@@ -1,0 +1,1515 @@
+from .activate_live_event_alt1_error import ActivateLiveEventAlt1ErrorBody, activate_live_event_alt1_error_mapper
+from .activate_live_event_alt2_error import ActivateLiveEventAlt2ErrorBody, activate_live_event_alt2_error_mapper
+from .activate_live_event_error import ActivateLiveEventErrorBody, activate_live_event_error_mapper
+from .add_channel_categories_error import AddChannelCategoriesErrorBody, add_channel_categories_error_mapper
+from .add_channel_moderator_error import AddChannelModeratorErrorBody, add_channel_moderator_error_mapper
+from .add_channel_moderators_error import AddChannelModeratorsErrorBody, add_channel_moderators_error_mapper
+from .add_channel_tag_error import AddChannelTagErrorBody, add_channel_tag_error_mapper
+from .add_composer_video_graphic_item_error import (
+    AddComposerVideoGraphicItemErrorBody,
+    add_composer_video_graphic_item_error_mapper,
+)
+from .add_folder_to_showcases_error import AddFolderToShowcasesErrorBody, add_folder_to_showcases_error_mapper
+from .add_or_remove_multiple_albums_error import (
+    AddOrRemoveMultipleAlbumsErrorBody,
+    add_or_remove_multiple_albums_error_mapper,
+)
+from .add_tags_to_channel_error import AddTagsToChannelErrorBody, add_tags_to_channel_error_mapper
+from .add_video_credit_alt1_error import AddVideoCreditAlt1ErrorBody, add_video_credit_alt1_error_mapper
+from .add_video_credit_error import AddVideoCreditErrorBody, add_video_credit_error_mapper
+from .add_video_privacy_domain_error import AddVideoPrivacyDomainErrorBody, add_video_privacy_domain_error_mapper
+from .add_video_privacy_user_error import AddVideoPrivacyUserErrorBody, add_video_privacy_user_error_mapper
+from .add_video_tag_error import AddVideoTagErrorBody, add_video_tag_error_mapper
+from .add_video_tags_error import AddVideoTagsErrorBody, add_video_tags_error_mapper
+from .add_video_to_channel_error import AddVideoToChannelErrorBody, add_video_to_channel_error_mapper
+from .add_video_to_group_error import AddVideoToGroupErrorBody, add_video_to_group_error_mapper
+from .add_video_to_portfolio_alt1_error import (
+    AddVideoToPortfolioAlt1ErrorBody,
+    add_video_to_portfolio_alt1_error_mapper,
+)
+from .add_video_to_portfolio_error import AddVideoToPortfolioErrorBody, add_video_to_portfolio_error_mapper
+from .add_video_to_project_alt1_error import AddVideoToProjectAlt1ErrorBody, add_video_to_project_alt1_error_mapper
+from .add_video_to_project_error import AddVideoToProjectErrorBody, add_video_to_project_error_mapper
+from .add_video_to_showcase_alt2_error import AddVideoToShowcaseAlt2ErrorBody, add_video_to_showcase_alt2_error_mapper
+from .add_video_to_showcase_error import AddVideoToShowcaseErrorBody, add_video_to_showcase_error_mapper
+from .add_video_to_vod_error import AddVideoToVodErrorBody, add_video_to_vod_error_mapper
+from .add_videos_to_channel_error import AddVideosToChannelErrorBody, add_videos_to_channel_error_mapper
+from .add_videos_to_live_event_alt1_error import (
+    AddVideosToLiveEventAlt1ErrorBody,
+    add_videos_to_live_event_alt1_error_mapper,
+)
+from .add_videos_to_live_event_alt2_error import (
+    AddVideosToLiveEventAlt2ErrorBody,
+    add_videos_to_live_event_alt2_error_mapper,
+)
+from .add_videos_to_live_event_error import AddVideosToLiveEventErrorBody, add_videos_to_live_event_error_mapper
+from .add_videos_to_project_alt1_error import AddVideosToProjectAlt1ErrorBody, add_videos_to_project_alt1_error_mapper
+from .add_videos_to_project_error import AddVideosToProjectErrorBody, add_videos_to_project_error_mapper
+from .add_vod_genre_error import AddVodGenreErrorBody, add_vod_genre_error_mapper
+from .add_vod_poster_error import AddVodPosterErrorBody, add_vod_poster_error_mapper
+from .add_vod_region_error import AddVodRegionErrorBody, add_vod_region_error_mapper
+from .add_webhook_error import AddWebhookErrorBody, add_webhook_error_mapper
+from .ask_ai_question_error import AskAiQuestionErrorBody, ask_ai_question_error_mapper
+from .attach_graphic_item_to_scene_error import (
+    AttachGraphicItemToSceneErrorBody,
+    attach_graphic_item_to_scene_error_mapper,
+)
+from .backfill_team_custom_metadata_error import (
+    BackfillTeamCustomMetadataErrorBody,
+    backfill_team_custom_metadata_error_mapper,
+)
+from .categorize_channel_error import CategorizeChannelErrorBody, categorize_channel_error_mapper
+from .check_category_for_video_error import CheckCategoryForVideoErrorBody, check_category_for_video_error_mapper
+from .check_if_channel_has_tag_error import CheckIfChannelHasTagErrorBody, check_if_channel_has_tag_error_mapper
+from .check_if_user_is_following_alt1_error import (
+    CheckIfUserIsFollowingAlt1ErrorBody,
+    check_if_user_is_following_alt1_error_mapper,
+)
+from .check_if_user_is_following_error import CheckIfUserIsFollowingErrorBody, check_if_user_is_following_error_mapper
+from .check_if_user_joined_group_alt1_error import (
+    CheckIfUserJoinedGroupAlt1ErrorBody,
+    check_if_user_joined_group_alt1_error_mapper,
+)
+from .check_if_user_joined_group_error import CheckIfUserJoinedGroupErrorBody, check_if_user_joined_group_error_mapper
+from .check_if_user_liked_video_alt1_error import (
+    CheckIfUserLikedVideoAlt1ErrorBody,
+    check_if_user_liked_video_alt1_error_mapper,
+)
+from .check_if_user_liked_video_error import CheckIfUserLikedVideoErrorBody, check_if_user_liked_video_error_mapper
+from .check_if_user_owns_video_alt1_error import (
+    CheckIfUserOwnsVideoAlt1ErrorBody,
+    check_if_user_owns_video_alt1_error_mapper,
+)
+from .check_if_user_owns_video_error import CheckIfUserOwnsVideoErrorBody, check_if_user_owns_video_error_mapper
+from .check_if_user_subscribed_to_channel_alt1_error import (
+    CheckIfUserSubscribedToChannelAlt1ErrorBody,
+    check_if_user_subscribed_to_channel_alt1_error_mapper,
+)
+from .check_if_user_subscribed_to_channel_error import (
+    CheckIfUserSubscribedToChannelErrorBody,
+    check_if_user_subscribed_to_channel_error_mapper,
+)
+from .check_if_vod_was_purchased_alt1_error import (
+    CheckIfVodWasPurchasedAlt1ErrorBody,
+    check_if_vod_was_purchased_alt1_error_mapper,
+)
+from .check_video_for_tag_error import CheckVideoForTagErrorBody, check_video_for_tag_error_mapper
+from .check_watch_later_queue_alt1_error import (
+    CheckWatchLaterQueueAlt1ErrorBody,
+    check_watch_later_queue_alt1_error_mapper,
+)
+from .check_watch_later_queue_error import CheckWatchLaterQueueErrorBody, check_watch_later_queue_error_mapper
+from .client_auth_error import ClientAuthErrorBody, client_auth_error_mapper
+from .clip_trim_error import ClipTrimErrorBody, clip_trim_error_mapper
+from .complete_streaming_upload_error import CompleteStreamingUploadErrorBody, complete_streaming_upload_error_mapper
+from .convert_access_token_error import ConvertAccessTokenErrorBody, convert_access_token_error_mapper
+from .copy_showcase_alt2_error import CopyShowcaseAlt2ErrorBody, copy_showcase_alt2_error_mapper
+from .copy_showcase_error import CopyShowcaseErrorBody, copy_showcase_error_mapper
+from .copy_video_alt2_error import CopyVideoAlt2ErrorBody, copy_video_alt2_error_mapper
+from .copy_video_error import CopyVideoErrorBody, copy_video_error_mapper
+from .create_animated_thumbset_error import CreateAnimatedThumbsetErrorBody, create_animated_thumbset_error_mapper
+from .create_audio_track_error import CreateAudioTrackErrorBody, create_audio_track_error_mapper
+from .create_channel_error import CreateChannelErrorBody, create_channel_error_mapper
+from .create_chapter_error import CreateChapterErrorBody, create_chapter_error_mapper
+from .create_chapter_thumbnail_or_upload_link_error import (
+    CreateChapterThumbnailOrUploadLinkErrorBody,
+    create_chapter_thumbnail_or_upload_link_error_mapper,
+)
+from .create_comment_alt1_error import CreateCommentAlt1ErrorBody, create_comment_alt1_error_mapper
+from .create_comment_error import CreateCommentErrorBody, create_comment_error_mapper
+from .create_comment_reply_error import CreateCommentReplyErrorBody, create_comment_reply_error_mapper
+from .create_composer_scene_error import CreateComposerSceneErrorBody, create_composer_scene_error_mapper
+from .create_custom_logo_alt1_error import CreateCustomLogoAlt1ErrorBody, create_custom_logo_alt1_error_mapper
+from .create_custom_logo_error import CreateCustomLogoErrorBody, create_custom_logo_error_mapper
+from .create_group_error import CreateGroupErrorBody, create_group_error_mapper
+from .create_live_event_alt1_error import CreateLiveEventAlt1ErrorBody, create_live_event_alt1_error_mapper
+from .create_live_event_alt2_error import CreateLiveEventAlt2ErrorBody, create_live_event_alt2_error_mapper
+from .create_live_event_destination_alt1_error import (
+    CreateLiveEventDestinationAlt1ErrorBody,
+    create_live_event_destination_alt1_error_mapper,
+)
+from .create_live_event_destination_error import (
+    CreateLiveEventDestinationErrorBody,
+    create_live_event_destination_error_mapper,
+)
+from .create_live_event_error import CreateLiveEventErrorBody, create_live_event_error_mapper
+from .create_live_event_thumbnail_alt1_error import (
+    CreateLiveEventThumbnailAlt1ErrorBody,
+    create_live_event_thumbnail_alt1_error_mapper,
+)
+from .create_live_event_thumbnail_alt2_error import (
+    CreateLiveEventThumbnailAlt2ErrorBody,
+    create_live_event_thumbnail_alt2_error_mapper,
+)
+from .create_live_event_thumbnail_error import (
+    CreateLiveEventThumbnailErrorBody,
+    create_live_event_thumbnail_error_mapper,
+)
+from .create_ott_destination_error import CreateOttDestinationErrorBody, create_ott_destination_error_mapper
+from .create_project_alt1_error import CreateProjectAlt1ErrorBody, create_project_alt1_error_mapper
+from .create_project_error import CreateProjectErrorBody, create_project_error_mapper
+from .create_showcase_alt1_error import CreateShowcaseAlt1ErrorBody, create_showcase_alt1_error_mapper
+from .create_showcase_custom_thumb_error import (
+    CreateShowcaseCustomThumbErrorBody,
+    create_showcase_custom_thumb_error_mapper,
+)
+from .create_showcase_error import CreateShowcaseErrorBody, create_showcase_error_mapper
+from .create_showcase_logo_error import CreateShowcaseLogoErrorBody, create_showcase_logo_error_mapper
+from .create_text_track_alt1_error import CreateTextTrackAlt1ErrorBody, create_text_track_alt1_error_mapper
+from .create_text_track_error import CreateTextTrackErrorBody, create_text_track_error_mapper
+from .create_unsaved_chapter_thumbnail_or_upload_link_error import (
+    CreateUnsavedChapterThumbnailOrUploadLinkErrorBody,
+    create_unsaved_chapter_thumbnail_or_upload_link_error_mapper,
+)
+from .create_video_custom_logo_error import CreateVideoCustomLogoErrorBody, create_video_custom_logo_error_mapper
+from .create_video_version_error import CreateVideoVersionErrorBody, create_video_version_error_mapper
+from .create_vod_background_error import CreateVodBackgroundErrorBody, create_vod_background_error_mapper
+from .create_vod_promotion_error import CreateVodPromotionErrorBody, create_vod_promotion_error_mapper
+from .delete_animated_thumbset_error import DeleteAnimatedThumbsetErrorBody, delete_animated_thumbset_error_mapper
+from .delete_audio_track_error import DeleteAudioTrackErrorBody, delete_audio_track_error_mapper
+from .delete_channel_category_error import DeleteChannelCategoryErrorBody, delete_channel_category_error_mapper
+from .delete_channel_error import DeleteChannelErrorBody, delete_channel_error_mapper
+from .delete_channel_privacy_user_error import (
+    DeleteChannelPrivacyUserErrorBody,
+    delete_channel_privacy_user_error_mapper,
+)
+from .delete_chapter_error import DeleteChapterErrorBody, delete_chapter_error_mapper
+from .delete_chapter_thumbnail_error import DeleteChapterThumbnailErrorBody, delete_chapter_thumbnail_error_mapper
+from .delete_comment_error import DeleteCommentErrorBody, delete_comment_error_mapper
+from .delete_composer_video_graphic_item_error import (
+    DeleteComposerVideoGraphicItemErrorBody,
+    delete_composer_video_graphic_item_error_mapper,
+)
+from .delete_custom_logo_alt1_error import DeleteCustomLogoAlt1ErrorBody, delete_custom_logo_alt1_error_mapper
+from .delete_custom_logo_error import DeleteCustomLogoErrorBody, delete_custom_logo_error_mapper
+from .delete_embed_preset_alt1_error import DeleteEmbedPresetAlt1ErrorBody, delete_embed_preset_alt1_error_mapper
+from .delete_embed_preset_error import DeleteEmbedPresetErrorBody, delete_embed_preset_error_mapper
+from .delete_folder_embed_preset_error import DeleteFolderEmbedPresetErrorBody, delete_folder_embed_preset_error_mapper
+from .delete_folder_items_alt1_error import DeleteFolderItemsAlt1ErrorBody, delete_folder_items_alt1_error_mapper
+from .delete_group_error import DeleteGroupErrorBody, delete_group_error_mapper
+from .delete_live_event_alt1_error import DeleteLiveEventAlt1ErrorBody, delete_live_event_alt1_error_mapper
+from .delete_live_event_alt2_error import DeleteLiveEventAlt2ErrorBody, delete_live_event_alt2_error_mapper
+from .delete_live_event_destination_error import (
+    DeleteLiveEventDestinationErrorBody,
+    delete_live_event_destination_error_mapper,
+)
+from .delete_live_event_error import DeleteLiveEventErrorBody, delete_live_event_error_mapper
+from .delete_live_event_thumbnail_alt1_error import (
+    DeleteLiveEventThumbnailAlt1ErrorBody,
+    delete_live_event_thumbnail_alt1_error_mapper,
+)
+from .delete_live_event_thumbnail_alt2_error import (
+    DeleteLiveEventThumbnailAlt2ErrorBody,
+    delete_live_event_thumbnail_alt2_error_mapper,
+)
+from .delete_live_event_thumbnail_error import (
+    DeleteLiveEventThumbnailErrorBody,
+    delete_live_event_thumbnail_error_mapper,
+)
+from .delete_live_events_alt1_error import DeleteLiveEventsAlt1ErrorBody, delete_live_events_alt1_error_mapper
+from .delete_live_events_alt2_error import DeleteLiveEventsAlt2ErrorBody, delete_live_events_alt2_error_mapper
+from .delete_live_events_error import DeleteLiveEventsErrorBody, delete_live_events_error_mapper
+from .delete_ott_destination_error import DeleteOttDestinationErrorBody, delete_ott_destination_error_mapper
+from .delete_payment_method_error import DeletePaymentMethodErrorBody, delete_payment_method_error_mapper
+from .delete_project_alt1_error import DeleteProjectAlt1ErrorBody, delete_project_alt1_error_mapper
+from .delete_project_error import DeleteProjectErrorBody, delete_project_error_mapper
+from .delete_showcase_alt2_error import DeleteShowcaseAlt2ErrorBody, delete_showcase_alt2_error_mapper
+from .delete_showcase_custom_thumbnail_error import (
+    DeleteShowcaseCustomThumbnailErrorBody,
+    delete_showcase_custom_thumbnail_error_mapper,
+)
+from .delete_showcase_error import DeleteShowcaseErrorBody, delete_showcase_error_mapper
+from .delete_showcase_logo_error import DeleteShowcaseLogoErrorBody, delete_showcase_logo_error_mapper
+from .delete_tag_from_channel_error import DeleteTagFromChannelErrorBody, delete_tag_from_channel_error_mapper
+from .delete_text_track_error import DeleteTextTrackErrorBody, delete_text_track_error_mapper
+from .delete_token_error import DeleteTokenErrorBody, delete_token_error_mapper
+from .delete_video_credit_error import DeleteVideoCreditErrorBody, delete_video_credit_error_mapper
+from .delete_video_embed_preset_error import DeleteVideoEmbedPresetErrorBody, delete_video_embed_preset_error_mapper
+from .delete_video_error import DeleteVideoErrorBody, delete_video_error_mapper
+from .delete_video_from_channel_error import DeleteVideoFromChannelErrorBody, delete_video_from_channel_error_mapper
+from .delete_video_from_group_error import DeleteVideoFromGroupErrorBody, delete_video_from_group_error_mapper
+from .delete_video_from_portfolio_alt1_error import (
+    DeleteVideoFromPortfolioAlt1ErrorBody,
+    delete_video_from_portfolio_alt1_error_mapper,
+)
+from .delete_video_from_portfolio_error import (
+    DeleteVideoFromPortfolioErrorBody,
+    delete_video_from_portfolio_error_mapper,
+)
+from .delete_video_from_vod_error import DeleteVideoFromVodErrorBody, delete_video_from_vod_error_mapper
+from .delete_video_privacy_domain_error import (
+    DeleteVideoPrivacyDomainErrorBody,
+    delete_video_privacy_domain_error_mapper,
+)
+from .delete_video_privacy_user_error import DeleteVideoPrivacyUserErrorBody, delete_video_privacy_user_error_mapper
+from .delete_video_tag_error import DeleteVideoTagErrorBody, delete_video_tag_error_mapper
+from .delete_video_version_error import DeleteVideoVersionErrorBody, delete_video_version_error_mapper
+from .delete_videos_alt1_error import DeleteVideosAlt1ErrorBody, delete_videos_alt1_error_mapper
+from .delete_videos_error import DeleteVideosErrorBody, delete_videos_error_mapper
+from .delete_vod_background_error import DeleteVodBackgroundErrorBody, delete_vod_background_error_mapper
+from .delete_vod_draft_error import DeleteVodDraftErrorBody, delete_vod_draft_error_mapper
+from .delete_vod_genre_error import DeleteVodGenreErrorBody, delete_vod_genre_error_mapper
+from .delete_vod_promotion_error import DeleteVodPromotionErrorBody, delete_vod_promotion_error_mapper
+from .delete_vod_region_error import DeleteVodRegionErrorBody, delete_vod_region_error_mapper
+from .delete_vod_regions_error import DeleteVodRegionsErrorBody, delete_vod_regions_error_mapper
+from .delete_webhook_error import DeleteWebhookErrorBody, delete_webhook_error_mapper
+from .download_lms_package_error import DownloadLmsPackageErrorBody, download_lms_package_error_mapper
+from .edit_ai_texttrack_error import EditAiTexttrackErrorBody, edit_ai_texttrack_error_mapper
+from .edit_audio_track_error import EditAudioTrackErrorBody, edit_audio_track_error_mapper
+from .edit_channel_error import EditChannelErrorBody, edit_channel_error_mapper
+from .edit_chapter_error import EditChapterErrorBody, edit_chapter_error_mapper
+from .edit_comment_error import EditCommentErrorBody, edit_comment_error_mapper
+from .edit_embed_preset_alt1_error import EditEmbedPresetAlt1ErrorBody, edit_embed_preset_alt1_error_mapper
+from .edit_embed_preset_error import EditEmbedPresetErrorBody, edit_embed_preset_error_mapper
+from .edit_live_event_auto_cc_alt1_error import (
+    EditLiveEventAutoCcAlt1ErrorBody,
+    edit_live_event_auto_cc_alt1_error_mapper,
+)
+from .edit_live_event_auto_cc_alt2_error import (
+    EditLiveEventAutoCcAlt2ErrorBody,
+    edit_live_event_auto_cc_alt2_error_mapper,
+)
+from .edit_live_event_auto_cc_error import EditLiveEventAutoCcErrorBody, edit_live_event_auto_cc_error_mapper
+from .edit_live_event_thumbnail_alt1_error import (
+    EditLiveEventThumbnailAlt1ErrorBody,
+    edit_live_event_thumbnail_alt1_error_mapper,
+)
+from .edit_live_event_thumbnail_alt2_error import (
+    EditLiveEventThumbnailAlt2ErrorBody,
+    edit_live_event_thumbnail_alt2_error_mapper,
+)
+from .edit_live_event_thumbnail_error import EditLiveEventThumbnailErrorBody, edit_live_event_thumbnail_error_mapper
+from .edit_project_alt1_error import EditProjectAlt1ErrorBody, edit_project_alt1_error_mapper
+from .edit_project_error import EditProjectErrorBody, edit_project_error_mapper
+from .edit_showcase_alt2_error import EditShowcaseAlt2ErrorBody, edit_showcase_alt2_error_mapper
+from .edit_showcase_error import EditShowcaseErrorBody, edit_showcase_error_mapper
+from .edit_text_track_error import EditTextTrackErrorBody, edit_text_track_error_mapper
+from .edit_user_alt1_error import EditUserAlt1ErrorBody, edit_user_alt1_error_mapper
+from .edit_user_error import EditUserErrorBody, edit_user_error_mapper
+from .edit_video_credit_error import EditVideoCreditErrorBody, edit_video_credit_error_mapper
+from .edit_video_error import EditVideoErrorBody, edit_video_error_mapper
+from .edit_video_version_error import EditVideoVersionErrorBody, edit_video_version_error_mapper
+from .edit_vod_background_error import EditVodBackgroundErrorBody, edit_vod_background_error_mapper
+from .edit_vod_error import EditVodErrorBody, edit_vod_error_mapper
+from .end_live_event_alt1_error import EndLiveEventAlt1ErrorBody, end_live_event_alt1_error_mapper
+from .end_live_event_alt2_error import EndLiveEventAlt2ErrorBody, end_live_event_alt2_error_mapper
+from .end_live_event_error import EndLiveEventErrorBody, end_live_event_error_mapper
+from .exchange_auth_code_error import ExchangeAuthCodeErrorBody, exchange_auth_code_error_mapper
+from .export_vpaas_viewer_analytics_error import (
+    ExportVpaasViewerAnalyticsErrorBody,
+    export_vpaas_viewer_analytics_error_mapper,
+)
+from .federated_search_user_items_alt1_error import (
+    FederatedSearchUserItemsAlt1ErrorBody,
+    federated_search_user_items_alt1_error_mapper,
+)
+from .federated_search_user_items_error import (
+    FederatedSearchUserItemsErrorBody,
+    federated_search_user_items_error_mapper,
+)
+from .follow_user_alt1_error import FollowUserAlt1ErrorBody, follow_user_alt1_error_mapper
+from .follow_user_error import FollowUserErrorBody, follow_user_error_mapper
+from .follow_users_alt1_error import FollowUsersAlt1ErrorBody, follow_users_alt1_error_mapper
+from .follow_users_error import FollowUsersErrorBody, follow_users_error_mapper
+from .get_ai_languages_error import GetAiLanguagesErrorBody, get_ai_languages_error_mapper
+from .get_ai_metadata_error import GetAiMetadataErrorBody, get_ai_metadata_error_mapper
+from .get_ai_questions_error import GetAiQuestionsErrorBody, get_ai_questions_error_mapper
+from .get_ai_transcribe_status_error import GetAiTranscribeStatusErrorBody, get_ai_transcribe_status_error_mapper
+from .get_ai_translate_dubbing_status_error import (
+    GetAiTranslateDubbingStatusErrorBody,
+    get_ai_translate_dubbing_status_error_mapper,
+)
+from .get_ai_translate_subtitles_status_error import (
+    GetAiTranslateSubtitlesStatusErrorBody,
+    get_ai_translate_subtitles_status_error_mapper,
+)
+from .get_all_animated_thumbset_error import GetAllAnimatedThumbsetErrorBody, get_all_animated_thumbset_error_mapper
+from .get_animated_thumbset_error import GetAnimatedThumbsetErrorBody, get_animated_thumbset_error_mapper
+from .get_animated_thumbset_status_error import (
+    GetAnimatedThumbsetStatusErrorBody,
+    get_animated_thumbset_status_error_mapper,
+)
+from .get_appearances_alt1_error import GetAppearancesAlt1ErrorBody, get_appearances_alt1_error_mapper
+from .get_appearances_error import GetAppearancesErrorBody, get_appearances_error_mapper
+from .get_audio_track_error import GetAudioTrackErrorBody, get_audio_track_error_mapper
+from .get_audio_tracks_error import GetAudioTracksErrorBody, get_audio_tracks_error_mapper
+from .get_available_destinations_alt1_error import (
+    GetAvailableDestinationsAlt1ErrorBody,
+    get_available_destinations_alt1_error_mapper,
+)
+from .get_available_destinations_error import GetAvailableDestinationsErrorBody, get_available_destinations_error_mapper
+from .get_available_showcase_videos_error import (
+    GetAvailableShowcaseVideosErrorBody,
+    get_available_showcase_videos_error_mapper,
+)
+from .get_available_video_channels_error import (
+    GetAvailableVideoChannelsErrorBody,
+    get_available_video_channels_error_mapper,
+)
+from .get_available_video_groups_error import GetAvailableVideoGroupsErrorBody, get_available_video_groups_error_mapper
+from .get_available_video_showcases_error import (
+    GetAvailableVideoShowcasesErrorBody,
+    get_available_video_showcases_error_mapper,
+)
+from .get_category_channels_error import GetCategoryChannelsErrorBody, get_category_channels_error_mapper
+from .get_category_error import GetCategoryErrorBody, get_category_error_mapper
+from .get_category_groups_error import GetCategoryGroupsErrorBody, get_category_groups_error_mapper
+from .get_category_subscriptions_alt1_error import (
+    GetCategorySubscriptionsAlt1ErrorBody,
+    get_category_subscriptions_alt1_error_mapper,
+)
+from .get_category_subscriptions_error import GetCategorySubscriptionsErrorBody, get_category_subscriptions_error_mapper
+from .get_category_videos_error import GetCategoryVideosErrorBody, get_category_videos_error_mapper
+from .get_channel_categories_error import GetChannelCategoriesErrorBody, get_channel_categories_error_mapper
+from .get_channel_privacy_users_error import GetChannelPrivacyUsersErrorBody, get_channel_privacy_users_error_mapper
+from .get_channel_subscribers_error import GetChannelSubscribersErrorBody, get_channel_subscribers_error_mapper
+from .get_channel_subscriptions_alt1_error import (
+    GetChannelSubscriptionsAlt1ErrorBody,
+    get_channel_subscriptions_alt1_error_mapper,
+)
+from .get_channel_subscriptions_error import GetChannelSubscriptionsErrorBody, get_channel_subscriptions_error_mapper
+from .get_channel_tags_error import GetChannelTagsErrorBody, get_channel_tags_error_mapper
+from .get_channel_video_error import GetChannelVideoErrorBody, get_channel_video_error_mapper
+from .get_channel_videos_error import GetChannelVideosErrorBody, get_channel_videos_error_mapper
+from .get_channels_error import GetChannelsErrorBody, get_channels_error_mapper
+from .get_chapter_error import GetChapterErrorBody, get_chapter_error_mapper
+from .get_chapter_thumbnail_error import GetChapterThumbnailErrorBody, get_chapter_thumbnail_error_mapper
+from .get_chapter_thumbnails_error import GetChapterThumbnailsErrorBody, get_chapter_thumbnails_error_mapper
+from .get_chapters_error import GetChaptersErrorBody, get_chapters_error_mapper
+from .get_comment_error import GetCommentErrorBody, get_comment_error_mapper
+from .get_comment_replies_error import GetCommentRepliesErrorBody, get_comment_replies_error_mapper
+from .get_composer_scenes_error import GetComposerScenesErrorBody, get_composer_scenes_error_mapper
+from .get_composer_video_graphic_items_error import (
+    GetComposerVideoGraphicItemsErrorBody,
+    get_composer_video_graphic_items_error_mapper,
+)
+from .get_custom_logo_alt1_error import GetCustomLogoAlt1ErrorBody, get_custom_logo_alt1_error_mapper
+from .get_custom_logo_error import GetCustomLogoErrorBody, get_custom_logo_error_mapper
+from .get_custom_logos_alt1_error import GetCustomLogosAlt1ErrorBody, get_custom_logos_alt1_error_mapper
+from .get_custom_logos_error import GetCustomLogosErrorBody, get_custom_logos_error_mapper
+from .get_event_audio_tracks_error import GetEventAudioTracksErrorBody, get_event_audio_tracks_error_mapper
+from .get_feed_alt1_error import GetFeedAlt1ErrorBody, get_feed_alt1_error_mapper
+from .get_feed_error import GetFeedErrorBody, get_feed_error_mapper
+from .get_genre_vod_error import GetGenreVodErrorBody, get_genre_vod_error_mapper
+from .get_genre_vods_error import GetGenreVodsErrorBody, get_genre_vods_error_mapper
+from .get_group_error import GetGroupErrorBody, get_group_error_mapper
+from .get_group_members_error import GetGroupMembersErrorBody, get_group_members_error_mapper
+from .get_group_video_error import GetGroupVideoErrorBody, get_group_video_error_mapper
+from .get_group_videos_error import GetGroupVideosErrorBody, get_group_videos_error_mapper
+from .get_groups_error import GetGroupsErrorBody, get_groups_error_mapper
+from .get_likes_alt1_error import GetLikesAlt1ErrorBody, get_likes_alt1_error_mapper
+from .get_likes_error import GetLikesErrorBody, get_likes_error_mapper
+from .get_live_event_alt1_error import GetLiveEventAlt1ErrorBody, get_live_event_alt1_error_mapper
+from .get_live_event_alt2_error import GetLiveEventAlt2ErrorBody, get_live_event_alt2_error_mapper
+from .get_live_event_destination_error import GetLiveEventDestinationErrorBody, get_live_event_destination_error_mapper
+from .get_live_event_destinations_alt1_error import (
+    GetLiveEventDestinationsAlt1ErrorBody,
+    get_live_event_destinations_alt1_error_mapper,
+)
+from .get_live_event_destinations_error import (
+    GetLiveEventDestinationsErrorBody,
+    get_live_event_destinations_error_mapper,
+)
+from .get_live_event_error import GetLiveEventErrorBody, get_live_event_error_mapper
+from .get_live_event_m3_u8_playback_alt1_error import (
+    GetLiveEventM3U8PlaybackAlt1ErrorBody,
+    get_live_event_m3_u8_playback_alt1_error_mapper,
+)
+from .get_live_event_m3_u8_playback_error import (
+    GetLiveEventM3U8PlaybackErrorBody,
+    get_live_event_m3_u8_playback_error_mapper,
+)
+from .get_live_event_thumbnail_alt1_error import (
+    GetLiveEventThumbnailAlt1ErrorBody,
+    get_live_event_thumbnail_alt1_error_mapper,
+)
+from .get_live_event_thumbnail_alt2_error import (
+    GetLiveEventThumbnailAlt2ErrorBody,
+    get_live_event_thumbnail_alt2_error_mapper,
+)
+from .get_live_event_thumbnail_error import GetLiveEventThumbnailErrorBody, get_live_event_thumbnail_error_mapper
+from .get_live_event_thumbnails_alt1_error import (
+    GetLiveEventThumbnailsAlt1ErrorBody,
+    get_live_event_thumbnails_alt1_error_mapper,
+)
+from .get_live_event_thumbnails_alt2_error import (
+    GetLiveEventThumbnailsAlt2ErrorBody,
+    get_live_event_thumbnails_alt2_error_mapper,
+)
+from .get_live_event_thumbnails_error import GetLiveEventThumbnailsErrorBody, get_live_event_thumbnails_error_mapper
+from .get_live_event_video_alt1_error import GetLiveEventVideoAlt1ErrorBody, get_live_event_video_alt1_error_mapper
+from .get_live_event_video_alt2_error import GetLiveEventVideoAlt2ErrorBody, get_live_event_video_alt2_error_mapper
+from .get_live_event_video_error import GetLiveEventVideoErrorBody, get_live_event_video_error_mapper
+from .get_live_event_videos_alt1_error import GetLiveEventVideosAlt1ErrorBody, get_live_event_videos_alt1_error_mapper
+from .get_live_event_videos_alt2_error import GetLiveEventVideosAlt2ErrorBody, get_live_event_videos_alt2_error_mapper
+from .get_live_event_videos_error import GetLiveEventVideosErrorBody, get_live_event_videos_error_mapper
+from .get_live_event_whitelist_alt1_error import (
+    GetLiveEventWhitelistAlt1ErrorBody,
+    get_live_event_whitelist_alt1_error_mapper,
+)
+from .get_live_event_whitelist_alt2_error import (
+    GetLiveEventWhitelistAlt2ErrorBody,
+    get_live_event_whitelist_alt2_error_mapper,
+)
+from .get_live_event_whitelist_error import GetLiveEventWhitelistErrorBody, get_live_event_whitelist_error_mapper
+from .get_one_time_event_m3_u8_playback_alt1_error import (
+    GetOneTimeEventM3U8PlaybackAlt1ErrorBody,
+    get_one_time_event_m3_u8_playback_alt1_error_mapper,
+)
+from .get_one_time_event_m3_u8_playback_error import (
+    GetOneTimeEventM3U8PlaybackErrorBody,
+    get_one_time_event_m3_u8_playback_error_mapper,
+)
+from .get_ott_destinations_error import GetOttDestinationsErrorBody, get_ott_destinations_error_mapper
+from .get_payment_method_info_error import GetPaymentMethodInfoErrorBody, get_payment_method_info_error_mapper
+from .get_private_to_me_folder_error import GetPrivateToMeFolderErrorBody, get_private_to_me_folder_error_mapper
+from .get_project_alt1_error import GetProjectAlt1ErrorBody, get_project_alt1_error_mapper
+from .get_project_error import GetProjectErrorBody, get_project_error_mapper
+from .get_project_videos_alt1_error import GetProjectVideosAlt1ErrorBody, get_project_videos_alt1_error_mapper
+from .get_project_videos_error import GetProjectVideosErrorBody, get_project_videos_error_mapper
+from .get_projects_alt1_error import GetProjectsAlt1ErrorBody, get_projects_alt1_error_mapper
+from .get_projects_error import GetProjectsErrorBody, get_projects_error_mapper
+from .get_region_error import GetRegionErrorBody, get_region_error_mapper
+from .get_related_videos_error import GetRelatedVideosErrorBody, get_related_videos_error_mapper
+from .get_showcase_alt2_error import GetShowcaseAlt2ErrorBody, get_showcase_alt2_error_mapper
+from .get_showcase_custom_thumbnail_error import (
+    GetShowcaseCustomThumbnailErrorBody,
+    get_showcase_custom_thumbnail_error_mapper,
+)
+from .get_showcase_custom_thumbs_error import GetShowcaseCustomThumbsErrorBody, get_showcase_custom_thumbs_error_mapper
+from .get_showcase_error import GetShowcaseErrorBody, get_showcase_error_mapper
+from .get_showcase_logo_error import GetShowcaseLogoErrorBody, get_showcase_logo_error_mapper
+from .get_showcase_logos_error import GetShowcaseLogosErrorBody, get_showcase_logos_error_mapper
+from .get_showcase_video_alt2_error import GetShowcaseVideoAlt2ErrorBody, get_showcase_video_alt2_error_mapper
+from .get_showcase_video_error import GetShowcaseVideoErrorBody, get_showcase_video_error_mapper
+from .get_showcase_videos_alt2_error import GetShowcaseVideosAlt2ErrorBody, get_showcase_videos_alt2_error_mapper
+from .get_showcase_videos_error import GetShowcaseVideosErrorBody, get_showcase_videos_error_mapper
+from .get_showcases_alt1_error import GetShowcasesAlt1ErrorBody, get_showcases_alt1_error_mapper
+from .get_showcases_error import GetShowcasesErrorBody, get_showcases_error_mapper
+from .get_team_custom_metadata_incomplete_videos_error import (
+    GetTeamCustomMetadataIncompleteVideosErrorBody,
+    get_team_custom_metadata_incomplete_videos_error_mapper,
+)
+from .get_team_custom_metadata_settings_error import (
+    GetTeamCustomMetadataSettingsErrorBody,
+    get_team_custom_metadata_settings_error_mapper,
+)
+from .get_text_track_error import GetTextTrackErrorBody, get_text_track_error_mapper
+from .get_text_tracks_alt1_error import GetTextTracksAlt1ErrorBody, get_text_tracks_alt1_error_mapper
+from .get_text_tracks_alt2_error import GetTextTracksAlt2ErrorBody, get_text_tracks_alt2_error_mapper
+from .get_text_tracks_alt3_error import GetTextTracksAlt3ErrorBody, get_text_tracks_alt3_error_mapper
+from .get_text_tracks_error import GetTextTracksErrorBody, get_text_tracks_error_mapper
+from .get_transcript_error import GetTranscriptErrorBody, get_transcript_error_mapper
+from .get_transcript_metadata_error import GetTranscriptMetadataErrorBody, get_transcript_metadata_error_mapper
+from .get_unsaved_chapter_thumbnail_error import (
+    GetUnsavedChapterThumbnailErrorBody,
+    get_unsaved_chapter_thumbnail_error_mapper,
+)
+from .get_user_groups_alt1_error import GetUserGroupsAlt1ErrorBody, get_user_groups_alt1_error_mapper
+from .get_user_groups_error import GetUserGroupsErrorBody, get_user_groups_error_mapper
+from .get_user_vods_alt1_error import GetUserVodsAlt1ErrorBody, get_user_vods_alt1_error_mapper
+from .get_user_vods_error import GetUserVodsErrorBody, get_user_vods_error_mapper
+from .get_video_albums_error import GetVideoAlbumsErrorBody, get_video_albums_error_mapper
+from .get_video_categories_error import GetVideoCategoriesErrorBody, get_video_categories_error_mapper
+from .get_video_credit_error import GetVideoCreditErrorBody, get_video_credit_error_mapper
+from .get_video_custom_logo_error import GetVideoCustomLogoErrorBody, get_video_custom_logo_error_mapper
+from .get_video_embed_preset_error import GetVideoEmbedPresetErrorBody, get_video_embed_preset_error_mapper
+from .get_video_error import GetVideoErrorBody, get_video_error_mapper
+from .get_video_privacy_domains_error import GetVideoPrivacyDomainsErrorBody, get_video_privacy_domains_error_mapper
+from .get_video_privacy_users_alt1_error import (
+    GetVideoPrivacyUsersAlt1ErrorBody,
+    get_video_privacy_users_alt1_error_mapper,
+)
+from .get_video_privacy_users_error import GetVideoPrivacyUsersErrorBody, get_video_privacy_users_error_mapper
+from .get_video_reporting_reasons_error import (
+    GetVideoReportingReasonsErrorBody,
+    get_video_reporting_reasons_error_mapper,
+)
+from .get_video_version_error import GetVideoVersionErrorBody, get_video_version_error_mapper
+from .get_video_versions_alt1_error import GetVideoVersionsAlt1ErrorBody, get_video_versions_alt1_error_mapper
+from .get_video_versions_error import GetVideoVersionsErrorBody, get_video_versions_error_mapper
+from .get_videos_with_tag_error import GetVideosWithTagErrorBody, get_videos_with_tag_error_mapper
+from .get_vod_background_error import GetVodBackgroundErrorBody, get_vod_background_error_mapper
+from .get_vod_backgrounds_error import GetVodBackgroundsErrorBody, get_vod_backgrounds_error_mapper
+from .get_vod_error import GetVodErrorBody, get_vod_error_mapper
+from .get_vod_genre_by_ondemand_id_error import (
+    GetVodGenreByOndemandIdErrorBody,
+    get_vod_genre_by_ondemand_id_error_mapper,
+)
+from .get_vod_genre_error import GetVodGenreErrorBody, get_vod_genre_error_mapper
+from .get_vod_genres_by_ondemand_id_error import (
+    GetVodGenresByOndemandIdErrorBody,
+    get_vod_genres_by_ondemand_id_error_mapper,
+)
+from .get_vod_genres_error import GetVodGenresErrorBody, get_vod_genres_error_mapper
+from .get_vod_likes_error import GetVodLikesErrorBody, get_vod_likes_error_mapper
+from .get_vod_posters_error import GetVodPostersErrorBody, get_vod_posters_error_mapper
+from .get_vod_promotion_codes_error import GetVodPromotionCodesErrorBody, get_vod_promotion_codes_error_mapper
+from .get_vod_promotion_error import GetVodPromotionErrorBody, get_vod_promotion_error_mapper
+from .get_vod_promotions_error import GetVodPromotionsErrorBody, get_vod_promotions_error_mapper
+from .get_vod_purchases_alt1_error import GetVodPurchasesAlt1ErrorBody, get_vod_purchases_alt1_error_mapper
+from .get_vod_purchases_error import GetVodPurchasesErrorBody, get_vod_purchases_error_mapper
+from .get_vod_region_error import GetVodRegionErrorBody, get_vod_region_error_mapper
+from .get_vod_regions_error import GetVodRegionsErrorBody, get_vod_regions_error_mapper
+from .get_vod_season_error import GetVodSeasonErrorBody, get_vod_season_error_mapper
+from .get_vod_seasons_error import GetVodSeasonsErrorBody, get_vod_seasons_error_mapper
+from .get_watch_history_error import GetWatchHistoryErrorBody, get_watch_history_error_mapper
+from .get_webhook_error import GetWebhookErrorBody, get_webhook_error_mapper
+from .join_group_alt1_error import JoinGroupAlt1ErrorBody, join_group_alt1_error_mapper
+from .join_group_error import JoinGroupErrorBody, join_group_error_mapper
+from .leave_group_alt1_error import LeaveGroupAlt1ErrorBody, leave_group_alt1_error_mapper
+from .leave_group_error import LeaveGroupErrorBody, leave_group_error_mapper
+from .like_video_alt1_error import LikeVideoAlt1ErrorBody, like_video_alt1_error_mapper
+from .like_video_error import LikeVideoErrorBody, like_video_error_mapper
+from .list_payment_methods_error import ListPaymentMethodsErrorBody, list_payment_methods_error_mapper
+from .remove_channel_moderator_error import RemoveChannelModeratorErrorBody, remove_channel_moderator_error_mapper
+from .remove_channel_moderators_error import RemoveChannelModeratorsErrorBody, remove_channel_moderators_error_mapper
+from .remove_video_from_project_alt1_error import (
+    RemoveVideoFromProjectAlt1ErrorBody,
+    remove_video_from_project_alt1_error_mapper,
+)
+from .remove_video_from_project_error import RemoveVideoFromProjectErrorBody, remove_video_from_project_error_mapper
+from .remove_video_from_showcase_alt2_error import (
+    RemoveVideoFromShowcaseAlt2ErrorBody,
+    remove_video_from_showcase_alt2_error_mapper,
+)
+from .remove_video_from_showcase_error import RemoveVideoFromShowcaseErrorBody, remove_video_from_showcase_error_mapper
+from .remove_videos_from_channel_error import RemoveVideosFromChannelErrorBody, remove_videos_from_channel_error_mapper
+from .remove_videos_from_live_event_alt1_error import (
+    RemoveVideosFromLiveEventAlt1ErrorBody,
+    remove_videos_from_live_event_alt1_error_mapper,
+)
+from .remove_videos_from_live_event_alt2_error import (
+    RemoveVideosFromLiveEventAlt2ErrorBody,
+    remove_videos_from_live_event_alt2_error_mapper,
+)
+from .remove_videos_from_live_event_error import (
+    RemoveVideosFromLiveEventErrorBody,
+    remove_videos_from_live_event_error_mapper,
+)
+from .remove_videos_from_project_alt1_error import (
+    RemoveVideosFromProjectAlt1ErrorBody,
+    remove_videos_from_project_alt1_error_mapper,
+)
+from .remove_videos_from_project_error import RemoveVideosFromProjectErrorBody, remove_videos_from_project_error_mapper
+from .replace_channel_moderators_error import ReplaceChannelModeratorsErrorBody, replace_channel_moderators_error_mapper
+from .replace_showcase_custom_thumb_error import (
+    ReplaceShowcaseCustomThumbErrorBody,
+    replace_showcase_custom_thumb_error_mapper,
+)
+from .replace_showcase_logo_error import ReplaceShowcaseLogoErrorBody, replace_showcase_logo_error_mapper
+from .replace_videos_in_showcase_alt2_error import (
+    ReplaceVideosInShowcaseAlt2ErrorBody,
+    replace_videos_in_showcase_alt2_error_mapper,
+)
+from .replace_videos_in_showcase_error import ReplaceVideosInShowcaseErrorBody, replace_videos_in_showcase_error_mapper
+from .reset_composer_scenes_error import ResetComposerScenesErrorBody, reset_composer_scenes_error_mapper
+from .search_users_error import SearchUsersErrorBody, search_users_error_mapper
+from .search_videos_error import SearchVideosErrorBody, search_videos_error_mapper
+from .set_channel_privacy_user_error import SetChannelPrivacyUserErrorBody, set_channel_privacy_user_error_mapper
+from .set_channel_privacy_users_error import SetChannelPrivacyUsersErrorBody, set_channel_privacy_users_error_mapper
+from .set_chapter_thumbnail_active_error import (
+    SetChapterThumbnailActiveErrorBody,
+    set_chapter_thumbnail_active_error_mapper,
+)
+from .set_live_event_whitelist_alt1_error import (
+    SetLiveEventWhitelistAlt1ErrorBody,
+    set_live_event_whitelist_alt1_error_mapper,
+)
+from .set_live_event_whitelist_alt2_error import (
+    SetLiveEventWhitelistAlt2ErrorBody,
+    set_live_event_whitelist_alt2_error_mapper,
+)
+from .set_live_event_whitelist_error import SetLiveEventWhitelistErrorBody, set_live_event_whitelist_error_mapper
+from .set_video_as_showcase_featured_alt2_error import (
+    SetVideoAsShowcaseFeaturedAlt2ErrorBody,
+    set_video_as_showcase_featured_alt2_error_mapper,
+)
+from .set_video_as_showcase_featured_error import (
+    SetVideoAsShowcaseFeaturedErrorBody,
+    set_video_as_showcase_featured_error_mapper,
+)
+from .set_video_as_showcase_thumbnail_alt2_error import (
+    SetVideoAsShowcaseThumbnailAlt2ErrorBody,
+    set_video_as_showcase_thumbnail_alt2_error_mapper,
+)
+from .set_video_as_showcase_thumbnail_error import (
+    SetVideoAsShowcaseThumbnailErrorBody,
+    set_video_as_showcase_thumbnail_error_mapper,
+)
+from .set_vod_regions_error import SetVodRegionsErrorBody, set_vod_regions_error_mapper
+from .start_ai_transcribe_error import StartAiTranscribeErrorBody, start_ai_transcribe_error_mapper
+from .start_ai_translate_dubbing_error import StartAiTranslateDubbingErrorBody, start_ai_translate_dubbing_error_mapper
+from .start_ai_translate_subtitles_error import (
+    StartAiTranslateSubtitlesErrorBody,
+    start_ai_translate_subtitles_error_mapper,
+)
+from .subscribe_to_channel_alt1_error import SubscribeToChannelAlt1ErrorBody, subscribe_to_channel_alt1_error_mapper
+from .subscribe_to_channel_error import SubscribeToChannelErrorBody, subscribe_to_channel_error_mapper
+from .suggest_video_category_error import SuggestVideoCategoryErrorBody, suggest_video_category_error_mapper
+from .toggle_rle_low_latency_alt1_error import (
+    ToggleRleLowLatencyAlt1ErrorBody,
+    toggle_rle_low_latency_alt1_error_mapper,
+)
+from .toggle_rle_low_latency_alt2_error import (
+    ToggleRleLowLatencyAlt2ErrorBody,
+    toggle_rle_low_latency_alt2_error_mapper,
+)
+from .toggle_rle_low_latency_error import ToggleRleLowLatencyErrorBody, toggle_rle_low_latency_error_mapper
+from .unlike_video_alt1_error import UnlikeVideoAlt1ErrorBody, unlike_video_alt1_error_mapper
+from .unlike_video_error import UnlikeVideoErrorBody, unlike_video_error_mapper
+from .unsubscribe_from_channel_alt1_error import (
+    UnsubscribeFromChannelAlt1ErrorBody,
+    unsubscribe_from_channel_alt1_error_mapper,
+)
+from .unsubscribe_from_channel_error import UnsubscribeFromChannelErrorBody, unsubscribe_from_channel_error_mapper
+from .update_composer_scene_error import UpdateComposerSceneErrorBody, update_composer_scene_error_mapper
+from .update_custom_metadata_field_options_error import (
+    UpdateCustomMetadataFieldOptionsErrorBody,
+    update_custom_metadata_field_options_error_mapper,
+)
+from .update_event_audio_tracks_error import UpdateEventAudioTracksErrorBody, update_event_audio_tracks_error_mapper
+from .update_live_event_alt1_error import UpdateLiveEventAlt1ErrorBody, update_live_event_alt1_error_mapper
+from .update_live_event_alt2_error import UpdateLiveEventAlt2ErrorBody, update_live_event_alt2_error_mapper
+from .update_live_event_destination_error import (
+    UpdateLiveEventDestinationErrorBody,
+    update_live_event_destination_error_mapper,
+)
+from .update_live_event_error import UpdateLiveEventErrorBody, update_live_event_error_mapper
+from .update_video_custom_metadata_error import (
+    UpdateVideoCustomMetadataErrorBody,
+    update_video_custom_metadata_error_mapper,
+)
+from .update_webhook_error import UpdateWebhookErrorBody, update_webhook_error_mapper
+from .upload_video_alt1_error import UploadVideoAlt1ErrorBody, upload_video_alt1_error_mapper
+from .upload_video_error import UploadVideoErrorBody, upload_video_error_mapper
+from .upsert_custom_metadata_settings_error import (
+    UpsertCustomMetadataSettingsErrorBody,
+    upsert_custom_metadata_settings_error_mapper,
+)
+from .verify_token_error import VerifyTokenErrorBody, verify_token_error_mapper
+
+__all__ = [
+    "ActivateLiveEventAlt1ErrorBody",
+    "ActivateLiveEventAlt2ErrorBody",
+    "ActivateLiveEventErrorBody",
+    "AddChannelCategoriesErrorBody",
+    "AddChannelModeratorErrorBody",
+    "AddChannelModeratorsErrorBody",
+    "AddChannelTagErrorBody",
+    "AddComposerVideoGraphicItemErrorBody",
+    "AddFolderToShowcasesErrorBody",
+    "AddOrRemoveMultipleAlbumsErrorBody",
+    "AddTagsToChannelErrorBody",
+    "AddVideoCreditAlt1ErrorBody",
+    "AddVideoCreditErrorBody",
+    "AddVideoPrivacyDomainErrorBody",
+    "AddVideoPrivacyUserErrorBody",
+    "AddVideoTagErrorBody",
+    "AddVideoTagsErrorBody",
+    "AddVideoToChannelErrorBody",
+    "AddVideoToGroupErrorBody",
+    "AddVideoToPortfolioAlt1ErrorBody",
+    "AddVideoToPortfolioErrorBody",
+    "AddVideoToProjectAlt1ErrorBody",
+    "AddVideoToProjectErrorBody",
+    "AddVideoToShowcaseAlt2ErrorBody",
+    "AddVideoToShowcaseErrorBody",
+    "AddVideoToVodErrorBody",
+    "AddVideosToChannelErrorBody",
+    "AddVideosToLiveEventAlt1ErrorBody",
+    "AddVideosToLiveEventAlt2ErrorBody",
+    "AddVideosToLiveEventErrorBody",
+    "AddVideosToProjectAlt1ErrorBody",
+    "AddVideosToProjectErrorBody",
+    "AddVodGenreErrorBody",
+    "AddVodPosterErrorBody",
+    "AddVodRegionErrorBody",
+    "AddWebhookErrorBody",
+    "AskAiQuestionErrorBody",
+    "AttachGraphicItemToSceneErrorBody",
+    "BackfillTeamCustomMetadataErrorBody",
+    "CategorizeChannelErrorBody",
+    "CheckCategoryForVideoErrorBody",
+    "CheckIfChannelHasTagErrorBody",
+    "CheckIfUserIsFollowingAlt1ErrorBody",
+    "CheckIfUserIsFollowingErrorBody",
+    "CheckIfUserJoinedGroupAlt1ErrorBody",
+    "CheckIfUserJoinedGroupErrorBody",
+    "CheckIfUserLikedVideoAlt1ErrorBody",
+    "CheckIfUserLikedVideoErrorBody",
+    "CheckIfUserOwnsVideoAlt1ErrorBody",
+    "CheckIfUserOwnsVideoErrorBody",
+    "CheckIfUserSubscribedToChannelAlt1ErrorBody",
+    "CheckIfUserSubscribedToChannelErrorBody",
+    "CheckIfVodWasPurchasedAlt1ErrorBody",
+    "CheckVideoForTagErrorBody",
+    "CheckWatchLaterQueueAlt1ErrorBody",
+    "CheckWatchLaterQueueErrorBody",
+    "ClientAuthErrorBody",
+    "ClipTrimErrorBody",
+    "CompleteStreamingUploadErrorBody",
+    "ConvertAccessTokenErrorBody",
+    "CopyShowcaseAlt2ErrorBody",
+    "CopyShowcaseErrorBody",
+    "CopyVideoAlt2ErrorBody",
+    "CopyVideoErrorBody",
+    "CreateAnimatedThumbsetErrorBody",
+    "CreateAudioTrackErrorBody",
+    "CreateChannelErrorBody",
+    "CreateChapterErrorBody",
+    "CreateChapterThumbnailOrUploadLinkErrorBody",
+    "CreateCommentAlt1ErrorBody",
+    "CreateCommentErrorBody",
+    "CreateCommentReplyErrorBody",
+    "CreateComposerSceneErrorBody",
+    "CreateCustomLogoAlt1ErrorBody",
+    "CreateCustomLogoErrorBody",
+    "CreateGroupErrorBody",
+    "CreateLiveEventAlt1ErrorBody",
+    "CreateLiveEventAlt2ErrorBody",
+    "CreateLiveEventDestinationAlt1ErrorBody",
+    "CreateLiveEventDestinationErrorBody",
+    "CreateLiveEventErrorBody",
+    "CreateLiveEventThumbnailAlt1ErrorBody",
+    "CreateLiveEventThumbnailAlt2ErrorBody",
+    "CreateLiveEventThumbnailErrorBody",
+    "CreateOttDestinationErrorBody",
+    "CreateProjectAlt1ErrorBody",
+    "CreateProjectErrorBody",
+    "CreateShowcaseAlt1ErrorBody",
+    "CreateShowcaseCustomThumbErrorBody",
+    "CreateShowcaseErrorBody",
+    "CreateShowcaseLogoErrorBody",
+    "CreateTextTrackAlt1ErrorBody",
+    "CreateTextTrackErrorBody",
+    "CreateUnsavedChapterThumbnailOrUploadLinkErrorBody",
+    "CreateVideoCustomLogoErrorBody",
+    "CreateVideoVersionErrorBody",
+    "CreateVodBackgroundErrorBody",
+    "CreateVodPromotionErrorBody",
+    "DeleteAnimatedThumbsetErrorBody",
+    "DeleteAudioTrackErrorBody",
+    "DeleteChannelCategoryErrorBody",
+    "DeleteChannelErrorBody",
+    "DeleteChannelPrivacyUserErrorBody",
+    "DeleteChapterErrorBody",
+    "DeleteChapterThumbnailErrorBody",
+    "DeleteCommentErrorBody",
+    "DeleteComposerVideoGraphicItemErrorBody",
+    "DeleteCustomLogoAlt1ErrorBody",
+    "DeleteCustomLogoErrorBody",
+    "DeleteEmbedPresetAlt1ErrorBody",
+    "DeleteEmbedPresetErrorBody",
+    "DeleteFolderEmbedPresetErrorBody",
+    "DeleteFolderItemsAlt1ErrorBody",
+    "DeleteGroupErrorBody",
+    "DeleteLiveEventAlt1ErrorBody",
+    "DeleteLiveEventAlt2ErrorBody",
+    "DeleteLiveEventDestinationErrorBody",
+    "DeleteLiveEventErrorBody",
+    "DeleteLiveEventThumbnailAlt1ErrorBody",
+    "DeleteLiveEventThumbnailAlt2ErrorBody",
+    "DeleteLiveEventThumbnailErrorBody",
+    "DeleteLiveEventsAlt1ErrorBody",
+    "DeleteLiveEventsAlt2ErrorBody",
+    "DeleteLiveEventsErrorBody",
+    "DeleteOttDestinationErrorBody",
+    "DeletePaymentMethodErrorBody",
+    "DeleteProjectAlt1ErrorBody",
+    "DeleteProjectErrorBody",
+    "DeleteShowcaseAlt2ErrorBody",
+    "DeleteShowcaseCustomThumbnailErrorBody",
+    "DeleteShowcaseErrorBody",
+    "DeleteShowcaseLogoErrorBody",
+    "DeleteTagFromChannelErrorBody",
+    "DeleteTextTrackErrorBody",
+    "DeleteTokenErrorBody",
+    "DeleteVideoCreditErrorBody",
+    "DeleteVideoEmbedPresetErrorBody",
+    "DeleteVideoErrorBody",
+    "DeleteVideoFromChannelErrorBody",
+    "DeleteVideoFromGroupErrorBody",
+    "DeleteVideoFromPortfolioAlt1ErrorBody",
+    "DeleteVideoFromPortfolioErrorBody",
+    "DeleteVideoFromVodErrorBody",
+    "DeleteVideoPrivacyDomainErrorBody",
+    "DeleteVideoPrivacyUserErrorBody",
+    "DeleteVideoTagErrorBody",
+    "DeleteVideoVersionErrorBody",
+    "DeleteVideosAlt1ErrorBody",
+    "DeleteVideosErrorBody",
+    "DeleteVodBackgroundErrorBody",
+    "DeleteVodDraftErrorBody",
+    "DeleteVodGenreErrorBody",
+    "DeleteVodPromotionErrorBody",
+    "DeleteVodRegionErrorBody",
+    "DeleteVodRegionsErrorBody",
+    "DeleteWebhookErrorBody",
+    "DownloadLmsPackageErrorBody",
+    "EditAiTexttrackErrorBody",
+    "EditAudioTrackErrorBody",
+    "EditChannelErrorBody",
+    "EditChapterErrorBody",
+    "EditCommentErrorBody",
+    "EditEmbedPresetAlt1ErrorBody",
+    "EditEmbedPresetErrorBody",
+    "EditLiveEventAutoCcAlt1ErrorBody",
+    "EditLiveEventAutoCcAlt2ErrorBody",
+    "EditLiveEventAutoCcErrorBody",
+    "EditLiveEventThumbnailAlt1ErrorBody",
+    "EditLiveEventThumbnailAlt2ErrorBody",
+    "EditLiveEventThumbnailErrorBody",
+    "EditProjectAlt1ErrorBody",
+    "EditProjectErrorBody",
+    "EditShowcaseAlt2ErrorBody",
+    "EditShowcaseErrorBody",
+    "EditTextTrackErrorBody",
+    "EditUserAlt1ErrorBody",
+    "EditUserErrorBody",
+    "EditVideoCreditErrorBody",
+    "EditVideoErrorBody",
+    "EditVideoVersionErrorBody",
+    "EditVodBackgroundErrorBody",
+    "EditVodErrorBody",
+    "EndLiveEventAlt1ErrorBody",
+    "EndLiveEventAlt2ErrorBody",
+    "EndLiveEventErrorBody",
+    "ExchangeAuthCodeErrorBody",
+    "ExportVpaasViewerAnalyticsErrorBody",
+    "FederatedSearchUserItemsAlt1ErrorBody",
+    "FederatedSearchUserItemsErrorBody",
+    "FollowUserAlt1ErrorBody",
+    "FollowUserErrorBody",
+    "FollowUsersAlt1ErrorBody",
+    "FollowUsersErrorBody",
+    "GetAiLanguagesErrorBody",
+    "GetAiMetadataErrorBody",
+    "GetAiQuestionsErrorBody",
+    "GetAiTranscribeStatusErrorBody",
+    "GetAiTranslateDubbingStatusErrorBody",
+    "GetAiTranslateSubtitlesStatusErrorBody",
+    "GetAllAnimatedThumbsetErrorBody",
+    "GetAnimatedThumbsetErrorBody",
+    "GetAnimatedThumbsetStatusErrorBody",
+    "GetAppearancesAlt1ErrorBody",
+    "GetAppearancesErrorBody",
+    "GetAudioTrackErrorBody",
+    "GetAudioTracksErrorBody",
+    "GetAvailableDestinationsAlt1ErrorBody",
+    "GetAvailableDestinationsErrorBody",
+    "GetAvailableShowcaseVideosErrorBody",
+    "GetAvailableVideoChannelsErrorBody",
+    "GetAvailableVideoGroupsErrorBody",
+    "GetAvailableVideoShowcasesErrorBody",
+    "GetCategoryChannelsErrorBody",
+    "GetCategoryErrorBody",
+    "GetCategoryGroupsErrorBody",
+    "GetCategorySubscriptionsAlt1ErrorBody",
+    "GetCategorySubscriptionsErrorBody",
+    "GetCategoryVideosErrorBody",
+    "GetChannelCategoriesErrorBody",
+    "GetChannelPrivacyUsersErrorBody",
+    "GetChannelSubscribersErrorBody",
+    "GetChannelSubscriptionsAlt1ErrorBody",
+    "GetChannelSubscriptionsErrorBody",
+    "GetChannelTagsErrorBody",
+    "GetChannelVideoErrorBody",
+    "GetChannelVideosErrorBody",
+    "GetChannelsErrorBody",
+    "GetChapterErrorBody",
+    "GetChapterThumbnailErrorBody",
+    "GetChapterThumbnailsErrorBody",
+    "GetChaptersErrorBody",
+    "GetCommentErrorBody",
+    "GetCommentRepliesErrorBody",
+    "GetComposerScenesErrorBody",
+    "GetComposerVideoGraphicItemsErrorBody",
+    "GetCustomLogoAlt1ErrorBody",
+    "GetCustomLogoErrorBody",
+    "GetCustomLogosAlt1ErrorBody",
+    "GetCustomLogosErrorBody",
+    "GetEventAudioTracksErrorBody",
+    "GetFeedAlt1ErrorBody",
+    "GetFeedErrorBody",
+    "GetGenreVodErrorBody",
+    "GetGenreVodsErrorBody",
+    "GetGroupErrorBody",
+    "GetGroupMembersErrorBody",
+    "GetGroupVideoErrorBody",
+    "GetGroupVideosErrorBody",
+    "GetGroupsErrorBody",
+    "GetLikesAlt1ErrorBody",
+    "GetLikesErrorBody",
+    "GetLiveEventAlt1ErrorBody",
+    "GetLiveEventAlt2ErrorBody",
+    "GetLiveEventDestinationErrorBody",
+    "GetLiveEventDestinationsAlt1ErrorBody",
+    "GetLiveEventDestinationsErrorBody",
+    "GetLiveEventErrorBody",
+    "GetLiveEventM3U8PlaybackAlt1ErrorBody",
+    "GetLiveEventM3U8PlaybackErrorBody",
+    "GetLiveEventThumbnailAlt1ErrorBody",
+    "GetLiveEventThumbnailAlt2ErrorBody",
+    "GetLiveEventThumbnailErrorBody",
+    "GetLiveEventThumbnailsAlt1ErrorBody",
+    "GetLiveEventThumbnailsAlt2ErrorBody",
+    "GetLiveEventThumbnailsErrorBody",
+    "GetLiveEventVideoAlt1ErrorBody",
+    "GetLiveEventVideoAlt2ErrorBody",
+    "GetLiveEventVideoErrorBody",
+    "GetLiveEventVideosAlt1ErrorBody",
+    "GetLiveEventVideosAlt2ErrorBody",
+    "GetLiveEventVideosErrorBody",
+    "GetLiveEventWhitelistAlt1ErrorBody",
+    "GetLiveEventWhitelistAlt2ErrorBody",
+    "GetLiveEventWhitelistErrorBody",
+    "GetOneTimeEventM3U8PlaybackAlt1ErrorBody",
+    "GetOneTimeEventM3U8PlaybackErrorBody",
+    "GetOttDestinationsErrorBody",
+    "GetPaymentMethodInfoErrorBody",
+    "GetPrivateToMeFolderErrorBody",
+    "GetProjectAlt1ErrorBody",
+    "GetProjectErrorBody",
+    "GetProjectVideosAlt1ErrorBody",
+    "GetProjectVideosErrorBody",
+    "GetProjectsAlt1ErrorBody",
+    "GetProjectsErrorBody",
+    "GetRegionErrorBody",
+    "GetRelatedVideosErrorBody",
+    "GetShowcaseAlt2ErrorBody",
+    "GetShowcaseCustomThumbnailErrorBody",
+    "GetShowcaseCustomThumbsErrorBody",
+    "GetShowcaseErrorBody",
+    "GetShowcaseLogoErrorBody",
+    "GetShowcaseLogosErrorBody",
+    "GetShowcaseVideoAlt2ErrorBody",
+    "GetShowcaseVideoErrorBody",
+    "GetShowcaseVideosAlt2ErrorBody",
+    "GetShowcaseVideosErrorBody",
+    "GetShowcasesAlt1ErrorBody",
+    "GetShowcasesErrorBody",
+    "GetTeamCustomMetadataIncompleteVideosErrorBody",
+    "GetTeamCustomMetadataSettingsErrorBody",
+    "GetTextTrackErrorBody",
+    "GetTextTracksAlt1ErrorBody",
+    "GetTextTracksAlt2ErrorBody",
+    "GetTextTracksAlt3ErrorBody",
+    "GetTextTracksErrorBody",
+    "GetTranscriptErrorBody",
+    "GetTranscriptMetadataErrorBody",
+    "GetUnsavedChapterThumbnailErrorBody",
+    "GetUserGroupsAlt1ErrorBody",
+    "GetUserGroupsErrorBody",
+    "GetUserVodsAlt1ErrorBody",
+    "GetUserVodsErrorBody",
+    "GetVideoAlbumsErrorBody",
+    "GetVideoCategoriesErrorBody",
+    "GetVideoCreditErrorBody",
+    "GetVideoCustomLogoErrorBody",
+    "GetVideoEmbedPresetErrorBody",
+    "GetVideoErrorBody",
+    "GetVideoPrivacyDomainsErrorBody",
+    "GetVideoPrivacyUsersAlt1ErrorBody",
+    "GetVideoPrivacyUsersErrorBody",
+    "GetVideoReportingReasonsErrorBody",
+    "GetVideoVersionErrorBody",
+    "GetVideoVersionsAlt1ErrorBody",
+    "GetVideoVersionsErrorBody",
+    "GetVideosWithTagErrorBody",
+    "GetVodBackgroundErrorBody",
+    "GetVodBackgroundsErrorBody",
+    "GetVodErrorBody",
+    "GetVodGenreByOndemandIdErrorBody",
+    "GetVodGenreErrorBody",
+    "GetVodGenresByOndemandIdErrorBody",
+    "GetVodGenresErrorBody",
+    "GetVodLikesErrorBody",
+    "GetVodPostersErrorBody",
+    "GetVodPromotionCodesErrorBody",
+    "GetVodPromotionErrorBody",
+    "GetVodPromotionsErrorBody",
+    "GetVodPurchasesAlt1ErrorBody",
+    "GetVodPurchasesErrorBody",
+    "GetVodRegionErrorBody",
+    "GetVodRegionsErrorBody",
+    "GetVodSeasonErrorBody",
+    "GetVodSeasonsErrorBody",
+    "GetWatchHistoryErrorBody",
+    "GetWebhookErrorBody",
+    "JoinGroupAlt1ErrorBody",
+    "JoinGroupErrorBody",
+    "LeaveGroupAlt1ErrorBody",
+    "LeaveGroupErrorBody",
+    "LikeVideoAlt1ErrorBody",
+    "LikeVideoErrorBody",
+    "ListPaymentMethodsErrorBody",
+    "RemoveChannelModeratorErrorBody",
+    "RemoveChannelModeratorsErrorBody",
+    "RemoveVideoFromProjectAlt1ErrorBody",
+    "RemoveVideoFromProjectErrorBody",
+    "RemoveVideoFromShowcaseAlt2ErrorBody",
+    "RemoveVideoFromShowcaseErrorBody",
+    "RemoveVideosFromChannelErrorBody",
+    "RemoveVideosFromLiveEventAlt1ErrorBody",
+    "RemoveVideosFromLiveEventAlt2ErrorBody",
+    "RemoveVideosFromLiveEventErrorBody",
+    "RemoveVideosFromProjectAlt1ErrorBody",
+    "RemoveVideosFromProjectErrorBody",
+    "ReplaceChannelModeratorsErrorBody",
+    "ReplaceShowcaseCustomThumbErrorBody",
+    "ReplaceShowcaseLogoErrorBody",
+    "ReplaceVideosInShowcaseAlt2ErrorBody",
+    "ReplaceVideosInShowcaseErrorBody",
+    "ResetComposerScenesErrorBody",
+    "SearchUsersErrorBody",
+    "SearchVideosErrorBody",
+    "SetChannelPrivacyUserErrorBody",
+    "SetChannelPrivacyUsersErrorBody",
+    "SetChapterThumbnailActiveErrorBody",
+    "SetLiveEventWhitelistAlt1ErrorBody",
+    "SetLiveEventWhitelistAlt2ErrorBody",
+    "SetLiveEventWhitelistErrorBody",
+    "SetVideoAsShowcaseFeaturedAlt2ErrorBody",
+    "SetVideoAsShowcaseFeaturedErrorBody",
+    "SetVideoAsShowcaseThumbnailAlt2ErrorBody",
+    "SetVideoAsShowcaseThumbnailErrorBody",
+    "SetVodRegionsErrorBody",
+    "StartAiTranscribeErrorBody",
+    "StartAiTranslateDubbingErrorBody",
+    "StartAiTranslateSubtitlesErrorBody",
+    "SubscribeToChannelAlt1ErrorBody",
+    "SubscribeToChannelErrorBody",
+    "SuggestVideoCategoryErrorBody",
+    "ToggleRleLowLatencyAlt1ErrorBody",
+    "ToggleRleLowLatencyAlt2ErrorBody",
+    "ToggleRleLowLatencyErrorBody",
+    "UnlikeVideoAlt1ErrorBody",
+    "UnlikeVideoErrorBody",
+    "UnsubscribeFromChannelAlt1ErrorBody",
+    "UnsubscribeFromChannelErrorBody",
+    "UpdateComposerSceneErrorBody",
+    "UpdateCustomMetadataFieldOptionsErrorBody",
+    "UpdateEventAudioTracksErrorBody",
+    "UpdateLiveEventAlt1ErrorBody",
+    "UpdateLiveEventAlt2ErrorBody",
+    "UpdateLiveEventDestinationErrorBody",
+    "UpdateLiveEventErrorBody",
+    "UpdateVideoCustomMetadataErrorBody",
+    "UpdateWebhookErrorBody",
+    "UploadVideoAlt1ErrorBody",
+    "UploadVideoErrorBody",
+    "UpsertCustomMetadataSettingsErrorBody",
+    "VerifyTokenErrorBody",
+    "activate_live_event_alt1_error_mapper",
+    "activate_live_event_alt2_error_mapper",
+    "activate_live_event_error_mapper",
+    "add_channel_categories_error_mapper",
+    "add_channel_moderator_error_mapper",
+    "add_channel_moderators_error_mapper",
+    "add_channel_tag_error_mapper",
+    "add_composer_video_graphic_item_error_mapper",
+    "add_folder_to_showcases_error_mapper",
+    "add_or_remove_multiple_albums_error_mapper",
+    "add_tags_to_channel_error_mapper",
+    "add_video_credit_alt1_error_mapper",
+    "add_video_credit_error_mapper",
+    "add_video_privacy_domain_error_mapper",
+    "add_video_privacy_user_error_mapper",
+    "add_video_tag_error_mapper",
+    "add_video_tags_error_mapper",
+    "add_video_to_channel_error_mapper",
+    "add_video_to_group_error_mapper",
+    "add_video_to_portfolio_alt1_error_mapper",
+    "add_video_to_portfolio_error_mapper",
+    "add_video_to_project_alt1_error_mapper",
+    "add_video_to_project_error_mapper",
+    "add_video_to_showcase_alt2_error_mapper",
+    "add_video_to_showcase_error_mapper",
+    "add_video_to_vod_error_mapper",
+    "add_videos_to_channel_error_mapper",
+    "add_videos_to_live_event_alt1_error_mapper",
+    "add_videos_to_live_event_alt2_error_mapper",
+    "add_videos_to_live_event_error_mapper",
+    "add_videos_to_project_alt1_error_mapper",
+    "add_videos_to_project_error_mapper",
+    "add_vod_genre_error_mapper",
+    "add_vod_poster_error_mapper",
+    "add_vod_region_error_mapper",
+    "add_webhook_error_mapper",
+    "ask_ai_question_error_mapper",
+    "attach_graphic_item_to_scene_error_mapper",
+    "backfill_team_custom_metadata_error_mapper",
+    "categorize_channel_error_mapper",
+    "check_category_for_video_error_mapper",
+    "check_if_channel_has_tag_error_mapper",
+    "check_if_user_is_following_alt1_error_mapper",
+    "check_if_user_is_following_error_mapper",
+    "check_if_user_joined_group_alt1_error_mapper",
+    "check_if_user_joined_group_error_mapper",
+    "check_if_user_liked_video_alt1_error_mapper",
+    "check_if_user_liked_video_error_mapper",
+    "check_if_user_owns_video_alt1_error_mapper",
+    "check_if_user_owns_video_error_mapper",
+    "check_if_user_subscribed_to_channel_alt1_error_mapper",
+    "check_if_user_subscribed_to_channel_error_mapper",
+    "check_if_vod_was_purchased_alt1_error_mapper",
+    "check_video_for_tag_error_mapper",
+    "check_watch_later_queue_alt1_error_mapper",
+    "check_watch_later_queue_error_mapper",
+    "client_auth_error_mapper",
+    "clip_trim_error_mapper",
+    "complete_streaming_upload_error_mapper",
+    "convert_access_token_error_mapper",
+    "copy_showcase_alt2_error_mapper",
+    "copy_showcase_error_mapper",
+    "copy_video_alt2_error_mapper",
+    "copy_video_error_mapper",
+    "create_animated_thumbset_error_mapper",
+    "create_audio_track_error_mapper",
+    "create_channel_error_mapper",
+    "create_chapter_error_mapper",
+    "create_chapter_thumbnail_or_upload_link_error_mapper",
+    "create_comment_alt1_error_mapper",
+    "create_comment_error_mapper",
+    "create_comment_reply_error_mapper",
+    "create_composer_scene_error_mapper",
+    "create_custom_logo_alt1_error_mapper",
+    "create_custom_logo_error_mapper",
+    "create_group_error_mapper",
+    "create_live_event_alt1_error_mapper",
+    "create_live_event_alt2_error_mapper",
+    "create_live_event_destination_alt1_error_mapper",
+    "create_live_event_destination_error_mapper",
+    "create_live_event_error_mapper",
+    "create_live_event_thumbnail_alt1_error_mapper",
+    "create_live_event_thumbnail_alt2_error_mapper",
+    "create_live_event_thumbnail_error_mapper",
+    "create_ott_destination_error_mapper",
+    "create_project_alt1_error_mapper",
+    "create_project_error_mapper",
+    "create_showcase_alt1_error_mapper",
+    "create_showcase_custom_thumb_error_mapper",
+    "create_showcase_error_mapper",
+    "create_showcase_logo_error_mapper",
+    "create_text_track_alt1_error_mapper",
+    "create_text_track_error_mapper",
+    "create_unsaved_chapter_thumbnail_or_upload_link_error_mapper",
+    "create_video_custom_logo_error_mapper",
+    "create_video_version_error_mapper",
+    "create_vod_background_error_mapper",
+    "create_vod_promotion_error_mapper",
+    "delete_animated_thumbset_error_mapper",
+    "delete_audio_track_error_mapper",
+    "delete_channel_category_error_mapper",
+    "delete_channel_error_mapper",
+    "delete_channel_privacy_user_error_mapper",
+    "delete_chapter_error_mapper",
+    "delete_chapter_thumbnail_error_mapper",
+    "delete_comment_error_mapper",
+    "delete_composer_video_graphic_item_error_mapper",
+    "delete_custom_logo_alt1_error_mapper",
+    "delete_custom_logo_error_mapper",
+    "delete_embed_preset_alt1_error_mapper",
+    "delete_embed_preset_error_mapper",
+    "delete_folder_embed_preset_error_mapper",
+    "delete_folder_items_alt1_error_mapper",
+    "delete_group_error_mapper",
+    "delete_live_event_alt1_error_mapper",
+    "delete_live_event_alt2_error_mapper",
+    "delete_live_event_destination_error_mapper",
+    "delete_live_event_error_mapper",
+    "delete_live_event_thumbnail_alt1_error_mapper",
+    "delete_live_event_thumbnail_alt2_error_mapper",
+    "delete_live_event_thumbnail_error_mapper",
+    "delete_live_events_alt1_error_mapper",
+    "delete_live_events_alt2_error_mapper",
+    "delete_live_events_error_mapper",
+    "delete_ott_destination_error_mapper",
+    "delete_payment_method_error_mapper",
+    "delete_project_alt1_error_mapper",
+    "delete_project_error_mapper",
+    "delete_showcase_alt2_error_mapper",
+    "delete_showcase_custom_thumbnail_error_mapper",
+    "delete_showcase_error_mapper",
+    "delete_showcase_logo_error_mapper",
+    "delete_tag_from_channel_error_mapper",
+    "delete_text_track_error_mapper",
+    "delete_token_error_mapper",
+    "delete_video_credit_error_mapper",
+    "delete_video_embed_preset_error_mapper",
+    "delete_video_error_mapper",
+    "delete_video_from_channel_error_mapper",
+    "delete_video_from_group_error_mapper",
+    "delete_video_from_portfolio_alt1_error_mapper",
+    "delete_video_from_portfolio_error_mapper",
+    "delete_video_from_vod_error_mapper",
+    "delete_video_privacy_domain_error_mapper",
+    "delete_video_privacy_user_error_mapper",
+    "delete_video_tag_error_mapper",
+    "delete_video_version_error_mapper",
+    "delete_videos_alt1_error_mapper",
+    "delete_videos_error_mapper",
+    "delete_vod_background_error_mapper",
+    "delete_vod_draft_error_mapper",
+    "delete_vod_genre_error_mapper",
+    "delete_vod_promotion_error_mapper",
+    "delete_vod_region_error_mapper",
+    "delete_vod_regions_error_mapper",
+    "delete_webhook_error_mapper",
+    "download_lms_package_error_mapper",
+    "edit_ai_texttrack_error_mapper",
+    "edit_audio_track_error_mapper",
+    "edit_channel_error_mapper",
+    "edit_chapter_error_mapper",
+    "edit_comment_error_mapper",
+    "edit_embed_preset_alt1_error_mapper",
+    "edit_embed_preset_error_mapper",
+    "edit_live_event_auto_cc_alt1_error_mapper",
+    "edit_live_event_auto_cc_alt2_error_mapper",
+    "edit_live_event_auto_cc_error_mapper",
+    "edit_live_event_thumbnail_alt1_error_mapper",
+    "edit_live_event_thumbnail_alt2_error_mapper",
+    "edit_live_event_thumbnail_error_mapper",
+    "edit_project_alt1_error_mapper",
+    "edit_project_error_mapper",
+    "edit_showcase_alt2_error_mapper",
+    "edit_showcase_error_mapper",
+    "edit_text_track_error_mapper",
+    "edit_user_alt1_error_mapper",
+    "edit_user_error_mapper",
+    "edit_video_credit_error_mapper",
+    "edit_video_error_mapper",
+    "edit_video_version_error_mapper",
+    "edit_vod_background_error_mapper",
+    "edit_vod_error_mapper",
+    "end_live_event_alt1_error_mapper",
+    "end_live_event_alt2_error_mapper",
+    "end_live_event_error_mapper",
+    "exchange_auth_code_error_mapper",
+    "export_vpaas_viewer_analytics_error_mapper",
+    "federated_search_user_items_alt1_error_mapper",
+    "federated_search_user_items_error_mapper",
+    "follow_user_alt1_error_mapper",
+    "follow_user_error_mapper",
+    "follow_users_alt1_error_mapper",
+    "follow_users_error_mapper",
+    "get_ai_languages_error_mapper",
+    "get_ai_metadata_error_mapper",
+    "get_ai_questions_error_mapper",
+    "get_ai_transcribe_status_error_mapper",
+    "get_ai_translate_dubbing_status_error_mapper",
+    "get_ai_translate_subtitles_status_error_mapper",
+    "get_all_animated_thumbset_error_mapper",
+    "get_animated_thumbset_error_mapper",
+    "get_animated_thumbset_status_error_mapper",
+    "get_appearances_alt1_error_mapper",
+    "get_appearances_error_mapper",
+    "get_audio_track_error_mapper",
+    "get_audio_tracks_error_mapper",
+    "get_available_destinations_alt1_error_mapper",
+    "get_available_destinations_error_mapper",
+    "get_available_showcase_videos_error_mapper",
+    "get_available_video_channels_error_mapper",
+    "get_available_video_groups_error_mapper",
+    "get_available_video_showcases_error_mapper",
+    "get_category_channels_error_mapper",
+    "get_category_error_mapper",
+    "get_category_groups_error_mapper",
+    "get_category_subscriptions_alt1_error_mapper",
+    "get_category_subscriptions_error_mapper",
+    "get_category_videos_error_mapper",
+    "get_channel_categories_error_mapper",
+    "get_channel_privacy_users_error_mapper",
+    "get_channel_subscribers_error_mapper",
+    "get_channel_subscriptions_alt1_error_mapper",
+    "get_channel_subscriptions_error_mapper",
+    "get_channel_tags_error_mapper",
+    "get_channel_video_error_mapper",
+    "get_channel_videos_error_mapper",
+    "get_channels_error_mapper",
+    "get_chapter_error_mapper",
+    "get_chapter_thumbnail_error_mapper",
+    "get_chapter_thumbnails_error_mapper",
+    "get_chapters_error_mapper",
+    "get_comment_error_mapper",
+    "get_comment_replies_error_mapper",
+    "get_composer_scenes_error_mapper",
+    "get_composer_video_graphic_items_error_mapper",
+    "get_custom_logo_alt1_error_mapper",
+    "get_custom_logo_error_mapper",
+    "get_custom_logos_alt1_error_mapper",
+    "get_custom_logos_error_mapper",
+    "get_event_audio_tracks_error_mapper",
+    "get_feed_alt1_error_mapper",
+    "get_feed_error_mapper",
+    "get_genre_vod_error_mapper",
+    "get_genre_vods_error_mapper",
+    "get_group_error_mapper",
+    "get_group_members_error_mapper",
+    "get_group_video_error_mapper",
+    "get_group_videos_error_mapper",
+    "get_groups_error_mapper",
+    "get_likes_alt1_error_mapper",
+    "get_likes_error_mapper",
+    "get_live_event_alt1_error_mapper",
+    "get_live_event_alt2_error_mapper",
+    "get_live_event_destination_error_mapper",
+    "get_live_event_destinations_alt1_error_mapper",
+    "get_live_event_destinations_error_mapper",
+    "get_live_event_error_mapper",
+    "get_live_event_m3_u8_playback_alt1_error_mapper",
+    "get_live_event_m3_u8_playback_error_mapper",
+    "get_live_event_thumbnail_alt1_error_mapper",
+    "get_live_event_thumbnail_alt2_error_mapper",
+    "get_live_event_thumbnail_error_mapper",
+    "get_live_event_thumbnails_alt1_error_mapper",
+    "get_live_event_thumbnails_alt2_error_mapper",
+    "get_live_event_thumbnails_error_mapper",
+    "get_live_event_video_alt1_error_mapper",
+    "get_live_event_video_alt2_error_mapper",
+    "get_live_event_video_error_mapper",
+    "get_live_event_videos_alt1_error_mapper",
+    "get_live_event_videos_alt2_error_mapper",
+    "get_live_event_videos_error_mapper",
+    "get_live_event_whitelist_alt1_error_mapper",
+    "get_live_event_whitelist_alt2_error_mapper",
+    "get_live_event_whitelist_error_mapper",
+    "get_one_time_event_m3_u8_playback_alt1_error_mapper",
+    "get_one_time_event_m3_u8_playback_error_mapper",
+    "get_ott_destinations_error_mapper",
+    "get_payment_method_info_error_mapper",
+    "get_private_to_me_folder_error_mapper",
+    "get_project_alt1_error_mapper",
+    "get_project_error_mapper",
+    "get_project_videos_alt1_error_mapper",
+    "get_project_videos_error_mapper",
+    "get_projects_alt1_error_mapper",
+    "get_projects_error_mapper",
+    "get_region_error_mapper",
+    "get_related_videos_error_mapper",
+    "get_showcase_alt2_error_mapper",
+    "get_showcase_custom_thumbnail_error_mapper",
+    "get_showcase_custom_thumbs_error_mapper",
+    "get_showcase_error_mapper",
+    "get_showcase_logo_error_mapper",
+    "get_showcase_logos_error_mapper",
+    "get_showcase_video_alt2_error_mapper",
+    "get_showcase_video_error_mapper",
+    "get_showcase_videos_alt2_error_mapper",
+    "get_showcase_videos_error_mapper",
+    "get_showcases_alt1_error_mapper",
+    "get_showcases_error_mapper",
+    "get_team_custom_metadata_incomplete_videos_error_mapper",
+    "get_team_custom_metadata_settings_error_mapper",
+    "get_text_track_error_mapper",
+    "get_text_tracks_alt1_error_mapper",
+    "get_text_tracks_alt2_error_mapper",
+    "get_text_tracks_alt3_error_mapper",
+    "get_text_tracks_error_mapper",
+    "get_transcript_error_mapper",
+    "get_transcript_metadata_error_mapper",
+    "get_unsaved_chapter_thumbnail_error_mapper",
+    "get_user_groups_alt1_error_mapper",
+    "get_user_groups_error_mapper",
+    "get_user_vods_alt1_error_mapper",
+    "get_user_vods_error_mapper",
+    "get_video_albums_error_mapper",
+    "get_video_categories_error_mapper",
+    "get_video_credit_error_mapper",
+    "get_video_custom_logo_error_mapper",
+    "get_video_embed_preset_error_mapper",
+    "get_video_error_mapper",
+    "get_video_privacy_domains_error_mapper",
+    "get_video_privacy_users_alt1_error_mapper",
+    "get_video_privacy_users_error_mapper",
+    "get_video_reporting_reasons_error_mapper",
+    "get_video_version_error_mapper",
+    "get_video_versions_alt1_error_mapper",
+    "get_video_versions_error_mapper",
+    "get_videos_with_tag_error_mapper",
+    "get_vod_background_error_mapper",
+    "get_vod_backgrounds_error_mapper",
+    "get_vod_error_mapper",
+    "get_vod_genre_by_ondemand_id_error_mapper",
+    "get_vod_genre_error_mapper",
+    "get_vod_genres_by_ondemand_id_error_mapper",
+    "get_vod_genres_error_mapper",
+    "get_vod_likes_error_mapper",
+    "get_vod_posters_error_mapper",
+    "get_vod_promotion_codes_error_mapper",
+    "get_vod_promotion_error_mapper",
+    "get_vod_promotions_error_mapper",
+    "get_vod_purchases_alt1_error_mapper",
+    "get_vod_purchases_error_mapper",
+    "get_vod_region_error_mapper",
+    "get_vod_regions_error_mapper",
+    "get_vod_season_error_mapper",
+    "get_vod_seasons_error_mapper",
+    "get_watch_history_error_mapper",
+    "get_webhook_error_mapper",
+    "join_group_alt1_error_mapper",
+    "join_group_error_mapper",
+    "leave_group_alt1_error_mapper",
+    "leave_group_error_mapper",
+    "like_video_alt1_error_mapper",
+    "like_video_error_mapper",
+    "list_payment_methods_error_mapper",
+    "remove_channel_moderator_error_mapper",
+    "remove_channel_moderators_error_mapper",
+    "remove_video_from_project_alt1_error_mapper",
+    "remove_video_from_project_error_mapper",
+    "remove_video_from_showcase_alt2_error_mapper",
+    "remove_video_from_showcase_error_mapper",
+    "remove_videos_from_channel_error_mapper",
+    "remove_videos_from_live_event_alt1_error_mapper",
+    "remove_videos_from_live_event_alt2_error_mapper",
+    "remove_videos_from_live_event_error_mapper",
+    "remove_videos_from_project_alt1_error_mapper",
+    "remove_videos_from_project_error_mapper",
+    "replace_channel_moderators_error_mapper",
+    "replace_showcase_custom_thumb_error_mapper",
+    "replace_showcase_logo_error_mapper",
+    "replace_videos_in_showcase_alt2_error_mapper",
+    "replace_videos_in_showcase_error_mapper",
+    "reset_composer_scenes_error_mapper",
+    "search_users_error_mapper",
+    "search_videos_error_mapper",
+    "set_channel_privacy_user_error_mapper",
+    "set_channel_privacy_users_error_mapper",
+    "set_chapter_thumbnail_active_error_mapper",
+    "set_live_event_whitelist_alt1_error_mapper",
+    "set_live_event_whitelist_alt2_error_mapper",
+    "set_live_event_whitelist_error_mapper",
+    "set_video_as_showcase_featured_alt2_error_mapper",
+    "set_video_as_showcase_featured_error_mapper",
+    "set_video_as_showcase_thumbnail_alt2_error_mapper",
+    "set_video_as_showcase_thumbnail_error_mapper",
+    "set_vod_regions_error_mapper",
+    "start_ai_transcribe_error_mapper",
+    "start_ai_translate_dubbing_error_mapper",
+    "start_ai_translate_subtitles_error_mapper",
+    "subscribe_to_channel_alt1_error_mapper",
+    "subscribe_to_channel_error_mapper",
+    "suggest_video_category_error_mapper",
+    "toggle_rle_low_latency_alt1_error_mapper",
+    "toggle_rle_low_latency_alt2_error_mapper",
+    "toggle_rle_low_latency_error_mapper",
+    "unlike_video_alt1_error_mapper",
+    "unlike_video_error_mapper",
+    "unsubscribe_from_channel_alt1_error_mapper",
+    "unsubscribe_from_channel_error_mapper",
+    "update_composer_scene_error_mapper",
+    "update_custom_metadata_field_options_error_mapper",
+    "update_event_audio_tracks_error_mapper",
+    "update_live_event_alt1_error_mapper",
+    "update_live_event_alt2_error_mapper",
+    "update_live_event_destination_error_mapper",
+    "update_live_event_error_mapper",
+    "update_video_custom_metadata_error_mapper",
+    "update_webhook_error_mapper",
+    "upload_video_alt1_error_mapper",
+    "upload_video_error_mapper",
+    "upsert_custom_metadata_settings_error_mapper",
+    "verify_token_error_mapper",
+]

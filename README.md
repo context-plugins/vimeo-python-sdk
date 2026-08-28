@@ -1,15 +1,15 @@
-# Slack Web API SDK
+# Vimeo SDK
 
 [![Built with APIMatic][apimatic-badge]][apimatic-url] [![License: MIT][license-badge]][license-url] [![Python 3.10+][python-badge]][python-url]
 
-The Slack Web API SDK for Python provides access to the [Slack Web API REST APIs](https://api.slack.com/web) from Python applications.
+The Vimeo SDK for Python provides access to the Vimeo REST APIs from Python applications.
 
 > [!TIP]
 > **Looking for a specific signature, model, enum, or error type?** This SDK ships a generated
 > **[SDK map](sdk-map.md)** -- a lookup index of the SDK's entire Python surface. Consult it before
 > scanning the source tree; details under [SDK map](#sdk-map).
 
-One way to interact with the Slack platform is its HTTP RPC-based Web API, a collection of methods requiring OAuth 2.0-based user, bot, or workspace tokens blessed with related OAuth scopes.
+Build something great. Vimeo's API supports flexible, high-quality video integration with your custom apps.
 
 ---
 
@@ -18,15 +18,15 @@ One way to interact with the Slack platform is its HTTP RPC-based Web API, a col
 Install the Python SDK from PyPI, with whichever package manager your project uses:
 
 ```bash
-pip install slack-web-api
+pip install vimeo
 ```
 
 ```bash
-uv add slack-web-api
+uv add vimeo
 ```
 
 ```bash
-poetry add slack-web-api
+poetry add vimeo
 ```
 
 ---
@@ -35,23 +35,26 @@ poetry add slack-web-api
 
 ### Synchronous client
 
-Construct `SlackWebApiClient` with keyword arguments, and call `close()` when you are done. Every argument is optional; the full list is in the [SDK map](sdk-map.md).
+Construct `VimeoClient` with keyword arguments, and call `close()` when you are done. Every argument is optional; the full list is in the [SDK map](sdk-map.md).
 
 ```python
-from slack_web_api import SlackWebApiClient
-from slack_web_api.auth import SlackAuthScope
-from slack_web_api.core import AuthorizationCodeCredentials
+from vimeo import VimeoClient
+from vimeo.auth import Oauth2AuthorizationCodeScope, Oauth2ClientCredentialsScope
+from vimeo.core import AuthorizationCodeCredentials, ClientCredentials
 
 
 def prompt(url: str) -> str:
     return input(f"Open {url}, then paste the code: ")
 
 
-client = SlackWebApiClient(
-    slack_auth=AuthorizationCodeCredentials[SlackAuthScope](
+client = VimeoClient(
+    bearer="YOUR_BEARER_TOKEN",
+    oauth2_authorization_code=AuthorizationCodeCredentials[Oauth2AuthorizationCodeScope](
         client_id="YOUR_CLIENT_ID", redirect_uri="YOUR_REDIRECT_URI", prompt_for_authorization_code=prompt
     ),
-    environment="production",
+    oauth2_client_credentials=ClientCredentials[Oauth2ClientCredentialsScope](
+        client_id="YOUR_CLIENT_ID", client_secret="YOUR_CLIENT_SECRET"
+    ),
 )
 
 # TODO: call endpoints here -- see api-reference.md
@@ -59,22 +62,22 @@ client = SlackWebApiClient(
 client.close()
 ```
 
-Alternatively, scope it -- `with SlackWebApiClient(...) as client:` closes the pool on exit; see [Best Practices](#best-practices).
+Alternatively, scope it -- `with VimeoClient(...) as client:` closes the pool on exit; see [Best Practices](#best-practices).
 
-`Client` is exported as an alias of `SlackWebApiClient`, so `from slack_web_api import Client` also works.
+`Client` is exported as an alias of `VimeoClient`, so `from vimeo import Client` also works.
 
 The SDK accepts every model-typed input in two interchangeable spellings, both type-checked: the typed model, or a plain dict with the same keys -- the `OrDict` and `Model | ModelDict` unions in the [SDK map](sdk-map.md). Pick whichever suits the call site: the dict form needs no import, while the model form adds a keyword-checked constructor and editor completion.
 
 ### Asynchronous client
 
-`AsyncSlackWebApiClient` mirrors `SlackWebApiClient` with **identical method names**, and every endpoint method is a coroutine. It takes the same arguments, with some differences -- for example, the transport argument is `custom_async_http_client`.
+`AsyncVimeoClient` mirrors `VimeoClient` with **identical method names**, and every endpoint method is a coroutine. It takes the same arguments, with some differences -- for example, the transport argument is `custom_async_http_client`.
 
 ```python
 from asyncio import run, to_thread
 
-from slack_web_api import AsyncSlackWebApiClient
-from slack_web_api.auth import SlackAuthScope
-from slack_web_api.core import AsyncAuthorizationCodeCredentials
+from vimeo import AsyncVimeoClient
+from vimeo.auth import Oauth2AuthorizationCodeScope, Oauth2ClientCredentialsScope
+from vimeo.core import AsyncAuthorizationCodeCredentials, ClientCredentials
 
 
 async def prompt(url: str) -> str:
@@ -83,11 +86,14 @@ async def prompt(url: str) -> str:
 
 
 async def main() -> None:
-    client = AsyncSlackWebApiClient(
-        slack_auth=AsyncAuthorizationCodeCredentials[SlackAuthScope](
+    client = AsyncVimeoClient(
+        bearer="YOUR_BEARER_TOKEN",
+        oauth2_authorization_code=AsyncAuthorizationCodeCredentials[Oauth2AuthorizationCodeScope](
             client_id="YOUR_CLIENT_ID", redirect_uri="YOUR_REDIRECT_URI", prompt_for_authorization_code=prompt
         ),
-        environment="production",
+        oauth2_client_credentials=ClientCredentials[Oauth2ClientCredentialsScope](
+            client_id="YOUR_CLIENT_ID", client_secret="YOUR_CLIENT_SECRET"
+        ),
     )
     # TODO: call endpoints here, awaiting each -- see api-reference.md
     await client.aclose()
@@ -96,7 +102,7 @@ async def main() -> None:
 run(main())
 ```
 
-Alternatively, scope it -- `async with AsyncSlackWebApiClient(...) as client:` closes the pool on exit. Only the async spelling is `aclose`, matching httpx; see [Best Practices](#best-practices).
+Alternatively, scope it -- `async with AsyncVimeoClient(...) as client:` closes the pool on exit. Only the async spelling is `aclose`, matching httpx; see [Best Practices](#best-practices).
 
 `AsyncClient` is the exported alias. Each client accepts **only** its own transport argument and its own prompt flavour; passing the other's is a `TypeError` at runtime and an error under mypy.
 
@@ -111,7 +117,7 @@ Two generated references cover the SDK; each answers a different question:
 | **[API Reference](api-reference.md)** | Usage guidance for a single **parsed** operation: `client.<group>.<operation>(...)` returns the typed payload and raises `ApiError` on any non-2xx, with `.error` the typed error body, or `RawError` for a status the operation does not document. |
 | **[Raw API Reference](raw-api-reference.md)** | The same for the **raw** variant: `client.<group>.with_raw_response.<operation>(...)` returns `ApiResult[T, E]` and never raises for an API error. |
 
-Both API references carry every one of the 253 operations, with a sync and an async sample and a parameter table each.
+Both API references carry every one of the 520 operations, with a sync and an async sample and a parameter table each.
 
 ## SDK map
 
@@ -122,11 +128,11 @@ Consult the map before scanning or grepping the source: it answers call-level co
 ## Best Practices
 
 > [!TIP]
-> Use a **single `SlackWebApiClient` instance** for the lifetime of your application and reuse it across
+> Use a **single `VimeoClient` instance** for the lifetime of your application and reuse it across
 > all requests. Each instance owns its own connection pool, so an instance per request forfeits
 > connection reuse and leaks pools that are never closed.
 
-Match the disposal to the client's lifetime: an application-lifetime client is closed once at shutdown with `close()` / `aclose()`; where the lifetime fits a block, `with SlackWebApiClient() as client:` / `async with AsyncSlackWebApiClient() as client:` releases it automatically. Both are idempotent, but a closed client is not reusable: the next call raises. The client closes **whatever transport it holds**, including one you supplied via `custom_http_client` / `custom_async_http_client`; if you intend to reuse your own transport across clients, don't hand its lifetime to a `with` block.
+Match the disposal to the client's lifetime: an application-lifetime client is closed once at shutdown with `close()` / `aclose()`; where the lifetime fits a block, `with VimeoClient() as client:` / `async with AsyncVimeoClient() as client:` releases it automatically. Both are idempotent, but a closed client is not reusable: the next call raises. The client closes **whatever transport it holds**, including one you supplied via `custom_http_client` / `custom_async_http_client`; if you intend to reuse your own transport across clients, don't hand its lifetime to a `with` block.
 
 ## License
 

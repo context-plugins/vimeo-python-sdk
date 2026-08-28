@@ -1,0 +1,15 @@
+from __future__ import annotations
+
+from typing_extensions import NotRequired, TypedDict
+
+from ..core import UNSET, Optional, SdkBaseModel
+from .videos17 import Videos17, Videos17Dict
+
+
+class MeLiveEventsVideosRequest1(SdkBaseModel):
+    videos: Optional[list[Videos17]] = UNSET
+    """An array of video objects."""
+
+
+class MeLiveEventsVideosRequest1Dict(TypedDict):
+    videos: NotRequired[list[Videos17 | Videos17Dict]]

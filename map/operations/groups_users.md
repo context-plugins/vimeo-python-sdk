@@ -1,0 +1,99 @@
+<!-- Generated file — do not edit; regenerated with the SDK. -->
+
+# GroupsUsers — operations
+
+Accessor: `client.groups_users` · Source: `vimeo/apis/groups_users.py` · 5 operations
+
+Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
+
+### client.groups_users.check_if_user_joined_group
+
+- **Route**: `GET /users/{user_id}/groups/{group_id}`
+- **Signature**: `def check_if_user_joined_group(group_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `group_id`, `user_id`
+- **Params**: `group_id` — path · `user_id` — path
+- **Returns (parsed)**: `None`
+- **Returns (raw)**: `ApiResult[None, CheckIfUserJoinedGroupErrorBody]`
+- **Error**: `CheckIfUserJoinedGroupErrorBody` — **Case A (typed)**
+- **Error arms**: `LegacyError` [404] · `RawError` [anything unmapped]
+
+| Type | Source |
+| --- | --- |
+| `CheckIfUserJoinedGroupErrorBody` | `vimeo/errors/check_if_user_joined_group_error.py` |
+| `LegacyError` | `vimeo/models/legacy_error.py` |
+
+### client.groups_users.check_if_user_joined_group_alt1
+
+- **Route**: `GET /me/groups/{group_id}`
+- **Signature**: `def check_if_user_joined_group_alt1(group_id: float, *, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `group_id`
+- **Params**: `group_id` — path
+- **Returns (parsed)**: `None`
+- **Returns (raw)**: `ApiResult[None, CheckIfUserJoinedGroupAlt1ErrorBody]`
+- **Error**: `CheckIfUserJoinedGroupAlt1ErrorBody` — **Case A (typed)**
+- **Error arms**: `LegacyError` [404] · `RawError` [anything unmapped]
+
+| Type | Source |
+| --- | --- |
+| `CheckIfUserJoinedGroupAlt1ErrorBody` | `vimeo/errors/check_if_user_joined_group_alt1_error.py` |
+| `LegacyError` | `vimeo/models/legacy_error.py` |
+
+### client.groups_users.get_group_members
+
+- **Route**: `GET /groups/{group_id}/users`
+- **Signature**: `def get_group_members(group_id: float, *, direction: DirectionOrStr | None = None, filter: Filter2OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `group_id`
+- **Params**: `group_id` — path · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Returns (parsed)**: `UserConnection`
+- **Returns (raw)**: `ApiResult[UserConnection, GetGroupMembersErrorBody]`
+- **Error**: `GetGroupMembersErrorBody` — **Case A (typed)**
+- **Error arms**: `LegacyError` [404] · `RawError` [anything unmapped]
+
+| Type | Source |
+| --- | --- |
+| `DirectionOrStr` | `vimeo/models/enums/direction.py` |
+| `Filter2OrStr` | `vimeo/models/enums/filter2.py` |
+| `Sort8OrStr` | `vimeo/models/enums/sort8.py` |
+| `UserConnection` | `vimeo/models/user_connection.py` |
+| `GetGroupMembersErrorBody` | `vimeo/errors/get_group_members_error.py` |
+| `LegacyError` | `vimeo/models/legacy_error.py` |
+
+### client.groups_users.get_user_groups
+
+- **Route**: `GET /users/{user_id}/groups`
+- **Signature**: `def get_user_groups(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort5OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `user_id`
+- **Params**: `user_id` — path · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Returns (parsed)**: `GroupConnection`
+- **Returns (raw)**: `ApiResult[GroupConnection, GetUserGroupsErrorBody]`
+- **Error**: `GetUserGroupsErrorBody` — **Case A (typed)**
+- **Error arms**: `Error` [404] · `RawError` [anything unmapped]
+
+| Type | Source |
+| --- | --- |
+| `DirectionOrStr` | `vimeo/models/enums/direction.py` |
+| `Filter12OrStr` | `vimeo/models/enums/filter12.py` |
+| `Sort5OrStr` | `vimeo/models/enums/sort5.py` |
+| `GroupConnection` | `vimeo/models/group_connection.py` |
+| `GetUserGroupsErrorBody` | `vimeo/errors/get_user_groups_error.py` |
+| `Error` | `vimeo/models/error.py` |
+
+### client.groups_users.get_user_groups_alt1
+
+- **Route**: `GET /me/groups`
+- **Signature**: `def get_user_groups_alt1(*, direction: DirectionOrStr | None = None, filter: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort5OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Returns (parsed)**: `GroupConnection`
+- **Returns (raw)**: `ApiResult[GroupConnection, GetUserGroupsAlt1ErrorBody]`
+- **Error**: `GetUserGroupsAlt1ErrorBody` — **Case A (typed)**
+- **Error arms**: `Error` [404] · `RawError` [anything unmapped]
+
+| Type | Source |
+| --- | --- |
+| `DirectionOrStr` | `vimeo/models/enums/direction.py` |
+| `Filter12OrStr` | `vimeo/models/enums/filter12.py` |
+| `Sort5OrStr` | `vimeo/models/enums/sort5.py` |
+| `GroupConnection` | `vimeo/models/group_connection.py` |
+| `GetUserGroupsAlt1ErrorBody` | `vimeo/errors/get_user_groups_alt1_error.py` |
+| `Error` | `vimeo/models/error.py` |
+
