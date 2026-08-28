@@ -1,0 +1,24 @@
+from __future__ import annotations
+
+from typing import Literal
+
+from typing_extensions import NotRequired, TypedDict
+
+from ..core import UNSET, Optional, SdkBaseModel
+from .enums.chat_scheduled_messages_list_error_enum import ChatScheduledMessagesListErrorEnumOrStr
+
+
+class ChatScheduledMessagesListerrorschema1(SdkBaseModel):
+    """Schema for error response from chat.scheduledMessages.list method"""
+
+    callstack: Optional[str] = UNSET
+    """Note: PHP callstack is only visible in dev/qa"""
+
+    error: ChatScheduledMessagesListErrorEnumOrStr
+    ok: Literal["False"] = "False"
+
+
+class ChatScheduledMessagesListerrorschema1Dict(TypedDict):
+    callstack: NotRequired[str]
+    error: ChatScheduledMessagesListErrorEnumOrStr
+    ok: NotRequired[Literal["False"]]
