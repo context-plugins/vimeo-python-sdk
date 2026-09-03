@@ -2,13 +2,14 @@
 
 # LiveEventThumbnails — operations
 
-Accessor: `client.live_event_thumbnails` · Source: `vimeo/apis/live_event_thumbnails.py` · 15 operations
+Accessor: `client.live_event_thumbnails` · Source: `vimeo_api/apis/live_event_thumbnails.py` · 15 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.live_event_thumbnails.create_live_event_thumbnail
 
 - **Route**: `POST /users/{user_id}/live_events/{live_event_id}/pictures`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def create_live_event_thumbnail(live_event_id: float, user_id: float, *, body: UsersLiveEventsPicturesRequest | UsersLiveEventsPicturesRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `user_id`
 - **Params**: `live_event_id` — path · `user_id` — path · `body` — JSON body
@@ -19,15 +20,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `UsersLiveEventsPicturesRequest` | `vimeo/models/users_live_events_pictures_request.py` |
-| `UsersLiveEventsPicturesRequestDict` | `vimeo/models/users_live_events_pictures_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `CreateLiveEventThumbnailErrorBody` | `vimeo/errors/create_live_event_thumbnail_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `UsersLiveEventsPicturesRequest` | `vimeo_api/models/users_live_events_pictures_request.py` |
+| `UsersLiveEventsPicturesRequestDict` | `vimeo_api/models/users_live_events_pictures_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `CreateLiveEventThumbnailErrorBody` | `vimeo_api/errors/create_live_event_thumbnail_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.create_live_event_thumbnail_alt1
 
 - **Route**: `POST /live_events/{live_event_id}/pictures`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def create_live_event_thumbnail_alt1(live_event_id: float, *, body: LiveEventsPicturesRequest | LiveEventsPicturesRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`
 - **Params**: `live_event_id` — path · `body` — JSON body
@@ -38,15 +40,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `LiveEventsPicturesRequest` | `vimeo/models/live_events_pictures_request.py` |
-| `LiveEventsPicturesRequestDict` | `vimeo/models/live_events_pictures_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `CreateLiveEventThumbnailAlt1ErrorBody` | `vimeo/errors/create_live_event_thumbnail_alt1_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `LiveEventsPicturesRequest` | `vimeo_api/models/live_events_pictures_request.py` |
+| `LiveEventsPicturesRequestDict` | `vimeo_api/models/live_events_pictures_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `CreateLiveEventThumbnailAlt1ErrorBody` | `vimeo_api/errors/create_live_event_thumbnail_alt1_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.create_live_event_thumbnail_alt2
 
 - **Route**: `POST /me/live_events/{live_event_id}/pictures`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def create_live_event_thumbnail_alt2(live_event_id: float, *, body: MeLiveEventsPicturesRequest | MeLiveEventsPicturesRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`
 - **Params**: `live_event_id` — path · `body` — JSON body
@@ -57,15 +60,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `MeLiveEventsPicturesRequest` | `vimeo/models/me_live_events_pictures_request.py` |
-| `MeLiveEventsPicturesRequestDict` | `vimeo/models/me_live_events_pictures_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `CreateLiveEventThumbnailAlt2ErrorBody` | `vimeo/errors/create_live_event_thumbnail_alt2_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `MeLiveEventsPicturesRequest` | `vimeo_api/models/me_live_events_pictures_request.py` |
+| `MeLiveEventsPicturesRequestDict` | `vimeo_api/models/me_live_events_pictures_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `CreateLiveEventThumbnailAlt2ErrorBody` | `vimeo_api/errors/create_live_event_thumbnail_alt2_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.delete_live_event_thumbnail
 
 - **Route**: `DELETE /users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_live_event_thumbnail(live_event_id: float, thumbnail_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `thumbnail_id`, `user_id`
 - **Params**: `live_event_id` — path · `thumbnail_id` — path · `user_id` — path
@@ -76,12 +80,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteLiveEventThumbnailErrorBody` | `vimeo/errors/delete_live_event_thumbnail_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `DeleteLiveEventThumbnailErrorBody` | `vimeo_api/errors/delete_live_event_thumbnail_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.delete_live_event_thumbnail_alt1
 
 - **Route**: `DELETE /live_events/{live_event_id}/pictures/{thumbnail_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_live_event_thumbnail_alt1(live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `thumbnail_id`
 - **Params**: `live_event_id` — path · `thumbnail_id` — path
@@ -92,12 +97,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteLiveEventThumbnailAlt1ErrorBody` | `vimeo/errors/delete_live_event_thumbnail_alt1_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `DeleteLiveEventThumbnailAlt1ErrorBody` | `vimeo_api/errors/delete_live_event_thumbnail_alt1_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.delete_live_event_thumbnail_alt2
 
 - **Route**: `DELETE /me/live_events/{live_event_id}/pictures/{thumbnail_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_live_event_thumbnail_alt2(live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `thumbnail_id`
 - **Params**: `live_event_id` — path · `thumbnail_id` — path
@@ -108,12 +114,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteLiveEventThumbnailAlt2ErrorBody` | `vimeo/errors/delete_live_event_thumbnail_alt2_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `DeleteLiveEventThumbnailAlt2ErrorBody` | `vimeo_api/errors/delete_live_event_thumbnail_alt2_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.edit_live_event_thumbnail
 
 - **Route**: `PATCH /users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def edit_live_event_thumbnail(live_event_id: float, thumbnail_id: float, user_id: float, *, body: UsersLiveEventsPicturesThumbnailIdRequest | UsersLiveEventsPicturesThumbnailIdRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `thumbnail_id`, `user_id`
 - **Params**: `live_event_id` — path · `thumbnail_id` — path · `user_id` — path · `body` — JSON body
@@ -124,15 +131,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `UsersLiveEventsPicturesThumbnailIdRequest` | `vimeo/models/users_live_events_pictures_thumbnail_id_request.py` |
-| `UsersLiveEventsPicturesThumbnailIdRequestDict` | `vimeo/models/users_live_events_pictures_thumbnail_id_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `EditLiveEventThumbnailErrorBody` | `vimeo/errors/edit_live_event_thumbnail_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `UsersLiveEventsPicturesThumbnailIdRequest` | `vimeo_api/models/users_live_events_pictures_thumbnail_id_request.py` |
+| `UsersLiveEventsPicturesThumbnailIdRequestDict` | `vimeo_api/models/users_live_events_pictures_thumbnail_id_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `EditLiveEventThumbnailErrorBody` | `vimeo_api/errors/edit_live_event_thumbnail_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.edit_live_event_thumbnail_alt1
 
 - **Route**: `PATCH /live_events/{live_event_id}/pictures/{thumbnail_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def edit_live_event_thumbnail_alt1(live_event_id: float, thumbnail_id: float, *, body: LiveEventsPicturesRequest | LiveEventsPicturesRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `thumbnail_id`
 - **Params**: `live_event_id` — path · `thumbnail_id` — path · `body` — JSON body
@@ -143,15 +151,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `LiveEventsPicturesRequest` | `vimeo/models/live_events_pictures_request.py` |
-| `LiveEventsPicturesRequestDict` | `vimeo/models/live_events_pictures_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `EditLiveEventThumbnailAlt1ErrorBody` | `vimeo/errors/edit_live_event_thumbnail_alt1_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `LiveEventsPicturesRequest` | `vimeo_api/models/live_events_pictures_request.py` |
+| `LiveEventsPicturesRequestDict` | `vimeo_api/models/live_events_pictures_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `EditLiveEventThumbnailAlt1ErrorBody` | `vimeo_api/errors/edit_live_event_thumbnail_alt1_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.edit_live_event_thumbnail_alt2
 
 - **Route**: `PATCH /me/live_events/{live_event_id}/pictures/{thumbnail_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def edit_live_event_thumbnail_alt2(live_event_id: float, thumbnail_id: float, *, body: MeLiveEventsPicturesRequest | MeLiveEventsPicturesRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `thumbnail_id`
 - **Params**: `live_event_id` — path · `thumbnail_id` — path · `body` — JSON body
@@ -162,15 +171,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `MeLiveEventsPicturesRequest` | `vimeo/models/me_live_events_pictures_request.py` |
-| `MeLiveEventsPicturesRequestDict` | `vimeo/models/me_live_events_pictures_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `EditLiveEventThumbnailAlt2ErrorBody` | `vimeo/errors/edit_live_event_thumbnail_alt2_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `MeLiveEventsPicturesRequest` | `vimeo_api/models/me_live_events_pictures_request.py` |
+| `MeLiveEventsPicturesRequestDict` | `vimeo_api/models/me_live_events_pictures_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `EditLiveEventThumbnailAlt2ErrorBody` | `vimeo_api/errors/edit_live_event_thumbnail_alt2_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.get_live_event_thumbnail
 
 - **Route**: `GET /users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_live_event_thumbnail(live_event_id: float, thumbnail_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `thumbnail_id`, `user_id`
 - **Params**: `live_event_id` — path · `thumbnail_id` — path · `user_id` — path
@@ -181,13 +191,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Picture` | `vimeo/models/picture.py` |
-| `GetLiveEventThumbnailErrorBody` | `vimeo/errors/get_live_event_thumbnail_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `GetLiveEventThumbnailErrorBody` | `vimeo_api/errors/get_live_event_thumbnail_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.get_live_event_thumbnail_alt1
 
 - **Route**: `GET /live_events/{live_event_id}/pictures/{thumbnail_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_live_event_thumbnail_alt1(live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `thumbnail_id`
 - **Params**: `live_event_id` — path · `thumbnail_id` — path
@@ -198,13 +209,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Picture` | `vimeo/models/picture.py` |
-| `GetLiveEventThumbnailAlt1ErrorBody` | `vimeo/errors/get_live_event_thumbnail_alt1_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `GetLiveEventThumbnailAlt1ErrorBody` | `vimeo_api/errors/get_live_event_thumbnail_alt1_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.get_live_event_thumbnail_alt2
 
 - **Route**: `GET /me/live_events/{live_event_id}/pictures/{thumbnail_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_live_event_thumbnail_alt2(live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `thumbnail_id`
 - **Params**: `live_event_id` — path · `thumbnail_id` — path
@@ -215,13 +227,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Picture` | `vimeo/models/picture.py` |
-| `GetLiveEventThumbnailAlt2ErrorBody` | `vimeo/errors/get_live_event_thumbnail_alt2_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `GetLiveEventThumbnailAlt2ErrorBody` | `vimeo_api/errors/get_live_event_thumbnail_alt2_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.get_live_event_thumbnails
 
 - **Route**: `GET /users/{user_id}/live_events/{live_event_id}/pictures`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_live_event_thumbnails(live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `user_id`
 - **Params**: `live_event_id` — path · `user_id` — path
@@ -232,13 +245,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `PictureConnection` | `vimeo/models/picture_connection.py` |
-| `GetLiveEventThumbnailsErrorBody` | `vimeo/errors/get_live_event_thumbnails_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `PictureConnection` | `vimeo_api/models/picture_connection.py` |
+| `GetLiveEventThumbnailsErrorBody` | `vimeo_api/errors/get_live_event_thumbnails_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.get_live_event_thumbnails_alt1
 
 - **Route**: `GET /live_events/{live_event_id}/pictures`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_live_event_thumbnails_alt1(live_event_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`
 - **Params**: `live_event_id` — path
@@ -249,13 +263,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `PictureConnection` | `vimeo/models/picture_connection.py` |
-| `GetLiveEventThumbnailsAlt1ErrorBody` | `vimeo/errors/get_live_event_thumbnails_alt1_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `PictureConnection` | `vimeo_api/models/picture_connection.py` |
+| `GetLiveEventThumbnailsAlt1ErrorBody` | `vimeo_api/errors/get_live_event_thumbnails_alt1_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.live_event_thumbnails.get_live_event_thumbnails_alt2
 
 - **Route**: `GET /me/live_events/{live_event_id}/pictures`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_live_event_thumbnails_alt2(live_event_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`
 - **Params**: `live_event_id` — path
@@ -266,7 +281,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `PictureConnection` | `vimeo/models/picture_connection.py` |
-| `GetLiveEventThumbnailsAlt2ErrorBody` | `vimeo/errors/get_live_event_thumbnails_alt2_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `PictureConnection` | `vimeo_api/models/picture_connection.py` |
+| `GetLiveEventThumbnailsAlt2ErrorBody` | `vimeo_api/errors/get_live_event_thumbnails_alt2_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 

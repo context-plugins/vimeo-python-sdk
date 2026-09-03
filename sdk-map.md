@@ -1,14 +1,14 @@
 <!-- Generated file — do not edit; regenerated with the SDK. -->
 
-# SDK map — Vimeo (Python)
+# SDK map — Vimeo API (Python)
 
 > A generated table of contents for this SDK. Consult this map and its sub-pages to learn signatures, error types, and server/auth wiring **by lookup**. Model shapes and enum values are *not* duplicated here — the map names the module declaring each type; read the shape there. Every name is the emitted spelling, so a wrong one fails at import rather than working silently.
 
 |  |  |
 | --- | --- |
-| SDK display name | Vimeo |
-| Root package | `vimeo` |
-| Distribution name | `vimeo` |
+| SDK display name | Vimeo API |
+| Root package | `vimeo_api` |
+| Distribution name | `vimeo-api` |
 | Requires | Python 3.10 or later |
 | API spec version | `3.4.9` |
 | Generator | APIMatic |
@@ -24,16 +24,16 @@ All `Source` paths on this map and its sub-pages are relative to the **SDK root*
 ### Synchronous client
 
 ```python
-from vimeo import VimeoClient
-from vimeo.auth import Oauth2AuthorizationCodeScope, Oauth2ClientCredentialsScope
-from vimeo.core import AuthorizationCodeCredentials, ClientCredentials
+from vimeo_api import VimeoApiClient
+from vimeo_api.auth import Oauth2AuthorizationCodeScope, Oauth2ClientCredentialsScope
+from vimeo_api.core import AuthorizationCodeCredentials, ClientCredentials
 
 
 def prompt(url: str) -> str:
     return input(f"Open {url}, then paste the code: ")
 
 
-client = VimeoClient(
+client = VimeoApiClient(
     bearer="YOUR_BEARER_TOKEN",
     oauth2_authorization_code=AuthorizationCodeCredentials[Oauth2AuthorizationCodeScope](
         client_id="YOUR_CLIENT_ID", redirect_uri="YOUR_REDIRECT_URI", prompt_for_authorization_code=prompt
@@ -48,16 +48,16 @@ client = VimeoClient(
 client.close()
 ```
 
-Alternatively, scope it — `with VimeoClient(...) as client:` closes the pool on exit.
+Alternatively, scope it — `with VimeoApiClient(...) as client:` closes the pool on exit.
 
 ### Asynchronous client
 
 ```python
 from asyncio import run, to_thread
 
-from vimeo import AsyncVimeoClient
-from vimeo.auth import Oauth2AuthorizationCodeScope, Oauth2ClientCredentialsScope
-from vimeo.core import AsyncAuthorizationCodeCredentials, ClientCredentials
+from vimeo_api import AsyncVimeoApiClient
+from vimeo_api.auth import Oauth2AuthorizationCodeScope, Oauth2ClientCredentialsScope
+from vimeo_api.core import AsyncAuthorizationCodeCredentials, ClientCredentials
 
 
 async def prompt(url: str) -> str:
@@ -66,7 +66,7 @@ async def prompt(url: str) -> str:
 
 
 async def main() -> None:
-    client = AsyncVimeoClient(
+    client = AsyncVimeoApiClient(
         bearer="YOUR_BEARER_TOKEN",
         oauth2_authorization_code=AsyncAuthorizationCodeCredentials[Oauth2AuthorizationCodeScope](
             client_id="YOUR_CLIENT_ID", redirect_uri="YOUR_REDIRECT_URI", prompt_for_authorization_code=prompt
@@ -82,15 +82,15 @@ async def main() -> None:
 run(main())
 ```
 
-Alternatively, scope it — `async with AsyncVimeoClient(...) as client:` closes the pool on exit.
+Alternatively, scope it — `async with AsyncVimeoApiClient(...) as client:` closes the pool on exit.
 
-`AsyncClient` (`vimeo/async_client.py`) mirrors `Client` method for method, each endpoint method a coroutine. It takes the same keywords, except that each client accepts only its own transport and — where the **Async Type** column differs — only its own flavor.
+`AsyncClient` (`vimeo_api/async_client.py`) mirrors `Client` method for method, each endpoint method a coroutine. It takes the same keywords, except that each client accepts only its own transport and — where the **Async Type** column differs — only its own flavor.
 
-`Client` and `AsyncClient` are aliases of `VimeoClient` and `AsyncVimeoClient` — the names tracebacks and `repr()` show; all four import from the root.
+`Client` and `AsyncClient` are aliases of `VimeoApiClient` and `AsyncVimeoApiClient` — the names tracebacks and `repr()` show; all four import from the root.
 
 `close()` / `aclose()` closes the transport even when you supplied one via `custom_http_client=` / `custom_async_http_client=`, and a closed client cannot be reused.
 
-Every API group is a property on the client (e.g. `client.api_apps_webhooks`). Every constructor argument is optional and keyword-only. Sources: `vimeo/client.py`, `vimeo/async_client.py`:
+Every API group is a property on the client (e.g. `client.api_apps_webhooks`). Every constructor argument is optional and keyword-only. Sources: `vimeo_api/client.py`, `vimeo_api/async_client.py`:
 
 | Keyword | Sync Type | Async Type | Default |
 | --- | --- | --- | --- |
@@ -108,20 +108,20 @@ The types those columns name — where each imports from and, for a credentials 
 
 | Type | Import from | Shape |
 | --- | --- | --- |
-| `HttpClient` | `vimeo.core` | protocol — `send(request: HttpRequest) -> HttpResponse` · `close()` |
-| `AuthorizationCodeCredentialsOrDict` | `vimeo.core` | `AuthorizationCodeCredentials` or a dict: `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AuthorizationCodePrompt` |
-| `Oauth2AuthorizationCodeScope` | `vimeo.auth` | `Enum` of the declared scopes |
-| `RefreshableTokenSource` | `vimeo.core` | protocol — `fetch(credentials) -> OAuthTokenRefreshable` · `refresh(credentials, refresh_token) -> OAuthTokenRefreshable \| None` |
-| `AuthorizationCodeCredentials` | `vimeo.core` | `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AuthorizationCodePrompt` |
-| `ClientCredentialsOrDict` | `vimeo.core` | `ClientCredentials` or a dict: `client_id: str` · `client_secret: str` · `scopes: list[Scope] \| None` |
-| `Oauth2ClientCredentialsScope` | `vimeo.auth` | `Enum` of the declared scopes |
-| `TokenSource` | `vimeo.core` | protocol — `fetch(credentials) -> OAuthToken` |
-| `ClientCredentials` | `vimeo.core` | `client_id: str` · `client_secret: str` · `scopes: list[Scope] \| None` |
-| `AsyncHttpClient` | `vimeo.core` | protocol — `async send(request: HttpRequest) -> HttpResponse` · `async aclose()` |
-| `AsyncAuthorizationCodeCredentialsOrDict` | `vimeo.core` | `AsyncAuthorizationCodeCredentials` or a dict: `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AsyncAuthorizationCodePrompt` |
-| `AsyncRefreshableTokenSource` | `vimeo.core` | protocol — `async fetch(credentials) -> OAuthTokenRefreshable` · `async refresh(credentials, refresh_token) -> OAuthTokenRefreshable \| None` |
-| `AsyncAuthorizationCodeCredentials` | `vimeo.core` | `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AsyncAuthorizationCodePrompt` |
-| `AsyncTokenSource` | `vimeo.core` | protocol — `async fetch(credentials) -> OAuthToken` |
+| `HttpClient` | `vimeo_api.core` | protocol — `send(request: HttpRequest) -> HttpResponse` · `close()` |
+| `AuthorizationCodeCredentialsOrDict` | `vimeo_api.core` | `AuthorizationCodeCredentials` or a dict: `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AuthorizationCodePrompt` |
+| `Oauth2AuthorizationCodeScope` | `vimeo_api.auth` | `Enum` of the declared scopes |
+| `RefreshableTokenSource` | `vimeo_api.core` | protocol — `fetch(credentials) -> OAuthTokenRefreshable` · `refresh(credentials, refresh_token) -> OAuthTokenRefreshable \| None` |
+| `AuthorizationCodeCredentials` | `vimeo_api.core` | `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AuthorizationCodePrompt` |
+| `ClientCredentialsOrDict` | `vimeo_api.core` | `ClientCredentials` or a dict: `client_id: str` · `client_secret: str` · `scopes: list[Scope] \| None` |
+| `Oauth2ClientCredentialsScope` | `vimeo_api.auth` | `Enum` of the declared scopes |
+| `TokenSource` | `vimeo_api.core` | protocol — `fetch(credentials) -> OAuthToken` |
+| `ClientCredentials` | `vimeo_api.core` | `client_id: str` · `client_secret: str` · `scopes: list[Scope] \| None` |
+| `AsyncHttpClient` | `vimeo_api.core` | protocol — `async send(request: HttpRequest) -> HttpResponse` · `async aclose()` |
+| `AsyncAuthorizationCodeCredentialsOrDict` | `vimeo_api.core` | `AsyncAuthorizationCodeCredentials` or a dict: `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AsyncAuthorizationCodePrompt` |
+| `AsyncRefreshableTokenSource` | `vimeo_api.core` | protocol — `async fetch(credentials) -> OAuthTokenRefreshable` · `async refresh(credentials, refresh_token) -> OAuthTokenRefreshable \| None` |
+| `AsyncAuthorizationCodeCredentials` | `vimeo_api.core` | `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AsyncAuthorizationCodePrompt` |
+| `AsyncTokenSource` | `vimeo_api.core` | protocol — `async fetch(credentials) -> OAuthToken` |
 
 ---
 
@@ -134,22 +134,22 @@ Every operation is reached in two response modes:
 
 What `.error` holds is fixed per operation. There are two cases:
 
-- **Case A — typed error.** The operation documents at least one error status, so `vimeo/errors/` declares a union alias over the bodies those statuses map to — `RawError` is always its last arm, for any undocumented status — and `.error` is annotated with that alias. Narrow it with `isinstance`. The operation blocks name the alias and the status each arm maps from.
-- **Case B — raw error.** The operation documents no error status; `.error` is `RawError` (`vimeo/core/results.py`): `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` · `response: HttpResponse`.
+- **Case A — typed error.** The operation documents at least one error status, so `vimeo_api/errors/` declares a union alias over the bodies those statuses map to — `RawError` is always its last arm, for any undocumented status — and `.error` is annotated with that alias. Narrow it with `isinstance`. The operation blocks name the alias and the status each arm maps from.
+- **Case B — raw error.** The operation documents no error status; `.error` is `RawError` (`vimeo_api/core/results.py`): `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` · `response: HttpResponse`.
 
-Core runtime types (`vimeo/core/`) — public members with their **declared types**, verbatim from source:
+Core runtime types (`vimeo_api/core/`) — public members with their **declared types**, verbatim from source:
 
 | Type | Public members | Source |
 | --- | --- | --- |
-| `ApiError` — raised by every parsed call; `.error` is a Case A alias from `vimeo/errors/` or `RawError` | `error: E` · `status_code: int` · `response: HttpResponse` | `vimeo/core/exceptions.py` |
-| `ApiResult[T, E]` — returned by every raw call; the `Success[T] \| Failure[E]` union | `payload: T` (on `Success`) · `error: E` (on `Failure`) · `response: HttpResponse` (on both) | `vimeo/core/results.py` |
-| `RawError` | `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` · `response: HttpResponse` | `vimeo/core/results.py` |
+| `ApiError` — raised by every parsed call; `.error` is a Case A alias from `vimeo_api/errors/` or `RawError` | `error: E` · `status_code: int` · `response: HttpResponse` | `vimeo_api/core/exceptions.py` |
+| `ApiResult[T, E]` — returned by every raw call; the `Success[T] \| Failure[E]` union | `payload: T` (on `Success`) · `error: E` (on `Failure`) · `response: HttpResponse` (on both) | `vimeo_api/core/results.py` |
+| `RawError` | `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` · `response: HttpResponse` | `vimeo_api/core/results.py` |
 
 Typed error bodies (the arms of a Case A alias) are ordinary models — no special handling. The operation's **Type sources** table gives the module that declares each one; read field names, declared types and JSON aliases there, as for any other model.
 
 ```python
-from vimeo.core import ApiError, RawError
-from vimeo.models import Error
+from vimeo_api.core import ApiError, RawError
+from vimeo_api.models import Error
 
 try:
     response = client.api_apps_webhooks.add_webhook(app_id)
@@ -178,7 +178,7 @@ Each links to a sub-page with one block per operation, headed by its full access
 | **Four spellings, one signature** — the same method name and parameters on `Client` and `AsyncClient`, each also reachable through `.with_raw_response`; the async twin is a coroutine to `await`, with the same return types and error case, and where the **Async Type** column differs, pass the type it names | Getting a client |
 | **Parsed raises, raw returns** — `ApiError` versus `ApiResult` | Error-handling model |
 | **Case B error is always `RawError`** — also the last arm of every Case A alias, where a block's **Error arms** bullet ends in it | Error-handling model |
-| **A trailing `request_options`** — keyword-only and optional, for per-call overrides such as a timeout or extra headers; every signature ends with it | here (`vimeo/core/request_options.py`) |
+| **A trailing `request_options`** — keyword-only and optional, for per-call overrides such as a timeout or extra headers; every signature ends with it | here (`vimeo_api/core/request_options.py`) |
 | **Base URL `https://api.vimeo.com`** — this SDK's only server; override it with `base_url="https://…"` | Servers & auth |
 | **Parameter names are literal** — signatures are generated code verbatim, and everything behind the bare `*` must be passed by name | here |
 | **A parameter's wire name is its Python name** — sent as-is on the path, query string, header or body, unless the block's **Params** bullet carries a wire name beside the role | here |
@@ -294,14 +294,14 @@ Sub-pages chunk per `###` block: each block is self-contained given the table ab
 
 ## Models — where they live, how to build them
 
-**Shapes live only in the source.** Every module under `vimeo/models/` declares one type plus its input companion, and every module under `vimeo/errors/` one alias plus the mapper that builds it; no two share a name. Take a type's module from the operation's **Type sources** table. When no retrieved chunk names it, the module is the type name in snake_case under the kind's directory below (`ApiApp` ↔ `api_app.py`; an error alias drops its `Body` suffix: `ActivateLiveEventErrorBody` ↔ `activate_live_event_error.py`). Never grep for a type.
+**Shapes live only in the source.** Every module under `vimeo_api/models/` declares one type plus its input companion, and every module under `vimeo_api/errors/` one alias plus the mapper that builds it; no two share a name. Take a type's module from the operation's **Type sources** table. When no retrieved chunk names it, the module is the type name in snake_case under the kind's directory below (`ApiApp` ↔ `api_app.py`; an error alias drops its `Body` suffix: `ActivateLiveEventErrorBody` ↔ `activate_live_event_error.py`). Never grep for a type.
 
 | Group | Count | Directory (module = `<type_name>.py`) |
 | --- | --- | --- |
-| Models (`SdkBaseModel` pydantic classes) | 784 | `vimeo/models/` |
-| Enums (`Enum` over `str` / `int`) — Python member names + wire values | 281 | `vimeo/models/enums/` |
-| Unions (plain) — `TypeAlias` over the arms | 1 | `vimeo/models/unions/` |
-| Error aliases (one per Case A operation) | 411 | `vimeo/errors/` |
+| Models (`SdkBaseModel` pydantic classes) | 784 | `vimeo_api/models/` |
+| Enums (`Enum` over `str` / `int`) — Python member names + wire values | 270 | `vimeo_api/models/enums/` |
+| Unions (plain) — `TypeAlias` over the arms | 1 | `vimeo_api/models/unions/` |
+| Error aliases (one per Case A operation) | 411 | `vimeo_api/errors/` |
 
 Conventions: a model is a `SdkBaseModel` (pydantic) class; a field whose wire name differs from its Python name carries it as `Field(alias=…)` (`type_` ↔ `"type"`) — read the alias off the field rather than deriving it. An omittable field is annotated `Optional[T]` and defaults to `UNSET`, and one that may also be explicitly null is `OptionalNullable[T]`; both come from `core` and neither is `typing.Optional` — there is no `None` arm unless the spec declared the property nullable, so passing `None` to the first is a type error rather than a value that serializes.
 
@@ -311,13 +311,13 @@ Import paths by content type (`from <package> import <Name>`):
 
 | Contents | Import from |
 | --- | --- |
-| Client (root) | `vimeo` |
-| Operation controllers | `vimeo.apis` |
-| Models | `vimeo.models` |
-| Enums | `vimeo.models.enums` |
-| Unions | `vimeo.models.unions`, `vimeo.models` |
-| Error aliases | `vimeo.errors` |
-| Core runtime (`ApiError`, `ApiResult`, `RawError`, …) | `vimeo.core` |
+| Client (root) | `vimeo_api` |
+| Operation controllers | `vimeo_api.apis` |
+| Models | `vimeo_api.models` |
+| Enums | `vimeo_api.models.enums` |
+| Unions | `vimeo_api.models.unions`, `vimeo_api.models` |
+| Error aliases | `vimeo_api.errors` |
+| Core runtime (`ApiError`, `ApiResult`, `RawError`, …) | `vimeo_api.core` |
 
 ---
 
@@ -329,7 +329,14 @@ Import paths by content type (`from <package> import <Name>`):
 
 **OAuth2 (client credentials).** Pass `oauth2_client_credentials` your client id and secret; tokens come from `/oauth/authorize/client` on the base URL — so `base_url="https://…"` moves token traffic too. Scopes are the `Oauth2ClientCredentialsScope` alias.
 
-**One environment, one server** (`vimeo/server/server_config.py`). The spec declares a single environment, so no `environment` keyword exists; the base URL and its override point:
+Operation blocks name their scheme in an **Auth** bullet; an operation whose spec declares no scheme carries no such bullet.
+
+- `AND` — every scheme listed must be configured for the call to succeed.
+- `OR` — any one of the schemes listed can be used; the first one you configured is the one sent, in the order listed.
+
+A scheme you did not configure is skipped silently rather than raising, and the request is sent anyway — so an authentication failure can mean no credential was sent rather than a bad one.
+
+**One environment, one server** (`vimeo_api/server/server_config.py`). The spec declares a single environment, so no `environment` keyword exists; the base URL and its override point:
 
 | Base URL | Override point |
 | --- | --- |

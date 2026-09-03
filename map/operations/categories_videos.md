@@ -2,13 +2,14 @@
 
 # CategoriesVideos — operations
 
-Accessor: `client.categories_videos` · Source: `vimeo/apis/categories_videos.py` · 4 operations
+Accessor: `client.categories_videos` · Source: `vimeo_api/apis/categories_videos.py` · 4 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.categories_videos.check_category_for_video
 
 - **Route**: `GET /categories/{category}/videos/{video_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def check_category_for_video(category: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `category`, `video_id`
 - **Params**: `category` — path · `video_id` — path
@@ -19,13 +20,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Video` | `vimeo/models/video.py` |
-| `CheckCategoryForVideoErrorBody` | `vimeo/errors/check_category_for_video_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `Video` | `vimeo_api/models/video.py` |
+| `CheckCategoryForVideoErrorBody` | `vimeo_api/errors/check_category_for_video_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.categories_videos.get_category_videos
 
 - **Route**: `GET /categories/{category}/videos`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_category_videos(category: str, *, direction: DirectionOrStr | None = None, filter: FilterOrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort6OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `category`
 - **Params**: `category` — path · `direction` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
@@ -36,16 +38,17 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DirectionOrStr` | `vimeo/models/enums/direction.py` |
-| `FilterOrStr` | `vimeo/models/enums/filter.py` |
-| `Sort6OrStr` | `vimeo/models/enums/sort6.py` |
-| `VideoConnection` | `vimeo/models/video_connection.py` |
-| `GetCategoryVideosErrorBody` | `vimeo/errors/get_category_videos_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `DirectionOrStr` | `vimeo_api/models/enums/direction.py` |
+| `FilterOrStr` | `vimeo_api/models/enums/filter.py` |
+| `Sort6OrStr` | `vimeo_api/models/enums/sort6.py` |
+| `VideoConnection` | `vimeo_api/models/video_connection.py` |
+| `GetCategoryVideosErrorBody` | `vimeo_api/errors/get_category_videos_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.categories_videos.get_video_categories
 
 - **Route**: `GET /videos/{video_id}/categories`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_video_categories(video_id: float, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`
 - **Params**: `video_id` — path · `page` — query · `per_page` — query
@@ -56,13 +59,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `CategoryConnection` | `vimeo/models/category_connection.py` |
-| `GetVideoCategoriesErrorBody` | `vimeo/errors/get_video_categories_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `CategoryConnection` | `vimeo_api/models/category_connection.py` |
+| `GetVideoCategoriesErrorBody` | `vimeo_api/errors/get_video_categories_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.categories_videos.suggest_video_category
 
 - **Route**: `PUT /videos/{video_id}/categories`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def suggest_video_category(video_id: float, body: VideosCategoriesRequest | VideosCategoriesRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`, `body`
 - **Params**: `video_id` — path · `body` — JSON body
@@ -73,9 +77,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `VideosCategoriesRequest` | `vimeo/models/videos_categories_request.py` |
-| `VideosCategoriesRequestDict` | `vimeo/models/videos_categories_request.py` |
-| `Category` | `vimeo/models/category.py` |
-| `SuggestVideoCategoryErrorBody` | `vimeo/errors/suggest_video_category_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `VideosCategoriesRequest` | `vimeo_api/models/videos_categories_request.py` |
+| `VideosCategoriesRequestDict` | `vimeo_api/models/videos_categories_request.py` |
+| `Category` | `vimeo_api/models/category.py` |
+| `SuggestVideoCategoryErrorBody` | `vimeo_api/errors/suggest_video_category_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 

@@ -2,13 +2,14 @@
 
 # PortfoliosVideos — operations
 
-Accessor: `client.portfolios_videos` · Source: `vimeo/apis/portfolios_videos.py` · 8 operations
+Accessor: `client.portfolios_videos` · Source: `vimeo_api/apis/portfolios_videos.py` · 8 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.portfolios_videos.add_video_to_portfolio
 
 - **Route**: `PUT /users/{user_id}/portfolios/{portfolio_id}/videos/{video_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def add_video_to_portfolio(portfolio_id: float, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`, `user_id`, `video_id`
 - **Params**: `portfolio_id` — path · `user_id` — path · `video_id` — path
@@ -19,12 +20,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `AddVideoToPortfolioErrorBody` | `vimeo/errors/add_video_to_portfolio_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `AddVideoToPortfolioErrorBody` | `vimeo_api/errors/add_video_to_portfolio_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.portfolios_videos.add_video_to_portfolio_alt1
 
 - **Route**: `PUT /me/portfolios/{portfolio_id}/videos/{video_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def add_video_to_portfolio_alt1(portfolio_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`, `video_id`
 - **Params**: `portfolio_id` — path · `video_id` — path
@@ -35,12 +37,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `AddVideoToPortfolioAlt1ErrorBody` | `vimeo/errors/add_video_to_portfolio_alt1_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `AddVideoToPortfolioAlt1ErrorBody` | `vimeo_api/errors/add_video_to_portfolio_alt1_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.portfolios_videos.delete_video_from_portfolio
 
 - **Route**: `DELETE /users/{user_id}/portfolios/{portfolio_id}/videos/{video_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_video_from_portfolio(portfolio_id: float, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`, `user_id`, `video_id`
 - **Params**: `portfolio_id` — path · `user_id` — path · `video_id` — path
@@ -51,12 +54,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteVideoFromPortfolioErrorBody` | `vimeo/errors/delete_video_from_portfolio_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `DeleteVideoFromPortfolioErrorBody` | `vimeo_api/errors/delete_video_from_portfolio_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.portfolios_videos.delete_video_from_portfolio_alt1
 
 - **Route**: `DELETE /me/portfolios/{portfolio_id}/videos/{video_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_video_from_portfolio_alt1(portfolio_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`, `video_id`
 - **Params**: `portfolio_id` — path · `video_id` — path
@@ -67,12 +71,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteVideoFromPortfolioAlt1ErrorBody` | `vimeo/errors/delete_video_from_portfolio_alt1_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `DeleteVideoFromPortfolioAlt1ErrorBody` | `vimeo_api/errors/delete_video_from_portfolio_alt1_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.portfolios_videos.get_portfolio_video
 
 - **Route**: `GET /users/{user_id}/portfolios/{portfolio_id}/videos/{video_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_portfolio_video(portfolio_id: float, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`, `user_id`, `video_id`
 - **Params**: `portfolio_id` — path · `user_id` — path · `video_id` — path
@@ -82,11 +87,12 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Video` | `vimeo/models/video.py` |
+| `Video` | `vimeo_api/models/video.py` |
 
 ### client.portfolios_videos.get_portfolio_video_alt1
 
 - **Route**: `GET /me/portfolios/{portfolio_id}/videos/{video_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_portfolio_video_alt1(portfolio_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`, `video_id`
 - **Params**: `portfolio_id` — path · `video_id` — path
@@ -96,11 +102,12 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Video` | `vimeo/models/video.py` |
+| `Video` | `vimeo_api/models/video.py` |
 
 ### client.portfolios_videos.get_portfolio_videos
 
 - **Route**: `GET /users/{user_id}/portfolios/{portfolio_id}/videos`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_portfolio_videos(portfolio_id: float, user_id: float, *, containing_uri: str | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`, `user_id`
 - **Params**: `portfolio_id` — path · `user_id` — path · `containing_uri` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `sort` — query
@@ -110,13 +117,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Filter3OrStr` | `vimeo/models/enums/filter3.py` |
-| `Sort35OrStr` | `vimeo/models/enums/sort35.py` |
-| `VideoConnection` | `vimeo/models/video_connection.py` |
+| `Filter3OrStr` | `vimeo_api/models/enums/filter3.py` |
+| `Sort35OrStr` | `vimeo_api/models/enums/sort35.py` |
+| `VideoConnection` | `vimeo_api/models/video_connection.py` |
 
 ### client.portfolios_videos.get_portfolio_videos_alt1
 
 - **Route**: `GET /me/portfolios/{portfolio_id}/videos`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_portfolio_videos_alt1(portfolio_id: float, *, containing_uri: str | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`
 - **Params**: `portfolio_id` — path · `containing_uri` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `sort` — query
@@ -126,7 +134,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Filter3OrStr` | `vimeo/models/enums/filter3.py` |
-| `Sort35OrStr` | `vimeo/models/enums/sort35.py` |
-| `VideoConnection` | `vimeo/models/video_connection.py` |
+| `Filter3OrStr` | `vimeo_api/models/enums/filter3.py` |
+| `Sort35OrStr` | `vimeo_api/models/enums/sort35.py` |
+| `VideoConnection` | `vimeo_api/models/video_connection.py` |
 

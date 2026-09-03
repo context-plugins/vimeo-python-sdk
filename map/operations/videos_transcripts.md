@@ -2,13 +2,14 @@
 
 # VideosTranscripts — operations
 
-Accessor: `client.videos_transcripts` · Source: `vimeo/apis/videos_transcripts.py` · 2 operations
+Accessor: `client.videos_transcripts` · Source: `vimeo_api/apis/videos_transcripts.py` · 2 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.videos_transcripts.get_transcript
 
 - **Route**: `GET /videos/{video_id}/transcripts/{texttrack_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_transcript(texttrack_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `texttrack_id`, `video_id`
 - **Params**: `texttrack_id` — path · `video_id` — path
@@ -19,13 +20,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `SegmentConnection` | `vimeo/models/segment_connection.py` |
-| `GetTranscriptErrorBody` | `vimeo/errors/get_transcript_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `SegmentConnection` | `vimeo_api/models/segment_connection.py` |
+| `GetTranscriptErrorBody` | `vimeo_api/errors/get_transcript_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.videos_transcripts.get_transcript_metadata
 
 - **Route**: `GET /videos/{container_uuid}/transcript/{texttrack_id}/metadata`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_transcript_metadata(container_uuid: str, texttrack_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `container_uuid`, `texttrack_id`
 - **Params**: `container_uuid` — path · `texttrack_id` — path
@@ -36,7 +38,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `TranscriptMetadata` | `vimeo/models/transcript_metadata.py` |
-| `GetTranscriptMetadataErrorBody` | `vimeo/errors/get_transcript_metadata_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `TranscriptMetadata` | `vimeo_api/models/transcript_metadata.py` |
+| `GetTranscriptMetadataErrorBody` | `vimeo_api/errors/get_transcript_metadata_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 

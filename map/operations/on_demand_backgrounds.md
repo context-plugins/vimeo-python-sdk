@@ -2,13 +2,14 @@
 
 # OnDemandBackgrounds — operations
 
-Accessor: `client.on_demand_backgrounds` · Source: `vimeo/apis/on_demand_backgrounds.py` · 5 operations
+Accessor: `client.on_demand_backgrounds` · Source: `vimeo_api/apis/on_demand_backgrounds.py` · 5 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.on_demand_backgrounds.create_vod_background
 
 - **Route**: `POST /ondemand/pages/{ondemand_id}/backgrounds`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def create_vod_background(ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `ondemand_id`
 - **Params**: `ondemand_id` — path
@@ -19,13 +20,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Picture` | `vimeo/models/picture.py` |
-| `CreateVodBackgroundErrorBody` | `vimeo/errors/create_vod_background_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `CreateVodBackgroundErrorBody` | `vimeo_api/errors/create_vod_background_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.on_demand_backgrounds.delete_vod_background
 
 - **Route**: `DELETE /ondemand/pages/{ondemand_id}/backgrounds/{background_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_vod_background(background_id: float, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `background_id`, `ondemand_id`
 - **Params**: `background_id` — path · `ondemand_id` — path
@@ -36,12 +38,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteVodBackgroundErrorBody` | `vimeo/errors/delete_vod_background_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `DeleteVodBackgroundErrorBody` | `vimeo_api/errors/delete_vod_background_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.on_demand_backgrounds.edit_vod_background
 
 - **Route**: `PATCH /ondemand/pages/{ondemand_id}/backgrounds/{background_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def edit_vod_background(background_id: float, ondemand_id: float, *, body: OndemandPagesBackgroundsRequest | OndemandPagesBackgroundsRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `background_id`, `ondemand_id`
 - **Params**: `background_id` — path · `ondemand_id` — path · `body` — JSON body
@@ -52,15 +55,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `OndemandPagesBackgroundsRequest` | `vimeo/models/ondemand_pages_backgrounds_request.py` |
-| `OndemandPagesBackgroundsRequestDict` | `vimeo/models/ondemand_pages_backgrounds_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `EditVodBackgroundErrorBody` | `vimeo/errors/edit_vod_background_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `OndemandPagesBackgroundsRequest` | `vimeo_api/models/ondemand_pages_backgrounds_request.py` |
+| `OndemandPagesBackgroundsRequestDict` | `vimeo_api/models/ondemand_pages_backgrounds_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `EditVodBackgroundErrorBody` | `vimeo_api/errors/edit_vod_background_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.on_demand_backgrounds.get_vod_background
 
 - **Route**: `GET /ondemand/pages/{ondemand_id}/backgrounds/{background_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_vod_background(background_id: float, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `background_id`, `ondemand_id`
 - **Params**: `background_id` — path · `ondemand_id` — path
@@ -71,13 +75,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Picture` | `vimeo/models/picture.py` |
-| `GetVodBackgroundErrorBody` | `vimeo/errors/get_vod_background_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `GetVodBackgroundErrorBody` | `vimeo_api/errors/get_vod_background_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.on_demand_backgrounds.get_vod_backgrounds
 
 - **Route**: `GET /ondemand/pages/{ondemand_id}/backgrounds`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_vod_backgrounds(ondemand_id: float, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `ondemand_id`
 - **Params**: `ondemand_id` — path · `page` — query · `per_page` — query
@@ -88,7 +93,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `PictureConnection` | `vimeo/models/picture_connection.py` |
-| `GetVodBackgroundsErrorBody` | `vimeo/errors/get_vod_backgrounds_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `PictureConnection` | `vimeo_api/models/picture_connection.py` |
+| `GetVodBackgroundsErrorBody` | `vimeo_api/errors/get_vod_backgrounds_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 

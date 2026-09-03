@@ -2,13 +2,14 @@
 
 # ChannelsTags — operations
 
-Accessor: `client.channels_tags` · Source: `vimeo/apis/channels_tags.py` · 5 operations
+Accessor: `client.channels_tags` · Source: `vimeo_api/apis/channels_tags.py` · 5 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.channels_tags.add_channel_tag
 
 - **Route**: `PUT /channels/{channel_id}/tags/{word}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def add_channel_tag(channel_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `word`
 - **Params**: `channel_id` — path · `word` — path
@@ -19,13 +20,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `AddChannelTagErrorBody` | `vimeo/errors/add_channel_tag_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `AddChannelTagErrorBody` | `vimeo_api/errors/add_channel_tag_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.channels_tags.add_tags_to_channel
 
 - **Route**: `PUT /channels/{channel_id}/tags`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def add_tags_to_channel(channel_id: float, body: list[ChannelsTagsRequest | ChannelsTagsRequestDict], *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `body`
 - **Params**: `channel_id` — path · `body` — JSON body
@@ -36,16 +38,17 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `ChannelsTagsRequest` | `vimeo/models/channels_tags_request.py` |
-| `ChannelsTagsRequestDict` | `vimeo/models/channels_tags_request.py` |
-| `Tag` | `vimeo/models/tag.py` |
-| `AddTagsToChannelErrorBody` | `vimeo/errors/add_tags_to_channel_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `ChannelsTagsRequest` | `vimeo_api/models/channels_tags_request.py` |
+| `ChannelsTagsRequestDict` | `vimeo_api/models/channels_tags_request.py` |
+| `Tag` | `vimeo_api/models/tag.py` |
+| `AddTagsToChannelErrorBody` | `vimeo_api/errors/add_tags_to_channel_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.channels_tags.check_if_channel_has_tag
 
 - **Route**: `GET /channels/{channel_id}/tags/{word}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def check_if_channel_has_tag(channel_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `word`
 - **Params**: `channel_id` — path · `word` — path
@@ -56,13 +59,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `CheckIfChannelHasTagErrorBody` | `vimeo/errors/check_if_channel_has_tag_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `CheckIfChannelHasTagErrorBody` | `vimeo_api/errors/check_if_channel_has_tag_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.channels_tags.delete_tag_from_channel
 
 - **Route**: `DELETE /channels/{channel_id}/tags/{word}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_tag_from_channel(channel_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `word`
 - **Params**: `channel_id` — path · `word` — path
@@ -73,13 +77,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteTagFromChannelErrorBody` | `vimeo/errors/delete_tag_from_channel_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `DeleteTagFromChannelErrorBody` | `vimeo_api/errors/delete_tag_from_channel_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.channels_tags.get_channel_tags
 
 - **Route**: `GET /channels/{channel_id}/tags`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_channel_tags(channel_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`
 - **Params**: `channel_id` — path
@@ -90,7 +95,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `TagConnection` | `vimeo/models/tag_connection.py` |
-| `GetChannelTagsErrorBody` | `vimeo/errors/get_channel_tags_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `TagConnection` | `vimeo_api/models/tag_connection.py` |
+| `GetChannelTagsErrorBody` | `vimeo_api/errors/get_channel_tags_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 

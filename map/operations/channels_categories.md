@@ -2,13 +2,14 @@
 
 # ChannelsCategories — operations
 
-Accessor: `client.channels_categories` · Source: `vimeo/apis/channels_categories.py` · 4 operations
+Accessor: `client.channels_categories` · Source: `vimeo_api/apis/channels_categories.py` · 4 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.channels_categories.add_channel_categories
 
 - **Route**: `PUT /channels/{channel_id}/categories`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def add_channel_categories(channel_id: float, body: ChannelsCategoriesRequest | ChannelsCategoriesRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `body`
 - **Params**: `channel_id` — path · `body` — JSON body
@@ -19,15 +20,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `ChannelsCategoriesRequest` | `vimeo/models/channels_categories_request.py` |
-| `ChannelsCategoriesRequestDict` | `vimeo/models/channels_categories_request.py` |
-| `AddChannelCategoriesErrorBody` | `vimeo/errors/add_channel_categories_error.py` |
-| `Error` | `vimeo/models/error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `ChannelsCategoriesRequest` | `vimeo_api/models/channels_categories_request.py` |
+| `ChannelsCategoriesRequestDict` | `vimeo_api/models/channels_categories_request.py` |
+| `AddChannelCategoriesErrorBody` | `vimeo_api/errors/add_channel_categories_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.channels_categories.categorize_channel
 
 - **Route**: `PUT /channels/{channel_id}/categories/{category}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def categorize_channel(category: str, channel_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `category`, `channel_id`
 - **Params**: `category` — path · `channel_id` — path
@@ -38,13 +40,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `CategorizeChannelErrorBody` | `vimeo/errors/categorize_channel_error.py` |
-| `Error` | `vimeo/models/error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `CategorizeChannelErrorBody` | `vimeo_api/errors/categorize_channel_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.channels_categories.delete_channel_category
 
 - **Route**: `DELETE /channels/{channel_id}/categories/{category}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_channel_category(category: str, channel_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `category`, `channel_id`
 - **Params**: `category` — path · `channel_id` — path
@@ -55,13 +58,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteChannelCategoryErrorBody` | `vimeo/errors/delete_channel_category_error.py` |
-| `Error` | `vimeo/models/error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `DeleteChannelCategoryErrorBody` | `vimeo_api/errors/delete_channel_category_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.channels_categories.get_channel_categories
 
 - **Route**: `GET /channels/{channel_id}/categories`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_channel_categories(channel_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`
 - **Params**: `channel_id` — path
@@ -72,7 +76,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `CategoryConnection` | `vimeo/models/category_connection.py` |
-| `GetChannelCategoriesErrorBody` | `vimeo/errors/get_channel_categories_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `CategoryConnection` | `vimeo_api/models/category_connection.py` |
+| `GetChannelCategoriesErrorBody` | `vimeo_api/errors/get_channel_categories_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 

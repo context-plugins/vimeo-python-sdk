@@ -2,13 +2,14 @@
 
 # VideosChapters — operations
 
-Accessor: `client.videos_chapters` · Source: `vimeo/apis/videos_chapters.py` · 12 operations
+Accessor: `client.videos_chapters` · Source: `vimeo_api/apis/videos_chapters.py` · 12 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.videos_chapters.create_chapter
 
 - **Route**: `POST /videos/{video_id}/chapters`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def create_chapter(video_id: float, *, body: VideosChaptersRequest | VideosChaptersRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`
 - **Params**: `video_id` — path · `body` — JSON body
@@ -19,15 +20,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `VideosChaptersRequest` | `vimeo/models/videos_chapters_request.py` |
-| `VideosChaptersRequestDict` | `vimeo/models/videos_chapters_request.py` |
-| `Chapter` | `vimeo/models/chapter.py` |
-| `CreateChapterErrorBody` | `vimeo/errors/create_chapter_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `VideosChaptersRequest` | `vimeo_api/models/videos_chapters_request.py` |
+| `VideosChaptersRequestDict` | `vimeo_api/models/videos_chapters_request.py` |
+| `Chapter` | `vimeo_api/models/chapter.py` |
+| `CreateChapterErrorBody` | `vimeo_api/errors/create_chapter_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.create_chapter_thumbnail_or_upload_link
 
 - **Route**: `POST /videos/{video_id}/chapters/{chapter_id}/pictures`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def create_chapter_thumbnail_or_upload_link(chapter_id: float, video_id: float, *, body: VideosChaptersPicturesRequest | VideosChaptersPicturesRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `chapter_id`, `video_id`
 - **Params**: `chapter_id` — path · `video_id` — path · `body` — JSON body
@@ -38,15 +40,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `VideosChaptersPicturesRequest` | `vimeo/models/videos_chapters_pictures_request.py` |
-| `VideosChaptersPicturesRequestDict` | `vimeo/models/videos_chapters_pictures_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `CreateChapterThumbnailOrUploadLinkErrorBody` | `vimeo/errors/create_chapter_thumbnail_or_upload_link_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `VideosChaptersPicturesRequest` | `vimeo_api/models/videos_chapters_pictures_request.py` |
+| `VideosChaptersPicturesRequestDict` | `vimeo_api/models/videos_chapters_pictures_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `CreateChapterThumbnailOrUploadLinkErrorBody` | `vimeo_api/errors/create_chapter_thumbnail_or_upload_link_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.create_unsaved_chapter_thumbnail_or_upload_link
 
 - **Route**: `POST /videos/{video_id}/chapters/temporary/pictures`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def create_unsaved_chapter_thumbnail_or_upload_link(video_id: float, *, body: VideosChaptersTemporaryPicturesRequest | VideosChaptersTemporaryPicturesRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`
 - **Params**: `video_id` — path · `body` — JSON body
@@ -57,15 +60,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `VideosChaptersTemporaryPicturesRequest` | `vimeo/models/videos_chapters_temporary_pictures_request.py` |
-| `VideosChaptersTemporaryPicturesRequestDict` | `vimeo/models/videos_chapters_temporary_pictures_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `CreateUnsavedChapterThumbnailOrUploadLinkErrorBody` | `vimeo/errors/create_unsaved_chapter_thumbnail_or_upload_link_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `VideosChaptersTemporaryPicturesRequest` | `vimeo_api/models/videos_chapters_temporary_pictures_request.py` |
+| `VideosChaptersTemporaryPicturesRequestDict` | `vimeo_api/models/videos_chapters_temporary_pictures_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `CreateUnsavedChapterThumbnailOrUploadLinkErrorBody` | `vimeo_api/errors/create_unsaved_chapter_thumbnail_or_upload_link_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.delete_chapter
 
 - **Route**: `DELETE /videos/{video_id}/chapters/{chapter_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_chapter(chapter_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `chapter_id`, `video_id`
 - **Params**: `chapter_id` — path · `video_id` — path
@@ -76,12 +80,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteChapterErrorBody` | `vimeo/errors/delete_chapter_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `DeleteChapterErrorBody` | `vimeo_api/errors/delete_chapter_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.delete_chapter_thumbnail
 
 - **Route**: `DELETE /videos/{video_id}/chapters/{chapter_id}/pictures/{uid}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_chapter_thumbnail(chapter_id: float, uid: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `chapter_id`, `uid`, `video_id`
 - **Params**: `chapter_id` — path · `uid` — path · `video_id` — path
@@ -92,12 +97,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteChapterThumbnailErrorBody` | `vimeo/errors/delete_chapter_thumbnail_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `DeleteChapterThumbnailErrorBody` | `vimeo_api/errors/delete_chapter_thumbnail_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.edit_chapter
 
 - **Route**: `PATCH /videos/{video_id}/chapters/{chapter_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def edit_chapter(chapter_id: float, video_id: float, *, body: VideosChaptersRequest1 | VideosChaptersRequest1Dict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `chapter_id`, `video_id`
 - **Params**: `chapter_id` — path · `video_id` — path · `body` — JSON body
@@ -108,16 +114,17 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `VideosChaptersRequest1` | `vimeo/models/videos_chapters_request1.py` |
-| `VideosChaptersRequest1Dict` | `vimeo/models/videos_chapters_request1.py` |
-| `Chapter` | `vimeo/models/chapter.py` |
-| `EditChapterErrorBody` | `vimeo/errors/edit_chapter_error.py` |
-| `Error` | `vimeo/models/error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `VideosChaptersRequest1` | `vimeo_api/models/videos_chapters_request1.py` |
+| `VideosChaptersRequest1Dict` | `vimeo_api/models/videos_chapters_request1.py` |
+| `Chapter` | `vimeo_api/models/chapter.py` |
+| `EditChapterErrorBody` | `vimeo_api/errors/edit_chapter_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.get_chapter
 
 - **Route**: `GET /videos/{video_id}/chapters/{chapter_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_chapter(chapter_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `chapter_id`, `video_id`
 - **Params**: `chapter_id` — path · `video_id` — path
@@ -128,13 +135,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Chapter` | `vimeo/models/chapter.py` |
-| `GetChapterErrorBody` | `vimeo/errors/get_chapter_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `Chapter` | `vimeo_api/models/chapter.py` |
+| `GetChapterErrorBody` | `vimeo_api/errors/get_chapter_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.get_chapter_thumbnail
 
 - **Route**: `GET /videos/{video_id}/chapters/{chapter_id}/pictures/{uid}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_chapter_thumbnail(chapter_id: float, video_id: float, uid: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `chapter_id`, `video_id`, `uid`
 - **Params**: `chapter_id` — path · `video_id` — path · `uid` — path
@@ -145,13 +153,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Picture` | `vimeo/models/picture.py` |
-| `GetChapterThumbnailErrorBody` | `vimeo/errors/get_chapter_thumbnail_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `GetChapterThumbnailErrorBody` | `vimeo_api/errors/get_chapter_thumbnail_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.get_chapter_thumbnails
 
 - **Route**: `GET /videos/{video_id}/chapters/{chapter_id}/pictures`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_chapter_thumbnails(chapter_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `chapter_id`, `video_id`
 - **Params**: `chapter_id` — path · `video_id` — path
@@ -162,13 +171,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Picture` | `vimeo/models/picture.py` |
-| `GetChapterThumbnailsErrorBody` | `vimeo/errors/get_chapter_thumbnails_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `GetChapterThumbnailsErrorBody` | `vimeo_api/errors/get_chapter_thumbnails_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.get_chapters
 
 - **Route**: `GET /videos/{video_id}/chapters`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_chapters(video_id: float, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`
 - **Params**: `video_id` — path · `page` — query · `per_page` — query
@@ -179,13 +189,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `ChapterConnection` | `vimeo/models/chapter_connection.py` |
-| `GetChaptersErrorBody` | `vimeo/errors/get_chapters_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `ChapterConnection` | `vimeo_api/models/chapter_connection.py` |
+| `GetChaptersErrorBody` | `vimeo_api/errors/get_chapters_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.get_unsaved_chapter_thumbnail
 
 - **Route**: `GET /videos/{video_id}/chapters/temporary/pictures/{uid}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_unsaved_chapter_thumbnail(video_id: float, uid: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`, `uid`
 - **Params**: `video_id` — path · `uid` — path
@@ -196,13 +207,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Picture` | `vimeo/models/picture.py` |
-| `GetUnsavedChapterThumbnailErrorBody` | `vimeo/errors/get_unsaved_chapter_thumbnail_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `GetUnsavedChapterThumbnailErrorBody` | `vimeo_api/errors/get_unsaved_chapter_thumbnail_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_chapters.set_chapter_thumbnail_active
 
 - **Route**: `PATCH /videos/{video_id}/chapters/{chapter_id}/pictures/{uid}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def set_chapter_thumbnail_active(chapter_id: float, video_id: float, uid: str, *, body: VideosChaptersPicturesUidRequest | VideosChaptersPicturesUidRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `chapter_id`, `video_id`, `uid`
 - **Params**: `chapter_id` — path · `video_id` — path · `uid` — path · `body` — JSON body
@@ -213,9 +225,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `VideosChaptersPicturesUidRequest` | `vimeo/models/videos_chapters_pictures_uid_request.py` |
-| `VideosChaptersPicturesUidRequestDict` | `vimeo/models/videos_chapters_pictures_uid_request.py` |
-| `Picture` | `vimeo/models/picture.py` |
-| `SetChapterThumbnailActiveErrorBody` | `vimeo/errors/set_chapter_thumbnail_active_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `VideosChaptersPicturesUidRequest` | `vimeo_api/models/videos_chapters_pictures_uid_request.py` |
+| `VideosChaptersPicturesUidRequestDict` | `vimeo_api/models/videos_chapters_pictures_uid_request.py` |
+| `Picture` | `vimeo_api/models/picture.py` |
+| `SetChapterThumbnailActiveErrorBody` | `vimeo_api/errors/set_chapter_thumbnail_active_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 

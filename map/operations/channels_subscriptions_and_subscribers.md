@@ -2,13 +2,14 @@
 
 # ChannelsSubscriptionsAndSubscribers — operations
 
-Accessor: `client.channels_subscriptions_and_subscribers` · Source: `vimeo/apis/channels_subscriptions_and_subscribers.py` · 7 operations
+Accessor: `client.channels_subscriptions_and_subscribers` · Source: `vimeo_api/apis/channels_subscriptions_and_subscribers.py` · 7 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel
 
 - **Route**: `GET /users/{user_id}/channels/{channel_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def check_if_user_subscribed_to_channel(channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `user_id`
 - **Params**: `channel_id` — path · `user_id` — path
@@ -19,12 +20,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `CheckIfUserSubscribedToChannelErrorBody` | `vimeo/errors/check_if_user_subscribed_to_channel_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `CheckIfUserSubscribedToChannelErrorBody` | `vimeo_api/errors/check_if_user_subscribed_to_channel_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel_alt1
 
 - **Route**: `GET /me/channels/{channel_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def check_if_user_subscribed_to_channel_alt1(channel_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`
 - **Params**: `channel_id` — path
@@ -35,12 +37,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `CheckIfUserSubscribedToChannelAlt1ErrorBody` | `vimeo/errors/check_if_user_subscribed_to_channel_alt1_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `CheckIfUserSubscribedToChannelAlt1ErrorBody` | `vimeo_api/errors/check_if_user_subscribed_to_channel_alt1_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.channels_subscriptions_and_subscribers.get_channel_subscribers
 
 - **Route**: `GET /channels/{channel_id}/users`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_channel_subscribers(channel_id: float, filter: Filter2OrStr, *, direction: DirectionOrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `filter`
 - **Params**: `channel_id` — path · `filter` — query · `direction` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
@@ -51,16 +54,17 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Filter2OrStr` | `vimeo/models/enums/filter2.py` |
-| `DirectionOrStr` | `vimeo/models/enums/direction.py` |
-| `Sort8OrStr` | `vimeo/models/enums/sort8.py` |
-| `UserConnection` | `vimeo/models/user_connection.py` |
-| `GetChannelSubscribersErrorBody` | `vimeo/errors/get_channel_subscribers_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `Filter2OrStr` | `vimeo_api/models/enums/filter2.py` |
+| `DirectionOrStr` | `vimeo_api/models/enums/direction.py` |
+| `Sort8OrStr` | `vimeo_api/models/enums/sort8.py` |
+| `UserConnection` | `vimeo_api/models/user_connection.py` |
+| `GetChannelSubscribersErrorBody` | `vimeo_api/errors/get_channel_subscribers_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.channels_subscriptions_and_subscribers.subscribe_to_channel
 
 - **Route**: `PUT /users/{user_id}/channels/{channel_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def subscribe_to_channel(channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `user_id`
 - **Params**: `channel_id` — path · `user_id` — path
@@ -71,12 +75,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `SubscribeToChannelErrorBody` | `vimeo/errors/subscribe_to_channel_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `SubscribeToChannelErrorBody` | `vimeo_api/errors/subscribe_to_channel_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.channels_subscriptions_and_subscribers.subscribe_to_channel_alt1
 
 - **Route**: `PUT /me/channels/{channel_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def subscribe_to_channel_alt1(channel_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`
 - **Params**: `channel_id` — path
@@ -87,12 +92,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `SubscribeToChannelAlt1ErrorBody` | `vimeo/errors/subscribe_to_channel_alt1_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `SubscribeToChannelAlt1ErrorBody` | `vimeo_api/errors/subscribe_to_channel_alt1_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.channels_subscriptions_and_subscribers.unsubscribe_from_channel
 
 - **Route**: `DELETE /users/{user_id}/channels/{channel_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def unsubscribe_from_channel(channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `user_id`
 - **Params**: `channel_id` — path · `user_id` — path
@@ -103,12 +109,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `UnsubscribeFromChannelErrorBody` | `vimeo/errors/unsubscribe_from_channel_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `UnsubscribeFromChannelErrorBody` | `vimeo_api/errors/unsubscribe_from_channel_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.channels_subscriptions_and_subscribers.unsubscribe_from_channel_alt1
 
 - **Route**: `DELETE /me/channels/{channel_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def unsubscribe_from_channel_alt1(channel_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`
 - **Params**: `channel_id` — path
@@ -119,6 +126,6 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `UnsubscribeFromChannelAlt1ErrorBody` | `vimeo/errors/unsubscribe_from_channel_alt1_error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `UnsubscribeFromChannelAlt1ErrorBody` | `vimeo_api/errors/unsubscribe_from_channel_alt1_error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 

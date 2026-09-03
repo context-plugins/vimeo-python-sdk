@@ -2,13 +2,14 @@
 
 # AuthenticationExtrasExchange — operations
 
-Accessor: `client.authentication_extras_exchange` · Source: `vimeo/apis/authentication_extras_exchange.py` · 1 operation
+Accessor: `client.authentication_extras_exchange` · Source: `vimeo_api/apis/authentication_extras_exchange.py` · 1 operation
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.authentication_extras_exchange.exchange_auth_code
 
 - **Route**: `POST /oauth/access_token`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def exchange_auth_code(body: OauthAccessTokenRequest | OauthAccessTokenRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -19,9 +20,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `OauthAccessTokenRequest` | `vimeo/models/oauth_access_token_request.py` |
-| `OauthAccessTokenRequestDict` | `vimeo/models/oauth_access_token_request.py` |
-| `AuthModel` | `vimeo/models/auth_model.py` |
-| `ExchangeAuthCodeErrorBody` | `vimeo/errors/exchange_auth_code_error.py` |
-| `AuthError` | `vimeo/models/auth_error.py` |
+| `OauthAccessTokenRequest` | `vimeo_api/models/oauth_access_token_request.py` |
+| `OauthAccessTokenRequestDict` | `vimeo_api/models/oauth_access_token_request.py` |
+| `AuthModel` | `vimeo_api/models/auth_model.py` |
+| `ExchangeAuthCodeErrorBody` | `vimeo_api/errors/exchange_auth_code_error.py` |
+| `AuthError` | `vimeo_api/models/auth_error.py` |
 

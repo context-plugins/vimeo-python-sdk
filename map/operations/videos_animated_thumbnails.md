@@ -2,13 +2,14 @@
 
 # VideosAnimatedThumbnails — operations
 
-Accessor: `client.videos_animated_thumbnails` · Source: `vimeo/apis/videos_animated_thumbnails.py` · 5 operations
+Accessor: `client.videos_animated_thumbnails` · Source: `vimeo_api/apis/videos_animated_thumbnails.py` · 5 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
 ### client.videos_animated_thumbnails.create_animated_thumbset
 
 - **Route**: `POST /videos/{video_id}/animated_thumbsets`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def create_animated_thumbset(video_id: float, body: VideosAnimatedThumbsetsRequest | VideosAnimatedThumbsetsRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`, `body`
 - **Params**: `video_id` — path · `body` — JSON body
@@ -19,16 +20,17 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `VideosAnimatedThumbsetsRequest` | `vimeo/models/videos_animated_thumbsets_request.py` |
-| `VideosAnimatedThumbsetsRequestDict` | `vimeo/models/videos_animated_thumbsets_request.py` |
-| `AnimatedThumbset` | `vimeo/models/animated_thumbset.py` |
-| `CreateAnimatedThumbsetErrorBody` | `vimeo/errors/create_animated_thumbset_error.py` |
-| `Error` | `vimeo/models/error.py` |
-| `LegacyError` | `vimeo/models/legacy_error.py` |
+| `VideosAnimatedThumbsetsRequest` | `vimeo_api/models/videos_animated_thumbsets_request.py` |
+| `VideosAnimatedThumbsetsRequestDict` | `vimeo_api/models/videos_animated_thumbsets_request.py` |
+| `AnimatedThumbset` | `vimeo_api/models/animated_thumbset.py` |
+| `CreateAnimatedThumbsetErrorBody` | `vimeo_api/errors/create_animated_thumbset_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
+| `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
 ### client.videos_animated_thumbnails.delete_animated_thumbset
 
 - **Route**: `DELETE /videos/{video_id}/animated_thumbsets/{picture_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def delete_animated_thumbset(picture_id: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `picture_id`, `video_id`
 - **Params**: `picture_id` — path · `video_id` — path
@@ -39,12 +41,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteAnimatedThumbsetErrorBody` | `vimeo/errors/delete_animated_thumbset_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `DeleteAnimatedThumbsetErrorBody` | `vimeo_api/errors/delete_animated_thumbset_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.videos_animated_thumbnails.get_all_animated_thumbset
 
 - **Route**: `GET /videos/{video_id}/animated_thumbsets`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_all_animated_thumbset(video_id: float, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`
 - **Params**: `video_id` — path · `page` — query · `per_page` — query
@@ -55,13 +58,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `AnimatedThumbsetConnection` | `vimeo/models/animated_thumbset_connection.py` |
-| `GetAllAnimatedThumbsetErrorBody` | `vimeo/errors/get_all_animated_thumbset_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `AnimatedThumbsetConnection` | `vimeo_api/models/animated_thumbset_connection.py` |
+| `GetAllAnimatedThumbsetErrorBody` | `vimeo_api/errors/get_all_animated_thumbset_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.videos_animated_thumbnails.get_animated_thumbset
 
 - **Route**: `GET /videos/{video_id}/animated_thumbsets/{picture_id}`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_animated_thumbset(picture_id: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `picture_id`, `video_id`
 - **Params**: `picture_id` — path · `video_id` — path
@@ -72,13 +76,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `AnimatedThumbset` | `vimeo/models/animated_thumbset.py` |
-| `GetAnimatedThumbsetErrorBody` | `vimeo/errors/get_animated_thumbset_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `AnimatedThumbset` | `vimeo_api/models/animated_thumbset.py` |
+| `GetAnimatedThumbsetErrorBody` | `vimeo_api/errors/get_animated_thumbset_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
 ### client.videos_animated_thumbnails.get_animated_thumbset_status
 
 - **Route**: `GET /videos/{video_id}/animated_thumbsets/{picture_id}/status`
+- **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
 - **Signature**: `def get_animated_thumbset_status(picture_id: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `picture_id`, `video_id`
 - **Params**: `picture_id` — path · `video_id` — path
@@ -89,7 +94,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `AnimatedThumbset` | `vimeo/models/animated_thumbset.py` |
-| `GetAnimatedThumbsetStatusErrorBody` | `vimeo/errors/get_animated_thumbset_status_error.py` |
-| `Error` | `vimeo/models/error.py` |
+| `AnimatedThumbset` | `vimeo_api/models/animated_thumbset.py` |
+| `GetAnimatedThumbsetStatusErrorBody` | `vimeo_api/errors/get_animated_thumbset_status_error.py` |
+| `Error` | `vimeo_api/models/error.py` |
 
