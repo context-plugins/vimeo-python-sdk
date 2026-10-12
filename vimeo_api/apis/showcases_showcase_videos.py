@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_video_to_showcase_alt2_error import (
     AddVideoToShowcaseAlt2ErrorBody,
@@ -104,7 +107,8 @@ class ShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -112,9 +116,9 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't add videos to
                 the showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_to_showcase(
-            album_id, user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_to_showcase(album_id, user_id, video_id, request_options=request_options)
+        )
 
     def add_video_to_showcase_alt2(
         self, album_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -125,7 +129,8 @@ class ShowcasesShowcaseVideos:
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -133,9 +138,9 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't add videos to
                 the showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_to_showcase_alt2(
-            album_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_to_showcase_alt2(album_id, video_id, request_options=request_options)
+        )
 
     def get_available_showcase_videos(
         self,
@@ -164,7 +169,8 @@ class ShowcasesShowcaseVideos:
                 duration. * ``last_user_action_event_date`` - Sort the results by most recent user interaction. *
                 ``likes`` - Sort the results by number of likes. * ``modified_time`` - Sort the results by last
                 modification. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -172,15 +178,17 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: Error code 3200: The authenticated user can't add videos to this showcase. No such showcase
                 exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.get_available_showcase_videos(
-            album_id,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_available_showcase_videos(
+                album_id,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_available_video_showcases(
         self,
@@ -206,7 +214,8 @@ class ShowcasesShowcaseVideos:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by
                 duration. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcases were returned.
@@ -214,15 +223,17 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: Error code 3433: The authenticated user can't add the video to or remove the video from any
                 showcases. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_available_video_showcases(
-            video_id,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_available_video_showcases(
+                video_id,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_showcase_video(
         self,
@@ -241,7 +252,8 @@ class ShowcasesShowcaseVideos:
             user_id: The ID of the user.
             video_id: The ID of the video.
             password: The password of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -249,9 +261,11 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: No such showcase exists, or the video doesn't belong to it. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_showcase_video(
-            album_id, user_id, video_id, password=password, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcase_video(
+                album_id, user_id, video_id, password=password, request_options=request_options
+            ),
+        )
 
     def get_showcase_video_alt2(
         self,
@@ -268,7 +282,8 @@ class ShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
             password: The password of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -276,9 +291,11 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: No such showcase exists, or the video doesn't belong to it. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_showcase_video_alt2(
-            album_id, video_id, password=password, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcase_video_alt2(
+                album_id, video_id, password=password, request_options=request_options
+            ),
+        )
 
     def get_showcase_videos(
         self,
@@ -287,7 +304,7 @@ class ShowcasesShowcaseVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter10OrStr | None = None,
+        filter_: Filter10OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         password: str | None = None,
@@ -306,7 +323,7 @@ class ShowcasesShowcaseVideos:
             containing_uri: The page containing the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
                 results by the **embeddable** attribute. * ``playable`` - Filter the results by the **playable**
                 attribute.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
@@ -323,28 +340,31 @@ class ShowcasesShowcaseVideos:
                 results by number of plays.
             weak_search: Whether to include private videos in the search. Please note that a separate search service
                 provides this functionality. The service performs a partial text search on the video's name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_showcase_videos(
-            album_id,
-            user_id,
-            containing_uri=containing_uri,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            password=password,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            weak_search=weak_search,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcase_videos(
+                album_id,
+                user_id,
+                containing_uri=containing_uri,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                password=password,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                weak_search=weak_search,
+                request_options=request_options,
+            ),
+        )
 
     def get_showcase_videos_alt2(
         self,
@@ -352,7 +372,7 @@ class ShowcasesShowcaseVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter10OrStr | None = None,
+        filter_: Filter10OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         password: str | None = None,
@@ -370,7 +390,7 @@ class ShowcasesShowcaseVideos:
             containing_uri: The page containing the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
                 results by the **embeddable** attribute. * ``playable`` - Filter the results by the **playable**
                 attribute.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
@@ -387,27 +407,30 @@ class ShowcasesShowcaseVideos:
                 results by number of plays.
             weak_search: Whether to include private videos in the search. Please note that a separate search service
                 provides this functionality. The service performs a partial text search on the video's name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_showcase_videos_alt2(
-            album_id,
-            containing_uri=containing_uri,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            password=password,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            weak_search=weak_search,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcase_videos_alt2(
+                album_id,
+                containing_uri=containing_uri,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                password=password,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                weak_search=weak_search,
+                request_options=request_options,
+            ),
+        )
 
     def remove_video_from_showcase(
         self, album_id: float, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -419,7 +442,8 @@ class ShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -427,9 +451,11 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't remove videos
                 from the showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.remove_video_from_showcase(
-            album_id, user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_video_from_showcase(
+                album_id, user_id, video_id, request_options=request_options
+            ),
+        )
 
     def remove_video_from_showcase_alt2(
         self, album_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -440,7 +466,8 @@ class ShowcasesShowcaseVideos:
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -448,9 +475,9 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't remove videos
                 from the showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.remove_video_from_showcase_alt2(
-            album_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_video_from_showcase_alt2(album_id, video_id, request_options=request_options)
+        )
 
     def replace_videos_in_showcase(
         self,
@@ -467,7 +494,8 @@ class ShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were replaced.
@@ -475,9 +503,9 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: The authenticated user can't add videos to the showcase. No such showcase exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.replace_videos_in_showcase(
-            album_id, user_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.replace_videos_in_showcase(album_id, user_id, body, request_options=request_options)
+        )
 
     def replace_videos_in_showcase_alt2(
         self,
@@ -492,7 +520,8 @@ class ShowcasesShowcaseVideos:
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were replaced.
@@ -500,9 +529,9 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: The authenticated user can't add videos to the showcase. No such showcase exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.replace_videos_in_showcase_alt2(
-            album_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.replace_videos_in_showcase_alt2(album_id, body, request_options=request_options)
+        )
 
     def set_video_as_showcase_featured(
         self, album_id: float, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -514,7 +543,8 @@ class ShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video is now the featured video of the showcase.
@@ -522,9 +552,11 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: Error code 3429: The authenticated user can't set the featured video of this showcase. Error code
                 5000: No such showcase, user, or video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.set_video_as_showcase_featured(
-            album_id, user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_video_as_showcase_featured(
+                album_id, user_id, video_id, request_options=request_options
+            ),
+        )
 
     def set_video_as_showcase_featured_alt2(
         self, album_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -535,7 +567,8 @@ class ShowcasesShowcaseVideos:
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video is now the featured video of the showcase.
@@ -543,9 +576,11 @@ class ShowcasesShowcaseVideos:
         Raises:
             ApiError: Error code 3429: The authenticated user can't set the featured video of this showcase. Error code
                 5000: No such showcase, user, or video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.set_video_as_showcase_featured_alt2(
-            album_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_video_as_showcase_featured_alt2(
+                album_id, video_id, request_options=request_options
+            ),
+        )
 
     def set_video_as_showcase_thumbnail(
         self,
@@ -568,7 +603,8 @@ class ShowcasesShowcaseVideos:
             user_id: The ID of the user.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase thumbnail was created.
@@ -577,9 +613,11 @@ class ShowcasesShowcaseVideos:
             ApiError: Error code 3429: The authenticated user can't create a thumbnail for this showcase. Error code
                 5000: No such showcase, user, or video exists. Error code 4016: An unexpected error occurred. ``error``
                 is ``Error | RawError``."""
-        return self._with_raw_response.set_video_as_showcase_thumbnail(
-            album_id, user_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_video_as_showcase_thumbnail(
+                album_id, user_id, video_id, body=body, request_options=request_options
+            ),
+        )
 
     def set_video_as_showcase_thumbnail_alt2(
         self,
@@ -596,7 +634,8 @@ class ShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase thumbnail was created.
@@ -605,9 +644,11 @@ class ShowcasesShowcaseVideos:
             ApiError: Error code 3429: The authenticated user can't create a thumbnail for this showcase. Error code
                 5000: No such showcase, user, or video exists. Error code 4016: An unexpected error occurred. ``error``
                 is ``Error | RawError``."""
-        return self._with_raw_response.set_video_as_showcase_thumbnail_alt2(
-            album_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_video_as_showcase_thumbnail_alt2(
+                album_id, video_id, body=body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> ShowcasesShowcaseVideosWithRawResponse:
@@ -628,7 +669,8 @@ class AsyncShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -636,11 +678,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't add videos to
                 the showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_showcase(
                 album_id, user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def add_video_to_showcase_alt2(
         self, album_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -651,7 +693,8 @@ class AsyncShowcasesShowcaseVideos:
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -659,11 +702,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't add videos to
                 the showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_showcase_alt2(
                 album_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_available_showcase_videos(
         self,
@@ -692,7 +735,8 @@ class AsyncShowcasesShowcaseVideos:
                 duration. * ``last_user_action_event_date`` - Sort the results by most recent user interaction. *
                 ``likes`` - Sort the results by number of likes. * ``modified_time`` - Sort the results by last
                 modification. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -700,7 +744,7 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: Error code 3200: The authenticated user can't add videos to this showcase. No such showcase
                 exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_available_showcase_videos(
                 album_id,
                 direction=direction,
@@ -709,8 +753,8 @@ class AsyncShowcasesShowcaseVideos:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_available_video_showcases(
         self,
@@ -736,7 +780,8 @@ class AsyncShowcasesShowcaseVideos:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by
                 duration. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcases were returned.
@@ -744,7 +789,7 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: Error code 3433: The authenticated user can't add the video to or remove the video from any
                 showcases. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_available_video_showcases(
                 video_id,
                 direction=direction,
@@ -753,8 +798,8 @@ class AsyncShowcasesShowcaseVideos:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_showcase_video(
         self,
@@ -773,7 +818,8 @@ class AsyncShowcasesShowcaseVideos:
             user_id: The ID of the user.
             video_id: The ID of the video.
             password: The password of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -781,11 +827,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: No such showcase exists, or the video doesn't belong to it. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcase_video(
                 album_id, user_id, video_id, password=password, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_showcase_video_alt2(
         self,
@@ -802,7 +848,8 @@ class AsyncShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
             password: The password of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -810,11 +857,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: No such showcase exists, or the video doesn't belong to it. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcase_video_alt2(
                 album_id, video_id, password=password, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_showcase_videos(
         self,
@@ -823,7 +870,7 @@ class AsyncShowcasesShowcaseVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter10OrStr | None = None,
+        filter_: Filter10OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         password: str | None = None,
@@ -842,7 +889,7 @@ class AsyncShowcasesShowcaseVideos:
             containing_uri: The page containing the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
                 results by the **embeddable** attribute. * ``playable`` - Filter the results by the **playable**
                 attribute.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
@@ -859,20 +906,21 @@ class AsyncShowcasesShowcaseVideos:
                 results by number of plays.
             weak_search: Whether to include private videos in the search. Please note that a separate search service
                 provides this functionality. The service performs a partial text search on the video's name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcase_videos(
                 album_id,
                 user_id,
                 containing_uri=containing_uri,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 password=password,
@@ -881,8 +929,8 @@ class AsyncShowcasesShowcaseVideos:
                 sort=sort,
                 weak_search=weak_search,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_showcase_videos_alt2(
         self,
@@ -890,7 +938,7 @@ class AsyncShowcasesShowcaseVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter10OrStr | None = None,
+        filter_: Filter10OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         password: str | None = None,
@@ -908,7 +956,7 @@ class AsyncShowcasesShowcaseVideos:
             containing_uri: The page containing the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
                 results by the **embeddable** attribute. * ``playable`` - Filter the results by the **playable**
                 attribute.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
@@ -925,19 +973,20 @@ class AsyncShowcasesShowcaseVideos:
                 results by number of plays.
             weak_search: Whether to include private videos in the search. Please note that a separate search service
                 provides this functionality. The service performs a partial text search on the video's name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcase_videos_alt2(
                 album_id,
                 containing_uri=containing_uri,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 password=password,
@@ -946,8 +995,8 @@ class AsyncShowcasesShowcaseVideos:
                 sort=sort,
                 weak_search=weak_search,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_video_from_showcase(
         self, album_id: float, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -959,7 +1008,8 @@ class AsyncShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -967,11 +1017,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't remove videos
                 from the showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_video_from_showcase(
                 album_id, user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_video_from_showcase_alt2(
         self, album_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -982,7 +1032,8 @@ class AsyncShowcasesShowcaseVideos:
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -990,11 +1041,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't remove videos
                 from the showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_video_from_showcase_alt2(
                 album_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def replace_videos_in_showcase(
         self,
@@ -1011,7 +1062,8 @@ class AsyncShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were replaced.
@@ -1019,11 +1071,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: The authenticated user can't add videos to the showcase. No such showcase exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.replace_videos_in_showcase(
                 album_id, user_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def replace_videos_in_showcase_alt2(
         self,
@@ -1038,7 +1090,8 @@ class AsyncShowcasesShowcaseVideos:
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were replaced.
@@ -1046,11 +1099,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: The authenticated user can't add videos to the showcase. No such showcase exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.replace_videos_in_showcase_alt2(
                 album_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def set_video_as_showcase_featured(
         self, album_id: float, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -1062,7 +1115,8 @@ class AsyncShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video is now the featured video of the showcase.
@@ -1070,11 +1124,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: Error code 3429: The authenticated user can't set the featured video of this showcase. Error code
                 5000: No such showcase, user, or video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_video_as_showcase_featured(
                 album_id, user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def set_video_as_showcase_featured_alt2(
         self, album_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -1085,7 +1139,8 @@ class AsyncShowcasesShowcaseVideos:
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video is now the featured video of the showcase.
@@ -1093,11 +1148,11 @@ class AsyncShowcasesShowcaseVideos:
         Raises:
             ApiError: Error code 3429: The authenticated user can't set the featured video of this showcase. Error code
                 5000: No such showcase, user, or video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_video_as_showcase_featured_alt2(
                 album_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def set_video_as_showcase_thumbnail(
         self,
@@ -1120,7 +1175,8 @@ class AsyncShowcasesShowcaseVideos:
             user_id: The ID of the user.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase thumbnail was created.
@@ -1129,11 +1185,11 @@ class AsyncShowcasesShowcaseVideos:
             ApiError: Error code 3429: The authenticated user can't create a thumbnail for this showcase. Error code
                 5000: No such showcase, user, or video exists. Error code 4016: An unexpected error occurred. ``error``
                 is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_video_as_showcase_thumbnail(
                 album_id, user_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def set_video_as_showcase_thumbnail_alt2(
         self,
@@ -1150,7 +1206,8 @@ class AsyncShowcasesShowcaseVideos:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase thumbnail was created.
@@ -1159,11 +1216,11 @@ class AsyncShowcasesShowcaseVideos:
             ApiError: Error code 3429: The authenticated user can't create a thumbnail for this showcase. Error code
                 5000: No such showcase, user, or video exists. Error code 4016: An unexpected error occurred. ``error``
                 is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_video_as_showcase_thumbnail_alt2(
                 album_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncShowcasesShowcaseVideosWithRawResponse:
@@ -1181,7 +1238,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1209,7 +1267,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1253,7 +1312,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
                 duration. * ``last_user_action_event_date`` - Sort the results by most recent user interaction. *
                 ``likes`` - Sort the results by number of likes. * ``modified_time`` - Sort the results by last
                 modification. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1300,7 +1360,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by
                 duration. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1340,7 +1401,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             user_id: The ID of the user.
             video_id: The ID of the video.
             password: The password of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1374,7 +1436,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             album_id: The ID of the showcase.
             video_id: The ID of the video.
             password: The password of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1398,7 +1461,7 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter10OrStr | None = None,
+        filter_: Filter10OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         password: str | None = None,
@@ -1417,7 +1480,7 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             containing_uri: The page containing the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
                 results by the **embeddable** attribute. * ``playable`` - Filter the results by the **playable**
                 attribute.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
@@ -1434,7 +1497,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
                 results by number of plays.
             weak_search: Whether to include private videos in the search. Please note that a separate search service
                 provides this functionality. The service performs a partial text search on the video's name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1445,7 +1509,7 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter10OrStr | None]("filter", filter),
+                param[Filter10OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[str | None]("password", password),
@@ -1468,7 +1532,7 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter10OrStr | None = None,
+        filter_: Filter10OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         password: str | None = None,
@@ -1486,7 +1550,7 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             containing_uri: The page containing the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
                 results by the **embeddable** attribute. * ``playable`` - Filter the results by the **playable**
                 attribute.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
@@ -1503,7 +1567,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
                 results by number of plays.
             weak_search: Whether to include private videos in the search. Please note that a separate search service
                 provides this functionality. The service performs a partial text search on the video's name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1514,7 +1579,7 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter10OrStr | None]("filter", filter),
+                param[Filter10OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[str | None]("password", password),
@@ -1541,7 +1606,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1569,7 +1635,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1601,7 +1668,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1632,7 +1700,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1660,7 +1729,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1690,7 +1760,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1728,7 +1799,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             user_id: The ID of the user.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1771,7 +1843,8 @@ class ShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[RawClient, Serve
             album_id: The ID of the showcase.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1803,7 +1876,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1817,7 +1891,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_video_to_showcase_error_mapper,
             request_options=request_options,
         )
@@ -1831,7 +1905,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1843,7 +1918,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_video_to_showcase_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1875,7 +1950,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
                 duration. * ``last_user_action_event_date`` - Sort the results by most recent user interaction. *
                 ``likes`` - Sort the results by number of likes. * ``modified_time`` - Sort the results by last
                 modification. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1893,7 +1969,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_available_showcase_videos_error_mapper,
             request_options=request_options,
         )
@@ -1922,7 +1998,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by
                 duration. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1940,7 +2017,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AlbumConnection],
+            decoder=async_json_decoder[AlbumConnection],
             error_mapper=get_available_video_showcases_error_mapper,
             request_options=request_options,
         )
@@ -1962,7 +2039,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             user_id: The ID of the user.
             video_id: The ID of the video.
             password: The password of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1976,7 +2054,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=get_showcase_video_error_mapper,
             request_options=request_options,
         )
@@ -1996,7 +2074,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             album_id: The ID of the showcase.
             video_id: The ID of the video.
             password: The password of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2008,7 +2087,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=get_showcase_video_alt2_error_mapper,
             request_options=request_options,
         )
@@ -2020,7 +2099,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter10OrStr | None = None,
+        filter_: Filter10OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         password: str | None = None,
@@ -2039,7 +2118,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             containing_uri: The page containing the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
                 results by the **embeddable** attribute. * ``playable`` - Filter the results by the **playable**
                 attribute.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
@@ -2056,7 +2135,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
                 results by number of plays.
             weak_search: Whether to include private videos in the search. Please note that a separate search service
                 provides this functionality. The service performs a partial text search on the video's name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2067,7 +2147,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter10OrStr | None]("filter", filter),
+                param[Filter10OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[str | None]("password", password),
@@ -2079,7 +2159,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_showcase_videos_error_mapper,
             request_options=request_options,
         )
@@ -2090,7 +2170,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter10OrStr | None = None,
+        filter_: Filter10OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         password: str | None = None,
@@ -2108,7 +2188,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             containing_uri: The page containing the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Filter the
                 results by the **embeddable** attribute. * ``playable`` - Filter the results by the **playable**
                 attribute.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
@@ -2125,7 +2205,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
                 results by number of plays.
             weak_search: Whether to include private videos in the search. Please note that a separate search service
                 provides this functionality. The service performs a partial text search on the video's name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2136,7 +2217,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter10OrStr | None]("filter", filter),
+                param[Filter10OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[str | None]("password", password),
@@ -2148,7 +2229,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_showcase_videos_alt2_error_mapper,
             request_options=request_options,
         )
@@ -2163,7 +2244,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2177,7 +2259,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_video_from_showcase_error_mapper,
             request_options=request_options,
         )
@@ -2191,7 +2273,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2203,7 +2286,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_video_from_showcase_alt2_error_mapper,
             request_options=request_options,
         )
@@ -2223,7 +2306,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2236,7 +2320,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=replace_videos_in_showcase_error_mapper,
             request_options=request_options,
         )
@@ -2254,7 +2338,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2267,7 +2352,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=replace_videos_in_showcase_alt2_error_mapper,
             request_options=request_options,
         )
@@ -2282,7 +2367,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2298,7 +2384,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=set_video_as_showcase_featured_error_mapper,
             request_options=request_options,
         )
@@ -2312,7 +2398,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             album_id: The ID of the showcase.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2324,7 +2411,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=set_video_as_showcase_featured_alt2_error_mapper,
             request_options=request_options,
         )
@@ -2350,7 +2437,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             user_id: The ID of the user.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2373,7 +2461,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=set_video_as_showcase_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -2393,7 +2481,8 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             album_id: The ID of the showcase.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2408,7 +2497,7 @@ class AsyncShowcasesShowcaseVideosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=set_video_as_showcase_thumbnail_alt2_error_mapper,
             request_options=request_options,
         )

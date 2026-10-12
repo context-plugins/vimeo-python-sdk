@@ -18,4 +18,4 @@ class Disabled1(SdkBaseModel):
 
 class Disabled1Dict(TypedDict):
     enable_link: NotRequired[str]
-    reasons: NotRequired[list[Reason | ReasonDict]]
+    reasons: NotRequired[list[ReasonDict]]

@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/feed`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_feed(user_id: float, *, offset: str | None = None, page: float | None = None, per_page: float | None = None, type_: Type29OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_feed(user_id: float, *, offset: str | None = None, page: float | None = None, per_page: float | None = None, type_: Type33OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `user_id`
 - **Params**: `user_id` — path · `offset` — query · `page` — query · `per_page` — query · `type_` — query `type`
 - **Returns (parsed)**: `Activity31Connection`
@@ -20,7 +20,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Type29OrStr` | `vimeo_api/models/enums/type29.py` |
+| `Type33OrStr` | `vimeo_api/models/enums/type33.py` |
 | `Activity31Connection` | `vimeo_api/models/activity31_connection.py` |
 | `GetFeedErrorBody` | `vimeo_api/errors/get_feed_error.py` |
 | `Error` | `vimeo_api/models/error.py` |
@@ -29,7 +29,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/feed`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_feed_alt1(*, offset: str | None = None, page: float | None = None, per_page: float | None = None, type_: Type29OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_feed_alt1(*, offset: str | None = None, page: float | None = None, per_page: float | None = None, type_: Type33OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
 - **Params**: `offset` — query · `page` — query · `per_page` — query · `type_` — query `type`
 - **Returns (parsed)**: `Activity31Connection`
 - **Returns (raw)**: `ApiResult[Activity31Connection, GetFeedAlt1ErrorBody]`
@@ -38,7 +38,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Type29OrStr` | `vimeo_api/models/enums/type29.py` |
+| `Type33OrStr` | `vimeo_api/models/enums/type33.py` |
 | `Activity31Connection` | `vimeo_api/models/activity31_connection.py` |
 | `GetFeedAlt1ErrorBody` | `vimeo_api/errors/get_feed_alt1_error.py` |
 | `Error` | `vimeo_api/models/error.py` |

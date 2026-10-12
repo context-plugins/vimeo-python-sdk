@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, OptionalNullable, SdkBaseModel
-from .enums.type39 import Type39OrStr
+from .enums.type43 import Type43OrStr
 
 
 class FieldModel(SdkBaseModel):
@@ -28,7 +28,7 @@ class FieldModel(SdkBaseModel):
     name: Optional[str] = UNSET
     """The display name of the field. Required when creating a new field. Up to 255 characters."""
 
-    type_: Optional[Type39OrStr] = Field(default=UNSET, alias="type")
+    type_: Optional[Type43OrStr] = Field(default=UNSET, alias="type")
     """The data type of the field. Required when creating a new field. **Immutable** after creation.
 
     Option descriptions:
@@ -39,7 +39,7 @@ class FieldModel(SdkBaseModel):
      * ``select`` - A single value chosen from the field's ``values`` list.
      * ``str`` - Freeform string value."""
 
-    values: Optional[list[str | None]] = UNSET
+    values: OptionalNullable[list[str]] = UNSET
     """The list of allowed values. Required for ``select`` and ``multi-select`` fields."""
 
 
@@ -50,5 +50,5 @@ class FieldModelDict(TypedDict):
     id: NotRequired[float]
     mandatory: NotRequired[bool]
     name: NotRequired[str]
-    type_: NotRequired[Type39OrStr]
-    values: NotRequired[list[str | None]]
+    type_: NotRequired[Type43OrStr]
+    values: NotRequired[list[str] | None]

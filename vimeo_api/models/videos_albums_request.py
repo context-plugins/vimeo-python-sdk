@@ -20,5 +20,5 @@ class VideosAlbumsRequest(SdkBaseModel):
 
 
 class VideosAlbumsRequestDict(TypedDict):
-    add: NotRequired[list[Add | AddDict]]
-    remove: NotRequired[list[Remove | RemoveDict]]
+    add: NotRequired[list[AddDict]]
+    remove: NotRequired[list[RemoveDict]]

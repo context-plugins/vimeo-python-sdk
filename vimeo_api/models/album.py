@@ -207,15 +207,15 @@ class AlbumDict(TypedDict):
     allowed_privacies: list[str]
     autoplay: bool
     brand_color: str | None
-    config: ShowcaseConfig | ShowcaseConfigDict
+    config: ShowcaseConfigDict
     created_time: str
-    custom_logo: Picture | PictureDict | None
-    custom_thumbnail: Picture | PictureDict
+    custom_logo: PictureDict | None
+    custom_thumbnail: PictureDict
     description: str | None
     domain: str | None
     domain_certificate_state: DomainCertificateStateOrStr
     duration: float
-    embed: Embed2 | Embed2Dict
+    embed: Embed2Dict
     embed_brand_color: bool | None
     embed_custom_logo: bool | None
     has_chosen_thumbnail: bool
@@ -227,11 +227,11 @@ class AlbumDict(TypedDict):
     layout: LayoutOrStr
     link: str
     loop: bool
-    metadata: Metadata11 | Metadata11Dict
+    metadata: Metadata11Dict
     modified_time: str
     name: str
-    pictures: Picture | PictureDict
-    privacy: Privacy5 | Privacy5Dict
+    pictures: PictureDict
+    privacy: Privacy5Dict
     resource_key: str
     review_mode: bool
     seo_allow_indexed: bool
@@ -247,6 +247,6 @@ class AlbumDict(TypedDict):
     uri: str
     url: str | None
     use_custom_domain: bool
-    user: User | UserDict
+    user: UserDict
     web_brand_color: bool
     web_custom_logo: bool

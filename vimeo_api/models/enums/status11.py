@@ -5,14 +5,12 @@ from ...core import open_enum_validator
 
 
 class Status11(str, Enum):
-    """The status of the event.
+    """The status of the live video's RTMP link.
 
     Option descriptions:
-     * ``ended`` - The user ended the event.
-     * ``started`` - The user started the event."""
+     * ``streaming`` - The stream is open and receiving content."""
 
-    ENDED = "ended"
-    STARTED = "started"
+    STREAMING = "streaming"
 
     __str__ = str.__str__
 

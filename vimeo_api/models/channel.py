@@ -7,7 +7,7 @@ from .category import Category, CategoryDict
 from .metadata1 import Metadata1, Metadata1Dict
 from .picture import Picture, PictureDict
 from .privacy import Privacy, PrivacyDict
-from .tag import Tag, TagDict
+from .tag_model import TagModel, TagModelDict
 from .user import User, UserDict
 
 
@@ -45,7 +45,7 @@ class Channel(SdkBaseModel):
     resource_key: str
     """The channel resource key."""
 
-    tags: list[Tag]
+    tags: list[TagModel]
     """An array of all tags assigned to the channel."""
 
     uri: str
@@ -56,17 +56,17 @@ class Channel(SdkBaseModel):
 
 
 class ChannelDict(TypedDict):
-    categories: list[Category | CategoryDict]
+    categories: list[CategoryDict]
     created_time: str
     description: str | None
-    header: Picture | PictureDict
+    header: PictureDict
     link: str
-    metadata: Metadata1 | Metadata1Dict
+    metadata: Metadata1Dict
     modified_time: str
     name: str
-    pictures: Picture | PictureDict
-    privacy: Privacy | PrivacyDict
+    pictures: PictureDict
+    privacy: PrivacyDict
     resource_key: str
-    tags: list[Tag | TagDict]
+    tags: list[TagModelDict]
     uri: str
-    user: User | UserDict
+    user: UserDict

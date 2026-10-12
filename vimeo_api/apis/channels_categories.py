@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_channel_categories_error import AddChannelCategoriesErrorBody, add_channel_categories_error_mapper
 from ..errors.categorize_channel_error import CategorizeChannelErrorBody, categorize_channel_error_mapper
@@ -41,7 +44,8 @@ class ChannelsCategories:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was added to the categories.
@@ -51,9 +55,7 @@ class ChannelsCategories:
                 was no request body, or the request body is malformed. Error code 8003: The user credentials are
                 invalid. Error code 3200: The authenticated user can't add categories to the channel. No such channel
                 exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.add_channel_categories(
-            channel_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.add_channel_categories(channel_id, body, request_options=request_options))
 
     def categorize_channel(
         self, category: str, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -64,7 +66,8 @@ class ChannelsCategories:
         Args:
             category: The name of the category.
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was added to the category.
@@ -74,9 +77,7 @@ class ChannelsCategories:
                 credentials are invalid. Error code 3200: The authenticated user doesn't own the channel or isn't a
                 channel moderator. No such channel or category exists. ``error`` is ``Error | LegacyError |
                 RawError``."""
-        return self._with_raw_response.categorize_channel(
-            category, channel_id, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.categorize_channel(category, channel_id, request_options=request_options))
 
     def delete_channel_category(
         self, category: str, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -87,7 +88,8 @@ class ChannelsCategories:
         Args:
             category: The name of the category.
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was removed.
@@ -96,9 +98,9 @@ class ChannelsCategories:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user doesn't
                 own the channel or isn't a channel moderator. No such channel or category exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return self._with_raw_response.delete_channel_category(
-            category, channel_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_channel_category(category, channel_id, request_options=request_options)
+        )
 
     def get_channel_categories(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -107,7 +109,8 @@ class ChannelsCategories:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
@@ -115,7 +118,7 @@ class ChannelsCategories:
         Raises:
             ApiError: * No such channel exists. * Error code 5451: This resource is restricted in your region. ``error``
                 is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_channel_categories(channel_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_channel_categories(channel_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> ChannelsCategoriesWithRawResponse:
@@ -138,7 +141,8 @@ class AsyncChannelsCategories:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was added to the categories.
@@ -148,9 +152,9 @@ class AsyncChannelsCategories:
                 was no request body, or the request body is malformed. Error code 8003: The user credentials are
                 invalid. Error code 3200: The authenticated user can't add categories to the channel. No such channel
                 exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_channel_categories(channel_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def categorize_channel(
         self, category: str, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -161,7 +165,8 @@ class AsyncChannelsCategories:
         Args:
             category: The name of the category.
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was added to the category.
@@ -171,9 +176,9 @@ class AsyncChannelsCategories:
                 credentials are invalid. Error code 3200: The authenticated user doesn't own the channel or isn't a
                 channel moderator. No such channel or category exists. ``error`` is ``Error | LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.categorize_channel(category, channel_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_channel_category(
         self, category: str, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -184,7 +189,8 @@ class AsyncChannelsCategories:
         Args:
             category: The name of the category.
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was removed.
@@ -193,9 +199,9 @@ class AsyncChannelsCategories:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user doesn't
                 own the channel or isn't a channel moderator. No such channel or category exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_channel_category(category, channel_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_channel_categories(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -204,7 +210,8 @@ class AsyncChannelsCategories:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
@@ -212,9 +219,7 @@ class AsyncChannelsCategories:
         Raises:
             ApiError: * No such channel exists. * Error code 5451: This resource is restricted in your region. ``error``
                 is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.get_channel_categories(channel_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_channel_categories(channel_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncChannelsCategoriesWithRawResponse:
@@ -234,7 +239,8 @@ class ChannelsCategoriesWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -261,7 +267,8 @@ class ChannelsCategoriesWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             category: The name of the category.
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -287,7 +294,8 @@ class ChannelsCategoriesWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             category: The name of the category.
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -311,7 +319,8 @@ class ChannelsCategoriesWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -341,7 +350,8 @@ class AsyncChannelsCategoriesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -354,7 +364,7 @@ class AsyncChannelsCategoriesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_channel_categories_error_mapper,
             request_options=request_options,
         )
@@ -368,7 +378,8 @@ class AsyncChannelsCategoriesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             category: The name of the category.
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -380,7 +391,7 @@ class AsyncChannelsCategoriesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=categorize_channel_error_mapper,
             request_options=request_options,
         )
@@ -394,7 +405,8 @@ class AsyncChannelsCategoriesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             category: The name of the category.
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -406,7 +418,7 @@ class AsyncChannelsCategoriesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_channel_category_error_mapper,
             request_options=request_options,
         )
@@ -418,7 +430,8 @@ class AsyncChannelsCategoriesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -429,7 +442,7 @@ class AsyncChannelsCategoriesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CategoryConnection],
+            decoder=async_json_decoder[CategoryConnection],
             error_mapper=get_channel_categories_error_mapper,
             request_options=request_options,
         )

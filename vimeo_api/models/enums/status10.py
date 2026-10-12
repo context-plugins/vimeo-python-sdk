@@ -5,18 +5,18 @@ from ...core import open_enum_validator
 
 
 class Status10(str, Enum):
-    """The status of the pre-live video's RTMP link.
+    """The availability of the animated thumbnail.
 
     Option descriptions:
-     * ``pending`` - Vimeo is working on setting up the connection.
-     * ``ready`` - Resources have been provisioned for the event.
-     * ``streaming`` - Live video is currently streaming to the RTMP link.
-     * ``unavailable`` - The connection is ready, but streaming to the RTMP link has not yet begun."""
+     * ``cancelled`` - The animated thumbnail's creation has been cancelled.
+     * ``completed`` - The animated thumbnail has been created.
+     * ``failed`` - The animated thumbnail's creation has failed.
+     * ``started`` - The animated thumbnail's creation has started."""
 
-    PENDING = "pending"
-    READY = "ready"
-    STREAMING = "streaming"
-    UNAVAILABLE = "unavailable"
+    CANCELLED = "cancelled"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    STARTED = "started"
 
     __str__ = str.__str__
 

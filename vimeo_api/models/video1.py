@@ -44,7 +44,7 @@ class Video1Dict(TypedDict):
     created_time: str
     duration: float
     likes: float
-    live: Live1 | Live1Dict
+    live: Live1Dict
     manage_link: str
     options: list[str]
     title: str

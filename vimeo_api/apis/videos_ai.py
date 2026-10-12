@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     json_body,
     param,
+    unwrap,
 )
 from ..errors.ask_ai_question_error import AskAiQuestionErrorBody, ask_ai_question_error_mapper
 from ..errors.edit_ai_texttrack_error import EditAiTexttrackErrorBody, edit_ai_texttrack_error_mapper
@@ -41,7 +43,7 @@ from ..errors.start_ai_translate_subtitles_error import (
     StartAiTranslateSubtitlesErrorBody,
     start_ai_translate_subtitles_error_mapper,
 )
-from ..models.enums.type48 import Type48OrStr
+from ..models.enums.type52 import Type52OrStr
 from ..models.videos_ai_ask_request import VideosAiAskRequest, VideosAiAskRequestDict
 from ..models.videos_ai_texttracks_request import VideosAiTexttracksRequest, VideosAiTexttracksRequestDict
 from ..models.videos_ai_transcribe_request import VideosAiTranscribeRequest, VideosAiTranscribeRequestDict
@@ -74,7 +76,8 @@ class VideosAi:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The AI-generated answer. The response includes ``video_id``, ``status`` (``completed``), and ``data``
@@ -86,7 +89,7 @@ class VideosAi:
             ApiError: Error code 2204: The parameters are invalid. Error code 3457: The authenticated user's account
                 doesn't support this feature. No such video exists. Error code 1004: The AI service is temporarily
                 unavailable. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.ask_ai_question(video_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.ask_ai_question(video_id, body=body, request_options=request_options))
 
     def edit_ai_texttrack(
         self,
@@ -117,7 +120,8 @@ class VideosAi:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The result of the edit. Includes ``video_id``, ``texttrack_id``, ``track_type``, ``segments_updated``, and
@@ -126,12 +130,14 @@ class VideosAi:
         Raises:
             ApiError: Error code 2204: The parameters are invalid. No such video or text track exists. Error code 1004:
                 The AI service is temporarily unavailable. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.edit_ai_texttrack(
-            texttrack_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_ai_texttrack(
+                texttrack_id, video_id, body=body, request_options=request_options
+            ),
+        )
 
     def get_ai_languages(
-        self, *, type_: Type48OrStr | None = None, request_options: RequestOptionsOrDict | None = None
+        self, *, type_: Type52OrStr | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> None:
         """This method returns the list of supported languages for AI features. Use the ``type`` query parameter to
         filter by feature: ``transcription`` for speech-to-text languages, ``subtitling`` for subtitle translation
@@ -142,7 +148,8 @@ class VideosAi:
                 for AI audio dubbing. Includes available accents per language. * ``subtitling`` - Languages supported
                 for AI subtitle translation. * ``transcription`` - Languages supported for AI transcription
                 (speech-to-text).
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of supported languages. Each entry includes ``code`` (string) and ``name`` (string). For dubbing,
@@ -150,7 +157,7 @@ class VideosAi:
 
         Raises:
             ApiError: Error code 2204: The parameters are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_ai_languages(type_=type_, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_ai_languages(type_=type_, request_options=request_options))
 
     def get_ai_metadata(self, video_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method returns AI-generated metadata for the specified video, including a suggested title, description,
@@ -159,7 +166,8 @@ class VideosAi:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The AI-generated metadata. The response includes ``video_id``, ``status`` (``completed``), and ``data``
@@ -170,7 +178,7 @@ class VideosAi:
             ApiError: Error code 2204: The parameters are invalid. Error code 3457: The authenticated user's account
                 doesn't support this feature. No such video exists. Error code 1004: The AI service is temporarily
                 unavailable. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.get_ai_metadata(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_ai_metadata(video_id, request_options=request_options))
 
     def get_ai_questions(
         self, video_id: float, *, language: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -186,7 +194,8 @@ class VideosAi:
             video_id: The ID of the video.
             language: The language for suggested questions. Defaults to ``en``. Available: ``en``, ``fr``, ``es``,
                 ``de``, ``it``, ``pt``, ``ja``, ``ko``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The suggested questions and answers. The response includes ``video_id``, ``status``, ``language``, and
@@ -197,9 +206,9 @@ class VideosAi:
             ApiError: Error code 3457: The authenticated user's account doesn't support this feature. No such video
                 exists. Error code 1004: The AI service is temporarily unavailable. ``error`` is ``Error | LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_ai_questions(
-            video_id, language=language, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_ai_questions(video_id, language=language, request_options=request_options)
+        )
 
     def get_ai_transcribe_status(self, video_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method returns the current transcription status for a video. The response includes the ``video_id``,
@@ -212,7 +221,8 @@ class VideosAi:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The transcription status was returned. The response includes ``video_id`` (integer), ``status`` (string),
@@ -221,7 +231,7 @@ class VideosAi:
         Raises:
             ApiError: Error code 3457: The authenticated user's account doesn't support this feature. No such video
                 exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.get_ai_transcribe_status(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_ai_transcribe_status(video_id, request_options=request_options))
 
     def get_ai_translate_dubbing_status(
         self, video_id: float, *, language: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -238,7 +248,8 @@ class VideosAi:
         Args:
             video_id: The ID of the video.
             language: Filter results to a specific target language code. When omitted, all dubbing jobs are returned.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The dubbing status was returned. The response includes ``video_id`` (integer), ``total`` (integer), and
@@ -252,9 +263,11 @@ class VideosAi:
             ApiError: Error code 3457: The authenticated user's account doesn't support this feature. No such video
                 exists. Error code 1004: The translation service is temporarily unavailable. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return self._with_raw_response.get_ai_translate_dubbing_status(
-            video_id, language=language, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_ai_translate_dubbing_status(
+                video_id, language=language, request_options=request_options
+            ),
+        )
 
     def get_ai_translate_subtitles_status(
         self, video_id: float, *, language: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -270,7 +283,8 @@ class VideosAi:
             video_id: The ID of the video.
             language: Filter results to a specific target language code. When omitted, all subtitle translation jobs are
                 returned.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The subtitle translation status was returned. The response includes ``video_id`` (integer), ``total``
@@ -284,9 +298,11 @@ class VideosAi:
             ApiError: Error code 3457: The authenticated user's account doesn't support this feature. No such video
                 exists. Error code 1004: The translation service is temporarily unavailable. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return self._with_raw_response.get_ai_translate_subtitles_status(
-            video_id, language=language, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_ai_translate_subtitles_status(
+                video_id, language=language, request_options=request_options
+            ),
+        )
 
     def start_ai_transcribe(
         self,
@@ -307,7 +323,8 @@ class VideosAi:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The transcription job was queued. The response includes ``video_id`` and ``status`` (``not_started``). Poll
@@ -318,9 +335,7 @@ class VideosAi:
                 transcript. Delete the existing transcript first. * Error code 3991: A transcription is already in
                 progress for this video. Error code 3457: The authenticated user's account doesn't support this feature.
                 No such video exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.start_ai_transcribe(
-            video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.start_ai_transcribe(video_id, body=body, request_options=request_options))
 
     def start_ai_translate_dubbing(
         self,
@@ -343,7 +358,8 @@ class VideosAi:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The dubbing job was queued. The response includes ``video_id`` and ``status`` (``processing``). Use GET
@@ -358,9 +374,9 @@ class VideosAi:
                 in progress for this language. Error code 3457: The authenticated user's account doesn't support this
                 feature. No such video exists. Error code 1004: The translation service is temporarily unavailable.
                 ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.start_ai_translate_dubbing(
-            video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.start_ai_translate_dubbing(video_id, body=body, request_options=request_options)
+        )
 
     def start_ai_translate_subtitles(
         self,
@@ -379,7 +395,8 @@ class VideosAi:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The subtitle translation job was queued. The response includes ``video_id`` and ``status`` (``processing``).
@@ -393,9 +410,9 @@ class VideosAi:
                 first. * Error code 3994: A translation is already in progress for this language. Error code 3457: The
                 authenticated user's account doesn't support this feature. No such video exists. Error code 1004: The
                 translation service is temporarily unavailable. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.start_ai_translate_subtitles(
-            video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.start_ai_translate_subtitles(video_id, body=body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> VideosAiWithRawResponse:
@@ -420,7 +437,8 @@ class AsyncVideosAi:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The AI-generated answer. The response includes ``video_id``, ``status`` (``completed``), and ``data``
@@ -432,9 +450,9 @@ class AsyncVideosAi:
             ApiError: Error code 2204: The parameters are invalid. Error code 3457: The authenticated user's account
                 doesn't support this feature. No such video exists. Error code 1004: The AI service is temporarily
                 unavailable. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.ask_ai_question(video_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_ai_texttrack(
         self,
@@ -465,7 +483,8 @@ class AsyncVideosAi:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The result of the edit. Includes ``video_id``, ``texttrack_id``, ``track_type``, ``segments_updated``, and
@@ -474,14 +493,14 @@ class AsyncVideosAi:
         Raises:
             ApiError: Error code 2204: The parameters are invalid. No such video or text track exists. Error code 1004:
                 The AI service is temporarily unavailable. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_ai_texttrack(
                 texttrack_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_ai_languages(
-        self, *, type_: Type48OrStr | None = None, request_options: RequestOptionsOrDict | None = None
+        self, *, type_: Type52OrStr | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> None:
         """This method returns the list of supported languages for AI features. Use the ``type`` query parameter to
         filter by feature: ``transcription`` for speech-to-text languages, ``subtitling`` for subtitle translation
@@ -492,7 +511,8 @@ class AsyncVideosAi:
                 for AI audio dubbing. Includes available accents per language. * ``subtitling`` - Languages supported
                 for AI subtitle translation. * ``transcription`` - Languages supported for AI transcription
                 (speech-to-text).
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of supported languages. Each entry includes ``code`` (string) and ``name`` (string). For dubbing,
@@ -500,7 +520,7 @@ class AsyncVideosAi:
 
         Raises:
             ApiError: Error code 2204: The parameters are invalid. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.get_ai_languages(type_=type_, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_ai_languages(type_=type_, request_options=request_options))
 
     async def get_ai_metadata(self, video_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method returns AI-generated metadata for the specified video, including a suggested title, description,
@@ -509,7 +529,8 @@ class AsyncVideosAi:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The AI-generated metadata. The response includes ``video_id``, ``status`` (``completed``), and ``data``
@@ -520,7 +541,7 @@ class AsyncVideosAi:
             ApiError: Error code 2204: The parameters are invalid. Error code 3457: The authenticated user's account
                 doesn't support this feature. No such video exists. Error code 1004: The AI service is temporarily
                 unavailable. ``error`` is ``Error | LegacyError | RawError``."""
-        return (await self._with_raw_response.get_ai_metadata(video_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_ai_metadata(video_id, request_options=request_options))
 
     async def get_ai_questions(
         self, video_id: float, *, language: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -536,7 +557,8 @@ class AsyncVideosAi:
             video_id: The ID of the video.
             language: The language for suggested questions. Defaults to ``en``. Available: ``en``, ``fr``, ``es``,
                 ``de``, ``it``, ``pt``, ``ja``, ``ko``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The suggested questions and answers. The response includes ``video_id``, ``status``, ``language``, and
@@ -547,9 +569,9 @@ class AsyncVideosAi:
             ApiError: Error code 3457: The authenticated user's account doesn't support this feature. No such video
                 exists. Error code 1004: The AI service is temporarily unavailable. ``error`` is ``Error | LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_ai_questions(video_id, language=language, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_ai_transcribe_status(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -564,7 +586,8 @@ class AsyncVideosAi:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The transcription status was returned. The response includes ``video_id`` (integer), ``status`` (string),
@@ -573,9 +596,7 @@ class AsyncVideosAi:
         Raises:
             ApiError: Error code 3457: The authenticated user's account doesn't support this feature. No such video
                 exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.get_ai_transcribe_status(video_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_ai_transcribe_status(video_id, request_options=request_options))
 
     async def get_ai_translate_dubbing_status(
         self, video_id: float, *, language: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -592,7 +613,8 @@ class AsyncVideosAi:
         Args:
             video_id: The ID of the video.
             language: Filter results to a specific target language code. When omitted, all dubbing jobs are returned.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The dubbing status was returned. The response includes ``video_id`` (integer), ``total`` (integer), and
@@ -606,11 +628,11 @@ class AsyncVideosAi:
             ApiError: Error code 3457: The authenticated user's account doesn't support this feature. No such video
                 exists. Error code 1004: The translation service is temporarily unavailable. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_ai_translate_dubbing_status(
                 video_id, language=language, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_ai_translate_subtitles_status(
         self, video_id: float, *, language: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -626,7 +648,8 @@ class AsyncVideosAi:
             video_id: The ID of the video.
             language: Filter results to a specific target language code. When omitted, all subtitle translation jobs are
                 returned.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The subtitle translation status was returned. The response includes ``video_id`` (integer), ``total``
@@ -640,11 +663,11 @@ class AsyncVideosAi:
             ApiError: Error code 3457: The authenticated user's account doesn't support this feature. No such video
                 exists. Error code 1004: The translation service is temporarily unavailable. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_ai_translate_subtitles_status(
                 video_id, language=language, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def start_ai_transcribe(
         self,
@@ -665,7 +688,8 @@ class AsyncVideosAi:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The transcription job was queued. The response includes ``video_id`` and ``status`` (``not_started``). Poll
@@ -676,9 +700,9 @@ class AsyncVideosAi:
                 transcript. Delete the existing transcript first. * Error code 3991: A transcription is already in
                 progress for this video. Error code 3457: The authenticated user's account doesn't support this feature.
                 No such video exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.start_ai_transcribe(video_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def start_ai_translate_dubbing(
         self,
@@ -701,7 +725,8 @@ class AsyncVideosAi:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The dubbing job was queued. The response includes ``video_id`` and ``status`` (``processing``). Use GET
@@ -716,11 +741,11 @@ class AsyncVideosAi:
                 in progress for this language. Error code 3457: The authenticated user's account doesn't support this
                 feature. No such video exists. Error code 1004: The translation service is temporarily unavailable.
                 ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.start_ai_translate_dubbing(
                 video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def start_ai_translate_subtitles(
         self,
@@ -739,7 +764,8 @@ class AsyncVideosAi:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The subtitle translation job was queued. The response includes ``video_id`` and ``status`` (``processing``).
@@ -753,11 +779,11 @@ class AsyncVideosAi:
                 first. * Error code 3994: A translation is already in progress for this language. Error code 3457: The
                 authenticated user's account doesn't support this feature. No such video exists. Error code 1004: The
                 translation service is temporarily unavailable. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.start_ai_translate_subtitles(
                 video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosAiWithRawResponse:
@@ -779,7 +805,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -826,7 +853,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -845,7 +873,7 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
         )
 
     def get_ai_languages(
-        self, *, type_: Type48OrStr | None = None, request_options: RequestOptionsOrDict | None = None
+        self, *, type_: Type52OrStr | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[None, GetAiLanguagesErrorBody]:
         """This method returns the list of supported languages for AI features. Use the ``type`` query parameter to
         filter by feature: ``transcription`` for speech-to-text languages, ``subtitling`` for subtitle translation
@@ -856,14 +884,15 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
                 for AI audio dubbing. Includes available accents per language. * ``subtitling`` - Languages supported
                 for AI subtitle translation. * ``transcription`` - Languages supported for AI transcription
                 (speech-to-text).
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
             url_template=self._server.default("/videos/ai/languages"),
-            query_params=[param[Type48OrStr | None]("type", type_)],
+            query_params=[param[Type52OrStr | None]("type", type_)],
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
@@ -881,7 +910,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -911,7 +941,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
             video_id: The ID of the video.
             language: The language for suggested questions. Defaults to ``en``. Available: ``en``, ``fr``, ``es``,
                 ``de``, ``it``, ``pt``, ``ja``, ``ko``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -941,7 +972,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -972,7 +1004,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
         Args:
             video_id: The ID of the video.
             language: Filter results to a specific target language code. When omitted, all dubbing jobs are returned.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1003,7 +1036,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
             video_id: The ID of the video.
             language: Filter results to a specific target language code. When omitted, all subtitle translation jobs are
                 returned.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1039,7 +1073,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1078,7 +1113,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1113,7 +1149,8 @@ class VideosAiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1147,7 +1184,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1160,7 +1198,7 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=ask_ai_question_error_mapper,
             request_options=request_options,
         )
@@ -1194,7 +1232,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1207,13 +1246,13 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=edit_ai_texttrack_error_mapper,
             request_options=request_options,
         )
 
     async def get_ai_languages(
-        self, *, type_: Type48OrStr | None = None, request_options: RequestOptionsOrDict | None = None
+        self, *, type_: Type52OrStr | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[None, GetAiLanguagesErrorBody]:
         """This method returns the list of supported languages for AI features. Use the ``type`` query parameter to
         filter by feature: ``transcription`` for speech-to-text languages, ``subtitling`` for subtitle translation
@@ -1224,18 +1263,19 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
                 for AI audio dubbing. Includes available accents per language. * ``subtitling`` - Languages supported
                 for AI subtitle translation. * ``transcription`` - Languages supported for AI transcription
                 (speech-to-text).
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
             url_template=self._server.default("/videos/ai/languages"),
-            query_params=[param[Type48OrStr | None]("type", type_)],
+            query_params=[param[Type52OrStr | None]("type", type_)],
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_ai_languages_error_mapper,
             request_options=request_options,
         )
@@ -1249,7 +1289,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1260,7 +1301,7 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_ai_metadata_error_mapper,
             request_options=request_options,
         )
@@ -1279,7 +1320,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             video_id: The ID of the video.
             language: The language for suggested questions. Defaults to ``en``. Available: ``en``, ``fr``, ``es``,
                 ``de``, ``it``, ``pt``, ``ja``, ``ko``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1291,7 +1333,7 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_ai_questions_error_mapper,
             request_options=request_options,
         )
@@ -1309,7 +1351,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1320,7 +1363,7 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_ai_transcribe_status_error_mapper,
             request_options=request_options,
         )
@@ -1340,7 +1383,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
         Args:
             video_id: The ID of the video.
             language: Filter results to a specific target language code. When omitted, all dubbing jobs are returned.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1352,7 +1396,7 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_ai_translate_dubbing_status_error_mapper,
             request_options=request_options,
         )
@@ -1371,7 +1415,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             video_id: The ID of the video.
             language: Filter results to a specific target language code. When omitted, all subtitle translation jobs are
                 returned.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1383,7 +1428,7 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_ai_translate_subtitles_status_error_mapper,
             request_options=request_options,
         )
@@ -1407,7 +1452,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1420,7 +1466,7 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=start_ai_transcribe_error_mapper,
             request_options=request_options,
         )
@@ -1446,7 +1492,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1459,7 +1506,7 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=start_ai_translate_dubbing_error_mapper,
             request_options=request_options,
         )
@@ -1481,7 +1528,8 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1494,7 +1542,7 @@ class AsyncVideosAiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=start_ai_translate_subtitles_error_mapper,
             request_options=request_options,
         )

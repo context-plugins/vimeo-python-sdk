@@ -12,10 +12,13 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.add_video_tag_error import AddVideoTagErrorBody, add_video_tag_error_mapper
 from ..errors.add_video_tags_error import AddVideoTagsErrorBody, add_video_tags_error_mapper
@@ -24,8 +27,8 @@ from ..errors.delete_video_tag_error import DeleteVideoTagErrorBody, delete_vide
 from ..errors.get_videos_with_tag_error import GetVideosWithTagErrorBody, get_videos_with_tag_error_mapper
 from ..models.enums.direction import DirectionOrStr
 from ..models.enums.sort47 import Sort47OrStr
-from ..models.tag import Tag
 from ..models.tag_connection import TagConnection
+from ..models.tag_model import TagModel
 from ..models.video_connection import VideoConnection
 from ..server.server import Server
 
@@ -34,14 +37,17 @@ class VideosTags:
     def __init__(self, client: RawClient, server: Server, auth: AuthSchemes) -> None:
         self._with_raw_response = VideosTagsWithRawResponse(client, server, auth)
 
-    def add_video_tag(self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None) -> Tag:
+    def add_video_tag(
+        self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
+    ) -> TagModel:
         """This method adds a single tag to the specified video. The authenticated user must have edit access to the
         video.
 
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag was added.
@@ -49,7 +55,7 @@ class VideosTags:
         Raises:
             ApiError: * The tag is invalid. * An unsupported parameter was supplied. The total number of tags can't
                 exceed 20. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_tag(video_id, word, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_video_tag(video_id, word, request_options=request_options))
 
     def add_video_tags(
         self,
@@ -58,7 +64,7 @@ class VideosTags:
         page: float | None = None,
         per_page: float | None = None,
         request_options: RequestOptionsOrDict | None = None,
-    ) -> list[Tag]:
+    ) -> list[TagModel]:
         """This method adds multiple tags to the specified video. Include the tags as a JSON array as the body of the
         request with the **name** field, like this: ``[{ "name": "funny"}, {"name": "concert" }]``. The authenticated
         user must have edit access to the video. For more information on batch requests like this one, see `Using Common
@@ -68,7 +74,8 @@ class VideosTags:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tags were added.
@@ -77,20 +84,23 @@ class VideosTags:
             ApiError: * The request body wasn't supplied. * A parameter is invalid. * The request body doesn't contain a
                 JSON-encoded list of tags. * The authenticated user can't add tags to this video. * The total number of
                 tags can't exceed 20. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_tags(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_tags(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def check_video_for_tag(
         self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
-    ) -> Tag:
+    ) -> TagModel:
         """This method determines whether the specified tag has been added to a video. The authenticated user must be
         the owner of the video.
 
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag has been added to the video.
@@ -98,7 +108,7 @@ class VideosTags:
         Raises:
             ApiError: * A parameter is invalid. * The tag is invalid. The video has no such tag. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.check_video_for_tag(video_id, word, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.check_video_for_tag(video_id, word, request_options=request_options))
 
     def delete_video_tag(
         self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
@@ -109,14 +119,15 @@ class VideosTags:
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag was removed.
 
         Raises:
             ApiError: * A parameter is invalid. * The tag is invalid. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_video_tag(video_id, word, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_video_tag(video_id, word, request_options=request_options))
 
     def get_video_tags(
         self,
@@ -133,16 +144,19 @@ class VideosTags:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tags were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_video_tags(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_tags(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_videos_with_tag(
         self,
@@ -164,7 +178,8 @@ class VideosTags:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``created_time`` - Sort the results by creation
                 time. * ``duration`` - Sort the results by duration. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -172,9 +187,11 @@ class VideosTags:
         Raises:
             ApiError: * No such tag exists. * Error code 5451: This resource is restricted in your region. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.get_videos_with_tag(
-            word, direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_videos_with_tag(
+                word, direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosTagsWithRawResponse:
@@ -187,14 +204,15 @@ class AsyncVideosTags:
 
     async def add_video_tag(
         self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
-    ) -> Tag:
+    ) -> TagModel:
         """This method adds a single tag to the specified video. The authenticated user must have edit access to the
         video.
 
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag was added.
@@ -202,7 +220,7 @@ class AsyncVideosTags:
         Raises:
             ApiError: * The tag is invalid. * An unsupported parameter was supplied. The total number of tags can't
                 exceed 20. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.add_video_tag(video_id, word, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.add_video_tag(video_id, word, request_options=request_options))
 
     async def add_video_tags(
         self,
@@ -211,7 +229,7 @@ class AsyncVideosTags:
         page: float | None = None,
         per_page: float | None = None,
         request_options: RequestOptionsOrDict | None = None,
-    ) -> list[Tag]:
+    ) -> list[TagModel]:
         """This method adds multiple tags to the specified video. Include the tags as a JSON array as the body of the
         request with the **name** field, like this: ``[{ "name": "funny"}, {"name": "concert" }]``. The authenticated
         user must have edit access to the video. For more information on batch requests like this one, see `Using Common
@@ -221,7 +239,8 @@ class AsyncVideosTags:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tags were added.
@@ -230,22 +249,23 @@ class AsyncVideosTags:
             ApiError: * The request body wasn't supplied. * A parameter is invalid. * The request body doesn't contain a
                 JSON-encoded list of tags. * The authenticated user can't add tags to this video. * The total number of
                 tags can't exceed 20. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_tags(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def check_video_for_tag(
         self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
-    ) -> Tag:
+    ) -> TagModel:
         """This method determines whether the specified tag has been added to a video. The authenticated user must be
         the owner of the video.
 
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag has been added to the video.
@@ -253,9 +273,9 @@ class AsyncVideosTags:
         Raises:
             ApiError: * A parameter is invalid. * The tag is invalid. The video has no such tag. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_video_for_tag(video_id, word, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_video_tag(
         self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
@@ -266,16 +286,15 @@ class AsyncVideosTags:
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag was removed.
 
         Raises:
             ApiError: * A parameter is invalid. * The tag is invalid. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.delete_video_tag(video_id, word, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.delete_video_tag(video_id, word, request_options=request_options))
 
     async def get_video_tags(
         self,
@@ -292,18 +311,19 @@ class AsyncVideosTags:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tags were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_tags(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_videos_with_tag(
         self,
@@ -325,7 +345,8 @@ class AsyncVideosTags:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``created_time`` - Sort the results by creation
                 time. * ``duration`` - Sort the results by duration. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -333,11 +354,11 @@ class AsyncVideosTags:
         Raises:
             ApiError: * No such tag exists. * Error code 5451: This resource is restricted in your region. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_videos_with_tag(
                 word, direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosTagsWithRawResponse:
@@ -347,14 +368,15 @@ class AsyncVideosTags:
 class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
     def add_video_tag(
         self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
-    ) -> ApiResult[Tag, AddVideoTagErrorBody]:
+    ) -> ApiResult[TagModel, AddVideoTagErrorBody]:
         """This method adds a single tag to the specified video. The authenticated user must have edit access to the
         video.
 
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -366,7 +388,7 @@ class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Tag],
+            decoder=json_decoder[TagModel],
             error_mapper=add_video_tag_error_mapper,
             request_options=request_options,
         )
@@ -378,7 +400,7 @@ class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         page: float | None = None,
         per_page: float | None = None,
         request_options: RequestOptionsOrDict | None = None,
-    ) -> ApiResult[list[Tag], AddVideoTagsErrorBody]:
+    ) -> ApiResult[list[TagModel], AddVideoTagsErrorBody]:
         """This method adds multiple tags to the specified video. Include the tags as a JSON array as the body of the
         request with the **name** field, like this: ``[{ "name": "funny"}, {"name": "concert" }]``. The authenticated
         user must have edit access to the video. For more information on batch requests like this one, see `Using Common
@@ -388,7 +410,8 @@ class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -401,21 +424,22 @@ class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[Tag]],
+            decoder=json_decoder[list[TagModel]],
             error_mapper=add_video_tags_error_mapper,
             request_options=request_options,
         )
 
     def check_video_for_tag(
         self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
-    ) -> ApiResult[Tag, CheckVideoForTagErrorBody]:
+    ) -> ApiResult[TagModel, CheckVideoForTagErrorBody]:
         """This method determines whether the specified tag has been added to a video. The authenticated user must be
         the owner of the video.
 
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -426,7 +450,7 @@ class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Tag],
+            decoder=json_decoder[TagModel],
             error_mapper=check_video_for_tag_error_mapper,
             request_options=request_options,
         )
@@ -440,7 +464,8 @@ class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -472,7 +497,8 @@ class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -509,7 +535,8 @@ class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``created_time`` - Sort the results by creation
                 time. * ``duration`` - Sort the results by duration. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -535,14 +562,15 @@ class VideosTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAuthSchemes]):
     async def add_video_tag(
         self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
-    ) -> ApiResult[Tag, AddVideoTagErrorBody]:
+    ) -> ApiResult[TagModel, AddVideoTagErrorBody]:
         """This method adds a single tag to the specified video. The authenticated user must have edit access to the
         video.
 
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -554,7 +582,7 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Tag],
+            decoder=async_json_decoder[TagModel],
             error_mapper=add_video_tag_error_mapper,
             request_options=request_options,
         )
@@ -566,7 +594,7 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         page: float | None = None,
         per_page: float | None = None,
         request_options: RequestOptionsOrDict | None = None,
-    ) -> ApiResult[list[Tag], AddVideoTagsErrorBody]:
+    ) -> ApiResult[list[TagModel], AddVideoTagsErrorBody]:
         """This method adds multiple tags to the specified video. Include the tags as a JSON array as the body of the
         request with the **name** field, like this: ``[{ "name": "funny"}, {"name": "concert" }]``. The authenticated
         user must have edit access to the video. For more information on batch requests like this one, see `Using Common
@@ -576,7 +604,8 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -589,21 +618,22 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[Tag]],
+            decoder=async_json_decoder[list[TagModel]],
             error_mapper=add_video_tags_error_mapper,
             request_options=request_options,
         )
 
     async def check_video_for_tag(
         self, video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
-    ) -> ApiResult[Tag, CheckVideoForTagErrorBody]:
+    ) -> ApiResult[TagModel, CheckVideoForTagErrorBody]:
         """This method determines whether the specified tag has been added to a video. The authenticated user must be
         the owner of the video.
 
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -614,7 +644,7 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Tag],
+            decoder=async_json_decoder[TagModel],
             error_mapper=check_video_for_tag_error_mapper,
             request_options=request_options,
         )
@@ -628,7 +658,8 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             video_id: The ID of the video.
             word: The tag word.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -640,7 +671,7 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_tag_error_mapper,
             request_options=request_options,
         )
@@ -660,7 +691,8 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -672,7 +704,7 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TagConnection],
+            decoder=async_json_decoder[TagConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -697,7 +729,8 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``created_time`` - Sort the results by creation
                 time. * ``duration`` - Sort the results by duration. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -714,7 +747,7 @@ class AsyncVideosTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_videos_with_tag_error_mapper,
             request_options=request_options,
         )

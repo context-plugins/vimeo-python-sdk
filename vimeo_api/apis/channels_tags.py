@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_channel_tag_error import AddChannelTagErrorBody, add_channel_tag_error_mapper
 from ..errors.add_tags_to_channel_error import AddTagsToChannelErrorBody, add_tags_to_channel_error_mapper
@@ -22,8 +25,8 @@ from ..errors.check_if_channel_has_tag_error import CheckIfChannelHasTagErrorBod
 from ..errors.delete_tag_from_channel_error import DeleteTagFromChannelErrorBody, delete_tag_from_channel_error_mapper
 from ..errors.get_channel_tags_error import GetChannelTagsErrorBody, get_channel_tags_error_mapper
 from ..models.channels_tags_request import ChannelsTagsRequest, ChannelsTagsRequestDict
-from ..models.tag import Tag
 from ..models.tag_connection import TagConnection
+from ..models.tag_model import TagModel
 from ..server.server import Server
 
 
@@ -40,7 +43,8 @@ class ChannelsTags:
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag was added.
@@ -49,7 +53,7 @@ class ChannelsTags:
             ApiError: * The tag is invalid, or a parameter is invalid. * Error code 2501: The channel can't have more
                 than 20 tags. Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user
                 can't add tags to this channel. ``error`` is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.add_channel_tag(channel_id, word, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_channel_tag(channel_id, word, request_options=request_options))
 
     def add_tags_to_channel(
         self,
@@ -57,7 +61,7 @@ class ChannelsTags:
         body: list[ChannelsTagsRequest | ChannelsTagsRequestDict],
         *,
         request_options: RequestOptionsOrDict | None = None,
-    ) -> list[Tag]:
+    ) -> list[TagModel]:
         """This method adds multiple tags to the specified channel. Include the tags as a JSON array in the body of the
         request using the **tag** field, like this: ``[{ "tag": "funny" }, { "tag": "concert" }]``. The authenticated
         user must be the owner of the channel. For more information on batch requests like this one, see `Using Common
@@ -66,7 +70,8 @@ class ChannelsTags:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tags were added.
@@ -76,7 +81,7 @@ class ChannelsTags:
                 or the request body is malformed. * Error code 2501: The channel can't have more than 20 tags. Error
                 code 8003: The user credentials are invalid. Error code 3200: The authenticated user can't add tags to
                 this channel. ``error`` is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.add_tags_to_channel(channel_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_tags_to_channel(channel_id, body, request_options=request_options))
 
     def check_if_channel_has_tag(
         self, channel_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
@@ -86,7 +91,8 @@ class ChannelsTags:
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag has been added to the channel.
@@ -94,9 +100,9 @@ class ChannelsTags:
         Raises:
             ApiError: No such tag exists. Error code 5000: The tag exists, but the channel isn't tagged by it. ``error``
                 is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.check_if_channel_has_tag(
-            channel_id, word, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_channel_has_tag(channel_id, word, request_options=request_options)
+        )
 
     def delete_tag_from_channel(
         self, channel_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
@@ -107,7 +113,8 @@ class ChannelsTags:
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag was removed.
@@ -116,9 +123,9 @@ class ChannelsTags:
             ApiError: The tag is invalid, or a parameter is invalid. Error code 8003: The user credentials are invalid.
                 Error code 3200: The authenticated user can't remove tags from this channel. ``error`` is ``LegacyError
                 | Error | RawError``."""
-        return self._with_raw_response.delete_tag_from_channel(
-            channel_id, word, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_tag_from_channel(channel_id, word, request_options=request_options)
+        )
 
     def get_channel_tags(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -127,14 +134,15 @@ class ChannelsTags:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tags were returned.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_channel_tags(channel_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_channel_tags(channel_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> ChannelsTagsWithRawResponse:
@@ -154,7 +162,8 @@ class AsyncChannelsTags:
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag was added.
@@ -163,9 +172,7 @@ class AsyncChannelsTags:
             ApiError: * The tag is invalid, or a parameter is invalid. * Error code 2501: The channel can't have more
                 than 20 tags. Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user
                 can't add tags to this channel. ``error`` is ``LegacyError | Error | RawError``."""
-        return (
-            await self._with_raw_response.add_channel_tag(channel_id, word, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.add_channel_tag(channel_id, word, request_options=request_options))
 
     async def add_tags_to_channel(
         self,
@@ -173,7 +180,7 @@ class AsyncChannelsTags:
         body: list[ChannelsTagsRequest | ChannelsTagsRequestDict],
         *,
         request_options: RequestOptionsOrDict | None = None,
-    ) -> list[Tag]:
+    ) -> list[TagModel]:
         """This method adds multiple tags to the specified channel. Include the tags as a JSON array in the body of the
         request using the **tag** field, like this: ``[{ "tag": "funny" }, { "tag": "concert" }]``. The authenticated
         user must be the owner of the channel. For more information on batch requests like this one, see `Using Common
@@ -182,7 +189,8 @@ class AsyncChannelsTags:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tags were added.
@@ -192,9 +200,9 @@ class AsyncChannelsTags:
                 or the request body is malformed. * Error code 2501: The channel can't have more than 20 tags. Error
                 code 8003: The user credentials are invalid. Error code 3200: The authenticated user can't add tags to
                 this channel. ``error`` is ``LegacyError | Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_tags_to_channel(channel_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def check_if_channel_has_tag(
         self, channel_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
@@ -204,7 +212,8 @@ class AsyncChannelsTags:
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag has been added to the channel.
@@ -212,9 +221,9 @@ class AsyncChannelsTags:
         Raises:
             ApiError: No such tag exists. Error code 5000: The tag exists, but the channel isn't tagged by it. ``error``
                 is ``LegacyError | Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_channel_has_tag(channel_id, word, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_tag_from_channel(
         self, channel_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None
@@ -225,7 +234,8 @@ class AsyncChannelsTags:
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tag was removed.
@@ -234,9 +244,9 @@ class AsyncChannelsTags:
             ApiError: The tag is invalid, or a parameter is invalid. Error code 8003: The user credentials are invalid.
                 Error code 3200: The authenticated user can't remove tags from this channel. ``error`` is ``LegacyError
                 | Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_tag_from_channel(channel_id, word, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_channel_tags(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -245,14 +255,15 @@ class AsyncChannelsTags:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The tags were returned.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.get_channel_tags(channel_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_channel_tags(channel_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncChannelsTagsWithRawResponse:
@@ -269,7 +280,8 @@ class ChannelsTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -292,7 +304,7 @@ class ChannelsTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         body: list[ChannelsTagsRequest | ChannelsTagsRequestDict],
         *,
         request_options: RequestOptionsOrDict | None = None,
-    ) -> ApiResult[list[Tag], AddTagsToChannelErrorBody]:
+    ) -> ApiResult[list[TagModel], AddTagsToChannelErrorBody]:
         """This method adds multiple tags to the specified channel. Include the tags as a JSON array in the body of the
         request using the **tag** field, like this: ``[{ "tag": "funny" }, { "tag": "concert" }]``. The authenticated
         user must be the owner of the channel. For more information on batch requests like this one, see `Using Common
@@ -301,7 +313,8 @@ class ChannelsTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -314,7 +327,7 @@ class ChannelsTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[Tag]],
+            decoder=json_decoder[list[TagModel]],
             error_mapper=add_tags_to_channel_error_mapper,
             request_options=request_options,
         )
@@ -327,7 +340,8 @@ class ChannelsTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -352,7 +366,8 @@ class ChannelsTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -376,7 +391,8 @@ class ChannelsTagsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -403,7 +419,8 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -415,7 +432,7 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_channel_tag_error_mapper,
             request_options=request_options,
         )
@@ -426,7 +443,7 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         body: list[ChannelsTagsRequest | ChannelsTagsRequestDict],
         *,
         request_options: RequestOptionsOrDict | None = None,
-    ) -> ApiResult[list[Tag], AddTagsToChannelErrorBody]:
+    ) -> ApiResult[list[TagModel], AddTagsToChannelErrorBody]:
         """This method adds multiple tags to the specified channel. Include the tags as a JSON array in the body of the
         request using the **tag** field, like this: ``[{ "tag": "funny" }, { "tag": "concert" }]``. The authenticated
         user must be the owner of the channel. For more information on batch requests like this one, see `Using Common
@@ -435,7 +452,8 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -448,7 +466,7 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[Tag]],
+            decoder=async_json_decoder[list[TagModel]],
             error_mapper=add_tags_to_channel_error_mapper,
             request_options=request_options,
         )
@@ -461,7 +479,8 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -472,7 +491,7 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=check_if_channel_has_tag_error_mapper,
             request_options=request_options,
         )
@@ -486,7 +505,8 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             channel_id: The ID of the channel.
             word: The word to use as the tag.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -498,7 +518,7 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_tag_from_channel_error_mapper,
             request_options=request_options,
         )
@@ -510,7 +530,8 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -521,7 +542,7 @@ class AsyncChannelsTagsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TagConnection],
+            decoder=async_json_decoder[TagConnection],
             error_mapper=get_channel_tags_error_mapper,
             request_options=request_options,
         )

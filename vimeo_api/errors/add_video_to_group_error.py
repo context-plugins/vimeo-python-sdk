@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final, TypeAlias
 
-from ..core import ErrorMapper, HttpResponse, RawError, decode_json
+from ..core import ErrorMapper, RawError, decode_json
 from ..models.error import Error
 from ..models.legacy_error import LegacyError
 
@@ -12,14 +12,14 @@ AddVideoToGroupErrorBody: TypeAlias = LegacyError | Error | RawError
 
 @dataclass(frozen=True, slots=True)
 class _AddVideoToGroupError:
-    def map(self, response: HttpResponse) -> AddVideoToGroupErrorBody:
-        match response.status_code:
+    def map(self, status_code: int, content: bytes) -> AddVideoToGroupErrorBody:
+        match status_code:
             case 403:
-                return decode_json[LegacyError](response)
+                return decode_json[LegacyError](content)
             case 404:
-                return decode_json[Error](response)
+                return decode_json[Error](content)
             case _:
-                return RawError(response)
+                return RawError(status_code, content)
 
 
 add_video_to_group_error_mapper: Final[ErrorMapper[AddVideoToGroupErrorBody]] = _AddVideoToGroupError()

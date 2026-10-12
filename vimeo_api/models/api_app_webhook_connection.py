@@ -19,5 +19,5 @@ class ApiAppWebhookConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[ApiAppWebhook | ApiAppWebhookDict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[ApiAppWebhookDict]]

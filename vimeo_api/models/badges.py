@@ -48,11 +48,11 @@ class BadgesDict(TypedDict):
     hdr: bool
     hdr_10: NotRequired[bool]
     hdr_10_plus: NotRequired[bool]
-    live: Live | LiveDict
+    live: LiveDict
     ott_4k: NotRequired[bool]
     ott_5_1_audio: NotRequired[bool]
     ott_hevc: NotRequired[bool]
-    staff_pick: StaffPick | StaffPickDict
+    staff_pick: StaffPickDict
     stereo_spatial: NotRequired[bool]
     vod: bool
     weekend_challenge: bool

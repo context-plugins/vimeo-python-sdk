@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.complete_streaming_upload_error import (
     CompleteStreamingUploadErrorBody,
@@ -51,7 +54,8 @@ class VideosUploads:
             user_id: The ID of the user.
             signature: The crypto signature of the completed upload.
             video_file_id: The ID of the uploaded file.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The streaming upload was completed.
@@ -61,9 +65,11 @@ class VideosUploads:
                 exists. * Error code 5007: No such signature exists. * Error code 8400: The signature is invalid. Error
                 code 4011: The upload server returned an HTTP status code other than 200. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.complete_streaming_upload(
-            upload_id, user_id, signature, video_file_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.complete_streaming_upload(
+                upload_id, user_id, signature, video_file_id, request_options=request_options
+            ),
+        )
 
     def get_upload_attempt(
         self, upload_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -75,14 +81,15 @@ class VideosUploads:
         Args:
             upload_id: The ID of the upload attempt.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The upload attempt was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_upload_attempt(upload_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_upload_attempt(upload_id, user_id, request_options=request_options))
 
     def upload_video(
         self,
@@ -97,7 +104,8 @@ class VideosUploads:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The upload procedure has begun.
@@ -111,7 +119,7 @@ class VideosUploads:
                 authenticated user's allotted weekly quota has been reached. * Error code 4104: The authenticated user's
                 allotted daily quota has been reached. Error code 4003: There is a problem initiating the upload.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.upload_video(user_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.upload_video(user_id, body, request_options=request_options))
 
     def upload_video_alt1(
         self, body: MeVideosRequest1 | MeVideosRequest1Dict, *, request_options: RequestOptionsOrDict | None = None
@@ -121,7 +129,8 @@ class VideosUploads:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The upload procedure has begun.
@@ -135,7 +144,7 @@ class VideosUploads:
                 authenticated user's allotted weekly quota has been reached. * Error code 4104: The authenticated user's
                 allotted daily quota has been reached. Error code 4003: There is a problem initiating the upload.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.upload_video_alt1(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.upload_video_alt1(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> VideosUploadsWithRawResponse:
@@ -162,7 +171,8 @@ class AsyncVideosUploads:
             user_id: The ID of the user.
             signature: The crypto signature of the completed upload.
             video_file_id: The ID of the uploaded file.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The streaming upload was completed.
@@ -172,11 +182,11 @@ class AsyncVideosUploads:
                 exists. * Error code 5007: No such signature exists. * Error code 8400: The signature is invalid. Error
                 code 4011: The upload server returned an HTTP status code other than 200. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.complete_streaming_upload(
                 upload_id, user_id, signature, video_file_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_upload_attempt(
         self, upload_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -188,16 +198,17 @@ class AsyncVideosUploads:
         Args:
             upload_id: The ID of the upload attempt.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The upload attempt was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_upload_attempt(upload_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def upload_video(
         self,
@@ -212,7 +223,8 @@ class AsyncVideosUploads:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The upload procedure has begun.
@@ -226,7 +238,7 @@ class AsyncVideosUploads:
                 authenticated user's allotted weekly quota has been reached. * Error code 4104: The authenticated user's
                 allotted daily quota has been reached. Error code 4003: There is a problem initiating the upload.
                 ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.upload_video(user_id, body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.upload_video(user_id, body, request_options=request_options))
 
     async def upload_video_alt1(
         self, body: MeVideosRequest1 | MeVideosRequest1Dict, *, request_options: RequestOptionsOrDict | None = None
@@ -236,7 +248,8 @@ class AsyncVideosUploads:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The upload procedure has begun.
@@ -250,7 +263,7 @@ class AsyncVideosUploads:
                 authenticated user's allotted weekly quota has been reached. * Error code 4104: The authenticated user's
                 allotted daily quota has been reached. Error code 4003: There is a problem initiating the upload.
                 ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.upload_video_alt1(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.upload_video_alt1(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncVideosUploadsWithRawResponse:
@@ -274,7 +287,8 @@ class VideosUploadsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             user_id: The ID of the user.
             signature: The crypto signature of the completed upload.
             video_file_id: The ID of the uploaded file.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -302,7 +316,8 @@ class VideosUploadsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             upload_id: The ID of the upload attempt.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -331,7 +346,8 @@ class VideosUploadsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -357,7 +373,8 @@ class VideosUploadsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -392,7 +409,8 @@ class AsyncVideosUploadsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             user_id: The ID of the user.
             signature: The crypto signature of the completed upload.
             video_file_id: The ID of the uploaded file.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -405,7 +423,7 @@ class AsyncVideosUploadsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=complete_streaming_upload_error_mapper,
             request_options=request_options,
         )
@@ -420,7 +438,8 @@ class AsyncVideosUploadsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             upload_id: The ID of the upload attempt.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -431,7 +450,7 @@ class AsyncVideosUploadsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UploadAttempt],
+            decoder=async_json_decoder[UploadAttempt],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -449,7 +468,8 @@ class AsyncVideosUploadsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -462,7 +482,7 @@ class AsyncVideosUploadsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=upload_video_error_mapper,
             request_options=request_options,
         )
@@ -475,7 +495,8 @@ class AsyncVideosUploadsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -487,7 +508,7 @@ class AsyncVideosUploadsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=upload_video_alt1_error_mapper,
             request_options=request_options,
         )

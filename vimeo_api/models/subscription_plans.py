@@ -69,13 +69,13 @@ class SubscriptionPlans(SdkBaseModel):
 
 
 class SubscriptionPlansDict(TypedDict):
-    currency: Currency | CurrencyDict
-    discount: Discount | DiscountDict
-    id: Id | IdDict
-    metadata: Metadata25 | Metadata25Dict
+    currency: CurrencyDict
+    discount: DiscountDict
+    id: IdDict
+    metadata: Metadata25Dict
     name: str
-    price: Price | PriceDict
-    price_formatted: PriceFormatted | PriceFormattedDict
-    promotion: Promotion | PromotionDict
+    price: PriceDict
+    price_formatted: PriceFormattedDict
+    promotion: PromotionDict
     tier: TierOrStr
     uri: str

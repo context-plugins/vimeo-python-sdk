@@ -10,8 +10,10 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     raw_error_response,
+    unwrap,
 )
 from ..server.server import Server
 
@@ -24,14 +26,15 @@ class ApiInformationEssentials:
         """This method returns the full OpenAPI specification for the Vimeo API.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The OpenAPI specification was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_endpoints(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_endpoints(request_options=request_options))
 
     @property
     def with_raw_response(self) -> ApiInformationEssentialsWithRawResponse:
@@ -46,14 +49,15 @@ class AsyncApiInformationEssentials:
         """This method returns the full OpenAPI specification for the Vimeo API.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The OpenAPI specification was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_endpoints(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_endpoints(request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncApiInformationEssentialsWithRawResponse:
@@ -65,7 +69,8 @@ class ApiInformationEssentialsWithRawResponse(SecuredRawResponse[RawClient, Serv
         """This method returns the full OpenAPI specification for the Vimeo API.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -86,7 +91,8 @@ class AsyncApiInformationEssentialsWithRawResponse(SecuredRawResponse[AsyncRawCl
         """This method returns the full OpenAPI specification for the Vimeo API.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -96,7 +102,7 @@ class AsyncApiInformationEssentialsWithRawResponse(SecuredRawResponse[AsyncRawCl
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )

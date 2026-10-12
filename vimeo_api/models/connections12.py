@@ -12,4 +12,4 @@ class Connections12(SdkBaseModel):
 
 
 class Connections12Dict(TypedDict):
-    video: Video1 | Video1Dict
+    video: Video1Dict

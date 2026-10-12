@@ -5,16 +5,14 @@ from ...core import open_enum_validator
 
 
 class Type28(str, Enum):
-    """Which logo to show in the landing page navbar.
+    """The type of text track.
 
     Option descriptions:
-     * ``custom`` - A custom brand-kit logo (see ``uri``).
-     * ``none`` - No logo is shown.
-     * ``vimeo`` - The Vimeo logo."""
+     * ``captions`` - The text track is for captions.
+     * ``subtitles`` - The text track is for subtitles."""
 
-    CUSTOM = "custom"
-    NONE = "none"
-    VIMEO = "vimeo"
+    CAPTIONS = "captions"
+    SUBTITLES = "subtitles"
 
     __str__ = str.__str__
 

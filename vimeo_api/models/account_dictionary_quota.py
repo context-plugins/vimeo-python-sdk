@@ -18,5 +18,5 @@ class AccountDictionaryQuota(SdkBaseModel):
 
 
 class AccountDictionaryQuotaDict(TypedDict):
-    glossary_terms: NotRequired[GlossaryTerms | GlossaryTermsDict]
-    language_replacement_terms: NotRequired[LanguageReplacementTerms | LanguageReplacementTermsDict]
+    glossary_terms: NotRequired[GlossaryTermsDict]
+    language_replacement_terms: NotRequired[LanguageReplacementTermsDict]

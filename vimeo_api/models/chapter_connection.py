@@ -19,5 +19,5 @@ class ChapterConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[Chapter | ChapterDict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[ChapterDict]]

@@ -4,7 +4,7 @@ from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
 from .archive import Archive, ArchiveDict
-from .enums.status13 import Status13OrStr
+from .enums.status15 import Status15OrStr
 from .enums.stream_mode import StreamModeOrStr
 from .ingest import Ingest, IngestDict
 from .metering import Metering, MeteringDict
@@ -26,7 +26,7 @@ class EventSessionStatus(SdkBaseModel):
     metering: Metering
     """The metering status of the live video."""
 
-    status: Status13OrStr | None
+    status: Status15OrStr | None
     """The status of the event.
 
     Option descriptions:
@@ -43,10 +43,10 @@ class EventSessionStatus(SdkBaseModel):
 
 
 class EventSessionStatusDict(TypedDict):
-    archive: Archive | ArchiveDict
+    archive: ArchiveDict
     can_manage: bool
     id: float
-    ingest: Ingest | IngestDict
-    metering: Metering | MeteringDict
-    status: Status13OrStr | None
+    ingest: IngestDict
+    metering: MeteringDict
+    status: Status15OrStr | None
     stream_mode: StreamModeOrStr

@@ -6,7 +6,7 @@ from ..core import SdkBaseModel
 from .metadata2 import Metadata2, Metadata2Dict
 
 
-class Tag(SdkBaseModel):
+class TagModel(SdkBaseModel):
     canonical: str
     """The normalized canonical tag name."""
 
@@ -23,9 +23,9 @@ class Tag(SdkBaseModel):
     """The canonical relative URI of the tag."""
 
 
-class TagDict(TypedDict):
+class TagModelDict(TypedDict):
     canonical: str
-    metadata: Metadata2 | Metadata2Dict
+    metadata: Metadata2Dict
     name: str
     resource_key: str
     uri: str

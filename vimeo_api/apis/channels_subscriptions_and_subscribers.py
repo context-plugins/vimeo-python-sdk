@@ -11,9 +11,12 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.check_if_user_subscribed_to_channel_alt1_error import (
     CheckIfUserSubscribedToChannelAlt1ErrorBody,
@@ -56,16 +59,19 @@ class ChannelsSubscriptionsAndSubscribers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user follows the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_if_user_subscribed_to_channel(
-            channel_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_user_subscribed_to_channel(
+                channel_id, user_id, request_options=request_options
+            ),
+        )
 
     def check_if_user_subscribed_to_channel_alt1(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -74,21 +80,24 @@ class ChannelsSubscriptionsAndSubscribers:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user follows the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_if_user_subscribed_to_channel_alt1(
-            channel_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_user_subscribed_to_channel_alt1(
+                channel_id, request_options=request_options
+            ),
+        )
 
     def get_channel_subscribers(
         self,
         channel_id: float,
-        filter: Filter2OrStr,
+        filter_: Filter2OrStr,
         *,
         direction: DirectionOrStr | None = None,
         page: float | None = None,
@@ -101,7 +110,7 @@ class ChannelsSubscriptionsAndSubscribers:
 
         Args:
             channel_id: The ID of the channel.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return
                 moderators.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
@@ -110,23 +119,26 @@ class ChannelsSubscriptionsAndSubscribers:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by follow date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The followers were returned.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_channel_subscribers(
-            channel_id,
-            filter,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_channel_subscribers(
+                channel_id,
+                filter_,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def subscribe_to_channel(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -136,16 +148,17 @@ class ChannelsSubscriptionsAndSubscribers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is subscribed to the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.subscribe_to_channel(
-            channel_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.subscribe_to_channel(channel_id, user_id, request_options=request_options)
+        )
 
     def subscribe_to_channel_alt1(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -154,14 +167,15 @@ class ChannelsSubscriptionsAndSubscribers:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is subscribed to the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.subscribe_to_channel_alt1(channel_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.subscribe_to_channel_alt1(channel_id, request_options=request_options))
 
     def unsubscribe_from_channel(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -171,16 +185,17 @@ class ChannelsSubscriptionsAndSubscribers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is unsubscribed from the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.unsubscribe_from_channel(
-            channel_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.unsubscribe_from_channel(channel_id, user_id, request_options=request_options)
+        )
 
     def unsubscribe_from_channel_alt1(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -189,16 +204,17 @@ class ChannelsSubscriptionsAndSubscribers:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is unsubscribed from the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.unsubscribe_from_channel_alt1(
-            channel_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.unsubscribe_from_channel_alt1(channel_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> ChannelsSubscriptionsAndSubscribersWithRawResponse:
@@ -217,18 +233,19 @@ class AsyncChannelsSubscriptionsAndSubscribers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user follows the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_subscribed_to_channel(
                 channel_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def check_if_user_subscribed_to_channel_alt1(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -237,23 +254,24 @@ class AsyncChannelsSubscriptionsAndSubscribers:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user follows the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_subscribed_to_channel_alt1(
                 channel_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_channel_subscribers(
         self,
         channel_id: float,
-        filter: Filter2OrStr,
+        filter_: Filter2OrStr,
         *,
         direction: DirectionOrStr | None = None,
         page: float | None = None,
@@ -266,7 +284,7 @@ class AsyncChannelsSubscriptionsAndSubscribers:
 
         Args:
             channel_id: The ID of the channel.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return
                 moderators.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
@@ -275,25 +293,26 @@ class AsyncChannelsSubscriptionsAndSubscribers:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by follow date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The followers were returned.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channel_subscribers(
                 channel_id,
-                filter,
+                filter_,
                 direction=direction,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def subscribe_to_channel(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -303,16 +322,17 @@ class AsyncChannelsSubscriptionsAndSubscribers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is subscribed to the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.subscribe_to_channel(channel_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def subscribe_to_channel_alt1(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -321,16 +341,17 @@ class AsyncChannelsSubscriptionsAndSubscribers:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is subscribed to the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.subscribe_to_channel_alt1(channel_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def unsubscribe_from_channel(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -340,16 +361,17 @@ class AsyncChannelsSubscriptionsAndSubscribers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is unsubscribed from the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.unsubscribe_from_channel(channel_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def unsubscribe_from_channel_alt1(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -358,16 +380,17 @@ class AsyncChannelsSubscriptionsAndSubscribers:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is unsubscribed from the channel.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.unsubscribe_from_channel_alt1(channel_id, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncChannelsSubscriptionsAndSubscribersWithRawResponse:
@@ -383,7 +406,8 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -406,7 +430,8 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -425,7 +450,7 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
     def get_channel_subscribers(
         self,
         channel_id: float,
-        filter: Filter2OrStr,
+        filter_: Filter2OrStr,
         *,
         direction: DirectionOrStr | None = None,
         page: float | None = None,
@@ -438,7 +463,7 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
 
         Args:
             channel_id: The ID of the channel.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return
                 moderators.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
@@ -447,7 +472,8 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by follow date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -456,7 +482,7 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
             url_template=self._server.default("/channels/{channel_id}/users"),
             path_params=[param[float]("channel_id", channel_id)],
             query_params=[
-                param[Filter2OrStr]("filter", filter),
+                param[Filter2OrStr]("filter", filter_),
                 param[DirectionOrStr | None]("direction", direction),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -479,7 +505,8 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -503,7 +530,8 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -528,7 +556,8 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -552,7 +581,8 @@ class ChannelsSubscriptionsAndSubscribersWithRawResponse(SecuredRawResponse[RawC
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -581,7 +611,8 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -592,7 +623,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=check_if_user_subscribed_to_channel_error_mapper,
             request_options=request_options,
         )
@@ -604,7 +635,8 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -615,7 +647,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=check_if_user_subscribed_to_channel_alt1_error_mapper,
             request_options=request_options,
         )
@@ -623,7 +655,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
     async def get_channel_subscribers(
         self,
         channel_id: float,
-        filter: Filter2OrStr,
+        filter_: Filter2OrStr,
         *,
         direction: DirectionOrStr | None = None,
         page: float | None = None,
@@ -636,7 +668,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
 
         Args:
             channel_id: The ID of the channel.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return
                 moderators.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
@@ -645,7 +677,8 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by follow date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -654,7 +687,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
             url_template=self._server.default("/channels/{channel_id}/users"),
             path_params=[param[float]("channel_id", channel_id)],
             query_params=[
-                param[Filter2OrStr]("filter", filter),
+                param[Filter2OrStr]("filter", filter_),
                 param[DirectionOrStr | None]("direction", direction),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -664,7 +697,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=get_channel_subscribers_error_mapper,
             request_options=request_options,
         )
@@ -677,7 +710,8 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -689,7 +723,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=subscribe_to_channel_error_mapper,
             request_options=request_options,
         )
@@ -701,7 +735,8 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -713,7 +748,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=subscribe_to_channel_alt1_error_mapper,
             request_options=request_options,
         )
@@ -726,7 +761,8 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -738,7 +774,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=unsubscribe_from_channel_error_mapper,
             request_options=request_options,
         )
@@ -750,7 +786,8 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -762,7 +799,7 @@ class AsyncChannelsSubscriptionsAndSubscribersWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=unsubscribe_from_channel_alt1_error_mapper,
             request_options=request_options,
         )

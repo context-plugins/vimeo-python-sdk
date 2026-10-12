@@ -11,4 +11,4 @@ class Interactions9(SdkBaseModel):
 
 
 class Interactions9Dict(TypedDict):
-    report: Report2 | Report2Dict
+    report: Report2Dict

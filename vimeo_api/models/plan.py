@@ -66,13 +66,13 @@ class Plan(SdkBaseModel):
 
 
 class PlanDict(TypedDict):
-    amount: NotRequired[Money | MoneyDict]
+    amount: NotRequired[MoneyDict]
     billing_plan_id: NotRequired[str]
     billing_plan_product_id: NotRequired[str]
     billing_plan_type: NotRequired[str]
     created_at: str
     id: str
-    items: list[Items1 | Items1Dict]
+    items: list[Items1Dict]
     metadata: NotRequired[Any]
     plan_id: str
     product_id: str

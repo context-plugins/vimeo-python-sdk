@@ -22,7 +22,7 @@ class ComposerScenes(SdkBaseModel):
 
 
 class ComposerScenesDict(TypedDict):
-    graphics: list[Graphic | GraphicDict]
+    graphics: list[GraphicDict]
     id: str
-    meta: Meta | MetaDict
+    meta: MetaDict
     name: str

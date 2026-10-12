@@ -15,4 +15,4 @@ class Interactions13(SdkBaseModel):
 
 
 class Interactions13Dict(TypedDict):
-    page: Page1 | Page1Dict
+    page: Page1Dict

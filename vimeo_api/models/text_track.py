@@ -6,7 +6,7 @@ from typing_extensions import NotRequired, TypedDict
 from ..core import UNSET, Optional, SdkBaseModel
 from .download_links import DownloadLinks, DownloadLinksDict
 from .enums.provenance1 import Provenance1OrStr
-from .enums.type24 import Type24OrStr
+from .enums.type28 import Type28OrStr
 from .metadata27 import Metadata27, Metadata27Dict
 
 
@@ -68,7 +68,7 @@ class TextTrack(SdkBaseModel):
     source_link_expires_time: str
     """The time in ISO 8601 format when the read-only source text track link expires."""
 
-    type_: Type24OrStr | None = Field(alias="type")
+    type_: Type28OrStr | None = Field(alias="type")
     """The type of text track.
 
     Option descriptions:
@@ -86,7 +86,7 @@ class TextTrackDict(TypedDict):
     active: bool
     created_on: str
     display_language: str
-    download_links: NotRequired[DownloadLinks | DownloadLinksDict]
+    download_links: NotRequired[DownloadLinksDict]
     download_links_expires_time: NotRequired[str]
     hls_link: str
     hls_link_expires_time: str
@@ -94,12 +94,12 @@ class TextTrackDict(TypedDict):
     language: str | None
     link: str
     link_expires_time: str
-    metadata: NotRequired[Metadata27 | Metadata27Dict]
+    metadata: NotRequired[Metadata27Dict]
     modified_on: str
     name: str | None
     provenance: Provenance1OrStr
     source_link: str
     source_link_expires_time: str
-    type_: Type24OrStr | None
+    type_: Type28OrStr | None
     uri: str
     version: float | None

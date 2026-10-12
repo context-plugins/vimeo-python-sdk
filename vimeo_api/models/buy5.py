@@ -11,4 +11,4 @@ class Buy5(SdkBaseModel):
 
 
 class Buy5Dict(TypedDict):
-    price: NotRequired[Price7 | Price7Dict]
+    price: NotRequired[Price7Dict]

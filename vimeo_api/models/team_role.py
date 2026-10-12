@@ -61,7 +61,7 @@ class TeamRole(SdkBaseModel):
 
 
 class TeamRoleDict(TypedDict):
-    applicable_permission_policies: NotRequired[ApplicablePermissionPolicies1 | ApplicablePermissionPolicies1Dict]
+    applicable_permission_policies: NotRequired[ApplicablePermissionPolicies1Dict]
     count: NotRequired[float]
     display_description: NotRequired[str]
     display_name: NotRequired[str]

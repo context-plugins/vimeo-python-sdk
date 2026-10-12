@@ -44,9 +44,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /channels/{channel_id}/users`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_channel_subscribers(channel_id: float, filter: Filter2OrStr, *, direction: DirectionOrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `channel_id`, `filter`
-- **Params**: `channel_id` — path · `filter` — query · `direction` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Signature**: `def get_channel_subscribers(channel_id: float, filter_: Filter2OrStr, *, direction: DirectionOrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `channel_id`, `filter_`
+- **Params**: `channel_id` — path · `filter_` — query `filter` · `direction` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `UserConnection`
 - **Returns (raw)**: `ApiResult[UserConnection, GetChannelSubscribersErrorBody]`
 - **Error**: `GetChannelSubscribersErrorBody` — **Case A (typed)**

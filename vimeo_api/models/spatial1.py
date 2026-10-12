@@ -35,7 +35,7 @@ class Spatial1(SdkBaseModel):
 
 
 class Spatial1Dict(TypedDict):
-    director_timeline: NotRequired[list[DirectorTimeline1 | DirectorTimeline1Dict]]
+    director_timeline: NotRequired[list[DirectorTimeline1Dict]]
     field_of_view: NotRequired[float]
     projection: NotRequired[Projection1OrStr]
     stereo_format: NotRequired[StereoFormat1OrStr]

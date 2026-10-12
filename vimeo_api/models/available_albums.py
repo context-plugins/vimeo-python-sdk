@@ -24,7 +24,7 @@ class AvailableAlbums(SdkBaseModel):
 
 
 class AvailableAlbumsDict(TypedDict):
-    disabled: NotRequired[Disabled2 | Disabled2Dict]
+    disabled: NotRequired[Disabled2Dict]
     options: NotRequired[list[str]]
     total: NotRequired[float]
     uri: NotRequired[str]

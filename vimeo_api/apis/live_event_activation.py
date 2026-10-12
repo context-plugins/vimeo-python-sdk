@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.activate_live_event_alt1_error import (
     ActivateLiveEventAlt1ErrorBody,
@@ -53,7 +55,8 @@ class LiveEventActivation:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was activated.
@@ -65,9 +68,11 @@ class LiveEventActivation:
                 to the event. * Error code 3422: The authenticated user can't activate the event. Error code 5000: No
                 such event or user exists. Error code 4017: An unexpected error occurred. Error code 7701: The service
                 is unavailable. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.activate_live_event(
-            live_event_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.activate_live_event(
+                live_event_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     def activate_live_event_alt1(
         self,
@@ -82,7 +87,8 @@ class LiveEventActivation:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was activated.
@@ -94,9 +100,9 @@ class LiveEventActivation:
                 to the event. * Error code 3422: The authenticated user can't activate the event. Error code 5000: No
                 such event or user exists. Error code 4017: An unexpected error occurred. Error code 7701: The service
                 is unavailable. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.activate_live_event_alt1(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.activate_live_event_alt1(live_event_id, body=body, request_options=request_options)
+        )
 
     def activate_live_event_alt2(
         self,
@@ -111,7 +117,8 @@ class LiveEventActivation:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was activated.
@@ -123,9 +130,9 @@ class LiveEventActivation:
                 to the event. * Error code 3422: The authenticated user can't activate the event. Error code 5000: No
                 such event or user exists. Error code 4017: An unexpected error occurred. Error code 7701: The service
                 is unavailable. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.activate_live_event_alt2(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.activate_live_event_alt2(live_event_id, body=body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> LiveEventActivationWithRawResponse:
@@ -151,7 +158,8 @@ class AsyncLiveEventActivation:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was activated.
@@ -163,11 +171,11 @@ class AsyncLiveEventActivation:
                 to the event. * Error code 3422: The authenticated user can't activate the event. Error code 5000: No
                 such event or user exists. Error code 4017: An unexpected error occurred. Error code 7701: The service
                 is unavailable. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.activate_live_event(
                 live_event_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def activate_live_event_alt1(
         self,
@@ -182,7 +190,8 @@ class AsyncLiveEventActivation:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was activated.
@@ -194,11 +203,11 @@ class AsyncLiveEventActivation:
                 to the event. * Error code 3422: The authenticated user can't activate the event. Error code 5000: No
                 such event or user exists. Error code 4017: An unexpected error occurred. Error code 7701: The service
                 is unavailable. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.activate_live_event_alt1(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def activate_live_event_alt2(
         self,
@@ -213,7 +222,8 @@ class AsyncLiveEventActivation:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was activated.
@@ -225,11 +235,11 @@ class AsyncLiveEventActivation:
                 to the event. * Error code 3422: The authenticated user can't activate the event. Error code 5000: No
                 such event or user exists. Error code 4017: An unexpected error occurred. Error code 7701: The service
                 is unavailable. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.activate_live_event_alt2(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveEventActivationWithRawResponse:
@@ -252,7 +262,8 @@ class LiveEventActivationWithRawResponse(SecuredRawResponse[RawClient, Server, A
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -283,7 +294,8 @@ class LiveEventActivationWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -314,7 +326,8 @@ class LiveEventActivationWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -349,7 +362,8 @@ class AsyncLiveEventActivationWithRawResponse(SecuredRawResponse[AsyncRawClient,
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -362,7 +376,7 @@ class AsyncLiveEventActivationWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=activate_live_event_error_mapper,
             request_options=request_options,
         )
@@ -380,7 +394,8 @@ class AsyncLiveEventActivationWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -393,7 +408,7 @@ class AsyncLiveEventActivationWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=activate_live_event_alt1_error_mapper,
             request_options=request_options,
         )
@@ -411,7 +426,8 @@ class AsyncLiveEventActivationWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -424,7 +440,7 @@ class AsyncLiveEventActivationWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=activate_live_event_alt2_error_mapper,
             request_options=request_options,
         )

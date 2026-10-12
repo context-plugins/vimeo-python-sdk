@@ -4,14 +4,14 @@ from pydantic import Field
 from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
-from .enums.type12 import Type12OrStr
+from .enums.type16 import Type16OrStr
 
 
 class Graphic(SdkBaseModel):
     id: str
     """The unique identifier of the graphic item."""
 
-    type_: Type12OrStr = Field(alias="type")
+    type_: Type16OrStr = Field(alias="type")
     """The type of the graphic item.
 
     Option descriptions:
@@ -30,4 +30,4 @@ class Graphic(SdkBaseModel):
 
 class GraphicDict(TypedDict):
     id: str
-    type_: Type12OrStr
+    type_: Type16OrStr

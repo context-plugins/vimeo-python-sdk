@@ -22,7 +22,7 @@ class Metadata3(SdkBaseModel):
 
 
 class Metadata3Dict(TypedDict):
-    connections: Connections3 | Connections3Dict
-    interactions: Interactions2 | Interactions2Dict
+    connections: Connections3Dict
+    interactions: Interactions2Dict
     ms_teams_encrypted_team_id: str | None
-    public_videos: PublicVideos | PublicVideosDict
+    public_videos: PublicVideosDict

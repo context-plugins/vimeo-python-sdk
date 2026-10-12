@@ -155,39 +155,39 @@ class Interactions3(SdkBaseModel):
 
 
 class Interactions3Dict(TypedDict):
-    album: Album4 | Album4Dict | None
-    ask_ai: AskAi | AskAiDict
-    ask_ai_manager: AskAiManager | AskAiManagerDict
-    ask_ai_viewer: AskAiViewer | AskAiViewerDict
-    buy: Buy | BuyDict | None
+    album: Album4Dict | None
+    ask_ai: AskAiDict
+    ask_ai_manager: AskAiManagerDict
+    ask_ai_viewer: AskAiViewerDict
+    buy: BuyDict | None
     can_comment: NotRequired[bool]
     can_react_to_collab_comments: bool
-    can_request_team_role_upgrade: CanRequestTeamRoleUpgrade | CanRequestTeamRoleUpgradeDict
-    can_update_privacy_to_public: CanUpdatePrivacyToPublic | CanUpdatePrivacyToPublicDict
-    channel: Channel1 | Channel1Dict
-    create_editor: CreateEditor | CreateEditorDict
-    delete: Delete | DeleteDict
-    edit: Edit | EditDict
-    edit_privacy: EditPrivacy | EditPrivacyDict
+    can_request_team_role_upgrade: CanRequestTeamRoleUpgradeDict
+    can_update_privacy_to_public: CanUpdatePrivacyToPublicDict
+    channel: Channel1Dict
+    create_editor: CreateEditorDict
+    delete: DeleteDict
+    edit: EditDict
+    edit_privacy: EditPrivacyDict
     flag_clip: NotRequired[bool]
-    has_restricted_privacy_options: HasRestrictedPrivacyOptions | HasRestrictedPrivacyOptionsDict
-    highlights: Highlights | HighlightsDict
+    has_restricted_privacy_options: HasRestrictedPrivacyOptionsDict
+    highlights: HighlightsDict
     interact: NotRequired[bool]
-    invite: Invite | InviteDict
-    legal_hold: LegalHold | LegalHoldDict
-    like: Like | LikeDict
+    invite: InviteDict
+    legal_hold: LegalHoldDict
+    like: LikeDict
     lms_export: NotRequired[Any]
-    rent: Rent | RentDict | None
-    report: Report1 | Report1Dict
-    set_content_rating: SetContentRating | SetContentRatingDict
-    subscribe: NotRequired[Subscribe | SubscribeDict | None]
-    summary: Summary | SummaryDict
-    text_translations: TextTranslations | TextTranslationsDict
-    transcript_video_editor: TranscriptVideoEditor | TranscriptVideoEditorDict
-    translations: Translations | TranslationsDict
-    trim: Trim | TrimDict
-    validate_value: Validate | ValidateDict
-    view_privacy: ViewPrivacy | ViewPrivacyDict
-    view_team_members: ViewTeamMembers | ViewTeamMembersDict
-    watched: Watched | WatchedDict
-    watchlater: Watchlater1 | Watchlater1Dict
+    rent: RentDict | None
+    report: Report1Dict
+    set_content_rating: SetContentRatingDict
+    subscribe: NotRequired[SubscribeDict | None]
+    summary: SummaryDict
+    text_translations: TextTranslationsDict
+    transcript_video_editor: TranscriptVideoEditorDict
+    translations: TranslationsDict
+    trim: TrimDict
+    validate_value: ValidateDict
+    view_privacy: ViewPrivacyDict
+    view_team_members: ViewTeamMembersDict
+    watched: WatchedDict
+    watchlater: Watchlater1Dict

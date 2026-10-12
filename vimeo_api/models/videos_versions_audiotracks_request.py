@@ -5,7 +5,7 @@ from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
 from .enums.provenance2 import Provenance2OrStr
-from .enums.type53 import Type53OrStr
+from .enums.type57 import Type57OrStr
 from .upload5 import Upload5, Upload5Dict
 
 
@@ -25,7 +25,7 @@ class VideosVersionsAudiotracksRequest(SdkBaseModel):
      * ``user_uploaded`` - The audio track is uploaded by a user.
      * ``user_uploaded_and_ai_generated`` - The audio track is uploaded by a user and contains AI content."""
 
-    type_: Optional[Type53OrStr] = Field(default=UNSET, alias="type")
+    type_: Optional[Type57OrStr] = Field(default=UNSET, alias="type")
     """The type of audio track.
 
     Option descriptions:
@@ -40,5 +40,5 @@ class VideosVersionsAudiotracksRequestDict(TypedDict):
     active: NotRequired[bool]
     language_code: NotRequired[str]
     provenance: NotRequired[Provenance2OrStr]
-    type_: NotRequired[Type53OrStr]
-    upload: Upload5 | Upload5Dict
+    type_: NotRequired[Type57OrStr]
+    upload: Upload5Dict

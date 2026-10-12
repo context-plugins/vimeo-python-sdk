@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.convert_access_token_error import ConvertAccessTokenErrorBody, convert_access_token_error_mapper
 from ..models.auth_model import AuthModel
@@ -38,7 +40,8 @@ class AuthenticationExtrasConvert:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The token was converted.
@@ -46,7 +49,7 @@ class AuthenticationExtrasConvert:
         Raises:
             ApiError: * The token is invalid. * The token has unauthorized scopes. ``error`` is ``AuthError |
                 RawError``."""
-        return self._with_raw_response.convert_access_token(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.convert_access_token(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AuthenticationExtrasConvertWithRawResponse:
@@ -67,7 +70,8 @@ class AsyncAuthenticationExtrasConvert:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The token was converted.
@@ -75,7 +79,7 @@ class AsyncAuthenticationExtrasConvert:
         Raises:
             ApiError: * The token is invalid. * The token has unauthorized scopes. ``error`` is ``AuthError |
                 RawError``."""
-        return (await self._with_raw_response.convert_access_token(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.convert_access_token(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncAuthenticationExtrasConvertWithRawResponse:
@@ -93,7 +97,8 @@ class AuthenticationExtrasConvertWithRawResponse(SecuredRawResponse[RawClient, S
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -122,7 +127,8 @@ class AsyncAuthenticationExtrasConvertWithRawResponse(SecuredRawResponse[AsyncRa
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -134,7 +140,7 @@ class AsyncAuthenticationExtrasConvertWithRawResponse(SecuredRawResponse[AsyncRa
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AuthModel],
+            decoder=async_json_decoder[AuthModel],
             error_mapper=convert_access_token_error_mapper,
             request_options=request_options,
         )

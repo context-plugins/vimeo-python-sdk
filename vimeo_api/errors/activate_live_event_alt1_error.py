@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final, TypeAlias
 
-from ..core import ErrorMapper, HttpResponse, RawError, decode_json
+from ..core import ErrorMapper, RawError, decode_json
 from ..models.error import Error
 
 ActivateLiveEventAlt1ErrorBody: TypeAlias = Error | RawError
@@ -11,12 +11,12 @@ ActivateLiveEventAlt1ErrorBody: TypeAlias = Error | RawError
 
 @dataclass(frozen=True, slots=True)
 class _ActivateLiveEventAlt1Error:
-    def map(self, response: HttpResponse) -> ActivateLiveEventAlt1ErrorBody:
-        match response.status_code:
+    def map(self, status_code: int, content: bytes) -> ActivateLiveEventAlt1ErrorBody:
+        match status_code:
             case 400 | 401 | 403 | 404 | 500 | 503:
-                return decode_json[Error](response)
+                return decode_json[Error](content)
             case _:
-                return RawError(response)
+                return RawError(status_code, content)
 
 
 activate_live_event_alt1_error_mapper: Final[

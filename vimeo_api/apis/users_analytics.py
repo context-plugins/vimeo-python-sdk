@@ -10,9 +10,11 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.analytics_connection import AnalyticsConnection
 from ..models.enums.dimension import DimensionOrStr
@@ -112,33 +114,36 @@ class UsersAnalytics:
                 results by month according to the specified data dimension. * ``none`` - The results are not aggregated
                 by time interval. * ``week`` - Aggregate the results by week according to the specified data dimension.
                 * ``year`` - Aggregate the results by year according to the specified data dimension.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The analytics were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_user_analytics(
-            user_id,
-            dimension,
-            from_,
-            to,
-            direction=direction,
-            filter_content=filter_content,
-            filter_countries=filter_countries,
-            filter_custom_metadata=filter_custom_metadata,
-            filter_device_types=filter_device_types,
-            filter_embed_domains=filter_embed_domains,
-            filter_regions=filter_regions,
-            filter_streaming_types=filter_streaming_types,
-            filter_workspaces=filter_workspaces,
-            page=page,
-            per_page=per_page,
-            sort=sort,
-            time_interval=time_interval,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_user_analytics(
+                user_id,
+                dimension,
+                from_,
+                to,
+                direction=direction,
+                filter_content=filter_content,
+                filter_countries=filter_countries,
+                filter_custom_metadata=filter_custom_metadata,
+                filter_device_types=filter_device_types,
+                filter_embed_domains=filter_embed_domains,
+                filter_regions=filter_regions,
+                filter_streaming_types=filter_streaming_types,
+                filter_workspaces=filter_workspaces,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                time_interval=time_interval,
+                request_options=request_options,
+            ),
+        )
 
     def get_user_analytics_alt1(
         self,
@@ -224,32 +229,35 @@ class UsersAnalytics:
                 results by month according to the specified data dimension. * ``none`` - The results are not aggregated
                 by time interval. * ``week`` - Aggregate the results by week according to the specified data dimension.
                 * ``year`` - Aggregate the results by year according to the specified data dimension.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The analytics were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_user_analytics_alt1(
-            dimension,
-            from_,
-            to,
-            direction=direction,
-            filter_content=filter_content,
-            filter_countries=filter_countries,
-            filter_custom_metadata=filter_custom_metadata,
-            filter_device_types=filter_device_types,
-            filter_embed_domains=filter_embed_domains,
-            filter_regions=filter_regions,
-            filter_streaming_types=filter_streaming_types,
-            filter_workspaces=filter_workspaces,
-            page=page,
-            per_page=per_page,
-            sort=sort,
-            time_interval=time_interval,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_user_analytics_alt1(
+                dimension,
+                from_,
+                to,
+                direction=direction,
+                filter_content=filter_content,
+                filter_countries=filter_countries,
+                filter_custom_metadata=filter_custom_metadata,
+                filter_device_types=filter_device_types,
+                filter_embed_domains=filter_embed_domains,
+                filter_regions=filter_regions,
+                filter_streaming_types=filter_streaming_types,
+                filter_workspaces=filter_workspaces,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                time_interval=time_interval,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> UsersAnalyticsWithRawResponse:
@@ -346,14 +354,15 @@ class AsyncUsersAnalytics:
                 results by month according to the specified data dimension. * ``none`` - The results are not aggregated
                 by time interval. * ``week`` - Aggregate the results by week according to the specified data dimension.
                 * ``year`` - Aggregate the results by year according to the specified data dimension.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The analytics were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_user_analytics(
                 user_id,
                 dimension,
@@ -373,8 +382,8 @@ class AsyncUsersAnalytics:
                 sort=sort,
                 time_interval=time_interval,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_user_analytics_alt1(
         self,
@@ -460,14 +469,15 @@ class AsyncUsersAnalytics:
                 results by month according to the specified data dimension. * ``none`` - The results are not aggregated
                 by time interval. * ``week`` - Aggregate the results by week according to the specified data dimension.
                 * ``year`` - Aggregate the results by year according to the specified data dimension.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The analytics were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_user_analytics_alt1(
                 dimension,
                 from_,
@@ -486,8 +496,8 @@ class AsyncUsersAnalytics:
                 sort=sort,
                 time_interval=time_interval,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncUsersAnalyticsWithRawResponse:
@@ -581,7 +591,8 @@ class UsersAnalyticsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
                 results by month according to the specified data dimension. * ``none`` - The results are not aggregated
                 by time interval. * ``week`` - Aggregate the results by week according to the specified data dimension.
                 * ``year`` - Aggregate the results by year according to the specified data dimension.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -699,7 +710,8 @@ class UsersAnalyticsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
                 results by month according to the specified data dimension. * ``none`` - The results are not aggregated
                 by time interval. * ``week`` - Aggregate the results by week according to the specified data dimension.
                 * ``year`` - Aggregate the results by year according to the specified data dimension.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -820,7 +832,8 @@ class AsyncUsersAnalyticsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
                 results by month according to the specified data dimension. * ``none`` - The results are not aggregated
                 by time interval. * ``week`` - Aggregate the results by week according to the specified data dimension.
                 * ``year`` - Aggregate the results by year according to the specified data dimension.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -849,7 +862,7 @@ class AsyncUsersAnalyticsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AnalyticsConnection],
+            decoder=async_json_decoder[AnalyticsConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -938,7 +951,8 @@ class AsyncUsersAnalyticsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
                 results by month according to the specified data dimension. * ``none`` - The results are not aggregated
                 by time interval. * ``week`` - Aggregate the results by week according to the specified data dimension.
                 * ``year`` - Aggregate the results by year according to the specified data dimension.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -966,7 +980,7 @@ class AsyncUsersAnalyticsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AnalyticsConnection],
+            decoder=async_json_decoder[AnalyticsConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

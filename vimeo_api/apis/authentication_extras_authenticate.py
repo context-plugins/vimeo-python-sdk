@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.client_auth_error import ClientAuthErrorBody, client_auth_error_mapper
 from ..models.auth_model import AuthModel
@@ -37,14 +39,15 @@ class AuthenticationExtrasAuthenticate:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authorization was successful.
 
         Raises:
             ApiError: Error code 8001: No such client secret exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.client_auth(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.client_auth(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AuthenticationExtrasAuthenticateWithRawResponse:
@@ -67,14 +70,15 @@ class AsyncAuthenticationExtrasAuthenticate:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authorization was successful.
 
         Raises:
             ApiError: Error code 8001: No such client secret exists. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.client_auth(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.client_auth(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncAuthenticationExtrasAuthenticateWithRawResponse:
@@ -94,7 +98,8 @@ class AuthenticationExtrasAuthenticateWithRawResponse(SecuredRawResponse[RawClie
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -127,7 +132,8 @@ class AsyncAuthenticationExtrasAuthenticateWithRawResponse(
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -139,7 +145,7 @@ class AsyncAuthenticationExtrasAuthenticateWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AuthModel],
+            decoder=async_json_decoder[AuthModel],
             error_mapper=client_auth_error_mapper,
             request_options=request_options,
         )

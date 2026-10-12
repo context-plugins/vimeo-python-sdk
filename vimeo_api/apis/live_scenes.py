@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.attach_graphic_item_to_scene_error import (
     AttachGraphicItemToSceneErrorBody,
@@ -54,7 +56,8 @@ class LiveScenes:
             live_event_id: The ID of the event.
             scene_id: The ID of the scene.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scene was returned.
@@ -63,9 +66,11 @@ class LiveScenes:
             ApiError: Error code 3981: The provided graphic item type isn't supported yet. * Error code 3200: The
                 authenticated user can't access the event. * Error code 8000: The user credentials are invalid.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.attach_graphic_item_to_scene(
-            live_event_id, scene_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.attach_graphic_item_to_scene(
+                live_event_id, scene_id, body, request_options=request_options
+            ),
+        )
 
     def create_composer_scene(
         self,
@@ -79,7 +84,8 @@ class LiveScenes:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scene was created.
@@ -88,9 +94,9 @@ class LiveScenes:
             ApiError: * Error code 3980: The Composer Scenes API isn't supported in the context of venues. * Error code
                 3989: Scenes already exist for this event. * Error code 3200: The authenticated user can't access the
                 event. * Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_composer_scene(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_composer_scene(live_event_id, body=body, request_options=request_options)
+        )
 
     def get_composer_scenes(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -99,7 +105,8 @@ class LiveScenes:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scenes were returned.
@@ -108,7 +115,7 @@ class LiveScenes:
             ApiError: Error code 3980: The Composer Scenes API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_composer_scenes(live_event_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_composer_scenes(live_event_id, request_options=request_options))
 
     def reset_composer_scenes(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -118,7 +125,8 @@ class LiveScenes:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scenes were reset.
@@ -127,7 +135,7 @@ class LiveScenes:
             ApiError: Error code 3980: The Composer Scenes API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.reset_composer_scenes(live_event_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.reset_composer_scenes(live_event_id, request_options=request_options))
 
     def update_composer_scene(
         self, live_event_id: float, scene_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -137,7 +145,8 @@ class LiveScenes:
         Args:
             live_event_id: The ID of the event.
             scene_id: The ID of the scene.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scene was returned.
@@ -146,9 +155,9 @@ class LiveScenes:
             ApiError: Error code 3980: The Composer Scenes API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.update_composer_scene(
-            live_event_id, scene_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_composer_scene(live_event_id, scene_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> LiveScenesWithRawResponse:
@@ -173,7 +182,8 @@ class AsyncLiveScenes:
             live_event_id: The ID of the event.
             scene_id: The ID of the scene.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scene was returned.
@@ -182,11 +192,11 @@ class AsyncLiveScenes:
             ApiError: Error code 3981: The provided graphic item type isn't supported yet. * Error code 3200: The
                 authenticated user can't access the event. * Error code 8000: The user credentials are invalid.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.attach_graphic_item_to_scene(
                 live_event_id, scene_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_composer_scene(
         self,
@@ -200,7 +210,8 @@ class AsyncLiveScenes:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scene was created.
@@ -209,11 +220,11 @@ class AsyncLiveScenes:
             ApiError: * Error code 3980: The Composer Scenes API isn't supported in the context of venues. * Error code
                 3989: Scenes already exist for this event. * Error code 3200: The authenticated user can't access the
                 event. * Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_composer_scene(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_composer_scenes(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -222,7 +233,8 @@ class AsyncLiveScenes:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scenes were returned.
@@ -231,9 +243,7 @@ class AsyncLiveScenes:
             ApiError: Error code 3980: The Composer Scenes API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return (
-            await self._with_raw_response.get_composer_scenes(live_event_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_composer_scenes(live_event_id, request_options=request_options))
 
     async def reset_composer_scenes(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -243,7 +253,8 @@ class AsyncLiveScenes:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scenes were reset.
@@ -252,9 +263,9 @@ class AsyncLiveScenes:
             ApiError: Error code 3980: The Composer Scenes API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.reset_composer_scenes(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_composer_scene(
         self, live_event_id: float, scene_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -264,7 +275,8 @@ class AsyncLiveScenes:
         Args:
             live_event_id: The ID of the event.
             scene_id: The ID of the scene.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The scene was returned.
@@ -273,11 +285,11 @@ class AsyncLiveScenes:
             ApiError: Error code 3980: The Composer Scenes API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_composer_scene(
                 live_event_id, scene_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveScenesWithRawResponse:
@@ -299,7 +311,8 @@ class LiveScenesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
             live_event_id: The ID of the event.
             scene_id: The ID of the scene.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -329,7 +342,8 @@ class LiveScenesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -354,7 +368,8 @@ class LiveScenesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -378,7 +393,8 @@ class LiveScenesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -403,7 +419,8 @@ class LiveScenesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             live_event_id: The ID of the event.
             scene_id: The ID of the scene.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -436,7 +453,8 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             live_event_id: The ID of the event.
             scene_id: The ID of the scene.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -449,7 +467,7 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ComposerScenes],
+            decoder=async_json_decoder[ComposerScenes],
             error_mapper=attach_graphic_item_to_scene_error_mapper,
             request_options=request_options,
         )
@@ -466,7 +484,8 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -479,7 +498,7 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ComposerScenes],
+            decoder=async_json_decoder[ComposerScenes],
             error_mapper=create_composer_scene_error_mapper,
             request_options=request_options,
         )
@@ -491,7 +510,8 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -502,7 +522,7 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ComposerScenesConnection],
+            decoder=async_json_decoder[ComposerScenesConnection],
             error_mapper=get_composer_scenes_error_mapper,
             request_options=request_options,
         )
@@ -515,7 +535,8 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -527,7 +548,7 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[ComposerScenes]],
+            decoder=async_json_decoder[list[ComposerScenes]],
             error_mapper=reset_composer_scenes_error_mapper,
             request_options=request_options,
         )
@@ -540,7 +561,8 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             live_event_id: The ID of the event.
             scene_id: The ID of the scene.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -552,7 +574,7 @@ class AsyncLiveScenesWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ComposerScenes],
+            decoder=async_json_decoder[ComposerScenes],
             error_mapper=update_composer_scene_error_mapper,
             request_options=request_options,
         )

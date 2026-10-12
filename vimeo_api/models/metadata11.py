@@ -18,5 +18,5 @@ class Metadata11(SdkBaseModel):
 
 
 class Metadata11Dict(TypedDict):
-    connections: Connections11 | Connections11Dict
-    interactions: Interactions7 | Interactions7Dict | None
+    connections: Connections11Dict
+    interactions: Interactions7Dict | None

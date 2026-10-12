@@ -1,17 +1,16 @@
 from __future__ import annotations
 
-from typing import Literal
-
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
+from .enums.grant_type import GrantTypeOrStr
 
 
 class OauthAccessTokenRequest(SdkBaseModel):
     code: str
     """The authorization code received from the authorization server."""
 
-    grant_type: Literal["authorization_code"] = "authorization_code"
+    grant_type: GrantTypeOrStr
     """The grant type. The value of this field must be ``authorization_code``.
 
     Option descriptions:
@@ -23,5 +22,5 @@ class OauthAccessTokenRequest(SdkBaseModel):
 
 class OauthAccessTokenRequestDict(TypedDict):
     code: str
-    grant_type: NotRequired[Literal["authorization_code"]]
+    grant_type: GrantTypeOrStr
     redirect_uri: str

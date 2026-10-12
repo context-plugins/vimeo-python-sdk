@@ -9,13 +9,15 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_feed_alt1_error import GetFeedAlt1ErrorBody, get_feed_alt1_error_mapper
 from ..errors.get_feed_error import GetFeedErrorBody, get_feed_error_mapper
 from ..models.activity31_connection import Activity31Connection
-from ..models.enums.type29 import Type29OrStr
+from ..models.enums.type33 import Type33OrStr
 from ..server.server import Server
 
 
@@ -30,7 +32,7 @@ class UsersFeeds:
         offset: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
-        type_: Type29OrStr | None = None,
+        type_: Type33OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> Activity31Connection:
         """This method returns every video in the authenticated user's feed.
@@ -48,16 +50,19 @@ class UsersFeeds:
                 - Group videos. * ``likes`` - Liked videos. * ``ondemand_publish`` - On Demand videos. * ``share`` -
                 Shared videos. * ``tagged_with`` - Tagged videos. * ``twitter_timeline`` - Videos from the user's
                 Twitter timeline. * ``uploads`` - Uploaded videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_feed(
-            user_id, offset=offset, page=page, per_page=per_page, type_=type_, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_feed(
+                user_id, offset=offset, page=page, per_page=per_page, type_=type_, request_options=request_options
+            ),
+        )
 
     def get_feed_alt1(
         self,
@@ -65,7 +70,7 @@ class UsersFeeds:
         offset: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
-        type_: Type29OrStr | None = None,
+        type_: Type33OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> Activity31Connection:
         """This method returns every video in the authenticated user's feed.
@@ -82,16 +87,19 @@ class UsersFeeds:
                 - Group videos. * ``likes`` - Liked videos. * ``ondemand_publish`` - On Demand videos. * ``share`` -
                 Shared videos. * ``tagged_with`` - Tagged videos. * ``twitter_timeline`` - Videos from the user's
                 Twitter timeline. * ``uploads`` - Uploaded videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_feed_alt1(
-            offset=offset, page=page, per_page=per_page, type_=type_, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_feed_alt1(
+                offset=offset, page=page, per_page=per_page, type_=type_, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> UsersFeedsWithRawResponse:
@@ -109,7 +117,7 @@ class AsyncUsersFeeds:
         offset: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
-        type_: Type29OrStr | None = None,
+        type_: Type33OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> Activity31Connection:
         """This method returns every video in the authenticated user's feed.
@@ -127,18 +135,19 @@ class AsyncUsersFeeds:
                 - Group videos. * ``likes`` - Liked videos. * ``ondemand_publish`` - On Demand videos. * ``share`` -
                 Shared videos. * ``tagged_with`` - Tagged videos. * ``twitter_timeline`` - Videos from the user's
                 Twitter timeline. * ``uploads`` - Uploaded videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_feed(
                 user_id, offset=offset, page=page, per_page=per_page, type_=type_, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_feed_alt1(
         self,
@@ -146,7 +155,7 @@ class AsyncUsersFeeds:
         offset: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
-        type_: Type29OrStr | None = None,
+        type_: Type33OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> Activity31Connection:
         """This method returns every video in the authenticated user's feed.
@@ -163,18 +172,19 @@ class AsyncUsersFeeds:
                 - Group videos. * ``likes`` - Liked videos. * ``ondemand_publish`` - On Demand videos. * ``share`` -
                 Shared videos. * ``tagged_with`` - Tagged videos. * ``twitter_timeline`` - Videos from the user's
                 Twitter timeline. * ``uploads`` - Uploaded videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_feed_alt1(
                 offset=offset, page=page, per_page=per_page, type_=type_, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncUsersFeedsWithRawResponse:
@@ -189,7 +199,7 @@ class UsersFeedsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         offset: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
-        type_: Type29OrStr | None = None,
+        type_: Type33OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[Activity31Connection, GetFeedErrorBody]:
         """This method returns every video in the authenticated user's feed.
@@ -207,7 +217,8 @@ class UsersFeedsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
                 - Group videos. * ``likes`` - Liked videos. * ``ondemand_publish`` - On Demand videos. * ``share`` -
                 Shared videos. * ``tagged_with`` - Tagged videos. * ``twitter_timeline`` - Videos from the user's
                 Twitter timeline. * ``uploads`` - Uploaded videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -219,7 +230,7 @@ class UsersFeedsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
                 param[str | None]("offset", offset),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
-                param[Type29OrStr | None]("type", type_),
+                param[Type33OrStr | None]("type", type_),
             ],
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
@@ -235,7 +246,7 @@ class UsersFeedsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         offset: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
-        type_: Type29OrStr | None = None,
+        type_: Type33OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[Activity31Connection, GetFeedAlt1ErrorBody]:
         """This method returns every video in the authenticated user's feed.
@@ -252,7 +263,8 @@ class UsersFeedsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
                 - Group videos. * ``likes`` - Liked videos. * ``ondemand_publish`` - On Demand videos. * ``share`` -
                 Shared videos. * ``tagged_with`` - Tagged videos. * ``twitter_timeline`` - Videos from the user's
                 Twitter timeline. * ``uploads`` - Uploaded videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -263,7 +275,7 @@ class UsersFeedsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
                 param[str | None]("offset", offset),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
-                param[Type29OrStr | None]("type", type_),
+                param[Type33OrStr | None]("type", type_),
             ],
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
@@ -282,7 +294,7 @@ class AsyncUsersFeedsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         offset: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
-        type_: Type29OrStr | None = None,
+        type_: Type33OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[Activity31Connection, GetFeedErrorBody]:
         """This method returns every video in the authenticated user's feed.
@@ -300,7 +312,8 @@ class AsyncUsersFeedsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
                 - Group videos. * ``likes`` - Liked videos. * ``ondemand_publish`` - On Demand videos. * ``share`` -
                 Shared videos. * ``tagged_with`` - Tagged videos. * ``twitter_timeline`` - Videos from the user's
                 Twitter timeline. * ``uploads`` - Uploaded videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -312,12 +325,12 @@ class AsyncUsersFeedsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
                 param[str | None]("offset", offset),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
-                param[Type29OrStr | None]("type", type_),
+                param[Type33OrStr | None]("type", type_),
             ],
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Activity31Connection],
+            decoder=async_json_decoder[Activity31Connection],
             error_mapper=get_feed_error_mapper,
             request_options=request_options,
         )
@@ -328,7 +341,7 @@ class AsyncUsersFeedsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         offset: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
-        type_: Type29OrStr | None = None,
+        type_: Type33OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[Activity31Connection, GetFeedAlt1ErrorBody]:
         """This method returns every video in the authenticated user's feed.
@@ -345,7 +358,8 @@ class AsyncUsersFeedsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
                 - Group videos. * ``likes`` - Liked videos. * ``ondemand_publish`` - On Demand videos. * ``share`` -
                 Shared videos. * ``tagged_with`` - Tagged videos. * ``twitter_timeline`` - Videos from the user's
                 Twitter timeline. * ``uploads`` - Uploaded videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -356,12 +370,12 @@ class AsyncUsersFeedsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
                 param[str | None]("offset", offset),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
-                param[Type29OrStr | None]("type", type_),
+                param[Type33OrStr | None]("type", type_),
             ],
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Activity31Connection],
+            decoder=async_json_decoder[Activity31Connection],
             error_mapper=get_feed_alt1_error_mapper,
             request_options=request_options,
         )

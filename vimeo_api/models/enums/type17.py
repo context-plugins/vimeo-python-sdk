@@ -5,18 +5,22 @@ from ...core import open_enum_validator
 
 
 class Type17(str, Enum):
-    """The project item type.
+    """The data type of the metadata field.
 
     Option descriptions:
-     * ``folder`` - The project item is a folder.
-     * ``live_event`` - The project item is an event.
-     * ``showcase`` - The project item is a showcase.
-     * ``video`` - The project item is a video."""
+     * ``bool`` - Boolean value.
+     * ``date`` - Date value.
+     * ``int`` - Integer value.
+     * ``multi-select`` - Multi-select from allowed values.
+     * ``select`` - Single-select from allowed values.
+     * ``str`` - String value."""
 
-    FOLDER = "folder"
-    LIVE_EVENT = "live_event"
-    SHOWCASE = "showcase"
-    VIDEO = "video"
+    BOOL = "bool"
+    DATE = "date"
+    INT = "int"
+    MULTI_SELECT = "multi-select"
+    SELECT = "select"
+    STR = "str"
 
     __str__ = str.__str__
 

@@ -86,13 +86,13 @@ class VideoPageSettingsDict(TypedDict):
     comments: bool
     creative_commons: bool
     credits: bool
-    customization: NotRequired[Customization | CustomizationDict]
+    customization: NotRequired[CustomizationDict]
     date_added: bool
     description: bool
     download: bool
     like: bool
     owner: bool
-    player: NotRequired[Player | PlayerDict]
+    player: NotRequired[PlayerDict]
     portrait: bool
     share: bool
     tags: bool

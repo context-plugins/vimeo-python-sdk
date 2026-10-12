@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from typing import Literal
-
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
 from .api_app import ApiApp, ApiAppDict
+from .enums.token_type import TokenTypeOrStr
 from .user import User, UserDict
 
 
@@ -26,7 +25,7 @@ class AuthModel(SdkBaseModel):
     scope: str
     """The scope or scopes that the token supports."""
 
-    token_type: Literal["bearer"] = "bearer"
+    token_type: TokenTypeOrStr
     """The token type.
 
     Option descriptions:
@@ -38,9 +37,9 @@ class AuthModel(SdkBaseModel):
 
 class AuthModelDict(TypedDict):
     access_token: str
-    app: ApiApp | ApiAppDict
+    app: ApiAppDict
     expires_on: NotRequired[str]
     refresh_token: NotRequired[str]
     scope: str
-    token_type: NotRequired[Literal["bearer"]]
-    user: NotRequired[User | UserDict]
+    token_type: TokenTypeOrStr
+    user: NotRequired[UserDict]

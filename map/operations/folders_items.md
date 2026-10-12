@@ -27,9 +27,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/projects/{project_id}/items`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_folder_items(project_id: float, *, clip_privacy_filters: str | None = None, direction: DirectionOrStr | None = None, filter: Filter21OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort37OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_folder_items(project_id: float, *, clip_privacy_filters: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter21OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort37OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `project_id`
-- **Params**: `project_id` — path · `clip_privacy_filters` — query · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `sort` — query
+- **Params**: `project_id` — path · `clip_privacy_filters` — query · `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `None`
 - **Returns (raw)**: `ApiResult[None, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -44,9 +44,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/projects/{project_id}/items`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_folder_items2(project_id: float, user_id: float, *, clip_privacy_filters: str | None = None, direction: DirectionOrStr | None = None, filter: Filter21OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort37OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_folder_items2(project_id: float, user_id: float, *, clip_privacy_filters: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter21OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort37OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `project_id`, `user_id`
-- **Params**: `project_id` — path · `user_id` — path · `clip_privacy_filters` — query · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `sort` — query
+- **Params**: `project_id` — path · `user_id` — path · `clip_privacy_filters` — query · `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `None`
 - **Returns (raw)**: `ApiResult[None, RawError]`
 - **Error**: `RawError` — **Case B**

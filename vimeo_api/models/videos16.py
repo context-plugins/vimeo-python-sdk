@@ -11,4 +11,4 @@ class Videos16(SdkBaseModel):
 
 
 class Videos16Dict(TypedDict):
-    video: NotRequired[Video5 | Video5Dict]
+    video: NotRequired[Video5Dict]

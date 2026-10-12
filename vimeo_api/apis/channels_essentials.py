@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.create_channel_error import CreateChannelErrorBody, create_channel_error_mapper
 from ..errors.delete_channel_error import DeleteChannelErrorBody, delete_channel_error_mapper
@@ -53,7 +56,8 @@ class ChannelsEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was created.
@@ -61,21 +65,22 @@ class ChannelsEssentials:
         Raises:
             ApiError: A parameter is invalid. The authenticated user can't create channels. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.create_channel(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_channel(body, request_options=request_options))
 
     def delete_channel(self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method deletes the specified channel. The authenticated user must own the channel.
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was deleted.
 
         Raises:
             ApiError: The authenticated user doesn't own this channel. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_channel(channel_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_channel(channel_id, request_options=request_options))
 
     def edit_channel(
         self,
@@ -89,14 +94,15 @@ class ChannelsEssentials:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was edited.
 
         Raises:
             ApiError: A parameter is invalid. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_channel(channel_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.edit_channel(channel_id, body=body, request_options=request_options))
 
     def get_channel(
         self, channel_id: float, *, sizes: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -108,21 +114,22 @@ class ChannelsEssentials:
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_channel(channel_id, sizes=sizes, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_channel(channel_id, sizes=sizes, request_options=request_options))
 
     def get_channel_subscriptions(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -135,7 +142,7 @@ class ChannelsEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -143,29 +150,32 @@ class ChannelsEssentials:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channels were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_channel_subscriptions(
-            user_id,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_channel_subscriptions(
+                user_id,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_channel_subscriptions_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -177,7 +187,7 @@ class ChannelsEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -185,28 +195,31 @@ class ChannelsEssentials:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channels were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_channel_subscriptions_alt1(
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_channel_subscriptions_alt1(
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_channels(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter1OrStr | None = None,
+        filter_: Filter1OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -218,7 +231,7 @@ class ChannelsEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``featured`` - Return featured
+            filter_: The attribute by which to filter the results. Option descriptions: * ``featured`` - Return featured
                 channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -228,7 +241,8 @@ class ChannelsEssentials:
                 creation date. * ``followers`` - Sort the results by number of followers. * ``relevant`` - Sort the
                 results by relevance. This option is available for search queries only. * ``videos`` - Sort the results
                 by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channels were returned.
@@ -236,15 +250,17 @@ class ChannelsEssentials:
         Raises:
             ApiError: The relevant sort has no search query. Error code 5451: This resource is restricted in your
                 region. ``error`` is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.get_channels(
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_channels(
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> ChannelsEssentialsWithRawResponse:
@@ -262,7 +278,8 @@ class AsyncChannelsEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was created.
@@ -270,21 +287,22 @@ class AsyncChannelsEssentials:
         Raises:
             ApiError: A parameter is invalid. The authenticated user can't create channels. ``error`` is ``LegacyError |
                 RawError``."""
-        return (await self._with_raw_response.create_channel(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_channel(body, request_options=request_options))
 
     async def delete_channel(self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method deletes the specified channel. The authenticated user must own the channel.
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was deleted.
 
         Raises:
             ApiError: The authenticated user doesn't own this channel. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.delete_channel(channel_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_channel(channel_id, request_options=request_options))
 
     async def edit_channel(
         self,
@@ -298,16 +316,17 @@ class AsyncChannelsEssentials:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was edited.
 
         Raises:
             ApiError: A parameter is invalid. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_channel(channel_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_channel(
         self, channel_id: float, *, sizes: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -319,23 +338,24 @@ class AsyncChannelsEssentials:
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channel was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channel(channel_id, sizes=sizes, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_channel_subscriptions(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -348,7 +368,7 @@ class AsyncChannelsEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -356,31 +376,32 @@ class AsyncChannelsEssentials:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channels were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channel_subscriptions(
                 user_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_channel_subscriptions_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -392,7 +413,7 @@ class AsyncChannelsEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -400,30 +421,31 @@ class AsyncChannelsEssentials:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channels were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channel_subscriptions_alt1(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_channels(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter1OrStr | None = None,
+        filter_: Filter1OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -435,7 +457,7 @@ class AsyncChannelsEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``featured`` - Return featured
+            filter_: The attribute by which to filter the results. Option descriptions: * ``featured`` - Return featured
                 channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -445,7 +467,8 @@ class AsyncChannelsEssentials:
                 creation date. * ``followers`` - Sort the results by number of followers. * ``relevant`` - Sort the
                 results by relevance. This option is available for search queries only. * ``videos`` - Sort the results
                 by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channels were returned.
@@ -453,17 +476,17 @@ class AsyncChannelsEssentials:
         Raises:
             ApiError: The relevant sort has no search query. Error code 5451: This resource is restricted in your
                 region. ``error`` is ``LegacyError | Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channels(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncChannelsEssentialsWithRawResponse:
@@ -478,7 +501,8 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -502,7 +526,8 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -531,7 +556,8 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -559,7 +585,8 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -581,7 +608,7 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -594,7 +621,7 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -602,7 +629,8 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -612,7 +640,7 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter12OrStr | None]("filter", filter),
+                param[Filter12OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -630,7 +658,7 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -642,7 +670,7 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -650,7 +678,8 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -659,7 +688,7 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             url_template=self._server.default("/me/channels"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter12OrStr | None]("filter", filter),
+                param[Filter12OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -677,7 +706,7 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter1OrStr | None = None,
+        filter_: Filter1OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -689,7 +718,7 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``featured`` - Return featured
+            filter_: The attribute by which to filter the results. Option descriptions: * ``featured`` - Return featured
                 channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -699,7 +728,8 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
                 creation date. * ``followers`` - Sort the results by number of followers. * ``relevant`` - Sort the
                 results by relevance. This option is available for search queries only. * ``videos`` - Sort the results
                 by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -708,7 +738,7 @@ class ChannelsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             url_template=self._server.default("/channels"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter1OrStr | None]("filter", filter),
+                param[Filter1OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -731,7 +761,8 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -743,7 +774,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Channel],
+            decoder=async_json_decoder[Channel],
             error_mapper=create_channel_error_mapper,
             request_options=request_options,
         )
@@ -755,7 +786,8 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -767,7 +799,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_channel_error_mapper,
             request_options=request_options,
         )
@@ -784,7 +816,8 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -797,7 +830,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Channel],
+            decoder=async_json_decoder[Channel],
             error_mapper=edit_channel_error_mapper,
             request_options=request_options,
         )
@@ -812,7 +845,8 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -824,7 +858,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Channel],
+            decoder=async_json_decoder[Channel],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -834,7 +868,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -847,7 +881,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -855,7 +889,8 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -865,7 +900,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter12OrStr | None]("filter", filter),
+                param[Filter12OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -874,7 +909,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ChannelConnection],
+            decoder=async_json_decoder[ChannelConnection],
             error_mapper=get_channel_subscriptions_error_mapper,
             request_options=request_options,
         )
@@ -883,7 +918,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -895,7 +930,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -903,7 +938,8 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -912,7 +948,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             url_template=self._server.default("/me/channels"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter12OrStr | None]("filter", filter),
+                param[Filter12OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -921,7 +957,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ChannelConnection],
+            decoder=async_json_decoder[ChannelConnection],
             error_mapper=get_channel_subscriptions_alt1_error_mapper,
             request_options=request_options,
         )
@@ -930,7 +966,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter1OrStr | None = None,
+        filter_: Filter1OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -942,7 +978,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``featured`` - Return featured
+            filter_: The attribute by which to filter the results. Option descriptions: * ``featured`` - Return featured
                 channels.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -952,7 +988,8 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
                 creation date. * ``followers`` - Sort the results by number of followers. * ``relevant`` - Sort the
                 results by relevance. This option is available for search queries only. * ``videos`` - Sort the results
                 by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -961,7 +998,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             url_template=self._server.default("/channels"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter1OrStr | None]("filter", filter),
+                param[Filter1OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -970,7 +1007,7 @@ class AsyncChannelsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ChannelConnection],
+            decoder=async_json_decoder[ChannelConnection],
             error_mapper=get_channels_error_mapper,
             request_options=request_options,
         )

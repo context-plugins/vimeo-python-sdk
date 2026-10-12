@@ -14,4 +14,4 @@ class Interactions(SdkBaseModel):
 
 
 class InteractionsDict(TypedDict):
-    follow: Follow | FollowDict
+    follow: FollowDict

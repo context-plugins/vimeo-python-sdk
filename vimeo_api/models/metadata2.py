@@ -14,4 +14,4 @@ class Metadata2(SdkBaseModel):
 
 
 class Metadata2Dict(TypedDict):
-    connections: Connections2 | Connections2Dict
+    connections: Connections2Dict

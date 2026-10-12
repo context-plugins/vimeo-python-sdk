@@ -48,15 +48,15 @@ class Category(SdkBaseModel):
 
 
 class CategoryDict(TypedDict):
-    icon: NotRequired[Picture | PictureDict]
+    icon: NotRequired[PictureDict]
     is_deprecated: bool
     last_video_featured_time: str
     link: str
-    metadata: Metadata | MetadataDict
+    metadata: MetadataDict
     name: str
-    parent: Parent | ParentDict | None
-    pictures: Picture | PictureDict
+    parent: ParentDict | None
+    pictures: PictureDict
     resource_key: str
-    subcategories: NotRequired[list[Subcategory | SubcategoryDict]]
+    subcategories: NotRequired[list[SubcategoryDict]]
     top_level: bool
     uri: str

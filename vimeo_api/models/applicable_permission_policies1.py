@@ -21,5 +21,5 @@ class ApplicablePermissionPolicies1(SdkBaseModel):
 
 class ApplicablePermissionPolicies1Dict(TypedDict):
     folder: NotRequired[list[str]]
-    regional_delivery: NotRequired[list[RegionalDelivery | RegionalDeliveryDict]]
+    regional_delivery: NotRequired[list[RegionalDeliveryDict]]
     video: NotRequired[list[str]]

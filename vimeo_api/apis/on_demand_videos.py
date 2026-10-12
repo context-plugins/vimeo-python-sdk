@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.add_video_to_vod_error import AddVideoToVodErrorBody, add_video_to_vod_error_mapper
 from ..errors.delete_video_from_vod_error import DeleteVideoFromVodErrorBody, delete_video_from_vod_error_mapper
@@ -49,7 +52,8 @@ class OnDemandVideos:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -57,9 +61,9 @@ class OnDemandVideos:
         Raises:
             ApiError: The video can't be added to this On Demand page. The authenticated user can't add videos to this
                 On Demand page. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_to_vod(
-            ondemand_id, video_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_to_vod(ondemand_id, video_id, body, request_options=request_options)
+        )
 
     def delete_video_from_vod(
         self, ondemand_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -70,7 +74,8 @@ class OnDemandVideos:
         Args:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -78,9 +83,9 @@ class OnDemandVideos:
         Raises:
             ApiError: The authenticated user can't remove videos from this On Demand page. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.delete_video_from_vod(
-            ondemand_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_from_vod(ondemand_id, video_id, request_options=request_options)
+        )
 
     def get_vod_video(
         self, ondemand_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -91,21 +96,22 @@ class OnDemandVideos:
         Args:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_vod_video(ondemand_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_vod_video(ondemand_id, video_id, request_options=request_options))
 
     def get_vod_videos(
         self,
         ondemand_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter29OrStr | None = None,
+        filter_: Filter29OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort45OrStr | None = None,
@@ -117,7 +123,7 @@ class OnDemandVideos:
             ondemand_id: The ID of the On Demand page.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``all`` - Filter for all
+            filter_: The attribute by which to filter the results. Option descriptions: * ``all`` - Filter for all
                 videos. * ``buy`` - Filter for purchased videos. * ``expiring_soon`` - Filter for videos that expire
                 soon. * ``extra`` - Filter for extra footage videos. * ``main`` - Filter for main videos. *
                 ``main.viewable`` - Filter for videos that are both the main video and are viewable. * ``rent`` - Filter
@@ -129,22 +135,25 @@ class OnDemandVideos:
                 - Use the default sorting method. * ``episode`` - Sort the results by episode. * ``manual`` - Sort the
                 results manually. * ``name`` - Sort the results by name. * ``purchase_time`` - Sort the results by time
                 of purchase. * ``release_date`` - Sort the results by release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_vod_videos(
-            ondemand_id,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_videos(
+                ondemand_id,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> OnDemandVideosWithRawResponse:
@@ -170,7 +179,8 @@ class AsyncOnDemandVideos:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -178,9 +188,9 @@ class AsyncOnDemandVideos:
         Raises:
             ApiError: The video can't be added to this On Demand page. The authenticated user can't add videos to this
                 On Demand page. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_vod(ondemand_id, video_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_video_from_vod(
         self, ondemand_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -191,7 +201,8 @@ class AsyncOnDemandVideos:
         Args:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -199,9 +210,9 @@ class AsyncOnDemandVideos:
         Raises:
             ApiError: The authenticated user can't remove videos from this On Demand page. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_from_vod(ondemand_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_vod_video(
         self, ondemand_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -212,23 +223,24 @@ class AsyncOnDemandVideos:
         Args:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_video(ondemand_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_vod_videos(
         self,
         ondemand_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter29OrStr | None = None,
+        filter_: Filter29OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort45OrStr | None = None,
@@ -240,7 +252,7 @@ class AsyncOnDemandVideos:
             ondemand_id: The ID of the On Demand page.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``all`` - Filter for all
+            filter_: The attribute by which to filter the results. Option descriptions: * ``all`` - Filter for all
                 videos. * ``buy`` - Filter for purchased videos. * ``expiring_soon`` - Filter for videos that expire
                 soon. * ``extra`` - Filter for extra footage videos. * ``main`` - Filter for main videos. *
                 ``main.viewable`` - Filter for videos that are both the main video and are viewable. * ``rent`` - Filter
@@ -252,24 +264,25 @@ class AsyncOnDemandVideos:
                 - Use the default sorting method. * ``episode`` - Sort the results by episode. * ``manual`` - Sort the
                 results manually. * ``name`` - Sort the results by name. * ``purchase_time`` - Sort the results by time
                 of purchase. * ``release_date`` - Sort the results by release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_videos(
                 ondemand_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncOnDemandVideosWithRawResponse:
@@ -292,7 +305,8 @@ class OnDemandVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -319,7 +333,8 @@ class OnDemandVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -345,7 +360,8 @@ class OnDemandVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -366,7 +382,7 @@ class OnDemandVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         ondemand_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter29OrStr | None = None,
+        filter_: Filter29OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort45OrStr | None = None,
@@ -378,7 +394,7 @@ class OnDemandVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             ondemand_id: The ID of the On Demand page.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``all`` - Filter for all
+            filter_: The attribute by which to filter the results. Option descriptions: * ``all`` - Filter for all
                 videos. * ``buy`` - Filter for purchased videos. * ``expiring_soon`` - Filter for videos that expire
                 soon. * ``extra`` - Filter for extra footage videos. * ``main`` - Filter for main videos. *
                 ``main.viewable`` - Filter for videos that are both the main video and are viewable. * ``rent`` - Filter
@@ -390,7 +406,8 @@ class OnDemandVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
                 - Use the default sorting method. * ``episode`` - Sort the results by episode. * ``manual`` - Sort the
                 results manually. * ``name`` - Sort the results by name. * ``purchase_time`` - Sort the results by time
                 of purchase. * ``release_date`` - Sort the results by release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -400,7 +417,7 @@ class OnDemandVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             path_params=[param[float]("ondemand_id", ondemand_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter29OrStr | None]("filter", filter),
+                param[Filter29OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort45OrStr | None]("sort", sort),
@@ -430,7 +447,8 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -443,7 +461,7 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandVideo],
+            decoder=async_json_decoder[OnDemandVideo],
             error_mapper=add_video_to_vod_error_mapper,
             request_options=request_options,
         )
@@ -457,7 +475,8 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -469,7 +488,7 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_from_vod_error_mapper,
             request_options=request_options,
         )
@@ -483,7 +502,8 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             ondemand_id: The ID of the On Demand page.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -494,7 +514,7 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -504,7 +524,7 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         ondemand_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter29OrStr | None = None,
+        filter_: Filter29OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort45OrStr | None = None,
@@ -516,7 +536,7 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             ondemand_id: The ID of the On Demand page.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``all`` - Filter for all
+            filter_: The attribute by which to filter the results. Option descriptions: * ``all`` - Filter for all
                 videos. * ``buy`` - Filter for purchased videos. * ``expiring_soon`` - Filter for videos that expire
                 soon. * ``extra`` - Filter for extra footage videos. * ``main`` - Filter for main videos. *
                 ``main.viewable`` - Filter for videos that are both the main video and are viewable. * ``rent`` - Filter
@@ -528,7 +548,8 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
                 - Use the default sorting method. * ``episode`` - Sort the results by episode. * ``manual`` - Sort the
                 results manually. * ``name`` - Sort the results by name. * ``purchase_time`` - Sort the results by time
                 of purchase. * ``release_date`` - Sort the results by release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -538,7 +559,7 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             path_params=[param[float]("ondemand_id", ondemand_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter29OrStr | None]("filter", filter),
+                param[Filter29OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort45OrStr | None]("sort", sort),
@@ -546,7 +567,7 @@ class AsyncOnDemandVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandVideoConnection],
+            decoder=async_json_decoder[OnDemandVideoConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

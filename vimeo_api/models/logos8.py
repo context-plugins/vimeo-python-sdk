@@ -13,5 +13,5 @@ class Logos8(SdkBaseModel):
 
 
 class Logos8Dict(TypedDict):
-    custom: NotRequired[Custom8 | Custom8Dict]
+    custom: NotRequired[Custom8Dict]
     vimeo: NotRequired[bool]

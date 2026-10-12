@@ -148,34 +148,34 @@ class EmbedSettingsDict(TypedDict):
     audio_tracks: bool
     autopip: bool
     autoplay: bool
-    badges: Badges | BadgesDict
-    buttons: Buttons | ButtonsDict
-    cards: list[Card | CardDict]
+    badges: BadgesDict
+    buttons: ButtonsDict
+    cards: list[CardDict]
     cc_track_menu: bool
     chapters: bool
     chromecast: bool
     closed_captions: bool
     color: str
-    colors: Colors | ColorsDict
+    colors: ColorsDict
     context_menu: bool
     email_capture_form: Any
-    end_screen: EndScreen3 | EndScreen3Dict
+    end_screen: EndScreen3Dict
     event_schedule: bool
     has_cards: bool
     html: NotRequired[str]
     interactive: bool
-    logos: Logos | LogosDict
+    logos: LogosDict
     muted: bool
     outro_type: OutroTypeOrStr
     pip: bool
-    play_button: PlayButton | PlayButtonDict
+    play_button: PlayButtonDict
     playbar: bool
     quality_selector: bool
-    sentiment_widgets: list[SentimentWidget | SentimentWidgetDict]
+    sentiment_widgets: list[SentimentWidgetDict]
     show_timezone: bool
     skipping_forward: bool
     speed: bool
-    title: Title | TitleDict
+    title: TitleDict
     transcript: bool
     uri: NotRequired[str]
     volume: bool

@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.add_video_credit_alt1_error import AddVideoCreditAlt1ErrorBody, add_video_credit_alt1_error_mapper
 from ..errors.add_video_credit_error import AddVideoCreditErrorBody, add_video_credit_error_mapper
@@ -50,7 +53,8 @@ class VideosCredits:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was added.
@@ -59,7 +63,7 @@ class VideosCredits:
             ApiError: * A parameter is invalid. * The authenticated user has an unverified email address. * There is a
                 user block between the video owner and the person receiving credit. The authenticated user doesn't own
                 the video. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_credit(video_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_video_credit(video_id, body, request_options=request_options))
 
     def add_video_credit_alt1(
         self,
@@ -75,7 +79,8 @@ class VideosCredits:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was added.
@@ -84,9 +89,9 @@ class VideosCredits:
             ApiError: * A parameter is invalid. * The authenticated user has an unverified email address. * There is a
                 user block between the video owner and the person receiving credit. The authenticated user doesn't own
                 the video. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_credit_alt1(
-            channel_id, video_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_credit_alt1(channel_id, video_id, body, request_options=request_options)
+        )
 
     def available_users(
         self,
@@ -110,22 +115,25 @@ class VideosCredits:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users who can be credited were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.available_users(
-            video_id,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.available_users(
+                video_id,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def delete_video_credit(
         self, credit_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -136,7 +144,8 @@ class VideosCredits:
         Args:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was deleted.
@@ -144,9 +153,7 @@ class VideosCredits:
         Raises:
             ApiError: The authenticated user isn't the creator of the credit or the credited user. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_video_credit(
-            credit_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.delete_video_credit(credit_id, video_id, request_options=request_options))
 
     def edit_video_credit(
         self,
@@ -162,7 +169,8 @@ class VideosCredits:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was edited.
@@ -170,9 +178,9 @@ class VideosCredits:
         Raises:
             ApiError: A parameter is invalid. No such video or credit exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.edit_video_credit(
-            credit_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_video_credit(credit_id, video_id, body=body, request_options=request_options)
+        )
 
     def get_video_credit(
         self, credit_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -182,14 +190,15 @@ class VideosCredits:
         Args:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was returned.
 
         Raises:
             ApiError: No such video or credit exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_video_credit(credit_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_video_credit(credit_id, video_id, request_options=request_options))
 
     def get_video_credits(
         self,
@@ -213,22 +222,25 @@ class VideosCredits:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credited users were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_video_credits(
-            video_id,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_credits(
+                video_id,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_video_credits_alt1(
         self,
@@ -254,23 +266,26 @@ class VideosCredits:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credited users were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_video_credits_alt1(
-            channel_id,
-            video_id,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_credits_alt1(
+                channel_id,
+                video_id,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosCreditsWithRawResponse:
@@ -293,7 +308,8 @@ class AsyncVideosCredits:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was added.
@@ -302,9 +318,7 @@ class AsyncVideosCredits:
             ApiError: * A parameter is invalid. * The authenticated user has an unverified email address. * There is a
                 user block between the video owner and the person receiving credit. The authenticated user doesn't own
                 the video. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.add_video_credit(video_id, body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.add_video_credit(video_id, body, request_options=request_options))
 
     async def add_video_credit_alt1(
         self,
@@ -320,7 +334,8 @@ class AsyncVideosCredits:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was added.
@@ -329,11 +344,11 @@ class AsyncVideosCredits:
             ApiError: * A parameter is invalid. * The authenticated user has an unverified email address. * There is a
                 user block between the video owner and the person receiving credit. The authenticated user doesn't own
                 the video. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_credit_alt1(
                 channel_id, video_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def available_users(
         self,
@@ -357,14 +372,15 @@ class AsyncVideosCredits:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users who can be credited were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.available_users(
                 video_id,
                 direction=direction,
@@ -373,8 +389,8 @@ class AsyncVideosCredits:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_video_credit(
         self, credit_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -385,7 +401,8 @@ class AsyncVideosCredits:
         Args:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was deleted.
@@ -393,9 +410,9 @@ class AsyncVideosCredits:
         Raises:
             ApiError: The authenticated user isn't the creator of the credit or the credited user. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_credit(credit_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_video_credit(
         self,
@@ -411,7 +428,8 @@ class AsyncVideosCredits:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was edited.
@@ -419,11 +437,11 @@ class AsyncVideosCredits:
         Raises:
             ApiError: A parameter is invalid. No such video or credit exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_video_credit(
                 credit_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_video_credit(
         self, credit_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -433,16 +451,17 @@ class AsyncVideosCredits:
         Args:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credit was returned.
 
         Raises:
             ApiError: No such video or credit exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_credit(credit_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_video_credits(
         self,
@@ -466,14 +485,15 @@ class AsyncVideosCredits:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credited users were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_credits(
                 video_id,
                 direction=direction,
@@ -482,8 +502,8 @@ class AsyncVideosCredits:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_video_credits_alt1(
         self,
@@ -509,14 +529,15 @@ class AsyncVideosCredits:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The credited users were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_credits_alt1(
                 channel_id,
                 video_id,
@@ -526,8 +547,8 @@ class AsyncVideosCredits:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosCreditsWithRawResponse:
@@ -547,7 +568,8 @@ class VideosCreditsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -579,7 +601,8 @@ class VideosCreditsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -619,7 +642,8 @@ class VideosCreditsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -651,7 +675,8 @@ class VideosCreditsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -682,7 +707,8 @@ class VideosCreditsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             credit_id: The ID of the credit.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -708,7 +734,8 @@ class VideosCreditsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -746,7 +773,8 @@ class VideosCreditsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -793,7 +821,8 @@ class VideosCreditsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -830,7 +859,8 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -843,7 +873,7 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Credit],
+            decoder=async_json_decoder[Credit],
             error_mapper=add_video_credit_error_mapper,
             request_options=request_options,
         )
@@ -862,7 +892,8 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -875,7 +906,7 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Credit],
+            decoder=async_json_decoder[Credit],
             error_mapper=add_video_credit_alt1_error_mapper,
             request_options=request_options,
         )
@@ -902,7 +933,8 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -920,7 +952,7 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -934,7 +966,8 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -946,7 +979,7 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_credit_error_mapper,
             request_options=request_options,
         )
@@ -965,7 +998,8 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             credit_id: The ID of the credit.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -978,7 +1012,7 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Credit],
+            decoder=async_json_decoder[Credit],
             error_mapper=edit_video_credit_error_mapper,
             request_options=request_options,
         )
@@ -991,7 +1025,8 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             credit_id: The ID of the credit.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1002,7 +1037,7 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Credit],
+            decoder=async_json_decoder[Credit],
             error_mapper=get_video_credit_error_mapper,
             request_options=request_options,
         )
@@ -1029,7 +1064,8 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1047,7 +1083,7 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CreditConnection],
+            decoder=async_json_decoder[CreditConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1076,7 +1112,8 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1094,7 +1131,7 @@ class AsyncVideosCreditsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CreditConnection],
+            decoder=async_json_decoder[CreditConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

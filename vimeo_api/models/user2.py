@@ -33,5 +33,5 @@ class User2Dict(TypedDict):
     is_staff_picked: bool
     link: str
     name: str
-    pictures: Picture | PictureDict
+    pictures: PictureDict
     uri: str

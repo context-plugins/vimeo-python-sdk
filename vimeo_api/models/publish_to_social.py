@@ -28,7 +28,7 @@ class PublishToSocial(SdkBaseModel):
 
 
 class PublishToSocialDict(TypedDict):
-    disabled: NotRequired[Disabled3 | Disabled3Dict]
+    disabled: NotRequired[Disabled3Dict]
     options: NotRequired[list[str]]
     publish_blockers: NotRequired[Any]
     publish_constraints: NotRequired[Any]

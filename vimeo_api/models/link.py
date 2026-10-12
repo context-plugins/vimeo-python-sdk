@@ -31,9 +31,9 @@ class Link(SdkBaseModel):
 
 
 class LinkDict(TypedDict):
-    button: NotRequired[Button | ButtonDict]
+    button: NotRequired[ButtonDict]
     description: NotRequired[str]
     name: NotRequired[str]
-    picture: NotRequired[Picture | PictureDict | None]
+    picture: NotRequired[PictureDict | None]
     picture_uri: NotRequired[str | None]
-    secondary_link: NotRequired[SecondaryLink | SecondaryLinkDict]
+    secondary_link: NotRequired[SecondaryLinkDict]

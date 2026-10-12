@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_chapter_error import CreateChapterErrorBody, create_chapter_error_mapper
 from ..errors.create_chapter_thumbnail_or_upload_link_error import (
@@ -76,7 +79,8 @@ class VideosChapters:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter was added.
@@ -84,7 +88,7 @@ class VideosChapters:
         Raises:
             ApiError: * The authenticated user can't add the chapter. * Error code 2204: The request contains errors.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_chapter(video_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_chapter(video_id, body=body, request_options=request_options))
 
     def create_chapter_thumbnail_or_upload_link(
         self,
@@ -103,7 +107,8 @@ class VideosChapters:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail or upload link was generated.
@@ -111,9 +116,11 @@ class VideosChapters:
         Raises:
             ApiError: * The authenticated user can't perform this action. * Error code 2204: The request contains
                 errors. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_chapter_thumbnail_or_upload_link(
-            chapter_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_chapter_thumbnail_or_upload_link(
+                chapter_id, video_id, body=body, request_options=request_options
+            ),
+        )
 
     def create_unsaved_chapter_thumbnail_or_upload_link(
         self,
@@ -130,7 +137,8 @@ class VideosChapters:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The upload link or chapter thumbnail was generated.
@@ -138,9 +146,11 @@ class VideosChapters:
         Raises:
             ApiError: * The authenticated user can't perform this action. * Error code 2204: The request contains
                 errors. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_unsaved_chapter_thumbnail_or_upload_link(
-            video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_unsaved_chapter_thumbnail_or_upload_link(
+                video_id, body=body, request_options=request_options
+            ),
+        )
 
     def delete_chapter(
         self, chapter_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -151,7 +161,8 @@ class VideosChapters:
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter was deleted.
@@ -160,7 +171,7 @@ class VideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.delete_chapter(chapter_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_chapter(chapter_id, video_id, request_options=request_options))
 
     def delete_chapter_thumbnail(
         self, chapter_id: float, uid: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -174,7 +185,8 @@ class VideosChapters:
             chapter_id: The ID of the chapter.
             uid: The unique ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail was deleted.
@@ -183,9 +195,9 @@ class VideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.delete_chapter_thumbnail(
-            chapter_id, uid, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_chapter_thumbnail(chapter_id, uid, video_id, request_options=request_options)
+        )
 
     def edit_chapter(
         self,
@@ -201,7 +213,8 @@ class VideosChapters:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter was edited.
@@ -210,9 +223,9 @@ class VideosChapters:
             ApiError: Error code 2204: There are errors in the request. * No such video or chapter exists. * Error code
                 5020: The specified chapter doesn't exist. * Error code 5021: The specified chapter belongs to a
                 different video. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.edit_chapter(
-            chapter_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_chapter(chapter_id, video_id, body=body, request_options=request_options)
+        )
 
     def get_chapter(
         self, chapter_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -222,7 +235,8 @@ class VideosChapters:
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter was returned.
@@ -231,7 +245,7 @@ class VideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_chapter(chapter_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_chapter(chapter_id, video_id, request_options=request_options))
 
     def get_chapter_thumbnail(
         self, chapter_id: float, video_id: float, uid: str, *, request_options: RequestOptionsOrDict | None = None
@@ -242,7 +256,8 @@ class VideosChapters:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             uid: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail was returned.
@@ -251,9 +266,9 @@ class VideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_chapter_thumbnail(
-            chapter_id, video_id, uid, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_chapter_thumbnail(chapter_id, video_id, uid, request_options=request_options)
+        )
 
     def get_chapter_thumbnails(
         self, chapter_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -263,7 +278,8 @@ class VideosChapters:
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnails were returned.
@@ -271,9 +287,9 @@ class VideosChapters:
         Raises:
             ApiError: * The authenticated user can't perform this action. * Error code 2204: The request contains
                 errors. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_chapter_thumbnails(
-            chapter_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_chapter_thumbnails(chapter_id, video_id, request_options=request_options)
+        )
 
     def get_chapters(
         self,
@@ -289,16 +305,19 @@ class VideosChapters:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapters were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_chapters(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_chapters(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_unsaved_chapter_thumbnail(
         self, video_id: float, uid: str, *, request_options: RequestOptionsOrDict | None = None
@@ -308,7 +327,8 @@ class VideosChapters:
         Args:
             video_id: The ID of the video.
             uid: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail was returned.
@@ -317,9 +337,9 @@ class VideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_unsaved_chapter_thumbnail(
-            video_id, uid, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_unsaved_chapter_thumbnail(video_id, uid, request_options=request_options)
+        )
 
     def set_chapter_thumbnail_active(
         self,
@@ -337,7 +357,8 @@ class VideosChapters:
             video_id: The ID of the video.
             uid: Value sent with the request.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail was set as active.
@@ -346,9 +367,11 @@ class VideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.set_chapter_thumbnail_active(
-            chapter_id, video_id, uid, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_chapter_thumbnail_active(
+                chapter_id, video_id, uid, body=body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosChaptersWithRawResponse:
@@ -371,7 +394,8 @@ class AsyncVideosChapters:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter was added.
@@ -379,9 +403,9 @@ class AsyncVideosChapters:
         Raises:
             ApiError: * The authenticated user can't add the chapter. * Error code 2204: The request contains errors.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_chapter(video_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def create_chapter_thumbnail_or_upload_link(
         self,
@@ -400,7 +424,8 @@ class AsyncVideosChapters:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail or upload link was generated.
@@ -408,11 +433,11 @@ class AsyncVideosChapters:
         Raises:
             ApiError: * The authenticated user can't perform this action. * Error code 2204: The request contains
                 errors. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_chapter_thumbnail_or_upload_link(
                 chapter_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_unsaved_chapter_thumbnail_or_upload_link(
         self,
@@ -429,7 +454,8 @@ class AsyncVideosChapters:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The upload link or chapter thumbnail was generated.
@@ -437,11 +463,11 @@ class AsyncVideosChapters:
         Raises:
             ApiError: * The authenticated user can't perform this action. * Error code 2204: The request contains
                 errors. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_unsaved_chapter_thumbnail_or_upload_link(
                 video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_chapter(
         self, chapter_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -452,7 +478,8 @@ class AsyncVideosChapters:
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter was deleted.
@@ -461,9 +488,9 @@ class AsyncVideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_chapter(chapter_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_chapter_thumbnail(
         self, chapter_id: float, uid: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -477,7 +504,8 @@ class AsyncVideosChapters:
             chapter_id: The ID of the chapter.
             uid: The unique ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail was deleted.
@@ -486,11 +514,11 @@ class AsyncVideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_chapter_thumbnail(
                 chapter_id, uid, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_chapter(
         self,
@@ -506,7 +534,8 @@ class AsyncVideosChapters:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter was edited.
@@ -515,9 +544,9 @@ class AsyncVideosChapters:
             ApiError: Error code 2204: There are errors in the request. * No such video or chapter exists. * Error code
                 5020: The specified chapter doesn't exist. * Error code 5021: The specified chapter belongs to a
                 different video. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_chapter(chapter_id, video_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_chapter(
         self, chapter_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -527,7 +556,8 @@ class AsyncVideosChapters:
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter was returned.
@@ -536,9 +566,7 @@ class AsyncVideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
-            await self._with_raw_response.get_chapter(chapter_id, video_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_chapter(chapter_id, video_id, request_options=request_options))
 
     async def get_chapter_thumbnail(
         self, chapter_id: float, video_id: float, uid: str, *, request_options: RequestOptionsOrDict | None = None
@@ -549,7 +577,8 @@ class AsyncVideosChapters:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             uid: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail was returned.
@@ -558,11 +587,11 @@ class AsyncVideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_chapter_thumbnail(
                 chapter_id, video_id, uid, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_chapter_thumbnails(
         self, chapter_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -572,7 +601,8 @@ class AsyncVideosChapters:
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnails were returned.
@@ -580,9 +610,9 @@ class AsyncVideosChapters:
         Raises:
             ApiError: * The authenticated user can't perform this action. * Error code 2204: The request contains
                 errors. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_chapter_thumbnails(chapter_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_chapters(
         self,
@@ -598,18 +628,19 @@ class AsyncVideosChapters:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapters were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_chapters(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_unsaved_chapter_thumbnail(
         self, video_id: float, uid: str, *, request_options: RequestOptionsOrDict | None = None
@@ -619,7 +650,8 @@ class AsyncVideosChapters:
         Args:
             video_id: The ID of the video.
             uid: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail was returned.
@@ -628,9 +660,9 @@ class AsyncVideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_unsaved_chapter_thumbnail(video_id, uid, request_options=request_options)
-        ).unwrap()
+        )
 
     async def set_chapter_thumbnail_active(
         self,
@@ -648,7 +680,8 @@ class AsyncVideosChapters:
             video_id: The ID of the video.
             uid: Value sent with the request.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The chapter thumbnail was set as active.
@@ -657,11 +690,11 @@ class AsyncVideosChapters:
             ApiError: * No such video or chapter exists. * Error code 5020: The specified chapter doesn't exist. * Error
                 code 5021: The specified chapter belongs to a different video. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_chapter_thumbnail_active(
                 chapter_id, video_id, uid, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosChaptersWithRawResponse:
@@ -681,7 +714,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -716,7 +750,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -749,7 +784,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -778,7 +814,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -807,7 +844,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             chapter_id: The ID of the chapter.
             uid: The unique ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -840,7 +878,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -866,7 +905,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -891,7 +931,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             uid: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -917,7 +958,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -947,7 +989,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -972,7 +1015,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             video_id: The ID of the video.
             uid: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1004,7 +1048,8 @@ class VideosChaptersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             video_id: The ID of the video.
             uid: Value sent with the request.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1038,7 +1083,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1051,7 +1097,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Chapter],
+            decoder=async_json_decoder[Chapter],
             error_mapper=create_chapter_error_mapper,
             request_options=request_options,
         )
@@ -1073,7 +1119,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1086,7 +1133,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_chapter_thumbnail_or_upload_link_error_mapper,
             request_options=request_options,
         )
@@ -1106,7 +1153,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1121,7 +1169,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_unsaved_chapter_thumbnail_or_upload_link_error_mapper,
             request_options=request_options,
         )
@@ -1135,7 +1183,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1147,7 +1196,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_chapter_error_mapper,
             request_options=request_options,
         )
@@ -1164,7 +1213,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             chapter_id: The ID of the chapter.
             uid: The unique ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1178,7 +1228,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_chapter_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -1197,7 +1247,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1210,7 +1261,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Chapter],
+            decoder=async_json_decoder[Chapter],
             error_mapper=edit_chapter_error_mapper,
             request_options=request_options,
         )
@@ -1223,7 +1274,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1234,7 +1286,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Chapter],
+            decoder=async_json_decoder[Chapter],
             error_mapper=get_chapter_error_mapper,
             request_options=request_options,
         )
@@ -1248,7 +1300,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
             uid: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1261,7 +1314,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_chapter_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -1274,7 +1327,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             chapter_id: The ID of the chapter.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1285,7 +1339,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_chapter_thumbnails_error_mapper,
             request_options=request_options,
         )
@@ -1304,7 +1358,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1316,7 +1371,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ChapterConnection],
+            decoder=async_json_decoder[ChapterConnection],
             error_mapper=get_chapters_error_mapper,
             request_options=request_options,
         )
@@ -1329,7 +1384,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             video_id: The ID of the video.
             uid: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1340,7 +1396,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_unsaved_chapter_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -1361,7 +1417,8 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             video_id: The ID of the video.
             uid: Value sent with the request.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1376,7 +1433,7 @@ class AsyncVideosChaptersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=set_chapter_thumbnail_active_error_mapper,
             request_options=request_options,
         )

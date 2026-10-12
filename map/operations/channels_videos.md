@@ -99,9 +99,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /channels/{channel_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_channel_videos(channel_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sizes: str | None = None, sort: Sort10OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_channel_videos(channel_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sizes: str | None = None, sort: Sort10OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`
-- **Params**: `channel_id` — path · `containing_uri` — query · `direction` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sizes` — query · `sort` — query
+- **Params**: `channel_id` — path · `containing_uri` — query · `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sizes` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetChannelVideosErrorBody]`
 - **Error**: `GetChannelVideosErrorBody` — **Case A (typed)**

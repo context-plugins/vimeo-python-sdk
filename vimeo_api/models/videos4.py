@@ -67,6 +67,6 @@ class Videos4Dict(TypedDict):
     license: LicenseOrStr | None
     page_preset_uri: NotRequired[str]
     password: NotRequired[str]
-    privacy: NotRequired[Privacy1 | Privacy1Dict]
+    privacy: NotRequired[Privacy1Dict]
     rating: RatingOrStr
     sharing_link_default_expiry_days: float

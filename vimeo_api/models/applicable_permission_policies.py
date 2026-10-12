@@ -20,6 +20,6 @@ class ApplicablePermissionPolicies(SdkBaseModel):
 
 
 class ApplicablePermissionPoliciesDict(TypedDict):
-    folder: list[PermissionPolicy | PermissionPolicyDict]
-    regional_delivery: list[PermissionPolicy | PermissionPolicyDict]
-    video: list[PermissionPolicy | PermissionPolicyDict]
+    folder: list[PermissionPolicyDict]
+    regional_delivery: list[PermissionPolicyDict]
+    video: list[PermissionPolicyDict]

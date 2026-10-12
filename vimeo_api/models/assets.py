@@ -18,5 +18,5 @@ class Assets(SdkBaseModel):
 
 
 class AssetsDict(TypedDict):
-    user: NotRequired[User | UserDict]
-    video: NotRequired[Video | VideoDict]
+    user: NotRequired[UserDict]
+    video: NotRequired[VideoDict]

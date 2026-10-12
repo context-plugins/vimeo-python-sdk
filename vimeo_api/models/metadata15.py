@@ -18,5 +18,5 @@ class Metadata15(SdkBaseModel):
 
 
 class Metadata15Dict(TypedDict):
-    connections: Connections15 | Connections15Dict
-    interactions: Interactions10 | Interactions10Dict
+    connections: Connections15Dict
+    interactions: Interactions10Dict

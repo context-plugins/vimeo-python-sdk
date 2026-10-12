@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.delete_vod_draft_error import DeleteVodDraftErrorBody, delete_vod_draft_error_mapper
 from ..errors.edit_vod_error import EditVodErrorBody, edit_vod_error_mapper
@@ -51,14 +54,15 @@ class OnDemandEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was created.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_vod(user_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_vod(user_id, body, request_options=request_options))
 
     def create_vod_alt1(
         self,
@@ -71,21 +75,23 @@ class OnDemandEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was created.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_vod_alt1(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_vod_alt1(body, request_options=request_options))
 
     def delete_vod_draft(self, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method deletes the specified On Demand page.
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was deleted.
@@ -93,7 +99,7 @@ class OnDemandEssentials:
         Raises:
             ApiError: The authenticated user can't delete this On Demand page. No such On Demand page exists. ``error``
                 is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_vod_draft(ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_vod_draft(ondemand_id, request_options=request_options))
 
     def edit_vod(
         self,
@@ -108,7 +114,8 @@ class OnDemandEssentials:
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was edited.
@@ -116,14 +123,14 @@ class OnDemandEssentials:
         Raises:
             ApiError: The authenticated user can't edit the On Demand page. No such On Demand page exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_vod(ondemand_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.edit_vod(ondemand_id, body=body, request_options=request_options))
 
     def get_user_vods(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter18OrStr | None = None,
+        filter_: Filter18OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort32OrStr | None = None,
@@ -135,7 +142,7 @@ class OnDemandEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
+            filter_: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
                 ``series`` - The page type is a series.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -144,7 +151,8 @@ class OnDemandEssentials:
                 * ``modified_time`` - Sort the results by time of page modification. * ``name`` - Sort the results by
                 page name. * ``publish.time`` - Sort the results by time of page publishing. * ``rating`` - Sort the
                 results by content rating.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand pages were returned.
@@ -152,21 +160,23 @@ class OnDemandEssentials:
         Raises:
             ApiError: * No such user exists. * Error code 5451: This resource is restricted in your region. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.get_user_vods(
-            user_id,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_user_vods(
+                user_id,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_user_vods_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter18OrStr | None = None,
+        filter_: Filter18OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort32OrStr | None = None,
@@ -177,7 +187,7 @@ class OnDemandEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
+            filter_: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
                 ``series`` - The page type is a series.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -186,7 +196,8 @@ class OnDemandEssentials:
                 * ``modified_time`` - Sort the results by time of page modification. * ``name`` - Sort the results by
                 page name. * ``publish.time`` - Sort the results by time of page publishing. * ``rating`` - Sort the
                 results by content rating.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand pages were returned.
@@ -194,23 +205,31 @@ class OnDemandEssentials:
         Raises:
             ApiError: * No such user exists. * Error code 5451: This resource is restricted in your region. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.get_user_vods_alt1(
-            direction=direction, filter=filter, page=page, per_page=per_page, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_user_vods_alt1(
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_vod(self, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None) -> OnDemandPage:
         """This method returns the specified On Demand page.
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was returned.
 
         Raises:
             ApiError: No such On Demand page exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod(ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_vod(ondemand_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> OnDemandEssentialsWithRawResponse:
@@ -234,14 +253,15 @@ class AsyncOnDemandEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was created.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.create_vod(user_id, body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_vod(user_id, body, request_options=request_options))
 
     async def create_vod_alt1(
         self,
@@ -254,14 +274,15 @@ class AsyncOnDemandEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was created.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.create_vod_alt1(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_vod_alt1(body, request_options=request_options))
 
     async def delete_vod_draft(
         self, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -270,7 +291,8 @@ class AsyncOnDemandEssentials:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was deleted.
@@ -278,7 +300,7 @@ class AsyncOnDemandEssentials:
         Raises:
             ApiError: The authenticated user can't delete this On Demand page. No such On Demand page exists. ``error``
                 is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.delete_vod_draft(ondemand_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_vod_draft(ondemand_id, request_options=request_options))
 
     async def edit_vod(
         self,
@@ -293,7 +315,8 @@ class AsyncOnDemandEssentials:
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was edited.
@@ -301,16 +324,14 @@ class AsyncOnDemandEssentials:
         Raises:
             ApiError: The authenticated user can't edit the On Demand page. No such On Demand page exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.edit_vod(ondemand_id, body=body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.edit_vod(ondemand_id, body=body, request_options=request_options))
 
     async def get_user_vods(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter18OrStr | None = None,
+        filter_: Filter18OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort32OrStr | None = None,
@@ -322,7 +343,7 @@ class AsyncOnDemandEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
+            filter_: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
                 ``series`` - The page type is a series.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -331,7 +352,8 @@ class AsyncOnDemandEssentials:
                 * ``modified_time`` - Sort the results by time of page modification. * ``name`` - Sort the results by
                 page name. * ``publish.time`` - Sort the results by time of page publishing. * ``rating`` - Sort the
                 results by content rating.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand pages were returned.
@@ -339,23 +361,23 @@ class AsyncOnDemandEssentials:
         Raises:
             ApiError: * No such user exists. * Error code 5451: This resource is restricted in your region. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_user_vods(
                 user_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_user_vods_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter18OrStr | None = None,
+        filter_: Filter18OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort32OrStr | None = None,
@@ -366,7 +388,7 @@ class AsyncOnDemandEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
+            filter_: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
                 ``series`` - The page type is a series.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -375,7 +397,8 @@ class AsyncOnDemandEssentials:
                 * ``modified_time`` - Sort the results by time of page modification. * ``name`` - Sort the results by
                 page name. * ``publish.time`` - Sort the results by time of page publishing. * ``rating`` - Sort the
                 results by content rating.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand pages were returned.
@@ -383,30 +406,31 @@ class AsyncOnDemandEssentials:
         Raises:
             ApiError: * No such user exists. * Error code 5451: This resource is restricted in your region. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_user_vods_alt1(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_vod(self, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None) -> OnDemandPage:
         """This method returns the specified On Demand page.
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page was returned.
 
         Raises:
             ApiError: No such On Demand page exists. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.get_vod(ondemand_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_vod(ondemand_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncOnDemandEssentialsWithRawResponse:
@@ -427,7 +451,8 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -456,7 +481,8 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -480,7 +506,8 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -510,7 +537,8 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -533,7 +561,7 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter18OrStr | None = None,
+        filter_: Filter18OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort32OrStr | None = None,
@@ -545,7 +573,7 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
+            filter_: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
                 ``series`` - The page type is a series.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -554,7 +582,8 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
                 * ``modified_time`` - Sort the results by time of page modification. * ``name`` - Sort the results by
                 page name. * ``publish.time`` - Sort the results by time of page publishing. * ``rating`` - Sort the
                 results by content rating.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -564,7 +593,7 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter18OrStr | None]("filter", filter),
+                param[Filter18OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort32OrStr | None]("sort", sort),
@@ -581,7 +610,7 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter18OrStr | None = None,
+        filter_: Filter18OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort32OrStr | None = None,
@@ -592,7 +621,7 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
+            filter_: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
                 ``series`` - The page type is a series.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -601,7 +630,8 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
                 * ``modified_time`` - Sort the results by time of page modification. * ``name`` - Sort the results by
                 page name. * ``publish.time`` - Sort the results by time of page publishing. * ``rating`` - Sort the
                 results by content rating.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -610,7 +640,7 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             url_template=self._server.default("/me/ondemand/pages"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter18OrStr | None]("filter", filter),
+                param[Filter18OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort32OrStr | None]("sort", sort),
@@ -630,7 +660,8 @@ class OnDemandEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -661,7 +692,8 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -674,7 +706,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPage],
+            decoder=async_json_decoder[OnDemandPage],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -690,7 +722,8 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -702,7 +735,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPage],
+            decoder=async_json_decoder[OnDemandPage],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -714,7 +747,8 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -726,7 +760,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_vod_draft_error_mapper,
             request_options=request_options,
         )
@@ -744,7 +778,8 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -757,7 +792,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPage],
+            decoder=async_json_decoder[OnDemandPage],
             error_mapper=edit_vod_error_mapper,
             request_options=request_options,
         )
@@ -767,7 +802,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter18OrStr | None = None,
+        filter_: Filter18OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort32OrStr | None = None,
@@ -779,7 +814,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
+            filter_: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
                 ``series`` - The page type is a series.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -788,7 +823,8 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
                 * ``modified_time`` - Sort the results by time of page modification. * ``name`` - Sort the results by
                 page name. * ``publish.time`` - Sort the results by time of page publishing. * ``rating`` - Sort the
                 results by content rating.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -798,7 +834,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter18OrStr | None]("filter", filter),
+                param[Filter18OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort32OrStr | None]("sort", sort),
@@ -806,7 +842,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPageConnection],
+            decoder=async_json_decoder[OnDemandPageConnection],
             error_mapper=get_user_vods_error_mapper,
             request_options=request_options,
         )
@@ -815,7 +851,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter18OrStr | None = None,
+        filter_: Filter18OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort32OrStr | None = None,
@@ -826,7 +862,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
+            filter_: The type of the page to return. Option descriptions: * ``film`` - The page type is a film. *
                 ``series`` - The page type is a series.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -835,7 +871,8 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
                 * ``modified_time`` - Sort the results by time of page modification. * ``name`` - Sort the results by
                 page name. * ``publish.time`` - Sort the results by time of page publishing. * ``rating`` - Sort the
                 results by content rating.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -844,7 +881,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             url_template=self._server.default("/me/ondemand/pages"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter18OrStr | None]("filter", filter),
+                param[Filter18OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort32OrStr | None]("sort", sort),
@@ -852,7 +889,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPageConnection],
+            decoder=async_json_decoder[OnDemandPageConnection],
             error_mapper=get_user_vods_alt1_error_mapper,
             request_options=request_options,
         )
@@ -864,7 +901,8 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -875,7 +913,7 @@ class AsyncOnDemandEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPage],
+            decoder=async_json_decoder[OnDemandPage],
             error_mapper=get_vod_error_mapper,
             request_options=request_options,
         )

@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_event_audio_tracks_error import GetEventAudioTracksErrorBody, get_event_audio_tracks_error_mapper
 from ..errors.update_event_audio_tracks_error import (
@@ -36,7 +38,8 @@ class LiveAudioTracks:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event audio track settings were returned.
@@ -44,7 +47,7 @@ class LiveAudioTracks:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such event or user exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_event_audio_tracks(live_event_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_event_audio_tracks(live_event_id, request_options=request_options))
 
     def update_event_audio_tracks(
         self,
@@ -58,7 +61,8 @@ class LiveAudioTracks:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event audio tracks settings were updated.
@@ -66,9 +70,9 @@ class LiveAudioTracks:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such event or user exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.update_event_audio_tracks(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_event_audio_tracks(live_event_id, body=body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> LiveAudioTracksWithRawResponse:
@@ -86,7 +90,8 @@ class AsyncLiveAudioTracks:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event audio track settings were returned.
@@ -94,9 +99,9 @@ class AsyncLiveAudioTracks:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such event or user exists.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_event_audio_tracks(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_event_audio_tracks(
         self,
@@ -110,7 +115,8 @@ class AsyncLiveAudioTracks:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event audio tracks settings were updated.
@@ -118,11 +124,11 @@ class AsyncLiveAudioTracks:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such event or user exists.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_event_audio_tracks(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveAudioTracksWithRawResponse:
@@ -137,7 +143,8 @@ class LiveAudioTracksWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -165,7 +172,8 @@ class LiveAudioTracksWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -192,7 +200,8 @@ class AsyncLiveAudioTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -203,7 +212,7 @@ class AsyncLiveAudioTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventAudioTracks],
+            decoder=async_json_decoder[EventAudioTracks],
             error_mapper=get_event_audio_tracks_error_mapper,
             request_options=request_options,
         )
@@ -220,7 +229,8 @@ class AsyncLiveAudioTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -233,7 +243,7 @@ class AsyncLiveAudioTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventAudioTracks],
+            decoder=async_json_decoder[EventAudioTracks],
             error_mapper=update_event_audio_tracks_error_mapper,
             request_options=request_options,
         )

@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.check_if_user_owns_video_alt1_error import (
     CheckIfUserOwnsVideoAlt1ErrorBody,
@@ -70,16 +73,17 @@ class VideosEssentials:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user owns the video.
 
         Raises:
             ApiError: The authenticated user doesn't own the video. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_if_user_owns_video(
-            user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_user_owns_video(user_id, video_id, request_options=request_options)
+        )
 
     def check_if_user_owns_video_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -88,14 +92,15 @@ class VideosEssentials:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user owns the video.
 
         Raises:
             ApiError: The authenticated user doesn't own the video. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_if_user_owns_video_alt1(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.check_if_user_owns_video_alt1(video_id, request_options=request_options))
 
     def copy_video(
         self,
@@ -112,7 +117,8 @@ class VideosEssentials:
             user_id: The ID of the user.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The copied video was created.
@@ -120,9 +126,7 @@ class VideosEssentials:
         Raises:
             ApiError: The authenticated user can't copy this video. No such video exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.copy_video(
-            user_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.copy_video(user_id, video_id, body=body, request_options=request_options))
 
     def copy_video_alt2(
         self,
@@ -137,7 +141,8 @@ class VideosEssentials:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The copied video was created.
@@ -145,7 +150,7 @@ class VideosEssentials:
         Raises:
             ApiError: The authenticated user can't copy this video. No such video exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.copy_video_alt2(video_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.copy_video_alt2(video_id, body=body, request_options=request_options))
 
     def delete_video(
         self,
@@ -159,14 +164,15 @@ class VideosEssentials:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was deleted.
 
         Raises:
             ApiError: The authenticated user can't delete the video. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_video(video_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_video(video_id, body=body, request_options=request_options))
 
     def delete_videos(
         self,
@@ -185,7 +191,8 @@ class VideosEssentials:
             user_id: The ID of the user.
             uris: A comma-separated list of the video URIs to delete.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were deleted.
@@ -194,7 +201,7 @@ class VideosEssentials:
             ApiError: * Error code 2204: The input is invalid. * Error code 3200: The authenticated user can't delete
                 one or more of the videos. Error code 8000: The user credentials are invalid. Error code 5000: No such
                 video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_videos(user_id, uris, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_videos(user_id, uris, body=body, request_options=request_options))
 
     def delete_videos_alt1(
         self,
@@ -211,7 +218,8 @@ class VideosEssentials:
         Args:
             uris: A comma-separated list of the video URIs to delete.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were deleted.
@@ -220,7 +228,7 @@ class VideosEssentials:
             ApiError: * Error code 2204: The input is invalid. * Error code 3200: The authenticated user can't delete
                 one or more of the videos. Error code 8000: The user credentials are invalid. Error code 5000: No such
                 video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_videos_alt1(uris, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_videos_alt1(uris, body=body, request_options=request_options))
 
     def edit_video(
         self,
@@ -234,7 +242,8 @@ class VideosEssentials:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was edited.
@@ -245,14 +254,14 @@ class VideosEssentials:
                 ``contacts``, and the authenticated user can't follow creators. * The authenticated user has an
                 opted-out Pro account, and **privacy.view** is ``users``, ``password``, ``nobody``, or ``public``.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_video(video_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.edit_video(video_id, body, request_options=request_options))
 
     def get_appearances(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -266,7 +275,7 @@ class VideosEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -277,30 +286,33 @@ class VideosEssentials:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_appearances(
-            user_id,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_appearances(
+                user_id,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_appearances_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -313,7 +325,7 @@ class VideosEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -324,23 +336,26 @@ class VideosEssentials:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_appearances_alt1(
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_appearances_alt1(
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_video(
         self, video_id: float, *, time_links: bool | None = None, request_options: RequestOptionsOrDict | None = None
@@ -350,16 +365,17 @@ class VideosEssentials:
         Args:
             video_id: The ID of the video.
             time_links: Whether to return timestamps in the description as links.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_video(
-            video_id, time_links=time_links, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video(video_id, time_links=time_links, request_options=request_options)
+        )
 
     def get_videos(
         self,
@@ -367,7 +383,7 @@ class VideosEssentials:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter22OrStr | None = None,
+        filter_: Filter22OrStr | None = None,
         filter_embeddable: bool | None = None,
         filter_playable: bool | None = None,
         filter_screen_recorded: bool | None = None,
@@ -390,7 +406,7 @@ class VideosEssentials:
                 **query**.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
                 videos. * ``cold_privacy`` - Return the owner's active videos whose privacy is suppressed because their
                 plan no longer supports it (cold privacy). * ``cold_storage`` - Return cold storage videos. *
                 ``embeddable`` - Return embeddable videos. * ``featured`` - Return featured videos. * ``live`` - Return
@@ -421,39 +437,42 @@ class VideosEssentials:
                 ``likes`` - Sort the results by number of likes. To use this option, **direction** must be ``desc``. *
                 ``modified_time`` - Sort the results by last modification. * ``plays`` - Sort the results by number of
                 plays. To use this option, **direction** must be ``desc``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_videos(
-            user_id,
-            containing_uri=containing_uri,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            filter_playable=filter_playable,
-            filter_screen_recorded=filter_screen_recorded,
-            filter_tag=filter_tag,
-            filter_tag_all_of=filter_tag_all_of,
-            filter_tag_exclude=filter_tag_exclude,
-            filter_uploader=filter_uploader,
-            page=page,
-            per_page=per_page,
-            query=query,
-            query_fields=query_fields,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_videos(
+                user_id,
+                containing_uri=containing_uri,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                filter_playable=filter_playable,
+                filter_screen_recorded=filter_screen_recorded,
+                filter_tag=filter_tag,
+                filter_tag_all_of=filter_tag_all_of,
+                filter_tag_exclude=filter_tag_exclude,
+                filter_uploader=filter_uploader,
+                page=page,
+                per_page=per_page,
+                query=query,
+                query_fields=query_fields,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_videos_alt1(
         self,
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter22OrStr | None = None,
+        filter_: Filter22OrStr | None = None,
         filter_embeddable: bool | None = None,
         filter_playable: bool | None = None,
         filter_screen_recorded: bool | None = None,
@@ -475,7 +494,7 @@ class VideosEssentials:
                 **query**.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
                 videos. * ``cold_privacy`` - Return the owner's active videos whose privacy is suppressed because their
                 plan no longer supports it (cold privacy). * ``cold_storage`` - Return cold storage videos. *
                 ``embeddable`` - Return embeddable videos. * ``featured`` - Return featured videos. * ``live`` - Return
@@ -506,37 +525,40 @@ class VideosEssentials:
                 ``likes`` - Sort the results by number of likes. To use this option, **direction** must be ``desc``. *
                 ``modified_time`` - Sort the results by last modification. * ``plays`` - Sort the results by number of
                 plays. To use this option, **direction** must be ``desc``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_videos_alt1(
-            containing_uri=containing_uri,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            filter_playable=filter_playable,
-            filter_screen_recorded=filter_screen_recorded,
-            filter_tag=filter_tag,
-            filter_tag_all_of=filter_tag_all_of,
-            filter_tag_exclude=filter_tag_exclude,
-            filter_uploader=filter_uploader,
-            page=page,
-            per_page=per_page,
-            query=query,
-            query_fields=query_fields,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_videos_alt1(
+                containing_uri=containing_uri,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                filter_playable=filter_playable,
+                filter_screen_recorded=filter_screen_recorded,
+                filter_tag=filter_tag,
+                filter_tag_all_of=filter_tag_all_of,
+                filter_tag_exclude=filter_tag_exclude,
+                filter_uploader=filter_uploader,
+                page=page,
+                per_page=per_page,
+                query=query,
+                query_fields=query_fields,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def search_videos(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter45OrStr | None = None,
+        filter_: Filter45OrStr | None = None,
         links: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -550,7 +572,7 @@ class VideosEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. ``CC`` and related filters target videos with the
+            filter_: The attribute by which to filter the results. ``CC`` and related filters target videos with the
                 corresponding Creative Commons licenses. For more information, see our `Creative Commons
                 <https://vimeo.com/creativecommons>`__ page. Option descriptions: * ``CC`` - Return videos under any
                 Creative Commons license. * ``CC-BY`` - Return CC BY, or attribution-only, videos. * ``CC-BY-NC`` -
@@ -573,7 +595,8 @@ class VideosEssentials:
                 relevance.
             uris: A comma-separated list of video URIs to find. Querying, filtering, and sorting aren't supported when
                 using this field.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The search results were returned.
@@ -583,17 +606,19 @@ class VideosEssentials:
                 * Error code 2204: A problem occurred with the batch request. Error code 5451: This resource is
                 restricted in your region. * Search is disabled. * Error code 7300: An internal search error occurred.
                 ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.search_videos(
-            direction=direction,
-            filter=filter,
-            links=links,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            uris=uris,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.search_videos(
+                direction=direction,
+                filter_=filter_,
+                links=links,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                uris=uris,
+                request_options=request_options,
+            ),
+        )
 
     def update_video_custom_metadata(
         self,
@@ -624,7 +649,8 @@ class VideosEssentials:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The updated custom metadata for the video.
@@ -634,9 +660,9 @@ class VideosEssentials:
                 doesn't match the field's data type. The authentication credentials are missing or invalid. The
                 authenticated user doesn't have permission to edit this video. No such video exists. ``error`` is
                 ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.update_video_custom_metadata(
-            video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_video_custom_metadata(video_id, body=body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> VideosEssentialsWithRawResponse:
@@ -655,16 +681,17 @@ class AsyncVideosEssentials:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user owns the video.
 
         Raises:
             ApiError: The authenticated user doesn't own the video. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_owns_video(user_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def check_if_user_owns_video_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -673,16 +700,17 @@ class AsyncVideosEssentials:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user owns the video.
 
         Raises:
             ApiError: The authenticated user doesn't own the video. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_owns_video_alt1(video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def copy_video(
         self,
@@ -699,7 +727,8 @@ class AsyncVideosEssentials:
             user_id: The ID of the user.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The copied video was created.
@@ -707,9 +736,9 @@ class AsyncVideosEssentials:
         Raises:
             ApiError: The authenticated user can't copy this video. No such video exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.copy_video(user_id, video_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def copy_video_alt2(
         self,
@@ -724,7 +753,8 @@ class AsyncVideosEssentials:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The copied video was created.
@@ -732,9 +762,9 @@ class AsyncVideosEssentials:
         Raises:
             ApiError: The authenticated user can't copy this video. No such video exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.copy_video_alt2(video_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_video(
         self,
@@ -748,16 +778,15 @@ class AsyncVideosEssentials:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was deleted.
 
         Raises:
             ApiError: The authenticated user can't delete the video. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.delete_video(video_id, body=body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.delete_video(video_id, body=body, request_options=request_options))
 
     async def delete_videos(
         self,
@@ -776,7 +805,8 @@ class AsyncVideosEssentials:
             user_id: The ID of the user.
             uris: A comma-separated list of the video URIs to delete.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were deleted.
@@ -785,9 +815,9 @@ class AsyncVideosEssentials:
             ApiError: * Error code 2204: The input is invalid. * Error code 3200: The authenticated user can't delete
                 one or more of the videos. Error code 8000: The user credentials are invalid. Error code 5000: No such
                 video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_videos(user_id, uris, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_videos_alt1(
         self,
@@ -804,7 +834,8 @@ class AsyncVideosEssentials:
         Args:
             uris: A comma-separated list of the video URIs to delete.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were deleted.
@@ -813,9 +844,9 @@ class AsyncVideosEssentials:
             ApiError: * Error code 2204: The input is invalid. * Error code 3200: The authenticated user can't delete
                 one or more of the videos. Error code 8000: The user credentials are invalid. Error code 5000: No such
                 video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_videos_alt1(uris, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_video(
         self,
@@ -829,7 +860,8 @@ class AsyncVideosEssentials:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was edited.
@@ -840,14 +872,14 @@ class AsyncVideosEssentials:
                 ``contacts``, and the authenticated user can't follow creators. * The authenticated user has an
                 opted-out Pro account, and **privacy.view** is ``users``, ``password``, ``nobody``, or ``public``.
                 ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.edit_video(video_id, body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.edit_video(video_id, body, request_options=request_options))
 
     async def get_appearances(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -861,7 +893,7 @@ class AsyncVideosEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -872,32 +904,33 @@ class AsyncVideosEssentials:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_appearances(
                 user_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_appearances_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -910,7 +943,7 @@ class AsyncVideosEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -921,25 +954,26 @@ class AsyncVideosEssentials:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_appearances_alt1(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_video(
         self, video_id: float, *, time_links: bool | None = None, request_options: RequestOptionsOrDict | None = None
@@ -949,16 +983,17 @@ class AsyncVideosEssentials:
         Args:
             video_id: The ID of the video.
             time_links: Whether to return timestamps in the description as links.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video(video_id, time_links=time_links, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_videos(
         self,
@@ -966,7 +1001,7 @@ class AsyncVideosEssentials:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter22OrStr | None = None,
+        filter_: Filter22OrStr | None = None,
         filter_embeddable: bool | None = None,
         filter_playable: bool | None = None,
         filter_screen_recorded: bool | None = None,
@@ -989,7 +1024,7 @@ class AsyncVideosEssentials:
                 **query**.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
                 videos. * ``cold_privacy`` - Return the owner's active videos whose privacy is suppressed because their
                 plan no longer supports it (cold privacy). * ``cold_storage`` - Return cold storage videos. *
                 ``embeddable`` - Return embeddable videos. * ``featured`` - Return featured videos. * ``live`` - Return
@@ -1020,19 +1055,20 @@ class AsyncVideosEssentials:
                 ``likes`` - Sort the results by number of likes. To use this option, **direction** must be ``desc``. *
                 ``modified_time`` - Sort the results by last modification. * ``plays`` - Sort the results by number of
                 plays. To use this option, **direction** must be ``desc``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_videos(
                 user_id,
                 containing_uri=containing_uri,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 filter_playable=filter_playable,
                 filter_screen_recorded=filter_screen_recorded,
@@ -1046,15 +1082,15 @@ class AsyncVideosEssentials:
                 query_fields=query_fields,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_videos_alt1(
         self,
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter22OrStr | None = None,
+        filter_: Filter22OrStr | None = None,
         filter_embeddable: bool | None = None,
         filter_playable: bool | None = None,
         filter_screen_recorded: bool | None = None,
@@ -1076,7 +1112,7 @@ class AsyncVideosEssentials:
                 **query**.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
                 videos. * ``cold_privacy`` - Return the owner's active videos whose privacy is suppressed because their
                 plan no longer supports it (cold privacy). * ``cold_storage`` - Return cold storage videos. *
                 ``embeddable`` - Return embeddable videos. * ``featured`` - Return featured videos. * ``live`` - Return
@@ -1107,18 +1143,19 @@ class AsyncVideosEssentials:
                 ``likes`` - Sort the results by number of likes. To use this option, **direction** must be ``desc``. *
                 ``modified_time`` - Sort the results by last modification. * ``plays`` - Sort the results by number of
                 plays. To use this option, **direction** must be ``desc``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_videos_alt1(
                 containing_uri=containing_uri,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 filter_playable=filter_playable,
                 filter_screen_recorded=filter_screen_recorded,
@@ -1132,14 +1169,14 @@ class AsyncVideosEssentials:
                 query_fields=query_fields,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def search_videos(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter45OrStr | None = None,
+        filter_: Filter45OrStr | None = None,
         links: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1153,7 +1190,7 @@ class AsyncVideosEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. ``CC`` and related filters target videos with the
+            filter_: The attribute by which to filter the results. ``CC`` and related filters target videos with the
                 corresponding Creative Commons licenses. For more information, see our `Creative Commons
                 <https://vimeo.com/creativecommons>`__ page. Option descriptions: * ``CC`` - Return videos under any
                 Creative Commons license. * ``CC-BY`` - Return CC BY, or attribution-only, videos. * ``CC-BY-NC`` -
@@ -1176,7 +1213,8 @@ class AsyncVideosEssentials:
                 relevance.
             uris: A comma-separated list of video URIs to find. Querying, filtering, and sorting aren't supported when
                 using this field.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The search results were returned.
@@ -1186,10 +1224,10 @@ class AsyncVideosEssentials:
                 * Error code 2204: A problem occurred with the batch request. Error code 5451: This resource is
                 restricted in your region. * Search is disabled. * Error code 7300: An internal search error occurred.
                 ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.search_videos(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 links=links,
                 page=page,
                 per_page=per_page,
@@ -1197,8 +1235,8 @@ class AsyncVideosEssentials:
                 sort=sort,
                 uris=uris,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def update_video_custom_metadata(
         self,
@@ -1229,7 +1267,8 @@ class AsyncVideosEssentials:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The updated custom metadata for the video.
@@ -1239,11 +1278,11 @@ class AsyncVideosEssentials:
                 doesn't match the field's data type. The authentication credentials are missing or invalid. The
                 authenticated user doesn't have permission to edit this video. No such video exists. ``error`` is
                 ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_video_custom_metadata(
                 video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosEssentialsWithRawResponse:
@@ -1259,7 +1298,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1282,7 +1322,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1313,7 +1354,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             user_id: The ID of the user.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1344,7 +1386,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1374,7 +1417,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1409,7 +1453,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             user_id: The ID of the user.
             uris: A comma-separated list of the video URIs to delete.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1443,7 +1488,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             uris: A comma-separated list of the video URIs to delete.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1473,7 +1519,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1496,7 +1543,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1510,7 +1557,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1521,7 +1568,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1531,7 +1579,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1550,7 +1598,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1563,7 +1611,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1574,7 +1622,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1583,7 +1632,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             url_template=self._server.default("/me/appearances"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1606,7 +1655,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             video_id: The ID of the video.
             time_links: Whether to return timestamps in the description as links.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1629,7 +1679,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter22OrStr | None = None,
+        filter_: Filter22OrStr | None = None,
         filter_embeddable: bool | None = None,
         filter_playable: bool | None = None,
         filter_screen_recorded: bool | None = None,
@@ -1652,7 +1702,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 **query**.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
                 videos. * ``cold_privacy`` - Return the owner's active videos whose privacy is suppressed because their
                 plan no longer supports it (cold privacy). * ``cold_storage`` - Return cold storage videos. *
                 ``embeddable`` - Return embeddable videos. * ``featured`` - Return featured videos. * ``live`` - Return
@@ -1683,7 +1733,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 ``likes`` - Sort the results by number of likes. To use this option, **direction** must be ``desc``. *
                 ``modified_time`` - Sort the results by last modification. * ``plays`` - Sort the results by number of
                 plays. To use this option, **direction** must be ``desc``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1694,7 +1745,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter22OrStr | None]("filter", filter),
+                param[Filter22OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[bool | None]("filter_playable", filter_playable),
                 param[bool | None]("filter_screen_recorded", filter_screen_recorded),
@@ -1721,7 +1772,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter22OrStr | None = None,
+        filter_: Filter22OrStr | None = None,
         filter_embeddable: bool | None = None,
         filter_playable: bool | None = None,
         filter_screen_recorded: bool | None = None,
@@ -1743,7 +1794,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 **query**.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
                 videos. * ``cold_privacy`` - Return the owner's active videos whose privacy is suppressed because their
                 plan no longer supports it (cold privacy). * ``cold_storage`` - Return cold storage videos. *
                 ``embeddable`` - Return embeddable videos. * ``featured`` - Return featured videos. * ``live`` - Return
@@ -1774,7 +1825,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 ``likes`` - Sort the results by number of likes. To use this option, **direction** must be ``desc``. *
                 ``modified_time`` - Sort the results by last modification. * ``plays`` - Sort the results by number of
                 plays. To use this option, **direction** must be ``desc``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1784,7 +1836,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter22OrStr | None]("filter", filter),
+                param[Filter22OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[bool | None]("filter_playable", filter_playable),
                 param[bool | None]("filter_screen_recorded", filter_screen_recorded),
@@ -1810,7 +1862,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter45OrStr | None = None,
+        filter_: Filter45OrStr | None = None,
         links: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1824,7 +1876,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. ``CC`` and related filters target videos with the
+            filter_: The attribute by which to filter the results. ``CC`` and related filters target videos with the
                 corresponding Creative Commons licenses. For more information, see our `Creative Commons
                 <https://vimeo.com/creativecommons>`__ page. Option descriptions: * ``CC`` - Return videos under any
                 Creative Commons license. * ``CC-BY`` - Return CC BY, or attribution-only, videos. * ``CC-BY-NC`` -
@@ -1847,7 +1899,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 relevance.
             uris: A comma-separated list of video URIs to find. Querying, filtering, and sorting aren't supported when
                 using this field.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1856,7 +1909,7 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             url_template=self._server.default("/videos"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter45OrStr | None]("filter", filter),
+                param[Filter45OrStr | None]("filter", filter_),
                 param[str | None]("links", links),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1901,7 +1954,8 @@ class VideosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1929,7 +1983,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1940,7 +1995,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=check_if_user_owns_video_error_mapper,
             request_options=request_options,
         )
@@ -1952,7 +2007,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1963,7 +2019,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=check_if_user_owns_video_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1983,7 +2039,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             user_id: The ID of the user.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1996,7 +2053,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=copy_video_error_mapper,
             request_options=request_options,
         )
@@ -2014,7 +2071,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2027,7 +2085,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=copy_video_alt2_error_mapper,
             request_options=request_options,
         )
@@ -2044,7 +2102,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2057,7 +2116,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_error_mapper,
             request_options=request_options,
         )
@@ -2079,7 +2138,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             user_id: The ID of the user.
             uris: A comma-separated list of the video URIs to delete.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2093,7 +2153,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_videos_error_mapper,
             request_options=request_options,
         )
@@ -2113,7 +2173,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             uris: A comma-separated list of the video URIs to delete.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2126,7 +2187,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_videos_alt1_error_mapper,
             request_options=request_options,
         )
@@ -2143,7 +2204,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2156,7 +2218,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=edit_video_error_mapper,
             request_options=request_options,
         )
@@ -2166,7 +2228,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -2180,7 +2242,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -2191,7 +2253,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2201,7 +2264,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -2211,7 +2274,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_appearances_error_mapper,
             request_options=request_options,
         )
@@ -2220,7 +2283,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -2233,7 +2296,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -2244,7 +2307,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2253,7 +2317,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             url_template=self._server.default("/me/appearances"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -2263,7 +2327,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_appearances_alt1_error_mapper,
             request_options=request_options,
         )
@@ -2276,7 +2340,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             video_id: The ID of the video.
             time_links: Whether to return timestamps in the description as links.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2288,7 +2353,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=get_video_error_mapper,
             request_options=request_options,
         )
@@ -2299,7 +2364,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter22OrStr | None = None,
+        filter_: Filter22OrStr | None = None,
         filter_embeddable: bool | None = None,
         filter_playable: bool | None = None,
         filter_screen_recorded: bool | None = None,
@@ -2322,7 +2387,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 **query**.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
                 videos. * ``cold_privacy`` - Return the owner's active videos whose privacy is suppressed because their
                 plan no longer supports it (cold privacy). * ``cold_storage`` - Return cold storage videos. *
                 ``embeddable`` - Return embeddable videos. * ``featured`` - Return featured videos. * ``live`` - Return
@@ -2353,7 +2418,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 ``likes`` - Sort the results by number of likes. To use this option, **direction** must be ``desc``. *
                 ``modified_time`` - Sort the results by last modification. * ``plays`` - Sort the results by number of
                 plays. To use this option, **direction** must be ``desc``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2364,7 +2430,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter22OrStr | None]("filter", filter),
+                param[Filter22OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[bool | None]("filter_playable", filter_playable),
                 param[bool | None]("filter_screen_recorded", filter_screen_recorded),
@@ -2381,7 +2447,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -2391,7 +2457,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter22OrStr | None = None,
+        filter_: Filter22OrStr | None = None,
         filter_embeddable: bool | None = None,
         filter_playable: bool | None = None,
         filter_screen_recorded: bool | None = None,
@@ -2413,7 +2479,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 **query**.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``app_only`` - Return app-only
                 videos. * ``cold_privacy`` - Return the owner's active videos whose privacy is suppressed because their
                 plan no longer supports it (cold privacy). * ``cold_storage`` - Return cold storage videos. *
                 ``embeddable`` - Return embeddable videos. * ``featured`` - Return featured videos. * ``live`` - Return
@@ -2444,7 +2510,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 ``likes`` - Sort the results by number of likes. To use this option, **direction** must be ``desc``. *
                 ``modified_time`` - Sort the results by last modification. * ``plays`` - Sort the results by number of
                 plays. To use this option, **direction** must be ``desc``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2454,7 +2521,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter22OrStr | None]("filter", filter),
+                param[Filter22OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[bool | None]("filter_playable", filter_playable),
                 param[bool | None]("filter_screen_recorded", filter_screen_recorded),
@@ -2471,7 +2538,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -2480,7 +2547,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter45OrStr | None = None,
+        filter_: Filter45OrStr | None = None,
         links: str | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -2494,7 +2561,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. ``CC`` and related filters target videos with the
+            filter_: The attribute by which to filter the results. ``CC`` and related filters target videos with the
                 corresponding Creative Commons licenses. For more information, see our `Creative Commons
                 <https://vimeo.com/creativecommons>`__ page. Option descriptions: * ``CC`` - Return videos under any
                 Creative Commons license. * ``CC-BY`` - Return CC BY, or attribution-only, videos. * ``CC-BY-NC`` -
@@ -2517,7 +2584,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 relevance.
             uris: A comma-separated list of video URIs to find. Querying, filtering, and sorting aren't supported when
                 using this field.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2526,7 +2594,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             url_template=self._server.default("/videos"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter45OrStr | None]("filter", filter),
+                param[Filter45OrStr | None]("filter", filter_),
                 param[str | None]("links", links),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -2537,7 +2605,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=search_videos_error_mapper,
             request_options=request_options,
         )
@@ -2571,7 +2639,8 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2584,7 +2653,7 @@ class AsyncVideosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[CustomMetadataValues]],
+            decoder=async_json_decoder[list[CustomMetadataValues]],
             error_mapper=update_video_custom_metadata_error_mapper,
             request_options=request_options,
         )

@@ -43,7 +43,7 @@ class PortfolioDict(TypedDict):
     created_time: str
     description: str | None
     link: str
-    metadata: Metadata22 | Metadata22Dict
+    metadata: Metadata22Dict
     modified_time: str
     name: str
     sort: Sort1OrStr

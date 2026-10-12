@@ -166,7 +166,7 @@ class AnalyticsDict(TypedDict):
     browser_name: str
     city_name: str
     completions: float
-    country: Country | CountryDict
+    country: CountryDict
     country_code: str
     country_name: str
     device_type: str
@@ -181,7 +181,7 @@ class AnalyticsDict(TypedDict):
     impressions: float
     mean_percent_watched: float
     mean_seconds_watched: float
-    metadata: Metadata12 | Metadata12Dict
+    metadata: Metadata12Dict
     one_star_clicks: float
     os_name: str
     ranking_widget_average_rating: float

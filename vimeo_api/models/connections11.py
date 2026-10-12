@@ -23,6 +23,6 @@ class Connections11(SdkBaseModel):
 
 
 class Connections11Dict(TypedDict):
-    available_videos: AvailableVideos | AvailableVideosDict
-    requested_clip: RequestedClip | RequestedClipDict
-    videos: Videos9 | Videos9Dict
+    available_videos: AvailableVideosDict
+    requested_clip: RequestedClipDict
+    videos: Videos9Dict

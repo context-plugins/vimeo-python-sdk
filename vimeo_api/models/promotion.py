@@ -30,6 +30,6 @@ class Promotion(SdkBaseModel):
 class PromotionDict(TypedDict):
     code: str
     discount: float
-    price: Price1 | Price1Dict
-    price_formatted: PriceFormatted1 | PriceFormatted1Dict
-    uri: Uri1 | Uri1Dict
+    price: Price1Dict
+    price_formatted: PriceFormatted1Dict
+    uri: Uri1Dict

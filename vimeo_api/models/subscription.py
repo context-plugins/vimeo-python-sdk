@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.status16 import Status16OrStr
+from .enums.status19 import Status19OrStr
 from .plan import Plan, PlanDict
 
 
@@ -45,7 +45,7 @@ class Subscription(SdkBaseModel):
     start_date: str
     """The time in ISO 8601 format when the subscription started."""
 
-    status: Status16OrStr
+    status: Status19OrStr
     """The status of the subscription.
 
     Option descriptions:
@@ -82,9 +82,9 @@ class SubscriptionDict(TypedDict):
     id: str
     is_latest: bool
     payment_method_id: str
-    plans: list[Plan | PlanDict]
+    plans: list[PlanDict]
     start_date: str
-    status: Status16OrStr
+    status: Status19OrStr
     subscription_number: str
     subscription_version: float
     updated_at: str

@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_live_event_whitelist_alt1_error import (
     GetLiveEventWhitelistAlt1ErrorBody,
@@ -68,7 +71,8 @@ class LiveEmbedPrivacy:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The permitted domains for the event were returned.
@@ -77,9 +81,9 @@ class LiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't get domains for the event. Error code 5000: No such event exists. Error code 4016: An unexpected
                 error occurred. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_whitelist(
-            live_event_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_whitelist(live_event_id, user_id, request_options=request_options)
+        )
 
     def get_live_event_whitelist_alt1(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -88,7 +92,8 @@ class LiveEmbedPrivacy:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The permitted domains for the event were returned.
@@ -97,9 +102,9 @@ class LiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't get domains for the event. Error code 5000: No such event exists. Error code 4016: An unexpected
                 error occurred. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_whitelist_alt1(
-            live_event_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_whitelist_alt1(live_event_id, request_options=request_options)
+        )
 
     def get_live_event_whitelist_alt2(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -108,7 +113,8 @@ class LiveEmbedPrivacy:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The permitted domains for the event were returned.
@@ -117,9 +123,9 @@ class LiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't get domains for the event. Error code 5000: No such event exists. Error code 4016: An unexpected
                 error occurred. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_whitelist_alt2(
-            live_event_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_whitelist_alt2(live_event_id, request_options=request_options)
+        )
 
     def set_live_event_whitelist(
         self,
@@ -135,7 +141,8 @@ class LiveEmbedPrivacy:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was embedded on the specified domains.
@@ -144,9 +151,11 @@ class LiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't edit domains for the event. Error code 5000: No such event exists under the user. Error code 4016:
                 An unexpected error occurred. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.set_live_event_whitelist(
-            live_event_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_live_event_whitelist(
+                live_event_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     def set_live_event_whitelist_alt1(
         self,
@@ -160,7 +169,8 @@ class LiveEmbedPrivacy:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was embedded on the specified domains.
@@ -169,9 +179,11 @@ class LiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't edit domains for the event. Error code 5000: No such event exists under the user. Error code 4016:
                 An unexpected error occurred. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.set_live_event_whitelist_alt1(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_live_event_whitelist_alt1(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     def set_live_event_whitelist_alt2(
         self,
@@ -185,7 +197,8 @@ class LiveEmbedPrivacy:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was embedded on the specified domains.
@@ -194,9 +207,11 @@ class LiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't edit domains for the event. Error code 5000: No such event exists under the user. Error code 4016:
                 An unexpected error occurred. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.set_live_event_whitelist_alt2(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_live_event_whitelist_alt2(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> LiveEmbedPrivacyWithRawResponse:
@@ -215,7 +230,8 @@ class AsyncLiveEmbedPrivacy:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The permitted domains for the event were returned.
@@ -224,11 +240,11 @@ class AsyncLiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't get domains for the event. Error code 5000: No such event exists. Error code 4016: An unexpected
                 error occurred. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_whitelist(
                 live_event_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_whitelist_alt1(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -237,7 +253,8 @@ class AsyncLiveEmbedPrivacy:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The permitted domains for the event were returned.
@@ -246,9 +263,9 @@ class AsyncLiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't get domains for the event. Error code 5000: No such event exists. Error code 4016: An unexpected
                 error occurred. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_whitelist_alt1(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_live_event_whitelist_alt2(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -257,7 +274,8 @@ class AsyncLiveEmbedPrivacy:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The permitted domains for the event were returned.
@@ -266,9 +284,9 @@ class AsyncLiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't get domains for the event. Error code 5000: No such event exists. Error code 4016: An unexpected
                 error occurred. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_whitelist_alt2(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def set_live_event_whitelist(
         self,
@@ -284,7 +302,8 @@ class AsyncLiveEmbedPrivacy:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was embedded on the specified domains.
@@ -293,11 +312,11 @@ class AsyncLiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't edit domains for the event. Error code 5000: No such event exists under the user. Error code 4016:
                 An unexpected error occurred. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_live_event_whitelist(
                 live_event_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def set_live_event_whitelist_alt1(
         self,
@@ -311,7 +330,8 @@ class AsyncLiveEmbedPrivacy:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was embedded on the specified domains.
@@ -320,11 +340,11 @@ class AsyncLiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't edit domains for the event. Error code 5000: No such event exists under the user. Error code 4016:
                 An unexpected error occurred. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_live_event_whitelist_alt1(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def set_live_event_whitelist_alt2(
         self,
@@ -338,7 +358,8 @@ class AsyncLiveEmbedPrivacy:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was embedded on the specified domains.
@@ -347,11 +368,11 @@ class AsyncLiveEmbedPrivacy:
             ApiError: Error code 2518: The embed permission isn't ``whitelist``. Error code 3200: The authenticated user
                 can't edit domains for the event. Error code 5000: No such event exists under the user. Error code 4016:
                 An unexpected error occurred. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_live_event_whitelist_alt2(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveEmbedPrivacyWithRawResponse:
@@ -367,7 +388,8 @@ class LiveEmbedPrivacyWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -390,7 +412,8 @@ class LiveEmbedPrivacyWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -413,7 +436,8 @@ class LiveEmbedPrivacyWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -443,7 +467,8 @@ class LiveEmbedPrivacyWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -475,7 +500,8 @@ class LiveEmbedPrivacyWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -505,7 +531,8 @@ class LiveEmbedPrivacyWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -533,7 +560,8 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -544,7 +572,7 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[DomainConnection],
+            decoder=async_json_decoder[DomainConnection],
             error_mapper=get_live_event_whitelist_error_mapper,
             request_options=request_options,
         )
@@ -556,7 +584,8 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -567,7 +596,7 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[DomainConnection],
+            decoder=async_json_decoder[DomainConnection],
             error_mapper=get_live_event_whitelist_alt1_error_mapper,
             request_options=request_options,
         )
@@ -579,7 +608,8 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -590,7 +620,7 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[DomainConnection],
+            decoder=async_json_decoder[DomainConnection],
             error_mapper=get_live_event_whitelist_alt2_error_mapper,
             request_options=request_options,
         )
@@ -609,7 +639,8 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -624,7 +655,7 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=set_live_event_whitelist_error_mapper,
             request_options=request_options,
         )
@@ -641,7 +672,8 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -654,7 +686,7 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=set_live_event_whitelist_alt1_error_mapper,
             request_options=request_options,
         )
@@ -671,7 +703,8 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -684,7 +717,7 @@ class AsyncLiveEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=set_live_event_whitelist_alt2_error_mapper,
             request_options=request_options,
         )

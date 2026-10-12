@@ -44,9 +44,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/likes`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_likes(user_id: float, *, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_likes(user_id: float, *, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `user_id`
-- **Params**: `user_id` — path · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Params**: `user_id` — path · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetLikesErrorBody]`
 - **Error**: `GetLikesErrorBody` — **Case A (typed)**
@@ -64,8 +64,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/likes`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_likes_alt1(*, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Signature**: `def get_likes_alt1(*, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetLikesAlt1ErrorBody]`
 - **Error**: `GetLikesAlt1ErrorBody` — **Case A (typed)**
@@ -117,9 +117,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /ondemand/pages/{ondemand_id}/likes`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_vod_likes(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter: Filter25OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_vod_likes(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter25OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `ondemand_id`
-- **Params**: `ondemand_id` — path · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `sort` — query
+- **Params**: `ondemand_id` — path · `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `UserConnection`
 - **Returns (raw)**: `ApiResult[UserConnection, GetVodLikesErrorBody]`
 - **Error**: `GetVodLikesErrorBody` — **Case A (typed)**

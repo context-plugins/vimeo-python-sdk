@@ -4,13 +4,13 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.type28 import Type28OrStr
+from .enums.type32 import Type32OrStr
 
 
 class LandingPageLogo2(SdkBaseModel):
     """The navbar logo configuration of the event landing page."""
 
-    type_: Optional[Type28OrStr] = Field(default=UNSET, alias="type")
+    type_: Optional[Type32OrStr] = Field(default=UNSET, alias="type")
     """Which logo to show in the landing page navbar.
 
     Option descriptions:
@@ -24,5 +24,5 @@ class LandingPageLogo2(SdkBaseModel):
 
 
 class LandingPageLogo2Dict(TypedDict):
-    type_: NotRequired[Type28OrStr]
+    type_: NotRequired[Type32OrStr]
     uri: NotRequired[str]

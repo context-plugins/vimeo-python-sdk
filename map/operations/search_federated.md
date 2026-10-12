@@ -10,9 +10,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /search/{user_id}/items`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def federated_search_user_items(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter30OrStr | None = None, filter_privacy: str | None = None, modified_end_date: str | None = None, modified_start_date: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: str | None = None, sort: Sort46OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def federated_search_user_items(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter30OrStr | None = None, filter_privacy: str | None = None, modified_end_date: str | None = None, modified_start_date: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: str | None = None, sort: Sort46OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `user_id`
-- **Params**: `user_id` — path · `direction` — query · `filter` — query · `filter_privacy` — query · `modified_end_date` — query · `modified_start_date` — query · `page` — query · `per_page` — query · `query` — query · `query_fields` — query · `sort` — query
+- **Params**: `user_id` — path · `direction` — query · `filter_` — query `filter` · `filter_privacy` — query · `modified_end_date` — query · `modified_start_date` — query · `page` — query · `per_page` — query · `query` — query · `query_fields` — query · `sort` — query
 - **Returns (parsed)**: `FederatedSearchItemsConnection`
 - **Returns (raw)**: `ApiResult[FederatedSearchItemsConnection, FederatedSearchUserItemsErrorBody]`
 - **Error**: `FederatedSearchUserItemsErrorBody` — **Case A (typed)**
@@ -31,9 +31,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /workspaces/search/{workspace_uuid}/items`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def federated_search_user_items_alt1(workspace_uuid: str, *, direction: DirectionOrStr | None = None, filter: Filter30OrStr | None = None, filter_privacy: str | None = None, modified_end_date: str | None = None, modified_start_date: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: str | None = None, sort: Sort46OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def federated_search_user_items_alt1(workspace_uuid: str, *, direction: DirectionOrStr | None = None, filter_: Filter30OrStr | None = None, filter_privacy: str | None = None, modified_end_date: str | None = None, modified_start_date: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: str | None = None, sort: Sort46OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `workspace_uuid`
-- **Params**: `workspace_uuid` — path · `direction` — query · `filter` — query · `filter_privacy` — query · `modified_end_date` — query · `modified_start_date` — query · `page` — query · `per_page` — query · `query` — query · `query_fields` — query · `sort` — query
+- **Params**: `workspace_uuid` — path · `direction` — query · `filter_` — query `filter` · `filter_privacy` — query · `modified_end_date` — query · `modified_start_date` — query · `page` — query · `per_page` — query · `query` — query · `query_fields` — query · `sort` — query
 - **Returns (parsed)**: `FederatedSearchItemsConnection`
 - **Returns (raw)**: `ApiResult[FederatedSearchItemsConnection, FederatedSearchUserItemsAlt1ErrorBody]`
 - **Error**: `FederatedSearchUserItemsAlt1ErrorBody` — **Case A (typed)**

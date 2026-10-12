@@ -89,14 +89,14 @@ class ProjectDict(TypedDict):
     last_user_action_event_date: str | None
     link: str
     manage_link: str
-    metadata: Metadata5 | Metadata5Dict
+    metadata: Metadata5Dict
     modified_time: str
     name: str
     pinned_on: str | None
-    privacy: Privacy2 | Privacy2Dict
+    privacy: Privacy2Dict
     resource_key: str
-    review_links: NotRequired[list[ReviewLink | ReviewLinkDict]]
-    settings: Settings | SettingsDict
+    review_links: NotRequired[list[ReviewLinkDict]]
+    settings: SettingsDict
     should_show_team_library_notification: bool
     uri: str
-    user: User | UserDict
+    user: UserDict

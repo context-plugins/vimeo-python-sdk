@@ -5,32 +5,20 @@ from ...core import open_enum_validator
 
 
 class Status4(str, Enum):
-    """The status code for the availability of the video.
+    """The play status of the video.
 
     Option descriptions:
-     * ``available`` - The video is available.
-     * ``failed`` - There was an error in rendering the video.
-     * ``processing`` - Rendering has started and is currently underway for the video.
-     * ``quota_exceeded`` - The user's weekly upload quota is exceeded with this video.
-     * ``total_cap_exceeded`` - The user's total storage limit is exceeded with this video.
-     * ``transcode_starting`` - Transcoding is starting for the video.
-     * ``transcoding`` - Transcoding has started and is currently underway for the video.
-     * ``transcoding_error`` - There was an error in transcoding the video.
-     * ``unavailable`` - The video is unavailable.
-     * ``uploading`` - The video is being uploaded.
-     * ``uploading_error`` - There was an error in uploading the video."""
+     * ``drm_plays_exceeded`` - The user's quota for DRM plays has been exceeded.
+     * ``playable`` - The video is playable.
+     * ``purchase_required`` - The video must be purchased.
+     * ``restricted`` - Playback for the video is restricted.
+     * ``unavailable`` - The video is unavailable."""
 
-    AVAILABLE = "available"
-    FAILED = "failed"
-    PROCESSING = "processing"
-    QUOTA_EXCEEDED = "quota_exceeded"
-    TOTAL_CAP_EXCEEDED = "total_cap_exceeded"
-    TRANSCODE_STARTING = "transcode_starting"
-    TRANSCODING = "transcoding"
-    TRANSCODING_ERROR = "transcoding_error"
+    DRM_PLAYS_EXCEEDED = "drm_plays_exceeded"
+    PLAYABLE = "playable"
+    PURCHASE_REQUIRED = "purchase_required"
+    RESTRICTED = "restricted"
     UNAVAILABLE = "unavailable"
-    UPLOADING = "uploading"
-    UPLOADING_ERROR = "uploading_error"
 
     __str__ = str.__str__
 

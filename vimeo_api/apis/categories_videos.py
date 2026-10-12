@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.check_category_for_video_error import (
     CheckCategoryForVideoErrorBody,
@@ -46,7 +48,8 @@ class CategoriesVideos:
         Args:
             category: The name of the category.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -54,16 +57,16 @@ class CategoriesVideos:
         Raises:
             ApiError: * No such category exists, or the video doesn't belong to it. * Error code 5451: This resource is
                 restricted in your region. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_category_for_video(
-            category, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_category_for_video(category, video_id, request_options=request_options)
+        )
 
     def get_category_videos(
         self,
         category: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: FilterOrStr | None = None,
+        filter_: FilterOrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -77,7 +80,7 @@ class CategoriesVideos:
             category: The name of the category.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``conditional_featured`` -
+            filter_: The attribute by which to filter the results. Option descriptions: * ``conditional_featured`` -
                 Return featured videos. * ``embeddable`` - Return embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -89,7 +92,8 @@ class CategoriesVideos:
                 by date. * ``duration`` - Sort the results by duration. * ``featured`` - Sort the results by featured
                 status. * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of
                 plays. * ``relevant`` - Sort the results by relevance.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -97,17 +101,19 @@ class CategoriesVideos:
         Raises:
             ApiError: * No such category exists. * Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_category_videos(
-            category,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_category_videos(
+                category,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_video_categories(
         self,
@@ -123,16 +129,19 @@ class CategoriesVideos:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_video_categories(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_categories(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def suggest_video_category(
         self,
@@ -150,7 +159,8 @@ class CategoriesVideos:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were set.
@@ -158,7 +168,7 @@ class CategoriesVideos:
         Raises:
             ApiError: The authenticated user doesn't own this video. No such video exists, or no such category exists.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.suggest_video_category(video_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.suggest_video_category(video_id, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> CategoriesVideosWithRawResponse:
@@ -178,7 +188,8 @@ class AsyncCategoriesVideos:
         Args:
             category: The name of the category.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -186,16 +197,16 @@ class AsyncCategoriesVideos:
         Raises:
             ApiError: * No such category exists, or the video doesn't belong to it. * Error code 5451: This resource is
                 restricted in your region. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_category_for_video(category, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_category_videos(
         self,
         category: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: FilterOrStr | None = None,
+        filter_: FilterOrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -209,7 +220,7 @@ class AsyncCategoriesVideos:
             category: The name of the category.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``conditional_featured`` -
+            filter_: The attribute by which to filter the results. Option descriptions: * ``conditional_featured`` -
                 Return featured videos. * ``embeddable`` - Return embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -221,7 +232,8 @@ class AsyncCategoriesVideos:
                 by date. * ``duration`` - Sort the results by duration. * ``featured`` - Sort the results by featured
                 status. * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of
                 plays. * ``relevant`` - Sort the results by relevance.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -229,19 +241,19 @@ class AsyncCategoriesVideos:
         Raises:
             ApiError: * No such category exists. * Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_category_videos(
                 category,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_video_categories(
         self,
@@ -257,18 +269,19 @@ class AsyncCategoriesVideos:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_categories(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def suggest_video_category(
         self,
@@ -286,7 +299,8 @@ class AsyncCategoriesVideos:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were set.
@@ -294,9 +308,9 @@ class AsyncCategoriesVideos:
         Raises:
             ApiError: The authenticated user doesn't own this video. No such video exists, or no such category exists.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.suggest_video_category(video_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncCategoriesVideosWithRawResponse:
@@ -313,7 +327,8 @@ class CategoriesVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             category: The name of the category.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -334,7 +349,7 @@ class CategoriesVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         category: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: FilterOrStr | None = None,
+        filter_: FilterOrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -348,7 +363,7 @@ class CategoriesVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             category: The name of the category.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``conditional_featured`` -
+            filter_: The attribute by which to filter the results. Option descriptions: * ``conditional_featured`` -
                 Return featured videos. * ``embeddable`` - Return embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -360,7 +375,8 @@ class CategoriesVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 by date. * ``duration`` - Sort the results by duration. * ``featured`` - Sort the results by featured
                 status. * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of
                 plays. * ``relevant`` - Sort the results by relevance.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -370,7 +386,7 @@ class CategoriesVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             path_params=[param[str]("category", category)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[FilterOrStr | None]("filter", filter),
+                param[FilterOrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -399,7 +415,8 @@ class CategoriesVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -432,7 +449,8 @@ class CategoriesVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -461,7 +479,8 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             category: The name of the category.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -472,7 +491,7 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=check_category_for_video_error_mapper,
             request_options=request_options,
         )
@@ -482,7 +501,7 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         category: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: FilterOrStr | None = None,
+        filter_: FilterOrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -496,7 +515,7 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             category: The name of the category.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``conditional_featured`` -
+            filter_: The attribute by which to filter the results. Option descriptions: * ``conditional_featured`` -
                 Return featured videos. * ``embeddable`` - Return embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -508,7 +527,8 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 by date. * ``duration`` - Sort the results by duration. * ``featured`` - Sort the results by featured
                 status. * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of
                 plays. * ``relevant`` - Sort the results by relevance.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -518,7 +538,7 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             path_params=[param[str]("category", category)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[FilterOrStr | None]("filter", filter),
+                param[FilterOrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -528,7 +548,7 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_category_videos_error_mapper,
             request_options=request_options,
         )
@@ -547,7 +567,8 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -559,7 +580,7 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CategoryConnection],
+            decoder=async_json_decoder[CategoryConnection],
             error_mapper=get_video_categories_error_mapper,
             request_options=request_options,
         )
@@ -580,7 +601,8 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -593,7 +615,7 @@ class AsyncCategoriesVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Category],
+            decoder=async_json_decoder[Category],
             error_mapper=suggest_video_category_error_mapper,
             request_options=request_options,
         )

@@ -25,5 +25,5 @@ class EditPrivacy(SdkBaseModel):
 class EditPrivacyDict(TypedDict):
     content_rating: list[str]
     options: list[str]
-    properties: list[Properties1 | Properties1Dict]
+    properties: list[Properties1Dict]
     uri: str

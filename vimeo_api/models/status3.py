@@ -5,7 +5,7 @@ from typing_extensions import TypedDict
 from ..core import SdkBaseModel
 
 
-class Status2(SdkBaseModel):
+class Status3(SdkBaseModel):
     """An object containing data on the value of **status** and whether it's required for the interaction."""
 
     required: bool
@@ -15,6 +15,6 @@ class Status2(SdkBaseModel):
     """The status of the role upgrade request to which the team member should have access."""
 
 
-class Status2Dict(TypedDict):
+class Status3Dict(TypedDict):
     required: bool
     value: str

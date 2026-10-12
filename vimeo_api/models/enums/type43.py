@@ -4,7 +4,7 @@ from typing import Annotated, TypeAlias
 from ...core import open_enum_validator
 
 
-class Type39(str, Enum):
+class Type43(str, Enum):
     """The data type of the field. Required when creating a new field. **Immutable** after creation.
 
     Option descriptions:
@@ -25,4 +25,4 @@ class Type39(str, Enum):
     __str__ = str.__str__
 
 
-Type39OrStr: TypeAlias = Annotated[Type39 | str, open_enum_validator(Type39)]
+Type43OrStr: TypeAlias = Annotated[Type43 | str, open_enum_validator(Type43)]

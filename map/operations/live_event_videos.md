@@ -121,9 +121,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/live_events/{live_event_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_live_event_videos(live_event_id: float, user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_live_event_videos(live_event_id: float, user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`, `user_id`
-- **Params**: `live_event_id` — path · `user_id` — path · `containing_uri` — query · `direction` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Params**: `live_event_id` — path · `user_id` — path · `containing_uri` — query · `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetLiveEventVideosErrorBody]`
 - **Error**: `GetLiveEventVideosErrorBody` — **Case A (typed)**
@@ -142,9 +142,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /live_events/{live_event_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_live_event_videos_alt1(live_event_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_live_event_videos_alt1(live_event_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`
-- **Params**: `live_event_id` — path · `containing_uri` — query · `direction` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Params**: `live_event_id` — path · `containing_uri` — query · `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetLiveEventVideosAlt1ErrorBody]`
 - **Error**: `GetLiveEventVideosAlt1ErrorBody` — **Case A (typed)**
@@ -163,9 +163,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/live_events/{live_event_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_live_event_videos_alt2(live_event_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_live_event_videos_alt2(live_event_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `live_event_id`
-- **Params**: `live_event_id` — path · `containing_uri` — query · `direction` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Params**: `live_event_id` — path · `containing_uri` — query · `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetLiveEventVideosAlt2ErrorBody]`
 - **Error**: `GetLiveEventVideosAlt2ErrorBody` — **Case A (typed)**

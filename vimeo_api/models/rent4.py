@@ -30,4 +30,4 @@ class Rent4(SdkBaseModel):
 class Rent4Dict(TypedDict):
     active: NotRequired[bool]
     period: NotRequired[Period6OrStr]
-    price: NotRequired[Price5 | Price5Dict]
+    price: NotRequired[Price5Dict]

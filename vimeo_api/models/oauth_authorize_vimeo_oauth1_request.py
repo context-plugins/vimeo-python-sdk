@@ -1,14 +1,13 @@
 from __future__ import annotations
 
-from typing import Literal
-
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
+from .enums.grant_type2 import GrantType2OrStr
 
 
 class OauthAuthorizeVimeoOauth1Request(SdkBaseModel):
-    grant_type: Literal["vimeo_oauth1"] = "vimeo_oauth1"
+    grant_type: GrantType2OrStr
     """The grant type. The value of this field must be ``vimeo_oauth1``.
 
     Option descriptions:
@@ -22,6 +21,6 @@ class OauthAuthorizeVimeoOauth1Request(SdkBaseModel):
 
 
 class OauthAuthorizeVimeoOauth1RequestDict(TypedDict):
-    grant_type: NotRequired[Literal["vimeo_oauth1"]]
+    grant_type: GrantType2OrStr
     token: str
     token_secret: str

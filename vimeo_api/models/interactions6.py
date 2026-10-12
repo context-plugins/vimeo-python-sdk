@@ -12,4 +12,4 @@ class Interactions6(SdkBaseModel):
 
 
 class Interactions6Dict(TypedDict):
-    page: Page | PageDict
+    page: PageDict

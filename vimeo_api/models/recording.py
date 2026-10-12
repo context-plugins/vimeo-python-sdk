@@ -29,7 +29,7 @@ class Recording(SdkBaseModel):
 class RecordingDict(TypedDict):
     duration: float | None
     link: str
-    pictures: Picture | PictureDict
+    pictures: PictureDict
     streamed_on: str | None
     title: str | None
     uri: str

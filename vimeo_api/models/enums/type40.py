@@ -4,7 +4,7 @@ from typing import Annotated, TypeAlias
 from ...core import open_enum_validator
 
 
-class Type36(str, Enum):
+class Type40(str, Enum):
     """The end screen type.
 
     Option descriptions:
@@ -21,4 +21,4 @@ class Type36(str, Enum):
     __str__ = str.__str__
 
 
-Type36OrStr: TypeAlias = Annotated[Type36 | str, open_enum_validator(Type36)]
+Type40OrStr: TypeAlias = Annotated[Type40 | str, open_enum_validator(Type40)]

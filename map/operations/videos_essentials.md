@@ -163,9 +163,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/appearances`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_appearances(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_appearances(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `user_id`
-- **Params**: `user_id` — path · `direction` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Params**: `user_id` — path · `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetAppearancesErrorBody]`
 - **Error**: `GetAppearancesErrorBody` — **Case A (typed)**
@@ -184,8 +184,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/appearances`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_appearances_alt1(*, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `direction` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Signature**: `def get_appearances_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetAppearancesAlt1ErrorBody]`
 - **Error**: `GetAppearancesAlt1ErrorBody` — **Case A (typed)**
@@ -222,9 +222,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_videos(user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter22OrStr | None = None, filter_embeddable: bool | None = None, filter_playable: bool | None = None, filter_screen_recorded: bool | None = None, filter_tag: str | None = None, filter_tag_all_of: str | None = None, filter_tag_exclude: str | None = None, filter_uploader: float | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: QueryFieldsOrStr | None = None, sort: Sort39OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_videos(user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter22OrStr | None = None, filter_embeddable: bool | None = None, filter_playable: bool | None = None, filter_screen_recorded: bool | None = None, filter_tag: str | None = None, filter_tag_all_of: str | None = None, filter_tag_exclude: str | None = None, filter_uploader: float | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: QueryFieldsOrStr | None = None, sort: Sort39OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `user_id`
-- **Params**: `user_id` — path · `containing_uri` — query · `direction` — query · `filter` — query · `filter_embeddable` — query · `filter_playable` — query · `filter_screen_recorded` — query · `filter_tag` — query · `filter_tag_all_of` — query · `filter_tag_exclude` — query · `filter_uploader` — query · `page` — query · `per_page` — query · `query` — query · `query_fields` — query · `sort` — query
+- **Params**: `user_id` — path · `containing_uri` — query · `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `filter_playable` — query · `filter_screen_recorded` — query · `filter_tag` — query · `filter_tag_all_of` — query · `filter_tag_exclude` — query · `filter_uploader` — query · `page` — query · `per_page` — query · `query` — query · `query_fields` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -241,8 +241,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_videos_alt1(*, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter22OrStr | None = None, filter_embeddable: bool | None = None, filter_playable: bool | None = None, filter_screen_recorded: bool | None = None, filter_tag: str | None = None, filter_tag_all_of: str | None = None, filter_tag_exclude: str | None = None, filter_uploader: float | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: QueryFieldsOrStr | None = None, sort: Sort39OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `containing_uri` — query · `direction` — query · `filter` — query · `filter_embeddable` — query · `filter_playable` — query · `filter_screen_recorded` — query · `filter_tag` — query · `filter_tag_all_of` — query · `filter_tag_exclude` — query · `filter_uploader` — query · `page` — query · `per_page` — query · `query` — query · `query_fields` — query · `sort` — query
+- **Signature**: `def get_videos_alt1(*, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter22OrStr | None = None, filter_embeddable: bool | None = None, filter_playable: bool | None = None, filter_screen_recorded: bool | None = None, filter_tag: str | None = None, filter_tag_all_of: str | None = None, filter_tag_exclude: str | None = None, filter_uploader: float | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: QueryFieldsOrStr | None = None, sort: Sort39OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `containing_uri` — query · `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `filter_playable` — query · `filter_screen_recorded` — query · `filter_tag` — query · `filter_tag_all_of` — query · `filter_tag_exclude` — query · `filter_uploader` — query · `page` — query · `per_page` — query · `query` — query · `query_fields` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -259,8 +259,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def search_videos(*, direction: DirectionOrStr | None = None, filter: Filter45OrStr | None = None, links: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort73OrStr | None = None, uris: str | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `direction` — query · `filter` — query · `links` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query · `uris` — query
+- **Signature**: `def search_videos(*, direction: DirectionOrStr | None = None, filter_: Filter45OrStr | None = None, links: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort73OrStr | None = None, uris: str | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `direction` — query · `filter_` — query `filter` · `links` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query · `uris` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, SearchVideosErrorBody]`
 - **Error**: `SearchVideosErrorBody` — **Case A (typed)**

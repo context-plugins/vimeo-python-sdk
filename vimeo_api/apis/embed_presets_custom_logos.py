@@ -11,9 +11,12 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_custom_logo_alt1_error import CreateCustomLogoAlt1ErrorBody, create_custom_logo_alt1_error_mapper
 from ..errors.create_custom_logo_error import CreateCustomLogoErrorBody, create_custom_logo_error_mapper
@@ -40,14 +43,15 @@ class EmbedPresetsCustomLogos:
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was added.
 
         Raises:
             ApiError: The authenticated user can't add the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_custom_logo(user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_custom_logo(user_id, request_options=request_options))
 
     def create_custom_logo_alt1(self, *, request_options: RequestOptionsOrDict | None = None) -> Picture:
         """This method adds a custom logo representing the authenticated user for display in the embedded player. Be
@@ -56,14 +60,15 @@ class EmbedPresetsCustomLogos:
         method represents Step 2 of the procedure.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was added.
 
         Raises:
             ApiError: The authenticated user can't add the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_custom_logo_alt1(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_custom_logo_alt1(request_options=request_options))
 
     def delete_custom_logo(
         self, logo_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -73,28 +78,30 @@ class EmbedPresetsCustomLogos:
         Args:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was deleted.
 
         Raises:
             ApiError: The authenticated user can't access the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_custom_logo(logo_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_custom_logo(logo_id, user_id, request_options=request_options))
 
     def delete_custom_logo_alt1(self, logo_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method deletes the specified custom logo belonging to the authenticated user.
 
         Args:
             logo_id: The ID of the custom logo.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was deleted.
 
         Raises:
             ApiError: The authenticated user can't access the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_custom_logo_alt1(logo_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_custom_logo_alt1(logo_id, request_options=request_options))
 
     def get_custom_logo(
         self, logo_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -104,28 +111,30 @@ class EmbedPresetsCustomLogos:
         Args:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was returned.
 
         Raises:
             ApiError: The authenticated user can't access the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_custom_logo(logo_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_custom_logo(logo_id, user_id, request_options=request_options))
 
     def get_custom_logo_alt1(self, logo_id: float, *, request_options: RequestOptionsOrDict | None = None) -> Picture:
         """This method returns a single custom logo belonging to the authenticated user.
 
         Args:
             logo_id: The ID of the custom logo.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was returned.
 
         Raises:
             ApiError: The authenticated user can't access the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_custom_logo_alt1(logo_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_custom_logo_alt1(logo_id, request_options=request_options))
 
     def get_custom_logos(
         self,
@@ -145,16 +154,19 @@ class EmbedPresetsCustomLogos:
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logos were returned.
 
         Raises:
             ApiError: The authenticated user can't access the custom logos. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_custom_logos(
-            user_id, page=page, per_page=per_page, sizes=sizes, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_custom_logos(
+                user_id, page=page, per_page=per_page, sizes=sizes, request_options=request_options
+            ),
+        )
 
     def get_custom_logos_alt1(
         self,
@@ -172,16 +184,19 @@ class EmbedPresetsCustomLogos:
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logos were returned.
 
         Raises:
             ApiError: The authenticated user can't access the custom logos. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_custom_logos_alt1(
-            page=page, per_page=per_page, sizes=sizes, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_custom_logos_alt1(
+                page=page, per_page=per_page, sizes=sizes, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> EmbedPresetsCustomLogosWithRawResponse:
@@ -202,14 +217,15 @@ class AsyncEmbedPresetsCustomLogos:
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was added.
 
         Raises:
             ApiError: The authenticated user can't add the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.create_custom_logo(user_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_custom_logo(user_id, request_options=request_options))
 
     async def create_custom_logo_alt1(self, *, request_options: RequestOptionsOrDict | None = None) -> Picture:
         """This method adds a custom logo representing the authenticated user for display in the embedded player. Be
@@ -218,14 +234,15 @@ class AsyncEmbedPresetsCustomLogos:
         method represents Step 2 of the procedure.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was added.
 
         Raises:
             ApiError: The authenticated user can't add the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.create_custom_logo_alt1(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_custom_logo_alt1(request_options=request_options))
 
     async def delete_custom_logo(
         self, logo_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -235,16 +252,17 @@ class AsyncEmbedPresetsCustomLogos:
         Args:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was deleted.
 
         Raises:
             ApiError: The authenticated user can't access the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_custom_logo(logo_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_custom_logo_alt1(
         self, logo_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -253,16 +271,15 @@ class AsyncEmbedPresetsCustomLogos:
 
         Args:
             logo_id: The ID of the custom logo.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was deleted.
 
         Raises:
             ApiError: The authenticated user can't access the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.delete_custom_logo_alt1(logo_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.delete_custom_logo_alt1(logo_id, request_options=request_options))
 
     async def get_custom_logo(
         self, logo_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -272,16 +289,15 @@ class AsyncEmbedPresetsCustomLogos:
         Args:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was returned.
 
         Raises:
             ApiError: The authenticated user can't access the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.get_custom_logo(logo_id, user_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_custom_logo(logo_id, user_id, request_options=request_options))
 
     async def get_custom_logo_alt1(
         self, logo_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -290,14 +306,15 @@ class AsyncEmbedPresetsCustomLogos:
 
         Args:
             logo_id: The ID of the custom logo.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was returned.
 
         Raises:
             ApiError: The authenticated user can't access the custom logo. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.get_custom_logo_alt1(logo_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_custom_logo_alt1(logo_id, request_options=request_options))
 
     async def get_custom_logos(
         self,
@@ -317,18 +334,19 @@ class AsyncEmbedPresetsCustomLogos:
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logos were returned.
 
         Raises:
             ApiError: The authenticated user can't access the custom logos. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_custom_logos(
                 user_id, page=page, per_page=per_page, sizes=sizes, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_custom_logos_alt1(
         self,
@@ -346,18 +364,19 @@ class AsyncEmbedPresetsCustomLogos:
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logos were returned.
 
         Raises:
             ApiError: The authenticated user can't access the custom logos. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_custom_logos_alt1(
                 page=page, per_page=per_page, sizes=sizes, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncEmbedPresetsCustomLogosWithRawResponse:
@@ -375,7 +394,8 @@ class EmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[RawClient, Serve
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -401,7 +421,8 @@ class EmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[RawClient, Serve
         method represents Step 2 of the procedure.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -425,7 +446,8 @@ class EmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -449,7 +471,8 @@ class EmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[RawClient, Serve
 
         Args:
             logo_id: The ID of the custom logo.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -474,7 +497,8 @@ class EmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -497,7 +521,8 @@ class EmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[RawClient, Serve
 
         Args:
             logo_id: The ID of the custom logo.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -531,7 +556,8 @@ class EmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[RawClient, Serve
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -568,7 +594,8 @@ class EmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[RawClient, Serve
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -600,7 +627,8 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -612,7 +640,7 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_custom_logo_error_mapper,
             request_options=request_options,
         )
@@ -626,7 +654,8 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
         method represents Step 2 of the procedure.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -637,7 +666,7 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_custom_logo_alt1_error_mapper,
             request_options=request_options,
         )
@@ -650,7 +679,8 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -662,7 +692,7 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_custom_logo_error_mapper,
             request_options=request_options,
         )
@@ -674,7 +704,8 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
 
         Args:
             logo_id: The ID of the custom logo.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -686,7 +717,7 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_custom_logo_alt1_error_mapper,
             request_options=request_options,
         )
@@ -699,7 +730,8 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -710,7 +742,7 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_custom_logo_error_mapper,
             request_options=request_options,
         )
@@ -722,7 +754,8 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
 
         Args:
             logo_id: The ID of the custom logo.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -733,7 +766,7 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_custom_logo_alt1_error_mapper,
             request_options=request_options,
         )
@@ -756,7 +789,8 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -772,7 +806,7 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=get_custom_logos_error_mapper,
             request_options=request_options,
         )
@@ -793,7 +827,8 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             sizes: The pixel dimensions of the image in ``{width}x{height}`` format. For more information, see our
                 `Using Common Formats and Parameters
                 <https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter>`__ guide.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -808,7 +843,7 @@ class AsyncEmbedPresetsCustomLogosWithRawResponse(SecuredRawResponse[AsyncRawCli
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=get_custom_logos_alt1_error_mapper,
             request_options=request_options,
         )

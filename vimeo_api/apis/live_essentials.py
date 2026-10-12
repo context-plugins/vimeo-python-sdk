@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.create_live_event_alt1_error import CreateLiveEventAlt1ErrorBody, create_live_event_alt1_error_mapper
 from ..errors.create_live_event_alt2_error import CreateLiveEventAlt2ErrorBody, create_live_event_alt2_error_mapper
@@ -36,7 +39,7 @@ from ..errors.update_live_event_error import UpdateLiveEventErrorBody, update_li
 from ..models.enums.direction import DirectionOrStr
 from ..models.enums.filter8 import Filter8OrStr
 from ..models.enums.sort8 import Sort8OrStr
-from ..models.enums.type27 import Type27OrStr
+from ..models.enums.type31 import Type31OrStr
 from ..models.event_connection import EventConnection
 from ..models.live_event_occurrence_connection import LiveEventOccurrenceConnection
 from ..models.live_events_request import LiveEventsRequest, LiveEventsRequestDict
@@ -68,7 +71,8 @@ class LiveEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was created.
@@ -78,7 +82,7 @@ class LiveEssentials:
                 event. * Error code 8000: The user credentials are invalid. * Error code 3422: The authenticated user
                 can't create an event. * Error code 3439: The authenticated user can't edit the content rating of an
                 event. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_live_event(user_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_live_event(user_id, body, request_options=request_options))
 
     def create_live_event_alt1(
         self, body: LiveEventsRequest1 | LiveEventsRequest1Dict, *, request_options: RequestOptionsOrDict | None = None
@@ -87,7 +91,8 @@ class LiveEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was created.
@@ -97,7 +102,7 @@ class LiveEssentials:
                 event. * Error code 8000: The user credentials are invalid. * Error code 3422: The authenticated user
                 can't create an event. * Error code 3439: The authenticated user can't edit the content rating of an
                 event. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_live_event_alt1(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_live_event_alt1(body, request_options=request_options))
 
     def create_live_event_alt2(
         self,
@@ -109,7 +114,8 @@ class LiveEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was created.
@@ -119,7 +125,7 @@ class LiveEssentials:
                 event. * Error code 8000: The user credentials are invalid. * Error code 3422: The authenticated user
                 can't create an event. * Error code 3439: The authenticated user can't edit the content rating of an
                 event. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_live_event_alt2(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_live_event_alt2(body, request_options=request_options))
 
     def delete_live_event(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -129,7 +135,8 @@ class LiveEssentials:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was deleted.
@@ -138,9 +145,9 @@ class LiveEssentials:
             ApiError: * Error code 3200: The authenticated user doesn't have the necessary permissions to delete the
                 event. * Error code 3422: The authenticated user can't delete the event. Error code 5000: No such event
                 or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_live_event(
-            live_event_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_live_event(live_event_id, user_id, request_options=request_options)
+        )
 
     def delete_live_event_alt1(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -149,7 +156,8 @@ class LiveEssentials:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was deleted.
@@ -158,7 +166,7 @@ class LiveEssentials:
             ApiError: * Error code 3200: The authenticated user doesn't have the necessary permissions to delete the
                 event. * Error code 3422: The authenticated user can't delete the event. Error code 5000: No such event
                 or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_live_event_alt1(live_event_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_live_event_alt1(live_event_id, request_options=request_options))
 
     def delete_live_event_alt2(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -167,7 +175,8 @@ class LiveEssentials:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was deleted.
@@ -176,7 +185,7 @@ class LiveEssentials:
             ApiError: * Error code 3200: The authenticated user doesn't have the necessary permissions to delete the
                 event. * Error code 3422: The authenticated user can't delete the event. Error code 5000: No such event
                 or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_live_event_alt2(live_event_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_live_event_alt2(live_event_id, request_options=request_options))
 
     def delete_live_events(
         self,
@@ -190,7 +199,8 @@ class LiveEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were deleted.
@@ -198,7 +208,7 @@ class LiveEssentials:
         Raises:
             ApiError: * Error code 3200: The authenticated user can't delete the specified events. * Error code 8000:
                 The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_live_events(user_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_live_events(user_id, body, request_options=request_options))
 
     def delete_live_events_alt1(
         self, body: LiveEventsRequest | LiveEventsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -207,7 +217,8 @@ class LiveEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were deleted.
@@ -215,7 +226,7 @@ class LiveEssentials:
         Raises:
             ApiError: * Error code 3200: The authenticated user can't delete the specified events. * Error code 8000:
                 The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_live_events_alt1(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_live_events_alt1(body, request_options=request_options))
 
     def delete_live_events_alt2(
         self,
@@ -227,7 +238,8 @@ class LiveEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were deleted.
@@ -235,7 +247,7 @@ class LiveEssentials:
         Raises:
             ApiError: * Error code 3200: The authenticated user can't delete the specified events. * Error code 8000:
                 The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_live_events_alt2(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_live_events_alt2(body, request_options=request_options))
 
     def get_live_event(
         self,
@@ -251,7 +263,8 @@ class LiveEssentials:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was returned.
@@ -260,9 +273,11 @@ class LiveEssentials:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_live_event(
-            live_event_id, user_id, password=password, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event(
+                live_event_id, user_id, password=password, request_options=request_options
+            ),
+        )
 
     def get_live_event_alt1(
         self, live_event_id: float, *, password: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -272,7 +287,8 @@ class LiveEssentials:
         Args:
             live_event_id: The ID of the event.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was returned.
@@ -281,9 +297,11 @@ class LiveEssentials:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_live_event_alt1(
-            live_event_id, password=password, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_alt1(
+                live_event_id, password=password, request_options=request_options
+            ),
+        )
 
     def get_live_event_alt2(
         self, live_event_id: float, *, password: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -293,7 +311,8 @@ class LiveEssentials:
         Args:
             live_event_id: The ID of the event.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was returned.
@@ -302,9 +321,11 @@ class LiveEssentials:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_live_event_alt2(
-            live_event_id, password=password, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_alt2(
+                live_event_id, password=password, request_options=request_options
+            ),
+        )
 
     def get_live_event_occurrences(
         self,
@@ -327,28 +348,31 @@ class LiveEssentials:
             end_date: The end of the date range in ISO 8601 format. Defaults to 7 days after start.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The occurrences were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_live_event_occurrences(
-            user_id, start_date, end_date=end_date, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_occurrences(
+                user_id, start_date, end_date=end_date, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_live_events(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> EventConnection:
         """The method returns every event belonging to the authenticated user.
@@ -357,7 +381,7 @@ class LiveEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -366,35 +390,38 @@ class LiveEssentials:
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_live_events(
-            user_id,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            type_=type_,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_events(
+                user_id,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                type_=type_,
+                request_options=request_options,
+            ),
+        )
 
     def get_live_events_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> EventConnection:
         """The method returns every event belonging to the authenticated user.
@@ -402,7 +429,7 @@ class LiveEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -411,34 +438,37 @@ class LiveEssentials:
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_live_events_alt1(
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            type_=type_,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_events_alt1(
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                type_=type_,
+                request_options=request_options,
+            ),
+        )
 
     def get_live_events_alt2(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> EventConnection:
         """The method returns every event belonging to the authenticated user.
@@ -446,7 +476,7 @@ class LiveEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -455,23 +485,26 @@ class LiveEssentials:
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_live_events_alt2(
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            type_=type_,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_events_alt2(
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                type_=type_,
+                request_options=request_options,
+            ),
+        )
 
     def update_live_event(
         self,
@@ -487,7 +520,8 @@ class LiveEssentials:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was updated.
@@ -496,9 +530,11 @@ class LiveEssentials:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user doesn't have
                 the necessary permissions to update the event. * Error code 3422: The authenticated user can't update
                 the event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.update_live_event(
-            live_event_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_live_event(
+                live_event_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     def update_live_event_alt1(
         self,
@@ -512,7 +548,8 @@ class LiveEssentials:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was updated.
@@ -521,9 +558,9 @@ class LiveEssentials:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user doesn't have
                 the necessary permissions to update the event. * Error code 3422: The authenticated user can't update
                 the event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.update_live_event_alt1(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_live_event_alt1(live_event_id, body=body, request_options=request_options)
+        )
 
     def update_live_event_alt2(
         self,
@@ -537,7 +574,8 @@ class LiveEssentials:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was updated.
@@ -546,9 +584,9 @@ class LiveEssentials:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user doesn't have
                 the necessary permissions to update the event. * Error code 3422: The authenticated user can't update
                 the event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.update_live_event_alt2(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_live_event_alt2(live_event_id, body=body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> LiveEssentialsWithRawResponse:
@@ -571,7 +609,8 @@ class AsyncLiveEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was created.
@@ -581,9 +620,7 @@ class AsyncLiveEssentials:
                 event. * Error code 8000: The user credentials are invalid. * Error code 3422: The authenticated user
                 can't create an event. * Error code 3439: The authenticated user can't edit the content rating of an
                 event. ``error`` is ``Error | RawError``."""
-        return (
-            await self._with_raw_response.create_live_event(user_id, body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.create_live_event(user_id, body, request_options=request_options))
 
     async def create_live_event_alt1(
         self, body: LiveEventsRequest1 | LiveEventsRequest1Dict, *, request_options: RequestOptionsOrDict | None = None
@@ -592,7 +629,8 @@ class AsyncLiveEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was created.
@@ -602,7 +640,7 @@ class AsyncLiveEssentials:
                 event. * Error code 8000: The user credentials are invalid. * Error code 3422: The authenticated user
                 can't create an event. * Error code 3439: The authenticated user can't edit the content rating of an
                 event. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.create_live_event_alt1(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_live_event_alt1(body, request_options=request_options))
 
     async def create_live_event_alt2(
         self,
@@ -614,7 +652,8 @@ class AsyncLiveEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was created.
@@ -624,7 +663,7 @@ class AsyncLiveEssentials:
                 event. * Error code 8000: The user credentials are invalid. * Error code 3422: The authenticated user
                 can't create an event. * Error code 3439: The authenticated user can't edit the content rating of an
                 event. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.create_live_event_alt2(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_live_event_alt2(body, request_options=request_options))
 
     async def delete_live_event(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -634,7 +673,8 @@ class AsyncLiveEssentials:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was deleted.
@@ -643,9 +683,9 @@ class AsyncLiveEssentials:
             ApiError: * Error code 3200: The authenticated user doesn't have the necessary permissions to delete the
                 event. * Error code 3422: The authenticated user can't delete the event. Error code 5000: No such event
                 or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_live_event(live_event_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_live_event_alt1(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -654,7 +694,8 @@ class AsyncLiveEssentials:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was deleted.
@@ -663,9 +704,9 @@ class AsyncLiveEssentials:
             ApiError: * Error code 3200: The authenticated user doesn't have the necessary permissions to delete the
                 event. * Error code 3422: The authenticated user can't delete the event. Error code 5000: No such event
                 or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_live_event_alt1(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_live_event_alt2(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -674,7 +715,8 @@ class AsyncLiveEssentials:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was deleted.
@@ -683,9 +725,9 @@ class AsyncLiveEssentials:
             ApiError: * Error code 3200: The authenticated user doesn't have the necessary permissions to delete the
                 event. * Error code 3422: The authenticated user can't delete the event. Error code 5000: No such event
                 or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_live_event_alt2(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_live_events(
         self,
@@ -699,7 +741,8 @@ class AsyncLiveEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were deleted.
@@ -707,9 +750,7 @@ class AsyncLiveEssentials:
         Raises:
             ApiError: * Error code 3200: The authenticated user can't delete the specified events. * Error code 8000:
                 The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (
-            await self._with_raw_response.delete_live_events(user_id, body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.delete_live_events(user_id, body, request_options=request_options))
 
     async def delete_live_events_alt1(
         self, body: LiveEventsRequest | LiveEventsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -718,7 +759,8 @@ class AsyncLiveEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were deleted.
@@ -726,7 +768,7 @@ class AsyncLiveEssentials:
         Raises:
             ApiError: * Error code 3200: The authenticated user can't delete the specified events. * Error code 8000:
                 The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.delete_live_events_alt1(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_live_events_alt1(body, request_options=request_options))
 
     async def delete_live_events_alt2(
         self,
@@ -738,7 +780,8 @@ class AsyncLiveEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were deleted.
@@ -746,7 +789,7 @@ class AsyncLiveEssentials:
         Raises:
             ApiError: * Error code 3200: The authenticated user can't delete the specified events. * Error code 8000:
                 The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.delete_live_events_alt2(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_live_events_alt2(body, request_options=request_options))
 
     async def get_live_event(
         self,
@@ -762,7 +805,8 @@ class AsyncLiveEssentials:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was returned.
@@ -771,11 +815,11 @@ class AsyncLiveEssentials:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event(
                 live_event_id, user_id, password=password, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_alt1(
         self, live_event_id: float, *, password: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -785,7 +829,8 @@ class AsyncLiveEssentials:
         Args:
             live_event_id: The ID of the event.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was returned.
@@ -794,11 +839,11 @@ class AsyncLiveEssentials:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_alt1(
                 live_event_id, password=password, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_alt2(
         self, live_event_id: float, *, password: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -808,7 +853,8 @@ class AsyncLiveEssentials:
         Args:
             live_event_id: The ID of the event.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was returned.
@@ -817,11 +863,11 @@ class AsyncLiveEssentials:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_alt2(
                 live_event_id, password=password, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_occurrences(
         self,
@@ -844,30 +890,31 @@ class AsyncLiveEssentials:
             end_date: The end of the date range in ISO 8601 format. Defaults to 7 days after start.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The occurrences were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_occurrences(
                 user_id, start_date, end_date=end_date, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_events(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> EventConnection:
         """The method returns every event belonging to the authenticated user.
@@ -876,7 +923,7 @@ class AsyncLiveEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -885,37 +932,38 @@ class AsyncLiveEssentials:
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_events(
                 user_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 type_=type_,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_events_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> EventConnection:
         """The method returns every event belonging to the authenticated user.
@@ -923,7 +971,7 @@ class AsyncLiveEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -932,36 +980,37 @@ class AsyncLiveEssentials:
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_events_alt1(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 type_=type_,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_events_alt2(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> EventConnection:
         """The method returns every event belonging to the authenticated user.
@@ -969,7 +1018,7 @@ class AsyncLiveEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -978,25 +1027,26 @@ class AsyncLiveEssentials:
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The events were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_events_alt2(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 type_=type_,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def update_live_event(
         self,
@@ -1012,7 +1062,8 @@ class AsyncLiveEssentials:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was updated.
@@ -1021,11 +1072,11 @@ class AsyncLiveEssentials:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user doesn't have
                 the necessary permissions to update the event. * Error code 3422: The authenticated user can't update
                 the event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_live_event(
                 live_event_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def update_live_event_alt1(
         self,
@@ -1039,7 +1090,8 @@ class AsyncLiveEssentials:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was updated.
@@ -1048,11 +1100,11 @@ class AsyncLiveEssentials:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user doesn't have
                 the necessary permissions to update the event. * Error code 3422: The authenticated user can't update
                 the event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_live_event_alt1(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def update_live_event_alt2(
         self,
@@ -1066,7 +1118,8 @@ class AsyncLiveEssentials:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event was updated.
@@ -1075,11 +1128,11 @@ class AsyncLiveEssentials:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user doesn't have
                 the necessary permissions to update the event. * Error code 3422: The authenticated user can't update
                 the event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_live_event_alt2(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveEssentialsWithRawResponse:
@@ -1099,7 +1152,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1124,7 +1178,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1151,7 +1206,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1176,7 +1232,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1200,7 +1257,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1224,7 +1282,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1253,7 +1312,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1278,7 +1338,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1305,7 +1366,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1336,7 +1398,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1361,7 +1424,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             live_event_id: The ID of the event.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1386,7 +1450,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             live_event_id: The ID of the event.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1424,7 +1489,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             end_date: The end of the date range in ISO 8601 format. Defaults to 7 days after start.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1451,12 +1517,12 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[EventConnection, RawError]:
         """The method returns every event belonging to the authenticated user.
@@ -1465,7 +1531,7 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -1474,7 +1540,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1484,12 +1551,12 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter8OrStr | None]("filter", filter),
+                param[Filter8OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
                 param[Sort8OrStr | None]("sort", sort),
-                param[Type27OrStr | None]("type", type_),
+                param[Type31OrStr | None]("type", type_),
             ],
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
@@ -1503,12 +1570,12 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[EventConnection, RawError]:
         """The method returns every event belonging to the authenticated user.
@@ -1516,7 +1583,7 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -1525,7 +1592,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1534,12 +1602,12 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             url_template=self._server.default("/live_events"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter8OrStr | None]("filter", filter),
+                param[Filter8OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
                 param[Sort8OrStr | None]("sort", sort),
-                param[Type27OrStr | None]("type", type_),
+                param[Type31OrStr | None]("type", type_),
             ],
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
@@ -1553,12 +1621,12 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[EventConnection, RawError]:
         """The method returns every event belonging to the authenticated user.
@@ -1566,7 +1634,7 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -1575,7 +1643,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1584,12 +1653,12 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             url_template=self._server.default("/me/live_events"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter8OrStr | None]("filter", filter),
+                param[Filter8OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
                 param[Sort8OrStr | None]("sort", sort),
-                param[Type27OrStr | None]("type", type_),
+                param[Type31OrStr | None]("type", type_),
             ],
             auth_scheme=AnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
@@ -1613,7 +1682,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1643,7 +1713,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1673,7 +1744,8 @@ class LiveEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1705,7 +1777,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1718,7 +1791,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEvent],
+            decoder=async_json_decoder[RecurringEvent],
             error_mapper=create_live_event_error_mapper,
             request_options=request_options,
         )
@@ -1730,7 +1803,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1742,7 +1816,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEvent],
+            decoder=async_json_decoder[RecurringEvent],
             error_mapper=create_live_event_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1757,7 +1831,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1769,7 +1844,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEvent],
+            decoder=async_json_decoder[RecurringEvent],
             error_mapper=create_live_event_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1782,7 +1857,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1794,7 +1870,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_event_error_mapper,
             request_options=request_options,
         )
@@ -1806,7 +1882,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1818,7 +1895,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_event_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1830,7 +1907,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1842,7 +1920,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_event_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1859,7 +1937,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1872,7 +1951,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_events_error_mapper,
             request_options=request_options,
         )
@@ -1884,7 +1963,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1896,7 +1976,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_events_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1911,7 +1991,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1923,7 +2004,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_events_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1942,7 +2023,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1954,7 +2036,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEvent],
+            decoder=async_json_decoder[RecurringEvent],
             error_mapper=get_live_event_error_mapper,
             request_options=request_options,
         )
@@ -1967,7 +2049,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             live_event_id: The ID of the event.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1979,7 +2062,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEvent],
+            decoder=async_json_decoder[RecurringEvent],
             error_mapper=get_live_event_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1992,7 +2075,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             live_event_id: The ID of the event.
             password: The password of the event when the privacy is set to ``password``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2004,7 +2088,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEvent],
+            decoder=async_json_decoder[RecurringEvent],
             error_mapper=get_live_event_alt2_error_mapper,
             request_options=request_options,
         )
@@ -2030,7 +2114,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             end_date: The end of the date range in ISO 8601 format. Defaults to 7 days after start.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2047,7 +2132,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[LiveEventOccurrenceConnection],
+            decoder=async_json_decoder[LiveEventOccurrenceConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -2057,12 +2142,12 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[EventConnection, RawError]:
         """The method returns every event belonging to the authenticated user.
@@ -2071,7 +2156,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -2080,7 +2165,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2090,17 +2176,17 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter8OrStr | None]("filter", filter),
+                param[Filter8OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
                 param[Sort8OrStr | None]("sort", sort),
-                param[Type27OrStr | None]("type", type_),
+                param[Type31OrStr | None]("type", type_),
             ],
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventConnection],
+            decoder=async_json_decoder[EventConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -2109,12 +2195,12 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[EventConnection, RawError]:
         """The method returns every event belonging to the authenticated user.
@@ -2122,7 +2208,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -2131,7 +2217,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2140,17 +2227,17 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             url_template=self._server.default("/live_events"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter8OrStr | None]("filter", filter),
+                param[Filter8OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
                 param[Sort8OrStr | None]("sort", sort),
-                param[Type27OrStr | None]("type", type_),
+                param[Type31OrStr | None]("type", type_),
             ],
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventConnection],
+            decoder=async_json_decoder[EventConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -2159,12 +2246,12 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter8OrStr | None = None,
+        filter_: Filter8OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
         sort: Sort8OrStr | None = None,
-        type_: Type27OrStr | None = None,
+        type_: Type31OrStr | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[EventConnection, RawError]:
         """The method returns every event belonging to the authenticated user.
@@ -2172,7 +2259,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
+            filter_: The attribute by which to filter the results. Option descriptions: * ``not_in_folder`` - Show only
                 events that aren't in a folder. * ``not_in_showcase`` - Show only events that aren't in a showcase.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -2181,7 +2268,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
                 alphabetically. * ``date`` - Sort the results by creation date.
             type_: The type of event to return. Option descriptions: * ``all`` - Return all events. * ``one_time`` -
                 Return one-time events only. * ``recurring`` - Return recurring events only.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2190,17 +2278,17 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             url_template=self._server.default("/me/live_events"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter8OrStr | None]("filter", filter),
+                param[Filter8OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
                 param[Sort8OrStr | None]("sort", sort),
-                param[Type27OrStr | None]("type", type_),
+                param[Type31OrStr | None]("type", type_),
             ],
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventConnection],
+            decoder=async_json_decoder[EventConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -2219,7 +2307,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2232,7 +2321,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEvent],
+            decoder=async_json_decoder[RecurringEvent],
             error_mapper=update_live_event_error_mapper,
             request_options=request_options,
         )
@@ -2249,7 +2338,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2262,7 +2352,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEvent],
+            decoder=async_json_decoder[RecurringEvent],
             error_mapper=update_live_event_alt1_error_mapper,
             request_options=request_options,
         )
@@ -2279,7 +2369,8 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -2292,7 +2383,7 @@ class AsyncLiveEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEvent],
+            decoder=async_json_decoder[RecurringEvent],
             error_mapper=update_live_event_alt2_error_mapper,
             request_options=request_options,
         )

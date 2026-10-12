@@ -12,9 +12,11 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.delete_folder_items_alt1_error import (
     DeleteFolderItemsAlt1ErrorBody,
@@ -48,7 +50,8 @@ class FoldersItems:
             send_to_recently_deleted: When ``should_delete_items`` is true, send deleted clips to Recently Deleted
                 purgatory (``TYPE_RECENTLY_DELETED``) instead of legacy user delete purgatory.
             should_delete_items: Whether to delete the items when removing them from the folder.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The items were removed.
@@ -57,13 +60,15 @@ class FoldersItems:
             ApiError: * Error code 2204: The input is invalid. * Error code 3200: The authenticated user can't remove
                 items from the folder. Error code 8000: The user credentials are invalid. Error code 5000: No such
                 folder or video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_folder_items_alt1(
-            project_id,
-            uris,
-            send_to_recently_deleted=send_to_recently_deleted,
-            should_delete_items=should_delete_items,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_folder_items_alt1(
+                project_id,
+                uris,
+                send_to_recently_deleted=send_to_recently_deleted,
+                should_delete_items=should_delete_items,
+                request_options=request_options,
+            ),
+        )
 
     def get_folder_items(
         self,
@@ -71,7 +76,7 @@ class FoldersItems:
         *,
         clip_privacy_filters: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter21OrStr | None = None,
+        filter_: Filter21OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort37OrStr | None = None,
@@ -88,8 +93,9 @@ class FoldersItems:
                 when only users with the link can play the video.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the results
-                by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by video.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the
+                results by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by
+                video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
@@ -97,20 +103,23 @@ class FoldersItems:
                 ``duration`` - Sort the results by duration. Items without a duration, namely events and folders, are
                 grouped by type in ascending alphabetical order, with events first. * ``last_user_action_event_date`` -
                 Sort the results by the date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_folder_items(
-            project_id,
-            clip_privacy_filters=clip_privacy_filters,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_folder_items(
+                project_id,
+                clip_privacy_filters=clip_privacy_filters,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_folder_items2(
         self,
@@ -119,7 +128,7 @@ class FoldersItems:
         *,
         clip_privacy_filters: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter21OrStr | None = None,
+        filter_: Filter21OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort37OrStr | None = None,
@@ -137,8 +146,9 @@ class FoldersItems:
                 when only users with the link can play the video.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the results
-                by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by video.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the
+                results by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by
+                video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
@@ -146,21 +156,24 @@ class FoldersItems:
                 ``duration`` - Sort the results by duration. Items without a duration, namely events and folders, are
                 grouped by type in ascending alphabetical order, with events first. * ``last_user_action_event_date`` -
                 Sort the results by the date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_folder_items2(
-            project_id,
-            user_id,
-            clip_privacy_filters=clip_privacy_filters,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_folder_items2(
+                project_id,
+                user_id,
+                clip_privacy_filters=clip_privacy_filters,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> FoldersItemsWithRawResponse:
@@ -189,7 +202,8 @@ class AsyncFoldersItems:
             send_to_recently_deleted: When ``should_delete_items`` is true, send deleted clips to Recently Deleted
                 purgatory (``TYPE_RECENTLY_DELETED``) instead of legacy user delete purgatory.
             should_delete_items: Whether to delete the items when removing them from the folder.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The items were removed.
@@ -198,15 +212,15 @@ class AsyncFoldersItems:
             ApiError: * Error code 2204: The input is invalid. * Error code 3200: The authenticated user can't remove
                 items from the folder. Error code 8000: The user credentials are invalid. Error code 5000: No such
                 folder or video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_folder_items_alt1(
                 project_id,
                 uris,
                 send_to_recently_deleted=send_to_recently_deleted,
                 should_delete_items=should_delete_items,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_folder_items(
         self,
@@ -214,7 +228,7 @@ class AsyncFoldersItems:
         *,
         clip_privacy_filters: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter21OrStr | None = None,
+        filter_: Filter21OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort37OrStr | None = None,
@@ -231,8 +245,9 @@ class AsyncFoldersItems:
                 when only users with the link can play the video.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the results
-                by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by video.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the
+                results by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by
+                video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
@@ -240,22 +255,23 @@ class AsyncFoldersItems:
                 ``duration`` - Sort the results by duration. Items without a duration, namely events and folders, are
                 grouped by type in ascending alphabetical order, with events first. * ``last_user_action_event_date`` -
                 Sort the results by the date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_folder_items(
                 project_id,
                 clip_privacy_filters=clip_privacy_filters,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_folder_items2(
         self,
@@ -264,7 +280,7 @@ class AsyncFoldersItems:
         *,
         clip_privacy_filters: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter21OrStr | None = None,
+        filter_: Filter21OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort37OrStr | None = None,
@@ -282,8 +298,9 @@ class AsyncFoldersItems:
                 when only users with the link can play the video.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the results
-                by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by video.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the
+                results by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by
+                video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
@@ -291,23 +308,24 @@ class AsyncFoldersItems:
                 ``duration`` - Sort the results by duration. Items without a duration, namely events and folders, are
                 grouped by type in ascending alphabetical order, with events first. * ``last_user_action_event_date`` -
                 Sort the results by the date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_folder_items2(
                 project_id,
                 user_id,
                 clip_privacy_filters=clip_privacy_filters,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncFoldersItemsWithRawResponse:
@@ -333,7 +351,8 @@ class FoldersItemsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
             send_to_recently_deleted: When ``should_delete_items`` is true, send deleted clips to Recently Deleted
                 purgatory (``TYPE_RECENTLY_DELETED``) instead of legacy user delete purgatory.
             should_delete_items: Whether to delete the items when removing them from the folder.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -361,7 +380,7 @@ class FoldersItemsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         *,
         clip_privacy_filters: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter21OrStr | None = None,
+        filter_: Filter21OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort37OrStr | None = None,
@@ -378,8 +397,9 @@ class FoldersItemsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
                 when only users with the link can play the video.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the results
-                by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by video.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the
+                results by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by
+                video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
@@ -387,7 +407,8 @@ class FoldersItemsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
                 ``duration`` - Sort the results by duration. Items without a duration, namely events and folders, are
                 grouped by type in ascending alphabetical order, with events first. * ``last_user_action_event_date`` -
                 Sort the results by the date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -398,7 +419,7 @@ class FoldersItemsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
             query_params=[
                 param[str | None]("clip_privacy_filters", clip_privacy_filters),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter21OrStr | None]("filter", filter),
+                param[Filter21OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort37OrStr | None]("sort", sort),
@@ -418,7 +439,7 @@ class FoldersItemsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         *,
         clip_privacy_filters: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter21OrStr | None = None,
+        filter_: Filter21OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort37OrStr | None = None,
@@ -436,8 +457,9 @@ class FoldersItemsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
                 when only users with the link can play the video.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the results
-                by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by video.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the
+                results by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by
+                video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
@@ -445,7 +467,8 @@ class FoldersItemsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
                 ``duration`` - Sort the results by duration. Items without a duration, namely events and folders, are
                 grouped by type in ascending alphabetical order, with events first. * ``last_user_action_event_date`` -
                 Sort the results by the date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -456,7 +479,7 @@ class FoldersItemsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
             query_params=[
                 param[str | None]("clip_privacy_filters", clip_privacy_filters),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter21OrStr | None]("filter", filter),
+                param[Filter21OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort37OrStr | None]("sort", sort),
@@ -489,7 +512,8 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             send_to_recently_deleted: When ``should_delete_items`` is true, send deleted clips to Recently Deleted
                 purgatory (``TYPE_RECENTLY_DELETED``) instead of legacy user delete purgatory.
             should_delete_items: Whether to delete the items when removing them from the folder.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -506,7 +530,7 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_folder_items_alt1_error_mapper,
             request_options=request_options,
         )
@@ -517,7 +541,7 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         *,
         clip_privacy_filters: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter21OrStr | None = None,
+        filter_: Filter21OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort37OrStr | None = None,
@@ -534,8 +558,9 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
                 when only users with the link can play the video.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the results
-                by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by video.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the
+                results by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by
+                video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
@@ -543,7 +568,8 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
                 ``duration`` - Sort the results by duration. Items without a duration, namely events and folders, are
                 grouped by type in ascending alphabetical order, with events first. * ``last_user_action_event_date`` -
                 Sort the results by the date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -554,7 +580,7 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             query_params=[
                 param[str | None]("clip_privacy_filters", clip_privacy_filters),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter21OrStr | None]("filter", filter),
+                param[Filter21OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort37OrStr | None]("sort", sort),
@@ -562,7 +588,7 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -574,7 +600,7 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         *,
         clip_privacy_filters: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter21OrStr | None = None,
+        filter_: Filter21OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort37OrStr | None = None,
@@ -592,8 +618,9 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
                 when only users with the link can play the video.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the results
-                by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by video.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``folder`` - Filter the
+                results by folder. * ``live_event`` - Filter the results by event. * ``video`` - Filter the results by
+                video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
@@ -601,7 +628,8 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
                 ``duration`` - Sort the results by duration. Items without a duration, namely events and folders, are
                 grouped by type in ascending alphabetical order, with events first. * ``last_user_action_event_date`` -
                 Sort the results by the date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -612,7 +640,7 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             query_params=[
                 param[str | None]("clip_privacy_filters", clip_privacy_filters),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter21OrStr | None]("filter", filter),
+                param[Filter21OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort37OrStr | None]("sort", sort),
@@ -620,7 +648,7 @@ class AsyncFoldersItemsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )

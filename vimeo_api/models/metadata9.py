@@ -19,5 +19,5 @@ class Metadata9(SdkBaseModel):
 
 
 class Metadata9Dict(TypedDict):
-    connections: Connections9 | Connections9Dict
-    interactions: PurchaseInteraction | PurchaseInteractionDict
+    connections: Connections9Dict
+    interactions: PurchaseInteractionDict

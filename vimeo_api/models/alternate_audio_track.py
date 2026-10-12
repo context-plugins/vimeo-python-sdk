@@ -56,11 +56,11 @@ class AlternateAudioTrack(SdkBaseModel):
 
 class AlternateAudioTrackDict(TypedDict):
     active: bool
-    download: list[Download1 | Download1Dict]
-    language: Language2 | Language2Dict
+    download: list[Download1Dict]
+    language: Language2Dict
     provenance: ProvenanceOrStr
-    quota: Quota | QuotaDict
-    transcode: Transcode1 | Transcode1Dict
+    quota: QuotaDict
+    transcode: Transcode1Dict
     type_: Type11OrStr
     upload: Any
     uri: str

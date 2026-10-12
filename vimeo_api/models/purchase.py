@@ -3,12 +3,12 @@ from __future__ import annotations
 from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
-from .enums.status17 import Status17OrStr
+from .enums.status20 import Status20OrStr
 from .uri import Uri, UriDict
 
 
 class Purchase(SdkBaseModel):
-    status: Status17OrStr
+    status: Status20OrStr
     """The purchase status of the product.
 
     Option descriptions:
@@ -21,5 +21,5 @@ class Purchase(SdkBaseModel):
 
 
 class PurchaseDict(TypedDict):
-    status: Status17OrStr
-    uri: Uri | UriDict
+    status: Status20OrStr
+    uri: UriDict

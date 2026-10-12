@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import Literal
-
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
+from .enums.unit2 import Unit2OrStr
 
 
 class Restricted(SdkBaseModel):
@@ -16,7 +15,7 @@ class Restricted(SdkBaseModel):
     max: float | None
     """The total number of bytes that the authenticated user can use for restricted videos (embeddable or private)."""
 
-    unit: Literal["video_size"] = "video_size"
+    unit: Unit2OrStr
     """The unit that's used to compute quota.
 
     Option descriptions:
@@ -29,5 +28,5 @@ class Restricted(SdkBaseModel):
 class RestrictedDict(TypedDict):
     free: float | None
     max: float | None
-    unit: NotRequired[Literal["video_size"]]
+    unit: Unit2OrStr
     used: float

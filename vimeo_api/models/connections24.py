@@ -22,6 +22,6 @@ class Connections24(SdkBaseModel):
 
 
 class Connections24Dict(TypedDict):
-    groups: Groups2 | Groups2Dict
-    owner: Owner1 | Owner1Dict
-    personal_team_folder: PersonalTeamFolder | PersonalTeamFolderDict
+    groups: Groups2Dict
+    owner: Owner1Dict
+    personal_team_folder: PersonalTeamFolderDict

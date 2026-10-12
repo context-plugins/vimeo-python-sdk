@@ -5,13 +5,15 @@ from ...core import open_enum_validator
 
 
 class Status8(str, Enum):
-    """The transcode status of the audio track.
+    """The status code for the availability of the uploaded video.
 
     Option descriptions:
-     * ``complete`` - Transcoding is complete. The audio track is available.
-     * ``error`` - There was a transcoding error. The audio track isn't available.
-     * ``in_progress`` - Transcoding is in progress. The audio track isn't available yet."""
+     * ``canceled`` - The upload was canceled.
+     * ``complete`` - The upload is complete.
+     * ``error`` - The upload ended with an error.
+     * ``in_progress`` - The upload is underway."""
 
+    CANCELED = "canceled"
     COMPLETE = "complete"
     ERROR = "error"
     IN_PROGRESS = "in_progress"

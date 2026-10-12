@@ -10,9 +10,11 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.creative_commons_connection import CreativeCommonsConnection
 from ..server.server import Server
@@ -34,16 +36,17 @@ class VideosCreativeCommons:
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The Creative Commons licenses were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_cc_licenses(
-            page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_cc_licenses(page=page, per_page=per_page, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> VideosCreativeCommonsWithRawResponse:
@@ -66,16 +69,17 @@ class AsyncVideosCreativeCommons:
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The Creative Commons licenses were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_cc_licenses(page=page, per_page=per_page, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosCreativeCommonsWithRawResponse:
@@ -95,7 +99,8 @@ class VideosCreativeCommonsWithRawResponse(SecuredRawResponse[RawClient, Server,
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -125,7 +130,8 @@ class AsyncVideosCreativeCommonsWithRawResponse(SecuredRawResponse[AsyncRawClien
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -136,7 +142,7 @@ class AsyncVideosCreativeCommonsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CreativeCommonsConnection],
+            decoder=async_json_decoder[CreativeCommonsConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.status3 import Status3OrStr
+from .enums.status4 import Status4OrStr
 from .hls_dash_video_file import HlsDashVideoFile, HlsDashVideoFileDict
 from .progressive import Progressive, ProgressiveDict
 
@@ -24,7 +24,7 @@ class Play(SdkBaseModel):
     progressive: Optional[list[Progressive]] = UNSET
     """The progressive video files."""
 
-    status: Status3OrStr
+    status: Status4OrStr
     """The play status of the video.
 
     Option descriptions:
@@ -36,9 +36,9 @@ class Play(SdkBaseModel):
 
 
 class PlayDict(TypedDict):
-    dash: NotRequired[HlsDashVideoFile | HlsDashVideoFileDict]
-    hls: NotRequired[HlsDashVideoFile | HlsDashVideoFileDict]
+    dash: NotRequired[HlsDashVideoFileDict]
+    hls: NotRequired[HlsDashVideoFileDict]
     player_fairplay_certificate_url: str
     player_license_url: str
-    progressive: NotRequired[list[Progressive | ProgressiveDict]]
-    status: Status3OrStr
+    progressive: NotRequired[list[ProgressiveDict]]
+    status: Status4OrStr

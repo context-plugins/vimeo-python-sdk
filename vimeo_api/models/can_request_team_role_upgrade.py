@@ -21,5 +21,5 @@ class CanRequestTeamRoleUpgrade(SdkBaseModel):
 
 class CanRequestTeamRoleUpgradeDict(TypedDict):
     options: list[str]
-    properties: Properties | PropertiesDict
+    properties: PropertiesDict
     uri: str

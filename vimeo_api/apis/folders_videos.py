@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_video_to_project_alt1_error import (
     AddVideoToProjectAlt1ErrorBody,
@@ -68,16 +71,17 @@ class FoldersVideos:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: Error code 5000: No such user, folder, or video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_video_to_project(
-            project_id, user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_to_project(project_id, user_id, video_id, request_options=request_options)
+        )
 
     def add_video_to_project_alt1(
         self, project_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -88,16 +92,17 @@ class FoldersVideos:
         Args:
             project_id: The ID of the folder.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: Error code 5000: No such user, folder, or video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_video_to_project_alt1(
-            project_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_to_project_alt1(project_id, video_id, request_options=request_options)
+        )
 
     def add_videos_to_project(
         self,
@@ -114,7 +119,8 @@ class FoldersVideos:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -122,9 +128,9 @@ class FoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such folder or video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_videos_to_project(
-            project_id, user_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_videos_to_project(project_id, user_id, body, request_options=request_options)
+        )
 
     def add_videos_to_project_alt1(
         self,
@@ -139,7 +145,8 @@ class FoldersVideos:
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -147,9 +154,9 @@ class FoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such folder or video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_videos_to_project_alt1(
-            project_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_videos_to_project_alt1(project_id, body, request_options=request_options)
+        )
 
     def get_project_videos(
         self,
@@ -190,7 +197,8 @@ class FoldersVideos:
                 alphabetically. * ``date`` - Sort the results by date. * ``default`` - Use the default sort order. *
                 ``duration`` - Sort the results by duration. * ``last_user_action_event_date`` - Sort the results by the
                 date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -198,21 +206,23 @@ class FoldersVideos:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_project_videos(
-            project_id,
-            user_id,
-            direction=direction,
-            filter_tag=filter_tag,
-            filter_tag_all_of=filter_tag_all_of,
-            filter_tag_exclude=filter_tag_exclude,
-            include_subfolders=include_subfolders,
-            page=page,
-            per_page=per_page,
-            query=query,
-            query_fields=query_fields,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_project_videos(
+                project_id,
+                user_id,
+                direction=direction,
+                filter_tag=filter_tag,
+                filter_tag_all_of=filter_tag_all_of,
+                filter_tag_exclude=filter_tag_exclude,
+                include_subfolders=include_subfolders,
+                page=page,
+                per_page=per_page,
+                query=query,
+                query_fields=query_fields,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_project_videos_alt1(
         self,
@@ -251,7 +261,8 @@ class FoldersVideos:
                 alphabetically. * ``date`` - Sort the results by date. * ``default`` - Use the default sort order. *
                 ``duration`` - Sort the results by duration. * ``last_user_action_event_date`` - Sort the results by the
                 date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -259,20 +270,22 @@ class FoldersVideos:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_project_videos_alt1(
-            project_id,
-            direction=direction,
-            filter_tag=filter_tag,
-            filter_tag_all_of=filter_tag_all_of,
-            filter_tag_exclude=filter_tag_exclude,
-            include_subfolders=include_subfolders,
-            page=page,
-            per_page=per_page,
-            query=query,
-            query_fields=query_fields,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_project_videos_alt1(
+                project_id,
+                direction=direction,
+                filter_tag=filter_tag,
+                filter_tag_all_of=filter_tag_all_of,
+                filter_tag_exclude=filter_tag_exclude,
+                include_subfolders=include_subfolders,
+                page=page,
+                per_page=per_page,
+                query=query,
+                query_fields=query_fields,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def remove_video_from_project(
         self, project_id: float, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -284,7 +297,8 @@ class FoldersVideos:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -292,9 +306,11 @@ class FoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such video exists in the folder. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.remove_video_from_project(
-            project_id, user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_video_from_project(
+                project_id, user_id, video_id, request_options=request_options
+            ),
+        )
 
     def remove_video_from_project_alt1(
         self, project_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -305,7 +321,8 @@ class FoldersVideos:
         Args:
             project_id: The ID of the folder.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -313,9 +330,11 @@ class FoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such video exists in the folder. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.remove_video_from_project_alt1(
-            project_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_video_from_project_alt1(
+                project_id, video_id, request_options=request_options
+            ),
+        )
 
     def remove_videos_from_project(
         self,
@@ -332,7 +351,8 @@ class FoldersVideos:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -340,9 +360,11 @@ class FoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such folder exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.remove_videos_from_project(
-            project_id, user_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_videos_from_project(
+                project_id, user_id, body, request_options=request_options
+            ),
+        )
 
     def remove_videos_from_project_alt1(
         self,
@@ -357,7 +379,8 @@ class FoldersVideos:
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -365,9 +388,9 @@ class FoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such folder exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.remove_videos_from_project_alt1(
-            project_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_videos_from_project_alt1(project_id, body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> FoldersVideosWithRawResponse:
@@ -388,18 +411,19 @@ class AsyncFoldersVideos:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: Error code 5000: No such user, folder, or video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_project(
                 project_id, user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def add_video_to_project_alt1(
         self, project_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -410,18 +434,19 @@ class AsyncFoldersVideos:
         Args:
             project_id: The ID of the folder.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: Error code 5000: No such user, folder, or video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_project_alt1(
                 project_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def add_videos_to_project(
         self,
@@ -438,7 +463,8 @@ class AsyncFoldersVideos:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -446,11 +472,11 @@ class AsyncFoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such folder or video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_videos_to_project(
                 project_id, user_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def add_videos_to_project_alt1(
         self,
@@ -465,7 +491,8 @@ class AsyncFoldersVideos:
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -473,9 +500,9 @@ class AsyncFoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such folder or video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_videos_to_project_alt1(project_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_project_videos(
         self,
@@ -516,7 +543,8 @@ class AsyncFoldersVideos:
                 alphabetically. * ``date`` - Sort the results by date. * ``default`` - Use the default sort order. *
                 ``duration`` - Sort the results by duration. * ``last_user_action_event_date`` - Sort the results by the
                 date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -524,7 +552,7 @@ class AsyncFoldersVideos:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_project_videos(
                 project_id,
                 user_id,
@@ -539,8 +567,8 @@ class AsyncFoldersVideos:
                 query_fields=query_fields,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_project_videos_alt1(
         self,
@@ -579,7 +607,8 @@ class AsyncFoldersVideos:
                 alphabetically. * ``date`` - Sort the results by date. * ``default`` - Use the default sort order. *
                 ``duration`` - Sort the results by duration. * ``last_user_action_event_date`` - Sort the results by the
                 date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -587,7 +616,7 @@ class AsyncFoldersVideos:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_project_videos_alt1(
                 project_id,
                 direction=direction,
@@ -601,8 +630,8 @@ class AsyncFoldersVideos:
                 query_fields=query_fields,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_video_from_project(
         self, project_id: float, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -614,7 +643,8 @@ class AsyncFoldersVideos:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -622,11 +652,11 @@ class AsyncFoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such video exists in the folder. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_video_from_project(
                 project_id, user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_video_from_project_alt1(
         self, project_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -637,7 +667,8 @@ class AsyncFoldersVideos:
         Args:
             project_id: The ID of the folder.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -645,11 +676,11 @@ class AsyncFoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such video exists in the folder. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_video_from_project_alt1(
                 project_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_videos_from_project(
         self,
@@ -666,7 +697,8 @@ class AsyncFoldersVideos:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -674,11 +706,11 @@ class AsyncFoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such folder exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_videos_from_project(
                 project_id, user_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_videos_from_project_alt1(
         self,
@@ -693,7 +725,8 @@ class AsyncFoldersVideos:
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -701,11 +734,11 @@ class AsyncFoldersVideos:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 8000: The user credentials are invalid. Error
                 code 5000: No such folder exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_videos_from_project_alt1(
                 project_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncFoldersVideosWithRawResponse:
@@ -723,7 +756,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             project_id: The ID of the folder.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -753,7 +787,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             project_id: The ID of the folder.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -785,7 +820,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -816,7 +852,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -873,7 +910,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
                 alphabetically. * ``date`` - Sort the results by date. * ``default`` - Use the default sort order. *
                 ``duration`` - Sort the results by duration. * ``last_user_action_event_date`` - Sort the results by the
                 date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -938,7 +976,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
                 alphabetically. * ``date`` - Sort the results by date. * ``default`` - Use the default sort order. *
                 ``duration`` - Sort the results by duration. * ``last_user_action_event_date`` - Sort the results by the
                 date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -976,7 +1015,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             project_id: The ID of the folder.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1006,7 +1046,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             project_id: The ID of the folder.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1038,7 +1079,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1069,7 +1111,8 @@ class FoldersVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1099,7 +1142,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             project_id: The ID of the folder.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1115,7 +1159,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_video_to_project_error_mapper,
             request_options=request_options,
         )
@@ -1129,7 +1173,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             project_id: The ID of the folder.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1141,7 +1186,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_video_to_project_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1161,7 +1206,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1174,7 +1220,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_videos_to_project_error_mapper,
             request_options=request_options,
         )
@@ -1192,7 +1238,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1205,7 +1252,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_videos_to_project_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1249,7 +1296,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
                 alphabetically. * ``date`` - Sort the results by date. * ``default`` - Use the default sort order. *
                 ``duration`` - Sort the results by duration. * ``last_user_action_event_date`` - Sort the results by the
                 date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1272,7 +1320,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_project_videos_error_mapper,
             request_options=request_options,
         )
@@ -1314,7 +1362,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
                 alphabetically. * ``date`` - Sort the results by date. * ``default`` - Use the default sort order. *
                 ``duration`` - Sort the results by duration. * ``last_user_action_event_date`` - Sort the results by the
                 date of the last user action.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1337,7 +1386,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_project_videos_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1352,7 +1401,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             project_id: The ID of the folder.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1368,7 +1418,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_video_from_project_error_mapper,
             request_options=request_options,
         )
@@ -1382,7 +1432,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             project_id: The ID of the folder.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1394,7 +1445,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_video_from_project_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1414,7 +1465,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1427,7 +1479,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_videos_from_project_error_mapper,
             request_options=request_options,
         )
@@ -1445,7 +1497,8 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1458,7 +1511,7 @@ class AsyncFoldersVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_videos_from_project_alt1_error_mapper,
             request_options=request_options,
         )

@@ -37,7 +37,7 @@ class AiCreditsQuota(SdkBaseModel):
 
 class AiCreditsQuotaDict(TypedDict):
     available: NotRequired[float]
-    balances: NotRequired[list[Balance | BalanceDict]]
+    balances: NotRequired[list[BalanceDict]]
     period: NotRequired[PeriodOrStr]
     remaining: NotRequired[float]
     reset_date: NotRequired[str]

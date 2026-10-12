@@ -4,7 +4,7 @@ from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
 from .folder_uri import FolderUri, FolderUriDict
-from .status2 import Status2, Status2Dict
+from .status3 import Status3, Status3Dict
 from .upgrade_to_role import UpgradeToRole, UpgradeToRoleDict
 
 
@@ -14,7 +14,7 @@ class Properties(SdkBaseModel):
     folder_uri: FolderUri
     """An object containing data on the value of **folder_uri** and whether it's required for the interaction."""
 
-    status: Status2
+    status: Status3
     """An object containing data on the value of **status** and whether it's required for the interaction."""
 
     upgrade_to_role: UpgradeToRole
@@ -22,6 +22,6 @@ class Properties(SdkBaseModel):
 
 
 class PropertiesDict(TypedDict):
-    folder_uri: FolderUri | FolderUriDict
-    status: Status2 | Status2Dict
-    upgrade_to_role: UpgradeToRole | UpgradeToRoleDict
+    folder_uri: FolderUriDict
+    status: Status3Dict
+    upgrade_to_role: UpgradeToRoleDict

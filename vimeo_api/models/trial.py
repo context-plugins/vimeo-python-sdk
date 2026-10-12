@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import Literal
-
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
+from .enums.status1 import Status1OrStr
 
 
 class Trial(SdkBaseModel):
@@ -19,7 +18,7 @@ class Trial(SdkBaseModel):
     and have no PaymentsService subscription backing them; for these users, ``subscription.renewal.renewal_date``
     carries the trial-expiry datetime instead of a next-charge datetime."""
 
-    status: Literal["free_trial"] = "free_trial"
+    status: Status1OrStr | None
     """The status of the authenticated user's trial.
 
     Option descriptions:
@@ -29,4 +28,4 @@ class Trial(SdkBaseModel):
 class TrialDict(TypedDict):
     has_been_in_free_trial: bool
     is_reverse_free_trial: bool
-    status: NotRequired[Literal["free_trial"]]
+    status: Status1OrStr | None

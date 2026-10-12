@@ -19,5 +19,5 @@ class ComposerGraphicsConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[ComposerGraphics | ComposerGraphicsDict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[ComposerGraphicsDict]]

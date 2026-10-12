@@ -15,5 +15,5 @@ class Episodes(SdkBaseModel):
 
 
 class EpisodesDict(TypedDict):
-    buy: Buy1 | Buy1Dict
-    rent: Rent1 | Rent1Dict
+    buy: Buy1Dict
+    rent: Rent1Dict

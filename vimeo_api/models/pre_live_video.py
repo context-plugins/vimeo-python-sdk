@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
-from .enums.status10 import Status10OrStr
+from .enums.status12 import Status12OrStr
 
 
 class PreLiveVideo(SdkBaseModel):
@@ -13,7 +13,7 @@ class PreLiveVideo(SdkBaseModel):
     options: list[str]
     """An array of HTTP methods permitted on this URI."""
 
-    status: Status10OrStr
+    status: Status12OrStr
     """The status of the pre-live video's RTMP link.
 
     Option descriptions:
@@ -28,5 +28,5 @@ class PreLiveVideo(SdkBaseModel):
 
 class PreLiveVideoDict(TypedDict):
     options: list[str]
-    status: Status10OrStr
+    status: Status12OrStr
     uri: str

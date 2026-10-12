@@ -19,5 +19,5 @@ class PictureConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[Picture | PictureDict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[PictureDict]]

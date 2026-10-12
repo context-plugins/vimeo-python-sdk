@@ -13,14 +13,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Signature**: `def add_video_tag(video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`, `word`
 - **Params**: `video_id` — path · `word` — path
-- **Returns (parsed)**: `Tag`
-- **Returns (raw)**: `ApiResult[Tag, AddVideoTagErrorBody]`
+- **Returns (parsed)**: `TagModel`
+- **Returns (raw)**: `ApiResult[TagModel, AddVideoTagErrorBody]`
 - **Error**: `AddVideoTagErrorBody` — **Case A (typed)**
 - **Error arms**: `LegacyError` [400, 403] · `RawError` [anything unmapped]
 
 | Type | Source |
 | --- | --- |
-| `Tag` | `vimeo_api/models/tag.py` |
+| `TagModel` | `vimeo_api/models/tag_model.py` |
 | `AddVideoTagErrorBody` | `vimeo_api/errors/add_video_tag_error.py` |
 | `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
@@ -31,14 +31,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Signature**: `def add_video_tags(video_id: float, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`
 - **Params**: `video_id` — path · `page` — query · `per_page` — query
-- **Returns (parsed)**: `list[Tag]`
-- **Returns (raw)**: `ApiResult[list[Tag], AddVideoTagsErrorBody]`
+- **Returns (parsed)**: `list[TagModel]`
+- **Returns (raw)**: `ApiResult[list[TagModel], AddVideoTagsErrorBody]`
 - **Error**: `AddVideoTagsErrorBody` — **Case A (typed)**
 - **Error arms**: `LegacyError` [400, 403] · `RawError` [anything unmapped]
 
 | Type | Source |
 | --- | --- |
-| `Tag` | `vimeo_api/models/tag.py` |
+| `TagModel` | `vimeo_api/models/tag_model.py` |
 | `AddVideoTagsErrorBody` | `vimeo_api/errors/add_video_tags_error.py` |
 | `LegacyError` | `vimeo_api/models/legacy_error.py` |
 
@@ -49,14 +49,14 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Signature**: `def check_video_for_tag(video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `video_id`, `word`
 - **Params**: `video_id` — path · `word` — path
-- **Returns (parsed)**: `Tag`
-- **Returns (raw)**: `ApiResult[Tag, CheckVideoForTagErrorBody]`
+- **Returns (parsed)**: `TagModel`
+- **Returns (raw)**: `ApiResult[TagModel, CheckVideoForTagErrorBody]`
 - **Error**: `CheckVideoForTagErrorBody` — **Case A (typed)**
 - **Error arms**: `LegacyError` [400, 404] · `RawError` [anything unmapped]
 
 | Type | Source |
 | --- | --- |
-| `Tag` | `vimeo_api/models/tag.py` |
+| `TagModel` | `vimeo_api/models/tag_model.py` |
 | `CheckVideoForTagErrorBody` | `vimeo_api/errors/check_video_for_tag_error.py` |
 | `LegacyError` | `vimeo_api/models/legacy_error.py` |
 

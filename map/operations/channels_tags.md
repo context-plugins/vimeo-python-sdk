@@ -31,8 +31,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Signature**: `def add_tags_to_channel(channel_id: float, body: list[ChannelsTagsRequest | ChannelsTagsRequestDict], *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `channel_id`, `body`
 - **Params**: `channel_id` — path · `body` — JSON body
-- **Returns (parsed)**: `list[Tag]`
-- **Returns (raw)**: `ApiResult[list[Tag], AddTagsToChannelErrorBody]`
+- **Returns (parsed)**: `list[TagModel]`
+- **Returns (raw)**: `ApiResult[list[TagModel], AddTagsToChannelErrorBody]`
 - **Error**: `AddTagsToChannelErrorBody` — **Case A (typed)**
 - **Error arms**: `LegacyError` [400] · `Error` [401, 403] · `RawError` [anything unmapped]
 
@@ -40,7 +40,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 | --- | --- |
 | `ChannelsTagsRequest` | `vimeo_api/models/channels_tags_request.py` |
 | `ChannelsTagsRequestDict` | `vimeo_api/models/channels_tags_request.py` |
-| `Tag` | `vimeo_api/models/tag.py` |
+| `TagModel` | `vimeo_api/models/tag_model.py` |
 | `AddTagsToChannelErrorBody` | `vimeo_api/errors/add_tags_to_channel_error.py` |
 | `LegacyError` | `vimeo_api/models/legacy_error.py` |
 | `Error` | `vimeo_api/models/error.py` |

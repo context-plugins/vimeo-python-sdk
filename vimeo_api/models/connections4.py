@@ -91,22 +91,22 @@ class Connections4(SdkBaseModel):
 
 
 class Connections4Dict(TypedDict):
-    albums: NotRequired[Albums1 | Albums1Dict]
-    ancestor_path: list[AncestorPath | AncestorPathDict]
-    available_albums: NotRequired[AvailableAlbums | AvailableAlbumsDict]
-    available_channels: NotRequired[AvailableChannels | AvailableChannelsDict]
-    comments: Comments1 | Comments1Dict
-    credits: Credits | CreditsDict | None
-    likes: Likes1 | Likes1Dict
-    ondemand: NotRequired[Ondemand | OndemandDict]
-    pictures: Pictures1 | Pictures1Dict
-    publish_to_social: NotRequired[PublishToSocial | PublishToSocialDict]
-    recommendations: Recommendations | RecommendationsDict | None
-    related: Related | RelatedDict | None
-    resource_creator_team_user: ResourceCreatorTeamUser | ResourceCreatorTeamUserDict
-    season: NotRequired[Season | SeasonDict]
-    team_permissions: NotRequired[TeamPermissions | TeamPermissionsDict]
-    texttracks: Texttracks | TexttracksDict
-    trailer: NotRequired[Trailer | TrailerDict]
-    users_with_access: NotRequired[UsersWithAccess | UsersWithAccessDict]
-    versions: Versions | VersionsDict
+    albums: NotRequired[Albums1Dict]
+    ancestor_path: list[AncestorPathDict]
+    available_albums: NotRequired[AvailableAlbumsDict]
+    available_channels: NotRequired[AvailableChannelsDict]
+    comments: Comments1Dict
+    credits: CreditsDict | None
+    likes: Likes1Dict
+    ondemand: NotRequired[OndemandDict]
+    pictures: Pictures1Dict
+    publish_to_social: NotRequired[PublishToSocialDict]
+    recommendations: RecommendationsDict | None
+    related: RelatedDict | None
+    resource_creator_team_user: ResourceCreatorTeamUserDict
+    season: NotRequired[SeasonDict]
+    team_permissions: NotRequired[TeamPermissionsDict]
+    texttracks: TexttracksDict
+    trailer: NotRequired[TrailerDict]
+    users_with_access: NotRequired[UsersWithAccessDict]
+    versions: VersionsDict

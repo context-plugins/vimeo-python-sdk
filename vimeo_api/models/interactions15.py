@@ -11,4 +11,4 @@ class Interactions15(SdkBaseModel):
 
 
 class Interactions15Dict(TypedDict):
-    purchase: Purchase | PurchaseDict
+    purchase: PurchaseDict

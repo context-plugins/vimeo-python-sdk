@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.status6 import Status6OrStr
+from .enums.status7 import Status7OrStr
 
 
 class Transcript(SdkBaseModel):
@@ -12,7 +12,7 @@ class Transcript(SdkBaseModel):
     language: str | None
     """The video transcript's language. This data requires a bearer token with the ``private`` scope."""
 
-    status: Optional[Status6OrStr] = UNSET
+    status: Optional[Status7OrStr] = UNSET
     """The video transcript's availability status. This data requires a bearer token with the ``private`` scope.
 
     Option descriptions:
@@ -29,4 +29,4 @@ class Transcript(SdkBaseModel):
 
 class TranscriptDict(TypedDict):
     language: str | None
-    status: NotRequired[Status6OrStr]
+    status: NotRequired[Status7OrStr]

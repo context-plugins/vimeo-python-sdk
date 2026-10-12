@@ -38,6 +38,6 @@ class Videos15(SdkBaseModel):
 class Videos15Dict(TypedDict):
     outro_videos_collection_type: NotRequired[OutroVideosCollectionTypeOrStr | None]
     outro_videos_collection_uri: NotRequired[str | None]
-    picture: NotRequired[Picture | PictureDict | None]
+    picture: NotRequired[PictureDict | None]
     picture_uri: NotRequired[str | None]
     video_uris: NotRequired[list[str]]

@@ -5,16 +5,12 @@ from ...core import open_enum_validator
 
 
 class Status1(str, Enum):
-    """The status of the video.
+    """The status of the authenticated user's trial.
 
     Option descriptions:
-     * ``done`` - The video is finished processing.
-     * ``failed`` - Video processing has failed.
-     * ``processing`` - The video is still being processed."""
+     * ``free_trial`` - The user is currently in a free trial."""
 
-    DONE = "done"
-    FAILED = "failed"
-    PROCESSING = "processing"
+    FREE_TRIAL = "free_trial"
 
     __str__ = str.__str__
 

@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.type21 import Type21OrStr
+from .enums.type25 import Type25OrStr
 from .image import Image, ImageDict
 from .link import Link, LinkDict
 from .share import Share, ShareDict
@@ -27,7 +27,7 @@ class EndScreen1(SdkBaseModel):
     text: Optional[Text] = UNSET
     """The text block that appears after the video ends."""
 
-    type_: Type21OrStr = Field(alias="type")
+    type_: Type25OrStr = Field(alias="type")
     """The elements that appear after the video ends.
 
     Option descriptions:
@@ -48,9 +48,9 @@ class EndScreen1(SdkBaseModel):
 
 
 class EndScreen1Dict(TypedDict):
-    image: NotRequired[Image | ImageDict]
-    link: NotRequired[Link | LinkDict]
-    share: NotRequired[Share | ShareDict]
-    text: NotRequired[Text | TextDict]
-    type_: Type21OrStr
-    videos: NotRequired[Videos15 | Videos15Dict]
+    image: NotRequired[ImageDict]
+    link: NotRequired[LinkDict]
+    share: NotRequired[ShareDict]
+    text: NotRequired[TextDict]
+    type_: Type25OrStr
+    videos: NotRequired[Videos15Dict]

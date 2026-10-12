@@ -55,15 +55,15 @@ class Interactions4(SdkBaseModel):
 
 
 class Interactions4Dict(TypedDict):
-    add_subfolder: AddSubfolder | AddSubfolderDict
+    add_subfolder: AddSubfolderDict
     allow_multiple_review_links: NotRequired[bool]
     can_comment: NotRequired[bool]
-    delete: Delete1 | Delete1Dict
-    delete_video: DeleteVideo | DeleteVideoDict
-    edit: Edit1 | Edit1Dict
-    edit_settings: EditSettings | EditSettingsDict
-    invite: Invite1 | Invite1Dict
-    move_video: MoveVideo | MoveVideoDict
+    delete: Delete1Dict
+    delete_video: DeleteVideoDict
+    edit: Edit1Dict
+    edit_settings: EditSettingsDict
+    invite: Invite1Dict
+    move_video: MoveVideoDict
     review_redirect_link: NotRequired[str]
-    upload_video: UploadVideo | UploadVideoDict
-    view: View2 | View2Dict
+    upload_video: UploadVideoDict
+    view: View2Dict

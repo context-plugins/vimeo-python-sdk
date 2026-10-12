@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.add_folder_to_showcases_error import AddFolderToShowcasesErrorBody, add_folder_to_showcases_error_mapper
 from ..errors.copy_showcase_alt2_error import CopyShowcaseAlt2ErrorBody, copy_showcase_alt2_error_mapper
@@ -59,7 +62,8 @@ class ShowcasesEssentials:
             user_id: The ID of the user.
             album_uris: A comma-separated list of showcase URIs.
             folder_id: The ID of the folder containing videos and events to add.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder contents were added to the showcases.
@@ -68,9 +72,11 @@ class ShowcasesEssentials:
             ApiError: Error code 2204: A parameter is invalid. Error code 3200: The user lacks the permissions to update
                 the showcases or access the folder. Error code 5000: The folder was not found. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.add_folder_to_showcases(
-            user_id, album_uris, folder_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_folder_to_showcases(
+                user_id, album_uris, folder_id, request_options=request_options
+            ),
+        )
 
     def copy_showcase(
         self,
@@ -86,7 +92,8 @@ class ShowcasesEssentials:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The copied showcase was created.
@@ -94,9 +101,9 @@ class ShowcasesEssentials:
         Raises:
             ApiError: The authenticated user can't copy this showcase. No such showcase exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.copy_showcase(
-            album_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.copy_showcase(album_id, user_id, body=body, request_options=request_options)
+        )
 
     def copy_showcase_alt2(
         self,
@@ -110,7 +117,8 @@ class ShowcasesEssentials:
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The copied showcase was created.
@@ -118,7 +126,7 @@ class ShowcasesEssentials:
         Raises:
             ApiError: The authenticated user can't copy this showcase. No such showcase exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.copy_showcase_alt2(album_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.copy_showcase_alt2(album_id, body=body, request_options=request_options))
 
     def create_showcase(
         self,
@@ -132,7 +140,8 @@ class ShowcasesEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was created.
@@ -140,7 +149,7 @@ class ShowcasesEssentials:
         Raises:
             ApiError: A parameter is invalid. The supplied token doesn't have the proper scopes, or the authenticated
                 user can't create showcases. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_showcase(user_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_showcase(user_id, body, request_options=request_options))
 
     def create_showcase_alt1(
         self, body: MeAlbumsRequest | MeAlbumsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -149,7 +158,8 @@ class ShowcasesEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was created.
@@ -157,7 +167,7 @@ class ShowcasesEssentials:
         Raises:
             ApiError: A parameter is invalid. The supplied token doesn't have the proper scopes, or the authenticated
                 user can't create showcases. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_showcase_alt1(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_showcase_alt1(body, request_options=request_options))
 
     def delete_showcase(
         self, album_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -167,7 +177,8 @@ class ShowcasesEssentials:
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was deleted.
@@ -175,14 +186,15 @@ class ShowcasesEssentials:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't delete the
                 showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_showcase(album_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_showcase(album_id, user_id, request_options=request_options))
 
     def delete_showcase_alt2(self, album_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method deletes the specified showcase. The authenticated user must be the owner of the showcase.
 
         Args:
             album_id: The ID of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was deleted.
@@ -190,7 +202,7 @@ class ShowcasesEssentials:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't delete the
                 showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_showcase_alt2(album_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_showcase_alt2(album_id, request_options=request_options))
 
     def edit_showcase(
         self,
@@ -206,7 +218,8 @@ class ShowcasesEssentials:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was edited.
@@ -215,9 +228,9 @@ class ShowcasesEssentials:
             ApiError: A parameter is invalid. The authenticated user doesn't own the showcase, the supplied token
                 doesn't have the proper scopes, or the authenticated user can't edit the showcase. No such showcase
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_showcase(
-            album_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_showcase(album_id, user_id, body=body, request_options=request_options)
+        )
 
     def edit_showcase_alt2(
         self,
@@ -231,7 +244,8 @@ class ShowcasesEssentials:
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was edited.
@@ -240,7 +254,7 @@ class ShowcasesEssentials:
             ApiError: A parameter is invalid. The authenticated user doesn't own the showcase, the supplied token
                 doesn't have the proper scopes, or the authenticated user can't edit the showcase. No such showcase
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_showcase_alt2(album_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.edit_showcase_alt2(album_id, body=body, request_options=request_options))
 
     def get_showcase(
         self, album_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -250,28 +264,30 @@ class ShowcasesEssentials:
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_showcase(album_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_showcase(album_id, user_id, request_options=request_options))
 
     def get_showcase_alt2(self, album_id: float, *, request_options: RequestOptionsOrDict | None = None) -> Album:
         """This method returns the specified showcase. The authenticated user must be the owner of the showcase.
 
         Args:
             album_id: The ID of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_showcase_alt2(album_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_showcase_alt2(album_id, request_options=request_options))
 
     def get_showcases(
         self,
@@ -303,23 +319,26 @@ class ShowcasesEssentials:
                 alphabetically. * ``date`` - Sort the results by date of creation. * ``duration`` - Sort the results by
                 duration. * ``last_modified`` - Sort the results by last modified date. * ``videos`` - Sort the results
                 by the number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcases were returned.
 
         Raises:
             ApiError: A parameter is invalid. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_showcases(
-            user_id,
-            direction=direction,
-            filter_privacy=filter_privacy,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcases(
+                user_id,
+                direction=direction,
+                filter_privacy=filter_privacy,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_showcases_alt1(
         self,
@@ -349,22 +368,25 @@ class ShowcasesEssentials:
                 alphabetically. * ``date`` - Sort the results by date of creation. * ``duration`` - Sort the results by
                 duration. * ``last_modified`` - Sort the results by last modified date. * ``videos`` - Sort the results
                 by the number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcases were returned.
 
         Raises:
             ApiError: A parameter is invalid. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_showcases_alt1(
-            direction=direction,
-            filter_privacy=filter_privacy,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcases_alt1(
+                direction=direction,
+                filter_privacy=filter_privacy,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def update_showcases(
         self,
@@ -383,16 +405,19 @@ class ShowcasesEssentials:
             user_id: The ID of the user.
             album_item_uris: A comma-separated list of video or event URIs.
             album_uris: A comma-separated list of showcase URIs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos and events were added to the showcases.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.update_showcases(
-            user_id, album_item_uris, album_uris, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_showcases(
+                user_id, album_item_uris, album_uris, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> ShowcasesEssentialsWithRawResponse:
@@ -414,7 +439,8 @@ class AsyncShowcasesEssentials:
             user_id: The ID of the user.
             album_uris: A comma-separated list of showcase URIs.
             folder_id: The ID of the folder containing videos and events to add.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder contents were added to the showcases.
@@ -423,11 +449,11 @@ class AsyncShowcasesEssentials:
             ApiError: Error code 2204: A parameter is invalid. Error code 3200: The user lacks the permissions to update
                 the showcases or access the folder. Error code 5000: The folder was not found. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_folder_to_showcases(
                 user_id, album_uris, folder_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def copy_showcase(
         self,
@@ -443,7 +469,8 @@ class AsyncShowcasesEssentials:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The copied showcase was created.
@@ -451,9 +478,9 @@ class AsyncShowcasesEssentials:
         Raises:
             ApiError: The authenticated user can't copy this showcase. No such showcase exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.copy_showcase(album_id, user_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def copy_showcase_alt2(
         self,
@@ -467,7 +494,8 @@ class AsyncShowcasesEssentials:
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The copied showcase was created.
@@ -475,9 +503,9 @@ class AsyncShowcasesEssentials:
         Raises:
             ApiError: The authenticated user can't copy this showcase. No such showcase exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.copy_showcase_alt2(album_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def create_showcase(
         self,
@@ -491,7 +519,8 @@ class AsyncShowcasesEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was created.
@@ -499,7 +528,7 @@ class AsyncShowcasesEssentials:
         Raises:
             ApiError: A parameter is invalid. The supplied token doesn't have the proper scopes, or the authenticated
                 user can't create showcases. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.create_showcase(user_id, body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_showcase(user_id, body, request_options=request_options))
 
     async def create_showcase_alt1(
         self, body: MeAlbumsRequest | MeAlbumsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -508,7 +537,8 @@ class AsyncShowcasesEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was created.
@@ -516,7 +546,7 @@ class AsyncShowcasesEssentials:
         Raises:
             ApiError: A parameter is invalid. The supplied token doesn't have the proper scopes, or the authenticated
                 user can't create showcases. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.create_showcase_alt1(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_showcase_alt1(body, request_options=request_options))
 
     async def delete_showcase(
         self, album_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -526,7 +556,8 @@ class AsyncShowcasesEssentials:
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was deleted.
@@ -534,9 +565,7 @@ class AsyncShowcasesEssentials:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't delete the
                 showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.delete_showcase(album_id, user_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.delete_showcase(album_id, user_id, request_options=request_options))
 
     async def delete_showcase_alt2(
         self, album_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -545,7 +574,8 @@ class AsyncShowcasesEssentials:
 
         Args:
             album_id: The ID of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was deleted.
@@ -553,7 +583,7 @@ class AsyncShowcasesEssentials:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't delete the
                 showcase. No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.delete_showcase_alt2(album_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_showcase_alt2(album_id, request_options=request_options))
 
     async def edit_showcase(
         self,
@@ -569,7 +599,8 @@ class AsyncShowcasesEssentials:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was edited.
@@ -578,9 +609,9 @@ class AsyncShowcasesEssentials:
             ApiError: A parameter is invalid. The authenticated user doesn't own the showcase, the supplied token
                 doesn't have the proper scopes, or the authenticated user can't edit the showcase. No such showcase
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_showcase(album_id, user_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_showcase_alt2(
         self,
@@ -594,7 +625,8 @@ class AsyncShowcasesEssentials:
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was edited.
@@ -603,9 +635,9 @@ class AsyncShowcasesEssentials:
             ApiError: A parameter is invalid. The authenticated user doesn't own the showcase, the supplied token
                 doesn't have the proper scopes, or the authenticated user can't edit the showcase. No such showcase
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_showcase_alt2(album_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_showcase(
         self, album_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -615,28 +647,30 @@ class AsyncShowcasesEssentials:
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.get_showcase(album_id, user_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_showcase(album_id, user_id, request_options=request_options))
 
     async def get_showcase_alt2(self, album_id: float, *, request_options: RequestOptionsOrDict | None = None) -> Album:
         """This method returns the specified showcase. The authenticated user must be the owner of the showcase.
 
         Args:
             album_id: The ID of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcase was returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.get_showcase_alt2(album_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_showcase_alt2(album_id, request_options=request_options))
 
     async def get_showcases(
         self,
@@ -668,14 +702,15 @@ class AsyncShowcasesEssentials:
                 alphabetically. * ``date`` - Sort the results by date of creation. * ``duration`` - Sort the results by
                 duration. * ``last_modified`` - Sort the results by last modified date. * ``videos`` - Sort the results
                 by the number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcases were returned.
 
         Raises:
             ApiError: A parameter is invalid. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcases(
                 user_id,
                 direction=direction,
@@ -685,8 +720,8 @@ class AsyncShowcasesEssentials:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_showcases_alt1(
         self,
@@ -716,14 +751,15 @@ class AsyncShowcasesEssentials:
                 alphabetically. * ``date`` - Sort the results by date of creation. * ``duration`` - Sort the results by
                 duration. * ``last_modified`` - Sort the results by last modified date. * ``videos`` - Sort the results
                 by the number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcases were returned.
 
         Raises:
             ApiError: A parameter is invalid. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcases_alt1(
                 direction=direction,
                 filter_privacy=filter_privacy,
@@ -732,8 +768,8 @@ class AsyncShowcasesEssentials:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def update_showcases(
         self,
@@ -752,18 +788,19 @@ class AsyncShowcasesEssentials:
             user_id: The ID of the user.
             album_item_uris: A comma-separated list of video or event URIs.
             album_uris: A comma-separated list of showcase URIs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos and events were added to the showcases.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_showcases(
                 user_id, album_item_uris, album_uris, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncShowcasesEssentialsWithRawResponse:
@@ -782,7 +819,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             user_id: The ID of the user.
             album_uris: A comma-separated list of showcase URIs.
             folder_id: The ID of the folder containing videos and events to add.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -814,7 +852,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -844,7 +883,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -874,7 +914,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -899,7 +940,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -924,7 +966,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -948,7 +991,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             album_id: The ID of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -979,7 +1023,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1009,7 +1054,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1035,7 +1081,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1058,7 +1105,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             album_id: The ID of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1104,7 +1152,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
                 alphabetically. * ``date`` - Sort the results by date of creation. * ``duration`` - Sort the results by
                 duration. * ``last_modified`` - Sort the results by last modified date. * ``videos`` - Sort the results
                 by the number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1156,7 +1205,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
                 alphabetically. * ``date`` - Sort the results by date of creation. * ``duration`` - Sort the results by
                 duration. * ``last_modified`` - Sort the results by last modified date. * ``videos`` - Sort the results
                 by the number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1196,7 +1246,8 @@ class ShowcasesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             user_id: The ID of the user.
             album_item_uris: A comma-separated list of video or event URIs.
             album_uris: A comma-separated list of showcase URIs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1227,7 +1278,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             user_id: The ID of the user.
             album_uris: A comma-separated list of showcase URIs.
             folder_id: The ID of the folder containing videos and events to add.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1240,7 +1292,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_folder_to_showcases_error_mapper,
             request_options=request_options,
         )
@@ -1259,7 +1311,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1272,7 +1325,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=copy_showcase_error_mapper,
             request_options=request_options,
         )
@@ -1289,7 +1342,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1302,7 +1356,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=copy_showcase_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1319,7 +1373,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1332,7 +1387,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=create_showcase_error_mapper,
             request_options=request_options,
         )
@@ -1344,7 +1399,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1356,7 +1412,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=create_showcase_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1369,7 +1425,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1381,7 +1438,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_showcase_error_mapper,
             request_options=request_options,
         )
@@ -1393,7 +1450,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             album_id: The ID of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1405,7 +1463,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_showcase_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1424,7 +1482,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             album_id: The ID of the showcase.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1437,7 +1496,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=edit_showcase_error_mapper,
             request_options=request_options,
         )
@@ -1454,7 +1513,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             album_id: The ID of the showcase.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1467,7 +1527,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=edit_showcase_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1480,7 +1540,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1491,7 +1552,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=get_showcase_error_mapper,
             request_options=request_options,
         )
@@ -1503,7 +1564,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             album_id: The ID of the showcase.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1514,7 +1576,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Album],
+            decoder=async_json_decoder[Album],
             error_mapper=get_showcase_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1549,7 +1611,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
                 alphabetically. * ``date`` - Sort the results by date of creation. * ``duration`` - Sort the results by
                 duration. * ``last_modified`` - Sort the results by last modified date. * ``videos`` - Sort the results
                 by the number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1568,7 +1631,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AlbumConnection],
+            decoder=async_json_decoder[AlbumConnection],
             error_mapper=get_showcases_error_mapper,
             request_options=request_options,
         )
@@ -1601,7 +1664,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
                 alphabetically. * ``date`` - Sort the results by date of creation. * ``duration`` - Sort the results by
                 duration. * ``last_modified`` - Sort the results by last modified date. * ``videos`` - Sort the results
                 by the number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1619,7 +1683,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AlbumConnection],
+            decoder=async_json_decoder[AlbumConnection],
             error_mapper=get_showcases_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1641,7 +1705,8 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             user_id: The ID of the user.
             album_item_uris: A comma-separated list of video or event URIs.
             album_uris: A comma-separated list of showcase URIs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1654,7 +1719,7 @@ class AsyncShowcasesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )

@@ -62,7 +62,7 @@ class MeVideosRequest1(SdkBaseModel):
 class MeVideosRequest1Dict(TypedDict):
     content_rating: NotRequired[list[str]]
     description: NotRequired[str]
-    embed: NotRequired[Embed18 | Embed18Dict]
+    embed: NotRequired[Embed18Dict]
     embed_domains: NotRequired[list[str]]
     folder_uri: NotRequired[str]
     hide_from_vimeo: NotRequired[bool]
@@ -70,7 +70,7 @@ class MeVideosRequest1Dict(TypedDict):
     locale: NotRequired[str]
     name: NotRequired[str]
     password: NotRequired[str]
-    privacy: NotRequired[Privacy14 | Privacy14Dict]
-    review_page: NotRequired[ReviewPage | ReviewPageDict]
-    spatial: NotRequired[Spatial1 | Spatial1Dict]
-    upload: Upload2 | Upload2Dict
+    privacy: NotRequired[Privacy14Dict]
+    review_page: NotRequired[ReviewPageDict]
+    spatial: NotRequired[Spatial1Dict]
+    upload: Upload2Dict

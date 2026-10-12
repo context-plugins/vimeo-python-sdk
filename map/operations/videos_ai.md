@@ -50,7 +50,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /videos/ai/languages`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_ai_languages(*, type_: Type48OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_ai_languages(*, type_: Type52OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
 - **Params**: `type_` — query `type`
 - **Returns (parsed)**: `None`
 - **Returns (raw)**: `ApiResult[None, GetAiLanguagesErrorBody]`
@@ -59,7 +59,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Type48OrStr` | `vimeo_api/models/enums/type48.py` |
+| `Type52OrStr` | `vimeo_api/models/enums/type52.py` |
 | `GetAiLanguagesErrorBody` | `vimeo_api/errors/get_ai_languages_error.py` |
 | `Error` | `vimeo_api/models/error.py` |
 

@@ -12,10 +12,13 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.get_category_subscriptions_alt1_error import (
     GetCategorySubscriptionsAlt1ErrorBody,
@@ -43,16 +46,19 @@ class CategoriesUsers:
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.check_if_user_subscribed_to_category(
-            category, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_user_subscribed_to_category(
+                category, user_id, request_options=request_options
+            ),
+        )
 
     def check_if_user_subscribed_to_category_alt1(
         self, category: str, *, request_options: RequestOptionsOrDict | None = None
@@ -61,16 +67,17 @@ class CategoriesUsers:
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.check_if_user_subscribed_to_category_alt1(
-            category, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_user_subscribed_to_category_alt1(category, request_options=request_options)
+        )
 
     def get_category_subscriptions(
         self,
@@ -92,7 +99,8 @@ class CategoriesUsers:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
@@ -100,9 +108,11 @@ class CategoriesUsers:
         Raises:
             ApiError: Error code 3200: Only the authenticated user can access this information. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_category_subscriptions(
-            user_id, direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_category_subscriptions(
+                user_id, direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
+            ),
+        )
 
     def get_category_subscriptions_alt1(
         self,
@@ -122,7 +132,8 @@ class CategoriesUsers:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
@@ -130,9 +141,11 @@ class CategoriesUsers:
         Raises:
             ApiError: Error code 3200: Only the authenticated user can access this information. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_category_subscriptions_alt1(
-            direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_category_subscriptions_alt1(
+                direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
+            ),
+        )
 
     def subscribe_to_category(
         self, category: str, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -142,30 +155,30 @@ class CategoriesUsers:
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.subscribe_to_category(
-            category, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.subscribe_to_category(category, user_id, request_options=request_options))
 
     def subscribe_to_category_alt1(self, category: str, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method causes the authenticated user to follow the specified category.
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.subscribe_to_category_alt1(category, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.subscribe_to_category_alt1(category, request_options=request_options))
 
     def unsubscribe_from_category(
         self, category: str, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -175,16 +188,17 @@ class CategoriesUsers:
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user has stopped following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.unsubscribe_from_category(
-            category, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.unsubscribe_from_category(category, user_id, request_options=request_options)
+        )
 
     def unsubscribe_from_category_alt1(
         self, category: str, *, request_options: RequestOptionsOrDict | None = None
@@ -193,16 +207,15 @@ class CategoriesUsers:
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user has stopped following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.unsubscribe_from_category_alt1(
-            category, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.unsubscribe_from_category_alt1(category, request_options=request_options))
 
     @property
     def with_raw_response(self) -> CategoriesUsersWithRawResponse:
@@ -221,18 +234,19 @@ class AsyncCategoriesUsers:
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_subscribed_to_category(
                 category, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def check_if_user_subscribed_to_category_alt1(
         self, category: str, *, request_options: RequestOptionsOrDict | None = None
@@ -241,18 +255,19 @@ class AsyncCategoriesUsers:
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_subscribed_to_category_alt1(
                 category, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_category_subscriptions(
         self,
@@ -274,7 +289,8 @@ class AsyncCategoriesUsers:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
@@ -282,11 +298,11 @@ class AsyncCategoriesUsers:
         Raises:
             ApiError: Error code 3200: Only the authenticated user can access this information. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_category_subscriptions(
                 user_id, direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_category_subscriptions_alt1(
         self,
@@ -306,7 +322,8 @@ class AsyncCategoriesUsers:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
@@ -314,11 +331,11 @@ class AsyncCategoriesUsers:
         Raises:
             ApiError: Error code 3200: Only the authenticated user can access this information. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_category_subscriptions_alt1(
                 direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def subscribe_to_category(
         self, category: str, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -328,16 +345,17 @@ class AsyncCategoriesUsers:
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.subscribe_to_category(category, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def subscribe_to_category_alt1(
         self, category: str, *, request_options: RequestOptionsOrDict | None = None
@@ -346,16 +364,17 @@ class AsyncCategoriesUsers:
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user is following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.subscribe_to_category_alt1(category, request_options=request_options)
-        ).unwrap()
+        )
 
     async def unsubscribe_from_category(
         self, category: str, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -365,16 +384,17 @@ class AsyncCategoriesUsers:
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user has stopped following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.unsubscribe_from_category(category, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def unsubscribe_from_category_alt1(
         self, category: str, *, request_options: RequestOptionsOrDict | None = None
@@ -383,16 +403,17 @@ class AsyncCategoriesUsers:
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user has stopped following the category.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.unsubscribe_from_category_alt1(category, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncCategoriesUsersWithRawResponse:
@@ -408,7 +429,8 @@ class CategoriesUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -431,7 +453,8 @@ class CategoriesUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -467,7 +490,8 @@ class CategoriesUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -507,7 +531,8 @@ class CategoriesUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -536,7 +561,8 @@ class CategoriesUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -560,7 +586,8 @@ class CategoriesUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -585,7 +612,8 @@ class CategoriesUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -609,7 +637,8 @@ class CategoriesUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -636,7 +665,8 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -647,7 +677,7 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -659,7 +689,8 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -670,7 +701,7 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -695,7 +726,8 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -712,7 +744,7 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CategoryConnection],
+            decoder=async_json_decoder[CategoryConnection],
             error_mapper=get_category_subscriptions_error_mapper,
             request_options=request_options,
         )
@@ -735,7 +767,8 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -751,7 +784,7 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CategoryConnection],
+            decoder=async_json_decoder[CategoryConnection],
             error_mapper=get_category_subscriptions_alt1_error_mapper,
             request_options=request_options,
         )
@@ -764,7 +797,8 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -776,7 +810,7 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -788,7 +822,8 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -800,7 +835,7 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -813,7 +848,8 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             category: The name of the category.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -825,7 +861,7 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -837,7 +873,8 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -849,7 +886,7 @@ class AsyncCategoriesUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )

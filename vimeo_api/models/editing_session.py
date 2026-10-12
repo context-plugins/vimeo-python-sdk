@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.status1 import Status1OrStr
+from .enums.status2 import Status2OrStr
 
 
 class EditingSession(SdkBaseModel):
@@ -28,7 +28,7 @@ class EditingSession(SdkBaseModel):
     result_video_hash: str
     """The result video hash for the created video."""
 
-    status: Status1OrStr
+    status: Status2OrStr
     """The status of the video.
 
     Option descriptions:
@@ -54,7 +54,7 @@ class EditingSessionDict(TypedDict):
     is_rated: bool
     min_tier_for_movie: str
     result_video_hash: str
-    status: Status1OrStr
+    status: Status2OrStr
     upload_attempt_id_version_uri: NotRequired[str]
     version_uri: NotRequired[str]
     vsid: float

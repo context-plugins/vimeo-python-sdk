@@ -31,7 +31,7 @@ class Interactions1(SdkBaseModel):
 
 
 class Interactions1Dict(TypedDict):
-    add_moderators: AddModerators | AddModeratorsDict
-    add_to: AddTo | AddToDict | None
-    follow: Follow1 | Follow1Dict
-    moderate_videos: ModerateVideos | ModerateVideosDict
+    add_moderators: AddModeratorsDict
+    add_to: AddToDict | None
+    follow: Follow1Dict
+    moderate_videos: ModerateVideosDict

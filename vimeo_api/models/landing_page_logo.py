@@ -4,14 +4,14 @@ from pydantic import Field
 from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
-from .enums.type14 import Type14OrStr
+from .enums.type18 import Type18OrStr
 
 
 class LandingPageLogo(SdkBaseModel):
     """The navbar logo configuration of the event landing page, or ``null`` when the event was never configured (default
     rendering)."""
 
-    type_: Type14OrStr = Field(alias="type")
+    type_: Type18OrStr = Field(alias="type")
     """Which logo to show in the landing page navbar.
 
     Option descriptions:
@@ -27,6 +27,6 @@ class LandingPageLogo(SdkBaseModel):
 
 
 class LandingPageLogoDict(TypedDict):
-    type_: Type14OrStr
+    type_: Type18OrStr
     uri: str | None
     url: str | None

@@ -83,9 +83,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /ondemand/pages/{ondemand_id}/promotions`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_vod_promotions(ondemand_id: float, filter: Filter26OrStr, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `ondemand_id`, `filter`
-- **Params**: `ondemand_id` — path · `filter` — query · `page` — query · `per_page` — query
+- **Signature**: `def get_vod_promotions(ondemand_id: float, filter_: Filter26OrStr, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `ondemand_id`, `filter_`
+- **Params**: `ondemand_id` — path · `filter_` — query `filter` · `page` — query · `per_page` — query
 - **Returns (parsed)**: `OnDemandPromotion`
 - **Returns (raw)**: `ApiResult[OnDemandPromotion, GetVodPromotionsErrorBody]`
 - **Error**: `GetVodPromotionsErrorBody` — **Case A (typed)**

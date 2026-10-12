@@ -16,5 +16,5 @@ class Interactions14(SdkBaseModel):
 
 
 class Interactions14Dict(TypedDict):
-    likes: Likes3 | Likes3Dict
-    watchlater: Watchlater2 | Watchlater2Dict
+    likes: Likes3Dict
+    watchlater: Watchlater2Dict

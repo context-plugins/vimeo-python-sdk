@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from typing import Literal
-
 from pydantic import Field
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
+from .enums.type15 import Type15OrStr
 from .metadata13 import Metadata13, Metadata13Dict
 from .metdata import Metdata, MetdataDict
 from .reply import Reply, ReplyDict
@@ -43,7 +42,7 @@ class Comment(SdkBaseModel):
     text_decorations: list[TextDecoration]
     """An array of text decorations for the note."""
 
-    type_: Literal["video"] = Field(default="video", alias="type")
+    type_: Type15OrStr = Field(alias="type")
     """The Vimeo content to which the comment relates.
 
     Option descriptions:
@@ -62,13 +61,13 @@ class CommentDict(TypedDict):
     deleted_on: str | None
     last_edited_on: str | None
     link: str
-    metadata: Metadata13 | Metadata13Dict
-    metdata: Metdata | MetdataDict
-    replies: list[Reply | ReplyDict]
+    metadata: Metadata13Dict
+    metdata: MetdataDict
+    replies: list[ReplyDict]
     resource_key: str
     richtext: str | None
     text: str
-    text_decorations: list[TextDecoration | TextDecorationDict]
-    type_: NotRequired[Literal["video"]]
+    text_decorations: list[TextDecorationDict]
+    type_: Type15OrStr
     uri: str
-    user: User | UserDict | None
+    user: UserDict | None

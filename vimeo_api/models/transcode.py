@@ -3,13 +3,13 @@ from __future__ import annotations
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.status5 import Status5OrStr
+from .enums.status6 import Status6OrStr
 
 
 class Transcode(SdkBaseModel):
     """The transcode information of the video upload."""
 
-    status: Optional[Status5OrStr] = UNSET
+    status: Optional[Status6OrStr] = UNSET
     """The video's availability status.
 
     Option descriptions:
@@ -19,4 +19,4 @@ class Transcode(SdkBaseModel):
 
 
 class TranscodeDict(TypedDict):
-    status: NotRequired[Status5OrStr]
+    status: NotRequired[Status6OrStr]

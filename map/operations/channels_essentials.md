@@ -82,9 +82,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/channels`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_channel_subscriptions(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort4OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_channel_subscriptions(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort4OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `user_id`
-- **Params**: `user_id` — path · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Params**: `user_id` — path · `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `ChannelConnection`
 - **Returns (raw)**: `ApiResult[ChannelConnection, GetChannelSubscriptionsErrorBody]`
 - **Error**: `GetChannelSubscriptionsErrorBody` — **Case A (typed)**
@@ -103,8 +103,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/channels`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_channel_subscriptions_alt1(*, direction: DirectionOrStr | None = None, filter: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort4OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Signature**: `def get_channel_subscriptions_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort4OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `ChannelConnection`
 - **Returns (raw)**: `ApiResult[ChannelConnection, GetChannelSubscriptionsAlt1ErrorBody]`
 - **Error**: `GetChannelSubscriptionsAlt1ErrorBody` — **Case A (typed)**
@@ -123,8 +123,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /channels`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_channels(*, direction: DirectionOrStr | None = None, filter: Filter1OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort7OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Signature**: `def get_channels(*, direction: DirectionOrStr | None = None, filter_: Filter1OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort7OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `ChannelConnection`
 - **Returns (raw)**: `ApiResult[ChannelConnection, GetChannelsErrorBody]`
 - **Error**: `GetChannelsErrorBody` — **Case A (typed)**

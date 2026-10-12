@@ -5,7 +5,7 @@ from typing_extensions import NotRequired, TypedDict
 from ..core import UNSET, Optional, SdkBaseModel
 from .enums.approach import ApproachOrStr
 from .enums.error2 import Error2OrStr
-from .enums.status7 import Status7OrStr
+from .enums.status8 import Status8OrStr
 
 
 class Upload1(SdkBaseModel):
@@ -59,7 +59,7 @@ class Upload1(SdkBaseModel):
     size: Optional[float] = UNSET
     """The file size in bytes of the uploaded video."""
 
-    status: Status7OrStr
+    status: Status8OrStr
     """The status code for the availability of the uploaded video.
 
     Option descriptions:
@@ -80,5 +80,5 @@ class Upload1Dict(TypedDict):
     link: NotRequired[str]
     redirect_url: NotRequired[str]
     size: NotRequired[float]
-    status: Status7OrStr
+    status: Status8OrStr
     upload_link: NotRequired[str]

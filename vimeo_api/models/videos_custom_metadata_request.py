@@ -12,4 +12,4 @@ class VideosCustomMetadataRequest(SdkBaseModel):
 
 
 class VideosCustomMetadataRequestDict(TypedDict):
-    fields: NotRequired[list[Field1 | Field1Dict]]
+    fields: NotRequired[list[Field1Dict]]

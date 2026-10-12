@@ -20,6 +20,6 @@ class Connections26(SdkBaseModel):
 
 
 class Connections26Dict(TypedDict):
-    created_version: CreatedVersion | CreatedVersionDict
-    root_version: RootVersion | RootVersionDict
-    video: Video2 | Video2Dict
+    created_version: CreatedVersionDict
+    root_version: RootVersionDict
+    video: Video2Dict

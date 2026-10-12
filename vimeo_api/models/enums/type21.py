@@ -5,32 +5,18 @@ from ...core import open_enum_validator
 
 
 class Type21(str, Enum):
-    """The elements that appear after the video ends.
+    """The project item type.
 
     Option descriptions:
-     * ``beginning`` - The end screen is a thumbnail.
-     * ``custom`` - The end screen is custom.
-     * ``email`` - The end screen is an email form.
-     * ``image`` - The end screen is an image.
-     * ``link`` - The end screen is a link.
-     * ``loop`` - The end screen is a loop.
-     * ``nothing`` - There is no end screen.
-     * ``share`` - The end screen is a share button.
-     * ``text`` - The end screen is text.
-     * ``threevideos`` - The end screen is three video suggestions.
-     * ``videos`` - The end screen is video suggestions."""
+     * ``folder`` - The project item is a folder.
+     * ``live_event`` - The project item is an event.
+     * ``showcase`` - The project item is a showcase.
+     * ``video`` - The project item is a video."""
 
-    BEGINNING = "beginning"
-    CUSTOM = "custom"
-    EMAIL = "email"
-    IMAGE = "image"
-    LINK = "link"
-    LOOP = "loop"
-    NOTHING = "nothing"
-    SHARE = "share"
-    TEXT = "text"
-    THREEVIDEOS = "threevideos"
-    VIDEOS = "videos"
+    FOLDER = "folder"
+    LIVE_EVENT = "live_event"
+    SHOWCASE = "showcase"
+    VIDEO = "video"
 
     __str__ = str.__str__
 

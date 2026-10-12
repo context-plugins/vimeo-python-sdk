@@ -4,7 +4,7 @@ from typing import Annotated, TypeAlias
 from ...core import open_enum_validator
 
 
-class Status18(str, Enum):
+class Status21(str, Enum):
     """The status of the team membership invite.
 
     Option descriptions:
@@ -17,4 +17,4 @@ class Status18(str, Enum):
     __str__ = str.__str__
 
 
-Status18OrStr: TypeAlias = Annotated[Status18 | str, open_enum_validator(Status18)]
+Status21OrStr: TypeAlias = Annotated[Status21 | str, open_enum_validator(Status21)]

@@ -22,4 +22,4 @@ class PurchaseInteraction(SdkBaseModel):
 class PurchaseInteractionDict(TypedDict):
     buy: NotRequired[Any | None]
     rent: NotRequired[Any | None]
-    subscribe: NotRequired[Subscribe1 | Subscribe1Dict | None]
+    subscribe: NotRequired[Subscribe1Dict | None]

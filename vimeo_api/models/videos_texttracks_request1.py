@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.type25 import Type25OrStr
+from .enums.type29 import Type29OrStr
 
 
 class VideosTexttracksRequest1(SdkBaseModel):
@@ -19,7 +19,7 @@ class VideosTexttracksRequest1(SdkBaseModel):
     name: Optional[str] = UNSET
     """The name of the text track."""
 
-    type_: Optional[Type25OrStr] = Field(default=UNSET, alias="type")
+    type_: Optional[Type29OrStr] = Field(default=UNSET, alias="type")
     """The type of text track.
 
     Option descriptions:
@@ -34,4 +34,4 @@ class VideosTexttracksRequest1Dict(TypedDict):
     active: NotRequired[bool]
     language: NotRequired[str]
     name: NotRequired[str]
-    type_: NotRequired[Type25OrStr]
+    type_: NotRequired[Type29OrStr]

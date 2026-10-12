@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_vod_background_error import CreateVodBackgroundErrorBody, create_vod_background_error_mapper
 from ..errors.delete_vod_background_error import DeleteVodBackgroundErrorBody, delete_vod_background_error_mapper
@@ -42,7 +45,8 @@ class OnDemandBackgrounds:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background image was added.
@@ -50,7 +54,7 @@ class OnDemandBackgrounds:
         Raises:
             ApiError: The authenticated user can't add a background image to this On Demand page. No such On Demand page
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_vod_background(ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_vod_background(ondemand_id, request_options=request_options))
 
     def delete_vod_background(
         self, background_id: float, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -61,7 +65,8 @@ class OnDemandBackgrounds:
         Args:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background image was deleted.
@@ -69,9 +74,9 @@ class OnDemandBackgrounds:
         Raises:
             ApiError: The authenticated user can't delete this background image. No such On Demand page or background
                 image exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_vod_background(
-            background_id, ondemand_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_vod_background(background_id, ondemand_id, request_options=request_options)
+        )
 
     def edit_vod_background(
         self,
@@ -88,7 +93,8 @@ class OnDemandBackgrounds:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background image was edited.
@@ -96,9 +102,11 @@ class OnDemandBackgrounds:
         Raises:
             ApiError: The authenticated user can't edit this background image. No such On Demand page or background
                 image exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_vod_background(
-            background_id, ondemand_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_vod_background(
+                background_id, ondemand_id, body=body, request_options=request_options
+            ),
+        )
 
     def get_vod_background(
         self, background_id: float, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -109,7 +117,8 @@ class OnDemandBackgrounds:
         Args:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background image was returned.
@@ -117,9 +126,9 @@ class OnDemandBackgrounds:
         Raises:
             ApiError: The authenticated user can't get this background image. No such On Demand page or background image
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_background(
-            background_id, ondemand_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_background(background_id, ondemand_id, request_options=request_options)
+        )
 
     def get_vod_backgrounds(
         self,
@@ -136,16 +145,19 @@ class OnDemandBackgrounds:
             ondemand_id: The ID of the On Demand page.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background images were returned.
 
         Raises:
             ApiError: No such On Demand page exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_backgrounds(
-            ondemand_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_backgrounds(
+                ondemand_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> OnDemandBackgroundsWithRawResponse:
@@ -164,7 +176,8 @@ class AsyncOnDemandBackgrounds:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background image was added.
@@ -172,9 +185,7 @@ class AsyncOnDemandBackgrounds:
         Raises:
             ApiError: The authenticated user can't add a background image to this On Demand page. No such On Demand page
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.create_vod_background(ondemand_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.create_vod_background(ondemand_id, request_options=request_options))
 
     async def delete_vod_background(
         self, background_id: float, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -185,7 +196,8 @@ class AsyncOnDemandBackgrounds:
         Args:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background image was deleted.
@@ -193,11 +205,11 @@ class AsyncOnDemandBackgrounds:
         Raises:
             ApiError: The authenticated user can't delete this background image. No such On Demand page or background
                 image exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_vod_background(
                 background_id, ondemand_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_vod_background(
         self,
@@ -214,7 +226,8 @@ class AsyncOnDemandBackgrounds:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background image was edited.
@@ -222,11 +235,11 @@ class AsyncOnDemandBackgrounds:
         Raises:
             ApiError: The authenticated user can't edit this background image. No such On Demand page or background
                 image exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_vod_background(
                 background_id, ondemand_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_vod_background(
         self, background_id: float, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -237,7 +250,8 @@ class AsyncOnDemandBackgrounds:
         Args:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background image was returned.
@@ -245,11 +259,11 @@ class AsyncOnDemandBackgrounds:
         Raises:
             ApiError: The authenticated user can't get this background image. No such On Demand page or background image
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_background(
                 background_id, ondemand_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_vod_backgrounds(
         self,
@@ -266,18 +280,19 @@ class AsyncOnDemandBackgrounds:
             ondemand_id: The ID of the On Demand page.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The background images were returned.
 
         Raises:
             ApiError: No such On Demand page exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_backgrounds(
                 ondemand_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncOnDemandBackgroundsWithRawResponse:
@@ -293,7 +308,8 @@ class OnDemandBackgroundsWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -319,7 +335,8 @@ class OnDemandBackgroundsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -351,7 +368,8 @@ class OnDemandBackgroundsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -378,7 +396,8 @@ class OnDemandBackgroundsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -409,7 +428,8 @@ class OnDemandBackgroundsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             ondemand_id: The ID of the On Demand page.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -436,7 +456,8 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -448,7 +469,7 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_vod_background_error_mapper,
             request_options=request_options,
         )
@@ -462,7 +483,8 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -474,7 +496,7 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_vod_background_error_mapper,
             request_options=request_options,
         )
@@ -494,7 +516,8 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -507,7 +530,7 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=edit_vod_background_error_mapper,
             request_options=request_options,
         )
@@ -521,7 +544,8 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             background_id: The ID of the background image.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -532,7 +556,7 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_vod_background_error_mapper,
             request_options=request_options,
         )
@@ -552,7 +576,8 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             ondemand_id: The ID of the On Demand page.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -564,7 +589,7 @@ class AsyncOnDemandBackgroundsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=get_vod_backgrounds_error_mapper,
             request_options=request_options,
         )

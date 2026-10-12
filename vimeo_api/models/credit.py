@@ -28,5 +28,5 @@ class CreditDict(TypedDict):
     name: str
     role: str
     uri: str
-    user: NotRequired[User | UserDict]
-    video: NotRequired[Video | VideoDict]
+    user: NotRequired[UserDict]
+    video: NotRequired[VideoDict]

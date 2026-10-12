@@ -33,7 +33,7 @@ This method adds a webhook for the specified app.
 
 ```python
 try:
-    response = client.api_apps_webhooks.add_webhook(app_id)
+    response = client.api_apps_webhooks.add_webhook(128301)
     # TODO: Handle 'response' of type ApiAppWebhook
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddWebhookErrorBody
@@ -43,7 +43,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.api_apps_webhooks.add_webhook(app_id)
+    response = await async_client.api_apps_webhooks.add_webhook(128301)
     # TODO: Handle 'response' of type ApiAppWebhook
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddWebhookErrorBody
@@ -61,7 +61,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>app_id</code> | <code>float</code> | The ID of the app for which the webhook is created. |
 | <code>body</code> | <code>[AppsWebhooksRequest](vimeo_api/models/apps_webhooks_request.py) \| [AppsWebhooksRequestDict](vimeo_api/models/apps_webhooks_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -115,7 +115,7 @@ This method deletes the specified webhook.
 
 ```python
 try:
-    client.api_apps_webhooks.delete_webhook(app_id, webhook_id)
+    client.api_apps_webhooks.delete_webhook(128301, 123)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteWebhookErrorBody
 ```
@@ -124,7 +124,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.api_apps_webhooks.delete_webhook(app_id, webhook_id)
+    await async_client.api_apps_webhooks.delete_webhook(128301, 123)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteWebhookErrorBody
 ```
@@ -141,7 +141,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>app_id</code> | <code>float</code> | The ID of the app that the webhook is associated with. |
 | <code>webhook_id</code> | <code>float</code> | The ID of the webhook. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -195,7 +195,7 @@ This method returns the specified webhook.
 
 ```python
 try:
-    response = client.api_apps_webhooks.get_webhook(app_id, webhook_id)
+    response = client.api_apps_webhooks.get_webhook(128301, 123)
     # TODO: Handle 'response' of type ApiAppWebhook
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetWebhookErrorBody
@@ -205,7 +205,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.api_apps_webhooks.get_webhook(app_id, webhook_id)
+    response = await async_client.api_apps_webhooks.get_webhook(128301, 123)
     # TODO: Handle 'response' of type ApiAppWebhook
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetWebhookErrorBody
@@ -223,7 +223,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>app_id</code> | <code>float</code> | The ID of the app that the webhook is associated with. |
 | <code>webhook_id</code> | <code>float</code> | The ID of the webhook. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -277,7 +277,7 @@ This method returns every webhook for the specified app.
 
 ```python
 try:
-    response = client.api_apps_webhooks.get_webhooks(app_id)
+    response = client.api_apps_webhooks.get_webhooks(128301, page=1, per_page=10)
     # TODO: Handle 'response' of type ApiAppWebhookConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -287,7 +287,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.api_apps_webhooks.get_webhooks(app_id)
+    response = await async_client.api_apps_webhooks.get_webhooks(128301, page=1, per_page=10)
     # TODO: Handle 'response' of type ApiAppWebhookConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -306,7 +306,7 @@ except ApiError as e:
 | <code>app_id</code> | <code>float</code> | The ID of the app that the webhook is associated with. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -353,7 +353,7 @@ This method updates the specified webhook.
 
 ```python
 try:
-    response = client.api_apps_webhooks.update_webhook(app_id, webhook_id)
+    response = client.api_apps_webhooks.update_webhook(128301, 123)
     # TODO: Handle 'response' of type ApiAppWebhook
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateWebhookErrorBody
@@ -363,7 +363,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.api_apps_webhooks.update_webhook(app_id, webhook_id)
+    response = await async_client.api_apps_webhooks.update_webhook(128301, 123)
     # TODO: Handle 'response' of type ApiAppWebhook
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateWebhookErrorBody
@@ -382,7 +382,7 @@ except ApiError as e:
 | <code>app_id</code> | <code>float</code> | The ID of the app that the webhook is associated with. |
 | <code>webhook_id</code> | <code>float</code> | The ID of the webhook. |
 | <code>body</code> | <code>[AppsWebhooksRequest1](vimeo_api/models/apps_webhooks_request1.py) \| [AppsWebhooksRequest1Dict](vimeo_api/models/apps_webhooks_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -464,7 +464,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -515,7 +515,9 @@ This method uses the OAuth protocol to authorize a client. For details on OAuth 
 
 ```python
 try:
-    response = client.authentication_extras_authenticate.client_auth(body)
+    response = client.authentication_extras_authenticate.client_auth(
+        OauthAuthorizeClientRequest(grant_type=GrantType1.CLIENT_CREDENTIALS, scope="some example string")
+    )
     # TODO: Handle 'response' of type AuthModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ClientAuthErrorBody
@@ -525,7 +527,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.authentication_extras_authenticate.client_auth(body)
+    response = await async_client.authentication_extras_authenticate.client_auth(
+        OauthAuthorizeClientRequest(grant_type=GrantType1.CLIENT_CREDENTIALS, scope="some example string")
+    )
     # TODO: Handle 'response' of type AuthModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ClientAuthErrorBody
@@ -542,7 +546,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[OauthAuthorizeClientRequest](vimeo_api/models/oauth_authorize_client_request.py) \| [OauthAuthorizeClientRequestDict](vimeo_api/models/oauth_authorize_client_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -600,7 +604,11 @@ This method exchanges a legacy Advanced API OAuth 1 token for an API v3 OAuth 2 
 
 ```python
 try:
-    response = client.authentication_extras_convert.convert_access_token(body)
+    response = client.authentication_extras_convert.convert_access_token(
+        OauthAuthorizeVimeoOauth1Request(
+            grant_type=GrantType2.VIMEO_OAUTH1, token="some example string", token_secret="some example string"
+        ),
+    )
     # TODO: Handle 'response' of type AuthModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ConvertAccessTokenErrorBody
@@ -610,7 +618,11 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.authentication_extras_convert.convert_access_token(body)
+    response = await async_client.authentication_extras_convert.convert_access_token(
+        OauthAuthorizeVimeoOauth1Request(
+            grant_type=GrantType2.VIMEO_OAUTH1, token="some example string", token_secret="some example string"
+        ),
+    )
     # TODO: Handle 'response' of type AuthModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ConvertAccessTokenErrorBody
@@ -627,7 +639,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[OauthAuthorizeVimeoOauth1Request](vimeo_api/models/oauth_authorize_vimeo_oauth1_request.py) \| [OauthAuthorizeVimeoOauth1RequestDict](vimeo_api/models/oauth_authorize_vimeo_oauth1_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -709,7 +721,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -789,7 +801,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -847,7 +859,11 @@ This method exchanges an OAuth authorization code for an OAuth access token.
 
 ```python
 try:
-    response = client.authentication_extras_exchange.exchange_auth_code(body)
+    response = client.authentication_extras_exchange.exchange_auth_code(
+        OauthAccessTokenRequest(
+            code="some example string", grant_type=GrantType.AUTHORIZATION_CODE, redirect_uri="some example string"
+        ),
+    )
     # TODO: Handle 'response' of type AuthModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ExchangeAuthCodeErrorBody
@@ -857,7 +873,11 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.authentication_extras_exchange.exchange_auth_code(body)
+    response = await async_client.authentication_extras_exchange.exchange_auth_code(
+        OauthAccessTokenRequest(
+            code="some example string", grant_type=GrantType.AUTHORIZATION_CODE, redirect_uri="some example string"
+        ),
+    )
     # TODO: Handle 'response' of type AuthModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ExchangeAuthCodeErrorBody
@@ -874,7 +894,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[OauthAccessTokenRequest](vimeo_api/models/oauth_access_token_request.py) \| [OauthAccessTokenRequestDict](vimeo_api/models/oauth_access_token_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -932,7 +952,9 @@ This method returns every channel that belongs to the specified category.
 
 ```python
 try:
-    response = client.categories_channels.get_category_channels(category)
+    response = client.categories_channels.get_category_channels(
+        "animation", direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategoryChannelsErrorBody
@@ -942,7 +964,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_channels.get_category_channels(category)
+    response = await async_client.categories_channels.get_category_channels(
+        "animation", direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategoryChannelsErrorBody
@@ -964,7 +988,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort4OrStr](vimeo_api/models/enums/sort4.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `followers` - Sort the results by number of followers.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1022,7 +1046,7 @@ This method returns every available category.
 
 ```python
 try:
-    response = client.categories_essentials.get_categories()
+    response = client.categories_essentials.get_categories(direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -1032,7 +1056,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_essentials.get_categories()
+    response = await async_client.categories_essentials.get_categories(direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -1052,7 +1076,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort3OrStr](vimeo_api/models/enums/sort3.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `last_video_featured_time` - Sort the results by most recently featured.<br> * `name` - Sort the results by name.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1099,7 +1123,7 @@ This method returns the specified category.
 
 ```python
 try:
-    response = client.categories_essentials.get_category(category)
+    response = client.categories_essentials.get_category("animation")
     # TODO: Handle 'response' of type Category
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategoryErrorBody
@@ -1109,7 +1133,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_essentials.get_category(category)
+    response = await async_client.categories_essentials.get_category("animation")
     # TODO: Handle 'response' of type Category
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategoryErrorBody
@@ -1126,7 +1150,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1184,7 +1208,9 @@ This method returns every group that belongs to the specified category.
 
 ```python
 try:
-    response = client.categories_groups.get_category_groups(category)
+    response = client.categories_groups.get_category_groups(
+        "animation", direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategoryGroupsErrorBody
@@ -1194,7 +1220,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_groups.get_category_groups(category)
+    response = await async_client.categories_groups.get_category_groups(
+        "animation", direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategoryGroupsErrorBody
@@ -1216,7 +1244,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort5OrStr](vimeo_api/models/enums/sort5.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `members` - Sort the results by number of members.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1274,7 +1302,7 @@ This method determines whether the authenticated user follows the specified cate
 
 ```python
 try:
-    client.categories_users.check_if_user_subscribed_to_category(category, user_id)
+    client.categories_users.check_if_user_subscribed_to_category("animation", 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1283,7 +1311,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.categories_users.check_if_user_subscribed_to_category(category, user_id)
+    await async_client.categories_users.check_if_user_subscribed_to_category("animation", 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1300,7 +1328,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1347,7 +1375,7 @@ This method determines whether the authenticated user follows the specified cate
 
 ```python
 try:
-    client.categories_users.check_if_user_subscribed_to_category_alt1(category)
+    client.categories_users.check_if_user_subscribed_to_category_alt1("animation")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1356,7 +1384,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.categories_users.check_if_user_subscribed_to_category_alt1(category)
+    await async_client.categories_users.check_if_user_subscribed_to_category_alt1("animation")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1372,7 +1400,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1419,7 +1447,7 @@ This method returns every category that the authenticated user follows.
 
 ```python
 try:
-    response = client.categories_users.get_category_subscriptions(user_id)
+    response = client.categories_users.get_category_subscriptions(152184, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategorySubscriptionsErrorBody
@@ -1429,7 +1457,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_users.get_category_subscriptions(user_id)
+    response = await async_client.categories_users.get_category_subscriptions(
+        152184, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategorySubscriptionsErrorBody
@@ -1450,7 +1480,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort24OrStr](vimeo_api/models/enums/sort24.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `name` - Sort the results by name.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1504,7 +1534,7 @@ This method returns every category that the authenticated user follows.
 
 ```python
 try:
-    response = client.categories_users.get_category_subscriptions_alt1()
+    response = client.categories_users.get_category_subscriptions_alt1(direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategorySubscriptionsAlt1ErrorBody
@@ -1514,7 +1544,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_users.get_category_subscriptions_alt1()
+    response = await async_client.categories_users.get_category_subscriptions_alt1(
+        direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategorySubscriptionsAlt1ErrorBody
@@ -1534,7 +1566,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort24OrStr](vimeo_api/models/enums/sort24.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `name` - Sort the results by name.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1588,7 +1620,7 @@ This method causes the authenticated user to follow the specified category.
 
 ```python
 try:
-    client.categories_users.subscribe_to_category(category, user_id)
+    client.categories_users.subscribe_to_category("animation", 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1597,7 +1629,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.categories_users.subscribe_to_category(category, user_id)
+    await async_client.categories_users.subscribe_to_category("animation", 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1614,7 +1646,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1661,7 +1693,7 @@ This method causes the authenticated user to follow the specified category.
 
 ```python
 try:
-    client.categories_users.subscribe_to_category_alt1(category)
+    client.categories_users.subscribe_to_category_alt1("animation")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1670,7 +1702,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.categories_users.subscribe_to_category_alt1(category)
+    await async_client.categories_users.subscribe_to_category_alt1("animation")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1686,7 +1718,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1733,7 +1765,7 @@ This method causes the authenticated user to stop following the specified catego
 
 ```python
 try:
-    client.categories_users.unsubscribe_from_category(category, user_id)
+    client.categories_users.unsubscribe_from_category("animation", 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1742,7 +1774,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.categories_users.unsubscribe_from_category(category, user_id)
+    await async_client.categories_users.unsubscribe_from_category("animation", 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1759,7 +1791,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1806,7 +1838,7 @@ This method causes the authenticated user to stop following the specified catego
 
 ```python
 try:
-    client.categories_users.unsubscribe_from_category_alt1(category)
+    client.categories_users.unsubscribe_from_category_alt1("animation")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1815,7 +1847,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.categories_users.unsubscribe_from_category_alt1(category)
+    await async_client.categories_users.unsubscribe_from_category_alt1("animation")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -1831,7 +1863,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1882,7 +1914,7 @@ This method returns a single video in the specified category. You can use this m
 
 ```python
 try:
-    response = client.categories_videos.check_category_for_video(category, video_id)
+    response = client.categories_videos.check_category_for_video("animation", 273576296)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckCategoryForVideoErrorBody
@@ -1892,7 +1924,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_videos.check_category_for_video(category, video_id)
+    response = await async_client.categories_videos.check_category_for_video("animation", 273576296)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckCategoryForVideoErrorBody
@@ -1910,7 +1942,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1940,7 +1972,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_category_videos(category: str, *, direction: DirectionOrStr | None = None, filter: FilterOrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort6OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_category_videos(category: str, *, direction: DirectionOrStr | None = None, filter_: FilterOrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort6OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -1964,7 +1996,9 @@ This method returns every video that belongs to the specified category.
 
 ```python
 try:
-    response = client.categories_videos.get_category_videos(category)
+    response = client.categories_videos.get_category_videos(
+        "animation", direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategoryVideosErrorBody
@@ -1974,7 +2008,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_videos.get_category_videos(category)
+    response = await async_client.categories_videos.get_category_videos(
+        "animation", direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCategoryVideosErrorBody
@@ -1992,13 +2028,13 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[FilterOrStr](vimeo_api/models/enums/filter.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `conditional_featured` - Return featured videos.<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[FilterOrStr](vimeo_api/models/enums/filter.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `conditional_featured` - Return featured videos.<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort6OrStr](vimeo_api/models/enums/sort6.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by date.<br> * `duration` - Sort the results by duration.<br> * `featured` - Sort the results by featured status.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br> * `relevant` - Sort the results by relevance.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2052,7 +2088,7 @@ This method returns every category that contains the specified video.
 
 ```python
 try:
-    response = client.categories_videos.get_video_categories(video_id)
+    response = client.categories_videos.get_video_categories(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoCategoriesErrorBody
@@ -2062,7 +2098,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_videos.get_video_categories(video_id)
+    response = await async_client.categories_videos.get_video_categories(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoCategoriesErrorBody
@@ -2081,7 +2117,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2135,7 +2171,9 @@ This method sets multiple categories and subcategories for the specified video. 
 
 ```python
 try:
-    response = client.categories_videos.suggest_video_category(video_id, body)
+    response = client.categories_videos.suggest_video_category(
+        258684937, VideosCategoriesRequest(category=["some example string"])
+    )
     # TODO: Handle 'response' of type Category
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SuggestVideoCategoryErrorBody
@@ -2145,7 +2183,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.categories_videos.suggest_video_category(video_id, body)
+    response = await async_client.categories_videos.suggest_video_category(
+        258684937, VideosCategoriesRequest(category=["some example string"])
+    )
     # TODO: Handle 'response' of type Category
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SuggestVideoCategoryErrorBody
@@ -2163,7 +2203,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosCategoriesRequest](vimeo_api/models/videos_categories_request.py) \| [VideosCategoriesRequestDict](vimeo_api/models/videos_categories_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2221,7 +2261,7 @@ This method adds the specified channel to multiple categories.
 
 ```python
 try:
-    client.channels_categories.add_channel_categories(channel_id, body)
+    client.channels_categories.add_channel_categories(927, ChannelsCategoriesRequest(channels=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddChannelCategoriesErrorBody
 ```
@@ -2230,7 +2270,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_categories.add_channel_categories(channel_id, body)
+    await async_client.channels_categories.add_channel_categories(
+        927, ChannelsCategoriesRequest(channels=["some example string"])
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddChannelCategoriesErrorBody
 ```
@@ -2247,7 +2289,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>body</code> | <code>[ChannelsCategoriesRequest](vimeo_api/models/channels_categories_request.py) \| [ChannelsCategoriesRequestDict](vimeo_api/models/channels_categories_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2302,7 +2344,7 @@ This method adds the specified channel to a single category. The authenticated u
 
 ```python
 try:
-    client.channels_categories.categorize_channel(category, channel_id)
+    client.channels_categories.categorize_channel("animation", 927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CategorizeChannelErrorBody
 ```
@@ -2311,7 +2353,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_categories.categorize_channel(category, channel_id)
+    await async_client.channels_categories.categorize_channel("animation", 927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CategorizeChannelErrorBody
 ```
@@ -2328,7 +2370,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2383,7 +2425,7 @@ This method removes a channel from the specified category. The authenticated use
 
 ```python
 try:
-    client.channels_categories.delete_channel_category(category, channel_id)
+    client.channels_categories.delete_channel_category("animation", 927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChannelCategoryErrorBody
 ```
@@ -2392,7 +2434,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_categories.delete_channel_category(category, channel_id)
+    await async_client.channels_categories.delete_channel_category("animation", 927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChannelCategoryErrorBody
 ```
@@ -2409,7 +2451,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>category</code> | <code>str</code> | The name of the category. |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2464,7 +2506,7 @@ This method returns every category to which the specified channel belongs.
 
 ```python
 try:
-    response = client.channels_categories.get_channel_categories(channel_id)
+    response = client.channels_categories.get_channel_categories(927)
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelCategoriesErrorBody
@@ -2474,7 +2516,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_categories.get_channel_categories(channel_id)
+    response = await async_client.channels_categories.get_channel_categories(927)
     # TODO: Handle 'response' of type CategoryConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelCategoriesErrorBody
@@ -2491,7 +2533,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2549,7 +2591,9 @@ This method creates a new channel.
 
 ```python
 try:
-    response = client.channels_essentials.create_channel(body)
+    response = client.channels_essentials.create_channel(
+        ChannelsRequest(name="some example string", privacy=Privacy7.ANYBODY)
+    )
     # TODO: Handle 'response' of type Channel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateChannelErrorBody
@@ -2559,7 +2603,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_essentials.create_channel(body)
+    response = await async_client.channels_essentials.create_channel(
+        ChannelsRequest(name="some example string", privacy=Privacy7.ANYBODY)
+    )
     # TODO: Handle 'response' of type Channel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateChannelErrorBody
@@ -2576,7 +2622,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ChannelsRequest](vimeo_api/models/channels_request.py) \| [ChannelsRequestDict](vimeo_api/models/channels_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2630,7 +2676,7 @@ This method deletes the specified channel. The authenticated user must own the c
 
 ```python
 try:
-    client.channels_essentials.delete_channel(channel_id)
+    client.channels_essentials.delete_channel(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChannelErrorBody
 ```
@@ -2639,7 +2685,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_essentials.delete_channel(channel_id)
+    await async_client.channels_essentials.delete_channel(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChannelErrorBody
 ```
@@ -2655,7 +2701,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2709,7 +2755,7 @@ This method edits the specified channel.
 
 ```python
 try:
-    response = client.channels_essentials.edit_channel(channel_id)
+    response = client.channels_essentials.edit_channel(927)
     # TODO: Handle 'response' of type Channel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditChannelErrorBody
@@ -2719,7 +2765,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_essentials.edit_channel(channel_id)
+    response = await async_client.channels_essentials.edit_channel(927)
     # TODO: Handle 'response' of type Channel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditChannelErrorBody
@@ -2737,7 +2783,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>body</code> | <code>[ChannelsRequest1](vimeo_api/models/channels_request1.py) \| [ChannelsRequest1Dict](vimeo_api/models/channels_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2791,7 +2837,7 @@ This method returns a single channel.
 
 ```python
 try:
-    response = client.channels_essentials.get_channel(channel_id)
+    response = client.channels_essentials.get_channel(927, sizes="100x75")
     # TODO: Handle 'response' of type Channel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -2801,7 +2847,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_essentials.get_channel(channel_id)
+    response = await async_client.channels_essentials.get_channel(927, sizes="100x75")
     # TODO: Handle 'response' of type Channel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -2819,7 +2865,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>sizes</code> | <code>str \| None</code> | The pixel dimensions of the image in `{width}x{height}` format. For more information, see our [Using Common Formats and Parameters](https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter) guide.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2842,7 +2888,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_channel_subscriptions(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort4OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ChannelConnection</code></summary>
+<summary><code>def get_channel_subscriptions(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort4OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ChannelConnection</code></summary>
 
 <dl>
 <dd>
@@ -2866,7 +2912,9 @@ This method returns all the channels to which the specified user subscribes.
 
 ```python
 try:
-    response = client.channels_essentials.get_channel_subscriptions(user_id)
+    response = client.channels_essentials.get_channel_subscriptions(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelSubscriptionsErrorBody
@@ -2876,7 +2924,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_essentials.get_channel_subscriptions(user_id)
+    response = await async_client.channels_essentials.get_channel_subscriptions(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelSubscriptionsErrorBody
@@ -2894,12 +2944,12 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter12OrStr](vimeo_api/models/enums/filter12.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderated` - Return moderated channels.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter12OrStr](vimeo_api/models/enums/filter12.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderated` - Return moderated channels.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort4OrStr](vimeo_api/models/enums/sort4.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `followers` - Sort the results by number of followers.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2929,7 +2979,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_channel_subscriptions_alt1(*, direction: DirectionOrStr | None = None, filter: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort4OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ChannelConnection</code></summary>
+<summary><code>def get_channel_subscriptions_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort4OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ChannelConnection</code></summary>
 
 <dl>
 <dd>
@@ -2953,7 +3003,9 @@ This method returns all the channels to which the specified user subscribes.
 
 ```python
 try:
-    response = client.channels_essentials.get_channel_subscriptions_alt1()
+    response = client.channels_essentials.get_channel_subscriptions_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelSubscriptionsAlt1ErrorBody
@@ -2963,7 +3015,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_essentials.get_channel_subscriptions_alt1()
+    response = await async_client.channels_essentials.get_channel_subscriptions_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelSubscriptionsAlt1ErrorBody
@@ -2980,12 +3034,12 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter12OrStr](vimeo_api/models/enums/filter12.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderated` - Return moderated channels.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter12OrStr](vimeo_api/models/enums/filter12.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderated` - Return moderated channels.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort4OrStr](vimeo_api/models/enums/sort4.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `followers` - Sort the results by number of followers.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3015,7 +3069,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_channels(*, direction: DirectionOrStr | None = None, filter: Filter1OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort7OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ChannelConnection</code></summary>
+<summary><code>def get_channels(*, direction: DirectionOrStr | None = None, filter_: Filter1OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort7OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ChannelConnection</code></summary>
 
 <dl>
 <dd>
@@ -3039,7 +3093,9 @@ This method returns all available channels.
 
 ```python
 try:
-    response = client.channels_essentials.get_channels()
+    response = client.channels_essentials.get_channels(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelsErrorBody
@@ -3049,7 +3105,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_essentials.get_channels()
+    response = await async_client.channels_essentials.get_channels(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelsErrorBody
@@ -3066,12 +3124,12 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter1OrStr](vimeo_api/models/enums/filter1.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `featured` - Return featured channels.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter1OrStr](vimeo_api/models/enums/filter1.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `featured` - Return featured channels.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort7OrStr](vimeo_api/models/enums/sort7.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `default` - Sort the results by creation date.<br> * `followers` - Sort the results by number of followers.<br> * `relevant` - Sort the results by relevance. This option is available for search queries only.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3130,7 +3188,7 @@ This method adds a single user as a moderator to the specified channel. The auth
 
 ```python
 try:
-    client.channels_moderators.add_channel_moderator(channel_id, user_id)
+    client.channels_moderators.add_channel_moderator(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddChannelModeratorErrorBody
 ```
@@ -3139,7 +3197,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_moderators.add_channel_moderator(channel_id, user_id)
+    await async_client.channels_moderators.add_channel_moderator(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddChannelModeratorErrorBody
 ```
@@ -3156,7 +3214,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3210,7 +3268,7 @@ This method adds multiple users as moderators to the specified channel. Include 
 
 ```python
 try:
-    client.channels_moderators.add_channel_moderators(channel_id)
+    client.channels_moderators.add_channel_moderators(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddChannelModeratorsErrorBody
 ```
@@ -3219,7 +3277,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_moderators.add_channel_moderators(channel_id)
+    await async_client.channels_moderators.add_channel_moderators(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddChannelModeratorsErrorBody
 ```
@@ -3235,7 +3293,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3290,7 +3348,7 @@ This method returns a single moderator of the specified channel.
 
 ```python
 try:
-    response = client.channels_moderators.get_channel_moderator(channel_id, user_id)
+    response = client.channels_moderators.get_channel_moderator(927, 152184)
     # TODO: Handle 'response' of type User
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -3300,7 +3358,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_moderators.get_channel_moderator(channel_id, user_id)
+    response = await async_client.channels_moderators.get_channel_moderator(927, 152184)
     # TODO: Handle 'response' of type User
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -3318,7 +3376,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3365,7 +3423,9 @@ This method returns every moderator of the specified channel.
 
 ```python
 try:
-    response = client.channels_moderators.get_channel_moderators(channel_id)
+    response = client.channels_moderators.get_channel_moderators(
+        927, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -3375,7 +3435,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_moderators.get_channel_moderators(channel_id)
+    response = await async_client.channels_moderators.get_channel_moderators(
+        927, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -3397,7 +3459,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date added.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3444,7 +3506,7 @@ This method removes a single moderator from the specified channel. The authentic
 
 ```python
 try:
-    client.channels_moderators.remove_channel_moderator(channel_id, user_id)
+    client.channels_moderators.remove_channel_moderator(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveChannelModeratorErrorBody
 ```
@@ -3453,7 +3515,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_moderators.remove_channel_moderator(channel_id, user_id)
+    await async_client.channels_moderators.remove_channel_moderator(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveChannelModeratorErrorBody
 ```
@@ -3470,7 +3532,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3524,7 +3586,7 @@ This method removes multiple moderators from the specified channel. The authenti
 
 ```python
 try:
-    client.channels_moderators.remove_channel_moderators(channel_id, body)
+    client.channels_moderators.remove_channel_moderators(927, ChannelsModeratorsRequest(user_uri="some example string"))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveChannelModeratorsErrorBody
 ```
@@ -3533,7 +3595,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_moderators.remove_channel_moderators(channel_id, body)
+    await async_client.channels_moderators.remove_channel_moderators(
+        927, ChannelsModeratorsRequest(user_uri="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveChannelModeratorsErrorBody
 ```
@@ -3550,7 +3614,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>body</code> | <code>[ChannelsModeratorsRequest](vimeo_api/models/channels_moderators_request.py) \| [ChannelsModeratorsRequestDict](vimeo_api/models/channels_moderators_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3604,7 +3668,9 @@ This method replaces the current list of channel moderators with a new list. The
 
 ```python
 try:
-    response = client.channels_moderators.replace_channel_moderators(channel_id, body)
+    response = client.channels_moderators.replace_channel_moderators(
+        927, ChannelsModeratorsRequest1(user_uri="some example string")
+    )
     # TODO: Handle 'response' of type list[User]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ReplaceChannelModeratorsErrorBody
@@ -3614,7 +3680,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_moderators.replace_channel_moderators(channel_id, body)
+    response = await async_client.channels_moderators.replace_channel_moderators(
+        927, ChannelsModeratorsRequest1(user_uri="some example string")
+    )
     # TODO: Handle 'response' of type list[User]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ReplaceChannelModeratorsErrorBody
@@ -3632,7 +3700,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>body</code> | <code>[ChannelsModeratorsRequest1](vimeo_api/models/channels_moderators_request1.py) \| [ChannelsModeratorsRequest1Dict](vimeo_api/models/channels_moderators_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3691,7 +3759,7 @@ This method prevents a single user from being able to access the specified priva
 
 ```python
 try:
-    client.channels_private_channel_members.delete_channel_privacy_user(channel_id, user_id)
+    client.channels_private_channel_members.delete_channel_privacy_user(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChannelPrivacyUserErrorBody
 ```
@@ -3700,7 +3768,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_private_channel_members.delete_channel_privacy_user(channel_id, user_id)
+    await async_client.channels_private_channel_members.delete_channel_privacy_user(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChannelPrivacyUserErrorBody
 ```
@@ -3717,7 +3785,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3771,7 +3839,9 @@ This method returns all the users who have access to the specified private chann
 
 ```python
 try:
-    response = client.channels_private_channel_members.get_channel_privacy_users(channel_id)
+    response = client.channels_private_channel_members.get_channel_privacy_users(
+        927, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelPrivacyUsersErrorBody
@@ -3781,7 +3851,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_private_channel_members.get_channel_privacy_users(channel_id)
+    response = await async_client.channels_private_channel_members.get_channel_privacy_users(
+        927, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelPrivacyUsersErrorBody
@@ -3801,7 +3873,7 @@ except ApiError as e:
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3855,7 +3927,7 @@ This method gives a single user access to the specified private channel. The aut
 
 ```python
 try:
-    client.channels_private_channel_members.set_channel_privacy_user(channel_id, user_id)
+    client.channels_private_channel_members.set_channel_privacy_user(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetChannelPrivacyUserErrorBody
 ```
@@ -3864,7 +3936,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_private_channel_members.set_channel_privacy_user(channel_id, user_id)
+    await async_client.channels_private_channel_members.set_channel_privacy_user(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetChannelPrivacyUserErrorBody
 ```
@@ -3881,7 +3953,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3935,7 +4007,9 @@ This method gives multiple users access to the specified private channel. The au
 
 ```python
 try:
-    response = client.channels_private_channel_members.set_channel_privacy_users(channel_id, body)
+    response = client.channels_private_channel_members.set_channel_privacy_users(
+        927, ChannelsPrivacyUsersRequest(users=["some example string"])
+    )
     # TODO: Handle 'response' of type list[User]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetChannelPrivacyUsersErrorBody
@@ -3945,7 +4019,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_private_channel_members.set_channel_privacy_users(channel_id, body)
+    response = await async_client.channels_private_channel_members.set_channel_privacy_users(
+        927, ChannelsPrivacyUsersRequest(users=["some example string"])
+    )
     # TODO: Handle 'response' of type list[User]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetChannelPrivacyUsersErrorBody
@@ -3963,7 +4039,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>body</code> | <code>[ChannelsPrivacyUsersRequest](vimeo_api/models/channels_privacy_users_request.py) \| [ChannelsPrivacyUsersRequestDict](vimeo_api/models/channels_privacy_users_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4021,7 +4097,7 @@ This method determines whether the specified user is a follower of a particular 
 
 ```python
 try:
-    client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel(channel_id, user_id)
+    client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserSubscribedToChannelErrorBody
 ```
@@ -4030,7 +4106,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel(channel_id, user_id)
+    await async_client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserSubscribedToChannelErrorBody
 ```
@@ -4047,7 +4123,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4101,7 +4177,7 @@ This method determines whether the specified user is a follower of a particular 
 
 ```python
 try:
-    client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel_alt1(channel_id)
+    client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel_alt1(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserSubscribedToChannelAlt1ErrorBody
 ```
@@ -4110,7 +4186,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel_alt1(channel_id)
+    await async_client.channels_subscriptions_and_subscribers.check_if_user_subscribed_to_channel_alt1(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserSubscribedToChannelAlt1ErrorBody
 ```
@@ -4126,7 +4202,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4156,7 +4232,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_channel_subscribers(channel_id: float, filter: Filter2OrStr, *, direction: DirectionOrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
+<summary><code>def get_channel_subscribers(channel_id: float, filter_: Filter2OrStr, *, direction: DirectionOrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
 
 <dl>
 <dd>
@@ -4180,7 +4256,9 @@ This method returns every follower of the specified channel.
 
 ```python
 try:
-    response = client.channels_subscriptions_and_subscribers.get_channel_subscribers(channel_id, filter)
+    response = client.channels_subscriptions_and_subscribers.get_channel_subscribers(
+        927, Filter2.MODERATORS, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelSubscribersErrorBody
@@ -4190,7 +4268,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_subscriptions_and_subscribers.get_channel_subscribers(channel_id, filter)
+    response = await async_client.channels_subscriptions_and_subscribers.get_channel_subscribers(
+        927, Filter2.MODERATORS, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelSubscribersErrorBody
@@ -4207,13 +4287,13 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>filter</code> | <code>[Filter2OrStr](vimeo_api/models/enums/filter2.py)</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderators` - Return moderators. |
+| <code>filter_</code> | <code>[Filter2OrStr](vimeo_api/models/enums/filter2.py)</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderators` - Return moderators. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by follow date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4267,7 +4347,7 @@ This method subscribes the authenticated user to the specified channel.
 
 ```python
 try:
-    client.channels_subscriptions_and_subscribers.subscribe_to_channel(channel_id, user_id)
+    client.channels_subscriptions_and_subscribers.subscribe_to_channel(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SubscribeToChannelErrorBody
 ```
@@ -4276,7 +4356,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_subscriptions_and_subscribers.subscribe_to_channel(channel_id, user_id)
+    await async_client.channels_subscriptions_and_subscribers.subscribe_to_channel(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SubscribeToChannelErrorBody
 ```
@@ -4293,7 +4373,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4347,7 +4427,7 @@ This method subscribes the authenticated user to the specified channel.
 
 ```python
 try:
-    client.channels_subscriptions_and_subscribers.subscribe_to_channel_alt1(channel_id)
+    client.channels_subscriptions_and_subscribers.subscribe_to_channel_alt1(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SubscribeToChannelAlt1ErrorBody
 ```
@@ -4356,7 +4436,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_subscriptions_and_subscribers.subscribe_to_channel_alt1(channel_id)
+    await async_client.channels_subscriptions_and_subscribers.subscribe_to_channel_alt1(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SubscribeToChannelAlt1ErrorBody
 ```
@@ -4372,7 +4452,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4426,7 +4506,7 @@ This method unsubscribes the authenticated user from the specified channel.
 
 ```python
 try:
-    client.channels_subscriptions_and_subscribers.unsubscribe_from_channel(channel_id, user_id)
+    client.channels_subscriptions_and_subscribers.unsubscribe_from_channel(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UnsubscribeFromChannelErrorBody
 ```
@@ -4435,7 +4515,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_subscriptions_and_subscribers.unsubscribe_from_channel(channel_id, user_id)
+    await async_client.channels_subscriptions_and_subscribers.unsubscribe_from_channel(927, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UnsubscribeFromChannelErrorBody
 ```
@@ -4452,7 +4532,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4506,7 +4586,7 @@ This method unsubscribes the authenticated user from the specified channel.
 
 ```python
 try:
-    client.channels_subscriptions_and_subscribers.unsubscribe_from_channel_alt1(channel_id)
+    client.channels_subscriptions_and_subscribers.unsubscribe_from_channel_alt1(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UnsubscribeFromChannelAlt1ErrorBody
 ```
@@ -4515,7 +4595,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_subscriptions_and_subscribers.unsubscribe_from_channel_alt1(channel_id)
+    await async_client.channels_subscriptions_and_subscribers.unsubscribe_from_channel_alt1(927)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UnsubscribeFromChannelAlt1ErrorBody
 ```
@@ -4531,7 +4611,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4589,7 +4669,7 @@ This method adds a single tag to the specified channel. The authenticated user m
 
 ```python
 try:
-    client.channels_tags.add_channel_tag(channel_id, word)
+    client.channels_tags.add_channel_tag(927, "awesome")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddChannelTagErrorBody
 ```
@@ -4598,7 +4678,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_tags.add_channel_tag(channel_id, word)
+    await async_client.channels_tags.add_channel_tag(927, "awesome")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddChannelTagErrorBody
 ```
@@ -4615,7 +4695,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>word</code> | <code>str</code> | The word to use as the tag. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4646,7 +4726,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def add_tags_to_channel(channel_id: float, body: list[ChannelsTagsRequest | ChannelsTagsRequestDict], *, request_options: RequestOptionsOrDict | None = None) -> list[Tag]</code></summary>
+<summary><code>def add_tags_to_channel(channel_id: float, body: list[ChannelsTagsRequest | ChannelsTagsRequestDict], *, request_options: RequestOptionsOrDict | None = None) -> list[TagModel]</code></summary>
 
 <dl>
 <dd>
@@ -4670,8 +4750,8 @@ This method adds multiple tags to the specified channel. Include the tags as a J
 
 ```python
 try:
-    response = client.channels_tags.add_tags_to_channel(channel_id, body)
-    # TODO: Handle 'response' of type list[Tag]
+    response = client.channels_tags.add_tags_to_channel(927, [ChannelsTagsRequest(name="some example string")])
+    # TODO: Handle 'response' of type list[TagModel]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddTagsToChannelErrorBody
 ```
@@ -4680,8 +4760,10 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_tags.add_tags_to_channel(channel_id, body)
-    # TODO: Handle 'response' of type list[Tag]
+    response = await async_client.channels_tags.add_tags_to_channel(
+        927, [ChannelsTagsRequest(name="some example string")]
+    )
+    # TODO: Handle 'response' of type list[TagModel]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddTagsToChannelErrorBody
 ```
@@ -4698,7 +4780,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>body</code> | <code>list&#91;[ChannelsTagsRequest](vimeo_api/models/channels_tags_request.py) \| [ChannelsTagsRequestDict](vimeo_api/models/channels_tags_request.py)&#93;</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4708,7 +4790,7 @@ except ApiError as e:
 <dl>
 <dd>
 
-**OnSuccess**: <code>list&#91;[Tag](vimeo_api/models/tag.py)&#93;</code> -- The tags were added.
+**OnSuccess**: <code>list&#91;[TagModel](vimeo_api/models/tag_model.py)&#93;</code> -- The tags were added.
 
 **OnError**: <code>[ApiError](vimeo_api/core/exceptions.py)&#91;[AddTagsToChannelErrorBody](vimeo_api/errors/add_tags_to_channel_error.py)&#93;</code>
 
@@ -4753,7 +4835,7 @@ This method determines whether a tag has been added to the specified channel.
 
 ```python
 try:
-    client.channels_tags.check_if_channel_has_tag(channel_id, word)
+    client.channels_tags.check_if_channel_has_tag(927, "awesome")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfChannelHasTagErrorBody
 ```
@@ -4762,7 +4844,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_tags.check_if_channel_has_tag(channel_id, word)
+    await async_client.channels_tags.check_if_channel_has_tag(927, "awesome")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfChannelHasTagErrorBody
 ```
@@ -4779,7 +4861,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>word</code> | <code>str</code> | The word to use as the tag. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4834,7 +4916,7 @@ This method removes a single tag from the specified channel. The authenticated u
 
 ```python
 try:
-    client.channels_tags.delete_tag_from_channel(channel_id, word)
+    client.channels_tags.delete_tag_from_channel(927, "awesome")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteTagFromChannelErrorBody
 ```
@@ -4843,7 +4925,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_tags.delete_tag_from_channel(channel_id, word)
+    await async_client.channels_tags.delete_tag_from_channel(927, "awesome")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteTagFromChannelErrorBody
 ```
@@ -4860,7 +4942,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>word</code> | <code>str</code> | The word to use as the tag. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4915,7 +4997,7 @@ This method returns every tag that has been added to the specified channel.
 
 ```python
 try:
-    response = client.channels_tags.get_channel_tags(channel_id)
+    response = client.channels_tags.get_channel_tags(927)
     # TODO: Handle 'response' of type TagConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelTagsErrorBody
@@ -4925,7 +5007,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_tags.get_channel_tags(channel_id)
+    response = await async_client.channels_tags.get_channel_tags(927)
     # TODO: Handle 'response' of type TagConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelTagsErrorBody
@@ -4942,7 +5024,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5000,7 +5082,7 @@ This method adds a single video to the specified channel. The authenticated user
 
 ```python
 try:
-    client.channels_videos.add_video_to_channel(channel_id, video_id)
+    client.channels_videos.add_video_to_channel(927, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToChannelErrorBody
 ```
@@ -5009,7 +5091,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_videos.add_video_to_channel(channel_id, video_id)
+    await async_client.channels_videos.add_video_to_channel(927, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToChannelErrorBody
 ```
@@ -5026,7 +5108,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5080,7 +5162,7 @@ This method adds multiple videos to the specified channel. The authenticated use
 
 ```python
 try:
-    client.channels_videos.add_videos_to_channel(channel_id, body)
+    client.channels_videos.add_videos_to_channel(927, ChannelsVideosRequest1(video_uri="some example string"))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToChannelErrorBody
 ```
@@ -5089,7 +5171,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_videos.add_videos_to_channel(channel_id, body)
+    await async_client.channels_videos.add_videos_to_channel(
+        927, ChannelsVideosRequest1(video_uri="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToChannelErrorBody
 ```
@@ -5106,7 +5190,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>body</code> | <code>[ChannelsVideosRequest1](vimeo_api/models/channels_videos_request1.py) \| [ChannelsVideosRequest1Dict](vimeo_api/models/channels_videos_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5160,7 +5244,7 @@ This method removes a single video from the specified channel. The authenticated
 
 ```python
 try:
-    client.channels_videos.delete_video_from_channel(channel_id, video_id)
+    client.channels_videos.delete_video_from_channel(927, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromChannelErrorBody
 ```
@@ -5169,7 +5253,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_videos.delete_video_from_channel(channel_id, video_id)
+    await async_client.channels_videos.delete_video_from_channel(927, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromChannelErrorBody
 ```
@@ -5186,7 +5270,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5240,7 +5324,7 @@ This method returns every channel to which the authenticated user can add or rem
 
 ```python
 try:
-    response = client.channels_videos.get_available_video_channels(video_id)
+    response = client.channels_videos.get_available_video_channels(258684937)
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableVideoChannelsErrorBody
@@ -5250,7 +5334,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_videos.get_available_video_channels(video_id)
+    response = await async_client.channels_videos.get_available_video_channels(258684937)
     # TODO: Handle 'response' of type ChannelConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableVideoChannelsErrorBody
@@ -5267,7 +5351,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5321,7 +5405,7 @@ This method returns a single video in the specified channel. You can use it to d
 
 ```python
 try:
-    response = client.channels_videos.get_channel_video(channel_id, video_id)
+    response = client.channels_videos.get_channel_video(927, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelVideoErrorBody
@@ -5331,7 +5415,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_videos.get_channel_video(channel_id, video_id)
+    response = await async_client.channels_videos.get_channel_video(927, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelVideoErrorBody
@@ -5349,7 +5433,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5379,7 +5463,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_channel_videos(channel_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sizes: str | None = None, sort: Sort10OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_channel_videos(channel_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sizes: str | None = None, sort: Sort10OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -5403,7 +5487,16 @@ This method returns every video in the specified channel.
 
 ```python
 try:
-    response = client.channels_videos.get_channel_videos(channel_id)
+    response = client.channels_videos.get_channel_videos(
+        927,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        sizes="100x75",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelVideosErrorBody
@@ -5413,7 +5506,16 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.channels_videos.get_channel_videos(channel_id)
+    response = await async_client.channels_videos.get_channel_videos(
+        927,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        sizes="100x75",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChannelVideosErrorBody
@@ -5432,14 +5534,14 @@ except ApiError as e:
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>containing_uri</code> | <code>str \| None</code> | The page that contains the video URI.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sizes</code> | <code>str \| None</code> | The pixel dimensions of the image in `{width}x{height}` format. For more information, see our [Using Common Formats and Parameters](https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter) guide.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort10OrStr](vimeo_api/models/enums/sort10.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `added` - Sort the results by date added.<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by creation date.<br> * `default` - Use the default sorting method.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `manual` - Sort the results as the user has arranged them.<br> * `modified_time` - Sort the results by last modification.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5493,7 +5595,7 @@ This method removes multiple videos from the specified channel. Include the vide
 
 ```python
 try:
-    client.channels_videos.remove_videos_from_channel(channel_id, body)
+    client.channels_videos.remove_videos_from_channel(927, ChannelsVideosRequest(video_uri="some example string"))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromChannelErrorBody
 ```
@@ -5502,7 +5604,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.channels_videos.remove_videos_from_channel(channel_id, body)
+    await async_client.channels_videos.remove_videos_from_channel(
+        927, ChannelsVideosRequest(video_uri="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromChannelErrorBody
 ```
@@ -5519,7 +5623,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>body</code> | <code>[ChannelsVideosRequest](vimeo_api/models/channels_videos_request.py) \| [ChannelsVideosRequestDict](vimeo_api/models/channels_videos_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5577,7 +5681,7 @@ This method adds a custom logo representing the authenticated user for display i
 
 ```python
 try:
-    response = client.embed_presets_custom_logos.create_custom_logo(user_id)
+    response = client.embed_presets_custom_logos.create_custom_logo(152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateCustomLogoErrorBody
@@ -5587,7 +5691,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_custom_logos.create_custom_logo(user_id)
+    response = await async_client.embed_presets_custom_logos.create_custom_logo(152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateCustomLogoErrorBody
@@ -5604,7 +5708,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5684,7 +5788,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5738,7 +5842,7 @@ This method deletes the specified custom logo belonging to the authenticated use
 
 ```python
 try:
-    client.embed_presets_custom_logos.delete_custom_logo(logo_id, user_id)
+    client.embed_presets_custom_logos.delete_custom_logo(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteCustomLogoErrorBody
 ```
@@ -5747,7 +5851,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.embed_presets_custom_logos.delete_custom_logo(logo_id, user_id)
+    await async_client.embed_presets_custom_logos.delete_custom_logo(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteCustomLogoErrorBody
 ```
@@ -5764,7 +5868,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>logo_id</code> | <code>float</code> | The ID of the custom logo. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5818,7 +5922,7 @@ This method deletes the specified custom logo belonging to the authenticated use
 
 ```python
 try:
-    client.embed_presets_custom_logos.delete_custom_logo_alt1(logo_id)
+    client.embed_presets_custom_logos.delete_custom_logo_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteCustomLogoAlt1ErrorBody
 ```
@@ -5827,7 +5931,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.embed_presets_custom_logos.delete_custom_logo_alt1(logo_id)
+    await async_client.embed_presets_custom_logos.delete_custom_logo_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteCustomLogoAlt1ErrorBody
 ```
@@ -5843,7 +5947,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>logo_id</code> | <code>float</code> | The ID of the custom logo. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5897,7 +6001,7 @@ This method returns a single custom logo belonging to the authenticated user.
 
 ```python
 try:
-    response = client.embed_presets_custom_logos.get_custom_logo(logo_id, user_id)
+    response = client.embed_presets_custom_logos.get_custom_logo(12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCustomLogoErrorBody
@@ -5907,7 +6011,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_custom_logos.get_custom_logo(logo_id, user_id)
+    response = await async_client.embed_presets_custom_logos.get_custom_logo(12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCustomLogoErrorBody
@@ -5925,7 +6029,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>logo_id</code> | <code>float</code> | The ID of the custom logo. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5979,7 +6083,7 @@ This method returns a single custom logo belonging to the authenticated user.
 
 ```python
 try:
-    response = client.embed_presets_custom_logos.get_custom_logo_alt1(logo_id)
+    response = client.embed_presets_custom_logos.get_custom_logo_alt1(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCustomLogoAlt1ErrorBody
@@ -5989,7 +6093,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_custom_logos.get_custom_logo_alt1(logo_id)
+    response = await async_client.embed_presets_custom_logos.get_custom_logo_alt1(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCustomLogoAlt1ErrorBody
@@ -6006,7 +6110,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>logo_id</code> | <code>float</code> | The ID of the custom logo. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6060,7 +6164,7 @@ This method returns every custom logo that belongs to the authenticated user or 
 
 ```python
 try:
-    response = client.embed_presets_custom_logos.get_custom_logos(user_id)
+    response = client.embed_presets_custom_logos.get_custom_logos(152184, page=1, per_page=10, sizes="100x75")
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCustomLogosErrorBody
@@ -6070,7 +6174,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_custom_logos.get_custom_logos(user_id)
+    response = await async_client.embed_presets_custom_logos.get_custom_logos(
+        152184, page=1, per_page=10, sizes="100x75"
+    )
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCustomLogosErrorBody
@@ -6090,7 +6196,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sizes</code> | <code>str \| None</code> | The pixel dimensions of the image in `{width}x{height}` format. For more information, see our [Using Common Formats and Parameters](https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter) guide.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6144,7 +6250,7 @@ This method returns every custom logo that belongs to the authenticated user or 
 
 ```python
 try:
-    response = client.embed_presets_custom_logos.get_custom_logos_alt1()
+    response = client.embed_presets_custom_logos.get_custom_logos_alt1(page=1, per_page=10, sizes="100x75")
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCustomLogosAlt1ErrorBody
@@ -6154,7 +6260,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_custom_logos.get_custom_logos_alt1()
+    response = await async_client.embed_presets_custom_logos.get_custom_logos_alt1(page=1, per_page=10, sizes="100x75")
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCustomLogosAlt1ErrorBody
@@ -6173,7 +6279,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sizes</code> | <code>str \| None</code> | The pixel dimensions of the image in `{width}x{height}` format. For more information, see our [Using Common Formats and Parameters](https://developer.vimeo.com/api/common-formats#using-the-sizes-parameter) guide.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6231,7 +6337,7 @@ This method creates an embed preset.
 
 ```python
 try:
-    response = client.embed_presets_essentials.create_embed_presets(user_id)
+    response = client.embed_presets_essentials.create_embed_presets(152184)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6241,7 +6347,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_essentials.create_embed_presets(user_id)
+    response = await async_client.embed_presets_essentials.create_embed_presets(152184)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6259,7 +6365,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersPresetsRequest](vimeo_api/models/users_presets_request.py) \| [UsersPresetsRequestDict](vimeo_api/models/users_presets_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6333,7 +6439,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MePresetsRequest](vimeo_api/models/me_presets_request.py) \| [MePresetsRequestDict](vimeo_api/models/me_presets_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6380,7 +6486,7 @@ This method deletes the specified embed preset. The authenticated user must be t
 
 ```python
 try:
-    client.embed_presets_essentials.delete_embed_preset(preset_id, user_id)
+    client.embed_presets_essentials.delete_embed_preset(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteEmbedPresetErrorBody
 ```
@@ -6389,7 +6495,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.embed_presets_essentials.delete_embed_preset(preset_id, user_id)
+    await async_client.embed_presets_essentials.delete_embed_preset(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteEmbedPresetErrorBody
 ```
@@ -6406,7 +6512,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>preset_id</code> | <code>float</code> | The ID of the embed preset. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6460,7 +6566,7 @@ This method deletes the specified embed preset. The authenticated user must be t
 
 ```python
 try:
-    client.embed_presets_essentials.delete_embed_preset_alt1(preset_id)
+    client.embed_presets_essentials.delete_embed_preset_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteEmbedPresetAlt1ErrorBody
 ```
@@ -6469,7 +6575,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.embed_presets_essentials.delete_embed_preset_alt1(preset_id)
+    await async_client.embed_presets_essentials.delete_embed_preset_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteEmbedPresetAlt1ErrorBody
 ```
@@ -6485,7 +6591,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>preset_id</code> | <code>float</code> | The ID of the embed preset. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6539,7 +6645,7 @@ This method edits the specified embed preset. The authenticated user must be the
 
 ```python
 try:
-    response = client.embed_presets_essentials.edit_embed_preset(preset_id, user_id)
+    response = client.embed_presets_essentials.edit_embed_preset(12345, 152184)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditEmbedPresetErrorBody
@@ -6549,7 +6655,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_essentials.edit_embed_preset(preset_id, user_id)
+    response = await async_client.embed_presets_essentials.edit_embed_preset(12345, 152184)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditEmbedPresetErrorBody
@@ -6568,7 +6674,7 @@ except ApiError as e:
 | <code>preset_id</code> | <code>float</code> | The ID of the preset. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersPresetsRequest1](vimeo_api/models/users_presets_request1.py) \| [UsersPresetsRequest1Dict](vimeo_api/models/users_presets_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6622,7 +6728,7 @@ This method edits the specified embed preset. The authenticated user must be the
 
 ```python
 try:
-    response = client.embed_presets_essentials.edit_embed_preset_alt1(preset_id)
+    response = client.embed_presets_essentials.edit_embed_preset_alt1(12345)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditEmbedPresetAlt1ErrorBody
@@ -6632,7 +6738,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_essentials.edit_embed_preset_alt1(preset_id)
+    response = await async_client.embed_presets_essentials.edit_embed_preset_alt1(12345)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditEmbedPresetAlt1ErrorBody
@@ -6650,7 +6756,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>preset_id</code> | <code>float</code> | The ID of the preset. |
 | <code>body</code> | <code>[MePresetsRequest1](vimeo_api/models/me_presets_request1.py) \| [MePresetsRequest1Dict](vimeo_api/models/me_presets_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6704,7 +6810,7 @@ This method returns a single embed preset. The authenticated user must be the ow
 
 ```python
 try:
-    response = client.embed_presets_essentials.get_embed_preset(preset_id, user_id)
+    response = client.embed_presets_essentials.get_embed_preset(12345, 152184)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6714,7 +6820,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_essentials.get_embed_preset(preset_id, user_id)
+    response = await async_client.embed_presets_essentials.get_embed_preset(12345, 152184)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6732,7 +6838,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>preset_id</code> | <code>float</code> | The ID of the preset. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6779,7 +6885,7 @@ This method returns a single embed preset. The authenticated user must be the ow
 
 ```python
 try:
-    response = client.embed_presets_essentials.get_embed_preset_alt1(preset_id)
+    response = client.embed_presets_essentials.get_embed_preset_alt1(12345)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6789,7 +6895,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_essentials.get_embed_preset_alt1(preset_id)
+    response = await async_client.embed_presets_essentials.get_embed_preset_alt1(12345)
     # TODO: Handle 'response' of type Preset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6806,7 +6912,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>preset_id</code> | <code>float</code> | The ID of the preset. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6853,7 +6959,7 @@ This method returns every embed preset that belongs to the authenticated user.
 
 ```python
 try:
-    response = client.embed_presets_essentials.get_embed_presets(user_id)
+    response = client.embed_presets_essentials.get_embed_presets(152184, page=1, per_page=10)
     # TODO: Handle 'response' of type PresetConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6863,7 +6969,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_essentials.get_embed_presets(user_id)
+    response = await async_client.embed_presets_essentials.get_embed_presets(152184, page=1, per_page=10)
     # TODO: Handle 'response' of type PresetConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6882,7 +6988,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6929,7 +7035,7 @@ This method returns every embed preset that belongs to the authenticated user.
 
 ```python
 try:
-    response = client.embed_presets_essentials.get_embed_presets_alt1()
+    response = client.embed_presets_essentials.get_embed_presets_alt1(page=1, per_page=10)
     # TODO: Handle 'response' of type PresetConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6939,7 +7045,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_essentials.get_embed_presets_alt1()
+    response = await async_client.embed_presets_essentials.get_embed_presets_alt1(page=1, per_page=10)
     # TODO: Handle 'response' of type PresetConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -6957,7 +7063,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7008,7 +7114,7 @@ This method removes the specified embed preset from a folder. The authenticated 
 
 ```python
 try:
-    client.embed_presets_folders.delete_folder_embed_preset(preset_id, project_id, user_id)
+    client.embed_presets_folders.delete_folder_embed_preset(12345, 258684937, 182375364)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteFolderEmbedPresetErrorBody
 ```
@@ -7017,7 +7123,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.embed_presets_folders.delete_folder_embed_preset(preset_id, project_id, user_id)
+    await async_client.embed_presets_folders.delete_folder_embed_preset(12345, 258684937, 182375364)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteFolderEmbedPresetErrorBody
 ```
@@ -7035,7 +7141,7 @@ except ApiError as e:
 | <code>preset_id</code> | <code>float</code> | The ID of the embed preset. |
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7093,7 +7199,7 @@ This method adds a timeline event thumbnail to the specified video. The authenti
 
 ```python
 try:
-    response = client.embed_presets_timeline_events.create_video_custom_logo(video_id)
+    response = client.embed_presets_timeline_events.create_video_custom_logo(258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateVideoCustomLogoErrorBody
@@ -7103,7 +7209,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_timeline_events.create_video_custom_logo(video_id)
+    response = await async_client.embed_presets_timeline_events.create_video_custom_logo(258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateVideoCustomLogoErrorBody
@@ -7120,7 +7226,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7174,7 +7280,7 @@ This method returns a single timeline event thumbnail that belongs to the specif
 
 ```python
 try:
-    response = client.embed_presets_timeline_events.get_video_custom_logo(thumbnail_id, video_id)
+    response = client.embed_presets_timeline_events.get_video_custom_logo(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoCustomLogoErrorBody
@@ -7184,7 +7290,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_timeline_events.get_video_custom_logo(thumbnail_id, video_id)
+    response = await async_client.embed_presets_timeline_events.get_video_custom_logo(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoCustomLogoErrorBody
@@ -7202,7 +7308,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the timeline event thumbnail. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7260,7 +7366,7 @@ This method adds an embed preset to the specified video. The authenticated user 
 
 ```python
 try:
-    client.embed_presets_videos.add_video_embed_preset(preset_id, video_id)
+    client.embed_presets_videos.add_video_embed_preset(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -7269,7 +7375,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.embed_presets_videos.add_video_embed_preset(preset_id, video_id)
+    await async_client.embed_presets_videos.add_video_embed_preset(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -7286,7 +7392,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>preset_id</code> | <code>float</code> | The ID of the embed preset. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7333,7 +7439,7 @@ This method removes the specified embed preset from a video. The authenticated u
 
 ```python
 try:
-    client.embed_presets_videos.delete_video_embed_preset(preset_id, video_id)
+    client.embed_presets_videos.delete_video_embed_preset(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoEmbedPresetErrorBody
 ```
@@ -7342,7 +7448,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.embed_presets_videos.delete_video_embed_preset(preset_id, video_id)
+    await async_client.embed_presets_videos.delete_video_embed_preset(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoEmbedPresetErrorBody
 ```
@@ -7359,7 +7465,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>preset_id</code> | <code>float</code> | The ID of the embed preset. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7413,7 +7519,7 @@ This method returns every video to which the specified embed preset has been add
 
 ```python
 try:
-    response = client.embed_presets_videos.get_embed_preset_videos(preset_id, user_id)
+    response = client.embed_presets_videos.get_embed_preset_videos(12345, 152184, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -7423,7 +7529,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_videos.get_embed_preset_videos(preset_id, user_id)
+    response = await async_client.embed_presets_videos.get_embed_preset_videos(12345, 152184, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -7443,7 +7549,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7490,7 +7596,7 @@ This method returns every video to which the specified embed preset has been add
 
 ```python
 try:
-    response = client.embed_presets_videos.get_embed_preset_videos_alt1(preset_id)
+    response = client.embed_presets_videos.get_embed_preset_videos_alt1(12345, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -7500,7 +7606,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.embed_presets_videos.get_embed_preset_videos_alt1(preset_id)
+    response = await async_client.embed_presets_videos.get_embed_preset_videos_alt1(12345, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -7519,7 +7625,7 @@ except ApiError as e:
 | <code>preset_id</code> | <code>float</code> | The ID of the embed preset. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7566,7 +7672,7 @@ This method determines whether a video has the specified embed preset.
 
 ```python
 try:
-    client.embed_presets_videos.get_video_embed_preset(preset_id, video_id)
+    client.embed_presets_videos.get_video_embed_preset(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoEmbedPresetErrorBody
 ```
@@ -7575,7 +7681,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.embed_presets_videos.get_video_embed_preset(preset_id, video_id)
+    await async_client.embed_presets_videos.get_video_embed_preset(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoEmbedPresetErrorBody
 ```
@@ -7592,7 +7698,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>preset_id</code> | <code>float</code> | The ID of the embed preset. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7650,7 +7756,7 @@ This method creates a new folder for the authenticated user. By default, this me
 
 ```python
 try:
-    response = client.folders_essentials.create_project(user_id, body)
+    response = client.folders_essentials.create_project(152184, UsersProjectsRequest(name="some example string"))
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateProjectErrorBody
@@ -7660,7 +7766,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_essentials.create_project(user_id, body)
+    response = await async_client.folders_essentials.create_project(
+        152184, UsersProjectsRequest(name="some example string")
+    )
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateProjectErrorBody
@@ -7678,7 +7786,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersProjectsRequest](vimeo_api/models/users_projects_request.py) \| [UsersProjectsRequestDict](vimeo_api/models/users_projects_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7732,7 +7840,7 @@ This method creates a new folder for the authenticated user. By default, this me
 
 ```python
 try:
-    response = client.folders_essentials.create_project_alt1(body)
+    response = client.folders_essentials.create_project_alt1(MeProjectsRequest(name="some example string"))
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateProjectAlt1ErrorBody
@@ -7742,7 +7850,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_essentials.create_project_alt1(body)
+    response = await async_client.folders_essentials.create_project_alt1(MeProjectsRequest(name="some example string"))
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateProjectAlt1ErrorBody
@@ -7759,7 +7867,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MeProjectsRequest](vimeo_api/models/me_projects_request.py) \| [MeProjectsRequestDict](vimeo_api/models/me_projects_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7813,7 +7921,7 @@ This method deletes the specified folder and optionally also the videos that it 
 
 ```python
 try:
-    client.folders_essentials.delete_project(project_id, user_id)
+    client.folders_essentials.delete_project(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteProjectErrorBody
 ```
@@ -7822,7 +7930,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_essentials.delete_project(project_id, user_id)
+    await async_client.folders_essentials.delete_project(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteProjectErrorBody
 ```
@@ -7840,7 +7948,7 @@ except ApiError as e:
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersProjectsRequest1](vimeo_api/models/users_projects_request1.py) \| [UsersProjectsRequest1Dict](vimeo_api/models/users_projects_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7894,7 +8002,7 @@ This method deletes the specified folder and optionally also the videos that it 
 
 ```python
 try:
-    client.folders_essentials.delete_project_alt1(project_id)
+    client.folders_essentials.delete_project_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteProjectAlt1ErrorBody
 ```
@@ -7903,7 +8011,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_essentials.delete_project_alt1(project_id)
+    await async_client.folders_essentials.delete_project_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteProjectAlt1ErrorBody
 ```
@@ -7920,7 +8028,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>body</code> | <code>[MeProjectsRequest1](vimeo_api/models/me_projects_request1.py) \| [MeProjectsRequest1Dict](vimeo_api/models/me_projects_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7974,7 +8082,7 @@ This method edits the specified folder. The authenticated user must be the owner
 
 ```python
 try:
-    response = client.folders_essentials.edit_project(project_id, user_id, body)
+    response = client.folders_essentials.edit_project(12345, 152184, UsersProjectsRequest2(name="some example string"))
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditProjectErrorBody
@@ -7984,7 +8092,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_essentials.edit_project(project_id, user_id, body)
+    response = await async_client.folders_essentials.edit_project(
+        12345, 152184, UsersProjectsRequest2(name="some example string")
+    )
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditProjectErrorBody
@@ -8003,7 +8113,7 @@ except ApiError as e:
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersProjectsRequest2](vimeo_api/models/users_projects_request2.py) \| [UsersProjectsRequest2Dict](vimeo_api/models/users_projects_request2.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8057,7 +8167,7 @@ This method edits the specified folder. The authenticated user must be the owner
 
 ```python
 try:
-    response = client.folders_essentials.edit_project_alt1(project_id, body)
+    response = client.folders_essentials.edit_project_alt1(12345, MeProjectsRequest2(name="some example string"))
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditProjectAlt1ErrorBody
@@ -8067,7 +8177,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_essentials.edit_project_alt1(project_id, body)
+    response = await async_client.folders_essentials.edit_project_alt1(
+        12345, MeProjectsRequest2(name="some example string")
+    )
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditProjectAlt1ErrorBody
@@ -8085,7 +8197,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>body</code> | <code>[MeProjectsRequest2](vimeo_api/models/me_projects_request2.py) \| [MeProjectsRequest2Dict](vimeo_api/models/me_projects_request2.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8139,7 +8251,7 @@ This method returns the specified private-to-me folder.
 
 ```python
 try:
-    response = client.folders_essentials.get_private_to_me_folder(owner_id)
+    response = client.folders_essentials.get_private_to_me_folder(152184)
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetPrivateToMeFolderErrorBody
@@ -8149,7 +8261,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_essentials.get_private_to_me_folder(owner_id)
+    response = await async_client.folders_essentials.get_private_to_me_folder(152184)
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetPrivateToMeFolderErrorBody
@@ -8166,7 +8278,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>owner_id</code> | <code>float</code> | The ID of the owner. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8220,7 +8332,7 @@ This method returns a single folder belonging to the authenticated user.
 
 ```python
 try:
-    response = client.folders_essentials.get_project(project_id, user_id)
+    response = client.folders_essentials.get_project(12345, 152184)
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectErrorBody
@@ -8230,7 +8342,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_essentials.get_project(project_id, user_id)
+    response = await async_client.folders_essentials.get_project(12345, 152184)
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectErrorBody
@@ -8248,7 +8360,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8302,7 +8414,7 @@ This method returns a single folder belonging to the authenticated user.
 
 ```python
 try:
-    response = client.folders_essentials.get_project_alt1(project_id)
+    response = client.folders_essentials.get_project_alt1(12345)
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectAlt1ErrorBody
@@ -8312,7 +8424,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_essentials.get_project_alt1(project_id)
+    response = await async_client.folders_essentials.get_project_alt1(12345)
     # TODO: Handle 'response' of type Project
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectAlt1ErrorBody
@@ -8329,7 +8441,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8383,7 +8495,9 @@ This method returns all the folders belonging to the authenticated user.
 
 ```python
 try:
-    response = client.folders_essentials.get_projects(user_id)
+    response = client.folders_essentials.get_projects(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ProjectConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectsErrorBody
@@ -8393,7 +8507,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_essentials.get_projects(user_id)
+    response = await async_client.folders_essentials.get_projects(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ProjectConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectsErrorBody
@@ -8415,7 +8531,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort36OrStr](vimeo_api/models/enums/sort36.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `date` - Sort the results by date.<br> * `default` - Use the default sort order.<br> * `modified_time` - Sort the results by last modification.<br> * `name` - Sort the results by name.<br> * `pinned_on` - Sort the results by pinned timestamp.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8469,7 +8585,9 @@ This method returns all the folders belonging to the authenticated user.
 
 ```python
 try:
-    response = client.folders_essentials.get_projects_alt1()
+    response = client.folders_essentials.get_projects_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ProjectConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectsAlt1ErrorBody
@@ -8479,7 +8597,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_essentials.get_projects_alt1()
+    response = await async_client.folders_essentials.get_projects_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type ProjectConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectsAlt1ErrorBody
@@ -8500,7 +8620,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort36OrStr](vimeo_api/models/enums/sort36.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `date` - Sort the results by date.<br> * `default` - Use the default sort order.<br> * `modified_time` - Sort the results by last modification.<br> * `name` - Sort the results by name.<br> * `pinned_on` - Sort the results by pinned timestamp.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8558,7 +8678,9 @@ This method removes all items from the specified folder.
 
 ```python
 try:
-    client.folders_items.delete_folder_items_alt1(project_id, uris)
+    client.folders_items.delete_folder_items_alt1(
+        12345, "/videos/258684937,/live_events/273576296", send_to_recently_deleted=False, should_delete_items=False
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteFolderItemsAlt1ErrorBody
 ```
@@ -8567,7 +8689,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_items.delete_folder_items_alt1(project_id, uris)
+    await async_client.folders_items.delete_folder_items_alt1(
+        12345, "/videos/258684937,/live_events/273576296", send_to_recently_deleted=False, should_delete_items=False
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteFolderItemsAlt1ErrorBody
 ```
@@ -8586,7 +8710,7 @@ except ApiError as e:
 | <code>uris</code> | <code>str</code> | A comma-separated list of video, event, or folder URIs to remove. Folder URIs are moved to the library root (with their contents). |
 | <code>send_to_recently_deleted</code> | <code>bool \| None</code> | When `should_delete_items` is true, send deleted clips to Recently Deleted purgatory (`TYPE_RECENTLY_DELETED`) instead of legacy user delete purgatory.<br>**Default**: <code>None</code> |
 | <code>should_delete_items</code> | <code>bool \| None</code> | Whether to delete the items when removing them from the folder.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8616,7 +8740,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_folder_items(project_id: float, *, clip_privacy_filters: str | None = None, direction: DirectionOrStr | None = None, filter: Filter21OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort37OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> None</code></summary>
+<summary><code>def get_folder_items(project_id: float, *, clip_privacy_filters: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter21OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort37OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> None</code></summary>
 
 <dl>
 <dd>
@@ -8640,7 +8764,9 @@ This method returns every item that belongs to the specified folder.
 
 ```python
 try:
-    client.folders_items.get_folder_items(project_id)
+    client.folders_items.get_folder_items(
+        12345, clip_privacy_filters="private,unlisted,hide_from_vimeo", direction=Direction.ASC, page=1, per_page=10
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -8649,7 +8775,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_items.get_folder_items(project_id)
+    await async_client.folders_items.get_folder_items(
+        12345, clip_privacy_filters="private,unlisted,hide_from_vimeo", direction=Direction.ASC, page=1, per_page=10
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -8667,11 +8795,11 @@ except ApiError as e:
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>clip_privacy_filters</code> | <code>str \| None</code> | A comma-separated list of video privacy types to filter on. The accepted values are `private` for when only the creator and users with access grants can play the video; `public` for when anyone can play the video; `password` for when only users with the correct password can play the video; `hide_from_vimeo` for when the video is private but embeddable anywhere; and `unlisted` for when only users with the link can play the video.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter21OrStr](vimeo_api/models/enums/filter21.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `folder` - Filter the results by folder.<br> * `live_event` - Filter the results by event.<br> * `video` - Filter the results by video.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter21OrStr](vimeo_api/models/enums/filter21.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `folder` - Filter the results by folder.<br> * `live_event` - Filter the results by event.<br> * `video` - Filter the results by video.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort37OrStr](vimeo_api/models/enums/sort37.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `default` - Use the default sort order.<br> * `duration` - Sort the results by duration. Items without a duration, namely events and folders, are grouped by type in ascending alphabetical order, with events first.<br> * `last_user_action_event_date` - Sort the results by the date of the last user action.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8694,7 +8822,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_folder_items2(project_id: float, user_id: float, *, clip_privacy_filters: str | None = None, direction: DirectionOrStr | None = None, filter: Filter21OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort37OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> None</code></summary>
+<summary><code>def get_folder_items2(project_id: float, user_id: float, *, clip_privacy_filters: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter21OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort37OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> None</code></summary>
 
 <dl>
 <dd>
@@ -8718,7 +8846,14 @@ This method returns every item that belongs to the specified folder.
 
 ```python
 try:
-    client.folders_items.get_folder_items2(project_id, user_id)
+    client.folders_items.get_folder_items2(
+        12345,
+        152184,
+        clip_privacy_filters="private,unlisted,hide_from_vimeo",
+        direction=Direction.ASC,
+        page=1,
+        per_page=10,
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -8727,7 +8862,14 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_items.get_folder_items2(project_id, user_id)
+    await async_client.folders_items.get_folder_items2(
+        12345,
+        152184,
+        clip_privacy_filters="private,unlisted,hide_from_vimeo",
+        direction=Direction.ASC,
+        page=1,
+        per_page=10,
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -8746,11 +8888,11 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>clip_privacy_filters</code> | <code>str \| None</code> | A comma-separated list of video privacy types to filter on. The accepted values are `private` for when only the creator and users with access grants can play the video; `public` for when anyone can play the video; `password` for when only users with the correct password can play the video; `hide_from_vimeo` for when the video is private but embeddable anywhere; and `unlisted` for when only users with the link can play the video.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter21OrStr](vimeo_api/models/enums/filter21.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `folder` - Filter the results by folder.<br> * `live_event` - Filter the results by event.<br> * `video` - Filter the results by video.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter21OrStr](vimeo_api/models/enums/filter21.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `folder` - Filter the results by folder.<br> * `live_event` - Filter the results by event.<br> * `video` - Filter the results by video.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort37OrStr](vimeo_api/models/enums/sort37.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `default` - Use the default sort order.<br> * `duration` - Sort the results by duration. Items without a duration, namely events and folders, are grouped by type in ascending alphabetical order, with events first.<br> * `last_user_action_event_date` - Sort the results by the date of the last user action.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8801,7 +8943,7 @@ This method adds a single video to the specified folder. The authenticated user 
 
 ```python
 try:
-    client.folders_videos.add_video_to_project(project_id, user_id, video_id)
+    client.folders_videos.add_video_to_project(12345, 152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToProjectErrorBody
 ```
@@ -8810,7 +8952,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_videos.add_video_to_project(project_id, user_id, video_id)
+    await async_client.folders_videos.add_video_to_project(12345, 152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToProjectErrorBody
 ```
@@ -8828,7 +8970,7 @@ except ApiError as e:
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8882,7 +9024,7 @@ This method adds a single video to the specified folder. The authenticated user 
 
 ```python
 try:
-    client.folders_videos.add_video_to_project_alt1(project_id, video_id)
+    client.folders_videos.add_video_to_project_alt1(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToProjectAlt1ErrorBody
 ```
@@ -8891,7 +9033,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_videos.add_video_to_project_alt1(project_id, video_id)
+    await async_client.folders_videos.add_video_to_project_alt1(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToProjectAlt1ErrorBody
 ```
@@ -8908,7 +9050,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8962,7 +9104,7 @@ This method adds multiple videos to the specified folder. The authenticated user
 
 ```python
 try:
-    client.folders_videos.add_videos_to_project(project_id, user_id, body)
+    client.folders_videos.add_videos_to_project(12345, 152184, UsersProjectsVideosRequest1(uris="some example string"))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToProjectErrorBody
 ```
@@ -8971,7 +9113,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_videos.add_videos_to_project(project_id, user_id, body)
+    await async_client.folders_videos.add_videos_to_project(
+        12345, 152184, UsersProjectsVideosRequest1(uris="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToProjectErrorBody
 ```
@@ -8989,7 +9133,7 @@ except ApiError as e:
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersProjectsVideosRequest1](vimeo_api/models/users_projects_videos_request1.py) \| [UsersProjectsVideosRequest1Dict](vimeo_api/models/users_projects_videos_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9043,7 +9187,7 @@ This method adds multiple videos to the specified folder. The authenticated user
 
 ```python
 try:
-    client.folders_videos.add_videos_to_project_alt1(project_id, body)
+    client.folders_videos.add_videos_to_project_alt1(12345, MeProjectsVideosRequest1(uris="some example string"))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToProjectAlt1ErrorBody
 ```
@@ -9052,7 +9196,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_videos.add_videos_to_project_alt1(project_id, body)
+    await async_client.folders_videos.add_videos_to_project_alt1(
+        12345, MeProjectsVideosRequest1(uris="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToProjectAlt1ErrorBody
 ```
@@ -9069,7 +9215,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>body</code> | <code>[MeProjectsVideosRequest1](vimeo_api/models/me_projects_videos_request1.py) \| [MeProjectsVideosRequest1Dict](vimeo_api/models/me_projects_videos_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9123,7 +9269,19 @@ This method returns all the videos that belong to the specified folder.
 
 ```python
 try:
-    response = client.folders_videos.get_project_videos(project_id, user_id)
+    response = client.folders_videos.get_project_videos(
+        12345,
+        152184,
+        direction=Direction.ASC,
+        filter_tag="abc,xyz",
+        filter_tag_all_of="abc,xyz",
+        filter_tag_exclude="abc,xyz",
+        include_subfolders=False,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        query_fields="title,description",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectVideosErrorBody
@@ -9133,7 +9291,19 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_videos.get_project_videos(project_id, user_id)
+    response = await async_client.folders_videos.get_project_videos(
+        12345,
+        152184,
+        direction=Direction.ASC,
+        filter_tag="abc,xyz",
+        filter_tag_all_of="abc,xyz",
+        filter_tag_exclude="abc,xyz",
+        include_subfolders=False,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        query_fields="title,description",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectVideosErrorBody
@@ -9161,7 +9331,7 @@ except ApiError as e:
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>query_fields</code> | <code>str \| None</code> | A comma-separated list of fields to query over. The default value is `title,description,chapters,tags`.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort37OrStr](vimeo_api/models/enums/sort37.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `default` - Use the default sort order.<br> * `duration` - Sort the results by duration.<br> * `last_user_action_event_date` - Sort the results by the date of the last user action.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9215,7 +9385,18 @@ This method returns all the videos that belong to the specified folder.
 
 ```python
 try:
-    response = client.folders_videos.get_project_videos_alt1(project_id)
+    response = client.folders_videos.get_project_videos_alt1(
+        12345,
+        direction=Direction.ASC,
+        filter_tag="abc,xyz",
+        filter_tag_all_of="abc,xyz",
+        filter_tag_exclude="abc,xyz",
+        include_subfolders=False,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        query_fields="title,description",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectVideosAlt1ErrorBody
@@ -9225,7 +9406,18 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.folders_videos.get_project_videos_alt1(project_id)
+    response = await async_client.folders_videos.get_project_videos_alt1(
+        12345,
+        direction=Direction.ASC,
+        filter_tag="abc,xyz",
+        filter_tag_all_of="abc,xyz",
+        filter_tag_exclude="abc,xyz",
+        include_subfolders=False,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        query_fields="title,description",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetProjectVideosAlt1ErrorBody
@@ -9252,7 +9444,7 @@ except ApiError as e:
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>query_fields</code> | <code>str \| None</code> | A comma-separated list of fields to query over. The default value is `title,description,chapters,tags`.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort37OrStr](vimeo_api/models/enums/sort37.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `default` - Use the default sort order.<br> * `duration` - Sort the results by duration.<br> * `last_user_action_event_date` - Sort the results by the date of the last user action.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9306,7 +9498,7 @@ This method removes a single video from the specified folder. Please note that t
 
 ```python
 try:
-    client.folders_videos.remove_video_from_project(project_id, user_id, video_id)
+    client.folders_videos.remove_video_from_project(12345, 152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideoFromProjectErrorBody
 ```
@@ -9315,7 +9507,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_videos.remove_video_from_project(project_id, user_id, video_id)
+    await async_client.folders_videos.remove_video_from_project(12345, 152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideoFromProjectErrorBody
 ```
@@ -9333,7 +9525,7 @@ except ApiError as e:
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9387,7 +9579,7 @@ This method removes a single video from the specified folder. Please note that t
 
 ```python
 try:
-    client.folders_videos.remove_video_from_project_alt1(project_id, video_id)
+    client.folders_videos.remove_video_from_project_alt1(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideoFromProjectAlt1ErrorBody
 ```
@@ -9396,7 +9588,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_videos.remove_video_from_project_alt1(project_id, video_id)
+    await async_client.folders_videos.remove_video_from_project_alt1(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideoFromProjectAlt1ErrorBody
 ```
@@ -9413,7 +9605,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9467,7 +9659,9 @@ This method removes multiple videos from the specified folder. The authenticated
 
 ```python
 try:
-    client.folders_videos.remove_videos_from_project(project_id, user_id, body)
+    client.folders_videos.remove_videos_from_project(
+        12345, 152184, UsersProjectsVideosRequest(uris="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromProjectErrorBody
 ```
@@ -9476,7 +9670,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_videos.remove_videos_from_project(project_id, user_id, body)
+    await async_client.folders_videos.remove_videos_from_project(
+        12345, 152184, UsersProjectsVideosRequest(uris="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromProjectErrorBody
 ```
@@ -9494,7 +9690,7 @@ except ApiError as e:
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersProjectsVideosRequest](vimeo_api/models/users_projects_videos_request.py) \| [UsersProjectsVideosRequestDict](vimeo_api/models/users_projects_videos_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9548,7 +9744,7 @@ This method removes multiple videos from the specified folder. The authenticated
 
 ```python
 try:
-    client.folders_videos.remove_videos_from_project_alt1(project_id, body)
+    client.folders_videos.remove_videos_from_project_alt1(12345, MeProjectsVideosRequest(uris="some example string"))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromProjectAlt1ErrorBody
 ```
@@ -9557,7 +9753,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.folders_videos.remove_videos_from_project_alt1(project_id, body)
+    await async_client.folders_videos.remove_videos_from_project_alt1(
+        12345, MeProjectsVideosRequest(uris="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromProjectAlt1ErrorBody
 ```
@@ -9574,7 +9772,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>project_id</code> | <code>float</code> | The ID of the folder. |
 | <code>body</code> | <code>[MeProjectsVideosRequest](vimeo_api/models/me_projects_videos_request.py) \| [MeProjectsVideosRequestDict](vimeo_api/models/me_projects_videos_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9632,7 +9830,7 @@ This method creates a new group.
 
 ```python
 try:
-    response = client.groups_essentials.create_group(body)
+    response = client.groups_essentials.create_group(GroupsRequest(name="some example string"))
     # TODO: Handle 'response' of type Group
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateGroupErrorBody
@@ -9642,7 +9840,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_essentials.create_group(body)
+    response = await async_client.groups_essentials.create_group(GroupsRequest(name="some example string"))
     # TODO: Handle 'response' of type Group
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateGroupErrorBody
@@ -9659,7 +9857,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GroupsRequest](vimeo_api/models/groups_request.py) \| [GroupsRequestDict](vimeo_api/models/groups_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9714,7 +9912,7 @@ This method deletes the specified group. The authenticated user must be the owne
 
 ```python
 try:
-    client.groups_essentials.delete_group(group_id)
+    client.groups_essentials.delete_group(1108)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteGroupErrorBody
 ```
@@ -9723,7 +9921,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.groups_essentials.delete_group(group_id)
+    await async_client.groups_essentials.delete_group(1108)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteGroupErrorBody
 ```
@@ -9739,7 +9937,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9794,7 +9992,7 @@ This method returns the specified group.
 
 ```python
 try:
-    response = client.groups_essentials.get_group(group_id)
+    response = client.groups_essentials.get_group(1108)
     # TODO: Handle 'response' of type Group
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupErrorBody
@@ -9804,7 +10002,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_essentials.get_group(group_id)
+    response = await async_client.groups_essentials.get_group(1108)
     # TODO: Handle 'response' of type Group
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupErrorBody
@@ -9821,7 +10019,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9851,7 +10049,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_groups(*, direction: DirectionOrStr | None = None, filter: Filter1OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort13OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> GroupConnection</code></summary>
+<summary><code>def get_groups(*, direction: DirectionOrStr | None = None, filter_: Filter1OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort13OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> GroupConnection</code></summary>
 
 <dl>
 <dd>
@@ -9875,7 +10073,7 @@ This method returns every available group.
 
 ```python
 try:
-    response = client.groups_essentials.get_groups()
+    response = client.groups_essentials.get_groups(direction=Direction.ASC, page=1, per_page=10, query="Stop motion")
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupsErrorBody
@@ -9885,7 +10083,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_essentials.get_groups()
+    response = await async_client.groups_essentials.get_groups(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupsErrorBody
@@ -9902,12 +10102,12 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter1OrStr](vimeo_api/models/enums/filter1.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `featured` - Return featured groups.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter1OrStr](vimeo_api/models/enums/filter1.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `featured` - Return featured groups.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort13OrStr](vimeo_api/models/enums/sort13.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `followers` - Sort the results by number of followers.<br> * `relevant` - Sort the results by relevance. This option is available for search queries only.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9965,7 +10165,7 @@ This method adds the authenticated user to the specified group.
 
 ```python
 try:
-    client.groups_subscriptions.join_group(group_id, user_id)
+    client.groups_subscriptions.join_group(1108, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type JoinGroupErrorBody
 ```
@@ -9974,7 +10174,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.groups_subscriptions.join_group(group_id, user_id)
+    await async_client.groups_subscriptions.join_group(1108, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type JoinGroupErrorBody
 ```
@@ -9991,7 +10191,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10046,7 +10246,7 @@ This method adds the authenticated user to the specified group.
 
 ```python
 try:
-    client.groups_subscriptions.join_group_alt1(group_id)
+    client.groups_subscriptions.join_group_alt1(1108)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type JoinGroupAlt1ErrorBody
 ```
@@ -10055,7 +10255,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.groups_subscriptions.join_group_alt1(group_id)
+    await async_client.groups_subscriptions.join_group_alt1(1108)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type JoinGroupAlt1ErrorBody
 ```
@@ -10071,7 +10271,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10126,7 +10326,7 @@ This method removes the authenticated user from the specified group. The authent
 
 ```python
 try:
-    client.groups_subscriptions.leave_group(group_id, user_id)
+    client.groups_subscriptions.leave_group(1108, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type LeaveGroupErrorBody
 ```
@@ -10135,7 +10335,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.groups_subscriptions.leave_group(group_id, user_id)
+    await async_client.groups_subscriptions.leave_group(1108, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type LeaveGroupErrorBody
 ```
@@ -10152,7 +10352,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10207,7 +10407,7 @@ This method removes the authenticated user from the specified group. The authent
 
 ```python
 try:
-    client.groups_subscriptions.leave_group_alt1(group_id)
+    client.groups_subscriptions.leave_group_alt1(1108)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type LeaveGroupAlt1ErrorBody
 ```
@@ -10216,7 +10416,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.groups_subscriptions.leave_group_alt1(group_id)
+    await async_client.groups_subscriptions.leave_group_alt1(1108)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type LeaveGroupAlt1ErrorBody
 ```
@@ -10232,7 +10432,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10291,7 +10491,7 @@ This method determines whether the authenticated user belongs to the specified g
 
 ```python
 try:
-    client.groups_users.check_if_user_joined_group(group_id, user_id)
+    client.groups_users.check_if_user_joined_group(1108, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserJoinedGroupErrorBody
 ```
@@ -10300,7 +10500,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.groups_users.check_if_user_joined_group(group_id, user_id)
+    await async_client.groups_users.check_if_user_joined_group(1108, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserJoinedGroupErrorBody
 ```
@@ -10317,7 +10517,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10371,7 +10571,7 @@ This method determines whether the authenticated user belongs to the specified g
 
 ```python
 try:
-    client.groups_users.check_if_user_joined_group_alt1(group_id)
+    client.groups_users.check_if_user_joined_group_alt1(1108)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserJoinedGroupAlt1ErrorBody
 ```
@@ -10380,7 +10580,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.groups_users.check_if_user_joined_group_alt1(group_id)
+    await async_client.groups_users.check_if_user_joined_group_alt1(1108)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserJoinedGroupAlt1ErrorBody
 ```
@@ -10396,7 +10596,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10426,7 +10626,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_group_members(group_id: float, *, direction: DirectionOrStr | None = None, filter: Filter2OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
+<summary><code>def get_group_members(group_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter2OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
 
 <dl>
 <dd>
@@ -10450,7 +10650,9 @@ This method returns every user who belongs to the specified group.
 
 ```python
 try:
-    response = client.groups_users.get_group_members(group_id)
+    response = client.groups_users.get_group_members(
+        1108, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupMembersErrorBody
@@ -10460,7 +10662,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_users.get_group_members(group_id)
+    response = await async_client.groups_users.get_group_members(
+        1108, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupMembersErrorBody
@@ -10478,12 +10682,12 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter2OrStr](vimeo_api/models/enums/filter2.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderators` - Return group moderators.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter2OrStr](vimeo_api/models/enums/filter2.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderators` - Return group moderators.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10513,7 +10717,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_user_groups(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort5OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> GroupConnection</code></summary>
+<summary><code>def get_user_groups(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort5OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> GroupConnection</code></summary>
 
 <dl>
 <dd>
@@ -10537,7 +10741,9 @@ This method returns every group to which the authenticated user belongs.
 
 ```python
 try:
-    response = client.groups_users.get_user_groups(user_id)
+    response = client.groups_users.get_user_groups(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUserGroupsErrorBody
@@ -10547,7 +10753,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_users.get_user_groups(user_id)
+    response = await async_client.groups_users.get_user_groups(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUserGroupsErrorBody
@@ -10565,12 +10773,12 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter12OrStr](vimeo_api/models/enums/filter12.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderated` - Return moderated groups.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter12OrStr](vimeo_api/models/enums/filter12.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderated` - Return moderated groups.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort5OrStr](vimeo_api/models/enums/sort5.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `members` - Sort the results by number of members.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10600,7 +10808,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_user_groups_alt1(*, direction: DirectionOrStr | None = None, filter: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort5OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> GroupConnection</code></summary>
+<summary><code>def get_user_groups_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter12OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort5OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> GroupConnection</code></summary>
 
 <dl>
 <dd>
@@ -10624,7 +10832,9 @@ This method returns every group to which the authenticated user belongs.
 
 ```python
 try:
-    response = client.groups_users.get_user_groups_alt1()
+    response = client.groups_users.get_user_groups_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUserGroupsAlt1ErrorBody
@@ -10634,7 +10844,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_users.get_user_groups_alt1()
+    response = await async_client.groups_users.get_user_groups_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUserGroupsAlt1ErrorBody
@@ -10651,12 +10863,12 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter12OrStr](vimeo_api/models/enums/filter12.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderated` - Return moderated groups.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter12OrStr](vimeo_api/models/enums/filter12.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `moderated` - Return moderated groups.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort5OrStr](vimeo_api/models/enums/sort5.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `members` - Sort the results by number of members.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10714,7 +10926,7 @@ This method adds a video to the specified group. The authenticated user must be 
 
 ```python
 try:
-    response = client.groups_videos.add_video_to_group(group_id, video_id)
+    response = client.groups_videos.add_video_to_group(1108, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToGroupErrorBody
@@ -10724,7 +10936,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_videos.add_video_to_group(group_id, video_id)
+    response = await async_client.groups_videos.add_video_to_group(1108, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToGroupErrorBody
@@ -10742,7 +10954,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10797,7 +11009,7 @@ This method removes a video from the specified group. The authenticated user mus
 
 ```python
 try:
-    client.groups_videos.delete_video_from_group(group_id, video_id)
+    client.groups_videos.delete_video_from_group(1108, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromGroupErrorBody
 ```
@@ -10806,7 +11018,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.groups_videos.delete_video_from_group(group_id, video_id)
+    await async_client.groups_videos.delete_video_from_group(1108, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromGroupErrorBody
 ```
@@ -10823,7 +11035,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10878,7 +11090,7 @@ This method returns every group to which the authenticated user can add or remov
 
 ```python
 try:
-    response = client.groups_videos.get_available_video_groups(video_id)
+    response = client.groups_videos.get_available_video_groups(258684937)
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableVideoGroupsErrorBody
@@ -10888,7 +11100,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_videos.get_available_video_groups(video_id)
+    response = await async_client.groups_videos.get_available_video_groups(258684937)
     # TODO: Handle 'response' of type GroupConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableVideoGroupsErrorBody
@@ -10905,7 +11117,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10959,7 +11171,7 @@ This method returns a single video from the specified group. You can use this me
 
 ```python
 try:
-    response = client.groups_videos.get_group_video(group_id, video_id)
+    response = client.groups_videos.get_group_video(1108, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupVideoErrorBody
@@ -10969,7 +11181,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_videos.get_group_video(group_id, video_id)
+    response = await async_client.groups_videos.get_group_video(1108, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupVideoErrorBody
@@ -10987,7 +11199,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11017,7 +11229,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_group_videos(group_id: float, *, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_group_videos(group_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -11041,7 +11253,9 @@ This method returns every video from the specified group.
 
 ```python
 try:
-    response = client.groups_videos.get_group_videos(group_id)
+    response = client.groups_videos.get_group_videos(
+        1108, direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupVideosErrorBody
@@ -11051,7 +11265,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.groups_videos.get_group_videos(group_id)
+    response = await async_client.groups_videos.get_group_videos(
+        1108, direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGroupVideosErrorBody
@@ -11069,13 +11285,13 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>group_id</code> | <code>float</code> | The ID of the group. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort15OrStr](vimeo_api/models/enums/sort15.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by creation date.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11133,7 +11349,7 @@ This method checks if the authenticated user has liked the specified video.
 
 ```python
 try:
-    client.likes_essentials.check_if_user_liked_video(user_id, video_id)
+    client.likes_essentials.check_if_user_liked_video(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserLikedVideoErrorBody
 ```
@@ -11142,7 +11358,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.likes_essentials.check_if_user_liked_video(user_id, video_id)
+    await async_client.likes_essentials.check_if_user_liked_video(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserLikedVideoErrorBody
 ```
@@ -11159,7 +11375,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11213,7 +11429,7 @@ This method checks if the authenticated user has liked the specified video.
 
 ```python
 try:
-    client.likes_essentials.check_if_user_liked_video_alt1(video_id)
+    client.likes_essentials.check_if_user_liked_video_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserLikedVideoAlt1ErrorBody
 ```
@@ -11222,7 +11438,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.likes_essentials.check_if_user_liked_video_alt1(video_id)
+    await async_client.likes_essentials.check_if_user_liked_video_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserLikedVideoAlt1ErrorBody
 ```
@@ -11238,7 +11454,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11268,7 +11484,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_likes(user_id: float, *, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_likes(user_id: float, *, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -11292,7 +11508,9 @@ This method returns every video that the authenticated user has liked.
 
 ```python
 try:
-    response = client.likes_essentials.get_likes(user_id)
+    response = client.likes_essentials.get_likes(
+        152184, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLikesErrorBody
@@ -11302,7 +11520,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.likes_essentials.get_likes(user_id)
+    response = await async_client.likes_essentials.get_likes(
+        152184, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLikesErrorBody
@@ -11319,13 +11539,13 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort15OrStr](vimeo_api/models/enums/sort15.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by creation date.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11355,7 +11575,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_likes_alt1(*, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_likes_alt1(*, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -11379,7 +11599,7 @@ This method returns every video that the authenticated user has liked.
 
 ```python
 try:
-    response = client.likes_essentials.get_likes_alt1()
+    response = client.likes_essentials.get_likes_alt1(filter_embeddable=True, page=1, per_page=10, query="Stop motion")
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLikesAlt1ErrorBody
@@ -11389,7 +11609,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.likes_essentials.get_likes_alt1()
+    response = await async_client.likes_essentials.get_likes_alt1(
+        filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLikesAlt1ErrorBody
@@ -11405,13 +11627,13 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort15OrStr](vimeo_api/models/enums/sort15.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by creation date.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11465,7 +11687,7 @@ This method returns every user who has liked the specified video.
 
 ```python
 try:
-    response = client.likes_essentials.get_video_likes(video_id)
+    response = client.likes_essentials.get_video_likes(258684937, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -11475,7 +11697,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.likes_essentials.get_video_likes(video_id)
+    response = await async_client.likes_essentials.get_video_likes(
+        258684937, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -11496,7 +11720,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by join date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11543,7 +11767,9 @@ This method returns every user who has liked the specified video.
 
 ```python
 try:
-    response = client.likes_essentials.get_video_likes_alt1(channel_id, video_id)
+    response = client.likes_essentials.get_video_likes_alt1(
+        927, 258684937, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -11553,7 +11779,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.likes_essentials.get_video_likes_alt1(channel_id, video_id)
+    response = await async_client.likes_essentials.get_video_likes_alt1(
+        927, 258684937, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -11575,7 +11803,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by join date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11598,7 +11826,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_vod_likes(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter: Filter25OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
+<summary><code>def get_vod_likes(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter25OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
 
 <dl>
 <dd>
@@ -11622,7 +11850,7 @@ This method returns every user who has liked the specified video on an On Demand
 
 ```python
 try:
-    response = client.likes_essentials.get_vod_likes(ondemand_id)
+    response = client.likes_essentials.get_vod_likes(61326, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodLikesErrorBody
@@ -11632,7 +11860,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.likes_essentials.get_vod_likes(ondemand_id)
+    response = await async_client.likes_essentials.get_vod_likes(61326, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodLikesErrorBody
@@ -11650,11 +11878,11 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter25OrStr](vimeo_api/models/enums/filter25.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `extra` - Consider extra content only.<br> * `main` - Consider main content only.<br> * `trailer` - Consider trailer content only.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter25OrStr](vimeo_api/models/enums/filter25.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `extra` - Consider extra content only.<br> * `main` - Consider main content only.<br> * `trailer` - Consider trailer content only.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by join date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11708,7 +11936,7 @@ This method causes the authenticated user to like the specified video. The user 
 
 ```python
 try:
-    client.likes_essentials.like_video(user_id, video_id)
+    client.likes_essentials.like_video(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type LikeVideoErrorBody
 ```
@@ -11717,7 +11945,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.likes_essentials.like_video(user_id, video_id)
+    await async_client.likes_essentials.like_video(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type LikeVideoErrorBody
 ```
@@ -11734,7 +11962,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11788,7 +12016,7 @@ This method causes the authenticated user to like the specified video. The user 
 
 ```python
 try:
-    client.likes_essentials.like_video_alt1(video_id)
+    client.likes_essentials.like_video_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type LikeVideoAlt1ErrorBody
 ```
@@ -11797,7 +12025,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.likes_essentials.like_video_alt1(video_id)
+    await async_client.likes_essentials.like_video_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type LikeVideoAlt1ErrorBody
 ```
@@ -11813,7 +12041,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11867,7 +12095,7 @@ This method causes the authenticated user to unlike the specified video.
 
 ```python
 try:
-    client.likes_essentials.unlike_video(user_id, video_id)
+    client.likes_essentials.unlike_video(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UnlikeVideoErrorBody
 ```
@@ -11876,7 +12104,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.likes_essentials.unlike_video(user_id, video_id)
+    await async_client.likes_essentials.unlike_video(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UnlikeVideoErrorBody
 ```
@@ -11893,7 +12121,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11947,7 +12175,7 @@ This method causes the authenticated user to unlike the specified video.
 
 ```python
 try:
-    client.likes_essentials.unlike_video_alt1(video_id)
+    client.likes_essentials.unlike_video_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UnlikeVideoAlt1ErrorBody
 ```
@@ -11956,7 +12184,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.likes_essentials.unlike_video_alt1(video_id)
+    await async_client.likes_essentials.unlike_video_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UnlikeVideoAlt1ErrorBody
 ```
@@ -11972,7 +12200,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12033,7 +12261,7 @@ The webhook is delivered to the managing vendor app's registered webhook URL.
 
 ```python
 try:
-    client.live_analytics.export_vpaas_viewer_analytics(live_event_id)
+    client.live_analytics.export_vpaas_viewer_analytics(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ExportVpaasViewerAnalyticsErrorBody
 ```
@@ -12042,7 +12270,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_analytics.export_vpaas_viewer_analytics(live_event_id)
+    await async_client.live_analytics.export_vpaas_viewer_analytics(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ExportVpaasViewerAnalyticsErrorBody
 ```
@@ -12058,7 +12286,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the live event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12116,7 +12344,7 @@ This method returns audio tracks settings for the specified event.
 
 ```python
 try:
-    response = client.live_audio_tracks.get_event_audio_tracks(live_event_id)
+    response = client.live_audio_tracks.get_event_audio_tracks(12345)
     # TODO: Handle 'response' of type EventAudioTracks
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetEventAudioTracksErrorBody
@@ -12126,7 +12354,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_audio_tracks.get_event_audio_tracks(live_event_id)
+    response = await async_client.live_audio_tracks.get_event_audio_tracks(12345)
     # TODO: Handle 'response' of type EventAudioTracks
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetEventAudioTracksErrorBody
@@ -12143,7 +12371,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12197,7 +12425,7 @@ This method updates audio tracks settings on the specified event.
 
 ```python
 try:
-    response = client.live_audio_tracks.update_event_audio_tracks(live_event_id)
+    response = client.live_audio_tracks.update_event_audio_tracks(12345)
     # TODO: Handle 'response' of type EventAudioTracks
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateEventAudioTracksErrorBody
@@ -12207,7 +12435,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_audio_tracks.update_event_audio_tracks(live_event_id)
+    response = await async_client.live_audio_tracks.update_event_audio_tracks(12345)
     # TODO: Handle 'response' of type EventAudioTracks
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateEventAudioTracksErrorBody
@@ -12225,7 +12453,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsAudioTracksRequest](vimeo_api/models/live_events_audio_tracks_request.py) \| [LiveEventsAudioTracksRequestDict](vimeo_api/models/live_events_audio_tracks_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12283,7 +12511,7 @@ This method returns every permitted domain for an event. The embed privacy setti
 
 ```python
 try:
-    response = client.live_embed_privacy.get_live_event_whitelist(live_event_id, user_id)
+    response = client.live_embed_privacy.get_live_event_whitelist(12345, 152184)
     # TODO: Handle 'response' of type DomainConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventWhitelistErrorBody
@@ -12293,7 +12521,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_embed_privacy.get_live_event_whitelist(live_event_id, user_id)
+    response = await async_client.live_embed_privacy.get_live_event_whitelist(12345, 152184)
     # TODO: Handle 'response' of type DomainConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventWhitelistErrorBody
@@ -12311,7 +12539,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12365,7 +12593,7 @@ This method returns every permitted domain for an event. The embed privacy setti
 
 ```python
 try:
-    response = client.live_embed_privacy.get_live_event_whitelist_alt1(live_event_id)
+    response = client.live_embed_privacy.get_live_event_whitelist_alt1(12345)
     # TODO: Handle 'response' of type DomainConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventWhitelistAlt1ErrorBody
@@ -12375,7 +12603,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_embed_privacy.get_live_event_whitelist_alt1(live_event_id)
+    response = await async_client.live_embed_privacy.get_live_event_whitelist_alt1(12345)
     # TODO: Handle 'response' of type DomainConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventWhitelistAlt1ErrorBody
@@ -12392,7 +12620,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12446,7 +12674,7 @@ This method returns every permitted domain for an event. The embed privacy setti
 
 ```python
 try:
-    response = client.live_embed_privacy.get_live_event_whitelist_alt2(live_event_id)
+    response = client.live_embed_privacy.get_live_event_whitelist_alt2(12345)
     # TODO: Handle 'response' of type DomainConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventWhitelistAlt2ErrorBody
@@ -12456,7 +12684,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_embed_privacy.get_live_event_whitelist_alt2(live_event_id)
+    response = await async_client.live_embed_privacy.get_live_event_whitelist_alt2(12345)
     # TODO: Handle 'response' of type DomainConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventWhitelistAlt2ErrorBody
@@ -12473,7 +12701,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12527,7 +12755,7 @@ This method embeds an event on the specified domains. The embed privacy setting 
 
 ```python
 try:
-    client.live_embed_privacy.set_live_event_whitelist(live_event_id, user_id)
+    client.live_embed_privacy.set_live_event_whitelist(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetLiveEventWhitelistErrorBody
 ```
@@ -12536,7 +12764,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_embed_privacy.set_live_event_whitelist(live_event_id, user_id)
+    await async_client.live_embed_privacy.set_live_event_whitelist(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetLiveEventWhitelistErrorBody
 ```
@@ -12554,7 +12782,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsPrivacyDomainsRequest](vimeo_api/models/users_live_events_privacy_domains_request.py) \| [UsersLiveEventsPrivacyDomainsRequestDict](vimeo_api/models/users_live_events_privacy_domains_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12608,7 +12836,7 @@ This method embeds an event on the specified domains. The embed privacy setting 
 
 ```python
 try:
-    client.live_embed_privacy.set_live_event_whitelist_alt1(live_event_id)
+    client.live_embed_privacy.set_live_event_whitelist_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetLiveEventWhitelistAlt1ErrorBody
 ```
@@ -12617,7 +12845,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_embed_privacy.set_live_event_whitelist_alt1(live_event_id)
+    await async_client.live_embed_privacy.set_live_event_whitelist_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetLiveEventWhitelistAlt1ErrorBody
 ```
@@ -12634,7 +12862,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsPrivacyDomainsRequest](vimeo_api/models/live_events_privacy_domains_request.py) \| [LiveEventsPrivacyDomainsRequestDict](vimeo_api/models/live_events_privacy_domains_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12688,7 +12916,7 @@ This method embeds an event on the specified domains. The embed privacy setting 
 
 ```python
 try:
-    client.live_embed_privacy.set_live_event_whitelist_alt2(live_event_id)
+    client.live_embed_privacy.set_live_event_whitelist_alt2(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetLiveEventWhitelistAlt2ErrorBody
 ```
@@ -12697,7 +12925,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_embed_privacy.set_live_event_whitelist_alt2(live_event_id)
+    await async_client.live_embed_privacy.set_live_event_whitelist_alt2(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetLiveEventWhitelistAlt2ErrorBody
 ```
@@ -12714,7 +12942,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[MeLiveEventsPrivacyDomainsRequest](vimeo_api/models/me_live_events_privacy_domains_request.py) \| [MeLiveEventsPrivacyDomainsRequestDict](vimeo_api/models/me_live_events_privacy_domains_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12772,7 +13000,7 @@ This method creates a new event for the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.create_live_event(user_id, body)
+    response = client.live_essentials.create_live_event(152184, UsersLiveEventsRequest1(title="some example string"))
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventErrorBody
@@ -12782,7 +13010,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.create_live_event(user_id, body)
+    response = await async_client.live_essentials.create_live_event(
+        152184, UsersLiveEventsRequest1(title="some example string")
+    )
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventErrorBody
@@ -12800,7 +13030,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsRequest1](vimeo_api/models/users_live_events_request1.py) \| [UsersLiveEventsRequest1Dict](vimeo_api/models/users_live_events_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12854,7 +13084,7 @@ This method creates a new event for the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.create_live_event_alt1(body)
+    response = client.live_essentials.create_live_event_alt1(LiveEventsRequest1(title="some example string"))
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventAlt1ErrorBody
@@ -12864,7 +13094,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.create_live_event_alt1(body)
+    response = await async_client.live_essentials.create_live_event_alt1(
+        LiveEventsRequest1(title="some example string")
+    )
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventAlt1ErrorBody
@@ -12881,7 +13113,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[LiveEventsRequest1](vimeo_api/models/live_events_request1.py) \| [LiveEventsRequest1Dict](vimeo_api/models/live_events_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12935,7 +13167,7 @@ This method creates a new event for the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.create_live_event_alt2(body)
+    response = client.live_essentials.create_live_event_alt2(MeLiveEventsRequest1(title="some example string"))
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventAlt2ErrorBody
@@ -12945,7 +13177,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.create_live_event_alt2(body)
+    response = await async_client.live_essentials.create_live_event_alt2(
+        MeLiveEventsRequest1(title="some example string")
+    )
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventAlt2ErrorBody
@@ -12962,7 +13196,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MeLiveEventsRequest1](vimeo_api/models/me_live_events_request1.py) \| [MeLiveEventsRequest1Dict](vimeo_api/models/me_live_events_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13016,7 +13250,7 @@ This method deletes a single event belonging to the authenticated user.
 
 ```python
 try:
-    client.live_essentials.delete_live_event(live_event_id, user_id)
+    client.live_essentials.delete_live_event(1.5, 1.5)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventErrorBody
 ```
@@ -13025,7 +13259,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_essentials.delete_live_event(live_event_id, user_id)
+    await async_client.live_essentials.delete_live_event(1.5, 1.5)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventErrorBody
 ```
@@ -13042,7 +13276,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13096,7 +13330,7 @@ This method deletes a single event belonging to the authenticated user.
 
 ```python
 try:
-    client.live_essentials.delete_live_event_alt1(live_event_id)
+    client.live_essentials.delete_live_event_alt1(1.5)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventAlt1ErrorBody
 ```
@@ -13105,7 +13339,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_essentials.delete_live_event_alt1(live_event_id)
+    await async_client.live_essentials.delete_live_event_alt1(1.5)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventAlt1ErrorBody
 ```
@@ -13121,7 +13355,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13175,7 +13409,7 @@ This method deletes a single event belonging to the authenticated user.
 
 ```python
 try:
-    client.live_essentials.delete_live_event_alt2(live_event_id)
+    client.live_essentials.delete_live_event_alt2(1.5)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventAlt2ErrorBody
 ```
@@ -13184,7 +13418,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_essentials.delete_live_event_alt2(live_event_id)
+    await async_client.live_essentials.delete_live_event_alt2(1.5)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventAlt2ErrorBody
 ```
@@ -13200,7 +13434,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13254,7 +13488,7 @@ This method deletes multiple events belonging to the authenticated user.
 
 ```python
 try:
-    client.live_essentials.delete_live_events(user_id, body)
+    client.live_essentials.delete_live_events(152184, UsersLiveEventsRequest(events=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventsErrorBody
 ```
@@ -13263,7 +13497,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_essentials.delete_live_events(user_id, body)
+    await async_client.live_essentials.delete_live_events(
+        152184, UsersLiveEventsRequest(events=["some example string"])
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventsErrorBody
 ```
@@ -13280,7 +13516,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsRequest](vimeo_api/models/users_live_events_request.py) \| [UsersLiveEventsRequestDict](vimeo_api/models/users_live_events_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13334,7 +13570,7 @@ This method deletes multiple events belonging to the authenticated user.
 
 ```python
 try:
-    client.live_essentials.delete_live_events_alt1(body)
+    client.live_essentials.delete_live_events_alt1(LiveEventsRequest(events=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventsAlt1ErrorBody
 ```
@@ -13343,7 +13579,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_essentials.delete_live_events_alt1(body)
+    await async_client.live_essentials.delete_live_events_alt1(LiveEventsRequest(events=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventsAlt1ErrorBody
 ```
@@ -13359,7 +13595,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[LiveEventsRequest](vimeo_api/models/live_events_request.py) \| [LiveEventsRequestDict](vimeo_api/models/live_events_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13413,7 +13649,7 @@ This method deletes multiple events belonging to the authenticated user.
 
 ```python
 try:
-    client.live_essentials.delete_live_events_alt2(body)
+    client.live_essentials.delete_live_events_alt2(MeLiveEventsRequest(events=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventsAlt2ErrorBody
 ```
@@ -13422,7 +13658,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_essentials.delete_live_events_alt2(body)
+    await async_client.live_essentials.delete_live_events_alt2(MeLiveEventsRequest(events=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventsAlt2ErrorBody
 ```
@@ -13438,7 +13674,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MeLiveEventsRequest](vimeo_api/models/me_live_events_request.py) \| [MeLiveEventsRequestDict](vimeo_api/models/me_live_events_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13492,7 +13728,7 @@ This method returns a single event belonging to the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.get_live_event(live_event_id, user_id)
+    response = client.live_essentials.get_live_event(12345, 152184)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventErrorBody
@@ -13502,7 +13738,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.get_live_event(live_event_id, user_id)
+    response = await async_client.live_essentials.get_live_event(12345, 152184)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventErrorBody
@@ -13521,7 +13757,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>password</code> | <code>str \| None</code> | The password of the event when the privacy is set to `password`.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13575,7 +13811,7 @@ This method returns a single event belonging to the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.get_live_event_alt1(live_event_id)
+    response = client.live_essentials.get_live_event_alt1(12345)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventAlt1ErrorBody
@@ -13585,7 +13821,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.get_live_event_alt1(live_event_id)
+    response = await async_client.live_essentials.get_live_event_alt1(12345)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventAlt1ErrorBody
@@ -13603,7 +13839,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>password</code> | <code>str \| None</code> | The password of the event when the privacy is set to `password`.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13657,7 +13893,7 @@ This method returns a single event belonging to the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.get_live_event_alt2(live_event_id)
+    response = client.live_essentials.get_live_event_alt2(12345)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventAlt2ErrorBody
@@ -13667,7 +13903,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.get_live_event_alt2(live_event_id)
+    response = await async_client.live_essentials.get_live_event_alt2(12345)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventAlt2ErrorBody
@@ -13685,7 +13921,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>password</code> | <code>str \| None</code> | The password of the event when the privacy is set to `password`.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13742,7 +13978,9 @@ For one-time events (no rrule), the event is included if its start_time falls wi
 
 ```python
 try:
-    response = client.live_essentials.get_live_event_occurrences(user_id, start_date)
+    response = client.live_essentials.get_live_event_occurrences(
+        152184, "2025-03-05T08:00:00+00:00", end_date="2025-03-05T08:00:00+00:00", page=1, per_page=10
+    )
     # TODO: Handle 'response' of type LiveEventOccurrenceConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -13752,7 +13990,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.get_live_event_occurrences(user_id, start_date)
+    response = await async_client.live_essentials.get_live_event_occurrences(
+        152184, "2025-03-05T08:00:00+00:00", end_date="2025-03-05T08:00:00+00:00", page=1, per_page=10
+    )
     # TODO: Handle 'response' of type LiveEventOccurrenceConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -13773,7 +14013,7 @@ except ApiError as e:
 | <code>end_date</code> | <code>str \| None</code> | The end of the date range in ISO 8601 format. Defaults to 7 days after start.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13796,7 +14036,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_live_events(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type27OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> EventConnection</code></summary>
+<summary><code>def get_live_events(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type31OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> EventConnection</code></summary>
 
 <dl>
 <dd>
@@ -13820,7 +14060,9 @@ The method returns every event belonging to the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.get_live_events(user_id)
+    response = client.live_essentials.get_live_events(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion", type_=Type31.RECURRING
+    )
     # TODO: Handle 'response' of type EventConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -13830,7 +14072,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.get_live_events(user_id)
+    response = await async_client.live_essentials.get_live_events(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion", type_=Type31.RECURRING
+    )
     # TODO: Handle 'response' of type EventConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -13848,13 +14092,13 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter8OrStr](vimeo_api/models/enums/filter8.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `not_in_folder` - Show only events that aren't in a folder.<br> * `not_in_showcase` - Show only events that aren't in a showcase.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter8OrStr](vimeo_api/models/enums/filter8.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `not_in_folder` - Show only events that aren't in a folder.<br> * `not_in_showcase` - Show only events that aren't in a showcase.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br>**Default**: <code>None</code> |
-| <code>type_</code> | <code>[Type27OrStr](vimeo_api/models/enums/type27.py) \| None</code> | The type of event to return.<br><br>Option descriptions:<br> * `all` - Return all events.<br> * `one_time` - Return one-time events only.<br> * `recurring` - Return recurring events only.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>type_</code> | <code>[Type31OrStr](vimeo_api/models/enums/type31.py) \| None</code> | The type of event to return.<br><br>Option descriptions:<br> * `all` - Return all events.<br> * `one_time` - Return one-time events only.<br> * `recurring` - Return recurring events only.<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13877,7 +14121,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_live_events_alt1(*, direction: DirectionOrStr | None = None, filter: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type27OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> EventConnection</code></summary>
+<summary><code>def get_live_events_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type31OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> EventConnection</code></summary>
 
 <dl>
 <dd>
@@ -13901,7 +14145,9 @@ The method returns every event belonging to the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.get_live_events_alt1()
+    response = client.live_essentials.get_live_events_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion", type_=Type31.RECURRING
+    )
     # TODO: Handle 'response' of type EventConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -13911,7 +14157,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.get_live_events_alt1()
+    response = await async_client.live_essentials.get_live_events_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion", type_=Type31.RECURRING
+    )
     # TODO: Handle 'response' of type EventConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -13928,13 +14176,13 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter8OrStr](vimeo_api/models/enums/filter8.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `not_in_folder` - Show only events that aren't in a folder.<br> * `not_in_showcase` - Show only events that aren't in a showcase.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter8OrStr](vimeo_api/models/enums/filter8.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `not_in_folder` - Show only events that aren't in a folder.<br> * `not_in_showcase` - Show only events that aren't in a showcase.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br>**Default**: <code>None</code> |
-| <code>type_</code> | <code>[Type27OrStr](vimeo_api/models/enums/type27.py) \| None</code> | The type of event to return.<br><br>Option descriptions:<br> * `all` - Return all events.<br> * `one_time` - Return one-time events only.<br> * `recurring` - Return recurring events only.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>type_</code> | <code>[Type31OrStr](vimeo_api/models/enums/type31.py) \| None</code> | The type of event to return.<br><br>Option descriptions:<br> * `all` - Return all events.<br> * `one_time` - Return one-time events only.<br> * `recurring` - Return recurring events only.<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13957,7 +14205,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_live_events_alt2(*, direction: DirectionOrStr | None = None, filter: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type27OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> EventConnection</code></summary>
+<summary><code>def get_live_events_alt2(*, direction: DirectionOrStr | None = None, filter_: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type31OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> EventConnection</code></summary>
 
 <dl>
 <dd>
@@ -13981,7 +14229,9 @@ The method returns every event belonging to the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.get_live_events_alt2()
+    response = client.live_essentials.get_live_events_alt2(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion", type_=Type31.RECURRING
+    )
     # TODO: Handle 'response' of type EventConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -13991,7 +14241,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.get_live_events_alt2()
+    response = await async_client.live_essentials.get_live_events_alt2(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion", type_=Type31.RECURRING
+    )
     # TODO: Handle 'response' of type EventConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -14008,13 +14260,13 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter8OrStr](vimeo_api/models/enums/filter8.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `not_in_folder` - Show only events that aren't in a folder.<br> * `not_in_showcase` - Show only events that aren't in a showcase.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter8OrStr](vimeo_api/models/enums/filter8.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `not_in_folder` - Show only events that aren't in a folder.<br> * `not_in_showcase` - Show only events that aren't in a showcase.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br>**Default**: <code>None</code> |
-| <code>type_</code> | <code>[Type27OrStr](vimeo_api/models/enums/type27.py) \| None</code> | The type of event to return.<br><br>Option descriptions:<br> * `all` - Return all events.<br> * `one_time` - Return one-time events only.<br> * `recurring` - Return recurring events only.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>type_</code> | <code>[Type31OrStr](vimeo_api/models/enums/type31.py) \| None</code> | The type of event to return.<br><br>Option descriptions:<br> * `all` - Return all events.<br> * `one_time` - Return one-time events only.<br> * `recurring` - Return recurring events only.<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14061,7 +14313,7 @@ This method updates an event belonging to the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.update_live_event(live_event_id, user_id)
+    response = client.live_essentials.update_live_event(12345, 152184)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateLiveEventErrorBody
@@ -14071,7 +14323,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.update_live_event(live_event_id, user_id)
+    response = await async_client.live_essentials.update_live_event(12345, 152184)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateLiveEventErrorBody
@@ -14090,7 +14342,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsRequest2](vimeo_api/models/users_live_events_request2.py) \| [UsersLiveEventsRequest2Dict](vimeo_api/models/users_live_events_request2.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14144,7 +14396,7 @@ This method updates an event belonging to the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.update_live_event_alt1(live_event_id)
+    response = client.live_essentials.update_live_event_alt1(12345)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateLiveEventAlt1ErrorBody
@@ -14154,7 +14406,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.update_live_event_alt1(live_event_id)
+    response = await async_client.live_essentials.update_live_event_alt1(12345)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateLiveEventAlt1ErrorBody
@@ -14172,7 +14424,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsRequest2](vimeo_api/models/live_events_request2.py) \| [LiveEventsRequest2Dict](vimeo_api/models/live_events_request2.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14226,7 +14478,7 @@ This method updates an event belonging to the authenticated user.
 
 ```python
 try:
-    response = client.live_essentials.update_live_event_alt2(live_event_id)
+    response = client.live_essentials.update_live_event_alt2(12345)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateLiveEventAlt2ErrorBody
@@ -14236,7 +14488,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_essentials.update_live_event_alt2(live_event_id)
+    response = await async_client.live_essentials.update_live_event_alt2(12345)
     # TODO: Handle 'response' of type RecurringEvent
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateLiveEventAlt2ErrorBody
@@ -14254,7 +14506,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[MeLiveEventsRequest2](vimeo_api/models/me_live_events_request2.py) \| [MeLiveEventsRequest2Dict](vimeo_api/models/me_live_events_request2.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14312,7 +14564,7 @@ This method returns an M3U8 playback URL for the specified event stream. You sho
 
 ```python
 try:
-    client.live_event_m3_u8_playback.get_live_event_m3u8_playback(live_event_id, user_id)
+    client.live_event_m3_u8_playback.get_live_event_m3u8_playback(12345, 152184, dvr=1, max_fps_fhd=30, ttl=30)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventM3U8PlaybackErrorBody
 ```
@@ -14321,7 +14573,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_m3_u8_playback.get_live_event_m3u8_playback(live_event_id, user_id)
+    await async_client.live_event_m3_u8_playback.get_live_event_m3u8_playback(
+        12345, 152184, dvr=1, max_fps_fhd=30, ttl=30
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventM3U8PlaybackErrorBody
 ```
@@ -14341,7 +14595,7 @@ except ApiError as e:
 | <code>dvr</code> | <code>float \| None</code> | When set to `1`, returns an fMP4 stream URL if DVR is enabled on the event. If DVR is not enabled, the standard stream URL is returned.<br>**Default**: <code>None</code> |
 | <code>max_fps_fhd</code> | <code>float \| None</code> | The requested maximum frames per second.<br>**Default**: <code>None</code> |
 | <code>ttl</code> | <code>float \| None</code> | The time to live of the playlist link in seconds. This value must be between `10` and `60`.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14395,7 +14649,7 @@ This method returns an M3U8 playback URL for the specified event stream. You sho
 
 ```python
 try:
-    client.live_event_m3_u8_playback.get_live_event_m3u8_playback_alt1(live_event_id)
+    client.live_event_m3_u8_playback.get_live_event_m3u8_playback_alt1(12345, dvr=1, max_fps_fhd=30, ttl=30)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventM3U8PlaybackAlt1ErrorBody
 ```
@@ -14404,7 +14658,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_m3_u8_playback.get_live_event_m3u8_playback_alt1(live_event_id)
+    await async_client.live_event_m3_u8_playback.get_live_event_m3u8_playback_alt1(12345, dvr=1, max_fps_fhd=30, ttl=30)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventM3U8PlaybackAlt1ErrorBody
 ```
@@ -14423,7 +14677,7 @@ except ApiError as e:
 | <code>dvr</code> | <code>float \| None</code> | When set to `1`, returns an fMP4 stream URL if DVR is enabled on the event. If DVR is not enabled, the standard stream URL is returned.<br>**Default**: <code>None</code> |
 | <code>max_fps_fhd</code> | <code>float \| None</code> | The requested maximum frames per second.<br>**Default**: <code>None</code> |
 | <code>ttl</code> | <code>float \| None</code> | The time to live of the playlist link in seconds. This value must be between `10` and `60`.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14481,7 +14735,7 @@ This method creates the necessary RTMP links for the specified event. Begin stre
 
 ```python
 try:
-    response = client.live_event_activation.activate_live_event(live_event_id, user_id)
+    response = client.live_event_activation.activate_live_event(12345, 152184)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ActivateLiveEventErrorBody
@@ -14491,7 +14745,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_activation.activate_live_event(live_event_id, user_id)
+    response = await async_client.live_event_activation.activate_live_event(12345, 152184)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ActivateLiveEventErrorBody
@@ -14510,7 +14764,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsActivateRequest](vimeo_api/models/users_live_events_activate_request.py) \| [UsersLiveEventsActivateRequestDict](vimeo_api/models/users_live_events_activate_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14564,7 +14818,7 @@ This method creates the necessary RTMP links for the specified event. Begin stre
 
 ```python
 try:
-    response = client.live_event_activation.activate_live_event_alt1(live_event_id)
+    response = client.live_event_activation.activate_live_event_alt1(12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ActivateLiveEventAlt1ErrorBody
@@ -14574,7 +14828,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_activation.activate_live_event_alt1(live_event_id)
+    response = await async_client.live_event_activation.activate_live_event_alt1(12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ActivateLiveEventAlt1ErrorBody
@@ -14592,7 +14846,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsActivateRequest](vimeo_api/models/live_events_activate_request.py) \| [LiveEventsActivateRequestDict](vimeo_api/models/live_events_activate_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14646,7 +14900,7 @@ This method creates the necessary RTMP links for the specified event. Begin stre
 
 ```python
 try:
-    response = client.live_event_activation.activate_live_event_alt2(live_event_id)
+    response = client.live_event_activation.activate_live_event_alt2(12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ActivateLiveEventAlt2ErrorBody
@@ -14656,7 +14910,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_activation.activate_live_event_alt2(live_event_id)
+    response = await async_client.live_event_activation.activate_live_event_alt2(12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ActivateLiveEventAlt2ErrorBody
@@ -14674,7 +14928,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[MeLiveEventsActivateRequest](vimeo_api/models/me_live_events_activate_request.py) \| [MeLiveEventsActivateRequestDict](vimeo_api/models/me_live_events_activate_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14732,7 +14986,9 @@ This method edits the automated closed captions preference for the specified eve
 
 ```python
 try:
-    response = client.live_event_automated_closed_captions.edit_live_event_auto_cc(live_event_id, user_id, body)
+    response = client.live_event_automated_closed_captions.edit_live_event_auto_cc(
+        12345, 152184, UsersLiveEventsAutoCcRequest(auto_cc_enabled=True)
+    )
     # TODO: Handle 'response' of type EventAutomatedClosedCaptions
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventAutoCcErrorBody
@@ -14743,7 +14999,7 @@ except ApiError as e:
 ```python
 try:
     response = await async_client.live_event_automated_closed_captions.edit_live_event_auto_cc(
-        live_event_id, user_id, body
+        12345, 152184, UsersLiveEventsAutoCcRequest(auto_cc_enabled=True)
     )
     # TODO: Handle 'response' of type EventAutomatedClosedCaptions
 except ApiError as e:
@@ -14763,7 +15019,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsAutoCcRequest](vimeo_api/models/users_live_events_auto_cc_request.py) \| [UsersLiveEventsAutoCcRequestDict](vimeo_api/models/users_live_events_auto_cc_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14817,7 +15073,9 @@ This method edits the automated closed captions preference for the specified eve
 
 ```python
 try:
-    response = client.live_event_automated_closed_captions.edit_live_event_auto_cc_alt1(live_event_id, body)
+    response = client.live_event_automated_closed_captions.edit_live_event_auto_cc_alt1(
+        12345, LiveEventsAutoCcRequest(auto_cc_enabled=True)
+    )
     # TODO: Handle 'response' of type EventAutomatedClosedCaptions
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventAutoCcAlt1ErrorBody
@@ -14827,7 +15085,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_automated_closed_captions.edit_live_event_auto_cc_alt1(live_event_id, body)
+    response = await async_client.live_event_automated_closed_captions.edit_live_event_auto_cc_alt1(
+        12345, LiveEventsAutoCcRequest(auto_cc_enabled=True)
+    )
     # TODO: Handle 'response' of type EventAutomatedClosedCaptions
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventAutoCcAlt1ErrorBody
@@ -14845,7 +15105,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsAutoCcRequest](vimeo_api/models/live_events_auto_cc_request.py) \| [LiveEventsAutoCcRequestDict](vimeo_api/models/live_events_auto_cc_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14899,7 +15159,9 @@ This method edits the automated closed captions preference for the specified eve
 
 ```python
 try:
-    response = client.live_event_automated_closed_captions.edit_live_event_auto_cc_alt2(live_event_id, body)
+    response = client.live_event_automated_closed_captions.edit_live_event_auto_cc_alt2(
+        12345, MeLiveEventsAutoCcRequest(auto_cc_enabled=True)
+    )
     # TODO: Handle 'response' of type EventAutomatedClosedCaptions
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventAutoCcAlt2ErrorBody
@@ -14909,7 +15171,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_automated_closed_captions.edit_live_event_auto_cc_alt2(live_event_id, body)
+    response = await async_client.live_event_automated_closed_captions.edit_live_event_auto_cc_alt2(
+        12345, MeLiveEventsAutoCcRequest(auto_cc_enabled=True)
+    )
     # TODO: Handle 'response' of type EventAutomatedClosedCaptions
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventAutoCcAlt2ErrorBody
@@ -14927,7 +15191,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[MeLiveEventsAutoCcRequest](vimeo_api/models/me_live_events_auto_cc_request.py) \| [MeLiveEventsAutoCcRequestDict](vimeo_api/models/me_live_events_auto_cc_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14985,7 +15249,12 @@ This method creates a destination for the specified event. The authenticated use
 
 ```python
 try:
-    response = client.live_event_destinations.create_live_event_destination(live_event_id, body)
+    response = client.live_event_destinations.create_live_event_destination(
+        12345,
+        MeLiveEventsDestinationsRequest(
+            display_name="some example string", service_name=ServiceName1.CUSTOM_RTMP, type_=Type19.CHANNEL
+        ),
+    )
     # TODO: Handle 'response' of type EventDestination
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventDestinationErrorBody
@@ -14995,7 +15264,12 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_destinations.create_live_event_destination(live_event_id, body)
+    response = await async_client.live_event_destinations.create_live_event_destination(
+        12345,
+        MeLiveEventsDestinationsRequest(
+            display_name="some example string", service_name=ServiceName1.CUSTOM_RTMP, type_=Type19.CHANNEL
+        ),
+    )
     # TODO: Handle 'response' of type EventDestination
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventDestinationErrorBody
@@ -15013,7 +15287,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[MeLiveEventsDestinationsRequest](vimeo_api/models/me_live_events_destinations_request.py) \| [MeLiveEventsDestinationsRequestDict](vimeo_api/models/me_live_events_destinations_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15067,7 +15341,13 @@ This method creates a destination for the specified event. The authenticated use
 
 ```python
 try:
-    response = client.live_event_destinations.create_live_event_destination_alt1(live_event_id, user_id, body)
+    response = client.live_event_destinations.create_live_event_destination_alt1(
+        12345,
+        152184,
+        UsersLiveEventsDestinationsRequest(
+            display_name="some example string", service_name=ServiceName1.CUSTOM_RTMP, type_=Type19.CHANNEL
+        ),
+    )
     # TODO: Handle 'response' of type EventDestination
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventDestinationAlt1ErrorBody
@@ -15078,7 +15358,11 @@ except ApiError as e:
 ```python
 try:
     response = await async_client.live_event_destinations.create_live_event_destination_alt1(
-        live_event_id, user_id, body
+        12345,
+        152184,
+        UsersLiveEventsDestinationsRequest(
+            display_name="some example string", service_name=ServiceName1.CUSTOM_RTMP, type_=Type19.CHANNEL
+        ),
     )
     # TODO: Handle 'response' of type EventDestination
 except ApiError as e:
@@ -15098,7 +15382,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsDestinationsRequest](vimeo_api/models/users_live_events_destinations_request.py) \| [UsersLiveEventsDestinationsRequestDict](vimeo_api/models/users_live_events_destinations_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15152,7 +15436,7 @@ This method creates an OTT channel as the destination of the specified event. Th
 
 ```python
 try:
-    response = client.live_event_destinations.create_ott_destination(live_event_id, user_id)
+    response = client.live_event_destinations.create_ott_destination(12345, 152184)
     # TODO: Handle 'response' of type OttDestination
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateOttDestinationErrorBody
@@ -15162,7 +15446,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_destinations.create_ott_destination(live_event_id, user_id)
+    response = await async_client.live_event_destinations.create_ott_destination(12345, 152184)
     # TODO: Handle 'response' of type OttDestination
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateOttDestinationErrorBody
@@ -15180,7 +15464,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15234,7 +15518,7 @@ This method deletes the specified event destination belonging to the authenticat
 
 ```python
 try:
-    client.live_event_destinations.delete_live_event_destination(destination_id)
+    client.live_event_destinations.delete_live_event_destination(152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventDestinationErrorBody
 ```
@@ -15243,7 +15527,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_destinations.delete_live_event_destination(destination_id)
+    await async_client.live_event_destinations.delete_live_event_destination(152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventDestinationErrorBody
 ```
@@ -15259,7 +15543,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>destination_id</code> | <code>float</code> | The ID of the event destination. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15313,7 +15597,7 @@ This method deletes an OTT channel as the destination of the specified event. Th
 
 ```python
 try:
-    client.live_event_destinations.delete_ott_destination(live_event_id, user_id, destination_id)
+    client.live_event_destinations.delete_ott_destination(12345, 152184, "some example string")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteOttDestinationErrorBody
 ```
@@ -15322,7 +15606,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_destinations.delete_ott_destination(live_event_id, user_id, destination_id)
+    await async_client.live_event_destinations.delete_ott_destination(12345, 152184, "some example string")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteOttDestinationErrorBody
 ```
@@ -15340,7 +15624,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>destination_id</code> | <code>str</code> | Value sent with the request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15394,7 +15678,7 @@ This method returns every available event destination for the authenticated user
 
 ```python
 try:
-    client.live_event_destinations.get_available_destinations(user_id)
+    client.live_event_destinations.get_available_destinations(152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableDestinationsErrorBody
 ```
@@ -15403,7 +15687,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_destinations.get_available_destinations(user_id)
+    await async_client.live_event_destinations.get_available_destinations(152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableDestinationsErrorBody
 ```
@@ -15419,7 +15703,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The user ID of the team owner. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15497,7 +15781,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15551,7 +15835,7 @@ This method returns the specified event destination belonging to the authenticat
 
 ```python
 try:
-    response = client.live_event_destinations.get_live_event_destination(destination_id)
+    response = client.live_event_destinations.get_live_event_destination(152184)
     # TODO: Handle 'response' of type EventDestination
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventDestinationErrorBody
@@ -15561,7 +15845,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_destinations.get_live_event_destination(destination_id)
+    response = await async_client.live_event_destinations.get_live_event_destination(152184)
     # TODO: Handle 'response' of type EventDestination
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventDestinationErrorBody
@@ -15578,7 +15862,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>destination_id</code> | <code>float</code> | The ID of the event destination. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15632,7 +15916,7 @@ This method returns every destination of the specified event. The authenticated 
 
 ```python
 try:
-    response = client.live_event_destinations.get_live_event_destinations(live_event_id)
+    response = client.live_event_destinations.get_live_event_destinations(12345)
     # TODO: Handle 'response' of type EventDestinationConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventDestinationsErrorBody
@@ -15642,7 +15926,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_destinations.get_live_event_destinations(live_event_id)
+    response = await async_client.live_event_destinations.get_live_event_destinations(12345)
     # TODO: Handle 'response' of type EventDestinationConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventDestinationsErrorBody
@@ -15659,7 +15943,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15713,7 +15997,7 @@ This method returns every destination of the specified event. The authenticated 
 
 ```python
 try:
-    response = client.live_event_destinations.get_live_event_destinations_alt1(live_event_id, user_id)
+    response = client.live_event_destinations.get_live_event_destinations_alt1(12345, 152184)
     # TODO: Handle 'response' of type EventDestinationConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventDestinationsAlt1ErrorBody
@@ -15723,7 +16007,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_destinations.get_live_event_destinations_alt1(live_event_id, user_id)
+    response = await async_client.live_event_destinations.get_live_event_destinations_alt1(12345, 152184)
     # TODO: Handle 'response' of type EventDestinationConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventDestinationsAlt1ErrorBody
@@ -15741,7 +16025,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15795,7 +16079,7 @@ This method returns every OTT destination of the specified event. The authentica
 
 ```python
 try:
-    response = client.live_event_destinations.get_ott_destinations(live_event_id, user_id)
+    response = client.live_event_destinations.get_ott_destinations(12345, 152184)
     # TODO: Handle 'response' of type OttDestinationConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetOttDestinationsErrorBody
@@ -15805,7 +16089,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_destinations.get_ott_destinations(live_event_id, user_id)
+    response = await async_client.live_event_destinations.get_ott_destinations(12345, 152184)
     # TODO: Handle 'response' of type OttDestinationConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetOttDestinationsErrorBody
@@ -15823,7 +16107,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15877,7 +16161,7 @@ This method updates the specified event destination belonging to the authenticat
 
 ```python
 try:
-    response = client.live_event_destinations.update_live_event_destination(destination_id)
+    response = client.live_event_destinations.update_live_event_destination(152184)
     # TODO: Handle 'response' of type EventDestination
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateLiveEventDestinationErrorBody
@@ -15887,7 +16171,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_destinations.update_live_event_destination(destination_id)
+    response = await async_client.live_event_destinations.update_live_event_destination(152184)
     # TODO: Handle 'response' of type EventDestination
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateLiveEventDestinationErrorBody
@@ -15905,7 +16189,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>destination_id</code> | <code>float</code> | The ID of the event destination. |
 | <code>body</code> | <code>[DestinationRequest](vimeo_api/models/destination_request.py) \| [DestinationRequestDict](vimeo_api/models/destination_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15963,7 +16247,7 @@ This method ends the specified event. The authenticated user must be the owner o
 
 ```python
 try:
-    response = client.live_event_end.end_live_event(live_event_id, user_id)
+    response = client.live_event_end.end_live_event(12345, "some example string", clip_id=12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EndLiveEventErrorBody
@@ -15973,7 +16257,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_end.end_live_event(live_event_id, user_id)
+    response = await async_client.live_event_end.end_live_event(12345, "some example string", clip_id=12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EndLiveEventErrorBody
@@ -15992,7 +16276,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>str</code> | Value sent with the request. |
 | <code>clip_id</code> | <code>float \| None</code> | The ID of the streamable video.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16046,7 +16330,7 @@ This method ends the specified event. The authenticated user must be the owner o
 
 ```python
 try:
-    response = client.live_event_end.end_live_event_alt1(live_event_id)
+    response = client.live_event_end.end_live_event_alt1(12345, clip_id=12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EndLiveEventAlt1ErrorBody
@@ -16056,7 +16340,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_end.end_live_event_alt1(live_event_id)
+    response = await async_client.live_event_end.end_live_event_alt1(12345, clip_id=12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EndLiveEventAlt1ErrorBody
@@ -16074,7 +16358,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>clip_id</code> | <code>float \| None</code> | The ID of the streamable video.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16128,7 +16412,7 @@ This method ends the specified event. The authenticated user must be the owner o
 
 ```python
 try:
-    response = client.live_event_end.end_live_event_alt2(live_event_id)
+    response = client.live_event_end.end_live_event_alt2(12345, clip_id=12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EndLiveEventAlt2ErrorBody
@@ -16138,7 +16422,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_end.end_live_event_alt2(live_event_id)
+    response = await async_client.live_event_end.end_live_event_alt2(12345, clip_id=12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EndLiveEventAlt2ErrorBody
@@ -16156,7 +16440,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>clip_id</code> | <code>float \| None</code> | The ID of the streamable video.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16214,7 +16498,7 @@ This method toggles the low-latency option of the specified event.
 
 ```python
 try:
-    response = client.live_event_low_latency.toggle_rle_low_latency(live_event_id, user_id)
+    response = client.live_event_low_latency.toggle_rle_low_latency(12345, 152184)
     # TODO: Handle 'response' of type RecurringEventLowLatency
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ToggleRleLowLatencyErrorBody
@@ -16224,7 +16508,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_low_latency.toggle_rle_low_latency(live_event_id, user_id)
+    response = await async_client.live_event_low_latency.toggle_rle_low_latency(12345, 152184)
     # TODO: Handle 'response' of type RecurringEventLowLatency
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ToggleRleLowLatencyErrorBody
@@ -16243,7 +16527,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsLowLatencyRequest](vimeo_api/models/users_live_events_low_latency_request.py) \| [UsersLiveEventsLowLatencyRequestDict](vimeo_api/models/users_live_events_low_latency_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16297,7 +16581,7 @@ This method toggles the low-latency option of the specified event.
 
 ```python
 try:
-    response = client.live_event_low_latency.toggle_rle_low_latency_alt1(live_event_id)
+    response = client.live_event_low_latency.toggle_rle_low_latency_alt1(12345)
     # TODO: Handle 'response' of type RecurringEventLowLatency
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ToggleRleLowLatencyAlt1ErrorBody
@@ -16307,7 +16591,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_low_latency.toggle_rle_low_latency_alt1(live_event_id)
+    response = await async_client.live_event_low_latency.toggle_rle_low_latency_alt1(12345)
     # TODO: Handle 'response' of type RecurringEventLowLatency
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ToggleRleLowLatencyAlt1ErrorBody
@@ -16325,7 +16609,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsLowLatencyRequest](vimeo_api/models/live_events_low_latency_request.py) \| [LiveEventsLowLatencyRequestDict](vimeo_api/models/live_events_low_latency_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16379,7 +16663,7 @@ This method toggles the low-latency option of the specified event.
 
 ```python
 try:
-    response = client.live_event_low_latency.toggle_rle_low_latency_alt2(live_event_id)
+    response = client.live_event_low_latency.toggle_rle_low_latency_alt2(12345)
     # TODO: Handle 'response' of type RecurringEventLowLatency
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ToggleRleLowLatencyAlt2ErrorBody
@@ -16389,7 +16673,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_low_latency.toggle_rle_low_latency_alt2(live_event_id)
+    response = await async_client.live_event_low_latency.toggle_rle_low_latency_alt2(12345)
     # TODO: Handle 'response' of type RecurringEventLowLatency
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ToggleRleLowLatencyAlt2ErrorBody
@@ -16407,7 +16691,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[MeLiveEventsLowLatencyRequest](vimeo_api/models/me_live_events_low_latency_request.py) \| [MeLiveEventsLowLatencyRequestDict](vimeo_api/models/me_live_events_low_latency_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16465,7 +16749,7 @@ This method returns the ingest status of the specified event and associated vide
 
 ```python
 try:
-    response = client.live_event_sessions.get_live_clip_ingest_status(live_event_id)
+    response = client.live_event_sessions.get_live_clip_ingest_status("some example string", clip_id=258684789)
     # TODO: Handle 'response' of type EventSessionStatus
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -16475,7 +16759,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_sessions.get_live_clip_ingest_status(live_event_id)
+    response = await async_client.live_event_sessions.get_live_clip_ingest_status(
+        "some example string", clip_id=258684789
+    )
     # TODO: Handle 'response' of type EventSessionStatus
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -16493,7 +16779,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>str</code> | Value sent with the request. |
 | <code>clip_id</code> | <code>float \| None</code> | The ID of the video.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16540,7 +16826,7 @@ This method returns the ingest status of the specified event.
 
 ```python
 try:
-    response = client.live_event_sessions.get_live_ingest_status(video_id)
+    response = client.live_event_sessions.get_live_ingest_status(258684937)
     # TODO: Handle 'response' of type EventSessionStatus
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -16550,7 +16836,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_sessions.get_live_ingest_status(video_id)
+    response = await async_client.live_event_sessions.get_live_ingest_status(258684937)
     # TODO: Handle 'response' of type EventSessionStatus
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -16567,7 +16853,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16618,7 +16904,7 @@ This method creates a thumbnail image for the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.create_live_event_thumbnail(live_event_id, user_id)
+    response = client.live_event_thumbnails.create_live_event_thumbnail(12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventThumbnailErrorBody
@@ -16628,7 +16914,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.create_live_event_thumbnail(live_event_id, user_id)
+    response = await async_client.live_event_thumbnails.create_live_event_thumbnail(12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventThumbnailErrorBody
@@ -16647,7 +16933,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsPicturesRequest](vimeo_api/models/users_live_events_pictures_request.py) \| [UsersLiveEventsPicturesRequestDict](vimeo_api/models/users_live_events_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16701,7 +16987,7 @@ This method creates a thumbnail image for the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.create_live_event_thumbnail_alt1(live_event_id)
+    response = client.live_event_thumbnails.create_live_event_thumbnail_alt1(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventThumbnailAlt1ErrorBody
@@ -16711,7 +16997,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.create_live_event_thumbnail_alt1(live_event_id)
+    response = await async_client.live_event_thumbnails.create_live_event_thumbnail_alt1(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventThumbnailAlt1ErrorBody
@@ -16729,7 +17015,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsPicturesRequest](vimeo_api/models/live_events_pictures_request.py) \| [LiveEventsPicturesRequestDict](vimeo_api/models/live_events_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16783,7 +17069,7 @@ This method creates a thumbnail image for the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.create_live_event_thumbnail_alt2(live_event_id)
+    response = client.live_event_thumbnails.create_live_event_thumbnail_alt2(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventThumbnailAlt2ErrorBody
@@ -16793,7 +17079,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.create_live_event_thumbnail_alt2(live_event_id)
+    response = await async_client.live_event_thumbnails.create_live_event_thumbnail_alt2(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateLiveEventThumbnailAlt2ErrorBody
@@ -16811,7 +17097,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[MeLiveEventsPicturesRequest](vimeo_api/models/me_live_events_pictures_request.py) \| [MeLiveEventsPicturesRequestDict](vimeo_api/models/me_live_events_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16865,7 +17151,7 @@ This method deletes a thumbnail image for the specified event.
 
 ```python
 try:
-    client.live_event_thumbnails.delete_live_event_thumbnail(live_event_id, thumbnail_id, user_id)
+    client.live_event_thumbnails.delete_live_event_thumbnail(12345, 12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventThumbnailErrorBody
 ```
@@ -16874,7 +17160,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_thumbnails.delete_live_event_thumbnail(live_event_id, thumbnail_id, user_id)
+    await async_client.live_event_thumbnails.delete_live_event_thumbnail(12345, 12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventThumbnailErrorBody
 ```
@@ -16892,7 +17178,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the thumbnail. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16946,7 +17232,7 @@ This method deletes a thumbnail image for the specified event.
 
 ```python
 try:
-    client.live_event_thumbnails.delete_live_event_thumbnail_alt1(live_event_id, thumbnail_id)
+    client.live_event_thumbnails.delete_live_event_thumbnail_alt1(12345, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventThumbnailAlt1ErrorBody
 ```
@@ -16955,7 +17241,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_thumbnails.delete_live_event_thumbnail_alt1(live_event_id, thumbnail_id)
+    await async_client.live_event_thumbnails.delete_live_event_thumbnail_alt1(12345, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventThumbnailAlt1ErrorBody
 ```
@@ -16972,7 +17258,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the thumbnail. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17026,7 +17312,7 @@ This method deletes a thumbnail image for the specified event.
 
 ```python
 try:
-    client.live_event_thumbnails.delete_live_event_thumbnail_alt2(live_event_id, thumbnail_id)
+    client.live_event_thumbnails.delete_live_event_thumbnail_alt2(12345, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventThumbnailAlt2ErrorBody
 ```
@@ -17035,7 +17321,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_thumbnails.delete_live_event_thumbnail_alt2(live_event_id, thumbnail_id)
+    await async_client.live_event_thumbnails.delete_live_event_thumbnail_alt2(12345, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteLiveEventThumbnailAlt2ErrorBody
 ```
@@ -17052,7 +17338,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the thumbnail. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17106,7 +17392,7 @@ This method edits a thumbnail image for the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.edit_live_event_thumbnail(live_event_id, thumbnail_id, user_id)
+    response = client.live_event_thumbnails.edit_live_event_thumbnail(12345, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventThumbnailErrorBody
@@ -17116,7 +17402,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.edit_live_event_thumbnail(live_event_id, thumbnail_id, user_id)
+    response = await async_client.live_event_thumbnails.edit_live_event_thumbnail(12345, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventThumbnailErrorBody
@@ -17136,7 +17422,7 @@ except ApiError as e:
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the thumbnail. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsPicturesThumbnailIdRequest](vimeo_api/models/users_live_events_pictures_thumbnail_id_request.py) \| [UsersLiveEventsPicturesThumbnailIdRequestDict](vimeo_api/models/users_live_events_pictures_thumbnail_id_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17190,7 +17476,7 @@ This method edits a thumbnail image for the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.edit_live_event_thumbnail_alt1(live_event_id, thumbnail_id)
+    response = client.live_event_thumbnails.edit_live_event_thumbnail_alt1(12345, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventThumbnailAlt1ErrorBody
@@ -17200,7 +17486,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.edit_live_event_thumbnail_alt1(live_event_id, thumbnail_id)
+    response = await async_client.live_event_thumbnails.edit_live_event_thumbnail_alt1(12345, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventThumbnailAlt1ErrorBody
@@ -17219,7 +17505,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the thumbnail. |
 | <code>body</code> | <code>[LiveEventsPicturesRequest](vimeo_api/models/live_events_pictures_request.py) \| [LiveEventsPicturesRequestDict](vimeo_api/models/live_events_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17273,7 +17559,7 @@ This method edits a thumbnail image for the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.edit_live_event_thumbnail_alt2(live_event_id, thumbnail_id)
+    response = client.live_event_thumbnails.edit_live_event_thumbnail_alt2(12345, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventThumbnailAlt2ErrorBody
@@ -17283,7 +17569,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.edit_live_event_thumbnail_alt2(live_event_id, thumbnail_id)
+    response = await async_client.live_event_thumbnails.edit_live_event_thumbnail_alt2(12345, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditLiveEventThumbnailAlt2ErrorBody
@@ -17302,7 +17588,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the thumbnail. |
 | <code>body</code> | <code>[MeLiveEventsPicturesRequest](vimeo_api/models/me_live_events_pictures_request.py) \| [MeLiveEventsPicturesRequestDict](vimeo_api/models/me_live_events_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17356,7 +17642,7 @@ This method returns a single thumbnail image of the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.get_live_event_thumbnail(live_event_id, thumbnail_id, user_id)
+    response = client.live_event_thumbnails.get_live_event_thumbnail(12345, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailErrorBody
@@ -17366,7 +17652,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.get_live_event_thumbnail(live_event_id, thumbnail_id, user_id)
+    response = await async_client.live_event_thumbnails.get_live_event_thumbnail(12345, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailErrorBody
@@ -17385,7 +17671,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the thumbnail. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17439,7 +17725,7 @@ This method returns a single thumbnail image of the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.get_live_event_thumbnail_alt1(live_event_id, thumbnail_id)
+    response = client.live_event_thumbnails.get_live_event_thumbnail_alt1(12345, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailAlt1ErrorBody
@@ -17449,7 +17735,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.get_live_event_thumbnail_alt1(live_event_id, thumbnail_id)
+    response = await async_client.live_event_thumbnails.get_live_event_thumbnail_alt1(12345, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailAlt1ErrorBody
@@ -17467,7 +17753,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the thumbnail. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17521,7 +17807,7 @@ This method returns a single thumbnail image of the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.get_live_event_thumbnail_alt2(live_event_id, thumbnail_id)
+    response = client.live_event_thumbnails.get_live_event_thumbnail_alt2(12345, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailAlt2ErrorBody
@@ -17531,7 +17817,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.get_live_event_thumbnail_alt2(live_event_id, thumbnail_id)
+    response = await async_client.live_event_thumbnails.get_live_event_thumbnail_alt2(12345, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailAlt2ErrorBody
@@ -17549,7 +17835,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the thumbnail. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17603,7 +17889,7 @@ This method returns every thumbnail image of the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.get_live_event_thumbnails(live_event_id, user_id)
+    response = client.live_event_thumbnails.get_live_event_thumbnails(12345, 152184)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailsErrorBody
@@ -17613,7 +17899,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.get_live_event_thumbnails(live_event_id, user_id)
+    response = await async_client.live_event_thumbnails.get_live_event_thumbnails(12345, 152184)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailsErrorBody
@@ -17631,7 +17917,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17685,7 +17971,7 @@ This method returns every thumbnail image of the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.get_live_event_thumbnails_alt1(live_event_id)
+    response = client.live_event_thumbnails.get_live_event_thumbnails_alt1(12345)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailsAlt1ErrorBody
@@ -17695,7 +17981,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.get_live_event_thumbnails_alt1(live_event_id)
+    response = await async_client.live_event_thumbnails.get_live_event_thumbnails_alt1(12345)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailsAlt1ErrorBody
@@ -17712,7 +17998,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17766,7 +18052,7 @@ This method returns every thumbnail image of the specified event.
 
 ```python
 try:
-    response = client.live_event_thumbnails.get_live_event_thumbnails_alt2(live_event_id)
+    response = client.live_event_thumbnails.get_live_event_thumbnails_alt2(12345)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailsAlt2ErrorBody
@@ -17776,7 +18062,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_thumbnails.get_live_event_thumbnails_alt2(live_event_id)
+    response = await async_client.live_event_thumbnails.get_live_event_thumbnails_alt2(12345)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventThumbnailsAlt2ErrorBody
@@ -17793,7 +18079,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17851,7 +18137,7 @@ This method adds multiple videos to the specified event.
 
 ```python
 try:
-    client.live_event_videos.add_videos_to_live_event(live_event_id, user_id)
+    client.live_event_videos.add_videos_to_live_event(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToLiveEventErrorBody
 ```
@@ -17860,7 +18146,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_videos.add_videos_to_live_event(live_event_id, user_id)
+    await async_client.live_event_videos.add_videos_to_live_event(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToLiveEventErrorBody
 ```
@@ -17878,7 +18164,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsVideosRequest1](vimeo_api/models/users_live_events_videos_request1.py) \| [UsersLiveEventsVideosRequest1Dict](vimeo_api/models/users_live_events_videos_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17932,7 +18218,7 @@ This method adds multiple videos to the specified event.
 
 ```python
 try:
-    client.live_event_videos.add_videos_to_live_event_alt1(live_event_id)
+    client.live_event_videos.add_videos_to_live_event_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToLiveEventAlt1ErrorBody
 ```
@@ -17941,7 +18227,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_videos.add_videos_to_live_event_alt1(live_event_id)
+    await async_client.live_event_videos.add_videos_to_live_event_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToLiveEventAlt1ErrorBody
 ```
@@ -17958,7 +18244,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsVideosRequest1](vimeo_api/models/live_events_videos_request1.py) \| [LiveEventsVideosRequest1Dict](vimeo_api/models/live_events_videos_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18012,7 +18298,7 @@ This method adds multiple videos to the specified event.
 
 ```python
 try:
-    client.live_event_videos.add_videos_to_live_event_alt2(live_event_id)
+    client.live_event_videos.add_videos_to_live_event_alt2(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToLiveEventAlt2ErrorBody
 ```
@@ -18021,7 +18307,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_videos.add_videos_to_live_event_alt2(live_event_id)
+    await async_client.live_event_videos.add_videos_to_live_event_alt2(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideosToLiveEventAlt2ErrorBody
 ```
@@ -18038,7 +18324,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[MeLiveEventsVideosRequest1](vimeo_api/models/me_live_events_videos_request1.py) \| [MeLiveEventsVideosRequest1Dict](vimeo_api/models/me_live_events_videos_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18092,7 +18378,7 @@ This method returns a single video in the specified event.
 
 ```python
 try:
-    response = client.live_event_videos.get_live_event_video(live_event_id, user_id, video_id)
+    response = client.live_event_videos.get_live_event_video(12345, 152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideoErrorBody
@@ -18102,7 +18388,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_videos.get_live_event_video(live_event_id, user_id, video_id)
+    response = await async_client.live_event_videos.get_live_event_video(12345, 152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideoErrorBody
@@ -18121,7 +18407,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18175,7 +18461,7 @@ This method returns a single video in the specified event.
 
 ```python
 try:
-    response = client.live_event_videos.get_live_event_video_alt1(live_event_id, video_id)
+    response = client.live_event_videos.get_live_event_video_alt1(12345, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideoAlt1ErrorBody
@@ -18185,7 +18471,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_videos.get_live_event_video_alt1(live_event_id, video_id)
+    response = await async_client.live_event_videos.get_live_event_video_alt1(12345, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideoAlt1ErrorBody
@@ -18203,7 +18489,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18257,7 +18543,7 @@ This method returns a single video in the specified event.
 
 ```python
 try:
-    response = client.live_event_videos.get_live_event_video_alt2(live_event_id, video_id)
+    response = client.live_event_videos.get_live_event_video_alt2(12345, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideoAlt2ErrorBody
@@ -18267,7 +18553,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_videos.get_live_event_video_alt2(live_event_id, video_id)
+    response = await async_client.live_event_videos.get_live_event_video_alt2(12345, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideoAlt2ErrorBody
@@ -18285,7 +18571,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18315,7 +18601,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_live_event_videos(live_event_id: float, user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_live_event_videos(live_event_id: float, user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -18339,7 +18625,16 @@ This method returns every video in the specified event.
 
 ```python
 try:
-    response = client.live_event_videos.get_live_event_videos(live_event_id, user_id)
+    response = client.live_event_videos.get_live_event_videos(
+        12345,
+        152184,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideosErrorBody
@@ -18349,7 +18644,16 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_videos.get_live_event_videos(live_event_id, user_id)
+    response = await async_client.live_event_videos.get_live_event_videos(
+        12345,
+        152184,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideosErrorBody
@@ -18369,13 +18673,13 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>containing_uri</code> | <code>str \| None</code> | The page that contains the video URI.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable events.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable events.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort17OrStr](vimeo_api/models/enums/sort17.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `added` - Sort the results by most recently added videos.<br> * `alphabetical` - Sort the results alphabetically.<br> * `arranged` - Sort the results in the order that the user has arranged the videos.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by creation date.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18405,7 +18709,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_live_event_videos_alt1(live_event_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_live_event_videos_alt1(live_event_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -18429,7 +18733,15 @@ This method returns every video in the specified event.
 
 ```python
 try:
-    response = client.live_event_videos.get_live_event_videos_alt1(live_event_id)
+    response = client.live_event_videos.get_live_event_videos_alt1(
+        12345,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideosAlt1ErrorBody
@@ -18439,7 +18751,15 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_videos.get_live_event_videos_alt1(live_event_id)
+    response = await async_client.live_event_videos.get_live_event_videos_alt1(
+        12345,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideosAlt1ErrorBody
@@ -18458,13 +18778,13 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>containing_uri</code> | <code>str \| None</code> | The page that contains the video URI.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable events.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable events.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort17OrStr](vimeo_api/models/enums/sort17.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `added` - Sort the results by most recently added videos.<br> * `alphabetical` - Sort the results alphabetically.<br> * `arranged` - Sort the results in the order that the user has arranged the videos.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by creation date.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18494,7 +18814,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_live_event_videos_alt2(live_event_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_live_event_videos_alt2(live_event_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort17OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -18518,7 +18838,15 @@ This method returns every video in the specified event.
 
 ```python
 try:
-    response = client.live_event_videos.get_live_event_videos_alt2(live_event_id)
+    response = client.live_event_videos.get_live_event_videos_alt2(
+        12345,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideosAlt2ErrorBody
@@ -18528,7 +18856,15 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_event_videos.get_live_event_videos_alt2(live_event_id)
+    response = await async_client.live_event_videos.get_live_event_videos_alt2(
+        12345,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetLiveEventVideosAlt2ErrorBody
@@ -18547,13 +18883,13 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>containing_uri</code> | <code>str \| None</code> | The page that contains the video URI.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable events.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable events.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort17OrStr](vimeo_api/models/enums/sort17.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `added` - Sort the results by most recently added videos.<br> * `alphabetical` - Sort the results alphabetically.<br> * `arranged` - Sort the results in the order that the user has arranged the videos.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by creation date.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18607,7 +18943,7 @@ This method removes multiple videos from the specified event.
 
 ```python
 try:
-    client.live_event_videos.remove_videos_from_live_event(live_event_id, user_id)
+    client.live_event_videos.remove_videos_from_live_event(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromLiveEventErrorBody
 ```
@@ -18616,7 +18952,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_videos.remove_videos_from_live_event(live_event_id, user_id)
+    await async_client.live_event_videos.remove_videos_from_live_event(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromLiveEventErrorBody
 ```
@@ -18634,7 +18970,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersLiveEventsVideosRequest](vimeo_api/models/users_live_events_videos_request.py) \| [UsersLiveEventsVideosRequestDict](vimeo_api/models/users_live_events_videos_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18688,7 +19024,7 @@ This method removes multiple videos from the specified event.
 
 ```python
 try:
-    client.live_event_videos.remove_videos_from_live_event_alt1(live_event_id)
+    client.live_event_videos.remove_videos_from_live_event_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromLiveEventAlt1ErrorBody
 ```
@@ -18697,7 +19033,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_videos.remove_videos_from_live_event_alt1(live_event_id)
+    await async_client.live_event_videos.remove_videos_from_live_event_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromLiveEventAlt1ErrorBody
 ```
@@ -18714,7 +19050,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsVideosRequest](vimeo_api/models/live_events_videos_request.py) \| [LiveEventsVideosRequestDict](vimeo_api/models/live_events_videos_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18768,7 +19104,7 @@ This method removes multiple videos from the specified event.
 
 ```python
 try:
-    client.live_event_videos.remove_videos_from_live_event_alt2(live_event_id)
+    client.live_event_videos.remove_videos_from_live_event_alt2(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromLiveEventAlt2ErrorBody
 ```
@@ -18777,7 +19113,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_event_videos.remove_videos_from_live_event_alt2(live_event_id)
+    await async_client.live_event_videos.remove_videos_from_live_event_alt2(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideosFromLiveEventAlt2ErrorBody
 ```
@@ -18794,7 +19130,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[MeLiveEventsVideosRequest](vimeo_api/models/me_live_events_videos_request.py) \| [MeLiveEventsVideosRequestDict](vimeo_api/models/me_live_events_videos_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18852,7 +19188,9 @@ This method add a new video graphics item to the specified event.
 
 ```python
 try:
-    response = client.live_graphics.add_composer_video_graphic_item(live_event_id, body)
+    response = client.live_graphics.add_composer_video_graphic_item(
+        12345, LiveEventsComposerGraphicsVideosRequest(video_id=1.5)
+    )
     # TODO: Handle 'response' of type ComposerGraphics
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddComposerVideoGraphicItemErrorBody
@@ -18862,7 +19200,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_graphics.add_composer_video_graphic_item(live_event_id, body)
+    response = await async_client.live_graphics.add_composer_video_graphic_item(
+        12345, LiveEventsComposerGraphicsVideosRequest(video_id=1.5)
+    )
     # TODO: Handle 'response' of type ComposerGraphics
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddComposerVideoGraphicItemErrorBody
@@ -18880,7 +19220,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsComposerGraphicsVideosRequest](vimeo_api/models/live_events_composer_graphics_videos_request.py) \| [LiveEventsComposerGraphicsVideosRequestDict](vimeo_api/models/live_events_composer_graphics_videos_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18934,7 +19274,7 @@ This method deletes a video graphics item belonging to the specified event.
 
 ```python
 try:
-    client.live_graphics.delete_composer_video_graphic_item(live_event_id, video_id)
+    client.live_graphics.delete_composer_video_graphic_item(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteComposerVideoGraphicItemErrorBody
 ```
@@ -18943,7 +19283,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.live_graphics.delete_composer_video_graphic_item(live_event_id, video_id)
+    await async_client.live_graphics.delete_composer_video_graphic_item(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteComposerVideoGraphicItemErrorBody
 ```
@@ -18960,7 +19300,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>video_id</code> | <code>float</code> | The ID of the associated video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19014,7 +19354,7 @@ The method returns every video graphics item belonging to the specified event.
 
 ```python
 try:
-    response = client.live_graphics.get_composer_video_graphic_items(live_event_id)
+    response = client.live_graphics.get_composer_video_graphic_items(12345)
     # TODO: Handle 'response' of type ComposerGraphicsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetComposerVideoGraphicItemsErrorBody
@@ -19024,7 +19364,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_graphics.get_composer_video_graphic_items(live_event_id)
+    response = await async_client.live_graphics.get_composer_video_graphic_items(12345)
     # TODO: Handle 'response' of type ComposerGraphicsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetComposerVideoGraphicItemsErrorBody
@@ -19041,7 +19381,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19099,7 +19439,9 @@ This method attaches a graphic item to the specified scene.
 
 ```python
 try:
-    response = client.live_scenes.attach_graphic_item_to_scene(live_event_id, scene_id, body)
+    response = client.live_scenes.attach_graphic_item_to_scene(
+        12345, "default", LiveEventsComposerScenesGraphicsRequest(item={})
+    )
     # TODO: Handle 'response' of type ComposerScenes
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AttachGraphicItemToSceneErrorBody
@@ -19109,7 +19451,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_scenes.attach_graphic_item_to_scene(live_event_id, scene_id, body)
+    response = await async_client.live_scenes.attach_graphic_item_to_scene(
+        12345, "default", LiveEventsComposerScenesGraphicsRequest(item={})
+    )
     # TODO: Handle 'response' of type ComposerScenes
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AttachGraphicItemToSceneErrorBody
@@ -19128,7 +19472,7 @@ except ApiError as e:
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>scene_id</code> | <code>str</code> | The ID of the scene. |
 | <code>body</code> | <code>[LiveEventsComposerScenesGraphicsRequest](vimeo_api/models/live_events_composer_scenes_graphics_request.py) \| [LiveEventsComposerScenesGraphicsRequestDict](vimeo_api/models/live_events_composer_scenes_graphics_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19182,7 +19526,7 @@ The method creates a new scene for the specified event.
 
 ```python
 try:
-    response = client.live_scenes.create_composer_scene(live_event_id)
+    response = client.live_scenes.create_composer_scene(12345)
     # TODO: Handle 'response' of type ComposerScenes
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateComposerSceneErrorBody
@@ -19192,7 +19536,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_scenes.create_composer_scene(live_event_id)
+    response = await async_client.live_scenes.create_composer_scene(12345)
     # TODO: Handle 'response' of type ComposerScenes
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateComposerSceneErrorBody
@@ -19210,7 +19554,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>body</code> | <code>[LiveEventsComposerScenesRequest](vimeo_api/models/live_events_composer_scenes_request.py) \| [LiveEventsComposerScenesRequestDict](vimeo_api/models/live_events_composer_scenes_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19264,7 +19608,7 @@ The method returns every scene belonging to the specified event.
 
 ```python
 try:
-    response = client.live_scenes.get_composer_scenes(live_event_id)
+    response = client.live_scenes.get_composer_scenes(12345)
     # TODO: Handle 'response' of type ComposerScenesConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetComposerScenesErrorBody
@@ -19274,7 +19618,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_scenes.get_composer_scenes(live_event_id)
+    response = await async_client.live_scenes.get_composer_scenes(12345)
     # TODO: Handle 'response' of type ComposerScenesConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetComposerScenesErrorBody
@@ -19291,7 +19635,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19345,7 +19689,7 @@ The method resets the scenes that belong to the specified event by deleting ever
 
 ```python
 try:
-    response = client.live_scenes.reset_composer_scenes(live_event_id)
+    response = client.live_scenes.reset_composer_scenes(12345)
     # TODO: Handle 'response' of type list[ComposerScenes]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ResetComposerScenesErrorBody
@@ -19355,7 +19699,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_scenes.reset_composer_scenes(live_event_id)
+    response = await async_client.live_scenes.reset_composer_scenes(12345)
     # TODO: Handle 'response' of type list[ComposerScenes]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ResetComposerScenesErrorBody
@@ -19372,7 +19716,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19426,7 +19770,7 @@ The method updates a scene belonging to the specified event.
 
 ```python
 try:
-    response = client.live_scenes.update_composer_scene(live_event_id, scene_id)
+    response = client.live_scenes.update_composer_scene(12345, "default")
     # TODO: Handle 'response' of type ComposerScenes
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateComposerSceneErrorBody
@@ -19436,7 +19780,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.live_scenes.update_composer_scene(live_event_id, scene_id)
+    response = await async_client.live_scenes.update_composer_scene(12345, "default")
     # TODO: Handle 'response' of type ComposerScenes
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateComposerSceneErrorBody
@@ -19454,7 +19798,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>live_event_id</code> | <code>float</code> | The ID of the event. |
 | <code>scene_id</code> | <code>str</code> | The ID of the scene. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19512,7 +19856,7 @@ This method adds a background image to the specified On Demand page. The authent
 
 ```python
 try:
-    response = client.on_demand_backgrounds.create_vod_background(ondemand_id)
+    response = client.on_demand_backgrounds.create_vod_background(61326)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateVodBackgroundErrorBody
@@ -19522,7 +19866,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_backgrounds.create_vod_background(ondemand_id)
+    response = await async_client.on_demand_backgrounds.create_vod_background(61326)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateVodBackgroundErrorBody
@@ -19539,7 +19883,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19593,7 +19937,7 @@ This method deletes the specified background image on an On Demand page. The aut
 
 ```python
 try:
-    client.on_demand_backgrounds.delete_vod_background(background_id, ondemand_id)
+    client.on_demand_backgrounds.delete_vod_background(12345, 61326)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodBackgroundErrorBody
 ```
@@ -19602,7 +19946,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.on_demand_backgrounds.delete_vod_background(background_id, ondemand_id)
+    await async_client.on_demand_backgrounds.delete_vod_background(12345, 61326)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodBackgroundErrorBody
 ```
@@ -19619,7 +19963,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>background_id</code> | <code>float</code> | The ID of the background image. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19673,7 +20017,7 @@ This method edits the specified background image on an On Demand page. The authe
 
 ```python
 try:
-    response = client.on_demand_backgrounds.edit_vod_background(background_id, ondemand_id)
+    response = client.on_demand_backgrounds.edit_vod_background(12345, 61326)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVodBackgroundErrorBody
@@ -19683,7 +20027,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_backgrounds.edit_vod_background(background_id, ondemand_id)
+    response = await async_client.on_demand_backgrounds.edit_vod_background(12345, 61326)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVodBackgroundErrorBody
@@ -19702,7 +20046,7 @@ except ApiError as e:
 | <code>background_id</code> | <code>float</code> | The ID of the background image. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>body</code> | <code>[OndemandPagesBackgroundsRequest](vimeo_api/models/ondemand_pages_backgrounds_request.py) \| [OndemandPagesBackgroundsRequestDict](vimeo_api/models/ondemand_pages_backgrounds_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19756,7 +20100,7 @@ This method returns a single background image on the specified On Demand page. T
 
 ```python
 try:
-    response = client.on_demand_backgrounds.get_vod_background(background_id, ondemand_id)
+    response = client.on_demand_backgrounds.get_vod_background(12345, 61326)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodBackgroundErrorBody
@@ -19766,7 +20110,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_backgrounds.get_vod_background(background_id, ondemand_id)
+    response = await async_client.on_demand_backgrounds.get_vod_background(12345, 61326)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodBackgroundErrorBody
@@ -19784,7 +20128,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>background_id</code> | <code>float</code> | The ID of the background image. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19838,7 +20182,7 @@ This method returns every background image on the specified On Demand page. The 
 
 ```python
 try:
-    response = client.on_demand_backgrounds.get_vod_backgrounds(ondemand_id)
+    response = client.on_demand_backgrounds.get_vod_backgrounds(61326, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodBackgroundsErrorBody
@@ -19848,7 +20192,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_backgrounds.get_vod_backgrounds(ondemand_id)
+    response = await async_client.on_demand_backgrounds.get_vod_backgrounds(61326, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodBackgroundsErrorBody
@@ -19867,7 +20211,7 @@ except ApiError as e:
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19925,7 +20269,15 @@ This method creates a new On Demand page for the specified user. To publish the 
 
 ```python
 try:
-    response = client.on_demand_essentials.create_vod(user_id, body)
+    response = client.on_demand_essentials.create_vod(
+        152184,
+        UsersOndemandPagesRequest(
+            content_rating=ContentRating1.DRUGS,
+            description="some example string",
+            name="some example string",
+            type_=Type37.FILM,
+        ),
+    )
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -19935,7 +20287,15 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_essentials.create_vod(user_id, body)
+    response = await async_client.on_demand_essentials.create_vod(
+        152184,
+        UsersOndemandPagesRequest(
+            content_rating=ContentRating1.DRUGS,
+            description="some example string",
+            name="some example string",
+            type_=Type37.FILM,
+        ),
+    )
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -19953,7 +20313,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersOndemandPagesRequest](vimeo_api/models/users_ondemand_pages_request.py) \| [UsersOndemandPagesRequestDict](vimeo_api/models/users_ondemand_pages_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20000,7 +20360,14 @@ This method creates a new On Demand page for the specified user. To publish the 
 
 ```python
 try:
-    response = client.on_demand_essentials.create_vod_alt1(body)
+    response = client.on_demand_essentials.create_vod_alt1(
+        MeOndemandPagesRequest(
+            content_rating=ContentRating1.DRUGS,
+            description="some example string",
+            name="some example string",
+            type_=Type37.FILM,
+        ),
+    )
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -20010,7 +20377,14 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_essentials.create_vod_alt1(body)
+    response = await async_client.on_demand_essentials.create_vod_alt1(
+        MeOndemandPagesRequest(
+            content_rating=ContentRating1.DRUGS,
+            description="some example string",
+            name="some example string",
+            type_=Type37.FILM,
+        ),
+    )
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -20027,7 +20401,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MeOndemandPagesRequest](vimeo_api/models/me_ondemand_pages_request.py) \| [MeOndemandPagesRequestDict](vimeo_api/models/me_ondemand_pages_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20074,7 +20448,7 @@ This method deletes the specified On Demand page.
 
 ```python
 try:
-    client.on_demand_essentials.delete_vod_draft(ondemand_id)
+    client.on_demand_essentials.delete_vod_draft(61326)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodDraftErrorBody
 ```
@@ -20083,7 +20457,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.on_demand_essentials.delete_vod_draft(ondemand_id)
+    await async_client.on_demand_essentials.delete_vod_draft(61326)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodDraftErrorBody
 ```
@@ -20099,7 +20473,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20153,7 +20527,7 @@ This method edits the specified On Demand page. Use this method to enable preord
 
 ```python
 try:
-    response = client.on_demand_essentials.edit_vod(ondemand_id)
+    response = client.on_demand_essentials.edit_vod(61326)
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVodErrorBody
@@ -20163,7 +20537,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_essentials.edit_vod(ondemand_id)
+    response = await async_client.on_demand_essentials.edit_vod(61326)
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVodErrorBody
@@ -20181,7 +20555,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>body</code> | <code>[OndemandPagesRequest](vimeo_api/models/ondemand_pages_request.py) \| [OndemandPagesRequestDict](vimeo_api/models/ondemand_pages_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20211,7 +20585,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_user_vods(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter18OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort32OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
+<summary><code>def get_user_vods(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter18OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort32OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
 
 <dl>
 <dd>
@@ -20235,7 +20609,7 @@ This method returns every On Demand page belonging to the authenticated user.
 
 ```python
 try:
-    response = client.on_demand_essentials.get_user_vods(user_id)
+    response = client.on_demand_essentials.get_user_vods(152184, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUserVodsErrorBody
@@ -20245,7 +20619,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_essentials.get_user_vods(user_id)
+    response = await async_client.on_demand_essentials.get_user_vods(
+        152184, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUserVodsErrorBody
@@ -20263,11 +20639,11 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter18OrStr](vimeo_api/models/enums/filter18.py) \| None</code> | The type of the page to return.<br><br>Option descriptions:<br> * `film` - The page type is a film.<br> * `series` - The page type is a series.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter18OrStr](vimeo_api/models/enums/filter18.py) \| None</code> | The type of the page to return.<br><br>Option descriptions:<br> * `film` - The page type is a film.<br> * `series` - The page type is a series.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort32OrStr](vimeo_api/models/enums/sort32.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `added` - Sort the results by most recently added page.<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `modified_time` - Sort the results by time of page modification.<br> * `name` - Sort the results by page name.<br> * `publish.time` - Sort the results by time of page publishing.<br> * `rating` - Sort the results by content rating.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20297,7 +20673,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_user_vods_alt1(*, direction: DirectionOrStr | None = None, filter: Filter18OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort32OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
+<summary><code>def get_user_vods_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter18OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort32OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
 
 <dl>
 <dd>
@@ -20321,7 +20697,7 @@ This method returns every On Demand page belonging to the authenticated user.
 
 ```python
 try:
-    response = client.on_demand_essentials.get_user_vods_alt1()
+    response = client.on_demand_essentials.get_user_vods_alt1(direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUserVodsAlt1ErrorBody
@@ -20331,7 +20707,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_essentials.get_user_vods_alt1()
+    response = await async_client.on_demand_essentials.get_user_vods_alt1(direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUserVodsAlt1ErrorBody
@@ -20348,11 +20724,11 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter18OrStr](vimeo_api/models/enums/filter18.py) \| None</code> | The type of the page to return.<br><br>Option descriptions:<br> * `film` - The page type is a film.<br> * `series` - The page type is a series.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter18OrStr](vimeo_api/models/enums/filter18.py) \| None</code> | The type of the page to return.<br><br>Option descriptions:<br> * `film` - The page type is a film.<br> * `series` - The page type is a series.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort32OrStr](vimeo_api/models/enums/sort32.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `added` - Sort the results by most recently added page.<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `modified_time` - Sort the results by time of page modification.<br> * `name` - Sort the results by page name.<br> * `publish.time` - Sort the results by time of page publishing.<br> * `rating` - Sort the results by content rating.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20406,7 +20782,7 @@ This method returns the specified On Demand page.
 
 ```python
 try:
-    response = client.on_demand_essentials.get_vod(ondemand_id)
+    response = client.on_demand_essentials.get_vod(61326)
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodErrorBody
@@ -20416,7 +20792,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_essentials.get_vod(ondemand_id)
+    response = await async_client.on_demand_essentials.get_vod(61326)
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodErrorBody
@@ -20433,7 +20809,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20491,7 +20867,7 @@ This method adds the specified genre designation to an On Demand page. A page ca
 
 ```python
 try:
-    response = client.on_demand_genres.add_vod_genre(genre_id, ondemand_id)
+    response = client.on_demand_genres.add_vod_genre("animation", 61326)
     # TODO: Handle 'response' of type OnDemandGenre
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVodGenreErrorBody
@@ -20501,7 +20877,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_genres.add_vod_genre(genre_id, ondemand_id)
+    response = await async_client.on_demand_genres.add_vod_genre("animation", 61326)
     # TODO: Handle 'response' of type OnDemandGenre
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVodGenreErrorBody
@@ -20519,7 +20895,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>genre_id</code> | <code>str</code> | The ID of the genre. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20573,7 +20949,7 @@ This method removes a genre association from the specified On Demand page. The a
 
 ```python
 try:
-    client.on_demand_genres.delete_vod_genre(genre_id, ondemand_id)
+    client.on_demand_genres.delete_vod_genre("animation", 61326)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodGenreErrorBody
 ```
@@ -20582,7 +20958,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.on_demand_genres.delete_vod_genre(genre_id, ondemand_id)
+    await async_client.on_demand_genres.delete_vod_genre("animation", 61326)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodGenreErrorBody
 ```
@@ -20599,7 +20975,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>genre_id</code> | <code>str</code> | The ID of the genre. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20653,7 +21029,7 @@ This method returns a single On Demand page that belongs to the specified genre.
 
 ```python
 try:
-    response = client.on_demand_genres.get_genre_vod(genre_id, ondemand_id)
+    response = client.on_demand_genres.get_genre_vod("animation", 61326)
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGenreVodErrorBody
@@ -20663,7 +21039,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_genres.get_genre_vod(genre_id, ondemand_id)
+    response = await async_client.on_demand_genres.get_genre_vod("animation", 61326)
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGenreVodErrorBody
@@ -20681,7 +21057,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>genre_id</code> | <code>str</code> | The ID of the genre. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20711,7 +21087,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_genre_vods(genre_id: str, *, direction: DirectionOrStr | None = None, filter: Filter24OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort41OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
+<summary><code>def get_genre_vods(genre_id: str, *, direction: DirectionOrStr | None = None, filter_: Filter24OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort41OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
 
 <dl>
 <dd>
@@ -20735,7 +21111,9 @@ This method returns every On Demand page that belongs to the specified genre.
 
 ```python
 try:
-    response = client.on_demand_genres.get_genre_vods(genre_id)
+    response = client.on_demand_genres.get_genre_vods(
+        "animation", direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGenreVodsErrorBody
@@ -20745,7 +21123,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_genres.get_genre_vods(genre_id)
+    response = await async_client.on_demand_genres.get_genre_vods(
+        "animation", direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetGenreVodsErrorBody
@@ -20763,12 +21143,12 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>genre_id</code> | <code>str</code> | The ID of the genre. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter24OrStr](vimeo_api/models/enums/filter24.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `country` - Sort the results by country.<br> * `my_region` - Sort the results by user's region.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter24OrStr](vimeo_api/models/enums/filter24.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `country` - Sort the results by country.<br> * `my_region` - Sort the results by user's region.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort41OrStr](vimeo_api/models/enums/sort41.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `name` - Sort the results by name.<br> * `publish.time` - Sort the results by time of publishing.<br> * `videos` - Sort the results by video.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20822,7 +21202,7 @@ This method returns a single On Demand genre.
 
 ```python
 try:
-    response = client.on_demand_genres.get_vod_genre(genre_id)
+    response = client.on_demand_genres.get_vod_genre("animation")
     # TODO: Handle 'response' of type OnDemandGenre
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodGenreErrorBody
@@ -20832,7 +21212,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_genres.get_vod_genre(genre_id)
+    response = await async_client.on_demand_genres.get_vod_genre("animation")
     # TODO: Handle 'response' of type OnDemandGenre
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodGenreErrorBody
@@ -20849,7 +21229,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>genre_id</code> | <code>str</code> | The ID of the genre. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20903,7 +21283,7 @@ This method determines whether an On Demand page is associated with the specifie
 
 ```python
 try:
-    response = client.on_demand_genres.get_vod_genre_by_ondemand_id(genre_id, ondemand_id)
+    response = client.on_demand_genres.get_vod_genre_by_ondemand_id("animation", 61326)
     # TODO: Handle 'response' of type OnDemandGenre
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodGenreByOndemandIdErrorBody
@@ -20913,7 +21293,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_genres.get_vod_genre_by_ondemand_id(genre_id, ondemand_id)
+    response = await async_client.on_demand_genres.get_vod_genre_by_ondemand_id("animation", 61326)
     # TODO: Handle 'response' of type OnDemandGenre
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodGenreByOndemandIdErrorBody
@@ -20931,7 +21311,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>genre_id</code> | <code>str</code> | The ID of the genre. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21011,7 +21391,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21065,7 +21445,7 @@ This method returns every genre associated with the specified On Demand page.
 
 ```python
 try:
-    response = client.on_demand_genres.get_vod_genres_by_ondemand_id(ondemand_id)
+    response = client.on_demand_genres.get_vod_genres_by_ondemand_id(61326)
     # TODO: Handle 'response' of type OnDemandGenreConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodGenresByOndemandIdErrorBody
@@ -21075,7 +21455,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_genres.get_vod_genres_by_ondemand_id(ondemand_id)
+    response = await async_client.on_demand_genres.get_vod_genres_by_ondemand_id(61326)
     # TODO: Handle 'response' of type OnDemandGenreConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodGenresByOndemandIdErrorBody
@@ -21092,7 +21472,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21150,7 +21530,7 @@ This method adds a poster image to the specified On Demand page. The authenticat
 
 ```python
 try:
-    response = client.on_demand_posters.add_vod_poster(ondemand_id)
+    response = client.on_demand_posters.add_vod_poster(61326)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVodPosterErrorBody
@@ -21160,7 +21540,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_posters.add_vod_poster(ondemand_id)
+    response = await async_client.on_demand_posters.add_vod_poster(61326)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVodPosterErrorBody
@@ -21177,7 +21557,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21231,7 +21611,7 @@ This method edits a poster image on the specified On Demand page. The authentica
 
 ```python
 try:
-    response = client.on_demand_posters.edit_vod_poster(ondemand_id, poster_id)
+    response = client.on_demand_posters.edit_vod_poster(61326, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -21241,7 +21621,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_posters.edit_vod_poster(ondemand_id, poster_id)
+    response = await async_client.on_demand_posters.edit_vod_poster(61326, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -21260,7 +21640,7 @@ except ApiError as e:
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>poster_id</code> | <code>float</code> | The ID of the poster. |
 | <code>body</code> | <code>[OndemandPagesPicturesRequest](vimeo_api/models/ondemand_pages_pictures_request.py) \| [OndemandPagesPicturesRequestDict](vimeo_api/models/ondemand_pages_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21307,7 +21687,7 @@ This method returns a single poster on the specified On Demand page.
 
 ```python
 try:
-    response = client.on_demand_posters.get_vod_poster(ondemand_id, poster_id)
+    response = client.on_demand_posters.get_vod_poster(61326, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -21317,7 +21697,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_posters.get_vod_poster(ondemand_id, poster_id)
+    response = await async_client.on_demand_posters.get_vod_poster(61326, 12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -21335,7 +21715,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>poster_id</code> | <code>float</code> | The ID of the poster. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21382,7 +21762,7 @@ This method returns every poster on the specified On Demand page.
 
 ```python
 try:
-    response = client.on_demand_posters.get_vod_posters(ondemand_id)
+    response = client.on_demand_posters.get_vod_posters(61326, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPostersErrorBody
@@ -21392,7 +21772,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_posters.get_vod_posters(ondemand_id)
+    response = await async_client.on_demand_posters.get_vod_posters(61326, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPostersErrorBody
@@ -21411,7 +21791,7 @@ except ApiError as e:
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21469,7 +21849,12 @@ This method adds a promotion to the specified On Demand page. The authenticated 
 
 ```python
 try:
-    response = client.on_demand_promotions.create_vod_promotion(ondemand_id, body)
+    response = client.on_demand_promotions.create_vod_promotion(
+        61326,
+        OndemandPagesPromotionsRequest(
+            download=True, stream_period=StreamPeriod1._1_WEEK, total=1.5, type_=Type41.BATCH
+        ),
+    )
     # TODO: Handle 'response' of type OnDemandPromotion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateVodPromotionErrorBody
@@ -21479,7 +21864,12 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_promotions.create_vod_promotion(ondemand_id, body)
+    response = await async_client.on_demand_promotions.create_vod_promotion(
+        61326,
+        OndemandPagesPromotionsRequest(
+            download=True, stream_period=StreamPeriod1._1_WEEK, total=1.5, type_=Type41.BATCH
+        ),
+    )
     # TODO: Handle 'response' of type OnDemandPromotion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateVodPromotionErrorBody
@@ -21497,7 +21887,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>body</code> | <code>[OndemandPagesPromotionsRequest](vimeo_api/models/ondemand_pages_promotions_request.py) \| [OndemandPagesPromotionsRequestDict](vimeo_api/models/ondemand_pages_promotions_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21551,7 +21941,7 @@ This method deletes a promotion on the specified On Demand page. The authenticat
 
 ```python
 try:
-    client.on_demand_promotions.delete_vod_promotion(ondemand_id, promotion_id)
+    client.on_demand_promotions.delete_vod_promotion(61326, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodPromotionErrorBody
 ```
@@ -21560,7 +21950,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.on_demand_promotions.delete_vod_promotion(ondemand_id, promotion_id)
+    await async_client.on_demand_promotions.delete_vod_promotion(61326, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodPromotionErrorBody
 ```
@@ -21577,7 +21967,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>promotion_id</code> | <code>float</code> | The ID of the promotion. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21631,7 +22021,7 @@ This method returns a single promotion on the specified On Demand page. The auth
 
 ```python
 try:
-    response = client.on_demand_promotions.get_vod_promotion(ondemand_id, promotion_id)
+    response = client.on_demand_promotions.get_vod_promotion(61326, 12345)
     # TODO: Handle 'response' of type OnDemandPromotion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPromotionErrorBody
@@ -21641,7 +22031,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_promotions.get_vod_promotion(ondemand_id, promotion_id)
+    response = await async_client.on_demand_promotions.get_vod_promotion(61326, 12345)
     # TODO: Handle 'response' of type OnDemandPromotion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPromotionErrorBody
@@ -21659,7 +22049,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>promotion_id</code> | <code>float</code> | The ID of the promotion. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21713,7 +22103,7 @@ This method returns every code of the specified promotion on an On Demand page. 
 
 ```python
 try:
-    response = client.on_demand_promotions.get_vod_promotion_codes(ondemand_id, promotion_id)
+    response = client.on_demand_promotions.get_vod_promotion_codes(61326, 12345, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandPromotionCode
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPromotionCodesErrorBody
@@ -21723,7 +22113,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_promotions.get_vod_promotion_codes(ondemand_id, promotion_id)
+    response = await async_client.on_demand_promotions.get_vod_promotion_codes(61326, 12345, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandPromotionCode
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPromotionCodesErrorBody
@@ -21743,7 +22133,7 @@ except ApiError as e:
 | <code>promotion_id</code> | <code>float</code> | The ID of the promotion. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21773,7 +22163,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_vod_promotions(ondemand_id: float, filter: Filter26OrStr, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPromotion</code></summary>
+<summary><code>def get_vod_promotions(ondemand_id: float, filter_: Filter26OrStr, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPromotion</code></summary>
 
 <dl>
 <dd>
@@ -21797,7 +22187,7 @@ This method returns every promotion on the specified On Demand page. The authent
 
 ```python
 try:
-    response = client.on_demand_promotions.get_vod_promotions(ondemand_id, filter)
+    response = client.on_demand_promotions.get_vod_promotions(61326, Filter26.BATCH, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandPromotion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPromotionsErrorBody
@@ -21807,7 +22197,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_promotions.get_vod_promotions(ondemand_id, filter)
+    response = await async_client.on_demand_promotions.get_vod_promotions(61326, Filter26.BATCH, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandPromotion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPromotionsErrorBody
@@ -21824,10 +22214,10 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>filter</code> | <code>[Filter26OrStr](vimeo_api/models/enums/filter26.py)</code> | The type of filter to apply to the results.<br><br>Option descriptions:<br> * `batch` - Filter the results by the `batch` promotion.<br> * `default` - Filter the results by the default promotion.<br> * `single` - Filter the results by the `single` promotion.<br> * `vip` - Filter the results by the `vip` promotion. |
+| <code>filter_</code> | <code>[Filter26OrStr](vimeo_api/models/enums/filter26.py)</code> | The type of filter to apply to the results.<br><br>Option descriptions:<br> * `batch` - Filter the results by the `batch` promotion.<br> * `default` - Filter the results by the default promotion.<br> * `single` - Filter the results by the `single` promotion.<br> * `vip` - Filter the results by the `vip` promotion. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21885,7 +22275,7 @@ This method determines whether the authenticated user has made a purchase or ren
 
 ```python
 try:
-    response = client.on_demand_purchases_and_rentals.check_if_vod_was_purchased_alt1(ondemand_id)
+    response = client.on_demand_purchases_and_rentals.check_if_vod_was_purchased_alt1(61326)
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfVodWasPurchasedAlt1ErrorBody
@@ -21895,7 +22285,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_purchases_and_rentals.check_if_vod_was_purchased_alt1(ondemand_id)
+    response = await async_client.on_demand_purchases_and_rentals.check_if_vod_was_purchased_alt1(61326)
     # TODO: Handle 'response' of type OnDemandPage
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfVodWasPurchasedAlt1ErrorBody
@@ -21912,7 +22302,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21942,7 +22332,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_vod_purchases(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter19OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort33OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
+<summary><code>def get_vod_purchases(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter19OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort33OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
 
 <dl>
 <dd>
@@ -21966,7 +22356,9 @@ This method returns every purchase and rental that the authenticated user has ma
 
 ```python
 try:
-    response = client.on_demand_purchases_and_rentals.get_vod_purchases(user_id)
+    response = client.on_demand_purchases_and_rentals.get_vod_purchases(
+        152184, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPurchasesErrorBody
@@ -21976,7 +22368,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_purchases_and_rentals.get_vod_purchases(user_id)
+    response = await async_client.on_demand_purchases_and_rentals.get_vod_purchases(
+        152184, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPurchasesErrorBody
@@ -21994,11 +22388,11 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter19OrStr](vimeo_api/models/enums/filter19.py) \| None</code> | The type of the On Demand video to filter on.<br><br>Option descriptions:<br> * `all` - Filter by all video types.<br> * `expiring_soon` - Filter by videos that expire soon.<br> * `film` - Filter by film.<br> * `important` - Filter by pages that are about to expire.<br> * `purchased` - Filter by purchased videos.<br> * `rented` - Filter by rented videos.<br> * `series` - Filter by series.<br> * `subscription` - Filter by video subscription.<br> * `unwatched` - Filter by unwatched videos.<br> * `watched` - Filter by watched videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter19OrStr](vimeo_api/models/enums/filter19.py) \| None</code> | The type of the On Demand video to filter on.<br><br>Option descriptions:<br> * `all` - Filter by all video types.<br> * `expiring_soon` - Filter by videos that expire soon.<br> * `film` - Filter by film.<br> * `important` - Filter by pages that are about to expire.<br> * `purchased` - Filter by purchased videos.<br> * `rented` - Filter by rented videos.<br> * `series` - Filter by series.<br> * `subscription` - Filter by video subscription.<br> * `unwatched` - Filter by unwatched videos.<br> * `watched` - Filter by watched videos.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort33OrStr](vimeo_api/models/enums/sort33.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `added` - Sort the results by most recently added video.<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `name` - Sort the results by video name.<br> * `purchase_time` - Sort the results by time of video purchase.<br> * `rating` - Sort the results by content rating.<br> * `release_date` - Sort the results by video release date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22028,7 +22422,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_vod_purchases_alt1(*, direction: DirectionOrStr | None = None, filter: Filter19OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort33OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
+<summary><code>def get_vod_purchases_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter19OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort33OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandPageConnection</code></summary>
 
 <dl>
 <dd>
@@ -22052,7 +22446,9 @@ This method returns every purchase and rental that the authenticated user has ma
 
 ```python
 try:
-    response = client.on_demand_purchases_and_rentals.get_vod_purchases_alt1()
+    response = client.on_demand_purchases_and_rentals.get_vod_purchases_alt1(
+        direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPurchasesAlt1ErrorBody
@@ -22062,7 +22458,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_purchases_and_rentals.get_vod_purchases_alt1()
+    response = await async_client.on_demand_purchases_and_rentals.get_vod_purchases_alt1(
+        direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type OnDemandPageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodPurchasesAlt1ErrorBody
@@ -22079,11 +22477,11 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter19OrStr](vimeo_api/models/enums/filter19.py) \| None</code> | The type of the On Demand video to filter on.<br><br>Option descriptions:<br> * `all` - Filter by all video types.<br> * `expiring_soon` - Filter by videos that expire soon.<br> * `film` - Filter by film.<br> * `important` - Filter by pages that are about to expire.<br> * `purchased` - Filter by purchased videos.<br> * `rented` - Filter by rented videos.<br> * `series` - Filter by series.<br> * `subscription` - Filter by video subscription.<br> * `unwatched` - Filter by unwatched videos.<br> * `watched` - Filter by watched videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter19OrStr](vimeo_api/models/enums/filter19.py) \| None</code> | The type of the On Demand video to filter on.<br><br>Option descriptions:<br> * `all` - Filter by all video types.<br> * `expiring_soon` - Filter by videos that expire soon.<br> * `film` - Filter by film.<br> * `important` - Filter by pages that are about to expire.<br> * `purchased` - Filter by purchased videos.<br> * `rented` - Filter by rented videos.<br> * `series` - Filter by series.<br> * `subscription` - Filter by video subscription.<br> * `unwatched` - Filter by unwatched videos.<br> * `watched` - Filter by watched videos.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort33OrStr](vimeo_api/models/enums/sort33.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `added` - Sort the results by most recently added video.<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br> * `name` - Sort the results by video name.<br> * `purchase_time` - Sort the results by time of video purchase.<br> * `rating` - Sort the results by content rating.<br> * `release_date` - Sort the results by video release date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22141,7 +22539,7 @@ This method adds a single region to the specified On Demand page. The authentica
 
 ```python
 try:
-    response = client.on_demand_regions.add_vod_region(country, ondemand_id)
+    response = client.on_demand_regions.add_vod_region("US", 61326)
     # TODO: Handle 'response' of type OnDemandRegion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVodRegionErrorBody
@@ -22151,7 +22549,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_regions.add_vod_region(country, ondemand_id)
+    response = await async_client.on_demand_regions.add_vod_region("US", 61326)
     # TODO: Handle 'response' of type OnDemandRegion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVodRegionErrorBody
@@ -22169,7 +22567,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>country</code> | <code>str</code> | The country code of the region to add. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22223,7 +22621,7 @@ This method removes a single region from the specified On Demand page. The authe
 
 ```python
 try:
-    client.on_demand_regions.delete_vod_region(country, ondemand_id)
+    client.on_demand_regions.delete_vod_region("US", 61326)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodRegionErrorBody
 ```
@@ -22232,7 +22630,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.on_demand_regions.delete_vod_region(country, ondemand_id)
+    await async_client.on_demand_regions.delete_vod_region("US", 61326)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodRegionErrorBody
 ```
@@ -22249,7 +22647,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>country</code> | <code>str</code> | The country code of the region to remove. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22303,7 +22701,7 @@ This method removes multiple regions from the specified On Demand page. The auth
 
 ```python
 try:
-    response = client.on_demand_regions.delete_vod_regions(ondemand_id)
+    response = client.on_demand_regions.delete_vod_regions(61326)
     # TODO: Handle 'response' of type list[OnDemandRegion]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodRegionsErrorBody
@@ -22313,7 +22711,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_regions.delete_vod_regions(ondemand_id)
+    response = await async_client.on_demand_regions.delete_vod_regions(61326)
     # TODO: Handle 'response' of type list[OnDemandRegion]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVodRegionsErrorBody
@@ -22331,7 +22729,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>body</code> | <code>[OndemandPagesRegionsRequest](vimeo_api/models/ondemand_pages_regions_request.py) \| [OndemandPagesRegionsRequestDict](vimeo_api/models/ondemand_pages_regions_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22385,7 +22783,7 @@ This method returns a single On Demand region.
 
 ```python
 try:
-    response = client.on_demand_regions.get_region(country)
+    response = client.on_demand_regions.get_region("US")
     # TODO: Handle 'response' of type OnDemandRegion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetRegionErrorBody
@@ -22395,7 +22793,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_regions.get_region(country)
+    response = await async_client.on_demand_regions.get_region("US")
     # TODO: Handle 'response' of type OnDemandRegion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetRegionErrorBody
@@ -22412,7 +22810,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>country</code> | <code>str</code> | The country code of the region to return. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22492,7 +22890,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22539,7 +22937,7 @@ This method returns a single region on the specified On Demand page. The authent
 
 ```python
 try:
-    response = client.on_demand_regions.get_vod_region(country, ondemand_id)
+    response = client.on_demand_regions.get_vod_region("US", 61326)
     # TODO: Handle 'response' of type OnDemandRegion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodRegionErrorBody
@@ -22549,7 +22947,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_regions.get_vod_region(country, ondemand_id)
+    response = await async_client.on_demand_regions.get_vod_region("US", 61326)
     # TODO: Handle 'response' of type OnDemandRegion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodRegionErrorBody
@@ -22567,7 +22965,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>country</code> | <code>str</code> | The country code of the region to return. |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22621,7 +23019,7 @@ This method returns every region on the specified On Demand page. The authentica
 
 ```python
 try:
-    response = client.on_demand_regions.get_vod_regions(ondemand_id)
+    response = client.on_demand_regions.get_vod_regions(61326)
     # TODO: Handle 'response' of type OnDemandRegionConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodRegionsErrorBody
@@ -22631,7 +23029,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_regions.get_vod_regions(ondemand_id)
+    response = await async_client.on_demand_regions.get_vod_regions(61326)
     # TODO: Handle 'response' of type OnDemandRegionConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodRegionsErrorBody
@@ -22648,7 +23046,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22702,7 +23100,9 @@ This method adds multiple regions to the specified On Demand page. The authentic
 
 ```python
 try:
-    response = client.on_demand_regions.set_vod_regions(ondemand_id, body)
+    response = client.on_demand_regions.set_vod_regions(
+        61326, OndemandPagesRegionsRequest1(countries=["some example string"])
+    )
     # TODO: Handle 'response' of type OnDemandRegion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVodRegionsErrorBody
@@ -22712,7 +23112,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_regions.set_vod_regions(ondemand_id, body)
+    response = await async_client.on_demand_regions.set_vod_regions(
+        61326, OndemandPagesRegionsRequest1(countries=["some example string"])
+    )
     # TODO: Handle 'response' of type OnDemandRegion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVodRegionsErrorBody
@@ -22730,7 +23132,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>body</code> | <code>[OndemandPagesRegionsRequest1](vimeo_api/models/ondemand_pages_regions_request1.py) \| [OndemandPagesRegionsRequest1Dict](vimeo_api/models/ondemand_pages_regions_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22788,7 +23190,7 @@ This method returns a single season on the specified On Demand page.
 
 ```python
 try:
-    response = client.on_demand_seasons.get_vod_season(ondemand_id, season_id)
+    response = client.on_demand_seasons.get_vod_season(61326, 12345)
     # TODO: Handle 'response' of type OnDemandSeason
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodSeasonErrorBody
@@ -22798,7 +23200,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_seasons.get_vod_season(ondemand_id, season_id)
+    response = await async_client.on_demand_seasons.get_vod_season(61326, 12345)
     # TODO: Handle 'response' of type OnDemandSeason
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodSeasonErrorBody
@@ -22816,7 +23218,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>season_id</code> | <code>float</code> | The ID of the season. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22846,7 +23248,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_vod_season_videos(ondemand_id: float, season_id: float, *, filter: Filter27OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort44OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_vod_season_videos(ondemand_id: float, season_id: float, *, filter_: Filter27OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort44OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -22870,7 +23272,7 @@ This method returns every video in the specified season on an On Demand page.
 
 ```python
 try:
-    response = client.on_demand_seasons.get_vod_season_videos(ondemand_id, season_id)
+    response = client.on_demand_seasons.get_vod_season_videos(61326, 12345, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -22880,7 +23282,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_seasons.get_vod_season_videos(ondemand_id, season_id)
+    response = await async_client.on_demand_seasons.get_vod_season_videos(61326, 12345, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -22898,11 +23300,11 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>season_id</code> | <code>float</code> | The ID of the season. |
-| <code>filter</code> | <code>[Filter27OrStr](vimeo_api/models/enums/filter27.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `viewable` - Filter by viewable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter27OrStr](vimeo_api/models/enums/filter27.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `viewable` - Filter by viewable videos.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort44OrStr](vimeo_api/models/enums/sort44.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `date` - Sort the results by date.<br> * `default` - Use the default sorting method.<br> * `manual` - Sort the results manually.<br> * `name` - Sort the results by name.<br> * `purchase_time` - Sort the results by time of purchase.<br> * `release_date` - Sort the results by release date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22925,7 +23327,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_vod_seasons(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter: Filter27OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort43OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandSeasonConnection</code></summary>
+<summary><code>def get_vod_seasons(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter27OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort43OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandSeasonConnection</code></summary>
 
 <dl>
 <dd>
@@ -22949,7 +23351,7 @@ This method returns every season on the specified On Demand page.
 
 ```python
 try:
-    response = client.on_demand_seasons.get_vod_seasons(ondemand_id)
+    response = client.on_demand_seasons.get_vod_seasons(61326, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandSeasonConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodSeasonsErrorBody
@@ -22959,7 +23361,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_seasons.get_vod_seasons(ondemand_id)
+    response = await async_client.on_demand_seasons.get_vod_seasons(61326, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandSeasonConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVodSeasonsErrorBody
@@ -22977,11 +23379,11 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter27OrStr](vimeo_api/models/enums/filter27.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `viewable` - Filter by viewable seasons.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter27OrStr](vimeo_api/models/enums/filter27.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `viewable` - Filter by viewable seasons.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort43OrStr](vimeo_api/models/enums/sort43.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `date` - Sort the results by date.<br> * `manual` - Sort the results manually.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23039,7 +23441,7 @@ This method adds a video to the specified On Demand page. The authenticated user
 
 ```python
 try:
-    response = client.on_demand_videos.add_video_to_vod(ondemand_id, video_id, body)
+    response = client.on_demand_videos.add_video_to_vod(61326, 12345, OndemandPagesVideosRequest(type_=Type42.EXTRA))
     # TODO: Handle 'response' of type OnDemandVideo
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToVodErrorBody
@@ -23049,7 +23451,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_videos.add_video_to_vod(ondemand_id, video_id, body)
+    response = await async_client.on_demand_videos.add_video_to_vod(
+        61326, 12345, OndemandPagesVideosRequest(type_=Type42.EXTRA)
+    )
     # TODO: Handle 'response' of type OnDemandVideo
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToVodErrorBody
@@ -23068,7 +23472,7 @@ except ApiError as e:
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[OndemandPagesVideosRequest](vimeo_api/models/ondemand_pages_videos_request.py) \| [OndemandPagesVideosRequestDict](vimeo_api/models/ondemand_pages_videos_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23122,7 +23526,7 @@ This method removes a video from the specified On Demand page. The authenticated
 
 ```python
 try:
-    client.on_demand_videos.delete_video_from_vod(ondemand_id, video_id)
+    client.on_demand_videos.delete_video_from_vod(61326, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromVodErrorBody
 ```
@@ -23131,7 +23535,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.on_demand_videos.delete_video_from_vod(ondemand_id, video_id)
+    await async_client.on_demand_videos.delete_video_from_vod(61326, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromVodErrorBody
 ```
@@ -23148,7 +23552,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23202,7 +23606,7 @@ This method returns a single video on the specified On Demand page. Use this met
 
 ```python
 try:
-    response = client.on_demand_videos.get_vod_video(ondemand_id, video_id)
+    response = client.on_demand_videos.get_vod_video(61326, 12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23212,7 +23616,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_videos.get_vod_video(ondemand_id, video_id)
+    response = await async_client.on_demand_videos.get_vod_video(61326, 12345)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23230,7 +23634,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23253,7 +23657,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_vod_videos(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter: Filter29OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort45OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandVideoConnection</code></summary>
+<summary><code>def get_vod_videos(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter29OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort45OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> OnDemandVideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -23277,7 +23681,7 @@ This method returns every video on the specified On Demand page.
 
 ```python
 try:
-    response = client.on_demand_videos.get_vod_videos(ondemand_id)
+    response = client.on_demand_videos.get_vod_videos(61326, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandVideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23287,7 +23691,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.on_demand_videos.get_vod_videos(ondemand_id)
+    response = await async_client.on_demand_videos.get_vod_videos(61326, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type OnDemandVideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23305,11 +23709,11 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>ondemand_id</code> | <code>float</code> | The ID of the On Demand page. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter29OrStr](vimeo_api/models/enums/filter29.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `all` - Filter for all videos.<br> * `buy` - Filter for purchased videos.<br> * `expiring_soon` - Filter for videos that expire soon.<br> * `extra` - Filter for extra footage videos.<br> * `main` - Filter for main videos.<br> * `main.viewable` - Filter for videos that are both the main video and are viewable.<br> * `rent` - Filter for rented videos.<br> * `trailer` - Filter for trailer videos.<br> * `unwatched` - Filter for unwatched videos.<br> * `viewable` - Filter for videos that are viewable.<br> * `watched` - Filter for watched videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter29OrStr](vimeo_api/models/enums/filter29.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `all` - Filter for all videos.<br> * `buy` - Filter for purchased videos.<br> * `expiring_soon` - Filter for videos that expire soon.<br> * `extra` - Filter for extra footage videos.<br> * `main` - Filter for main videos.<br> * `main.viewable` - Filter for videos that are both the main video and are viewable.<br> * `rent` - Filter for rented videos.<br> * `trailer` - Filter for trailer videos.<br> * `unwatched` - Filter for unwatched videos.<br> * `viewable` - Filter for videos that are viewable.<br> * `watched` - Filter for watched videos.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort45OrStr](vimeo_api/models/enums/sort45.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `date` - Sort the results by date.<br> * `default` - Use the default sorting method.<br> * `episode` - Sort the results by episode.<br> * `manual` - Sort the results manually.<br> * `name` - Sort the results by name.<br> * `purchase_time` - Sort the results by time of purchase.<br> * `release_date` - Sort the results by release date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23360,7 +23764,7 @@ This method deletes the specified Vimeo payments service payment method.
 
 ```python
 try:
-    client.payments_essentials.delete_payment_method(payment_method_id)
+    client.payments_essentials.delete_payment_method("abc12345")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeletePaymentMethodErrorBody
 ```
@@ -23369,7 +23773,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.payments_essentials.delete_payment_method(payment_method_id)
+    await async_client.payments_essentials.delete_payment_method("abc12345")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeletePaymentMethodErrorBody
 ```
@@ -23385,7 +23789,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>payment_method_id</code> | <code>str</code> | The ID of the payment method. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23439,7 +23843,7 @@ This method returns information about the specified Vimeo payments service payme
 
 ```python
 try:
-    response = client.payments_essentials.get_payment_method_info(payment_method_id)
+    response = client.payments_essentials.get_payment_method_info("abc12345")
     # TODO: Handle 'response' of type PaymentMethod
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetPaymentMethodInfoErrorBody
@@ -23449,7 +23853,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.payments_essentials.get_payment_method_info(payment_method_id)
+    response = await async_client.payments_essentials.get_payment_method_info("abc12345")
     # TODO: Handle 'response' of type PaymentMethod
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetPaymentMethodInfoErrorBody
@@ -23466,7 +23870,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>payment_method_id</code> | <code>str</code> | The ID of the payment method. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23520,7 +23924,7 @@ This method returns information about the specified Vimeo payments service subsc
 
 ```python
 try:
-    client.payments_essentials.get_subscription_info(subscription_id, user_id)
+    client.payments_essentials.get_subscription_info("abc12345", "some example string")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -23529,7 +23933,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.payments_essentials.get_subscription_info(subscription_id, user_id)
+    await async_client.payments_essentials.get_subscription_info("abc12345", "some example string")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -23546,7 +23950,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>subscription_id</code> | <code>str</code> | The ID of the subscription. |
 | <code>user_id</code> | <code>str</code> | Value sent with the request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23593,7 +23997,9 @@ This method returns a list of all Vimeo payments service payment methods that ar
 
 ```python
 try:
-    response = client.payments_essentials.list_payment_methods()
+    response = client.payments_essentials.list_payment_methods(
+        cardmember_name="John Doe", page=1, per_page=10, show_disabled=False
+    )
     # TODO: Handle 'response' of type PaymentMethodConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ListPaymentMethodsErrorBody
@@ -23603,7 +24009,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.payments_essentials.list_payment_methods()
+    response = await async_client.payments_essentials.list_payment_methods(
+        cardmember_name="John Doe", page=1, per_page=10, show_disabled=False
+    )
     # TODO: Handle 'response' of type PaymentMethodConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ListPaymentMethodsErrorBody
@@ -23623,7 +24031,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>show_disabled</code> | <code>bool \| None</code> | Whether to return disabled payment methods.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23681,7 +24089,7 @@ This method returns a single portfolio belonging to the authenticated user.
 
 ```python
 try:
-    response = client.portfolios_essentials.get_portfolio(portfolio_id, user_id)
+    response = client.portfolios_essentials.get_portfolio(12345, 152184)
     # TODO: Handle 'response' of type Portfolio
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23691,7 +24099,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.portfolios_essentials.get_portfolio(portfolio_id, user_id)
+    response = await async_client.portfolios_essentials.get_portfolio(12345, 152184)
     # TODO: Handle 'response' of type Portfolio
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23709,7 +24117,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23756,7 +24164,7 @@ This method returns a single portfolio belonging to the authenticated user.
 
 ```python
 try:
-    response = client.portfolios_essentials.get_portfolio_alt1(portfolio_id)
+    response = client.portfolios_essentials.get_portfolio_alt1(12345)
     # TODO: Handle 'response' of type Portfolio
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23766,7 +24174,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.portfolios_essentials.get_portfolio_alt1(portfolio_id)
+    response = await async_client.portfolios_essentials.get_portfolio_alt1(12345)
     # TODO: Handle 'response' of type Portfolio
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23783,7 +24191,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23830,7 +24238,9 @@ This method returns every portfolio belonging to the authenticated user.
 
 ```python
 try:
-    response = client.portfolios_essentials.get_portfolios(user_id)
+    response = client.portfolios_essentials.get_portfolios(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type PortfolioConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23840,7 +24250,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.portfolios_essentials.get_portfolios(user_id)
+    response = await async_client.portfolios_essentials.get_portfolios(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type PortfolioConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23862,7 +24274,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23909,7 +24321,9 @@ This method returns every portfolio belonging to the authenticated user.
 
 ```python
 try:
-    response = client.portfolios_essentials.get_portfolios_alt1()
+    response = client.portfolios_essentials.get_portfolios_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type PortfolioConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23919,7 +24333,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.portfolios_essentials.get_portfolios_alt1()
+    response = await async_client.portfolios_essentials.get_portfolios_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type PortfolioConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -23940,7 +24356,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23991,7 +24407,7 @@ This method adds a video to the specified portfolio belonging to the authenticat
 
 ```python
 try:
-    client.portfolios_videos.add_video_to_portfolio(portfolio_id, user_id, video_id)
+    client.portfolios_videos.add_video_to_portfolio(12345, 152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToPortfolioErrorBody
 ```
@@ -24000,7 +24416,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.portfolios_videos.add_video_to_portfolio(portfolio_id, user_id, video_id)
+    await async_client.portfolios_videos.add_video_to_portfolio(12345, 152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToPortfolioErrorBody
 ```
@@ -24018,7 +24434,7 @@ except ApiError as e:
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24072,7 +24488,7 @@ This method adds a video to the specified portfolio belonging to the authenticat
 
 ```python
 try:
-    client.portfolios_videos.add_video_to_portfolio_alt1(portfolio_id, video_id)
+    client.portfolios_videos.add_video_to_portfolio_alt1(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToPortfolioAlt1ErrorBody
 ```
@@ -24081,7 +24497,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.portfolios_videos.add_video_to_portfolio_alt1(portfolio_id, video_id)
+    await async_client.portfolios_videos.add_video_to_portfolio_alt1(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToPortfolioAlt1ErrorBody
 ```
@@ -24098,7 +24514,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24152,7 +24568,7 @@ This method removes a video from the specified portfolio belonging to the authen
 
 ```python
 try:
-    client.portfolios_videos.delete_video_from_portfolio(portfolio_id, user_id, video_id)
+    client.portfolios_videos.delete_video_from_portfolio(12345, 152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromPortfolioErrorBody
 ```
@@ -24161,7 +24577,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.portfolios_videos.delete_video_from_portfolio(portfolio_id, user_id, video_id)
+    await async_client.portfolios_videos.delete_video_from_portfolio(12345, 152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromPortfolioErrorBody
 ```
@@ -24179,7 +24595,7 @@ except ApiError as e:
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24233,7 +24649,7 @@ This method removes a video from the specified portfolio belonging to the authen
 
 ```python
 try:
-    client.portfolios_videos.delete_video_from_portfolio_alt1(portfolio_id, video_id)
+    client.portfolios_videos.delete_video_from_portfolio_alt1(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromPortfolioAlt1ErrorBody
 ```
@@ -24242,7 +24658,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.portfolios_videos.delete_video_from_portfolio_alt1(portfolio_id, video_id)
+    await async_client.portfolios_videos.delete_video_from_portfolio_alt1(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoFromPortfolioAlt1ErrorBody
 ```
@@ -24259,7 +24675,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24313,7 +24729,7 @@ This method returns a single video from the specified portfolio belonging to the
 
 ```python
 try:
-    response = client.portfolios_videos.get_portfolio_video(portfolio_id, user_id, video_id)
+    response = client.portfolios_videos.get_portfolio_video(12345, 152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -24323,7 +24739,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.portfolios_videos.get_portfolio_video(portfolio_id, user_id, video_id)
+    response = await async_client.portfolios_videos.get_portfolio_video(12345, 152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -24342,7 +24758,7 @@ except ApiError as e:
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24389,7 +24805,7 @@ This method returns a single video from the specified portfolio belonging to the
 
 ```python
 try:
-    response = client.portfolios_videos.get_portfolio_video_alt1(portfolio_id, video_id)
+    response = client.portfolios_videos.get_portfolio_video_alt1(12345, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -24399,7 +24815,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.portfolios_videos.get_portfolio_video_alt1(portfolio_id, video_id)
+    response = await async_client.portfolios_videos.get_portfolio_video_alt1(12345, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -24417,7 +24833,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24440,7 +24856,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_portfolio_videos(portfolio_id: float, user_id: float, *, containing_uri: str | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_portfolio_videos(portfolio_id: float, user_id: float, *, containing_uri: str | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -24464,7 +24880,9 @@ This method returns every video from the specified portfolio belonging to the au
 
 ```python
 try:
-    response = client.portfolios_videos.get_portfolio_videos(portfolio_id, user_id)
+    response = client.portfolios_videos.get_portfolio_videos(
+        12345, 152184, containing_uri="/videos/258684937", filter_embeddable=True, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -24474,7 +24892,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.portfolios_videos.get_portfolio_videos(portfolio_id, user_id)
+    response = await async_client.portfolios_videos.get_portfolio_videos(
+        12345, 152184, containing_uri="/videos/258684937", filter_embeddable=True, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -24493,12 +24913,12 @@ except ApiError as e:
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>containing_uri</code> | <code>str \| None</code> | The page that contains the video URI.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort35OrStr](vimeo_api/models/enums/sort35.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by creation date.<br> * `default` - Use the default sorting method.<br> * `likes` - Sort the results by number of likes.<br> * `manual` - Sort the results by their user-specified order.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24521,7 +24941,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_portfolio_videos_alt1(portfolio_id: float, *, containing_uri: str | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_portfolio_videos_alt1(portfolio_id: float, *, containing_uri: str | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -24545,7 +24965,9 @@ This method returns every video from the specified portfolio belonging to the au
 
 ```python
 try:
-    response = client.portfolios_videos.get_portfolio_videos_alt1(portfolio_id)
+    response = client.portfolios_videos.get_portfolio_videos_alt1(
+        12345, containing_uri="/videos/258684937", filter_embeddable=True, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -24555,7 +24977,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.portfolios_videos.get_portfolio_videos_alt1(portfolio_id)
+    response = await async_client.portfolios_videos.get_portfolio_videos_alt1(
+        12345, containing_uri="/videos/258684937", filter_embeddable=True, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -24573,12 +24997,12 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>portfolio_id</code> | <code>float</code> | The ID of the portfolio. |
 | <code>containing_uri</code> | <code>str \| None</code> | The page that contains the video URI.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort35OrStr](vimeo_api/models/enums/sort35.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by creation date.<br> * `default` - Use the default sorting method.<br> * `likes` - Sort the results by number of likes.<br> * `manual` - Sort the results by their user-specified order.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24605,7 +25029,7 @@ except ApiError as e:
 > Source: [SearchFederated](vimeo_api/apis/search_federated.py)
 
 <details>
-<summary><code>def federated_search_user_items(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter30OrStr | None = None, filter_privacy: str | None = None, modified_end_date: str | None = None, modified_start_date: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: str | None = None, sort: Sort46OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> FederatedSearchItemsConnection</code></summary>
+<summary><code>def federated_search_user_items(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter30OrStr | None = None, filter_privacy: str | None = None, modified_end_date: str | None = None, modified_start_date: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: str | None = None, sort: Sort46OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> FederatedSearchItemsConnection</code></summary>
 
 <dl>
 <dd>
@@ -24631,7 +25055,16 @@ If no query is provided, the method returns items sorted by the most recent user
 
 ```python
 try:
-    response = client.search_federated.federated_search_user_items(user_id)
+    response = client.search_federated.federated_search_user_items(
+        152184,
+        direction=Direction.ASC,
+        modified_end_date="2022-01-13",
+        modified_start_date="2022-01-13",
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        query_fields="title,description,captions",
+    )
     # TODO: Handle 'response' of type FederatedSearchItemsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FederatedSearchUserItemsErrorBody
@@ -24641,7 +25074,16 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.search_federated.federated_search_user_items(user_id)
+    response = await async_client.search_federated.federated_search_user_items(
+        152184,
+        direction=Direction.ASC,
+        modified_end_date="2022-01-13",
+        modified_start_date="2022-01-13",
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        query_fields="title,description,captions",
+    )
     # TODO: Handle 'response' of type FederatedSearchItemsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FederatedSearchUserItemsErrorBody
@@ -24659,7 +25101,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter30OrStr](vimeo_api/models/enums/filter30.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `video` - Return videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter30OrStr](vimeo_api/models/enums/filter30.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `video` - Return videos.<br>**Default**: <code>None</code> |
 | <code>filter_privacy</code> | <code>str \| None</code> | A comma-separated list of privacy settings to filter the results by. Possible values include `unlisted` for videos that are accessible but not searchable from Vimeo, `password` for videos on Vimeo that anyone can access with the correct password, `hide-from-vimeo` for videos that don't appear on Vimeo, `private` for videos on Vimeo that only their owner can access, and `public` for videos on Vimeo that anyone can access. By default, all privacy settings are considered.<br>**Default**: <code>None</code> |
 | <code>modified_end_date</code> | <code>str \| None</code> | The inclusive end date of the range.<br>**Default**: <code>None</code> |
 | <code>modified_start_date</code> | <code>str \| None</code> | The inclusive start date of the range. This value must be earlier than the modified end date.<br>**Default**: <code>None</code> |
@@ -24668,7 +25110,7 @@ except ApiError as e:
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>query_fields</code> | <code>str \| None</code> | A comma-separated list of fields to query over. The default value is `title,description,chapters,tags`.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort46OrStr](vimeo_api/models/enums/sort46.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `default` - Use the default sorting order.<br> * `duration` - Sort the results by duration, where available.<br> * `folder_path` - Sort the results by the hierarchy of folders.<br> * `last_user_action_event_date` - Sort the results by most recent user interaction.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24698,7 +25140,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def federated_search_user_items_alt1(workspace_uuid: str, *, direction: DirectionOrStr | None = None, filter: Filter30OrStr | None = None, filter_privacy: str | None = None, modified_end_date: str | None = None, modified_start_date: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: str | None = None, sort: Sort46OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> FederatedSearchItemsConnection</code></summary>
+<summary><code>def federated_search_user_items_alt1(workspace_uuid: str, *, direction: DirectionOrStr | None = None, filter_: Filter30OrStr | None = None, filter_privacy: str | None = None, modified_end_date: str | None = None, modified_start_date: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: str | None = None, sort: Sort46OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> FederatedSearchItemsConnection</code></summary>
 
 <dl>
 <dd>
@@ -24724,7 +25166,16 @@ If no query is provided, the method returns items sorted by the most recent user
 
 ```python
 try:
-    response = client.search_federated.federated_search_user_items_alt1(workspace_uuid)
+    response = client.search_federated.federated_search_user_items_alt1(
+        "fb749ec5-6210-4283-8740-cdbe540cea0c",
+        direction=Direction.ASC,
+        modified_end_date="2022-01-13",
+        modified_start_date="2022-01-13",
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        query_fields="title,description,captions",
+    )
     # TODO: Handle 'response' of type FederatedSearchItemsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FederatedSearchUserItemsAlt1ErrorBody
@@ -24734,7 +25185,16 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.search_federated.federated_search_user_items_alt1(workspace_uuid)
+    response = await async_client.search_federated.federated_search_user_items_alt1(
+        "fb749ec5-6210-4283-8740-cdbe540cea0c",
+        direction=Direction.ASC,
+        modified_end_date="2022-01-13",
+        modified_start_date="2022-01-13",
+        page=1,
+        per_page=10,
+        query="Stop motion",
+        query_fields="title,description,captions",
+    )
     # TODO: Handle 'response' of type FederatedSearchItemsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FederatedSearchUserItemsAlt1ErrorBody
@@ -24752,7 +25212,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>workspace_uuid</code> | <code>str</code> | The UUID of the workspace. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter30OrStr](vimeo_api/models/enums/filter30.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `video` - Return videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter30OrStr](vimeo_api/models/enums/filter30.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `video` - Return videos.<br>**Default**: <code>None</code> |
 | <code>filter_privacy</code> | <code>str \| None</code> | A comma-separated list of privacy settings to filter the results by. Possible values include `unlisted` for videos that are accessible but not searchable from Vimeo, `password` for videos on Vimeo that anyone can access with the correct password, `hide-from-vimeo` for videos that don't appear on Vimeo, `private` for videos on Vimeo that only their owner can access, and `public` for videos on Vimeo that anyone can access. By default, all privacy settings are considered.<br>**Default**: <code>None</code> |
 | <code>modified_end_date</code> | <code>str \| None</code> | The inclusive end date of the range.<br>**Default**: <code>None</code> |
 | <code>modified_start_date</code> | <code>str \| None</code> | The inclusive start date of the range. This value must be earlier than the modified end date.<br>**Default**: <code>None</code> |
@@ -24761,7 +25221,7 @@ except ApiError as e:
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>query_fields</code> | <code>str \| None</code> | A comma-separated list of fields to query over. The default value is `title,description,chapters,tags`.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort46OrStr](vimeo_api/models/enums/sort46.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `default` - Use the default sorting order.<br> * `duration` - Sort the results by duration, where available.<br> * `folder_path` - Sort the results by the hierarchy of folders.<br> * `last_user_action_event_date` - Sort the results by most recent user interaction.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24821,7 +25281,7 @@ For information on how to upload the logo, see our [Working with Thumbnail Uploa
 
 ```python
 try:
-    response = client.showcases_custom_showcase_logos.create_showcase_logo(album_id, user_id)
+    response = client.showcases_custom_showcase_logos.create_showcase_logo(3706071, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateShowcaseLogoErrorBody
@@ -24831,7 +25291,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_custom_showcase_logos.create_showcase_logo(album_id, user_id)
+    response = await async_client.showcases_custom_showcase_logos.create_showcase_logo(3706071, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateShowcaseLogoErrorBody
@@ -24849,7 +25309,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24903,7 +25363,7 @@ This method deletes the specified custom logo from its showcase. The authenticat
 
 ```python
 try:
-    client.showcases_custom_showcase_logos.delete_showcase_logo(album_id, logo_id, user_id)
+    client.showcases_custom_showcase_logos.delete_showcase_logo(3706071, 12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteShowcaseLogoErrorBody
 ```
@@ -24912,7 +25372,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_custom_showcase_logos.delete_showcase_logo(album_id, logo_id, user_id)
+    await async_client.showcases_custom_showcase_logos.delete_showcase_logo(3706071, 12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteShowcaseLogoErrorBody
 ```
@@ -24930,7 +25390,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>logo_id</code> | <code>float</code> | The ID of the custom logo. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24984,7 +25444,7 @@ This method returns a single custom logo of the specified showcase. The authenti
 
 ```python
 try:
-    response = client.showcases_custom_showcase_logos.get_showcase_logo(album_id, logo_id, user_id)
+    response = client.showcases_custom_showcase_logos.get_showcase_logo(3706071, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseLogoErrorBody
@@ -24994,7 +25454,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_custom_showcase_logos.get_showcase_logo(album_id, logo_id, user_id)
+    response = await async_client.showcases_custom_showcase_logos.get_showcase_logo(3706071, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseLogoErrorBody
@@ -25013,7 +25473,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>logo_id</code> | <code>float</code> | The ID of the custom logo. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25067,7 +25527,7 @@ This method returns every custom logo of the specified showcase. The authenticat
 
 ```python
 try:
-    response = client.showcases_custom_showcase_logos.get_showcase_logos(album_id, user_id)
+    response = client.showcases_custom_showcase_logos.get_showcase_logos(3706071, 152184, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseLogosErrorBody
@@ -25077,7 +25537,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_custom_showcase_logos.get_showcase_logos(album_id, user_id)
+    response = await async_client.showcases_custom_showcase_logos.get_showcase_logos(
+        3706071, 152184, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseLogosErrorBody
@@ -25097,7 +25559,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25153,7 +25615,7 @@ For information on how to upload the logo, see our [Working with Thumbnail Uploa
 
 ```python
 try:
-    response = client.showcases_custom_showcase_logos.replace_showcase_logo(album_id, logo_id, user_id)
+    response = client.showcases_custom_showcase_logos.replace_showcase_logo(3706071, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ReplaceShowcaseLogoErrorBody
@@ -25163,7 +25625,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_custom_showcase_logos.replace_showcase_logo(album_id, logo_id, user_id)
+    response = await async_client.showcases_custom_showcase_logos.replace_showcase_logo(3706071, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ReplaceShowcaseLogoErrorBody
@@ -25183,7 +25645,7 @@ except ApiError as e:
 | <code>logo_id</code> | <code>float</code> | The ID of the custom logo. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersAlbumsLogosLogoIdRequest](vimeo_api/models/users_albums_logos_logo_id_request.py) \| [UsersAlbumsLogosLogoIdRequestDict](vimeo_api/models/users_albums_logos_logo_id_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25243,7 +25705,7 @@ For information on how to upload the thumbnail, see our [Working with Thumbnail 
 
 ```python
 try:
-    response = client.showcases_custom_showcase_thumbnails.create_showcase_custom_thumb(album_id, user_id)
+    response = client.showcases_custom_showcase_thumbnails.create_showcase_custom_thumb(3706071, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateShowcaseCustomThumbErrorBody
@@ -25253,7 +25715,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_custom_showcase_thumbnails.create_showcase_custom_thumb(album_id, user_id)
+    response = await async_client.showcases_custom_showcase_thumbnails.create_showcase_custom_thumb(3706071, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateShowcaseCustomThumbErrorBody
@@ -25271,7 +25733,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25325,7 +25787,7 @@ This method deletes the specified custom thumbnail from its showcase. The authen
 
 ```python
 try:
-    client.showcases_custom_showcase_thumbnails.delete_showcase_custom_thumbnail(album_id, thumbnail_id, user_id)
+    client.showcases_custom_showcase_thumbnails.delete_showcase_custom_thumbnail(3706071, 12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteShowcaseCustomThumbnailErrorBody
 ```
@@ -25334,9 +25796,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_custom_showcase_thumbnails.delete_showcase_custom_thumbnail(
-        album_id, thumbnail_id, user_id
-    )
+    await async_client.showcases_custom_showcase_thumbnails.delete_showcase_custom_thumbnail(3706071, 12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteShowcaseCustomThumbnailErrorBody
 ```
@@ -25354,7 +25814,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the custom thumbnail. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25408,9 +25868,7 @@ This method returns a single custom thumbnail of the specified showcase. The aut
 
 ```python
 try:
-    response = client.showcases_custom_showcase_thumbnails.get_showcase_custom_thumbnail(
-        album_id, thumbnail_id, user_id
-    )
+    response = client.showcases_custom_showcase_thumbnails.get_showcase_custom_thumbnail(3706071, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseCustomThumbnailErrorBody
@@ -25421,7 +25879,7 @@ except ApiError as e:
 ```python
 try:
     response = await async_client.showcases_custom_showcase_thumbnails.get_showcase_custom_thumbnail(
-        album_id, thumbnail_id, user_id
+        3706071, 12345, 152184
     )
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
@@ -25441,7 +25899,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the custom thumbnail. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25495,7 +25953,9 @@ This method returns every custom thumbnail of the specified showcase.
 
 ```python
 try:
-    response = client.showcases_custom_showcase_thumbnails.get_showcase_custom_thumbs(album_id, user_id)
+    response = client.showcases_custom_showcase_thumbnails.get_showcase_custom_thumbs(
+        3706071, 152184, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseCustomThumbsErrorBody
@@ -25505,7 +25965,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_custom_showcase_thumbnails.get_showcase_custom_thumbs(album_id, user_id)
+    response = await async_client.showcases_custom_showcase_thumbnails.get_showcase_custom_thumbs(
+        3706071, 152184, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseCustomThumbsErrorBody
@@ -25525,7 +25987,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25582,9 +26044,7 @@ For information on how to upload the thumbnail, see our [Working with Thumbnail 
 
 ```python
 try:
-    response = client.showcases_custom_showcase_thumbnails.replace_showcase_custom_thumb(
-        album_id, thumbnail_id, user_id
-    )
+    response = client.showcases_custom_showcase_thumbnails.replace_showcase_custom_thumb(3706071, 12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ReplaceShowcaseCustomThumbErrorBody
@@ -25595,7 +26055,7 @@ except ApiError as e:
 ```python
 try:
     response = await async_client.showcases_custom_showcase_thumbnails.replace_showcase_custom_thumb(
-        album_id, thumbnail_id, user_id
+        3706071, 12345, 152184
     )
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
@@ -25616,7 +26076,7 @@ except ApiError as e:
 | <code>thumbnail_id</code> | <code>float</code> | The ID of the custom thumbnail. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersAlbumsCustomThumbnailsThumbnailIdRequest](vimeo_api/models/users_albums_custom_thumbnails_thumbnail_id_request.py) \| [UsersAlbumsCustomThumbnailsThumbnailIdRequestDict](vimeo_api/models/users_albums_custom_thumbnails_thumbnail_id_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25676,7 +26136,7 @@ The authenticated user must either be the owner of the showcase or have team per
 
 ```python
 try:
-    client.showcases_essentials.add_folder_to_showcases(user_id, album_uris, folder_id)
+    client.showcases_essentials.add_folder_to_showcases(152184, "/showcases/258684873,/showcases/356684937", 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddFolderToShowcasesErrorBody
 ```
@@ -25685,7 +26145,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_essentials.add_folder_to_showcases(user_id, album_uris, folder_id)
+    await async_client.showcases_essentials.add_folder_to_showcases(
+        152184, "/showcases/258684873,/showcases/356684937", 12345
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddFolderToShowcasesErrorBody
 ```
@@ -25703,7 +26165,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>album_uris</code> | <code>str</code> | A comma-separated list of showcase URIs. |
 | <code>folder_id</code> | <code>float</code> | The ID of the folder containing videos and events to add. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25757,7 +26219,7 @@ This method creates a copy of the specified showcase.
 
 ```python
 try:
-    response = client.showcases_essentials.copy_showcase(album_id, user_id)
+    response = client.showcases_essentials.copy_showcase(3706071, 152184)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CopyShowcaseErrorBody
@@ -25767,7 +26229,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.copy_showcase(album_id, user_id)
+    response = await async_client.showcases_essentials.copy_showcase(3706071, 152184)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CopyShowcaseErrorBody
@@ -25786,7 +26248,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersAlbumsCopyRequest](vimeo_api/models/users_albums_copy_request.py) \| [UsersAlbumsCopyRequestDict](vimeo_api/models/users_albums_copy_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25840,7 +26302,7 @@ This method creates a copy of the specified showcase.
 
 ```python
 try:
-    response = client.showcases_essentials.copy_showcase_alt2(album_id)
+    response = client.showcases_essentials.copy_showcase_alt2(3706071)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CopyShowcaseAlt2ErrorBody
@@ -25850,7 +26312,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.copy_showcase_alt2(album_id)
+    response = await async_client.showcases_essentials.copy_showcase_alt2(3706071)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CopyShowcaseAlt2ErrorBody
@@ -25868,7 +26330,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>body</code> | <code>[MeAlbumsCopyRequest](vimeo_api/models/me_albums_copy_request.py) \| [MeAlbumsCopyRequestDict](vimeo_api/models/me_albums_copy_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25922,7 +26384,7 @@ This method creates a new showcase for the specified user.
 
 ```python
 try:
-    response = client.showcases_essentials.create_showcase(user_id, body)
+    response = client.showcases_essentials.create_showcase(152184, UsersAlbumsRequest(name="some example string"))
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateShowcaseErrorBody
@@ -25932,7 +26394,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.create_showcase(user_id, body)
+    response = await async_client.showcases_essentials.create_showcase(
+        152184, UsersAlbumsRequest(name="some example string")
+    )
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateShowcaseErrorBody
@@ -25950,7 +26414,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersAlbumsRequest](vimeo_api/models/users_albums_request.py) \| [UsersAlbumsRequestDict](vimeo_api/models/users_albums_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26004,7 +26468,7 @@ This method creates a new showcase for the specified user.
 
 ```python
 try:
-    response = client.showcases_essentials.create_showcase_alt1(body)
+    response = client.showcases_essentials.create_showcase_alt1(MeAlbumsRequest(name="some example string"))
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateShowcaseAlt1ErrorBody
@@ -26014,7 +26478,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.create_showcase_alt1(body)
+    response = await async_client.showcases_essentials.create_showcase_alt1(MeAlbumsRequest(name="some example string"))
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateShowcaseAlt1ErrorBody
@@ -26031,7 +26495,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MeAlbumsRequest](vimeo_api/models/me_albums_request.py) \| [MeAlbumsRequestDict](vimeo_api/models/me_albums_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26085,7 +26549,7 @@ This method deletes the specified showcase. The authenticated user must be the o
 
 ```python
 try:
-    client.showcases_essentials.delete_showcase(album_id, user_id)
+    client.showcases_essentials.delete_showcase(3706071, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteShowcaseErrorBody
 ```
@@ -26094,7 +26558,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_essentials.delete_showcase(album_id, user_id)
+    await async_client.showcases_essentials.delete_showcase(3706071, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteShowcaseErrorBody
 ```
@@ -26111,7 +26575,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26165,7 +26629,7 @@ This method deletes the specified showcase. The authenticated user must be the o
 
 ```python
 try:
-    client.showcases_essentials.delete_showcase_alt2(album_id)
+    client.showcases_essentials.delete_showcase_alt2(3706071)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteShowcaseAlt2ErrorBody
 ```
@@ -26174,7 +26638,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_essentials.delete_showcase_alt2(album_id)
+    await async_client.showcases_essentials.delete_showcase_alt2(3706071)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteShowcaseAlt2ErrorBody
 ```
@@ -26190,7 +26654,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26244,7 +26708,7 @@ This method edits the specified showcase. The authenticated user must be the own
 
 ```python
 try:
-    response = client.showcases_essentials.edit_showcase(album_id, user_id)
+    response = client.showcases_essentials.edit_showcase(3706071, 152184)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditShowcaseErrorBody
@@ -26254,7 +26718,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.edit_showcase(album_id, user_id)
+    response = await async_client.showcases_essentials.edit_showcase(3706071, 152184)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditShowcaseErrorBody
@@ -26273,7 +26737,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersAlbumsRequest1](vimeo_api/models/users_albums_request1.py) \| [UsersAlbumsRequest1Dict](vimeo_api/models/users_albums_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26327,7 +26791,7 @@ This method edits the specified showcase. The authenticated user must be the own
 
 ```python
 try:
-    response = client.showcases_essentials.edit_showcase_alt2(album_id)
+    response = client.showcases_essentials.edit_showcase_alt2(3706071)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditShowcaseAlt2ErrorBody
@@ -26337,7 +26801,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.edit_showcase_alt2(album_id)
+    response = await async_client.showcases_essentials.edit_showcase_alt2(3706071)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditShowcaseAlt2ErrorBody
@@ -26355,7 +26819,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>body</code> | <code>[MeAlbumsRequest1](vimeo_api/models/me_albums_request1.py) \| [MeAlbumsRequest1Dict](vimeo_api/models/me_albums_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26409,7 +26873,7 @@ This method returns the specified showcase. The authenticated user must be the o
 
 ```python
 try:
-    response = client.showcases_essentials.get_showcase(album_id, user_id)
+    response = client.showcases_essentials.get_showcase(3706071, 152184)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseErrorBody
@@ -26419,7 +26883,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.get_showcase(album_id, user_id)
+    response = await async_client.showcases_essentials.get_showcase(3706071, 152184)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseErrorBody
@@ -26437,7 +26901,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26491,7 +26955,7 @@ This method returns the specified showcase. The authenticated user must be the o
 
 ```python
 try:
-    response = client.showcases_essentials.get_showcase_alt2(album_id)
+    response = client.showcases_essentials.get_showcase_alt2(3706071)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseAlt2ErrorBody
@@ -26501,7 +26965,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.get_showcase_alt2(album_id)
+    response = await async_client.showcases_essentials.get_showcase_alt2(3706071)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseAlt2ErrorBody
@@ -26518,7 +26982,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26572,7 +27036,9 @@ This method returns every showcase belonging to the authenticated user.
 
 ```python
 try:
-    response = client.showcases_essentials.get_showcases(user_id)
+    response = client.showcases_essentials.get_showcases(
+        152184, direction=Direction.ASC, filter_privacy="anybody,password", page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type AlbumConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcasesErrorBody
@@ -26582,7 +27048,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.get_showcases(user_id)
+    response = await async_client.showcases_essentials.get_showcases(
+        152184, direction=Direction.ASC, filter_privacy="anybody,password", page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type AlbumConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcasesErrorBody
@@ -26605,7 +27073,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort18OrStr](vimeo_api/models/enums/sort18.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date of creation.<br> * `duration` - Sort the results by duration.<br> * `last_modified` - Sort the results by last modified date.<br> * `videos` - Sort the results by the number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26659,7 +27127,9 @@ This method returns every showcase belonging to the authenticated user.
 
 ```python
 try:
-    response = client.showcases_essentials.get_showcases_alt1()
+    response = client.showcases_essentials.get_showcases_alt1(
+        direction=Direction.ASC, filter_privacy="anybody,password", page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type AlbumConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcasesAlt1ErrorBody
@@ -26669,7 +27139,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_essentials.get_showcases_alt1()
+    response = await async_client.showcases_essentials.get_showcases_alt1(
+        direction=Direction.ASC, filter_privacy="anybody,password", page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type AlbumConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcasesAlt1ErrorBody
@@ -26691,7 +27163,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort18OrStr](vimeo_api/models/enums/sort18.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date of creation.<br> * `duration` - Sort the results by duration.<br> * `last_modified` - Sort the results by last modified date.<br> * `videos` - Sort the results by the number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26747,7 +27219,9 @@ The present setup permits only one event per showcase.
 
 ```python
 try:
-    client.showcases_essentials.update_showcases(user_id, album_item_uris, album_uris)
+    client.showcases_essentials.update_showcases(
+        152184, "/videos/258684937,/live_events/273576296", "/showcases/258684873, /showcases/356684937"
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -26756,7 +27230,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_essentials.update_showcases(user_id, album_item_uris, album_uris)
+    await async_client.showcases_essentials.update_showcases(
+        152184, "/videos/258684937,/live_events/273576296", "/showcases/258684873, /showcases/356684937"
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -26774,7 +27250,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>album_item_uris</code> | <code>str</code> | A comma-separated list of video or event URIs. |
 | <code>album_uris</code> | <code>str</code> | A comma-separated list of showcase URIs. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26825,7 +27301,7 @@ This method adds a single video to the specified showcase. The authenticated use
 
 ```python
 try:
-    client.showcases_showcase_videos.add_video_to_showcase(album_id, user_id, video_id)
+    client.showcases_showcase_videos.add_video_to_showcase(12345, 152184, 196367152)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToShowcaseErrorBody
 ```
@@ -26834,7 +27310,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_showcase_videos.add_video_to_showcase(album_id, user_id, video_id)
+    await async_client.showcases_showcase_videos.add_video_to_showcase(12345, 152184, 196367152)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToShowcaseErrorBody
 ```
@@ -26852,7 +27328,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26906,7 +27382,7 @@ This method adds a single video to the specified showcase. The authenticated use
 
 ```python
 try:
-    client.showcases_showcase_videos.add_video_to_showcase_alt2(album_id, video_id)
+    client.showcases_showcase_videos.add_video_to_showcase_alt2(12345, 196367152)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToShowcaseAlt2ErrorBody
 ```
@@ -26915,7 +27391,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_showcase_videos.add_video_to_showcase_alt2(album_id, video_id)
+    await async_client.showcases_showcase_videos.add_video_to_showcase_alt2(12345, 196367152)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoToShowcaseAlt2ErrorBody
 ```
@@ -26932,7 +27408,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26986,7 +27462,9 @@ This method returns every video belonging to the authenticated user that can be 
 
 ```python
 try:
-    response = client.showcases_showcase_videos.get_available_showcase_videos(album_id)
+    response = client.showcases_showcase_videos.get_available_showcase_videos(
+        3706071, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableShowcaseVideosErrorBody
@@ -26996,7 +27474,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.get_available_showcase_videos(album_id)
+    response = await async_client.showcases_showcase_videos.get_available_showcase_videos(
+        3706071, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableShowcaseVideosErrorBody
@@ -27018,7 +27498,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort2OrStr](vimeo_api/models/enums/sort2.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by date.<br> * `default` - Sort the results by the default method.<br> * `duration` - Sort the results by duration.<br> * `last_user_action_event_date` - Sort the results by most recent user interaction.<br> * `likes` - Sort the results by number of likes.<br> * `modified_time` - Sort the results by last modification.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27073,7 +27553,9 @@ This method returns every showcase to which the authenticated user can add or re
 
 ```python
 try:
-    response = client.showcases_showcase_videos.get_available_video_showcases(video_id)
+    response = client.showcases_showcase_videos.get_available_video_showcases(
+        258684937, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type AlbumConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableVideoShowcasesErrorBody
@@ -27083,7 +27565,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.get_available_video_showcases(video_id)
+    response = await async_client.showcases_showcase_videos.get_available_video_showcases(
+        258684937, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type AlbumConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAvailableVideoShowcasesErrorBody
@@ -27105,7 +27589,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort74OrStr](vimeo_api/models/enums/sort74.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `duration` - Sort the results by duration.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27159,7 +27643,7 @@ This method returns a single video belonging to the specified showcase. The auth
 
 ```python
 try:
-    response = client.showcases_showcase_videos.get_showcase_video(album_id, user_id, video_id)
+    response = client.showcases_showcase_videos.get_showcase_video(3706071, 152184, 196367152, password="hunter1")
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseVideoErrorBody
@@ -27169,7 +27653,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.get_showcase_video(album_id, user_id, video_id)
+    response = await async_client.showcases_showcase_videos.get_showcase_video(
+        3706071, 152184, 196367152, password="hunter1"
+    )
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseVideoErrorBody
@@ -27189,7 +27675,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>password</code> | <code>str \| None</code> | The password of the showcase.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27243,7 +27729,7 @@ This method returns a single video belonging to the specified showcase. The auth
 
 ```python
 try:
-    response = client.showcases_showcase_videos.get_showcase_video_alt2(album_id, video_id)
+    response = client.showcases_showcase_videos.get_showcase_video_alt2(3706071, 196367152, password="hunter1")
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseVideoAlt2ErrorBody
@@ -27253,7 +27739,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.get_showcase_video_alt2(album_id, video_id)
+    response = await async_client.showcases_showcase_videos.get_showcase_video_alt2(
+        3706071, 196367152, password="hunter1"
+    )
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseVideoAlt2ErrorBody
@@ -27272,7 +27760,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>password</code> | <code>str \| None</code> | The password of the showcase.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27302,7 +27790,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_showcase_videos(album_id: float, user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter10OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, password: str | None = None, per_page: float | None = None, query: str | None = None, sort: Sort21OrStr | None = None, weak_search: bool | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_showcase_videos(album_id: float, user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter10OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, password: str | None = None, per_page: float | None = None, query: str | None = None, sort: Sort21OrStr | None = None, weak_search: bool | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -27326,7 +27814,18 @@ This method returns every video in the specified showcase. The authenticated use
 
 ```python
 try:
-    response = client.showcases_showcase_videos.get_showcase_videos(album_id, user_id)
+    response = client.showcases_showcase_videos.get_showcase_videos(
+        3706071,
+        152184,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        password="hunter1",
+        per_page=10,
+        query="Stop motion",
+        weak_search=False,
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseVideosErrorBody
@@ -27336,7 +27835,18 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.get_showcase_videos(album_id, user_id)
+    response = await async_client.showcases_showcase_videos.get_showcase_videos(
+        3706071,
+        152184,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        password="hunter1",
+        per_page=10,
+        query="Stop motion",
+        weak_search=False,
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseVideosErrorBody
@@ -27356,7 +27866,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>containing_uri</code> | <code>str \| None</code> | The page containing the video URI.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter10OrStr](vimeo_api/models/enums/filter10.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Filter the results by the **embeddable** attribute.<br> * `playable` - Filter the results by the **playable** attribute.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter10OrStr](vimeo_api/models/enums/filter10.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Filter the results by the **embeddable** attribute.<br> * `playable` - Filter the results by the **playable** attribute.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>password</code> | <code>str \| None</code> | The password of the showcase.<br>**Default**: <code>None</code> |
@@ -27364,7 +27874,7 @@ except ApiError as e:
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort21OrStr](vimeo_api/models/enums/sort21.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by date.<br> * `default` - Sort the results by the default method.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `manual` - Sort the results by their manual order.<br> * `modified_time` - Sort the results by last modification.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
 | <code>weak_search</code> | <code>bool \| None</code> | Whether to include private videos in the search. Please note that a separate search service provides this functionality. The service performs a partial text search on the video's name.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27394,7 +27904,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_showcase_videos_alt2(album_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter10OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, password: str | None = None, per_page: float | None = None, query: str | None = None, sort: Sort21OrStr | None = None, weak_search: bool | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_showcase_videos_alt2(album_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter10OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, password: str | None = None, per_page: float | None = None, query: str | None = None, sort: Sort21OrStr | None = None, weak_search: bool | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -27418,7 +27928,17 @@ This method returns every video in the specified showcase. The authenticated use
 
 ```python
 try:
-    response = client.showcases_showcase_videos.get_showcase_videos_alt2(album_id)
+    response = client.showcases_showcase_videos.get_showcase_videos_alt2(
+        3706071,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        password="hunter1",
+        per_page=10,
+        query="Stop motion",
+        weak_search=False,
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseVideosAlt2ErrorBody
@@ -27428,7 +27948,17 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.get_showcase_videos_alt2(album_id)
+    response = await async_client.showcases_showcase_videos.get_showcase_videos_alt2(
+        3706071,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        page=1,
+        password="hunter1",
+        per_page=10,
+        query="Stop motion",
+        weak_search=False,
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetShowcaseVideosAlt2ErrorBody
@@ -27447,7 +27977,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>containing_uri</code> | <code>str \| None</code> | The page containing the video URI.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter10OrStr](vimeo_api/models/enums/filter10.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Filter the results by the **embeddable** attribute.<br> * `playable` - Filter the results by the **playable** attribute.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter10OrStr](vimeo_api/models/enums/filter10.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Filter the results by the **embeddable** attribute.<br> * `playable` - Filter the results by the **playable** attribute.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>password</code> | <code>str \| None</code> | The password of the showcase.<br>**Default**: <code>None</code> |
@@ -27455,7 +27985,7 @@ except ApiError as e:
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort21OrStr](vimeo_api/models/enums/sort21.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by date.<br> * `default` - Sort the results by the default method.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `manual` - Sort the results by their manual order.<br> * `modified_time` - Sort the results by last modification.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
 | <code>weak_search</code> | <code>bool \| None</code> | Whether to include private videos in the search. Please note that a separate search service provides this functionality. The service performs a partial text search on the video's name.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27509,7 +28039,7 @@ This method removes the specified video from its showcase. The authenticated use
 
 ```python
 try:
-    client.showcases_showcase_videos.remove_video_from_showcase(album_id, user_id, video_id)
+    client.showcases_showcase_videos.remove_video_from_showcase(12345, 152184, 196367152)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideoFromShowcaseErrorBody
 ```
@@ -27518,7 +28048,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_showcase_videos.remove_video_from_showcase(album_id, user_id, video_id)
+    await async_client.showcases_showcase_videos.remove_video_from_showcase(12345, 152184, 196367152)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideoFromShowcaseErrorBody
 ```
@@ -27536,7 +28066,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27590,7 +28120,7 @@ This method removes the specified video from its showcase. The authenticated use
 
 ```python
 try:
-    client.showcases_showcase_videos.remove_video_from_showcase_alt2(album_id, video_id)
+    client.showcases_showcase_videos.remove_video_from_showcase_alt2(12345, 196367152)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideoFromShowcaseAlt2ErrorBody
 ```
@@ -27599,7 +28129,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_showcase_videos.remove_video_from_showcase_alt2(album_id, video_id)
+    await async_client.showcases_showcase_videos.remove_video_from_showcase_alt2(12345, 196367152)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RemoveVideoFromShowcaseAlt2ErrorBody
 ```
@@ -27616,7 +28146,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27670,7 +28200,9 @@ This method replaces all the videos in the specified showcase with a new set of 
 
 ```python
 try:
-    client.showcases_showcase_videos.replace_videos_in_showcase(album_id, user_id, body)
+    client.showcases_showcase_videos.replace_videos_in_showcase(
+        3706071, 152184, UsersAlbumsVideosRequest(videos="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ReplaceVideosInShowcaseErrorBody
 ```
@@ -27679,7 +28211,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_showcase_videos.replace_videos_in_showcase(album_id, user_id, body)
+    await async_client.showcases_showcase_videos.replace_videos_in_showcase(
+        3706071, 152184, UsersAlbumsVideosRequest(videos="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ReplaceVideosInShowcaseErrorBody
 ```
@@ -27697,7 +28231,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersAlbumsVideosRequest](vimeo_api/models/users_albums_videos_request.py) \| [UsersAlbumsVideosRequestDict](vimeo_api/models/users_albums_videos_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27751,7 +28285,9 @@ This method replaces all the videos in the specified showcase with a new set of 
 
 ```python
 try:
-    client.showcases_showcase_videos.replace_videos_in_showcase_alt2(album_id, body)
+    client.showcases_showcase_videos.replace_videos_in_showcase_alt2(
+        3706071, MeAlbumsVideosRequest(videos="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ReplaceVideosInShowcaseAlt2ErrorBody
 ```
@@ -27760,7 +28296,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.showcases_showcase_videos.replace_videos_in_showcase_alt2(album_id, body)
+    await async_client.showcases_showcase_videos.replace_videos_in_showcase_alt2(
+        3706071, MeAlbumsVideosRequest(videos="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ReplaceVideosInShowcaseAlt2ErrorBody
 ```
@@ -27777,7 +28315,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>body</code> | <code>[MeAlbumsVideosRequest](vimeo_api/models/me_albums_videos_request.py) \| [MeAlbumsVideosRequestDict](vimeo_api/models/me_albums_videos_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27831,7 +28369,7 @@ This method sets the featured video of the specified showcase. The authenticated
 
 ```python
 try:
-    response = client.showcases_showcase_videos.set_video_as_showcase_featured(album_id, user_id, video_id)
+    response = client.showcases_showcase_videos.set_video_as_showcase_featured(12345, 152184, 196367152)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVideoAsShowcaseFeaturedErrorBody
@@ -27841,7 +28379,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.set_video_as_showcase_featured(album_id, user_id, video_id)
+    response = await async_client.showcases_showcase_videos.set_video_as_showcase_featured(12345, 152184, 196367152)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVideoAsShowcaseFeaturedErrorBody
@@ -27860,7 +28398,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27914,7 +28452,7 @@ This method sets the featured video of the specified showcase. The authenticated
 
 ```python
 try:
-    response = client.showcases_showcase_videos.set_video_as_showcase_featured_alt2(album_id, video_id)
+    response = client.showcases_showcase_videos.set_video_as_showcase_featured_alt2(12345, 196367152)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVideoAsShowcaseFeaturedAlt2ErrorBody
@@ -27924,7 +28462,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.set_video_as_showcase_featured_alt2(album_id, video_id)
+    response = await async_client.showcases_showcase_videos.set_video_as_showcase_featured_alt2(12345, 196367152)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVideoAsShowcaseFeaturedAlt2ErrorBody
@@ -27942,7 +28480,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -27996,7 +28534,7 @@ This method creates a thumbnail image for a showcase from the specified frame of
 
 ```python
 try:
-    response = client.showcases_showcase_videos.set_video_as_showcase_thumbnail(album_id, user_id, video_id)
+    response = client.showcases_showcase_videos.set_video_as_showcase_thumbnail(12345, 152184, 196367152)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVideoAsShowcaseThumbnailErrorBody
@@ -28006,7 +28544,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.set_video_as_showcase_thumbnail(album_id, user_id, video_id)
+    response = await async_client.showcases_showcase_videos.set_video_as_showcase_thumbnail(12345, 152184, 196367152)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVideoAsShowcaseThumbnailErrorBody
@@ -28026,7 +28564,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[UsersAlbumsVideosVideoIdSetAlbumThumbnailRequest](vimeo_api/models/users_albums_videos_video_id_set_album_thumbnail_request.py) \| [UsersAlbumsVideosVideoIdSetAlbumThumbnailRequestDict](vimeo_api/models/users_albums_videos_video_id_set_album_thumbnail_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28080,7 +28618,7 @@ This method creates a thumbnail image for a showcase from the specified frame of
 
 ```python
 try:
-    response = client.showcases_showcase_videos.set_video_as_showcase_thumbnail_alt2(album_id, video_id)
+    response = client.showcases_showcase_videos.set_video_as_showcase_thumbnail_alt2(12345, 196367152)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVideoAsShowcaseThumbnailAlt2ErrorBody
@@ -28090,7 +28628,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.showcases_showcase_videos.set_video_as_showcase_thumbnail_alt2(album_id, video_id)
+    response = await async_client.showcases_showcase_videos.set_video_as_showcase_thumbnail_alt2(12345, 196367152)
     # TODO: Handle 'response' of type Album
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetVideoAsShowcaseThumbnailAlt2ErrorBody
@@ -28109,7 +28647,7 @@ except ApiError as e:
 | <code>album_id</code> | <code>float</code> | The ID of the showcase. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[MeAlbumsVideosSetAlbumThumbnailRequest](vimeo_api/models/me_albums_videos_set_album_thumbnail_request.py) \| [MeAlbumsVideosSetAlbumThumbnailRequestDict](vimeo_api/models/me_albums_videos_set_album_thumbnail_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28167,7 +28705,7 @@ This method returns the specified subscription plan.
 
 ```python
 try:
-    client.subscription_plans_essentials.get_plan(tier)
+    client.subscription_plans_essentials.get_plan(Tier1.PRO)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28176,7 +28714,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.subscription_plans_essentials.get_plan(tier)
+    await async_client.subscription_plans_essentials.get_plan(Tier1.PRO)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28192,7 +28730,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>tier</code> | <code>[Tier1OrStr](vimeo_api/models/enums/tier1.py)</code> | The type of subscription plan.<br><br>Option descriptions:<br> * `advanced` - The plan type is Vimeo Advanced.<br> * `business` - The plan type is Vimeo Business.<br> * `free` - The plan type is Vimeo Free.<br> * `live_premium` - The plan type is Vimeo Premium.<br> * `plus` - The plan type is Vimeo Plus.<br> * `pro` - The plan type is Vimeo Pro.<br> * `pro_unlimited` - The plan type is Vimeo Pro Unlimited.<br> * `standard` - The plan type is Vimeo Standard.<br> * `starter` - The plan type is Vimeo Starter. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28219,7 +28757,7 @@ except ApiError as e:
 > Source: [TagsEssentials](vimeo_api/apis/tags_essentials.py)
 
 <details>
-<summary><code>def get_tag(word: str, *, request_options: RequestOptionsOrDict | None = None) -> Tag</code></summary>
+<summary><code>def get_tag(word: str, *, request_options: RequestOptionsOrDict | None = None) -> TagModel</code></summary>
 
 <dl>
 <dd>
@@ -28243,8 +28781,8 @@ This method returns the specified tag.
 
 ```python
 try:
-    response = client.tags_essentials.get_tag(word)
-    # TODO: Handle 'response' of type Tag
+    response = client.tags_essentials.get_tag("awesome")
+    # TODO: Handle 'response' of type TagModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28253,8 +28791,8 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.tags_essentials.get_tag(word)
-    # TODO: Handle 'response' of type Tag
+    response = await async_client.tags_essentials.get_tag("awesome")
+    # TODO: Handle 'response' of type TagModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28270,7 +28808,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>word</code> | <code>str</code> | The tag to return. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28280,7 +28818,7 @@ except ApiError as e:
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Tag](vimeo_api/models/tag.py)</code> -- The tag was returned.
+**OnSuccess**: <code>[TagModel](vimeo_api/models/tag_model.py)</code> -- The tag was returned.
 
 **OnError**: <code>[ApiError](vimeo_api/core/exceptions.py)&#91;[RawError](vimeo_api/core/results.py)&#93;</code>
 
@@ -28336,7 +28874,9 @@ requires `YYYY-MM-DD`, a `select` field requires one of its allowed values, and 
 
 ```python
 try:
-    client.teams_essentials.backfill_team_custom_metadata(user_id, body)
+    client.teams_essentials.backfill_team_custom_metadata(
+        152184, TeamsCustomMetadataBackfillRequest(field_id=1.5, field_value="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type BackfillTeamCustomMetadataErrorBody
 ```
@@ -28345,7 +28885,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.teams_essentials.backfill_team_custom_metadata(user_id, body)
+    await async_client.teams_essentials.backfill_team_custom_metadata(
+        152184, TeamsCustomMetadataBackfillRequest(field_id=1.5, field_value="some example string")
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type BackfillTeamCustomMetadataErrorBody
 ```
@@ -28362,7 +28904,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the team owner. |
 | <code>body</code> | <code>[TeamsCustomMetadataBackfillRequest](vimeo_api/models/teams_custom_metadata_backfill_request.py) \| [TeamsCustomMetadataBackfillRequestDict](vimeo_api/models/teams_custom_metadata_backfill_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28426,7 +28968,9 @@ considered. Teams with no mandatory fields receive an empty result set.
 
 ```python
 try:
-    client.teams_essentials.get_team_custom_metadata_incomplete_videos(user_id)
+    client.teams_essentials.get_team_custom_metadata_incomplete_videos(
+        152184, page=1, per_page=25, sort=Sort48.TITLE_ASC
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTeamCustomMetadataIncompleteVideosErrorBody
 ```
@@ -28435,7 +28979,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.teams_essentials.get_team_custom_metadata_incomplete_videos(user_id)
+    await async_client.teams_essentials.get_team_custom_metadata_incomplete_videos(
+        152184, page=1, per_page=25, sort=Sort48.TITLE_ASC
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTeamCustomMetadataIncompleteVideosErrorBody
 ```
@@ -28454,7 +29000,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show. Defaults to `1`.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page, up to a maximum of `100`. Defaults to `25`.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort48OrStr](vimeo_api/models/enums/sort48.py) \| None</code> | The order in which to return the results. Defaults to `title_asc`.<br><br>Option descriptions:<br> * `modified_asc` - Sort by last modified time, oldest first.<br> * `modified_desc` - Sort by last modified time, newest first.<br> * `title_asc` - Sort by video title, ascending.<br> * `title_desc` - Sort by video title, descending.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28518,7 +29064,7 @@ or to discover the field IDs you need for backfills and value updates.
 
 ```python
 try:
-    response = client.teams_essentials.get_team_custom_metadata_settings(user_id)
+    response = client.teams_essentials.get_team_custom_metadata_settings(152184)
     # TODO: Handle 'response' of type CustomMetadataSettingsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTeamCustomMetadataSettingsErrorBody
@@ -28528,7 +29074,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.teams_essentials.get_team_custom_metadata_settings(user_id)
+    response = await async_client.teams_essentials.get_team_custom_metadata_settings(152184)
     # TODO: Handle 'response' of type CustomMetadataSettingsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTeamCustomMetadataSettingsErrorBody
@@ -28545,7 +29091,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the team owner. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28623,7 +29169,9 @@ A few rules to be aware of:
 
 ```python
 try:
-    response = client.teams_essentials.update_custom_metadata_field_options(user_id, body)
+    response = client.teams_essentials.update_custom_metadata_field_options(
+        152184, TeamsCustomMetadataOptionsRequest(field_id=1.5, options=[Option()])
+    )
     # TODO: Handle 'response' of type CustomMetadataSettings
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateCustomMetadataFieldOptionsErrorBody
@@ -28633,7 +29181,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.teams_essentials.update_custom_metadata_field_options(user_id, body)
+    response = await async_client.teams_essentials.update_custom_metadata_field_options(
+        152184, TeamsCustomMetadataOptionsRequest(field_id=1.5, options=[Option()])
+    )
     # TODO: Handle 'response' of type CustomMetadataSettings
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateCustomMetadataFieldOptionsErrorBody
@@ -28651,7 +29201,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the team owner. |
 | <code>body</code> | <code>[TeamsCustomMetadataOptionsRequest](vimeo_api/models/teams_custom_metadata_options_request.py) \| [TeamsCustomMetadataOptionsRequestDict](vimeo_api/models/teams_custom_metadata_options_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28722,7 +29272,7 @@ Some constraints are worth knowing up front:
 
 ```python
 try:
-    response = client.teams_essentials.upsert_custom_metadata_settings(user_id)
+    response = client.teams_essentials.upsert_custom_metadata_settings(152184)
     # TODO: Handle 'response' of type list[CustomMetadataSettings]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpsertCustomMetadataSettingsErrorBody
@@ -28732,7 +29282,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.teams_essentials.upsert_custom_metadata_settings(user_id)
+    response = await async_client.teams_essentials.upsert_custom_metadata_settings(152184)
     # TODO: Handle 'response' of type list[CustomMetadataSettings]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpsertCustomMetadataSettingsErrorBody
@@ -28750,7 +29300,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the team owner. |
 | <code>body</code> | <code>[TeamsCustomMetadataRequest](vimeo_api/models/teams_custom_metadata_request.py) \| [TeamsCustomMetadataRequestDict](vimeo_api/models/teams_custom_metadata_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28809,7 +29359,7 @@ This method returns information about the membership of the specified team. Usag
 
 ```python
 try:
-    client.teams_members.get_team_information(code)
+    client.teams_members.get_team_information("q3u4mrqoc3u4hcnqo34")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28818,7 +29368,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.teams_members.get_team_information(code)
+    await async_client.teams_members.get_team_information("q3u4mrqoc3u4hcnqo34")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28834,7 +29384,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>code</code> | <code>str</code> | The code corresponding to the desired team. This value appears under `TeamUser` > `code`. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28881,7 +29431,7 @@ This method returns information about the membership of the specified team. Usag
 
 ```python
 try:
-    client.teams_members.get_team_information2(team_user_id, user_id)
+    client.teams_members.get_team_information2(1.5, 1.5)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28890,7 +29440,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.teams_members.get_team_information2(team_user_id, user_id)
+    await async_client.teams_members.get_team_information2(1.5, 1.5)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28907,7 +29457,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>team_user_id</code> | <code>float</code> | The ID of the team user. |
 | <code>user_id</code> | <code>float</code> | The ID of the team owner. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -28954,7 +29504,7 @@ This method returns information about the authenticated user's role on the speci
 
 ```python
 try:
-    client.teams_members.get_team_role_information(user_id)
+    client.teams_members.get_team_role_information(152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28963,7 +29513,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.teams_members.get_team_role_information(user_id)
+    await async_client.teams_members.get_team_role_information(152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -28979,7 +29529,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the team owner. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29054,7 +29604,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29105,7 +29655,23 @@ This method returns video analytics for the authenticated user's Vimeo account.
 
 ```python
 try:
-    response = client.users_analytics.get_user_analytics(user_id, dimension, from_, to)
+    response = client.users_analytics.get_user_analytics(
+        123456,
+        Dimension.BROWSER,
+        "2021-05-30T00:00:00+00:00",
+        "2021-06-30T23:59:59+00:00",
+        direction=Direction.ASC,
+        filter_content="/users/12345/projects/1233456,/videos/7890123,/users/13243/projects/123",
+        filter_countries=["UK,US,IN"],
+        filter_custom_metadata="[{\"field_id\":42,\"operator\":\"contains\",\"value\":\"rough cut\"}]",
+        filter_device_types=["android,ios"],
+        filter_embed_domains=["abc.com,xyz.com"],
+        filter_regions=["US-NJ,US-NY,IN-GJ,GB-WLS"],
+        filter_streaming_types=["live,video"],
+        filter_workspaces="12345,1233456",
+        page=1,
+        per_page=50,
+    )
     # TODO: Handle 'response' of type AnalyticsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -29115,7 +29681,23 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_analytics.get_user_analytics(user_id, dimension, from_, to)
+    response = await async_client.users_analytics.get_user_analytics(
+        123456,
+        Dimension.BROWSER,
+        "2021-05-30T00:00:00+00:00",
+        "2021-06-30T23:59:59+00:00",
+        direction=Direction.ASC,
+        filter_content="/users/12345/projects/1233456,/videos/7890123,/users/13243/projects/123",
+        filter_countries=["UK,US,IN"],
+        filter_custom_metadata="[{\"field_id\":42,\"operator\":\"contains\",\"value\":\"rough cut\"}]",
+        filter_device_types=["android,ios"],
+        filter_embed_domains=["abc.com,xyz.com"],
+        filter_regions=["US-NJ,US-NY,IN-GJ,GB-WLS"],
+        filter_streaming_types=["live,video"],
+        filter_workspaces="12345,1233456",
+        page=1,
+        per_page=50,
+    )
     # TODO: Handle 'response' of type AnalyticsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -29148,7 +29730,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The maximum number of items returned from the request, up to a limit of 1000 items. The default value is `50`.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort22OrStr](vimeo_api/models/enums/sort22.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `comments` - Sort the results by the number of comments.<br> * `completions` - Sort the results by number of completions.<br> * `country` - Sort the results by country.<br> * `default` - Sort the results by the values of both the **dimension** and **time_interval** fields.<br> * `device_type` - Sort the results by device type.<br> * `downloads` - Sort the results by the number of downloads.<br> * `drm_licenses_used` - Sort the results by the number of DRM licenses used. _This option is available only to users with the DRM feature._<br> * `embed_domain` - Sort the results by embed domain.<br> * `finishes` - Sort the results by the number of complete plays.<br> * `five_star_clicks` - Sort the results by the number of five-star ranking clicks.<br> * `four_star_clicks` - Sort the results by the number of four-star ranking clicks.<br> * `impressions` - Sort the results by the number of impressions.<br> * `like` - Sort the results by the number of likes.<br> * `mean_percent_watched` - Sort the results by mean percentage played.<br> * `mean_seconds_watched` - Sort the results by mean seconds played.<br> * `one_star_clicks` - Sort the results by the number of one-star ranking clicks.<br> * `ranking_widget_average_rating` - Sort the results by the average ranking widget rating.<br> * `ranking_widget_clicks` - Sort the results by the number of ranking widget clicks.<br> * `third_party_impressions` - Sort the results by the number of impressions from all non-Vimeo players.<br> * `three_star_clicks` - Sort the results by the number of three-star ranking clicks.<br> * `thumbs_down_clicks` - Sort the results by the number of thumbs-down clicks.<br> * `thumbs_up_clicks` - Sort the results by the number of thumbs-up clicks.<br> * `thumbs_widget_average_rating` - Sort the results by the average thumbs widget rating.<br> * `thumbs_widget_clicks` - Sort the results by the number of thumbs widget clicks.<br> * `time` - Sort the results by the value of the **start_date** field. This option is available only when the value of **time_interval** isn't `none`.<br> * `total_seconds_watched` - Sort the results by total seconds played.<br> * `two_star_clicks` - Sort the results by the number of two-star ranking clicks.<br> * `unique_impressions` - Sort the results by unique impressions.<br> * `unique_viewers` - Sort the results by unique viewers.<br> * `video` - Sort the results by video ID.<br> * `views` - Sort the results by the number of views.<br>**Default**: <code>None</code> |
 | <code>time_interval</code> | <code>[TimeIntervalOrStr](vimeo_api/models/enums/time_interval.py) \| None</code> | The interval by which to aggregate the data according to the specified data dimension. The default value is `none`. This parameter works only when the value of **dimension** is `video`, `country`, `embed_domain`, `device_type`, or `streaming_type`.<br><br>Option descriptions:<br> * `day` - Aggregate the results by day according to the specified data dimension.<br> * `month` - Aggregate the results by month according to the specified data dimension.<br> * `none` - The results are not aggregated by time interval.<br> * `week` - Aggregate the results by week according to the specified data dimension.<br> * `year` - Aggregate the results by year according to the specified data dimension.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29195,7 +29777,22 @@ This method returns video analytics for the authenticated user's Vimeo account.
 
 ```python
 try:
-    response = client.users_analytics.get_user_analytics_alt1(dimension, from_, to)
+    response = client.users_analytics.get_user_analytics_alt1(
+        Dimension.BROWSER,
+        "2021-05-30T00:00:00+00:00",
+        "2021-06-30T23:59:59+00:00",
+        direction=Direction.ASC,
+        filter_content="/users/12345/projects/1233456,/videos/7890123,/users/13243/projects/123",
+        filter_countries=["UK,US,IN"],
+        filter_custom_metadata="[{\"field_id\":42,\"operator\":\"contains\",\"value\":\"rough cut\"}]",
+        filter_device_types=["android,ios"],
+        filter_embed_domains=["abc.com,xyz.com"],
+        filter_regions=["US-NJ,US-NY,IN-GJ,GB-WLS"],
+        filter_streaming_types=["live,video"],
+        filter_workspaces="12345,1233456",
+        page=1,
+        per_page=50,
+    )
     # TODO: Handle 'response' of type AnalyticsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -29205,7 +29802,22 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_analytics.get_user_analytics_alt1(dimension, from_, to)
+    response = await async_client.users_analytics.get_user_analytics_alt1(
+        Dimension.BROWSER,
+        "2021-05-30T00:00:00+00:00",
+        "2021-06-30T23:59:59+00:00",
+        direction=Direction.ASC,
+        filter_content="/users/12345/projects/1233456,/videos/7890123,/users/13243/projects/123",
+        filter_countries=["UK,US,IN"],
+        filter_custom_metadata="[{\"field_id\":42,\"operator\":\"contains\",\"value\":\"rough cut\"}]",
+        filter_device_types=["android,ios"],
+        filter_embed_domains=["abc.com,xyz.com"],
+        filter_regions=["US-NJ,US-NY,IN-GJ,GB-WLS"],
+        filter_streaming_types=["live,video"],
+        filter_workspaces="12345,1233456",
+        page=1,
+        per_page=50,
+    )
     # TODO: Handle 'response' of type AnalyticsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -29237,7 +29849,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The maximum number of items returned from the request, up to a limit of 1000 items. The default value is `50`.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort22OrStr](vimeo_api/models/enums/sort22.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `comments` - Sort the results by the number of comments.<br> * `completions` - Sort the results by number of completions.<br> * `country` - Sort the results by country.<br> * `default` - Sort the results by the values of both the **dimension** and **time_interval** fields.<br> * `device_type` - Sort the results by device type.<br> * `downloads` - Sort the results by the number of downloads.<br> * `drm_licenses_used` - Sort the results by the number of DRM licenses used. _This option is available only to users with the DRM feature._<br> * `embed_domain` - Sort the results by embed domain.<br> * `finishes` - Sort the results by the number of complete plays.<br> * `five_star_clicks` - Sort the results by the number of five-star ranking clicks.<br> * `four_star_clicks` - Sort the results by the number of four-star ranking clicks.<br> * `impressions` - Sort the results by the number of impressions.<br> * `like` - Sort the results by the number of likes.<br> * `mean_percent_watched` - Sort the results by mean percentage played.<br> * `mean_seconds_watched` - Sort the results by mean seconds played.<br> * `one_star_clicks` - Sort the results by the number of one-star ranking clicks.<br> * `ranking_widget_average_rating` - Sort the results by the average ranking widget rating.<br> * `ranking_widget_clicks` - Sort the results by the number of ranking widget clicks.<br> * `third_party_impressions` - Sort the results by the number of impressions from all non-Vimeo players.<br> * `three_star_clicks` - Sort the results by the number of three-star ranking clicks.<br> * `thumbs_down_clicks` - Sort the results by the number of thumbs-down clicks.<br> * `thumbs_up_clicks` - Sort the results by the number of thumbs-up clicks.<br> * `thumbs_widget_average_rating` - Sort the results by the average thumbs widget rating.<br> * `thumbs_widget_clicks` - Sort the results by the number of thumbs widget clicks.<br> * `time` - Sort the results by the value of the **start_date** field. This option is available only when the value of **time_interval** isn't `none`.<br> * `total_seconds_watched` - Sort the results by total seconds played.<br> * `two_star_clicks` - Sort the results by the number of two-star ranking clicks.<br> * `unique_impressions` - Sort the results by unique impressions.<br> * `unique_viewers` - Sort the results by unique viewers.<br> * `video` - Sort the results by video ID.<br> * `views` - Sort the results by the number of views.<br>**Default**: <code>None</code> |
 | <code>time_interval</code> | <code>[TimeIntervalOrStr](vimeo_api/models/enums/time_interval.py) \| None</code> | The interval by which to aggregate the data according to the specified data dimension. The default value is `none`. This parameter works only when the value of **dimension** is `video`, `country`, `embed_domain`, `device_type`, or `streaming_type`.<br><br>Option descriptions:<br> * `day` - Aggregate the results by day according to the specified data dimension.<br> * `month` - Aggregate the results by month according to the specified data dimension.<br> * `none` - The results are not aggregated by time interval.<br> * `week` - Aggregate the results by week according to the specified data dimension.<br> * `year` - Aggregate the results by year according to the specified data dimension.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29288,7 +29900,7 @@ This method edits the Vimeo account of the authenticated user.
 
 ```python
 try:
-    response = client.users_essentials.edit_user(user_id)
+    response = client.users_essentials.edit_user(152184)
     # TODO: Handle 'response' of type User
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditUserErrorBody
@@ -29298,7 +29910,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_essentials.edit_user(user_id)
+    response = await async_client.users_essentials.edit_user(152184)
     # TODO: Handle 'response' of type User
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditUserErrorBody
@@ -29316,7 +29928,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersRequest](vimeo_api/models/users_request.py) \| [UsersRequestDict](vimeo_api/models/users_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29397,7 +30009,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MeRequest](vimeo_api/models/me_request.py) \| [MeRequestDict](vimeo_api/models/me_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29451,7 +30063,7 @@ This method returns the authenticated user.
 
 ```python
 try:
-    response = client.users_essentials.get_user(user_id)
+    response = client.users_essentials.get_user(152184)
     # TODO: Handle 'response' of type User
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -29461,7 +30073,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_essentials.get_user(user_id)
+    response = await async_client.users_essentials.get_user(152184)
     # TODO: Handle 'response' of type User
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -29478,7 +30090,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29551,7 +30163,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29578,7 +30190,7 @@ except ApiError as e:
 > Source: [UsersFeeds](vimeo_api/apis/users_feeds.py)
 
 <details>
-<summary><code>def get_feed(user_id: float, *, offset: str | None = None, page: float | None = None, per_page: float | None = None, type_: Type29OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> Activity31Connection</code></summary>
+<summary><code>def get_feed(user_id: float, *, offset: str | None = None, page: float | None = None, per_page: float | None = None, type_: Type33OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> Activity31Connection</code></summary>
 
 <dl>
 <dd>
@@ -29602,7 +30214,7 @@ This method returns every video in the authenticated user's feed.
 
 ```python
 try:
-    response = client.users_feeds.get_feed(user_id)
+    response = client.users_feeds.get_feed(152184, offset="280", page=1, per_page=10)
     # TODO: Handle 'response' of type Activity31Connection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetFeedErrorBody
@@ -29612,7 +30224,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_feeds.get_feed(user_id)
+    response = await async_client.users_feeds.get_feed(152184, offset="280", page=1, per_page=10)
     # TODO: Handle 'response' of type Activity31Connection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetFeedErrorBody
@@ -29632,8 +30244,8 @@ except ApiError as e:
 | <code>offset</code> | <code>str \| None</code> | The pagination offset. We recommend that you use the pagination links in the feed response instead of working with this value directly. For more details, see our [pagination documentation](https://developer.vimeo.com/api/common-formats#using-the-pagination-parameter).<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>type_</code> | <code>[Type29OrStr](vimeo_api/models/enums/type29.py) \| None</code> | The feed type.<br><br>Option descriptions:<br> * `appears` - Videos in which the user appears.<br> * `category_featured` - Featured videos.<br> * `channel` - Channel videos.<br> * `facebook_feed` - Videos from the user's Facebook feed.<br> * `following` - Videos from accounts that the user follows.<br> * `group` - Group videos.<br> * `likes` - Liked videos.<br> * `ondemand_publish` - On Demand videos.<br> * `share` - Shared videos.<br> * `tagged_with` - Tagged videos.<br> * `twitter_timeline` - Videos from the user's Twitter timeline.<br> * `uploads` - Uploaded videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>type_</code> | <code>[Type33OrStr](vimeo_api/models/enums/type33.py) \| None</code> | The feed type.<br><br>Option descriptions:<br> * `appears` - Videos in which the user appears.<br> * `category_featured` - Featured videos.<br> * `channel` - Channel videos.<br> * `facebook_feed` - Videos from the user's Facebook feed.<br> * `following` - Videos from accounts that the user follows.<br> * `group` - Group videos.<br> * `likes` - Liked videos.<br> * `ondemand_publish` - On Demand videos.<br> * `share` - Shared videos.<br> * `tagged_with` - Tagged videos.<br> * `twitter_timeline` - Videos from the user's Twitter timeline.<br> * `uploads` - Uploaded videos.<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29663,7 +30275,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_feed_alt1(*, offset: str | None = None, page: float | None = None, per_page: float | None = None, type_: Type29OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> Activity31Connection</code></summary>
+<summary><code>def get_feed_alt1(*, offset: str | None = None, page: float | None = None, per_page: float | None = None, type_: Type33OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> Activity31Connection</code></summary>
 
 <dl>
 <dd>
@@ -29687,7 +30299,7 @@ This method returns every video in the authenticated user's feed.
 
 ```python
 try:
-    response = client.users_feeds.get_feed_alt1()
+    response = client.users_feeds.get_feed_alt1(offset="280", page=1, per_page=10)
     # TODO: Handle 'response' of type Activity31Connection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetFeedAlt1ErrorBody
@@ -29697,7 +30309,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_feeds.get_feed_alt1()
+    response = await async_client.users_feeds.get_feed_alt1(offset="280", page=1, per_page=10)
     # TODO: Handle 'response' of type Activity31Connection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetFeedAlt1ErrorBody
@@ -29716,8 +30328,8 @@ except ApiError as e:
 | <code>offset</code> | <code>str \| None</code> | The pagination offset. We recommend that you use the pagination links in the feed response instead of working with this value directly. For more details, see our [pagination documentation](https://developer.vimeo.com/api/common-formats#using-the-pagination-parameter).<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>type_</code> | <code>[Type29OrStr](vimeo_api/models/enums/type29.py) \| None</code> | The feed type.<br><br>Option descriptions:<br> * `appears` - Videos in which the user appears.<br> * `category_featured` - Featured videos.<br> * `channel` - Channel videos.<br> * `facebook_feed` - Videos from the user's Facebook feed.<br> * `following` - Videos from accounts that the user follows.<br> * `group` - Group videos.<br> * `likes` - Liked videos.<br> * `ondemand_publish` - On Demand videos.<br> * `share` - Shared videos.<br> * `tagged_with` - Tagged videos.<br> * `twitter_timeline` - Videos from the user's Twitter timeline.<br> * `uploads` - Uploaded videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>type_</code> | <code>[Type33OrStr](vimeo_api/models/enums/type33.py) \| None</code> | The feed type.<br><br>Option descriptions:<br> * `appears` - Videos in which the user appears.<br> * `category_featured` - Featured videos.<br> * `channel` - Channel videos.<br> * `facebook_feed` - Videos from the user's Facebook feed.<br> * `following` - Videos from accounts that the user follows.<br> * `group` - Group videos.<br> * `likes` - Liked videos.<br> * `ondemand_publish` - On Demand videos.<br> * `share` - Shared videos.<br> * `tagged_with` - Tagged videos.<br> * `twitter_timeline` - Videos from the user's Twitter timeline.<br> * `uploads` - Uploaded videos.<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29775,7 +30387,7 @@ This method determines whether the authenticated user is a follower of the speci
 
 ```python
 try:
-    client.users_followers.check_if_user_is_following(follow_user_id, user_id)
+    client.users_followers.check_if_user_is_following(3766357, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserIsFollowingErrorBody
 ```
@@ -29784,7 +30396,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_followers.check_if_user_is_following(follow_user_id, user_id)
+    await async_client.users_followers.check_if_user_is_following(3766357, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserIsFollowingErrorBody
 ```
@@ -29801,7 +30413,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>follow_user_id</code> | <code>float</code> | The ID of the user to follow. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29855,7 +30467,7 @@ This method determines whether the authenticated user is a follower of the speci
 
 ```python
 try:
-    client.users_followers.check_if_user_is_following_alt1(follow_user_id)
+    client.users_followers.check_if_user_is_following_alt1(3766357)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserIsFollowingAlt1ErrorBody
 ```
@@ -29864,7 +30476,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_followers.check_if_user_is_following_alt1(follow_user_id)
+    await async_client.users_followers.check_if_user_is_following_alt1(3766357)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserIsFollowingAlt1ErrorBody
 ```
@@ -29880,7 +30492,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>follow_user_id</code> | <code>float</code> | The ID of the user to follow. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -29934,7 +30546,7 @@ This method causes the authenticated user to become the follower of the specifie
 
 ```python
 try:
-    client.users_followers.follow_user(follow_user_id, user_id)
+    client.users_followers.follow_user(3766357, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FollowUserErrorBody
 ```
@@ -29943,7 +30555,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_followers.follow_user(follow_user_id, user_id)
+    await async_client.users_followers.follow_user(3766357, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FollowUserErrorBody
 ```
@@ -29960,7 +30572,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>follow_user_id</code> | <code>float</code> | The ID of the user to follow. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30014,7 +30626,7 @@ This method causes the authenticated user to become the follower of the specifie
 
 ```python
 try:
-    client.users_followers.follow_user_alt1(follow_user_id)
+    client.users_followers.follow_user_alt1(3766357)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FollowUserAlt1ErrorBody
 ```
@@ -30023,7 +30635,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_followers.follow_user_alt1(follow_user_id)
+    await async_client.users_followers.follow_user_alt1(3766357)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FollowUserAlt1ErrorBody
 ```
@@ -30039,7 +30651,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>follow_user_id</code> | <code>float</code> | The ID of the user to follow. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30104,7 +30716,7 @@ an array of URIs, where `user01_id`, `user02_id`, `user03_id`, and so on, are th
 
 ```python
 try:
-    client.users_followers.follow_users(user_id, body)
+    client.users_followers.follow_users(152184, UsersFollowingRequest(users=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FollowUsersErrorBody
 ```
@@ -30113,7 +30725,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_followers.follow_users(user_id, body)
+    await async_client.users_followers.follow_users(152184, UsersFollowingRequest(users=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FollowUsersErrorBody
 ```
@@ -30130,7 +30742,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersFollowingRequest](vimeo_api/models/users_following_request.py) \| [UsersFollowingRequestDict](vimeo_api/models/users_following_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30195,7 +30807,7 @@ an array of URIs, where `user01_id`, `user02_id`, `user03_id`, and so on, are th
 
 ```python
 try:
-    client.users_followers.follow_users_alt1(body)
+    client.users_followers.follow_users_alt1(MeFollowingRequest(users=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FollowUsersAlt1ErrorBody
 ```
@@ -30204,7 +30816,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_followers.follow_users_alt1(body)
+    await async_client.users_followers.follow_users_alt1(MeFollowingRequest(users=["some example string"]))
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type FollowUsersAlt1ErrorBody
 ```
@@ -30220,7 +30832,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MeFollowingRequest](vimeo_api/models/me_following_request.py) \| [MeFollowingRequestDict](vimeo_api/models/me_following_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30274,7 +30886,9 @@ This method returns every follower of the authenticated user.
 
 ```python
 try:
-    response = client.users_followers.get_followers(user_id)
+    response = client.users_followers.get_followers(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30284,7 +30898,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_followers.get_followers(user_id)
+    response = await async_client.users_followers.get_followers(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30306,7 +30922,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date followed.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30353,7 +30969,9 @@ This method returns every follower of the authenticated user.
 
 ```python
 try:
-    response = client.users_followers.get_followers_alt1()
+    response = client.users_followers.get_followers_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30363,7 +30981,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_followers.get_followers_alt1()
+    response = await async_client.users_followers.get_followers_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30384,7 +31004,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date followed.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30407,7 +31027,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_user_following(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter13OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
+<summary><code>def get_user_following(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter13OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
 
 <dl>
 <dd>
@@ -30431,7 +31051,9 @@ This method returns every user who is followed by the authenticated user.
 
 ```python
 try:
-    response = client.users_followers.get_user_following(user_id)
+    response = client.users_followers.get_user_following(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30441,7 +31063,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_followers.get_user_following(user_id)
+    response = await async_client.users_followers.get_user_following(
+        152184, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30459,12 +31083,12 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter13OrStr](vimeo_api/models/enums/filter13.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `online` - Return users who are currently online.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter13OrStr](vimeo_api/models/enums/filter13.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `online` - Return users who are currently online.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date followed.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30487,7 +31111,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_user_following_alt1(*, direction: DirectionOrStr | None = None, filter: Filter13OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
+<summary><code>def get_user_following_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter13OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> UserConnection</code></summary>
 
 <dl>
 <dd>
@@ -30511,7 +31135,9 @@ This method returns every user who is followed by the authenticated user.
 
 ```python
 try:
-    response = client.users_followers.get_user_following_alt1()
+    response = client.users_followers.get_user_following_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30521,7 +31147,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_followers.get_user_following_alt1()
+    response = await async_client.users_followers.get_user_following_alt1(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30538,12 +31166,12 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter13OrStr](vimeo_api/models/enums/filter13.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `online` - Return users who are currently online.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter13OrStr](vimeo_api/models/enums/filter13.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `online` - Return users who are currently online.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date followed.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30590,7 +31218,7 @@ This method causes the authenticated user to stop following another user.
 
 ```python
 try:
-    client.users_followers.unfollow_user(follow_user_id, user_id)
+    client.users_followers.unfollow_user(3766357, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -30599,7 +31227,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_followers.unfollow_user(follow_user_id, user_id)
+    await async_client.users_followers.unfollow_user(3766357, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -30616,7 +31244,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>follow_user_id</code> | <code>float</code> | The ID of the user to unfollow. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30663,7 +31291,7 @@ This method causes the authenticated user to stop following another user.
 
 ```python
 try:
-    client.users_followers.unfollow_user_alt1(follow_user_id)
+    client.users_followers.unfollow_user_alt1(3766357)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -30672,7 +31300,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_followers.unfollow_user_alt1(follow_user_id)
+    await async_client.users_followers.unfollow_user_alt1(3766357)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -30688,7 +31316,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>follow_user_id</code> | <code>float</code> | The ID of the user to unfollow. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30739,7 +31367,14 @@ This method creates and returns a zipped proxy package of the course associated 
 
 ```python
 try:
-    client.users_lms.download_lms_package(user_id, video_id)
+    client.users_lms.download_lms_package(
+        152184,
+        152184,
+        completion_threshold=80,
+        course_title="My Course",
+        passing_score=70,
+        scoring_algorithm=ScoringAlgorithm.PERCENTAGE,
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DownloadLmsPackageErrorBody
 ```
@@ -30748,7 +31383,14 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_lms.download_lms_package(user_id, video_id)
+    await async_client.users_lms.download_lms_package(
+        152184,
+        152184,
+        completion_threshold=80,
+        course_title="My Course",
+        passing_score=70,
+        scoring_algorithm=ScoringAlgorithm.PERCENTAGE,
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DownloadLmsPackageErrorBody
 ```
@@ -30770,7 +31412,7 @@ except ApiError as e:
 | <code>passing_score</code> | <code>float \| None</code> | The passing score for the course.<br>**Default**: <code>None</code> |
 | <code>scoring_algorithm</code> | <code>[ScoringAlgorithmOrStr](vimeo_api/models/enums/scoring_algorithm.py) \| None</code> | The scoring algorithm for the course.<br><br>Option descriptions:<br> * `passfail` - The score is based on a pass or fail.<br> * `percentage` - The score is based on a percentage.<br> * `quiz` - The score is based on the course quiz.<br>**Default**: <code>None</code> |
 | <code>standard</code> | <code>[StandardOrStr](vimeo_api/models/enums/standard.py) \| None</code> | The learning management system standard used to create the proxy package.<br><br>Option descriptions:<br> * `aicc` - The standard is AICC.<br> * `cmi5` - The standard is cmi5.<br> * `scorm12` - The standard is SCORM 1.2.<br> * `scorm2004_3rd` - The standard is SCORM 2004 3rd Edition.<br> * `tincan` - The standard is Tin Can or xAPI.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30830,7 +31472,7 @@ from the **link** field in the response. For step-by-step instructions, see
 
 ```python
 try:
-    response = client.users_pictures.create_picture(user_id)
+    response = client.users_pictures.create_picture(152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30840,7 +31482,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_pictures.create_picture(user_id)
+    response = await async_client.users_pictures.create_picture(152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -30857,7 +31499,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30932,7 +31574,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -30979,7 +31621,7 @@ This method removes the specified portrait image from the authenticated user's V
 
 ```python
 try:
-    client.users_pictures.delete_picture(portraitset_id, user_id)
+    client.users_pictures.delete_picture(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -30988,7 +31630,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_pictures.delete_picture(portraitset_id, user_id)
+    await async_client.users_pictures.delete_picture(12345, 152184)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -31005,7 +31647,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>portraitset_id</code> | <code>float</code> | The ID of the picture. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31052,7 +31694,7 @@ This method removes the specified portrait image from the authenticated user's V
 
 ```python
 try:
-    client.users_pictures.delete_picture_alt1(portraitset_id)
+    client.users_pictures.delete_picture_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -31061,7 +31703,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_pictures.delete_picture_alt1(portraitset_id)
+    await async_client.users_pictures.delete_picture_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -31077,7 +31719,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>portraitset_id</code> | <code>float</code> | The ID of the picture. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31124,7 +31766,7 @@ This method edits the specified portrait image belonging to the authenticated us
 
 ```python
 try:
-    response = client.users_pictures.edit_picture(portraitset_id, user_id)
+    response = client.users_pictures.edit_picture(12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31134,7 +31776,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_pictures.edit_picture(portraitset_id, user_id)
+    response = await async_client.users_pictures.edit_picture(12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31153,7 +31795,7 @@ except ApiError as e:
 | <code>portraitset_id</code> | <code>float</code> | The ID of the picture. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersPicturesRequest](vimeo_api/models/users_pictures_request.py) \| [UsersPicturesRequestDict](vimeo_api/models/users_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31200,7 +31842,7 @@ This method edits the specified portrait image belonging to the authenticated us
 
 ```python
 try:
-    response = client.users_pictures.edit_picture_alt1(portraitset_id)
+    response = client.users_pictures.edit_picture_alt1(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31210,7 +31852,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_pictures.edit_picture_alt1(portraitset_id)
+    response = await async_client.users_pictures.edit_picture_alt1(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31228,7 +31870,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>portraitset_id</code> | <code>float</code> | The ID of the picture. |
 | <code>body</code> | <code>[MePicturesRequest](vimeo_api/models/me_pictures_request.py) \| [MePicturesRequestDict](vimeo_api/models/me_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31275,7 +31917,7 @@ This method returns a single portrait image belonging to the authenticated user.
 
 ```python
 try:
-    response = client.users_pictures.get_picture(portraitset_id, user_id)
+    response = client.users_pictures.get_picture(12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31285,7 +31927,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_pictures.get_picture(portraitset_id, user_id)
+    response = await async_client.users_pictures.get_picture(12345, 152184)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31303,7 +31945,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>portraitset_id</code> | <code>float</code> | The ID of the picture. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31350,7 +31992,7 @@ This method returns a single portrait image belonging to the authenticated user.
 
 ```python
 try:
-    response = client.users_pictures.get_picture_alt1(portraitset_id)
+    response = client.users_pictures.get_picture_alt1(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31360,7 +32002,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_pictures.get_picture_alt1(portraitset_id)
+    response = await async_client.users_pictures.get_picture_alt1(12345)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31377,7 +32019,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>portraitset_id</code> | <code>float</code> | The ID of the picture. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31424,7 +32066,7 @@ This method returns every portrait image belonging to the authenticated user.
 
 ```python
 try:
-    response = client.users_pictures.get_pictures(user_id)
+    response = client.users_pictures.get_pictures(152184, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31434,7 +32076,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_pictures.get_pictures(user_id)
+    response = await async_client.users_pictures.get_pictures(152184, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31453,7 +32095,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31500,7 +32142,7 @@ This method returns every portrait image belonging to the authenticated user.
 
 ```python
 try:
-    response = client.users_pictures.get_pictures_alt1()
+    response = client.users_pictures.get_pictures_alt1(page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31510,7 +32152,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_pictures.get_pictures_alt1()
+    response = await async_client.users_pictures.get_pictures_alt1(page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -31528,7 +32170,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31579,7 +32221,7 @@ This method returns user search results.
 
 ```python
 try:
-    response = client.users_search.search_users()
+    response = client.users_search.search_users(direction=Direction.ASC, page=1, per_page=10, query="Stop motion")
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SearchUsersErrorBody
@@ -31589,7 +32231,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_search.search_users()
+    response = await async_client.users_search.search_users(
+        direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SearchUsersErrorBody
@@ -31610,7 +32254,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort13OrStr](vimeo_api/models/enums/sort13.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by creation date.<br> * `followers` - Sort the results by number of followers.<br> * `relevant` - Sort the results by relevance.<br> * `videos` - Sort the results by number of videos.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31669,7 +32313,7 @@ This method deletes the specified video from the authenticated user's watch hist
 
 ```python
 try:
-    client.users_watch_history.delete_from_watch_history(video_id)
+    client.users_watch_history.delete_from_watch_history(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -31678,7 +32322,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.users_watch_history.delete_from_watch_history(video_id)
+    await async_client.users_watch_history.delete_from_watch_history(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -31694,7 +32338,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31765,7 +32409,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31812,7 +32456,7 @@ This method returns every video on the authenticated user's watch history. _This
 
 ```python
 try:
-    response = client.users_watch_history.get_watch_history()
+    response = client.users_watch_history.get_watch_history(page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetWatchHistoryErrorBody
@@ -31822,7 +32466,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.users_watch_history.get_watch_history()
+    response = await async_client.users_watch_history.get_watch_history(page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetWatchHistoryErrorBody
@@ -31840,7 +32484,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31901,7 +32545,7 @@ is returned with the answer.
 
 ```python
 try:
-    client.videos_ai.ask_ai_question(video_id)
+    client.videos_ai.ask_ai_question(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AskAiQuestionErrorBody
 ```
@@ -31910,7 +32554,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.ask_ai_question(video_id)
+    await async_client.videos_ai.ask_ai_question(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AskAiQuestionErrorBody
 ```
@@ -31927,7 +32571,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosAiAskRequest](vimeo_api/models/videos_ai_ask_request.py) \| [VideosAiAskRequestDict](vimeo_api/models/videos_ai_ask_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -31999,7 +32643,7 @@ To retrieve segment UUIDs and their current text and timecodes, use
 
 ```python
 try:
-    client.videos_ai.edit_ai_texttrack(texttrack_id, video_id)
+    client.videos_ai.edit_ai_texttrack(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditAiTexttrackErrorBody
 ```
@@ -32008,7 +32652,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.edit_ai_texttrack(texttrack_id, video_id)
+    await async_client.videos_ai.edit_ai_texttrack(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditAiTexttrackErrorBody
 ```
@@ -32026,7 +32670,7 @@ except ApiError as e:
 | <code>texttrack_id</code> | <code>float</code> | The ID of the text track. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosAiTexttracksRequest](vimeo_api/models/videos_ai_texttracks_request.py) \| [VideosAiTexttracksRequestDict](vimeo_api/models/videos_ai_texttracks_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32057,7 +32701,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_ai_languages(*, type_: Type48OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> None</code></summary>
+<summary><code>def get_ai_languages(*, type_: Type52OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> None</code></summary>
 
 <dl>
 <dd>
@@ -32083,7 +32727,7 @@ languages, or `dubbing` for audio dubbing languages (includes available accents 
 
 ```python
 try:
-    client.videos_ai.get_ai_languages()
+    client.videos_ai.get_ai_languages(type_=Type52.TRANSCRIPTION)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiLanguagesErrorBody
 ```
@@ -32092,7 +32736,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.get_ai_languages()
+    await async_client.videos_ai.get_ai_languages(type_=Type52.TRANSCRIPTION)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiLanguagesErrorBody
 ```
@@ -32107,8 +32751,8 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>type_</code> | <code>[Type48OrStr](vimeo_api/models/enums/type48.py) \| None</code> | The AI feature type to list languages for.<br><br>Option descriptions:<br> * `dubbing` - Languages supported for AI audio dubbing. Includes available accents per language.<br> * `subtitling` - Languages supported for AI subtitle translation.<br> * `transcription` - Languages supported for AI transcription (speech-to-text).<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>type_</code> | <code>[Type52OrStr](vimeo_api/models/enums/type52.py) \| None</code> | The AI feature type to list languages for.<br><br>Option descriptions:<br> * `dubbing` - Languages supported for AI audio dubbing. Includes available accents per language.<br> * `subtitling` - Languages supported for AI subtitle translation.<br> * `transcription` - Languages supported for AI transcription (speech-to-text).<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32164,7 +32808,7 @@ video may return a `202` response while the video is being processed — retry u
 
 ```python
 try:
-    client.videos_ai.get_ai_metadata(video_id)
+    client.videos_ai.get_ai_metadata(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiMetadataErrorBody
 ```
@@ -32173,7 +32817,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.get_ai_metadata(video_id)
+    await async_client.videos_ai.get_ai_metadata(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiMetadataErrorBody
 ```
@@ -32189,7 +32833,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32250,7 +32894,7 @@ English is returned by default.
 
 ```python
 try:
-    client.videos_ai.get_ai_questions(video_id)
+    client.videos_ai.get_ai_questions(258684937, language="en")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiQuestionsErrorBody
 ```
@@ -32259,7 +32903,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.get_ai_questions(video_id)
+    await async_client.videos_ai.get_ai_questions(258684937, language="en")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiQuestionsErrorBody
 ```
@@ -32276,7 +32920,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>language</code> | <code>str \| None</code> | The language for suggested questions. Defaults to `en`. Available: `en`, `fr`, `es`, `de`, `it`, `pt`, `ja`, `ko`.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32337,7 +32981,7 @@ Possible status values: `none` (no transcription requested), `not_started` (queu
 
 ```python
 try:
-    client.videos_ai.get_ai_transcribe_status(video_id)
+    client.videos_ai.get_ai_transcribe_status(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiTranscribeStatusErrorBody
 ```
@@ -32346,7 +32990,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.get_ai_transcribe_status(video_id)
+    await async_client.videos_ai.get_ai_transcribe_status(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiTranscribeStatusErrorBody
 ```
@@ -32362,7 +33006,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32421,7 +33065,7 @@ Possible status values: `processing`, `completed`, `completed_with_deleted_textt
 
 ```python
 try:
-    client.videos_ai.get_ai_translate_dubbing_status(video_id)
+    client.videos_ai.get_ai_translate_dubbing_status(258684937, language="es")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiTranslateDubbingStatusErrorBody
 ```
@@ -32430,7 +33074,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.get_ai_translate_dubbing_status(video_id)
+    await async_client.videos_ai.get_ai_translate_dubbing_status(258684937, language="es")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiTranslateDubbingStatusErrorBody
 ```
@@ -32447,7 +33091,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>language</code> | <code>str \| None</code> | Filter results to a specific target language code. When omitted, all dubbing jobs are returned.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32506,7 +33150,7 @@ Possible status values: `processing`, `completed`, `failed`, `invalid_input` (th
 
 ```python
 try:
-    client.videos_ai.get_ai_translate_subtitles_status(video_id)
+    client.videos_ai.get_ai_translate_subtitles_status(258684937, language="es")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiTranslateSubtitlesStatusErrorBody
 ```
@@ -32515,7 +33159,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.get_ai_translate_subtitles_status(video_id)
+    await async_client.videos_ai.get_ai_translate_subtitles_status(258684937, language="es")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAiTranslateSubtitlesStatusErrorBody
 ```
@@ -32532,7 +33176,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>language</code> | <code>str \| None</code> | Filter results to a specific target language code. When omitted, all subtitle translation jobs are returned.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32594,7 +33238,7 @@ preference, then English (`en`).
 
 ```python
 try:
-    client.videos_ai.start_ai_transcribe(video_id)
+    client.videos_ai.start_ai_transcribe(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type StartAiTranscribeErrorBody
 ```
@@ -32603,7 +33247,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.start_ai_transcribe(video_id)
+    await async_client.videos_ai.start_ai_transcribe(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type StartAiTranscribeErrorBody
 ```
@@ -32620,7 +33264,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosAiTranscribeRequest](vimeo_api/models/videos_ai_transcribe_request.py) \| [VideosAiTranscribeRequestDict](vimeo_api/models/videos_ai_transcribe_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32684,7 +33328,7 @@ AI credits are deducted from the enterprise account's balance. Dubbing costs mor
 
 ```python
 try:
-    client.videos_ai.start_ai_translate_dubbing(video_id)
+    client.videos_ai.start_ai_translate_dubbing(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type StartAiTranslateDubbingErrorBody
 ```
@@ -32693,7 +33337,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.start_ai_translate_dubbing(video_id)
+    await async_client.videos_ai.start_ai_translate_dubbing(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type StartAiTranslateDubbingErrorBody
 ```
@@ -32710,7 +33354,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosAiTranslateDubbingRequest](vimeo_api/models/videos_ai_translate_dubbing_request.py) \| [VideosAiTranslateDubbingRequestDict](vimeo_api/models/videos_ai_translate_dubbing_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32770,7 +33414,7 @@ AI credits are deducted from the enterprise account's balance.
 
 ```python
 try:
-    client.videos_ai.start_ai_translate_subtitles(video_id)
+    client.videos_ai.start_ai_translate_subtitles(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type StartAiTranslateSubtitlesErrorBody
 ```
@@ -32779,7 +33423,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_ai.start_ai_translate_subtitles(video_id)
+    await async_client.videos_ai.start_ai_translate_subtitles(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type StartAiTranslateSubtitlesErrorBody
 ```
@@ -32796,7 +33440,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosAiTranslateSubtitlesRequest](vimeo_api/models/videos_ai_translate_subtitles_request.py) \| [VideosAiTranslateSubtitlesRequestDict](vimeo_api/models/videos_ai_translate_subtitles_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32855,7 +33499,9 @@ This method creates a set of animated thumbnails for the specified video. Please
 
 ```python
 try:
-    response = client.videos_animated_thumbnails.create_animated_thumbset(video_id, body)
+    response = client.videos_animated_thumbnails.create_animated_thumbset(
+        258684937, VideosAnimatedThumbsetsRequest(duration=1.5)
+    )
     # TODO: Handle 'response' of type AnimatedThumbset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateAnimatedThumbsetErrorBody
@@ -32865,7 +33511,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_animated_thumbnails.create_animated_thumbset(video_id, body)
+    response = await async_client.videos_animated_thumbnails.create_animated_thumbset(
+        258684937, VideosAnimatedThumbsetsRequest(duration=1.5)
+    )
     # TODO: Handle 'response' of type AnimatedThumbset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateAnimatedThumbsetErrorBody
@@ -32883,7 +33531,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosAnimatedThumbsetsRequest](vimeo_api/models/videos_animated_thumbsets_request.py) \| [VideosAnimatedThumbsetsRequestDict](vimeo_api/models/videos_animated_thumbsets_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -32938,7 +33586,7 @@ This method deletes a set of animated thumbnails for the specified video.
 
 ```python
 try:
-    client.videos_animated_thumbnails.delete_animated_thumbset(picture_id, video_id)
+    client.videos_animated_thumbnails.delete_animated_thumbset("23f34-b34h4-34hb3", 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteAnimatedThumbsetErrorBody
 ```
@@ -32947,7 +33595,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_animated_thumbnails.delete_animated_thumbset(picture_id, video_id)
+    await async_client.videos_animated_thumbnails.delete_animated_thumbset("23f34-b34h4-34hb3", 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteAnimatedThumbsetErrorBody
 ```
@@ -32964,7 +33612,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>picture_id</code> | <code>str</code> | The UUID of the set of animated thumbnails. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33018,7 +33666,7 @@ This method returns all the sets of animated thumbnails associated with the spec
 
 ```python
 try:
-    response = client.videos_animated_thumbnails.get_all_animated_thumbset(video_id)
+    response = client.videos_animated_thumbnails.get_all_animated_thumbset(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type AnimatedThumbsetConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAllAnimatedThumbsetErrorBody
@@ -33028,7 +33676,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_animated_thumbnails.get_all_animated_thumbset(video_id)
+    response = await async_client.videos_animated_thumbnails.get_all_animated_thumbset(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type AnimatedThumbsetConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAllAnimatedThumbsetErrorBody
@@ -33047,7 +33695,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33101,7 +33749,7 @@ This method returns a particular set of animated thumbnails associated with the 
 
 ```python
 try:
-    response = client.videos_animated_thumbnails.get_animated_thumbset(picture_id, video_id)
+    response = client.videos_animated_thumbnails.get_animated_thumbset("23few-h4hw4t-45j5", 258684937)
     # TODO: Handle 'response' of type AnimatedThumbset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAnimatedThumbsetErrorBody
@@ -33111,7 +33759,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_animated_thumbnails.get_animated_thumbset(picture_id, video_id)
+    response = await async_client.videos_animated_thumbnails.get_animated_thumbset("23few-h4hw4t-45j5", 258684937)
     # TODO: Handle 'response' of type AnimatedThumbset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAnimatedThumbsetErrorBody
@@ -33129,7 +33777,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>picture_id</code> | <code>str</code> | The UUID of the set of animated thumbnails. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33183,7 +33831,7 @@ This method returns the status of a particular set of animated thumbnails associ
 
 ```python
 try:
-    response = client.videos_animated_thumbnails.get_animated_thumbset_status(picture_id, video_id)
+    response = client.videos_animated_thumbnails.get_animated_thumbset_status("23few-h4hw4t-45j5", 258684937)
     # TODO: Handle 'response' of type AnimatedThumbset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAnimatedThumbsetStatusErrorBody
@@ -33193,7 +33841,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_animated_thumbnails.get_animated_thumbset_status(picture_id, video_id)
+    response = await async_client.videos_animated_thumbnails.get_animated_thumbset_status(
+        "23few-h4hw4t-45j5", 258684937
+    )
     # TODO: Handle 'response' of type AnimatedThumbset
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAnimatedThumbsetStatusErrorBody
@@ -33211,7 +33861,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>picture_id</code> | <code>str</code> | The UUID of the set of animated thumbnails. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33269,7 +33919,7 @@ This method adds a chapter to the specified video.
 
 ```python
 try:
-    response = client.videos_chapters.create_chapter(video_id)
+    response = client.videos_chapters.create_chapter(258684937)
     # TODO: Handle 'response' of type Chapter
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateChapterErrorBody
@@ -33279,7 +33929,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.create_chapter(video_id)
+    response = await async_client.videos_chapters.create_chapter(258684937)
     # TODO: Handle 'response' of type Chapter
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateChapterErrorBody
@@ -33297,7 +33947,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosChaptersRequest](vimeo_api/models/videos_chapters_request.py) \| [VideosChaptersRequestDict](vimeo_api/models/videos_chapters_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33351,7 +34001,7 @@ This method generates either an upload link or a timecode-based thumbnail for th
 
 ```python
 try:
-    response = client.videos_chapters.create_chapter_thumbnail_or_upload_link(chapter_id, video_id)
+    response = client.videos_chapters.create_chapter_thumbnail_or_upload_link(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateChapterThumbnailOrUploadLinkErrorBody
@@ -33361,7 +34011,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.create_chapter_thumbnail_or_upload_link(chapter_id, video_id)
+    response = await async_client.videos_chapters.create_chapter_thumbnail_or_upload_link(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateChapterThumbnailOrUploadLinkErrorBody
@@ -33380,7 +34030,7 @@ except ApiError as e:
 | <code>chapter_id</code> | <code>float</code> | The ID of the chapter. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosChaptersPicturesRequest](vimeo_api/models/videos_chapters_pictures_request.py) \| [VideosChaptersPicturesRequestDict](vimeo_api/models/videos_chapters_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33434,7 +34084,7 @@ This method generates either an upload link or a timecode-based thumbnail for an
 
 ```python
 try:
-    response = client.videos_chapters.create_unsaved_chapter_thumbnail_or_upload_link(video_id)
+    response = client.videos_chapters.create_unsaved_chapter_thumbnail_or_upload_link(258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateUnsavedChapterThumbnailOrUploadLinkErrorBody
@@ -33444,7 +34094,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.create_unsaved_chapter_thumbnail_or_upload_link(video_id)
+    response = await async_client.videos_chapters.create_unsaved_chapter_thumbnail_or_upload_link(258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateUnsavedChapterThumbnailOrUploadLinkErrorBody
@@ -33462,7 +34112,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosChaptersTemporaryPicturesRequest](vimeo_api/models/videos_chapters_temporary_pictures_request.py) \| [VideosChaptersTemporaryPicturesRequestDict](vimeo_api/models/videos_chapters_temporary_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33516,7 +34166,7 @@ This method deletes the specified chapter from a video. The authenticated user m
 
 ```python
 try:
-    client.videos_chapters.delete_chapter(chapter_id, video_id)
+    client.videos_chapters.delete_chapter(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChapterErrorBody
 ```
@@ -33525,7 +34175,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_chapters.delete_chapter(chapter_id, video_id)
+    await async_client.videos_chapters.delete_chapter(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChapterErrorBody
 ```
@@ -33542,7 +34192,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>chapter_id</code> | <code>float</code> | The ID of the chapter. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33599,7 +34249,7 @@ This method deletes both timecode-generated and custom-uploaded thumbnails.
 
 ```python
 try:
-    client.videos_chapters.delete_chapter_thumbnail(chapter_id, uid, video_id)
+    client.videos_chapters.delete_chapter_thumbnail(12345, "24kjh4h4g38175db9f59fae9f7g9ekhg", 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChapterThumbnailErrorBody
 ```
@@ -33608,7 +34258,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_chapters.delete_chapter_thumbnail(chapter_id, uid, video_id)
+    await async_client.videos_chapters.delete_chapter_thumbnail(12345, "24kjh4h4g38175db9f59fae9f7g9ekhg", 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteChapterThumbnailErrorBody
 ```
@@ -33626,7 +34276,7 @@ except ApiError as e:
 | <code>chapter_id</code> | <code>float</code> | The ID of the chapter. |
 | <code>uid</code> | <code>str</code> | The unique ID of the thumbnail. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33680,7 +34330,7 @@ This method edits the specified chapter of a video. The authenticated user must 
 
 ```python
 try:
-    response = client.videos_chapters.edit_chapter(chapter_id, video_id)
+    response = client.videos_chapters.edit_chapter(12345, 258684937)
     # TODO: Handle 'response' of type Chapter
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditChapterErrorBody
@@ -33690,7 +34340,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.edit_chapter(chapter_id, video_id)
+    response = await async_client.videos_chapters.edit_chapter(12345, 258684937)
     # TODO: Handle 'response' of type Chapter
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditChapterErrorBody
@@ -33709,7 +34359,7 @@ except ApiError as e:
 | <code>chapter_id</code> | <code>float</code> | The ID of the chapter. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosChaptersRequest1](vimeo_api/models/videos_chapters_request1.py) \| [VideosChaptersRequest1Dict](vimeo_api/models/videos_chapters_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33764,7 +34414,7 @@ This method returns a single chapter of the specified video.
 
 ```python
 try:
-    response = client.videos_chapters.get_chapter(chapter_id, video_id)
+    response = client.videos_chapters.get_chapter(12345, 258684937)
     # TODO: Handle 'response' of type Chapter
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChapterErrorBody
@@ -33774,7 +34424,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.get_chapter(chapter_id, video_id)
+    response = await async_client.videos_chapters.get_chapter(12345, 258684937)
     # TODO: Handle 'response' of type Chapter
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChapterErrorBody
@@ -33792,7 +34442,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>chapter_id</code> | <code>float</code> | The ID of the chapter. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33846,7 +34496,7 @@ This method returns the specified thumbnail associated with a saved video chapte
 
 ```python
 try:
-    response = client.videos_chapters.get_chapter_thumbnail(chapter_id, video_id, uid)
+    response = client.videos_chapters.get_chapter_thumbnail(12345, 258684937, "some example string")
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChapterThumbnailErrorBody
@@ -33856,7 +34506,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.get_chapter_thumbnail(chapter_id, video_id, uid)
+    response = await async_client.videos_chapters.get_chapter_thumbnail(12345, 258684937, "some example string")
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChapterThumbnailErrorBody
@@ -33875,7 +34525,7 @@ except ApiError as e:
 | <code>chapter_id</code> | <code>float</code> | The ID of the chapter. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>uid</code> | <code>str</code> | Value sent with the request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -33929,7 +34579,7 @@ This method returns every thumbnail associated with the specified saved video ch
 
 ```python
 try:
-    response = client.videos_chapters.get_chapter_thumbnails(chapter_id, video_id)
+    response = client.videos_chapters.get_chapter_thumbnails(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChapterThumbnailsErrorBody
@@ -33939,7 +34589,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.get_chapter_thumbnails(chapter_id, video_id)
+    response = await async_client.videos_chapters.get_chapter_thumbnails(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChapterThumbnailsErrorBody
@@ -33957,7 +34607,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>chapter_id</code> | <code>float</code> | The ID of the chapter. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34011,7 +34661,7 @@ This method returns every chapter of the specified video.
 
 ```python
 try:
-    response = client.videos_chapters.get_chapters(video_id)
+    response = client.videos_chapters.get_chapters(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type ChapterConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChaptersErrorBody
@@ -34021,7 +34671,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.get_chapters(video_id)
+    response = await async_client.videos_chapters.get_chapters(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type ChapterConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetChaptersErrorBody
@@ -34040,7 +34690,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34094,7 +34744,7 @@ This method returns the specified thumbnail associated with an unsaved video cha
 
 ```python
 try:
-    response = client.videos_chapters.get_unsaved_chapter_thumbnail(video_id, uid)
+    response = client.videos_chapters.get_unsaved_chapter_thumbnail(258684937, "some example string")
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUnsavedChapterThumbnailErrorBody
@@ -34104,7 +34754,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.get_unsaved_chapter_thumbnail(video_id, uid)
+    response = await async_client.videos_chapters.get_unsaved_chapter_thumbnail(258684937, "some example string")
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetUnsavedChapterThumbnailErrorBody
@@ -34122,7 +34772,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>uid</code> | <code>str</code> | Value sent with the request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34176,7 +34826,7 @@ This method sets the specified chapter thumbnail for a video as active.
 
 ```python
 try:
-    response = client.videos_chapters.set_chapter_thumbnail_active(chapter_id, video_id, uid)
+    response = client.videos_chapters.set_chapter_thumbnail_active(12345, 258684937, "some example string")
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetChapterThumbnailActiveErrorBody
@@ -34186,7 +34836,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_chapters.set_chapter_thumbnail_active(chapter_id, video_id, uid)
+    response = await async_client.videos_chapters.set_chapter_thumbnail_active(12345, 258684937, "some example string")
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SetChapterThumbnailActiveErrorBody
@@ -34206,7 +34856,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>uid</code> | <code>str</code> | Value sent with the request. |
 | <code>body</code> | <code>[VideosChaptersPicturesUidRequest](vimeo_api/models/videos_chapters_pictures_uid_request.py) \| [VideosChaptersPicturesUidRequestDict](vimeo_api/models/videos_chapters_pictures_uid_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34290,7 +34940,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34341,7 +34991,7 @@ This method returns all available Creative Commons licenses.
 
 ```python
 try:
-    response = client.videos_creative_commons.get_cc_licenses()
+    response = client.videos_creative_commons.get_cc_licenses(page=1, per_page=10)
     # TODO: Handle 'response' of type CreativeCommonsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -34351,7 +35001,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_creative_commons.get_cc_licenses()
+    response = await async_client.videos_creative_commons.get_cc_licenses(page=1, per_page=10)
     # TODO: Handle 'response' of type CreativeCommonsConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -34369,7 +35019,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34420,7 +35070,15 @@ This method adds a user credit to the specified video.
 
 ```python
 try:
-    response = client.videos_credits.add_video_credit(video_id, body)
+    response = client.videos_credits.add_video_credit(
+        258684937,
+        VideosCreditsRequest(
+            email="some example string",
+            name="some example string",
+            role="some example string",
+            user_uri="some example string",
+        ),
+    )
     # TODO: Handle 'response' of type Credit
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoCreditErrorBody
@@ -34430,7 +35088,15 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_credits.add_video_credit(video_id, body)
+    response = await async_client.videos_credits.add_video_credit(
+        258684937,
+        VideosCreditsRequest(
+            email="some example string",
+            name="some example string",
+            role="some example string",
+            user_uri="some example string",
+        ),
+    )
     # TODO: Handle 'response' of type Credit
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoCreditErrorBody
@@ -34448,7 +35114,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosCreditsRequest](vimeo_api/models/videos_credits_request.py) \| [VideosCreditsRequestDict](vimeo_api/models/videos_credits_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34502,7 +35168,16 @@ This method adds a user credit to the specified video.
 
 ```python
 try:
-    response = client.videos_credits.add_video_credit_alt1(channel_id, video_id, body)
+    response = client.videos_credits.add_video_credit_alt1(
+        927,
+        258684937,
+        ChannelsVideosCreditsRequest(
+            email="some example string",
+            name="some example string",
+            role="some example string",
+            user_uri="some example string",
+        ),
+    )
     # TODO: Handle 'response' of type Credit
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoCreditAlt1ErrorBody
@@ -34512,7 +35187,16 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_credits.add_video_credit_alt1(channel_id, video_id, body)
+    response = await async_client.videos_credits.add_video_credit_alt1(
+        927,
+        258684937,
+        ChannelsVideosCreditsRequest(
+            email="some example string",
+            name="some example string",
+            role="some example string",
+            user_uri="some example string",
+        ),
+    )
     # TODO: Handle 'response' of type Credit
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoCreditAlt1ErrorBody
@@ -34531,7 +35215,7 @@ except ApiError as e:
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[ChannelsVideosCreditsRequest](vimeo_api/models/channels_videos_credits_request.py) \| [ChannelsVideosCreditsRequestDict](vimeo_api/models/channels_videos_credits_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34585,7 +35269,9 @@ This method returns the users who can be credited on the specified video.
 
 ```python
 try:
-    response = client.videos_credits.available_users(video_id)
+    response = client.videos_credits.available_users(
+        258684937, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -34595,7 +35281,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_credits.available_users(video_id)
+    response = await async_client.videos_credits.available_users(
+        258684937, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -34617,7 +35305,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date followed.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34664,7 +35352,7 @@ This method deletes the specified user credit from a video. The authenticated us
 
 ```python
 try:
-    client.videos_credits.delete_video_credit(credit_id, video_id)
+    client.videos_credits.delete_video_credit(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoCreditErrorBody
 ```
@@ -34673,7 +35361,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_credits.delete_video_credit(credit_id, video_id)
+    await async_client.videos_credits.delete_video_credit(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoCreditErrorBody
 ```
@@ -34690,7 +35378,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>credit_id</code> | <code>float</code> | The ID of the credit. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34744,7 +35432,7 @@ This method edits the specified user credit in a video.
 
 ```python
 try:
-    response = client.videos_credits.edit_video_credit(credit_id, video_id)
+    response = client.videos_credits.edit_video_credit(12345, 258684937)
     # TODO: Handle 'response' of type Credit
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVideoCreditErrorBody
@@ -34754,7 +35442,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_credits.edit_video_credit(credit_id, video_id)
+    response = await async_client.videos_credits.edit_video_credit(12345, 258684937)
     # TODO: Handle 'response' of type Credit
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVideoCreditErrorBody
@@ -34773,7 +35461,7 @@ except ApiError as e:
 | <code>credit_id</code> | <code>float</code> | The ID of the credit. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosCreditsRequest1](vimeo_api/models/videos_credits_request1.py) \| [VideosCreditsRequest1Dict](vimeo_api/models/videos_credits_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34827,7 +35515,7 @@ This method returns a single credited user in a video.
 
 ```python
 try:
-    response = client.videos_credits.get_video_credit(credit_id, video_id)
+    response = client.videos_credits.get_video_credit(12345, 258684937)
     # TODO: Handle 'response' of type Credit
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoCreditErrorBody
@@ -34837,7 +35525,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_credits.get_video_credit(credit_id, video_id)
+    response = await async_client.videos_credits.get_video_credit(12345, 258684937)
     # TODO: Handle 'response' of type Credit
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoCreditErrorBody
@@ -34855,7 +35543,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>credit_id</code> | <code>float</code> | The ID of the credit. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34909,7 +35597,9 @@ This method returns every credited user in a video.
 
 ```python
 try:
-    response = client.videos_credits.get_video_credits(video_id)
+    response = client.videos_credits.get_video_credits(
+        258684937, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type CreditConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -34919,7 +35609,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_credits.get_video_credits(video_id)
+    response = await async_client.videos_credits.get_video_credits(
+        258684937, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type CreditConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -34941,7 +35633,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -34988,7 +35680,9 @@ This method returns every credited user in a video.
 
 ```python
 try:
-    response = client.videos_credits.get_video_credits_alt1(channel_id, video_id)
+    response = client.videos_credits.get_video_credits_alt1(
+        927, 258684937, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type CreditConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -34998,7 +35692,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_credits.get_video_credits_alt1(channel_id, video_id)
+    response = await async_client.videos_credits.get_video_credits_alt1(
+        927, 258684937, direction=Direction.ASC, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type CreditConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -35021,7 +35717,7 @@ except ApiError as e:
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort8OrStr](vimeo_api/models/enums/sort8.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `date` - Sort the results by date.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35072,7 +35768,7 @@ This method adds the specified domain to a video's allowlist.
 
 ```python
 try:
-    client.videos_embed_privacy.add_video_privacy_domain(domain, video_id)
+    client.videos_embed_privacy.add_video_privacy_domain("example.com", 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoPrivacyDomainErrorBody
 ```
@@ -35081,7 +35777,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_embed_privacy.add_video_privacy_domain(domain, video_id)
+    await async_client.videos_embed_privacy.add_video_privacy_domain("example.com", 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoPrivacyDomainErrorBody
 ```
@@ -35098,7 +35794,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>domain</code> | <code>str</code> | The domain name. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35152,7 +35848,7 @@ This method removes the specified domain from a video's allowlist.
 
 ```python
 try:
-    client.videos_embed_privacy.delete_video_privacy_domain(domain, video_id)
+    client.videos_embed_privacy.delete_video_privacy_domain("example.com", 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoPrivacyDomainErrorBody
 ```
@@ -35161,7 +35857,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_embed_privacy.delete_video_privacy_domain(domain, video_id)
+    await async_client.videos_embed_privacy.delete_video_privacy_domain("example.com", 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoPrivacyDomainErrorBody
 ```
@@ -35178,7 +35874,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>domain</code> | <code>str</code> | The domain name. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35232,7 +35928,9 @@ This method returns every domain on the specified video's allowlist.
 
 ```python
 try:
-    response = client.videos_embed_privacy.get_video_privacy_domains(video_id)
+    response = client.videos_embed_privacy.get_video_privacy_domains(
+        258684937, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type DomainConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoPrivacyDomainsErrorBody
@@ -35242,7 +35940,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_embed_privacy.get_video_privacy_domains(video_id)
+    response = await async_client.videos_embed_privacy.get_video_privacy_domains(
+        258684937, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type DomainConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoPrivacyDomainsErrorBody
@@ -35263,7 +35963,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort78OrStr](vimeo_api/models/enums/sort78.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `default` - Sort the results by the video's allowlist ID.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35321,7 +36021,7 @@ This method determines whether the authenticated user is the owner of the specif
 
 ```python
 try:
-    response = client.videos_essentials.check_if_user_owns_video(user_id, video_id)
+    response = client.videos_essentials.check_if_user_owns_video(152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserOwnsVideoErrorBody
@@ -35331,7 +36031,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.check_if_user_owns_video(user_id, video_id)
+    response = await async_client.videos_essentials.check_if_user_owns_video(152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserOwnsVideoErrorBody
@@ -35349,7 +36049,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35403,7 +36103,7 @@ This method determines whether the authenticated user is the owner of the specif
 
 ```python
 try:
-    response = client.videos_essentials.check_if_user_owns_video_alt1(video_id)
+    response = client.videos_essentials.check_if_user_owns_video_alt1(258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserOwnsVideoAlt1ErrorBody
@@ -35413,7 +36113,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.check_if_user_owns_video_alt1(video_id)
+    response = await async_client.videos_essentials.check_if_user_owns_video_alt1(258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckIfUserOwnsVideoAlt1ErrorBody
@@ -35430,7 +36130,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35485,7 +36185,7 @@ current version is copied; prior version history is not carried over.
 
 ```python
 try:
-    response = client.videos_essentials.copy_video(user_id, video_id)
+    response = client.videos_essentials.copy_video(152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CopyVideoErrorBody
@@ -35495,7 +36195,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.copy_video(user_id, video_id)
+    response = await async_client.videos_essentials.copy_video(152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CopyVideoErrorBody
@@ -35514,7 +36214,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[UsersVideosCopyRequest](vimeo_api/models/users_videos_copy_request.py) \| [UsersVideosCopyRequestDict](vimeo_api/models/users_videos_copy_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35569,7 +36269,7 @@ current version is copied; prior version history is not carried over.
 
 ```python
 try:
-    response = client.videos_essentials.copy_video_alt2(video_id)
+    response = client.videos_essentials.copy_video_alt2(258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CopyVideoAlt2ErrorBody
@@ -35579,7 +36279,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.copy_video_alt2(video_id)
+    response = await async_client.videos_essentials.copy_video_alt2(258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CopyVideoAlt2ErrorBody
@@ -35597,7 +36297,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[MeVideosCopyRequest](vimeo_api/models/me_videos_copy_request.py) \| [MeVideosCopyRequestDict](vimeo_api/models/me_videos_copy_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35651,7 +36351,7 @@ This method deletes the specified video. The authenticated user must be the owne
 
 ```python
 try:
-    client.videos_essentials.delete_video(video_id)
+    client.videos_essentials.delete_video(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoErrorBody
 ```
@@ -35660,7 +36360,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_essentials.delete_video(video_id)
+    await async_client.videos_essentials.delete_video(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoErrorBody
 ```
@@ -35677,7 +36377,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosRequest](vimeo_api/models/videos_request.py) \| [VideosRequestDict](vimeo_api/models/videos_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35733,7 +36433,7 @@ Specify the videos to delete in a comma-separated list by URI using the **uris**
 
 ```python
 try:
-    client.videos_essentials.delete_videos(user_id, uris)
+    client.videos_essentials.delete_videos(152184, "/videos/258684937,/videos/258684546")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideosErrorBody
 ```
@@ -35742,7 +36442,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_essentials.delete_videos(user_id, uris)
+    await async_client.videos_essentials.delete_videos(152184, "/videos/258684937,/videos/258684546")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideosErrorBody
 ```
@@ -35760,7 +36460,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>uris</code> | <code>str</code> | A comma-separated list of the video URIs to delete. |
 | <code>body</code> | <code>[UsersVideosRequest](vimeo_api/models/users_videos_request.py) \| [UsersVideosRequestDict](vimeo_api/models/users_videos_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35816,7 +36516,7 @@ Specify the videos to delete in a comma-separated list by URI using the **uris**
 
 ```python
 try:
-    client.videos_essentials.delete_videos_alt1(uris)
+    client.videos_essentials.delete_videos_alt1("/videos/258684937,/videos/258684546")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideosAlt1ErrorBody
 ```
@@ -35825,7 +36525,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_essentials.delete_videos_alt1(uris)
+    await async_client.videos_essentials.delete_videos_alt1("/videos/258684937,/videos/258684546")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideosAlt1ErrorBody
 ```
@@ -35842,7 +36542,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>uris</code> | <code>str</code> | A comma-separated list of the video URIs to delete. |
 | <code>body</code> | <code>[MeVideosRequest](vimeo_api/models/me_videos_request.py) \| [MeVideosRequestDict](vimeo_api/models/me_videos_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35896,7 +36596,7 @@ This method edits the specified video.
 
 ```python
 try:
-    response = client.videos_essentials.edit_video(video_id, body)
+    response = client.videos_essentials.edit_video(258684937, VideosRequest1())
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVideoErrorBody
@@ -35906,7 +36606,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.edit_video(video_id, body)
+    response = await async_client.videos_essentials.edit_video(258684937, VideosRequest1())
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVideoErrorBody
@@ -35924,7 +36624,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosRequest1](vimeo_api/models/videos_request1.py) \| [VideosRequest1Dict](vimeo_api/models/videos_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -35954,7 +36654,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_appearances(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_appearances(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -35978,7 +36678,9 @@ This method returns all the videos in which the authenticated user has a credite
 
 ```python
 try:
-    response = client.videos_essentials.get_appearances(user_id)
+    response = client.videos_essentials.get_appearances(
+        152184, direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAppearancesErrorBody
@@ -35988,7 +36690,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.get_appearances(user_id)
+    response = await async_client.videos_essentials.get_appearances(
+        152184, direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAppearancesErrorBody
@@ -36006,13 +36710,13 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort15OrStr](vimeo_api/models/enums/sort15.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by date.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36042,7 +36746,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_appearances_alt1(*, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_appearances_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -36066,7 +36770,9 @@ This method returns all the videos in which the authenticated user has a credite
 
 ```python
 try:
-    response = client.videos_essentials.get_appearances_alt1()
+    response = client.videos_essentials.get_appearances_alt1(
+        direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAppearancesAlt1ErrorBody
@@ -36076,7 +36782,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.get_appearances_alt1()
+    response = await async_client.videos_essentials.get_appearances_alt1(
+        direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAppearancesAlt1ErrorBody
@@ -36093,13 +36801,13 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort15OrStr](vimeo_api/models/enums/sort15.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by date.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36153,7 +36861,7 @@ This method returns a single video.
 
 ```python
 try:
-    response = client.videos_essentials.get_video(video_id)
+    response = client.videos_essentials.get_video(258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoErrorBody
@@ -36163,7 +36871,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.get_video(video_id)
+    response = await async_client.videos_essentials.get_video(258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoErrorBody
@@ -36181,7 +36889,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>time_links</code> | <code>bool \| None</code> | Whether to return timestamps in the description as links.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36211,7 +36919,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_videos(user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter22OrStr | None = None, filter_embeddable: bool | None = None, filter_playable: bool | None = None, filter_screen_recorded: bool | None = None, filter_tag: str | None = None, filter_tag_all_of: str | None = None, filter_tag_exclude: str | None = None, filter_uploader: float | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: QueryFieldsOrStr | None = None, sort: Sort39OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_videos(user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter22OrStr | None = None, filter_embeddable: bool | None = None, filter_playable: bool | None = None, filter_screen_recorded: bool | None = None, filter_tag: str | None = None, filter_tag_all_of: str | None = None, filter_tag_exclude: str | None = None, filter_uploader: float | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: QueryFieldsOrStr | None = None, sort: Sort39OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -36235,7 +36943,21 @@ This method returns all the videos that the authenticated user has uploaded.
 
 ```python
 try:
-    response = client.videos_essentials.get_videos(user_id)
+    response = client.videos_essentials.get_videos(
+        152184,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        filter_playable=True,
+        filter_screen_recorded=True,
+        filter_tag="abc,xyz",
+        filter_tag_all_of="abc,xyz",
+        filter_tag_exclude="abc,xyz",
+        filter_uploader=258684937,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -36245,7 +36967,21 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.get_videos(user_id)
+    response = await async_client.videos_essentials.get_videos(
+        152184,
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        filter_playable=True,
+        filter_screen_recorded=True,
+        filter_tag="abc,xyz",
+        filter_tag_all_of="abc,xyz",
+        filter_tag_exclude="abc,xyz",
+        filter_uploader=258684937,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -36264,7 +37000,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>containing_uri</code> | <code>str \| None</code> | The page that contains the video URI. The field is available only when not paired with **query**.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter22OrStr](vimeo_api/models/enums/filter22.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `app_only` - Return app-only videos.<br> * `cold_privacy` - Return the owner's active videos whose privacy is suppressed because their plan no longer supports it (cold privacy).<br> * `cold_storage` - Return cold storage videos.<br> * `embeddable` - Return embeddable videos.<br> * `featured` - Return featured videos.<br> * `live` - Return only live videos.<br> * `no_placeholder` - Return no placeholder videos.<br> * `nolive` - Return no live videos.<br> * `playable` - Return playable videos.<br> * `screen_recorded` - Return screen-recorded videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter22OrStr](vimeo_api/models/enums/filter22.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `app_only` - Return app-only videos.<br> * `cold_privacy` - Return the owner's active videos whose privacy is suppressed because their plan no longer supports it (cold privacy).<br> * `cold_storage` - Return cold storage videos.<br> * `embeddable` - Return embeddable videos.<br> * `featured` - Return featured videos.<br> * `live` - Return only live videos.<br> * `no_placeholder` - Return no placeholder videos.<br> * `nolive` - Return no live videos.<br> * `playable` - Return playable videos.<br> * `screen_recorded` - Return screen-recorded videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>filter_playable</code> | <code>bool \| None</code> | Whether to filter the results by playable videos (`true`) or non-playable videos (`false`).<br>**Default**: <code>None</code> |
 | <code>filter_screen_recorded</code> | <code>bool \| None</code> | Whether to filter the results by screen-recorded videos (`true`) or non-screen-recorded videos (`false`).<br>**Default**: <code>None</code> |
@@ -36277,7 +37013,7 @@ except ApiError as e:
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>query_fields</code> | <code>[QueryFieldsOrStr](vimeo_api/models/enums/query_fields.py) \| None</code> | A comma-separated list of fields to query over. The default value is `title,description,chapters,tags`.<br><br>Option descriptions:<br> * `chapters` - Query by chapter titles that have been added to the video.<br> * `description` - Query by the description of the video.<br> * `tags` - Query by tag names that have been added to the video.<br> * `title` - Query by the title of the video.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort39OrStr](vimeo_api/models/enums/sort39.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically by title.<br> * `date` - Sort the results by date.<br> * `default` - Use the default sorting method.<br> * `duration` - Sort the results by duration.<br> * `last_user_action_event_date` - Sort the results by last user interaction. If a result hasn't had an interaction, the upload date is used instead.<br> * `likes` - Sort the results by number of likes. To use this option, **direction** must be `desc`.<br> * `modified_time` - Sort the results by last modification.<br> * `plays` - Sort the results by number of plays. To use this option, **direction** must be `desc`.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36300,7 +37036,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_videos_alt1(*, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter22OrStr | None = None, filter_embeddable: bool | None = None, filter_playable: bool | None = None, filter_screen_recorded: bool | None = None, filter_tag: str | None = None, filter_tag_all_of: str | None = None, filter_tag_exclude: str | None = None, filter_uploader: float | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: QueryFieldsOrStr | None = None, sort: Sort39OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_videos_alt1(*, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter22OrStr | None = None, filter_embeddable: bool | None = None, filter_playable: bool | None = None, filter_screen_recorded: bool | None = None, filter_tag: str | None = None, filter_tag_all_of: str | None = None, filter_tag_exclude: str | None = None, filter_uploader: float | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, query_fields: QueryFieldsOrStr | None = None, sort: Sort39OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -36324,7 +37060,20 @@ This method returns all the videos that the authenticated user has uploaded.
 
 ```python
 try:
-    response = client.videos_essentials.get_videos_alt1()
+    response = client.videos_essentials.get_videos_alt1(
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        filter_playable=True,
+        filter_screen_recorded=True,
+        filter_tag="abc,xyz",
+        filter_tag_all_of="abc,xyz",
+        filter_tag_exclude="abc,xyz",
+        filter_uploader=258684937,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -36334,7 +37083,20 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.get_videos_alt1()
+    response = await async_client.videos_essentials.get_videos_alt1(
+        containing_uri="/videos/258684937",
+        direction=Direction.ASC,
+        filter_embeddable=True,
+        filter_playable=True,
+        filter_screen_recorded=True,
+        filter_tag="abc,xyz",
+        filter_tag_all_of="abc,xyz",
+        filter_tag_exclude="abc,xyz",
+        filter_uploader=258684937,
+        page=1,
+        per_page=10,
+        query="Stop motion",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -36352,7 +37114,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>containing_uri</code> | <code>str \| None</code> | The page that contains the video URI. The field is available only when not paired with **query**.<br>**Default**: <code>None</code> |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter22OrStr](vimeo_api/models/enums/filter22.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `app_only` - Return app-only videos.<br> * `cold_privacy` - Return the owner's active videos whose privacy is suppressed because their plan no longer supports it (cold privacy).<br> * `cold_storage` - Return cold storage videos.<br> * `embeddable` - Return embeddable videos.<br> * `featured` - Return featured videos.<br> * `live` - Return only live videos.<br> * `no_placeholder` - Return no placeholder videos.<br> * `nolive` - Return no live videos.<br> * `playable` - Return playable videos.<br> * `screen_recorded` - Return screen-recorded videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter22OrStr](vimeo_api/models/enums/filter22.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `app_only` - Return app-only videos.<br> * `cold_privacy` - Return the owner's active videos whose privacy is suppressed because their plan no longer supports it (cold privacy).<br> * `cold_storage` - Return cold storage videos.<br> * `embeddable` - Return embeddable videos.<br> * `featured` - Return featured videos.<br> * `live` - Return only live videos.<br> * `no_placeholder` - Return no placeholder videos.<br> * `nolive` - Return no live videos.<br> * `playable` - Return playable videos.<br> * `screen_recorded` - Return screen-recorded videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>filter_playable</code> | <code>bool \| None</code> | Whether to filter the results by playable videos (`true`) or non-playable videos (`false`).<br>**Default**: <code>None</code> |
 | <code>filter_screen_recorded</code> | <code>bool \| None</code> | Whether to filter the results by screen-recorded videos (`true`) or non-screen-recorded videos (`false`).<br>**Default**: <code>None</code> |
@@ -36365,7 +37127,7 @@ except ApiError as e:
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>query_fields</code> | <code>[QueryFieldsOrStr](vimeo_api/models/enums/query_fields.py) \| None</code> | A comma-separated list of fields to query over. The default value is `title,description,chapters,tags`.<br><br>Option descriptions:<br> * `chapters` - Query by chapter titles that have been added to the video.<br> * `description` - Query by the description of the video.<br> * `tags` - Query by tag names that have been added to the video.<br> * `title` - Query by the title of the video.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort39OrStr](vimeo_api/models/enums/sort39.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically by title.<br> * `date` - Sort the results by date.<br> * `default` - Use the default sorting method.<br> * `duration` - Sort the results by duration.<br> * `last_user_action_event_date` - Sort the results by last user interaction. If a result hasn't had an interaction, the upload date is used instead.<br> * `likes` - Sort the results by number of likes. To use this option, **direction** must be `desc`.<br> * `modified_time` - Sort the results by last modification.<br> * `plays` - Sort the results by number of plays. To use this option, **direction** must be `desc`.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36388,7 +37150,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def search_videos(*, direction: DirectionOrStr | None = None, filter: Filter45OrStr | None = None, links: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort73OrStr | None = None, uris: str | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def search_videos(*, direction: DirectionOrStr | None = None, filter_: Filter45OrStr | None = None, links: str | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort73OrStr | None = None, uris: str | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -36412,7 +37174,14 @@ This method returns all the videos that match custom search criteria.
 
 ```python
 try:
-    response = client.videos_essentials.search_videos()
+    response = client.videos_essentials.search_videos(
+        direction=Direction.ASC,
+        links="https://vimeo.com/122375452,https://vimeo.com/273576296",
+        page=1,
+        per_page=10,
+        query="staff picks",
+        uris="/videos/122375452,/videos/273576296",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SearchVideosErrorBody
@@ -36422,7 +37191,14 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.search_videos()
+    response = await async_client.videos_essentials.search_videos(
+        direction=Direction.ASC,
+        links="https://vimeo.com/122375452,https://vimeo.com/273576296",
+        page=1,
+        per_page=10,
+        query="staff picks",
+        uris="/videos/122375452,/videos/273576296",
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type SearchVideosErrorBody
@@ -36439,14 +37215,14 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter45OrStr](vimeo_api/models/enums/filter45.py) \| None</code> | The attribute by which to filter the results. `CC` and related filters target videos with the corresponding Creative Commons licenses. For more information, see our [Creative Commons](https://vimeo.com/creativecommons) page.<br><br>Option descriptions:<br> * `CC` - Return videos under any Creative Commons license.<br> * `CC-BY` - Return CC BY, or attribution-only, videos.<br> * `CC-BY-NC` - Return CC BY-NC, or Attribution-NonCommercial, videos.<br> * `CC-BY-NC-ND` - Return CC BY-NC-ND, or Attribution-NonCommercial-NoDerivs, videos.<br> * `CC-BY-NC-SA` - Return CC BY-NC-SA, or Attribution-NonCommercial-ShareAlike, videos.<br> * `CC-BY-ND` - Return CC BY-ND, or Attribution-NoDerivs, videos.<br> * `CC-BY-SA` - Return CC BY-SA, or Attribution-ShareAlike, videos.<br> * `CC0` - Return CC0, or public domain, videos.<br> * `categories` - Filter by categories.<br> * `duration` - Filter by duration.<br> * `in-progress` - Return in-progress videos.<br> * `minimum_likes` - Filter by minimum likes.<br> * `trending` - Return trending videos.<br> * `upload_date` - Filter by upload date.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter45OrStr](vimeo_api/models/enums/filter45.py) \| None</code> | The attribute by which to filter the results. `CC` and related filters target videos with the corresponding Creative Commons licenses. For more information, see our [Creative Commons](https://vimeo.com/creativecommons) page.<br><br>Option descriptions:<br> * `CC` - Return videos under any Creative Commons license.<br> * `CC-BY` - Return CC BY, or attribution-only, videos.<br> * `CC-BY-NC` - Return CC BY-NC, or Attribution-NonCommercial, videos.<br> * `CC-BY-NC-ND` - Return CC BY-NC-ND, or Attribution-NonCommercial-NoDerivs, videos.<br> * `CC-BY-NC-SA` - Return CC BY-NC-SA, or Attribution-NonCommercial-ShareAlike, videos.<br> * `CC-BY-ND` - Return CC BY-ND, or Attribution-NoDerivs, videos.<br> * `CC-BY-SA` - Return CC BY-SA, or Attribution-ShareAlike, videos.<br> * `CC0` - Return CC0, or public domain, videos.<br> * `categories` - Filter by categories.<br> * `duration` - Filter by duration.<br> * `in-progress` - Return in-progress videos.<br> * `minimum_likes` - Filter by minimum likes.<br> * `trending` - Return trending videos.<br> * `upload_date` - Filter by upload date.<br>**Default**: <code>None</code> |
 | <code>links</code> | <code>str \| None</code> | A comma-separated list of video URLs to find. Querying, filtering, and sorting aren't supported when using this field.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort73OrStr](vimeo_api/models/enums/sort73.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by date.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br> * `relevant` - Sort the results by relevance.<br>**Default**: <code>None</code> |
 | <code>uris</code> | <code>str \| None</code> | A comma-separated list of video URIs to find. Querying, filtering, and sorting aren't supported when using this field.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36519,7 +37295,7 @@ its default value (if one is defined) or become unset.
 
 ```python
 try:
-    response = client.videos_essentials.update_video_custom_metadata(video_id)
+    response = client.videos_essentials.update_video_custom_metadata(258684937)
     # TODO: Handle 'response' of type list[CustomMetadataValues]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateVideoCustomMetadataErrorBody
@@ -36529,7 +37305,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_essentials.update_video_custom_metadata(video_id)
+    response = await async_client.videos_essentials.update_video_custom_metadata(258684937)
     # TODO: Handle 'response' of type list[CustomMetadataValues]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UpdateVideoCustomMetadataErrorBody
@@ -36547,7 +37323,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosCustomMetadataRequest](vimeo_api/models/videos_custom_metadata_request.py) \| [VideosCustomMetadataRequestDict](vimeo_api/models/videos_custom_metadata_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36606,7 +37382,7 @@ This method deletes all fragments for the specified video.
 
 ```python
 try:
-    client.videos_fragments.delete_fragments(video_id)
+    client.videos_fragments.delete_fragments(699033361)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -36615,7 +37391,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_fragments.delete_fragments(video_id)
+    await async_client.videos_fragments.delete_fragments(699033361)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -36631,7 +37407,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36678,7 +37454,7 @@ This method returns all of the fragments associated with the specified video.
 
 ```python
 try:
-    response = client.videos_fragments.get_fragments(video_id)
+    response = client.videos_fragments.get_fragments(699033361)
     # TODO: Handle 'response' of type Fragments
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -36688,7 +37464,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_fragments.get_fragments(video_id)
+    response = await async_client.videos_fragments.get_fragments(699033361)
     # TODO: Handle 'response' of type Fragments
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -36705,7 +37481,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36752,7 +37528,7 @@ This method updates the specified video with new fragments.
 
 ```python
 try:
-    client.videos_fragments.put_fragments(video_id)
+    client.videos_fragments.put_fragments(699033361)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -36761,7 +37537,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_fragments.put_fragments(video_id)
+    await async_client.videos_fragments.put_fragments(699033361)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -36777,7 +37553,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36804,7 +37580,7 @@ except ApiError as e:
 > Source: [VideosLanguages](vimeo_api/apis/videos_languages.py)
 
 <details>
-<summary><code>def get_languages(*, filter: Filter7OrStr | None = None, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None) -> LanguageConnection</code></summary>
+<summary><code>def get_languages(*, filter_: Filter7OrStr | None = None, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None) -> LanguageConnection</code></summary>
 
 <dl>
 <dd>
@@ -36828,7 +37604,7 @@ This method returns all available video languages.
 
 ```python
 try:
-    response = client.videos_languages.get_languages()
+    response = client.videos_languages.get_languages(page=1, per_page=10)
     # TODO: Handle 'response' of type LanguageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -36838,7 +37614,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_languages.get_languages()
+    response = await async_client.videos_languages.get_languages(page=1, per_page=10)
     # TODO: Handle 'response' of type LanguageConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -36854,10 +37630,10 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>filter</code> | <code>[Filter7OrStr](vimeo_api/models/enums/filter7.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `audiotracks` - Return languages that can be used for audio tracks.<br> * `texttracks` - Return languages that can be used for text tracks.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter7OrStr](vimeo_api/models/enums/filter7.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `audiotracks` - Return languages that can be used for audio tracks.<br> * `texttracks` - Return languages that can be used for text tracks.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36908,7 +37684,7 @@ This method returns an M3U8 playback URL for the specified event stream. You sho
 
 ```python
 try:
-    client.videos_live_m3_u8_playback.get_one_time_event_m3u8_playback(user_id, video_id)
+    client.videos_live_m3_u8_playback.get_one_time_event_m3u8_playback(152184, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetOneTimeEventM3U8PlaybackErrorBody
 ```
@@ -36917,7 +37693,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_live_m3_u8_playback.get_one_time_event_m3u8_playback(user_id, video_id)
+    await async_client.videos_live_m3_u8_playback.get_one_time_event_m3u8_playback(152184, 12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetOneTimeEventM3U8PlaybackErrorBody
 ```
@@ -36934,7 +37710,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -36988,7 +37764,7 @@ This method returns an M3U8 playback URL for the specified event stream. You sho
 
 ```python
 try:
-    client.videos_live_m3_u8_playback.get_one_time_event_m3u8_playback_alt1(video_id)
+    client.videos_live_m3_u8_playback.get_one_time_event_m3u8_playback_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetOneTimeEventM3U8PlaybackAlt1ErrorBody
 ```
@@ -36997,7 +37773,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_live_m3_u8_playback.get_one_time_event_m3u8_playback_alt1(video_id)
+    await async_client.videos_live_m3_u8_playback.get_one_time_event_m3u8_playback_alt1(12345)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetOneTimeEventM3U8PlaybackAlt1ErrorBody
 ```
@@ -37013,7 +37789,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37097,7 +37873,7 @@ except ApiError as e:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37155,7 +37931,7 @@ This method starts a trim operation for the specified video.
 
 ```python
 try:
-    response = client.videos_nondestructive_trimming.clip_trim(video_id)
+    response = client.videos_nondestructive_trimming.clip_trim(258684937)
     # TODO: Handle 'response' of type TrimmedVideo
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ClipTrimErrorBody
@@ -37165,7 +37941,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_nondestructive_trimming.clip_trim(video_id)
+    response = await async_client.videos_nondestructive_trimming.clip_trim(258684937)
     # TODO: Handle 'response' of type TrimmedVideo
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type ClipTrimErrorBody
@@ -37183,7 +37959,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosTrimRequest](vimeo_api/models/videos_trim_request.py) \| [VideosTrimRequestDict](vimeo_api/models/videos_trim_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37217,7 +37993,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 > Source: [VideosRecommendations](vimeo_api/apis/videos_recommendations.py)
 
 <details>
-<summary><code>def get_related_videos(video_id: float, *, filter: Filter46OrStr | None = None, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_related_videos(video_id: float, *, filter_: Filter46OrStr | None = None, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -37241,7 +38017,7 @@ This method returns every related video of the specified video.
 
 ```python
 try:
-    response = client.videos_recommendations.get_related_videos(video_id)
+    response = client.videos_recommendations.get_related_videos(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetRelatedVideosErrorBody
@@ -37251,7 +38027,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_recommendations.get_related_videos(video_id)
+    response = await async_client.videos_recommendations.get_related_videos(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetRelatedVideosErrorBody
@@ -37268,10 +38044,10 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>filter</code> | <code>[Filter46OrStr](vimeo_api/models/enums/filter46.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `related` - Return related videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter46OrStr](vimeo_api/models/enums/filter46.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `related` - Return related videos.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37330,7 +38106,7 @@ This method adds or removes the specified video to or from multiple showcases.
 
 ```python
 try:
-    response = client.videos_showcases.add_or_remove_multiple_albums(video_id)
+    response = client.videos_showcases.add_or_remove_multiple_albums(258684937)
     # TODO: Handle 'response' of type list[Album]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddOrRemoveMultipleAlbumsErrorBody
@@ -37340,7 +38116,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_showcases.add_or_remove_multiple_albums(video_id)
+    response = await async_client.videos_showcases.add_or_remove_multiple_albums(258684937)
     # TODO: Handle 'response' of type list[Album]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddOrRemoveMultipleAlbumsErrorBody
@@ -37358,7 +38134,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosAlbumsRequest](vimeo_api/models/videos_albums_request.py) \| [VideosAlbumsRequestDict](vimeo_api/models/videos_albums_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37412,7 +38188,7 @@ This method returns all the showcases that contain the specified video.
 
 ```python
 try:
-    response = client.videos_showcases.get_video_albums(video_id)
+    response = client.videos_showcases.get_video_albums(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type AlbumConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoAlbumsErrorBody
@@ -37422,7 +38198,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_showcases.get_video_albums(video_id)
+    response = await async_client.videos_showcases.get_video_albums(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type AlbumConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoAlbumsErrorBody
@@ -37441,7 +38217,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37475,7 +38251,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 > Source: [VideosTags](vimeo_api/apis/videos_tags.py)
 
 <details>
-<summary><code>def add_video_tag(video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None) -> Tag</code></summary>
+<summary><code>def add_video_tag(video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None) -> TagModel</code></summary>
 
 <dl>
 <dd>
@@ -37499,8 +38275,8 @@ This method adds a single tag to the specified video. The authenticated user mus
 
 ```python
 try:
-    response = client.videos_tags.add_video_tag(video_id, word)
-    # TODO: Handle 'response' of type Tag
+    response = client.videos_tags.add_video_tag(258684937, "awesome")
+    # TODO: Handle 'response' of type TagModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoTagErrorBody
 ```
@@ -37509,8 +38285,8 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_tags.add_video_tag(video_id, word)
-    # TODO: Handle 'response' of type Tag
+    response = await async_client.videos_tags.add_video_tag(258684937, "awesome")
+    # TODO: Handle 'response' of type TagModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoTagErrorBody
 ```
@@ -37527,7 +38303,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>word</code> | <code>str</code> | The tag word. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37537,7 +38313,7 @@ except ApiError as e:
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Tag](vimeo_api/models/tag.py)</code> -- The tag was added.
+**OnSuccess**: <code>[TagModel](vimeo_api/models/tag_model.py)</code> -- The tag was added.
 
 **OnError**: <code>[ApiError](vimeo_api/core/exceptions.py)&#91;[AddVideoTagErrorBody](vimeo_api/errors/add_video_tag_error.py)&#93;</code>
 
@@ -37557,7 +38333,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def add_video_tags(video_id: float, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None) -> list[Tag]</code></summary>
+<summary><code>def add_video_tags(video_id: float, *, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None) -> list[TagModel]</code></summary>
 
 <dl>
 <dd>
@@ -37581,8 +38357,8 @@ This method adds multiple tags to the specified video. Include the tags as a JSO
 
 ```python
 try:
-    response = client.videos_tags.add_video_tags(video_id)
-    # TODO: Handle 'response' of type list[Tag]
+    response = client.videos_tags.add_video_tags(258684937, page=1, per_page=10)
+    # TODO: Handle 'response' of type list[TagModel]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoTagsErrorBody
 ```
@@ -37591,8 +38367,8 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_tags.add_video_tags(video_id)
-    # TODO: Handle 'response' of type list[Tag]
+    response = await async_client.videos_tags.add_video_tags(258684937, page=1, per_page=10)
+    # TODO: Handle 'response' of type list[TagModel]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoTagsErrorBody
 ```
@@ -37610,7 +38386,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37620,7 +38396,7 @@ except ApiError as e:
 <dl>
 <dd>
 
-**OnSuccess**: <code>list&#91;[Tag](vimeo_api/models/tag.py)&#93;</code> -- The tags were added.
+**OnSuccess**: <code>list&#91;[TagModel](vimeo_api/models/tag_model.py)&#93;</code> -- The tags were added.
 
 **OnError**: <code>[ApiError](vimeo_api/core/exceptions.py)&#91;[AddVideoTagsErrorBody](vimeo_api/errors/add_video_tags_error.py)&#93;</code>
 
@@ -37640,7 +38416,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def check_video_for_tag(video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None) -> Tag</code></summary>
+<summary><code>def check_video_for_tag(video_id: float, word: str, *, request_options: RequestOptionsOrDict | None = None) -> TagModel</code></summary>
 
 <dl>
 <dd>
@@ -37664,8 +38440,8 @@ This method determines whether the specified tag has been added to a video. The 
 
 ```python
 try:
-    response = client.videos_tags.check_video_for_tag(video_id, word)
-    # TODO: Handle 'response' of type Tag
+    response = client.videos_tags.check_video_for_tag(258684937, "awesome")
+    # TODO: Handle 'response' of type TagModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckVideoForTagErrorBody
 ```
@@ -37674,8 +38450,8 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_tags.check_video_for_tag(video_id, word)
-    # TODO: Handle 'response' of type Tag
+    response = await async_client.videos_tags.check_video_for_tag(258684937, "awesome")
+    # TODO: Handle 'response' of type TagModel
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckVideoForTagErrorBody
 ```
@@ -37692,7 +38468,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>word</code> | <code>str</code> | The tag word. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37702,7 +38478,7 @@ except ApiError as e:
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Tag](vimeo_api/models/tag.py)</code> -- The tag has been added to the video.
+**OnSuccess**: <code>[TagModel](vimeo_api/models/tag_model.py)</code> -- The tag has been added to the video.
 
 **OnError**: <code>[ApiError](vimeo_api/core/exceptions.py)&#91;[CheckVideoForTagErrorBody](vimeo_api/errors/check_video_for_tag_error.py)&#93;</code>
 
@@ -37746,7 +38522,7 @@ This method removes the specified tag from a video. The authenticated user must 
 
 ```python
 try:
-    client.videos_tags.delete_video_tag(video_id, word)
+    client.videos_tags.delete_video_tag(258684937, "awesome")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoTagErrorBody
 ```
@@ -37755,7 +38531,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_tags.delete_video_tag(video_id, word)
+    await async_client.videos_tags.delete_video_tag(258684937, "awesome")
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoTagErrorBody
 ```
@@ -37772,7 +38548,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>word</code> | <code>str</code> | The tag word. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37826,7 +38602,7 @@ This method returns all the tags associated with the specified video. The authen
 
 ```python
 try:
-    response = client.videos_tags.get_video_tags(video_id)
+    response = client.videos_tags.get_video_tags(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type TagConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -37836,7 +38612,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_tags.get_video_tags(video_id)
+    response = await async_client.videos_tags.get_video_tags(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type TagConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -37855,7 +38631,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37902,7 +38678,7 @@ This method returns all the public videos associated with the specified tag.
 
 ```python
 try:
-    response = client.videos_tags.get_videos_with_tag(word)
+    response = client.videos_tags.get_videos_with_tag("awesome", direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideosWithTagErrorBody
@@ -37912,7 +38688,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_tags.get_videos_with_tag(word)
+    response = await async_client.videos_tags.get_videos_with_tag(
+        "awesome", direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideosWithTagErrorBody
@@ -37933,7 +38711,7 @@ except ApiError as e:
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort47OrStr](vimeo_api/models/enums/sort47.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `created_time` - Sort the results by creation time.<br> * `duration` - Sort the results by duration.<br> * `name` - Sort the results by name.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -37991,7 +38769,10 @@ This method adds a text track to the specified video. For more information, see 
 
 ```python
 try:
-    response = client.videos_text_tracks.create_text_track(video_id, body)
+    response = client.videos_text_tracks.create_text_track(
+        258684937,
+        VideosTexttracksRequest(language="some example string", name="some example string", type_=Type29.CAPTIONS),
+    )
     # TODO: Handle 'response' of type TextTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateTextTrackErrorBody
@@ -38001,7 +38782,10 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_text_tracks.create_text_track(video_id, body)
+    response = await async_client.videos_text_tracks.create_text_track(
+        258684937,
+        VideosTexttracksRequest(language="some example string", name="some example string", type_=Type29.CAPTIONS),
+    )
     # TODO: Handle 'response' of type TextTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateTextTrackErrorBody
@@ -38019,7 +38803,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosTexttracksRequest](vimeo_api/models/videos_texttracks_request.py) \| [VideosTexttracksRequestDict](vimeo_api/models/videos_texttracks_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38073,7 +38857,13 @@ This method adds a text track to the specified video. For more information, see 
 
 ```python
 try:
-    response = client.videos_text_tracks.create_text_track_alt1(channel_id, video_id, body)
+    response = client.videos_text_tracks.create_text_track_alt1(
+        927,
+        258684937,
+        ChannelsVideosTexttracksRequest(
+            language="some example string", name="some example string", type_=Type29.CAPTIONS
+        ),
+    )
     # TODO: Handle 'response' of type TextTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateTextTrackAlt1ErrorBody
@@ -38083,7 +38873,13 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_text_tracks.create_text_track_alt1(channel_id, video_id, body)
+    response = await async_client.videos_text_tracks.create_text_track_alt1(
+        927,
+        258684937,
+        ChannelsVideosTexttracksRequest(
+            language="some example string", name="some example string", type_=Type29.CAPTIONS
+        ),
+    )
     # TODO: Handle 'response' of type TextTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateTextTrackAlt1ErrorBody
@@ -38102,7 +38898,7 @@ except ApiError as e:
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[ChannelsVideosTexttracksRequest](vimeo_api/models/channels_videos_texttracks_request.py) \| [ChannelsVideosTexttracksRequestDict](vimeo_api/models/channels_videos_texttracks_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38156,7 +38952,7 @@ This method deletes the specified text track from a video. The authenticated use
 
 ```python
 try:
-    client.videos_text_tracks.delete_text_track(texttrack_id, video_id)
+    client.videos_text_tracks.delete_text_track(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteTextTrackErrorBody
 ```
@@ -38165,7 +38961,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_text_tracks.delete_text_track(texttrack_id, video_id)
+    await async_client.videos_text_tracks.delete_text_track(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteTextTrackErrorBody
 ```
@@ -38182,7 +38978,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>texttrack_id</code> | <code>float</code> | The ID of the text track. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38237,7 +39033,7 @@ This method edits the specified text track of a video. The authenticated user mu
 
 ```python
 try:
-    response = client.videos_text_tracks.edit_text_track(texttrack_id, video_id)
+    response = client.videos_text_tracks.edit_text_track(12345, 258684937)
     # TODO: Handle 'response' of type TextTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditTextTrackErrorBody
@@ -38247,7 +39043,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_text_tracks.edit_text_track(texttrack_id, video_id)
+    response = await async_client.videos_text_tracks.edit_text_track(12345, 258684937)
     # TODO: Handle 'response' of type TextTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditTextTrackErrorBody
@@ -38266,7 +39062,7 @@ except ApiError as e:
 | <code>texttrack_id</code> | <code>float</code> | The ID of the text track. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosTexttracksRequest1](vimeo_api/models/videos_texttracks_request1.py) \| [VideosTexttracksRequest1Dict](vimeo_api/models/videos_texttracks_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38320,7 +39116,7 @@ This method returns a single text track of the specified video. The authenticate
 
 ```python
 try:
-    response = client.videos_text_tracks.get_text_track(texttrack_id, video_id)
+    response = client.videos_text_tracks.get_text_track(12345, 258684937)
     # TODO: Handle 'response' of type TextTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTrackErrorBody
@@ -38330,7 +39126,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_text_tracks.get_text_track(texttrack_id, video_id)
+    response = await async_client.videos_text_tracks.get_text_track(12345, 258684937)
     # TODO: Handle 'response' of type TextTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTrackErrorBody
@@ -38348,7 +39144,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>texttrack_id</code> | <code>float</code> | The ID of the text track. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38403,7 +39199,7 @@ This method returns every text track of the specified video. The authenticated u
 
 ```python
 try:
-    response = client.videos_text_tracks.get_text_tracks(video_id)
+    response = client.videos_text_tracks.get_text_tracks(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type TextTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTracksErrorBody
@@ -38413,7 +39209,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_text_tracks.get_text_tracks(video_id)
+    response = await async_client.videos_text_tracks.get_text_tracks(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type TextTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTracksErrorBody
@@ -38432,7 +39228,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38486,7 +39282,7 @@ This method returns every text track of the specified video. The authenticated u
 
 ```python
 try:
-    response = client.videos_text_tracks.get_text_tracks_alt1(video_id, version_id)
+    response = client.videos_text_tracks.get_text_tracks_alt1(258684937, "some example string", page=1, per_page=10)
     # TODO: Handle 'response' of type TextTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTracksAlt1ErrorBody
@@ -38496,7 +39292,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_text_tracks.get_text_tracks_alt1(video_id, version_id)
+    response = await async_client.videos_text_tracks.get_text_tracks_alt1(
+        258684937, "some example string", page=1, per_page=10
+    )
     # TODO: Handle 'response' of type TextTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTracksAlt1ErrorBody
@@ -38516,7 +39314,7 @@ except ApiError as e:
 | <code>version_id</code> | <code>str</code> | Value sent with the request. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38570,7 +39368,7 @@ This method returns every text track of the specified video. The authenticated u
 
 ```python
 try:
-    response = client.videos_text_tracks.get_text_tracks_alt2(channel_id, video_id)
+    response = client.videos_text_tracks.get_text_tracks_alt2(927, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type TextTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTracksAlt2ErrorBody
@@ -38580,7 +39378,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_text_tracks.get_text_tracks_alt2(channel_id, video_id)
+    response = await async_client.videos_text_tracks.get_text_tracks_alt2(927, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type TextTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTracksAlt2ErrorBody
@@ -38600,7 +39398,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38654,7 +39452,7 @@ This method returns every text track of the specified video. The authenticated u
 
 ```python
 try:
-    response = client.videos_text_tracks.get_text_tracks_alt3(album_id, video_id)
+    response = client.videos_text_tracks.get_text_tracks_alt3(12345, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type TextTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTracksAlt3ErrorBody
@@ -38664,7 +39462,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_text_tracks.get_text_tracks_alt3(album_id, video_id)
+    response = await async_client.videos_text_tracks.get_text_tracks_alt3(12345, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type TextTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTextTracksAlt3ErrorBody
@@ -38684,7 +39482,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38742,7 +39540,7 @@ This method adds a thumbnail image to the specified video. The authenticated use
 
 ```python
 try:
-    response = client.videos_thumbnails.create_video_thumbnail(video_id)
+    response = client.videos_thumbnails.create_video_thumbnail(258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -38752,7 +39550,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_thumbnails.create_video_thumbnail(video_id)
+    response = await async_client.videos_thumbnails.create_video_thumbnail(258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -38770,7 +39568,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosPicturesRequest](vimeo_api/models/videos_pictures_request.py) \| [VideosPicturesRequestDict](vimeo_api/models/videos_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38817,7 +39615,7 @@ This method adds a thumbnail image to the specified video. The authenticated use
 
 ```python
 try:
-    response = client.videos_thumbnails.create_video_thumbnail_alt1(channel_id, video_id)
+    response = client.videos_thumbnails.create_video_thumbnail_alt1(927, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -38827,7 +39625,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_thumbnails.create_video_thumbnail_alt1(channel_id, video_id)
+    response = await async_client.videos_thumbnails.create_video_thumbnail_alt1(927, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -38846,7 +39644,7 @@ except ApiError as e:
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[ChannelsVideosPicturesRequest](vimeo_api/models/channels_videos_pictures_request.py) \| [ChannelsVideosPicturesRequestDict](vimeo_api/models/channels_videos_pictures_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38893,7 +39691,7 @@ This method deletes the specified thumbnail image from a video. The authenticate
 
 ```python
 try:
-    client.videos_thumbnails.delete_video_thumbnail(picture_id, video_id)
+    client.videos_thumbnails.delete_video_thumbnail(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -38902,7 +39700,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_thumbnails.delete_video_thumbnail(picture_id, video_id)
+    await async_client.videos_thumbnails.delete_video_thumbnail(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -38919,7 +39717,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>picture_id</code> | <code>float</code> | The ID of the thumbnail. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -38966,7 +39764,7 @@ This method edits the specified video thumbnail image. The authenticated user mu
 
 ```python
 try:
-    response = client.videos_thumbnails.edit_video_thumbnail(picture_id, video_id)
+    response = client.videos_thumbnails.edit_video_thumbnail(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -38976,7 +39774,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_thumbnails.edit_video_thumbnail(picture_id, video_id)
+    response = await async_client.videos_thumbnails.edit_video_thumbnail(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -38995,7 +39793,7 @@ except ApiError as e:
 | <code>picture_id</code> | <code>float</code> | The ID of the thumbnail. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosPicturesRequest1](vimeo_api/models/videos_pictures_request1.py) \| [VideosPicturesRequest1Dict](vimeo_api/models/videos_pictures_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39042,7 +39840,7 @@ This method returns a single thumbnail image from the specified video. The authe
 
 ```python
 try:
-    response = client.videos_thumbnails.get_video_thumbnail(picture_id, video_id)
+    response = client.videos_thumbnails.get_video_thumbnail(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39052,7 +39850,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_thumbnails.get_video_thumbnail(picture_id, video_id)
+    response = await async_client.videos_thumbnails.get_video_thumbnail(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39070,7 +39868,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>picture_id</code> | <code>float</code> | The ID of the thumbnail. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39117,7 +39915,7 @@ This method returns all thumbnail images of the specified video. The authenticat
 
 ```python
 try:
-    response = client.videos_thumbnails.get_video_thumbnails(video_id)
+    response = client.videos_thumbnails.get_video_thumbnails(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39127,7 +39925,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_thumbnails.get_video_thumbnails(video_id)
+    response = await async_client.videos_thumbnails.get_video_thumbnails(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39146,7 +39944,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39193,7 +39991,7 @@ This method returns all thumbnail images of the specified video. The authenticat
 
 ```python
 try:
-    response = client.videos_thumbnails.get_video_thumbnails_alt1(channel_id, video_id)
+    response = client.videos_thumbnails.get_video_thumbnails_alt1(927, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39203,7 +40001,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_thumbnails.get_video_thumbnails_alt1(channel_id, video_id)
+    response = await async_client.videos_thumbnails.get_video_thumbnails_alt1(927, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type PictureConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39223,7 +40021,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39274,7 +40072,7 @@ This method returns the transcript segments of the specified text track.
 
 ```python
 try:
-    response = client.videos_transcripts.get_transcript(texttrack_id, video_id)
+    response = client.videos_transcripts.get_transcript(12345, 258684937)
     # TODO: Handle 'response' of type SegmentConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTranscriptErrorBody
@@ -39284,7 +40082,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_transcripts.get_transcript(texttrack_id, video_id)
+    response = await async_client.videos_transcripts.get_transcript(12345, 258684937)
     # TODO: Handle 'response' of type SegmentConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTranscriptErrorBody
@@ -39302,7 +40100,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>texttrack_id</code> | <code>float</code> | The ID of the text track. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39356,7 +40154,7 @@ This method returns the transcript metadata of the specified text track.
 
 ```python
 try:
-    response = client.videos_transcripts.get_transcript_metadata(container_uuid, texttrack_id)
+    response = client.videos_transcripts.get_transcript_metadata("f086816d-8da8-4c97-8380-967f4e9f4e62", 12345)
     # TODO: Handle 'response' of type TranscriptMetadata
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTranscriptMetadataErrorBody
@@ -39366,7 +40164,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_transcripts.get_transcript_metadata(container_uuid, texttrack_id)
+    response = await async_client.videos_transcripts.get_transcript_metadata(
+        "f086816d-8da8-4c97-8380-967f4e9f4e62", 12345
+    )
     # TODO: Handle 'response' of type TranscriptMetadata
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetTranscriptMetadataErrorBody
@@ -39384,7 +40184,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>container_uuid</code> | <code>str</code> | The UUID of the video container. |
 | <code>texttrack_id</code> | <code>float</code> | The ID of the text track. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39442,7 +40242,7 @@ This method gives a single user permission to access the specified unlisted vide
 
 ```python
 try:
-    response = client.videos_unlisted_videos.add_video_privacy_user(user_id, video_id)
+    response = client.videos_unlisted_videos.add_video_privacy_user(152184, 258684937)
     # TODO: Handle 'response' of type User
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoPrivacyUserErrorBody
@@ -39452,7 +40252,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_unlisted_videos.add_video_privacy_user(user_id, video_id)
+    response = await async_client.videos_unlisted_videos.add_video_privacy_user(152184, 258684937)
     # TODO: Handle 'response' of type User
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type AddVideoPrivacyUserErrorBody
@@ -39470,7 +40270,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39524,7 +40324,7 @@ This method gives multiple users permission to access the specified unlisted vid
 
 ```python
 try:
-    response = client.videos_unlisted_videos.add_video_privacy_users(video_id)
+    response = client.videos_unlisted_videos.add_video_privacy_users(258684937)
     # TODO: Handle 'response' of type list[User]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39534,7 +40334,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_unlisted_videos.add_video_privacy_users(video_id)
+    response = await async_client.videos_unlisted_videos.add_video_privacy_users(258684937)
     # TODO: Handle 'response' of type list[User]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39551,7 +40351,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39598,7 +40398,7 @@ This method gives multiple users permission to access the specified unlisted vid
 
 ```python
 try:
-    response = client.videos_unlisted_videos.add_video_privacy_users_alt1(channel_id, video_id)
+    response = client.videos_unlisted_videos.add_video_privacy_users_alt1(927, 258684937)
     # TODO: Handle 'response' of type list[User]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39608,7 +40408,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_unlisted_videos.add_video_privacy_users_alt1(channel_id, video_id)
+    response = await async_client.videos_unlisted_videos.add_video_privacy_users_alt1(927, 258684937)
     # TODO: Handle 'response' of type list[User]
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -39626,7 +40426,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39673,7 +40473,7 @@ This method prevents a user from being able to view the specified unlisted video
 
 ```python
 try:
-    client.videos_unlisted_videos.delete_video_privacy_user(user_id, video_id)
+    client.videos_unlisted_videos.delete_video_privacy_user(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoPrivacyUserErrorBody
 ```
@@ -39682,7 +40482,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_unlisted_videos.delete_video_privacy_user(user_id, video_id)
+    await async_client.videos_unlisted_videos.delete_video_privacy_user(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoPrivacyUserErrorBody
 ```
@@ -39699,7 +40499,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39753,7 +40553,7 @@ This method returns every user who has access to the specified unlisted video.
 
 ```python
 try:
-    response = client.videos_unlisted_videos.get_video_privacy_users(video_id)
+    response = client.videos_unlisted_videos.get_video_privacy_users(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoPrivacyUsersErrorBody
@@ -39763,7 +40563,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_unlisted_videos.get_video_privacy_users(video_id)
+    response = await async_client.videos_unlisted_videos.get_video_privacy_users(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoPrivacyUsersErrorBody
@@ -39782,7 +40582,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39836,7 +40636,7 @@ This method returns every user who has access to the specified unlisted video.
 
 ```python
 try:
-    response = client.videos_unlisted_videos.get_video_privacy_users_alt1(channel_id, video_id)
+    response = client.videos_unlisted_videos.get_video_privacy_users_alt1(927, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoPrivacyUsersAlt1ErrorBody
@@ -39846,7 +40646,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_unlisted_videos.get_video_privacy_users_alt1(channel_id, video_id)
+    response = await async_client.videos_unlisted_videos.get_video_privacy_users_alt1(
+        927, 258684937, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type UserConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoPrivacyUsersAlt1ErrorBody
@@ -39866,7 +40668,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -39924,7 +40726,7 @@ This method completes the specified streaming upload of the authenticated user.
 
 ```python
 try:
-    client.videos_uploads.complete_streaming_upload(upload_id, user_id, signature, video_file_id)
+    client.videos_uploads.complete_streaming_upload(12345, 152184, "cd89a20adde7a608f3331e71c37bdfa087bacbf3", 1234)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CompleteStreamingUploadErrorBody
 ```
@@ -39933,7 +40735,9 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_uploads.complete_streaming_upload(upload_id, user_id, signature, video_file_id)
+    await async_client.videos_uploads.complete_streaming_upload(
+        12345, 152184, "cd89a20adde7a608f3331e71c37bdfa087bacbf3", 1234
+    )
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CompleteStreamingUploadErrorBody
 ```
@@ -39952,7 +40756,7 @@ except ApiError as e:
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>signature</code> | <code>str</code> | The crypto signature of the completed upload. |
 | <code>video_file_id</code> | <code>float</code> | The ID of the uploaded file. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40006,7 +40810,7 @@ This method returns the specified upload attempt of the authenticated user. _Thi
 
 ```python
 try:
-    response = client.videos_uploads.get_upload_attempt(upload_id, user_id)
+    response = client.videos_uploads.get_upload_attempt(12345, 152184)
     # TODO: Handle 'response' of type UploadAttempt
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -40016,7 +40820,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_uploads.get_upload_attempt(upload_id, user_id)
+    response = await async_client.videos_uploads.get_upload_attempt(12345, 152184)
     # TODO: Handle 'response' of type UploadAttempt
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -40034,7 +40838,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>upload_id</code> | <code>float</code> | The ID of the upload attempt. |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40081,7 +40885,7 @@ This method begins the video upload process for the authenticated user. For more
 
 ```python
 try:
-    response = client.videos_uploads.upload_video(user_id, body)
+    response = client.videos_uploads.upload_video(152184, UsersVideosRequest1(upload=Upload2(approach=Approach2.POST)))
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UploadVideoErrorBody
@@ -40091,7 +40895,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_uploads.upload_video(user_id, body)
+    response = await async_client.videos_uploads.upload_video(
+        152184, UsersVideosRequest1(upload=Upload2(approach=Approach2.POST))
+    )
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UploadVideoErrorBody
@@ -40109,7 +40915,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>body</code> | <code>[UsersVideosRequest1](vimeo_api/models/users_videos_request1.py) \| [UsersVideosRequest1Dict](vimeo_api/models/users_videos_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40163,7 +40969,7 @@ This method begins the video upload process for the authenticated user. For more
 
 ```python
 try:
-    response = client.videos_uploads.upload_video_alt1(body)
+    response = client.videos_uploads.upload_video_alt1(MeVideosRequest1(upload=Upload2(approach=Approach2.POST)))
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UploadVideoAlt1ErrorBody
@@ -40173,7 +40979,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_uploads.upload_video_alt1(body)
+    response = await async_client.videos_uploads.upload_video_alt1(
+        MeVideosRequest1(upload=Upload2(approach=Approach2.POST))
+    )
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type UploadVideoAlt1ErrorBody
@@ -40190,7 +40998,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MeVideosRequest1](vimeo_api/models/me_videos_request1.py) \| [MeVideosRequest1Dict](vimeo_api/models/me_videos_request1.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40248,7 +41056,9 @@ This method creates a new audio track for a video version.
 
 ```python
 try:
-    response = client.videos_versions.create_audio_track(version_id, video_id, body)
+    response = client.videos_versions.create_audio_track(
+        53214124, 42341324, VideosVersionsAudiotracksRequest(upload=Upload5(approach=Approach5.POST))
+    )
     # TODO: Handle 'response' of type AlternateAudioTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateAudioTrackErrorBody
@@ -40258,7 +41068,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.create_audio_track(version_id, video_id, body)
+    response = await async_client.videos_versions.create_audio_track(
+        53214124, 42341324, VideosVersionsAudiotracksRequest(upload=Upload5(approach=Approach5.POST))
+    )
     # TODO: Handle 'response' of type AlternateAudioTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateAudioTrackErrorBody
@@ -40277,7 +41089,7 @@ except ApiError as e:
 | <code>version_id</code> | <code>float</code> | The ID of the video version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosVersionsAudiotracksRequest](vimeo_api/models/videos_versions_audiotracks_request.py) \| [VideosVersionsAudiotracksRequestDict](vimeo_api/models/videos_versions_audiotracks_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40331,7 +41143,9 @@ This method adds a version to the specified video. The authenticated user must b
 
 ```python
 try:
-    response = client.videos_versions.create_video_version(video_id, body)
+    response = client.videos_versions.create_video_version(
+        258684937, VideosVersionsRequest(file_name="some example string", upload=Upload4(approach=Approach4.POST))
+    )
     # TODO: Handle 'response' of type VideoVersion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateVideoVersionErrorBody
@@ -40341,7 +41155,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.create_video_version(video_id, body)
+    response = await async_client.videos_versions.create_video_version(
+        258684937, VideosVersionsRequest(file_name="some example string", upload=Upload4(approach=Approach4.POST))
+    )
     # TODO: Handle 'response' of type VideoVersion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateVideoVersionErrorBody
@@ -40359,7 +41175,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosVersionsRequest](vimeo_api/models/videos_versions_request.py) \| [VideosVersionsRequestDict](vimeo_api/models/videos_versions_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40413,7 +41229,7 @@ This method deletes an audio track from the specified video version.
 
 ```python
 try:
-    client.videos_versions.delete_audio_track(audiotrack_id, version_id, video_id)
+    client.videos_versions.delete_audio_track("39591d3f-7dm9-456b-bahd-bed12ec136cc", 53214124, 42341324)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteAudioTrackErrorBody
 ```
@@ -40422,7 +41238,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_versions.delete_audio_track(audiotrack_id, version_id, video_id)
+    await async_client.videos_versions.delete_audio_track("39591d3f-7dm9-456b-bahd-bed12ec136cc", 53214124, 42341324)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteAudioTrackErrorBody
 ```
@@ -40440,7 +41256,7 @@ except ApiError as e:
 | <code>audiotrack_id</code> | <code>str</code> | The ID of the audio track. |
 | <code>version_id</code> | <code>float</code> | The ID of the video version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40494,7 +41310,7 @@ This method deletes the specified version from a video. The authenticated user m
 
 ```python
 try:
-    client.videos_versions.delete_video_version(version_id, video_id)
+    client.videos_versions.delete_video_version(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoVersionErrorBody
 ```
@@ -40503,7 +41319,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_versions.delete_video_version(version_id, video_id)
+    await async_client.videos_versions.delete_video_version(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteVideoVersionErrorBody
 ```
@@ -40520,7 +41336,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>version_id</code> | <code>float</code> | The ID of the video version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40574,7 +41390,7 @@ This method edits the metadata for the specified audio track.
 
 ```python
 try:
-    response = client.videos_versions.edit_audio_track(audiotrack_id, version_id, video_id)
+    response = client.videos_versions.edit_audio_track("39591d3f-7dm9-456b-bahd-bed12ec136cc", 53214124, 42341324)
     # TODO: Handle 'response' of type AlternateAudioTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditAudioTrackErrorBody
@@ -40584,7 +41400,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.edit_audio_track(audiotrack_id, version_id, video_id)
+    response = await async_client.videos_versions.edit_audio_track(
+        "39591d3f-7dm9-456b-bahd-bed12ec136cc", 53214124, 42341324
+    )
     # TODO: Handle 'response' of type AlternateAudioTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditAudioTrackErrorBody
@@ -40604,7 +41422,7 @@ except ApiError as e:
 | <code>version_id</code> | <code>float</code> | The ID of the video version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosVersionsAudiotracksAudiotrackIdRequest](vimeo_api/models/videos_versions_audiotracks_audiotrack_id_request.py) \| [VideosVersionsAudiotracksAudiotrackIdRequestDict](vimeo_api/models/videos_versions_audiotracks_audiotrack_id_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40658,7 +41476,7 @@ This method edits the specified version of a video. The authenticated user must 
 
 ```python
 try:
-    response = client.videos_versions.edit_video_version(version_id, video_id)
+    response = client.videos_versions.edit_video_version(12345, 258684937)
     # TODO: Handle 'response' of type VideoVersion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVideoVersionErrorBody
@@ -40668,7 +41486,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.edit_video_version(version_id, video_id)
+    response = await async_client.videos_versions.edit_video_version(12345, 258684937)
     # TODO: Handle 'response' of type VideoVersion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditVideoVersionErrorBody
@@ -40687,7 +41505,7 @@ except ApiError as e:
 | <code>version_id</code> | <code>float</code> | The ID of the video version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosVersionsRequest1](vimeo_api/models/videos_versions_request1.py) \| [VideosVersionsRequest1Dict](vimeo_api/models/videos_versions_request1.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40742,7 +41560,7 @@ This method returns the specified audio track that is associated with a video ve
 
 ```python
 try:
-    response = client.videos_versions.get_audio_track(audiotrack_id, version_id, video_id)
+    response = client.videos_versions.get_audio_track("39591d3f-7dm9-456b-bahd-bed12ec136cc", 53214124, 42341324)
     # TODO: Handle 'response' of type AlternateAudioTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAudioTrackErrorBody
@@ -40752,7 +41570,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.get_audio_track(audiotrack_id, version_id, video_id)
+    response = await async_client.videos_versions.get_audio_track(
+        "39591d3f-7dm9-456b-bahd-bed12ec136cc", 53214124, 42341324
+    )
     # TODO: Handle 'response' of type AlternateAudioTrack
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAudioTrackErrorBody
@@ -40771,7 +41591,7 @@ except ApiError as e:
 | <code>audiotrack_id</code> | <code>str</code> | The ID of the audio track. |
 | <code>version_id</code> | <code>float</code> | The ID of the video version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40825,7 +41645,7 @@ This method returns all audio tracks that are associated with the specified vide
 
 ```python
 try:
-    response = client.videos_versions.get_audio_tracks(version_id, video_id)
+    response = client.videos_versions.get_audio_tracks(53214124, 42341324)
     # TODO: Handle 'response' of type AlternateAudioTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAudioTracksErrorBody
@@ -40835,7 +41655,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.get_audio_tracks(version_id, video_id)
+    response = await async_client.videos_versions.get_audio_tracks(53214124, 42341324)
     # TODO: Handle 'response' of type AlternateAudioTrackConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetAudioTracksErrorBody
@@ -40853,7 +41673,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>version_id</code> | <code>float</code> | The ID of the video version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40907,7 +41727,7 @@ This method returns a list of downloadable file links for a version of a video t
 
 ```python
 try:
-    client.videos_versions.get_audiotrack_downloads(version_id, video_id)
+    client.videos_versions.get_audiotrack_downloads(53214124, 42341324)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -40916,7 +41736,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_versions.get_audiotrack_downloads(version_id, video_id)
+    await async_client.videos_versions.get_audiotrack_downloads(53214124, 42341324)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -40933,7 +41753,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>version_id</code> | <code>float</code> | The ID of the video version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -40980,7 +41800,7 @@ This method returns the thumbnail associated with the specified version of a vid
 
 ```python
 try:
-    response = client.videos_versions.get_version_thumbnail(version_id, video_id)
+    response = client.videos_versions.get_version_thumbnail(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -40990,7 +41810,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.get_version_thumbnail(version_id, video_id)
+    response = await async_client.videos_versions.get_version_thumbnail(12345, 258684937)
     # TODO: Handle 'response' of type Picture
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -41008,7 +41828,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>version_id</code> | <code>float</code> | The ID of the version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41055,7 +41875,7 @@ This method returns a single version of the specified video. The authenticated u
 
 ```python
 try:
-    response = client.videos_versions.get_video_version(version_id, video_id)
+    response = client.videos_versions.get_video_version(12345, 258684937)
     # TODO: Handle 'response' of type VideoVersion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoVersionErrorBody
@@ -41065,7 +41885,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.get_video_version(version_id, video_id)
+    response = await async_client.videos_versions.get_video_version(12345, 258684937)
     # TODO: Handle 'response' of type VideoVersion
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoVersionErrorBody
@@ -41083,7 +41903,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>version_id</code> | <code>float</code> | The ID of the video version. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41137,7 +41957,7 @@ This method returns every version of the specified video. The authenticated user
 
 ```python
 try:
-    response = client.videos_versions.get_video_versions(video_id)
+    response = client.videos_versions.get_video_versions(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoVersionConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoVersionsErrorBody
@@ -41147,7 +41967,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.get_video_versions(video_id)
+    response = await async_client.videos_versions.get_video_versions(258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoVersionConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoVersionsErrorBody
@@ -41166,7 +41986,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41221,7 +42041,7 @@ This method returns every version of the specified video. The authenticated user
 
 ```python
 try:
-    response = client.videos_versions.get_video_versions_alt1(channel_id, video_id)
+    response = client.videos_versions.get_video_versions_alt1(927, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoVersionConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoVersionsAlt1ErrorBody
@@ -41231,7 +42051,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_versions.get_video_versions_alt1(channel_id, video_id)
+    response = await async_client.videos_versions.get_video_versions_alt1(927, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type VideoVersionConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetVideoVersionsAlt1ErrorBody
@@ -41251,7 +42071,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41310,7 +42130,7 @@ This method adds a video comment to the specified video.
 
 ```python
 try:
-    response = client.videos_video_comments.create_comment(video_id)
+    response = client.videos_video_comments.create_comment(258684937)
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateCommentErrorBody
@@ -41320,7 +42140,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_video_comments.create_comment(video_id)
+    response = await async_client.videos_video_comments.create_comment(258684937)
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateCommentErrorBody
@@ -41338,7 +42158,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosCommentsRequest](vimeo_api/models/videos_comments_request.py) \| [VideosCommentsRequestDict](vimeo_api/models/videos_comments_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41392,7 +42212,7 @@ This method adds a video comment to the specified video.
 
 ```python
 try:
-    response = client.videos_video_comments.create_comment_alt1(channel_id, video_id)
+    response = client.videos_video_comments.create_comment_alt1(927, 258684937)
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateCommentAlt1ErrorBody
@@ -41402,7 +42222,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_video_comments.create_comment_alt1(channel_id, video_id)
+    response = await async_client.videos_video_comments.create_comment_alt1(927, 258684937)
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateCommentAlt1ErrorBody
@@ -41421,7 +42241,7 @@ except ApiError as e:
 | <code>channel_id</code> | <code>float</code> | The ID of the channel. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[ChannelsVideosCommentsRequest](vimeo_api/models/channels_videos_comments_request.py) \| [ChannelsVideosCommentsRequestDict](vimeo_api/models/channels_videos_comments_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41475,7 +42295,9 @@ This method adds a reply to the specified video comment.
 
 ```python
 try:
-    response = client.videos_video_comments.create_comment_reply(comment_id, video_id, body)
+    response = client.videos_video_comments.create_comment_reply(
+        12345, 258684937, VideosCommentsRepliesRequest(text="some example string")
+    )
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateCommentReplyErrorBody
@@ -41485,7 +42307,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_video_comments.create_comment_reply(comment_id, video_id, body)
+    response = await async_client.videos_video_comments.create_comment_reply(
+        12345, 258684937, VideosCommentsRepliesRequest(text="some example string")
+    )
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CreateCommentReplyErrorBody
@@ -41504,7 +42328,7 @@ except ApiError as e:
 | <code>comment_id</code> | <code>float</code> | The ID of the comment. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosCommentsRepliesRequest](vimeo_api/models/videos_comments_replies_request.py) \| [VideosCommentsRepliesRequestDict](vimeo_api/models/videos_comments_replies_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41558,7 +42382,7 @@ This method deletes the specified video comment. The authenticated user must be 
 
 ```python
 try:
-    client.videos_video_comments.delete_comment(comment_id, video_id)
+    client.videos_video_comments.delete_comment(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteCommentErrorBody
 ```
@@ -41567,7 +42391,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.videos_video_comments.delete_comment(comment_id, video_id)
+    await async_client.videos_video_comments.delete_comment(12345, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type DeleteCommentErrorBody
 ```
@@ -41584,7 +42408,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>comment_id</code> | <code>float</code> | The ID of the comment. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41639,7 +42463,7 @@ This method edits the specified video comment. The authenticated user must be th
 
 ```python
 try:
-    response = client.videos_video_comments.edit_comment(comment_id, video_id)
+    response = client.videos_video_comments.edit_comment(12345, 258684937)
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditCommentErrorBody
@@ -41649,7 +42473,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_video_comments.edit_comment(comment_id, video_id)
+    response = await async_client.videos_video_comments.edit_comment(12345, 258684937)
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type EditCommentErrorBody
@@ -41668,7 +42492,7 @@ except ApiError as e:
 | <code>comment_id</code> | <code>float</code> | The ID of the comment. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>body</code> | <code>[VideosCommentsRequest](vimeo_api/models/videos_comments_request.py) \| [VideosCommentsRequestDict](vimeo_api/models/videos_comments_request.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41722,7 +42546,7 @@ This method returns the specified video comment.
 
 ```python
 try:
-    response = client.videos_video_comments.get_comment(comment_id, video_id)
+    response = client.videos_video_comments.get_comment(12345, 258684937)
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCommentErrorBody
@@ -41732,7 +42556,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_video_comments.get_comment(comment_id, video_id)
+    response = await async_client.videos_video_comments.get_comment(12345, 258684937)
     # TODO: Handle 'response' of type Comment
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCommentErrorBody
@@ -41750,7 +42574,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>comment_id</code> | <code>float</code> | The ID of the comment. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41804,7 +42628,7 @@ This method returns every reply to the specified video comment.
 
 ```python
 try:
-    response = client.videos_video_comments.get_comment_replies(comment_id, video_id)
+    response = client.videos_video_comments.get_comment_replies(12345, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type CommentConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCommentRepliesErrorBody
@@ -41814,7 +42638,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_video_comments.get_comment_replies(comment_id, video_id)
+    response = await async_client.videos_video_comments.get_comment_replies(12345, 258684937, page=1, per_page=10)
     # TODO: Handle 'response' of type CommentConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type GetCommentRepliesErrorBody
@@ -41834,7 +42658,7 @@ except ApiError as e:
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41888,7 +42712,7 @@ This method returns every video comment on the specified video.
 
 ```python
 try:
-    response = client.videos_video_comments.get_comments(video_id)
+    response = client.videos_video_comments.get_comments(258684937, direction=Direction.ASC, page=1, per_page=10)
     # TODO: Handle 'response' of type CommentConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -41898,7 +42722,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_video_comments.get_comments(video_id)
+    response = await async_client.videos_video_comments.get_comments(
+        258684937, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type CommentConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -41918,7 +42744,7 @@ except ApiError as e:
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -41965,7 +42791,9 @@ This method returns every video comment on the specified video.
 
 ```python
 try:
-    response = client.videos_video_comments.get_comments_alt1(channel_id, video_id)
+    response = client.videos_video_comments.get_comments_alt1(
+        927, 258684937, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type CommentConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -41975,7 +42803,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.videos_video_comments.get_comments_alt1(channel_id, video_id)
+    response = await async_client.videos_video_comments.get_comments_alt1(
+        927, 258684937, direction=Direction.ASC, page=1, per_page=10
+    )
     # TODO: Handle 'response' of type CommentConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -41996,7 +42826,7 @@ except ApiError as e:
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -42047,7 +42877,7 @@ This method adds the specified video to the authenticated user's Watch Later que
 
 ```python
 try:
-    client.watch_later_queue_essentials.add_video_to_watch_later(user_id, video_id)
+    client.watch_later_queue_essentials.add_video_to_watch_later(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -42056,7 +42886,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.watch_later_queue_essentials.add_video_to_watch_later(user_id, video_id)
+    await async_client.watch_later_queue_essentials.add_video_to_watch_later(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -42073,7 +42903,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -42120,7 +42950,7 @@ This method adds the specified video to the authenticated user's Watch Later que
 
 ```python
 try:
-    client.watch_later_queue_essentials.add_video_to_watch_later_alt1(video_id)
+    client.watch_later_queue_essentials.add_video_to_watch_later_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -42129,7 +42959,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.watch_later_queue_essentials.add_video_to_watch_later_alt1(video_id)
+    await async_client.watch_later_queue_essentials.add_video_to_watch_later_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -42145,7 +42975,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -42192,7 +43022,7 @@ This method checks the authenticated user's Watch Later queue for the specified 
 
 ```python
 try:
-    response = client.watch_later_queue_essentials.check_watch_later_queue(user_id, video_id)
+    response = client.watch_later_queue_essentials.check_watch_later_queue(152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckWatchLaterQueueErrorBody
@@ -42202,7 +43032,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.watch_later_queue_essentials.check_watch_later_queue(user_id, video_id)
+    response = await async_client.watch_later_queue_essentials.check_watch_later_queue(152184, 258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckWatchLaterQueueErrorBody
@@ -42220,7 +43050,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -42274,7 +43104,7 @@ This method checks the authenticated user's Watch Later queue for the specified 
 
 ```python
 try:
-    response = client.watch_later_queue_essentials.check_watch_later_queue_alt1(video_id)
+    response = client.watch_later_queue_essentials.check_watch_later_queue_alt1(258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckWatchLaterQueueAlt1ErrorBody
@@ -42284,7 +43114,7 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.watch_later_queue_essentials.check_watch_later_queue_alt1(video_id)
+    response = await async_client.watch_later_queue_essentials.check_watch_later_queue_alt1(258684937)
     # TODO: Handle 'response' of type Video
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type CheckWatchLaterQueueAlt1ErrorBody
@@ -42301,7 +43131,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -42355,7 +43185,7 @@ This method removes the specified video from the authenticated user's Watch Late
 
 ```python
 try:
-    client.watch_later_queue_essentials.delete_video_from_watch_later(user_id, video_id)
+    client.watch_later_queue_essentials.delete_video_from_watch_later(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -42364,7 +43194,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.watch_later_queue_essentials.delete_video_from_watch_later(user_id, video_id)
+    await async_client.watch_later_queue_essentials.delete_video_from_watch_later(152184, 258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -42381,7 +43211,7 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -42428,7 +43258,7 @@ This method removes the specified video from the authenticated user's Watch Late
 
 ```python
 try:
-    client.watch_later_queue_essentials.delete_video_from_watch_later_alt1(video_id)
+    client.watch_later_queue_essentials.delete_video_from_watch_later_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -42437,7 +43267,7 @@ except ApiError as e:
 
 ```python
 try:
-    await async_client.watch_later_queue_essentials.delete_video_from_watch_later_alt1(video_id)
+    await async_client.watch_later_queue_essentials.delete_video_from_watch_later_alt1(258684937)
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
 ```
@@ -42453,7 +43283,7 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>video_id</code> | <code>float</code> | The ID of the video. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -42476,7 +43306,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_watch_later_queue(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_watch_later_queue(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -42500,7 +43330,9 @@ This method returns every video from the authenticated user's Watch Later queue.
 
 ```python
 try:
-    response = client.watch_later_queue_essentials.get_watch_later_queue(user_id)
+    response = client.watch_later_queue_essentials.get_watch_later_queue(
+        152184, direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -42510,7 +43342,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.watch_later_queue_essentials.get_watch_later_queue(user_id)
+    response = await async_client.watch_later_queue_essentials.get_watch_later_queue(
+        152184, direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -42528,13 +43362,13 @@ except ApiError as e:
 | --- | --- | --- |
 | <code>user_id</code> | <code>float</code> | The ID of the user. |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort15OrStr](vimeo_api/models/enums/sort15.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by date added.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -42557,7 +43391,7 @@ except ApiError as e:
 </details>
 
 <details>
-<summary><code>def get_watch_later_queue_alt1(*, direction: DirectionOrStr | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
+<summary><code>def get_watch_later_queue_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort15OrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> VideoConnection</code></summary>
 
 <dl>
 <dd>
@@ -42581,7 +43415,9 @@ This method returns every video from the authenticated user's Watch Later queue.
 
 ```python
 try:
-    response = client.watch_later_queue_essentials.get_watch_later_queue_alt1()
+    response = client.watch_later_queue_essentials.get_watch_later_queue_alt1(
+        direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -42591,7 +43427,9 @@ except ApiError as e:
 
 ```python
 try:
-    response = await async_client.watch_later_queue_essentials.get_watch_later_queue_alt1()
+    response = await async_client.watch_later_queue_essentials.get_watch_later_queue_alt1(
+        direction=Direction.ASC, filter_embeddable=True, page=1, per_page=10, query="Stop motion"
+    )
     # TODO: Handle 'response' of type VideoConnection
 except ApiError as e:
     ...  # TODO: Handle 'e.error' of type RawError
@@ -42608,13 +43446,13 @@ except ApiError as e:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>direction</code> | <code>[DirectionOrStr](vimeo_api/models/enums/direction.py) \| None</code> | The sort direction of the results.<br><br>Option descriptions:<br> * `asc` - Sort the results in ascending order.<br> * `desc` - Sort the results in descending order.<br>**Default**: <code>None</code> |
-| <code>filter</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
+| <code>filter_</code> | <code>[Filter3OrStr](vimeo_api/models/enums/filter3.py) \| None</code> | The attribute by which to filter the results.<br><br>Option descriptions:<br> * `embeddable` - Return embeddable videos.<br>**Default**: <code>None</code> |
 | <code>filter_embeddable</code> | <code>bool \| None</code> | Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). This parameter is required only when **filter** is `embeddable`.<br>**Default**: <code>None</code> |
 | <code>page</code> | <code>float \| None</code> | The page number of the results to show.<br>**Default**: <code>None</code> |
 | <code>per_page</code> | <code>float \| None</code> | The number of items to show on each page of results, up to a maximum of 100.<br>**Default**: <code>None</code> |
 | <code>query</code> | <code>str \| None</code> | The search query to use to filter the results.<br>**Default**: <code>None</code> |
 | <code>sort</code> | <code>[Sort15OrStr](vimeo_api/models/enums/sort15.py) \| None</code> | The way to sort the results.<br><br>Option descriptions:<br> * `alphabetical` - Sort the results alphabetically.<br> * `comments` - Sort the results by number of comments.<br> * `date` - Sort the results by date added.<br> * `duration` - Sort the results by duration.<br> * `likes` - Sort the results by number of likes.<br> * `plays` - Sort the results by number of plays.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](vimeo_api/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>

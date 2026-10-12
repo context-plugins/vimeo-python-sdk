@@ -14,5 +14,5 @@ class Metadata13(SdkBaseModel):
 
 
 class Metadata13Dict(TypedDict):
-    connections: Connections13 | Connections13Dict
-    interactions: Interactions8 | Interactions8Dict
+    connections: Connections13Dict
+    interactions: Interactions8Dict

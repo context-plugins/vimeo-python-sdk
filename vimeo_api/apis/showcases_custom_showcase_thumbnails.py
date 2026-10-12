@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_showcase_custom_thumb_error import (
     CreateShowcaseCustomThumbErrorBody,
@@ -63,7 +66,8 @@ class ShowcasesCustomShowcaseThumbnails:
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnail was added to the showcase.
@@ -71,9 +75,9 @@ class ShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: The authenticated user can't add custom thumbnails to this showcase. No such showcase exists.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_showcase_custom_thumb(
-            album_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_showcase_custom_thumb(album_id, user_id, request_options=request_options)
+        )
 
     def delete_showcase_custom_thumbnail(
         self,
@@ -90,7 +94,8 @@ class ShowcasesCustomShowcaseThumbnails:
             album_id: The ID of the showcase.
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnail was deleted.
@@ -98,9 +103,11 @@ class ShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: The authenticated user can't delete this custom thumbnail. No such showcase exists, or it doesn't
                 contain the specified custom thumbnail. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_showcase_custom_thumbnail(
-            album_id, thumbnail_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_showcase_custom_thumbnail(
+                album_id, thumbnail_id, user_id, request_options=request_options
+            ),
+        )
 
     def get_showcase_custom_thumbnail(
         self,
@@ -117,7 +124,8 @@ class ShowcasesCustomShowcaseThumbnails:
             album_id: The ID of the showcase.
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnail was returned.
@@ -125,9 +133,11 @@ class ShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: The authenticated user can't view this custom thumbnail. No such showcase exists, or it doesn't
                 contain the specified custom thumbnail. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_showcase_custom_thumbnail(
-            album_id, thumbnail_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcase_custom_thumbnail(
+                album_id, thumbnail_id, user_id, request_options=request_options
+            ),
+        )
 
     def get_showcase_custom_thumbs(
         self,
@@ -145,7 +155,8 @@ class ShowcasesCustomShowcaseThumbnails:
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnails were returned.
@@ -153,9 +164,11 @@ class ShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: Error code 3200: The authenticated user can't view the custon thumbnails from this showcase. No
                 such showcase exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.get_showcase_custom_thumbs(
-            album_id, user_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcase_custom_thumbs(
+                album_id, user_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def replace_showcase_custom_thumb(
         self,
@@ -179,7 +192,8 @@ class ShowcasesCustomShowcaseThumbnails:
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnail was replaced.
@@ -187,9 +201,11 @@ class ShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: The authenticated user can't replace this custom thumbnail. No such showcase exists, or it doesn't
                 contain the specified custom thumbnail. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.replace_showcase_custom_thumb(
-            album_id, thumbnail_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.replace_showcase_custom_thumb(
+                album_id, thumbnail_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> ShowcasesCustomShowcaseThumbnailsWithRawResponse:
@@ -214,7 +230,8 @@ class AsyncShowcasesCustomShowcaseThumbnails:
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnail was added to the showcase.
@@ -222,11 +239,11 @@ class AsyncShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: The authenticated user can't add custom thumbnails to this showcase. No such showcase exists.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_showcase_custom_thumb(
                 album_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_showcase_custom_thumbnail(
         self,
@@ -243,7 +260,8 @@ class AsyncShowcasesCustomShowcaseThumbnails:
             album_id: The ID of the showcase.
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnail was deleted.
@@ -251,11 +269,11 @@ class AsyncShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: The authenticated user can't delete this custom thumbnail. No such showcase exists, or it doesn't
                 contain the specified custom thumbnail. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_showcase_custom_thumbnail(
                 album_id, thumbnail_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_showcase_custom_thumbnail(
         self,
@@ -272,7 +290,8 @@ class AsyncShowcasesCustomShowcaseThumbnails:
             album_id: The ID of the showcase.
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnail was returned.
@@ -280,11 +299,11 @@ class AsyncShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: The authenticated user can't view this custom thumbnail. No such showcase exists, or it doesn't
                 contain the specified custom thumbnail. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcase_custom_thumbnail(
                 album_id, thumbnail_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_showcase_custom_thumbs(
         self,
@@ -302,7 +321,8 @@ class AsyncShowcasesCustomShowcaseThumbnails:
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnails were returned.
@@ -310,11 +330,11 @@ class AsyncShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: Error code 3200: The authenticated user can't view the custon thumbnails from this showcase. No
                 such showcase exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcase_custom_thumbs(
                 album_id, user_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def replace_showcase_custom_thumb(
         self,
@@ -338,7 +358,8 @@ class AsyncShowcasesCustomShowcaseThumbnails:
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom thumbnail was replaced.
@@ -346,11 +367,11 @@ class AsyncShowcasesCustomShowcaseThumbnails:
         Raises:
             ApiError: The authenticated user can't replace this custom thumbnail. No such showcase exists, or it doesn't
                 contain the specified custom thumbnail. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.replace_showcase_custom_thumb(
                 album_id, thumbnail_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse:
@@ -372,7 +393,8 @@ class ShowcasesCustomShowcaseThumbnailsWithRawResponse(SecuredRawResponse[RawCli
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -404,7 +426,8 @@ class ShowcasesCustomShowcaseThumbnailsWithRawResponse(SecuredRawResponse[RawCli
             album_id: The ID of the showcase.
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -440,7 +463,8 @@ class ShowcasesCustomShowcaseThumbnailsWithRawResponse(SecuredRawResponse[RawCli
             album_id: The ID of the showcase.
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -476,7 +500,8 @@ class ShowcasesCustomShowcaseThumbnailsWithRawResponse(SecuredRawResponse[RawCli
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -515,7 +540,8 @@ class ShowcasesCustomShowcaseThumbnailsWithRawResponse(SecuredRawResponse[RawCli
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -557,7 +583,8 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -569,7 +596,7 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_showcase_custom_thumb_error_mapper,
             request_options=request_options,
         )
@@ -589,7 +616,8 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
             album_id: The ID of the showcase.
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -605,7 +633,7 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_showcase_custom_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -625,7 +653,8 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
             album_id: The ID of the showcase.
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -640,7 +669,7 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_showcase_custom_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -661,7 +690,8 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -673,7 +703,7 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=get_showcase_custom_thumbs_error_mapper,
             request_options=request_options,
         )
@@ -700,7 +730,8 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
             thumbnail_id: The ID of the custom thumbnail.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -719,7 +750,7 @@ class AsyncShowcasesCustomShowcaseThumbnailsWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=replace_showcase_custom_thumb_error_mapper,
             request_options=request_options,
         )

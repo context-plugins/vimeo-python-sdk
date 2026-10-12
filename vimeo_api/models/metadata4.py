@@ -49,15 +49,15 @@ class Metadata4(SdkBaseModel):
 
 
 class Metadata4Dict(TypedDict):
-    ai_content: NotRequired[AiContent | AiContentDict]
+    ai_content: NotRequired[AiContentDict]
     can_be_replaced: NotRequired[bool]
-    connections: Connections4 | Connections4Dict
+    connections: Connections4Dict
     edit_session_vsid: NotRequired[float]
     has_chapter_suggestions: bool
     has_email_capture: NotRequired[bool]
     has_interactive_quiz: bool | None
     has_mandatory_email_capture: NotRequired[bool]
-    interactions: Interactions3 | Interactions3Dict
+    interactions: Interactions3Dict
     is_screen_record: bool
     is_vimeo_create: bool
     is_zoom_upload: bool

@@ -22,6 +22,6 @@ class Subscription3(SdkBaseModel):
 
 
 class Subscription3Dict(TypedDict):
-    billing: Billing | BillingDict
-    renewal: Renewal | RenewalDict
-    trial: Trial | TrialDict
+    billing: BillingDict
+    renewal: RenewalDict
+    trial: TrialDict

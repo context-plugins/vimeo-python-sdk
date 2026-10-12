@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_animated_thumbset_error import (
     CreateAnimatedThumbsetErrorBody,
@@ -59,7 +62,8 @@ class VideosAnimatedThumbnails:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The set of animated thumbnails was created.
@@ -69,9 +73,7 @@ class VideosAnimatedThumbnails:
                 sets of animated thumbnails. The user can't create a set of animated thumbnails from the specified
                 section of the video. The authenticated user is rate-limited from creating new animated thumbnails.
                 ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.create_animated_thumbset(
-            video_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.create_animated_thumbset(video_id, body, request_options=request_options))
 
     def delete_animated_thumbset(
         self, picture_id: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -81,7 +83,8 @@ class VideosAnimatedThumbnails:
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The set of animated thumbnails was deleted.
@@ -89,9 +92,9 @@ class VideosAnimatedThumbnails:
         Raises:
             ApiError: * Error code 5001: The authenticated user doesn't have permission to delete the animated thumbset.
                 * Error code 5017: No such set of animated thumbnails exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_animated_thumbset(
-            picture_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_animated_thumbset(picture_id, video_id, request_options=request_options)
+        )
 
     def get_all_animated_thumbset(
         self,
@@ -108,7 +111,8 @@ class VideosAnimatedThumbnails:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The sets of animated thumbnails were returned.
@@ -116,9 +120,11 @@ class VideosAnimatedThumbnails:
         Raises:
             ApiError: * Error code 5001: The authenticated user doesn't own the video. * Error code 5017: No such set of
                 animated thumbnails exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_all_animated_thumbset(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_all_animated_thumbset(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_animated_thumbset(
         self, picture_id: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -129,7 +135,8 @@ class VideosAnimatedThumbnails:
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The set of animated thumbnails was returned.
@@ -137,9 +144,9 @@ class VideosAnimatedThumbnails:
         Raises:
             ApiError: * Error code 5001: The authenticated user doesn't own the video. * Error code 5017: No such set of
                 animated thumbnails exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_animated_thumbset(
-            picture_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_animated_thumbset(picture_id, video_id, request_options=request_options)
+        )
 
     def get_animated_thumbset_status(
         self, picture_id: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -151,7 +158,8 @@ class VideosAnimatedThumbnails:
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The status of the set of animated thumbnails was returned.
@@ -159,9 +167,9 @@ class VideosAnimatedThumbnails:
         Raises:
             ApiError: * Error code 5001: The authenticated user doesn't own the video. * Error code 5017: No such set of
                 animated thumbnails exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_animated_thumbset_status(
-            picture_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_animated_thumbset_status(picture_id, video_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> VideosAnimatedThumbnailsWithRawResponse:
@@ -185,7 +193,8 @@ class AsyncVideosAnimatedThumbnails:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The set of animated thumbnails was created.
@@ -195,9 +204,9 @@ class AsyncVideosAnimatedThumbnails:
                 sets of animated thumbnails. The user can't create a set of animated thumbnails from the specified
                 section of the video. The authenticated user is rate-limited from creating new animated thumbnails.
                 ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_animated_thumbset(video_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_animated_thumbset(
         self, picture_id: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -207,7 +216,8 @@ class AsyncVideosAnimatedThumbnails:
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The set of animated thumbnails was deleted.
@@ -215,11 +225,11 @@ class AsyncVideosAnimatedThumbnails:
         Raises:
             ApiError: * Error code 5001: The authenticated user doesn't have permission to delete the animated thumbset.
                 * Error code 5017: No such set of animated thumbnails exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_animated_thumbset(
                 picture_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_all_animated_thumbset(
         self,
@@ -236,7 +246,8 @@ class AsyncVideosAnimatedThumbnails:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The sets of animated thumbnails were returned.
@@ -244,11 +255,11 @@ class AsyncVideosAnimatedThumbnails:
         Raises:
             ApiError: * Error code 5001: The authenticated user doesn't own the video. * Error code 5017: No such set of
                 animated thumbnails exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_all_animated_thumbset(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_animated_thumbset(
         self, picture_id: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -259,7 +270,8 @@ class AsyncVideosAnimatedThumbnails:
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The set of animated thumbnails was returned.
@@ -267,9 +279,9 @@ class AsyncVideosAnimatedThumbnails:
         Raises:
             ApiError: * Error code 5001: The authenticated user doesn't own the video. * Error code 5017: No such set of
                 animated thumbnails exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_animated_thumbset(picture_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_animated_thumbset_status(
         self, picture_id: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -281,7 +293,8 @@ class AsyncVideosAnimatedThumbnails:
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The status of the set of animated thumbnails was returned.
@@ -289,11 +302,11 @@ class AsyncVideosAnimatedThumbnails:
         Raises:
             ApiError: * Error code 5001: The authenticated user doesn't own the video. * Error code 5017: No such set of
                 animated thumbnails exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_animated_thumbset_status(
                 picture_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosAnimatedThumbnailsWithRawResponse:
@@ -314,7 +327,8 @@ class VideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Serv
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -340,7 +354,8 @@ class VideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Serv
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -372,7 +387,8 @@ class VideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Serv
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -398,7 +414,8 @@ class VideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Serv
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -424,7 +441,8 @@ class VideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Serv
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -455,7 +473,8 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -468,7 +487,7 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AnimatedThumbset],
+            decoder=async_json_decoder[AnimatedThumbset],
             error_mapper=create_animated_thumbset_error_mapper,
             request_options=request_options,
         )
@@ -481,7 +500,8 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -493,7 +513,7 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_animated_thumbset_error_mapper,
             request_options=request_options,
         )
@@ -513,7 +533,8 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -525,7 +546,7 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AnimatedThumbsetConnection],
+            decoder=async_json_decoder[AnimatedThumbsetConnection],
             error_mapper=get_all_animated_thumbset_error_mapper,
             request_options=request_options,
         )
@@ -539,7 +560,8 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -550,7 +572,7 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AnimatedThumbset],
+            decoder=async_json_decoder[AnimatedThumbset],
             error_mapper=get_animated_thumbset_error_mapper,
             request_options=request_options,
         )
@@ -565,7 +587,8 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
         Args:
             picture_id: The UUID of the set of animated thumbnails.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -576,7 +599,7 @@ class AsyncVideosAnimatedThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawCl
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AnimatedThumbset],
+            decoder=async_json_decoder[AnimatedThumbset],
             error_mapper=get_animated_thumbset_status_error_mapper,
             request_options=request_options,
         )

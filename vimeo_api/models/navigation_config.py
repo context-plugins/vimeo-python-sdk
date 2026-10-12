@@ -12,4 +12,4 @@ class NavigationConfig(SdkBaseModel):
 
 
 class NavigationConfigDict(TypedDict):
-    show_search_bar: ShowSearchBar | ShowSearchBarDict
+    show_search_bar: ShowSearchBarDict

@@ -11,4 +11,4 @@ class Preferences(SdkBaseModel):
 
 
 class PreferencesDict(TypedDict):
-    videos: Videos4 | Videos4Dict
+    videos: Videos4Dict

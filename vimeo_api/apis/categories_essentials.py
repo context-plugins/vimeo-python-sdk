@@ -10,9 +10,11 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.get_category_error import GetCategoryErrorBody, get_category_error_mapper
 from ..models.category import Category
@@ -44,30 +46,34 @@ class CategoriesEssentials:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``last_video_featured_time`` - Sort the results by
                 most recently featured. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_categories(
-            direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_categories(
+                direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
+            ),
+        )
 
     def get_category(self, category: str, *, request_options: RequestOptionsOrDict | None = None) -> Category:
         """This method returns the specified category.
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The category was returned.
 
         Raises:
             ApiError: No such category exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_category(category, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_category(category, request_options=request_options))
 
     @property
     def with_raw_response(self) -> CategoriesEssentialsWithRawResponse:
@@ -96,32 +102,34 @@ class AsyncCategoriesEssentials:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``last_video_featured_time`` - Sort the results by
                 most recently featured. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The categories were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_categories(
                 direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_category(self, category: str, *, request_options: RequestOptionsOrDict | None = None) -> Category:
         """This method returns the specified category.
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The category was returned.
 
         Raises:
             ApiError: No such category exists. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.get_category(category, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_category(category, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncCategoriesEssentialsWithRawResponse:
@@ -147,7 +155,8 @@ class CategoriesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, 
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``last_video_featured_time`` - Sort the results by
                 most recently featured. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -175,7 +184,8 @@ class CategoriesEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, 
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -211,7 +221,8 @@ class AsyncCategoriesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``last_video_featured_time`` - Sort the results by
                 most recently featured. * ``name`` - Sort the results by name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -227,7 +238,7 @@ class AsyncCategoriesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CategoryConnection],
+            decoder=async_json_decoder[CategoryConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -239,7 +250,8 @@ class AsyncCategoriesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
 
         Args:
             category: The name of the category.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -250,7 +262,7 @@ class AsyncCategoriesEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Category],
+            decoder=async_json_decoder[Category],
             error_mapper=get_category_error_mapper,
             request_options=request_options,
         )

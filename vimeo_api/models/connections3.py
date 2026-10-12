@@ -121,30 +121,30 @@ class Connections3(SdkBaseModel):
 
 
 class Connections3Dict(TypedDict):
-    albums: Albums | AlbumsDict
-    appearances: Appearances | AppearancesDict
-    block: NotRequired[Block | BlockDict]
-    categories: Categories | CategoriesDict
-    channels: Channels1 | Channels1Dict
-    connected_apps: NotRequired[ConnectedApps | ConnectedAppsDict]
-    feed: Feed | FeedDict
-    folders_root: FoldersRoot | FoldersRootDict
-    followers: Followers | FollowersDict
-    following: Following | FollowingDict
-    groups: Groups1 | Groups1Dict
-    import_apps: NotRequired[ImportApps | ImportAppsDict]
-    lead_capture_form: NotRequired[LeadCaptureForm | LeadCaptureFormDict]
-    likes: Likes | LikesDict
-    moderated_channels: ModeratedChannels | ModeratedChannelsDict
-    ms_teams_team_folder_id: NotRequired[MsTeamsTeamFolderId | MsTeamsTeamFolderIdDict | None]
+    albums: AlbumsDict
+    appearances: AppearancesDict
+    block: NotRequired[BlockDict]
+    categories: CategoriesDict
+    channels: Channels1Dict
+    connected_apps: NotRequired[ConnectedAppsDict]
+    feed: FeedDict
+    folders_root: FoldersRootDict
+    followers: FollowersDict
+    following: FollowingDict
+    groups: Groups1Dict
+    import_apps: NotRequired[ImportAppsDict]
+    lead_capture_form: NotRequired[LeadCaptureFormDict]
+    likes: LikesDict
+    moderated_channels: ModeratedChannelsDict
+    ms_teams_team_folder_id: NotRequired[MsTeamsTeamFolderIdDict | None]
     ms_teams_tenant_token_id: NotRequired[str | None]
-    pictures: Pictures | PicturesDict
-    portfolios: Portfolios | PortfoliosDict
-    projects: NotRequired[Projects | ProjectsDict]
-    recommended_channels: NotRequired[RecommendedChannels | RecommendedChannelsDict]
-    recommended_users: NotRequired[RecommendedUsers | RecommendedUsersDict]
-    shared: Shared | SharedDict
-    videos: Videos3 | Videos3Dict
-    view_profile: NotRequired[ViewProfile | ViewProfileDict]
-    watched_videos: NotRequired[WatchedVideos | WatchedVideosDict]
-    watchlater: Watchlater | WatchlaterDict
+    pictures: PicturesDict
+    portfolios: PortfoliosDict
+    projects: NotRequired[ProjectsDict]
+    recommended_channels: NotRequired[RecommendedChannelsDict]
+    recommended_users: NotRequired[RecommendedUsersDict]
+    shared: SharedDict
+    videos: Videos3Dict
+    view_profile: NotRequired[ViewProfileDict]
+    watched_videos: NotRequired[WatchedVideosDict]
+    watchlater: WatchlaterDict

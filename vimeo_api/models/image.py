@@ -25,5 +25,5 @@ class Image(SdkBaseModel):
 class ImageDict(TypedDict):
     description: NotRequired[str]
     link: NotRequired[str]
-    picture: NotRequired[Picture | PictureDict | None]
+    picture: NotRequired[PictureDict | None]
     picture_uri: NotRequired[str | None]

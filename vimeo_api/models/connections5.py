@@ -54,14 +54,14 @@ class Connections5(SdkBaseModel):
 
 
 class Connections5Dict(TypedDict):
-    ancestor_path: list[AncestorPath1 | AncestorPath1Dict]
-    data_retention: DataRetention | DataRetentionDict
-    folders: Folders | FoldersDict
-    group_folder_grants: GroupFolderGrants | GroupFolderGrantsDict
-    items: Items | ItemsDict
-    parent_folder: ParentFolder | ParentFolderDict
-    personal_team_folder_owner: PersonalTeamFolderOwner | PersonalTeamFolderOwnerDict
-    resource_creator_team_user: ResourceCreatorTeamUser1 | ResourceCreatorTeamUser1Dict
-    team_permissions: TeamPermissions1 | TeamPermissions1Dict
-    user_folder_access_grants: UserFolderAccessGrants | UserFolderAccessGrantsDict
-    videos: Videos5 | Videos5Dict
+    ancestor_path: list[AncestorPath1Dict]
+    data_retention: DataRetentionDict
+    folders: FoldersDict
+    group_folder_grants: GroupFolderGrantsDict
+    items: ItemsDict
+    parent_folder: ParentFolderDict
+    personal_team_folder_owner: PersonalTeamFolderOwnerDict
+    resource_creator_team_user: ResourceCreatorTeamUser1Dict
+    team_permissions: TeamPermissions1Dict
+    user_folder_access_grants: UserFolderAccessGrantsDict
+    videos: Videos5Dict

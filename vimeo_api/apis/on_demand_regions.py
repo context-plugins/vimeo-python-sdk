@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.add_vod_region_error import AddVodRegionErrorBody, add_vod_region_error_mapper
 from ..errors.delete_vod_region_error import DeleteVodRegionErrorBody, delete_vod_region_error_mapper
@@ -45,7 +48,8 @@ class OnDemandRegions:
         Args:
             country: The country code of the region to add.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The region was added.
@@ -53,7 +57,7 @@ class OnDemandRegions:
         Raises:
             ApiError: The authenticated user can't add regions to this On Demand page. No such On Demand page or region
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_vod_region(country, ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_vod_region(country, ondemand_id, request_options=request_options))
 
     def delete_vod_region(
         self, country: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -64,7 +68,8 @@ class OnDemandRegions:
         Args:
             country: The country code of the region to remove.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The region was removed.
@@ -72,7 +77,7 @@ class OnDemandRegions:
         Raises:
             ApiError: The authenticated user can't remove regions from this On Demand page. No such On Demand page or
                 region exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_vod_region(country, ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_vod_region(country, ondemand_id, request_options=request_options))
 
     def delete_vod_regions(
         self,
@@ -87,7 +92,8 @@ class OnDemandRegions:
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The regions were removed.
@@ -95,36 +101,38 @@ class OnDemandRegions:
         Raises:
             ApiError: The authenticated user can't remove regions from this On Demand page. No such On Demand page or
                 region exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_vod_regions(
-            ondemand_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_vod_regions(ondemand_id, body=body, request_options=request_options)
+        )
 
     def get_region(self, country: str, *, request_options: RequestOptionsOrDict | None = None) -> OnDemandRegion:
         """This method returns a single On Demand region.
 
         Args:
             country: The country code of the region to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The region was returned.
 
         Raises:
             ApiError: No such region exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_region(country, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_region(country, request_options=request_options))
 
     def get_regions(self, *, request_options: RequestOptionsOrDict | None = None) -> OnDemandRegionConnection:
         """This method returns every existing On Demand region.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The regions were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_regions(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_regions(request_options=request_options))
 
     def get_vod_region(
         self, country: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -135,14 +143,15 @@ class OnDemandRegions:
         Args:
             country: The country code of the region to return.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The region was returned.
 
         Raises:
             ApiError: No such On Demand page or region exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_region(country, ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_vod_region(country, ondemand_id, request_options=request_options))
 
     def get_vod_regions(
         self, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -152,14 +161,15 @@ class OnDemandRegions:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The regions were returned.
 
         Raises:
             ApiError: No such On Demand page exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_regions(ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_vod_regions(ondemand_id, request_options=request_options))
 
     def set_vod_regions(
         self,
@@ -174,7 +184,8 @@ class OnDemandRegions:
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of regions was added.
@@ -182,7 +193,7 @@ class OnDemandRegions:
         Raises:
             ApiError: The authenticated user can't add regions to this On Demand page. No such On Demand page or region
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.set_vod_regions(ondemand_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.set_vod_regions(ondemand_id, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> OnDemandRegionsWithRawResponse:
@@ -202,7 +213,8 @@ class AsyncOnDemandRegions:
         Args:
             country: The country code of the region to add.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The region was added.
@@ -210,9 +222,9 @@ class AsyncOnDemandRegions:
         Raises:
             ApiError: The authenticated user can't add regions to this On Demand page. No such On Demand page or region
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_vod_region(country, ondemand_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_vod_region(
         self, country: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -223,7 +235,8 @@ class AsyncOnDemandRegions:
         Args:
             country: The country code of the region to remove.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The region was removed.
@@ -231,9 +244,9 @@ class AsyncOnDemandRegions:
         Raises:
             ApiError: The authenticated user can't remove regions from this On Demand page. No such On Demand page or
                 region exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_vod_region(country, ondemand_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_vod_regions(
         self,
@@ -248,7 +261,8 @@ class AsyncOnDemandRegions:
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The regions were removed.
@@ -256,36 +270,38 @@ class AsyncOnDemandRegions:
         Raises:
             ApiError: The authenticated user can't remove regions from this On Demand page. No such On Demand page or
                 region exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_vod_regions(ondemand_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_region(self, country: str, *, request_options: RequestOptionsOrDict | None = None) -> OnDemandRegion:
         """This method returns a single On Demand region.
 
         Args:
             country: The country code of the region to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The region was returned.
 
         Raises:
             ApiError: No such region exists. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.get_region(country, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_region(country, request_options=request_options))
 
     async def get_regions(self, *, request_options: RequestOptionsOrDict | None = None) -> OnDemandRegionConnection:
         """This method returns every existing On Demand region.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The regions were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_regions(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_regions(request_options=request_options))
 
     async def get_vod_region(
         self, country: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -296,16 +312,17 @@ class AsyncOnDemandRegions:
         Args:
             country: The country code of the region to return.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The region was returned.
 
         Raises:
             ApiError: No such On Demand page or region exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_region(country, ondemand_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_vod_regions(
         self, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -315,14 +332,15 @@ class AsyncOnDemandRegions:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The regions were returned.
 
         Raises:
             ApiError: No such On Demand page exists. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.get_vod_regions(ondemand_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_vod_regions(ondemand_id, request_options=request_options))
 
     async def set_vod_regions(
         self,
@@ -337,7 +355,8 @@ class AsyncOnDemandRegions:
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of regions was added.
@@ -345,9 +364,7 @@ class AsyncOnDemandRegions:
         Raises:
             ApiError: The authenticated user can't add regions to this On Demand page. No such On Demand page or region
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.set_vod_regions(ondemand_id, body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.set_vod_regions(ondemand_id, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncOnDemandRegionsWithRawResponse:
@@ -364,7 +381,8 @@ class OnDemandRegionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             country: The country code of the region to add.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -390,7 +408,8 @@ class OnDemandRegionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             country: The country code of the region to remove.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -420,7 +439,8 @@ class OnDemandRegionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -445,7 +465,8 @@ class OnDemandRegionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             country: The country code of the region to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -467,7 +488,8 @@ class OnDemandRegionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         """This method returns every existing On Demand region.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -491,7 +513,8 @@ class OnDemandRegionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             country: The country code of the region to return.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -515,7 +538,8 @@ class OnDemandRegionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -544,7 +568,8 @@ class OnDemandRegionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -573,7 +598,8 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             country: The country code of the region to add.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -585,7 +611,7 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandRegion],
+            decoder=async_json_decoder[OnDemandRegion],
             error_mapper=add_vod_region_error_mapper,
             request_options=request_options,
         )
@@ -599,7 +625,8 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             country: The country code of the region to remove.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -611,7 +638,7 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_vod_region_error_mapper,
             request_options=request_options,
         )
@@ -629,7 +656,8 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -642,7 +670,7 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[OnDemandRegion]],
+            decoder=async_json_decoder[list[OnDemandRegion]],
             error_mapper=delete_vod_regions_error_mapper,
             request_options=request_options,
         )
@@ -654,7 +682,8 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             country: The country code of the region to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -665,7 +694,7 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandRegion],
+            decoder=async_json_decoder[OnDemandRegion],
             error_mapper=get_region_error_mapper,
             request_options=request_options,
         )
@@ -676,7 +705,8 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         """This method returns every existing On Demand region.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -686,7 +716,7 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandRegionConnection],
+            decoder=async_json_decoder[OnDemandRegionConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -700,7 +730,8 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             country: The country code of the region to return.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -711,7 +742,7 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandRegion],
+            decoder=async_json_decoder[OnDemandRegion],
             error_mapper=get_vod_region_error_mapper,
             request_options=request_options,
         )
@@ -724,7 +755,8 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -735,7 +767,7 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandRegionConnection],
+            decoder=async_json_decoder[OnDemandRegionConnection],
             error_mapper=get_vod_regions_error_mapper,
             request_options=request_options,
         )
@@ -753,7 +785,8 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -766,7 +799,7 @@ class AsyncOnDemandRegionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandRegion],
+            decoder=async_json_decoder[OnDemandRegion],
             error_mapper=set_vod_regions_error_mapper,
             request_options=request_options,
         )

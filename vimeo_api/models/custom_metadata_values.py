@@ -3,7 +3,7 @@ from __future__ import annotations
 from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
-from ..core import UNSET, Optional, OptionalNullable, SdkBaseModel
+from ..core import UNSET, OptionalNullable, SdkBaseModel
 
 
 class CustomMetadataValues(SdkBaseModel):
@@ -28,7 +28,7 @@ class CustomMetadataValues(SdkBaseModel):
     type_: str = Field(alias="type")
     """The data type of the metadata field."""
 
-    values: Optional[list[str | None]] = UNSET
+    values: OptionalNullable[list[str]] = UNSET
     """Allowed values for select/multi-select types."""
 
 
@@ -40,4 +40,4 @@ class CustomMetadataValuesDict(TypedDict):
     mandatory: bool
     name: str
     type_: str
-    values: NotRequired[list[str | None]]
+    values: NotRequired[list[str] | None]

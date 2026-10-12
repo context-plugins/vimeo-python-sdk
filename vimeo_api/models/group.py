@@ -48,11 +48,11 @@ class GroupDict(TypedDict):
     created_time: str
     description: str | None
     link: str
-    metadata: Metadata6 | Metadata6Dict
+    metadata: Metadata6Dict
     modified_time: str
     name: str
-    pictures: Picture | PictureDict
-    privacy: Privacy4 | Privacy4Dict
+    pictures: PictureDict
+    privacy: Privacy4Dict
     resource_key: str
     uri: str
-    user: NotRequired[User | UserDict | None]
+    user: NotRequired[UserDict | None]

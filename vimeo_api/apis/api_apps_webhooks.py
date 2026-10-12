@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.add_webhook_error import AddWebhookErrorBody, add_webhook_error_mapper
 from ..errors.delete_webhook_error import DeleteWebhookErrorBody, delete_webhook_error_mapper
@@ -45,7 +48,8 @@ class ApiAppsWebhooks:
         Args:
             app_id: The ID of the app for which the webhook is created.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The webhook was added.
@@ -53,7 +57,7 @@ class ApiAppsWebhooks:
         Raises:
             ApiError: Error code 3143: The request is invalid because the webhook type already exists and can't be
                 duplicated. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_webhook(app_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_webhook(app_id, body=body, request_options=request_options))
 
     def delete_webhook(
         self, app_id: float, webhook_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -63,7 +67,8 @@ class ApiAppsWebhooks:
         Args:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The webhook was deleted.
@@ -71,7 +76,7 @@ class ApiAppsWebhooks:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't delete the
                 webhook. No webhook exists with the supplied ID. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_webhook(app_id, webhook_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_webhook(app_id, webhook_id, request_options=request_options))
 
     def get_webhook(
         self, app_id: float, webhook_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -81,14 +86,15 @@ class ApiAppsWebhooks:
         Args:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The webhook was returned.
 
         Raises:
             ApiError: Error code 5000: No such API app webhook exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_webhook(app_id, webhook_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_webhook(app_id, webhook_id, request_options=request_options))
 
     def get_webhooks(
         self,
@@ -104,16 +110,17 @@ class ApiAppsWebhooks:
             app_id: The ID of the app that the webhook is associated with.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of webhooks was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_webhooks(
-            app_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_webhooks(app_id, page=page, per_page=per_page, request_options=request_options)
+        )
 
     def update_webhook(
         self,
@@ -129,7 +136,8 @@ class ApiAppsWebhooks:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The webhook was updated.
@@ -137,9 +145,9 @@ class ApiAppsWebhooks:
         Raises:
             ApiError: * Error code 2204: A parameter is invalid. * Error code 3143: The request is invalid because the
                 webhook type already exists and can't be duplicated. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.update_webhook(
-            app_id, webhook_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_webhook(app_id, webhook_id, body=body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> ApiAppsWebhooksWithRawResponse:
@@ -162,7 +170,8 @@ class AsyncApiAppsWebhooks:
         Args:
             app_id: The ID of the app for which the webhook is created.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The webhook was added.
@@ -170,7 +179,7 @@ class AsyncApiAppsWebhooks:
         Raises:
             ApiError: Error code 3143: The request is invalid because the webhook type already exists and can't be
                 duplicated. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.add_webhook(app_id, body=body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.add_webhook(app_id, body=body, request_options=request_options))
 
     async def delete_webhook(
         self, app_id: float, webhook_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -180,7 +189,8 @@ class AsyncApiAppsWebhooks:
         Args:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The webhook was deleted.
@@ -188,9 +198,7 @@ class AsyncApiAppsWebhooks:
         Raises:
             ApiError: The supplied token doesn't have the proper scopes, or the authenticated user can't delete the
                 webhook. No webhook exists with the supplied ID. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.delete_webhook(app_id, webhook_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.delete_webhook(app_id, webhook_id, request_options=request_options))
 
     async def get_webhook(
         self, app_id: float, webhook_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -200,14 +208,15 @@ class AsyncApiAppsWebhooks:
         Args:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The webhook was returned.
 
         Raises:
             ApiError: Error code 5000: No such API app webhook exists. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.get_webhook(app_id, webhook_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_webhook(app_id, webhook_id, request_options=request_options))
 
     async def get_webhooks(
         self,
@@ -223,18 +232,19 @@ class AsyncApiAppsWebhooks:
             app_id: The ID of the app that the webhook is associated with.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of webhooks was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_webhooks(
                 app_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def update_webhook(
         self,
@@ -250,7 +260,8 @@ class AsyncApiAppsWebhooks:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The webhook was updated.
@@ -258,9 +269,9 @@ class AsyncApiAppsWebhooks:
         Raises:
             ApiError: * Error code 2204: A parameter is invalid. * Error code 3143: The request is invalid because the
                 webhook type already exists and can't be duplicated. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_webhook(app_id, webhook_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncApiAppsWebhooksWithRawResponse:
@@ -280,7 +291,8 @@ class ApiAppsWebhooksWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             app_id: The ID of the app for which the webhook is created.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -306,7 +318,8 @@ class ApiAppsWebhooksWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -331,7 +344,8 @@ class ApiAppsWebhooksWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -361,7 +375,8 @@ class ApiAppsWebhooksWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             app_id: The ID of the app that the webhook is associated with.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -392,7 +407,8 @@ class ApiAppsWebhooksWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -424,7 +440,8 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             app_id: The ID of the app for which the webhook is created.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -437,7 +454,7 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ApiAppWebhook],
+            decoder=async_json_decoder[ApiAppWebhook],
             error_mapper=add_webhook_error_mapper,
             request_options=request_options,
         )
@@ -450,7 +467,8 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -462,7 +480,7 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_webhook_error_mapper,
             request_options=request_options,
         )
@@ -475,7 +493,8 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -486,7 +505,7 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ApiAppWebhook],
+            decoder=async_json_decoder[ApiAppWebhook],
             error_mapper=get_webhook_error_mapper,
             request_options=request_options,
         )
@@ -505,7 +524,8 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             app_id: The ID of the app that the webhook is associated with.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -517,7 +537,7 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ApiAppWebhookConnection],
+            decoder=async_json_decoder[ApiAppWebhookConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -536,7 +556,8 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             app_id: The ID of the app that the webhook is associated with.
             webhook_id: The ID of the webhook.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -549,7 +570,7 @@ class AsyncApiAppsWebhooksWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ApiAppWebhook],
+            decoder=async_json_decoder[ApiAppWebhook],
             error_mapper=update_webhook_error_mapper,
             request_options=request_options,
         )

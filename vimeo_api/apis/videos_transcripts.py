@@ -9,8 +9,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_transcript_error import GetTranscriptErrorBody, get_transcript_error_mapper
 from ..errors.get_transcript_metadata_error import GetTranscriptMetadataErrorBody, get_transcript_metadata_error_mapper
@@ -31,7 +33,8 @@ class VideosTranscripts:
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The transcript segments were returned.
@@ -40,7 +43,7 @@ class VideosTranscripts:
             ApiError: * Error code 2: The specified video doesn't exist. * Error code 5014: The specified text track
                 doesn't exist. * Error code 5022: The specified transcript doesn't exist. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_transcript(texttrack_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_transcript(texttrack_id, video_id, request_options=request_options))
 
     def get_transcript_metadata(
         self, container_uuid: str, texttrack_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -50,16 +53,19 @@ class VideosTranscripts:
         Args:
             container_uuid: The UUID of the video container.
             texttrack_id: The ID of the text track.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The transcript metadata of the text track was returned.
 
         Raises:
             ApiError: Error code 5022: No such transcript exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_transcript_metadata(
-            container_uuid, texttrack_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_transcript_metadata(
+                container_uuid, texttrack_id, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosTranscriptsWithRawResponse:
@@ -78,7 +84,8 @@ class AsyncVideosTranscripts:
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The transcript segments were returned.
@@ -87,9 +94,9 @@ class AsyncVideosTranscripts:
             ApiError: * Error code 2: The specified video doesn't exist. * Error code 5014: The specified text track
                 doesn't exist. * Error code 5022: The specified transcript doesn't exist. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_transcript(texttrack_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_transcript_metadata(
         self, container_uuid: str, texttrack_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -99,18 +106,19 @@ class AsyncVideosTranscripts:
         Args:
             container_uuid: The UUID of the video container.
             texttrack_id: The ID of the text track.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The transcript metadata of the text track was returned.
 
         Raises:
             ApiError: Error code 5022: No such transcript exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_transcript_metadata(
                 container_uuid, texttrack_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosTranscriptsWithRawResponse:
@@ -126,7 +134,8 @@ class VideosTranscriptsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -150,7 +159,8 @@ class VideosTranscriptsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         Args:
             container_uuid: The UUID of the video container.
             texttrack_id: The ID of the text track.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -176,7 +186,8 @@ class AsyncVideosTranscriptsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -187,7 +198,7 @@ class AsyncVideosTranscriptsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[SegmentConnection],
+            decoder=async_json_decoder[SegmentConnection],
             error_mapper=get_transcript_error_mapper,
             request_options=request_options,
         )
@@ -200,7 +211,8 @@ class AsyncVideosTranscriptsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         Args:
             container_uuid: The UUID of the video container.
             texttrack_id: The ID of the text track.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -211,7 +223,7 @@ class AsyncVideosTranscriptsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TranscriptMetadata],
+            decoder=async_json_decoder[TranscriptMetadata],
             error_mapper=get_transcript_metadata_error_mapper,
             request_options=request_options,
         )

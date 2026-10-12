@@ -15,7 +15,7 @@ from .enums.content_rating2 import ContentRating2OrStr
 from .enums.latency import LatencyOrStr
 from .enums.playlist_sort import PlaylistSortOrStr
 from .enums.preferred_stream_method import PreferredStreamMethodOrStr
-from .enums.status11 import Status11OrStr
+from .enums.status13 import Status13OrStr
 from .enums.stream_mode import StreamModeOrStr
 from .event_schedule import EventSchedule, EventScheduleDict
 from .interaction_tools_setting import InteractionToolsSetting, InteractionToolsSettingDict
@@ -161,7 +161,7 @@ class RecurringEvent(SdkBaseModel):
     auto_cc_translation_enabled: bool | None
     """Whether automated caption translations are enabled."""
 
-    auto_cc_translation_languages: list[str | None]
+    auto_cc_translation_languages: list[str] | None
     """The list of language codes for caption translations."""
 
     automatically_title_stream: bool
@@ -219,7 +219,7 @@ class RecurringEvent(SdkBaseModel):
     head_clip: Any | None
     """The first video to be played in the playlist."""
 
-    interaction_tools_settings: list[InteractionToolsSetting | None]
+    interaction_tools_settings: list[InteractionToolsSetting] | None
     """The settings for the interaction tools."""
 
     is_starred_by_cur_user: bool
@@ -246,7 +246,7 @@ class RecurringEvent(SdkBaseModel):
     live_clips: list[str]
     """A list of videos belonging to the event, including their video IDs and dates streamed."""
 
-    live_destinations: list[str | None]
+    live_destinations: list[str] | None
     """_This field is deprecated in favor of the following method: `Get all the destinations of a one-time event
     <https://developer.vimeo.com/api/reference/live#get_one_time_event_destinations>`__._"""
 
@@ -316,7 +316,7 @@ class RecurringEvent(SdkBaseModel):
     srt_passphrase: str | None
     """The secret key used in SRT streaming to encrypt data for secure transmission."""
 
-    status: Status11OrStr | None
+    status: Status13OrStr | None
     """The status of the event.
 
     Option descriptions:
@@ -381,25 +381,25 @@ class RecurringEvent(SdkBaseModel):
     view_link: str
     """The URI to access the event on Vimeo with or without an unlisted hash."""
 
-    webinar: list[str | None]
+    webinar: list[str] | None
     """Information about the associated webinar."""
 
-    whitelisted_domains: list[Domain | None]
+    whitelisted_domains: list[Domain] | None
     """The permitted domains for a video."""
 
 
 class RecurringEventDict(TypedDict):
-    album: Album2 | Album2Dict | None
+    album: Album2Dict | None
     allow_share_link: bool
     allowed_privacies: list[str]
-    app: ApiApp | ApiAppDict | None
+    app: ApiAppDict | None
     auto_cc_enabled: bool | None
     auto_cc_keywords: str | None
     auto_cc_language: AutoCcLanguageOrStr | None
     auto_cc_limit: float | None
     auto_cc_remaining: float | None
     auto_cc_translation_enabled: bool | None
-    auto_cc_translation_languages: list[str | None]
+    auto_cc_translation_languages: list[str] | None
     automatically_title_stream: bool
     backup_stream_key: str | None
     chat_enabled: bool
@@ -408,43 +408,43 @@ class RecurringEventDict(TypedDict):
     created_time: str
     disable_auto_archiving: bool
     dvr: bool
-    email_quota: EmailQuota | EmailQuotaDict
-    embed: Embed3 | Embed3Dict
+    email_quota: EmailQuotaDict
+    embed: Embed3Dict
     event_type: str
     from_showcase: bool
     from_webinar: NotRequired[bool]
     has_forced_lead_capture_form: bool
     head_clip: Any | None
-    interaction_tools_settings: list[InteractionToolsSetting | InteractionToolsSettingDict | None]
+    interaction_tools_settings: list[InteractionToolsSettingDict] | None
     is_starred_by_cur_user: bool
-    landing_page_logo: LandingPageLogo | LandingPageLogoDict | None
+    landing_page_logo: LandingPageLogoDict | None
     latency: LatencyOrStr
     lead_uuid: str
     link: str
     live_clips: list[str]
-    live_destinations: list[str | None]
-    metadata: Metadata15 | Metadata15Dict
+    live_destinations: list[str] | None
+    metadata: Metadata15Dict
     next_occurrence_time: str | None
-    parent_folder: Project | ProjectDict | None
-    pictures: Picture | PictureDict
+    parent_folder: ProjectDict | None
+    pictures: PictureDict
     playlist_sort: PlaylistSortOrStr
     preferred_stream_method: PreferredStreamMethodOrStr
-    recordings: list[Recording | RecordingDict]
+    recordings: list[RecordingDict]
     rtmp_link: str | None
     rtmp_preview: bool
     rtmps_link: str | None
-    schedule: EventSchedule | EventScheduleDict
+    schedule: EventScheduleDict
     scheduled_playback: bool
     settings_link: str
     srt_encryption_enabled: bool
     srt_link: NotRequired[str]
     srt_passphrase: str | None
-    status: Status11OrStr | None
+    status: Status13OrStr | None
     stream_description: str | None
     stream_key: str | None
     stream_mode: StreamModeOrStr
     stream_password: str | None
-    stream_privacy: StreamPrivacy | StreamPrivacyDict
+    stream_privacy: StreamPrivacyDict
     stream_title: str
     streamable_clip: Any | None
     streaming_auto_stop: bool
@@ -453,8 +453,8 @@ class RecurringEventDict(TypedDict):
     unlimited_auto_cc: bool | None
     unlimited_duration: bool
     uri: str
-    user: User | UserDict
+    user: UserDict
     venue_uuid: str | None
     view_link: str
-    webinar: list[str | None]
-    whitelisted_domains: list[Domain | DomainDict | None]
+    webinar: list[str] | None
+    whitelisted_domains: list[DomainDict] | None

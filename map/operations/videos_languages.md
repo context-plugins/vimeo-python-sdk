@@ -10,8 +10,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /languages`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_languages(*, filter: Filter7OrStr | None = None, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `filter` — query · `page` — query · `per_page` — query
+- **Signature**: `def get_languages(*, filter_: Filter7OrStr | None = None, page: float | None = None, per_page: float | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `filter_` — query `filter` · `page` — query · `per_page` — query
 - **Returns (parsed)**: `LanguageConnection`
 - **Returns (raw)**: `ApiResult[LanguageConnection, RawError]`
 - **Error**: `RawError` — **Case B**

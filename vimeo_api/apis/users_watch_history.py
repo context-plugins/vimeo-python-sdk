@@ -12,10 +12,13 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.get_watch_history_error import GetWatchHistoryErrorBody, get_watch_history_error_mapper
 from ..models.video_connection import VideoConnection
@@ -33,27 +36,29 @@ class UsersWatchHistory:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was deleted from the authenticated user's watch history.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_from_watch_history(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_from_watch_history(video_id, request_options=request_options))
 
     def delete_watch_history(self, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method deletes the entire watch history of the authenticated user.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user's watch history was deleted.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_watch_history(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_watch_history(request_options=request_options))
 
     def get_watch_history(
         self,
@@ -68,7 +73,8 @@ class UsersWatchHistory:
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -76,9 +82,9 @@ class UsersWatchHistory:
         Raises:
             ApiError: The authenticated user can't view another user's watch history. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_watch_history(
-            page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_watch_history(page=page, per_page=per_page, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> UsersWatchHistoryWithRawResponse:
@@ -96,29 +102,31 @@ class AsyncUsersWatchHistory:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was deleted from the authenticated user's watch history.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_from_watch_history(video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_watch_history(self, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method deletes the entire watch history of the authenticated user.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user's watch history was deleted.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.delete_watch_history(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_watch_history(request_options=request_options))
 
     async def get_watch_history(
         self,
@@ -133,7 +141,8 @@ class AsyncUsersWatchHistory:
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -141,11 +150,11 @@ class AsyncUsersWatchHistory:
         Raises:
             ApiError: The authenticated user can't view another user's watch history. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_watch_history(
                 page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncUsersWatchHistoryWithRawResponse:
@@ -160,7 +169,8 @@ class UsersWatchHistoryWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -181,7 +191,8 @@ class UsersWatchHistoryWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         """This method deletes the entire watch history of the authenticated user.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -210,7 +221,8 @@ class UsersWatchHistoryWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -235,7 +247,8 @@ class AsyncUsersWatchHistoryWithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -247,7 +260,7 @@ class AsyncUsersWatchHistoryWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -258,7 +271,8 @@ class AsyncUsersWatchHistoryWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         """This method deletes the entire watch history of the authenticated user.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -269,7 +283,7 @@ class AsyncUsersWatchHistoryWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -287,7 +301,8 @@ class AsyncUsersWatchHistoryWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -298,7 +313,7 @@ class AsyncUsersWatchHistoryWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_watch_history_error_mapper,
             request_options=request_options,
         )

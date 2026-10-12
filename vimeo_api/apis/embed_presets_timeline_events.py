@@ -11,8 +11,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_video_custom_logo_error import (
     CreateVideoCustomLogoErrorBody,
@@ -35,7 +37,8 @@ class EmbedPresetsTimelineEvents:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The timeline event thumbnail was added.
@@ -43,7 +46,7 @@ class EmbedPresetsTimelineEvents:
         Raises:
             ApiError: The authenticated user can't add a timeline event thumbnail to the video. No such video exists.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_video_custom_logo(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_video_custom_logo(video_id, request_options=request_options))
 
     def get_video_custom_logo(
         self, thumbnail_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -53,7 +56,8 @@ class EmbedPresetsTimelineEvents:
         Args:
             thumbnail_id: The ID of the timeline event thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The timeline event thumbnail was returned.
@@ -61,9 +65,9 @@ class EmbedPresetsTimelineEvents:
         Raises:
             ApiError: The authenticated user can't access the timeline event thumbnail. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_video_custom_logo(
-            thumbnail_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_custom_logo(thumbnail_id, video_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> EmbedPresetsTimelineEventsWithRawResponse:
@@ -82,7 +86,8 @@ class AsyncEmbedPresetsTimelineEvents:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The timeline event thumbnail was added.
@@ -90,9 +95,7 @@ class AsyncEmbedPresetsTimelineEvents:
         Raises:
             ApiError: The authenticated user can't add a timeline event thumbnail to the video. No such video exists.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.create_video_custom_logo(video_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.create_video_custom_logo(video_id, request_options=request_options))
 
     async def get_video_custom_logo(
         self, thumbnail_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -102,7 +105,8 @@ class AsyncEmbedPresetsTimelineEvents:
         Args:
             thumbnail_id: The ID of the timeline event thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The timeline event thumbnail was returned.
@@ -110,9 +114,9 @@ class AsyncEmbedPresetsTimelineEvents:
         Raises:
             ApiError: The authenticated user can't access the timeline event thumbnail. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_custom_logo(thumbnail_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncEmbedPresetsTimelineEventsWithRawResponse:
@@ -128,7 +132,8 @@ class EmbedPresetsTimelineEventsWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -153,7 +158,8 @@ class EmbedPresetsTimelineEventsWithRawResponse(SecuredRawResponse[RawClient, Se
         Args:
             thumbnail_id: The ID of the timeline event thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -179,7 +185,8 @@ class AsyncEmbedPresetsTimelineEventsWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -191,7 +198,7 @@ class AsyncEmbedPresetsTimelineEventsWithRawResponse(SecuredRawResponse[AsyncRaw
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_video_custom_logo_error_mapper,
             request_options=request_options,
         )
@@ -204,7 +211,8 @@ class AsyncEmbedPresetsTimelineEventsWithRawResponse(SecuredRawResponse[AsyncRaw
         Args:
             thumbnail_id: The ID of the timeline event thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -215,7 +223,7 @@ class AsyncEmbedPresetsTimelineEventsWithRawResponse(SecuredRawResponse[AsyncRaw
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_video_custom_logo_error_mapper,
             request_options=request_options,
         )

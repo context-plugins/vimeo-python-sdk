@@ -621,7 +621,7 @@ from .spatial1 import Spatial1, Spatial1Dict
 from .spatial3 import Spatial3, Spatial3Dict
 from .staff_pick import StaffPick, StaffPickDict
 from .stats import Stats, StatsDict
-from .status2 import Status2, Status2Dict
+from .status3 import Status3, Status3Dict
 from .storage import Storage, StorageDict
 from .stream_embed import StreamEmbed, StreamEmbedDict
 from .stream_privacy import StreamPrivacy, StreamPrivacyDict
@@ -635,8 +635,8 @@ from .subscription2 import Subscription2, Subscription2Dict
 from .subscription3 import Subscription3, Subscription3Dict
 from .subscription_plans import SubscriptionPlans, SubscriptionPlansDict
 from .summary import Summary, SummaryDict
-from .tag import Tag, TagDict
 from .tag_connection import TagConnection, TagConnectionDict
+from .tag_model import TagModel, TagModelDict
 from .team_member import TeamMember, TeamMemberDict
 from .team_membership import TeamMembership, TeamMembershipDict
 from .team_permissions import TeamPermissions, TeamPermissionsDict
@@ -2055,8 +2055,8 @@ __all__ = [
     "StaffPickDict",
     "Stats",
     "StatsDict",
-    "Status2",
-    "Status2Dict",
+    "Status3",
+    "Status3Dict",
     "Storage",
     "StorageDict",
     "StreamEmbed",
@@ -2083,10 +2083,10 @@ __all__ = [
     "SubscriptionPlansDict",
     "Summary",
     "SummaryDict",
-    "Tag",
     "TagConnection",
     "TagConnectionDict",
-    "TagDict",
+    "TagModel",
+    "TagModelDict",
     "TeamMember",
     "TeamMemberDict",
     "TeamMembership",

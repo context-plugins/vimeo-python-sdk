@@ -13,4 +13,4 @@ class VideoReportReason(SdkBaseModel):
 
 
 class VideoReportReasonDict(TypedDict):
-    reasons: list[ReportReasonNode | ReportReasonNodeDict]
+    reasons: list[ReportReasonNodeDict]

@@ -25,7 +25,7 @@ class Chapter(SdkBaseModel):
 
 class ChapterDict(TypedDict):
     active_thumbnail_uri: NotRequired[str]
-    thumbnails: list[Picture | PictureDict]
+    thumbnails: list[PictureDict]
     timecode: float
     title: str
     uri: str

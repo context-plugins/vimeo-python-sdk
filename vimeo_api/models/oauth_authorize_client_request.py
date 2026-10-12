@@ -1,14 +1,13 @@
 from __future__ import annotations
 
-from typing import Literal
-
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
+from .enums.grant_type1 import GrantType1OrStr
 
 
 class OauthAuthorizeClientRequest(SdkBaseModel):
-    grant_type: Literal["client_credentials"] = "client_credentials"
+    grant_type: GrantType1OrStr
     """The grant type. The value of this field must be ``client_credentials``.
 
     Option descriptions:
@@ -19,5 +18,5 @@ class OauthAuthorizeClientRequest(SdkBaseModel):
 
 
 class OauthAuthorizeClientRequestDict(TypedDict):
-    grant_type: NotRequired[Literal["client_credentials"]]
+    grant_type: GrantType1OrStr
     scope: str

@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_live_event_destination_alt1_error import (
     CreateLiveEventDestinationAlt1ErrorBody,
@@ -88,7 +91,8 @@ class LiveEventDestinations:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was created.
@@ -100,9 +104,9 @@ class LiveEventDestinations:
                 else. Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destinations. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.create_live_event_destination(
-            live_event_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_live_event_destination(live_event_id, body, request_options=request_options)
+        )
 
     def create_live_event_destination_alt1(
         self,
@@ -119,7 +123,8 @@ class LiveEventDestinations:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was created.
@@ -131,9 +136,11 @@ class LiveEventDestinations:
                 else. Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destinations. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.create_live_event_destination_alt1(
-            live_event_id, user_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_live_event_destination_alt1(
+                live_event_id, user_id, body, request_options=request_options
+            ),
+        )
 
     def create_ott_destination(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -144,7 +151,8 @@ class LiveEventDestinations:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The new OTT destination was created.
@@ -154,9 +162,9 @@ class LiveEventDestinations:
                 credentials are invalid. Error code 3200: The authenticated user can't access the event destination. *
                 Error code 5000: No such event or user exists. * Error code 5018: The user doesn't have any OTT
                 metadata. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_ott_destination(
-            live_event_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_ott_destination(live_event_id, user_id, request_options=request_options)
+        )
 
     def delete_live_event_destination(
         self, destination_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -165,7 +173,8 @@ class LiveEventDestinations:
 
         Args:
             destination_id: The ID of the event destination.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was deleted.
@@ -174,9 +183,9 @@ class LiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destination. Error code 5000: No such event destination exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.delete_live_event_destination(
-            destination_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_live_event_destination(destination_id, request_options=request_options)
+        )
 
     def delete_ott_destination(
         self,
@@ -193,7 +202,8 @@ class LiveEventDestinations:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             destination_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The OTT destination was deleted.
@@ -203,9 +213,11 @@ class LiveEventDestinations:
                 credentials are invalid. Error code 3200: The authenticated user can't access the event destination. *
                 Error code 5000: No such event or user exists. * Error code 5018: The user doesn't have any OTT
                 metadata. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_ott_destination(
-            live_event_id, user_id, destination_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_ott_destination(
+                live_event_id, user_id, destination_id, request_options=request_options
+            ),
+        )
 
     def get_available_destinations(
         self, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -214,7 +226,8 @@ class LiveEventDestinations:
 
         Args:
             user_id: The user ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destinations were returned.
@@ -223,13 +236,14 @@ class LiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. * Error code 3200: The authenticated user can't
                 get the available destinations. * Error code 3422: The authenticated user can't live simulcast.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_available_destinations(user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_available_destinations(user_id, request_options=request_options))
 
     def get_available_destinations_alt1(self, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method returns every available event destination for the authenticated user to stream to.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destinations were returned.
@@ -238,7 +252,7 @@ class LiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. * Error code 3200: The authenticated user can't
                 get the available destinations. * Error code 3422: The authenticated user can't live simulcast.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_available_destinations_alt1(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_available_destinations_alt1(request_options=request_options))
 
     def get_live_event_destination(
         self, destination_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -247,7 +261,8 @@ class LiveEventDestinations:
 
         Args:
             destination_id: The ID of the event destination.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was returned.
@@ -256,9 +271,9 @@ class LiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destination. Error code 5000: No such event destination exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_live_event_destination(
-            destination_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_destination(destination_id, request_options=request_options)
+        )
 
     def get_live_event_destinations(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -268,7 +283,8 @@ class LiveEventDestinations:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destinations were returned.
@@ -277,9 +293,9 @@ class LiveEventDestinations:
             ApiError: Error code 2204: Parameters are missing, or the body data is invalid. Error code 8000: The user
                 credentials are invalid. Error code 3200: The authenticated user can't access the event destination.
                 Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_destinations(
-            live_event_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_destinations(live_event_id, request_options=request_options)
+        )
 
     def get_live_event_destinations_alt1(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -290,7 +306,8 @@ class LiveEventDestinations:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destinations were returned.
@@ -299,9 +316,11 @@ class LiveEventDestinations:
             ApiError: Error code 2204: Parameters are missing, or the body data is invalid. Error code 8000: The user
                 credentials are invalid. Error code 3200: The authenticated user can't access the event destination.
                 Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_destinations_alt1(
-            live_event_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_destinations_alt1(
+                live_event_id, user_id, request_options=request_options
+            ),
+        )
 
     def get_ott_destinations(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -312,7 +331,8 @@ class LiveEventDestinations:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The OTT destinations were returned.
@@ -321,9 +341,9 @@ class LiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destination. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_ott_destinations(
-            live_event_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_ott_destinations(live_event_id, user_id, request_options=request_options)
+        )
 
     def update_live_event_destination(
         self,
@@ -337,7 +357,8 @@ class LiveEventDestinations:
         Args:
             destination_id: The ID of the event destination.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was updated.
@@ -349,9 +370,11 @@ class LiveEventDestinations:
                 on Facebook, YouTube, or LinkedIn. Error code 8000: The user credentials are invalid. Error code 3200:
                 The authenticated user can't access the event destination. Error code 5000: No such event destination
                 exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.update_live_event_destination(
-            destination_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_live_event_destination(
+                destination_id, body=body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> LiveEventDestinationsWithRawResponse:
@@ -375,7 +398,8 @@ class AsyncLiveEventDestinations:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was created.
@@ -387,11 +411,11 @@ class AsyncLiveEventDestinations:
                 else. Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destinations. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_live_event_destination(
                 live_event_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_live_event_destination_alt1(
         self,
@@ -408,7 +432,8 @@ class AsyncLiveEventDestinations:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was created.
@@ -420,11 +445,11 @@ class AsyncLiveEventDestinations:
                 else. Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destinations. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_live_event_destination_alt1(
                 live_event_id, user_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_ott_destination(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -435,7 +460,8 @@ class AsyncLiveEventDestinations:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The new OTT destination was created.
@@ -445,11 +471,11 @@ class AsyncLiveEventDestinations:
                 credentials are invalid. Error code 3200: The authenticated user can't access the event destination. *
                 Error code 5000: No such event or user exists. * Error code 5018: The user doesn't have any OTT
                 metadata. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_ott_destination(
                 live_event_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_live_event_destination(
         self, destination_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -458,7 +484,8 @@ class AsyncLiveEventDestinations:
 
         Args:
             destination_id: The ID of the event destination.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was deleted.
@@ -467,9 +494,9 @@ class AsyncLiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destination. Error code 5000: No such event destination exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_live_event_destination(destination_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_ott_destination(
         self,
@@ -486,7 +513,8 @@ class AsyncLiveEventDestinations:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             destination_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The OTT destination was deleted.
@@ -496,11 +524,11 @@ class AsyncLiveEventDestinations:
                 credentials are invalid. Error code 3200: The authenticated user can't access the event destination. *
                 Error code 5000: No such event or user exists. * Error code 5018: The user doesn't have any OTT
                 metadata. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_ott_destination(
                 live_event_id, user_id, destination_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_available_destinations(
         self, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -509,7 +537,8 @@ class AsyncLiveEventDestinations:
 
         Args:
             user_id: The user ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destinations were returned.
@@ -518,15 +547,16 @@ class AsyncLiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. * Error code 3200: The authenticated user can't
                 get the available destinations. * Error code 3422: The authenticated user can't live simulcast.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_available_destinations(user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_available_destinations_alt1(self, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method returns every available event destination for the authenticated user to stream to.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destinations were returned.
@@ -535,7 +565,7 @@ class AsyncLiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. * Error code 3200: The authenticated user can't
                 get the available destinations. * Error code 3422: The authenticated user can't live simulcast.
                 ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.get_available_destinations_alt1(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_available_destinations_alt1(request_options=request_options))
 
     async def get_live_event_destination(
         self, destination_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -544,7 +574,8 @@ class AsyncLiveEventDestinations:
 
         Args:
             destination_id: The ID of the event destination.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was returned.
@@ -553,9 +584,9 @@ class AsyncLiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destination. Error code 5000: No such event destination exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_destination(destination_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_live_event_destinations(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -565,7 +596,8 @@ class AsyncLiveEventDestinations:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destinations were returned.
@@ -574,9 +606,9 @@ class AsyncLiveEventDestinations:
             ApiError: Error code 2204: Parameters are missing, or the body data is invalid. Error code 8000: The user
                 credentials are invalid. Error code 3200: The authenticated user can't access the event destination.
                 Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_destinations(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_live_event_destinations_alt1(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -587,7 +619,8 @@ class AsyncLiveEventDestinations:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destinations were returned.
@@ -596,11 +629,11 @@ class AsyncLiveEventDestinations:
             ApiError: Error code 2204: Parameters are missing, or the body data is invalid. Error code 8000: The user
                 credentials are invalid. Error code 3200: The authenticated user can't access the event destination.
                 Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_destinations_alt1(
                 live_event_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_ott_destinations(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -611,7 +644,8 @@ class AsyncLiveEventDestinations:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The OTT destinations were returned.
@@ -620,9 +654,9 @@ class AsyncLiveEventDestinations:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the event destination. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_ott_destinations(live_event_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_live_event_destination(
         self,
@@ -636,7 +670,8 @@ class AsyncLiveEventDestinations:
         Args:
             destination_id: The ID of the event destination.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The event destination was updated.
@@ -648,11 +683,11 @@ class AsyncLiveEventDestinations:
                 on Facebook, YouTube, or LinkedIn. Error code 8000: The user credentials are invalid. Error code 3200:
                 The authenticated user can't access the event destination. Error code 5000: No such event destination
                 exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_live_event_destination(
                 destination_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveEventDestinationsWithRawResponse:
@@ -673,7 +708,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -706,7 +742,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -733,7 +770,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -757,7 +795,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             destination_id: The ID of the event destination.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -789,7 +828,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             destination_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -819,7 +859,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             user_id: The user ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -841,7 +882,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
         """This method returns every available event destination for the authenticated user to stream to.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -863,7 +905,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             destination_id: The ID of the event destination.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -887,7 +930,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -912,7 +956,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -937,7 +982,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -965,7 +1011,8 @@ class LiveEventDestinationsWithRawResponse(SecuredRawResponse[RawClient, Server,
         Args:
             destination_id: The ID of the event destination.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -998,7 +1045,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1011,7 +1059,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventDestination],
+            decoder=async_json_decoder[EventDestination],
             error_mapper=create_live_event_destination_error_mapper,
             request_options=request_options,
         )
@@ -1031,7 +1079,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1044,7 +1093,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventDestination],
+            decoder=async_json_decoder[EventDestination],
             error_mapper=create_live_event_destination_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1058,7 +1107,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1070,7 +1120,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OttDestination],
+            decoder=async_json_decoder[OttDestination],
             error_mapper=create_ott_destination_error_mapper,
             request_options=request_options,
         )
@@ -1082,7 +1132,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             destination_id: The ID of the event destination.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1094,7 +1145,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_event_destination_error_mapper,
             request_options=request_options,
         )
@@ -1114,7 +1165,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             destination_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1132,7 +1184,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_ott_destination_error_mapper,
             request_options=request_options,
         )
@@ -1144,7 +1196,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             user_id: The user ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1155,7 +1208,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_available_destinations_error_mapper,
             request_options=request_options,
         )
@@ -1166,7 +1219,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
         """This method returns every available event destination for the authenticated user to stream to.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1176,7 +1230,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_available_destinations_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1188,7 +1242,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             destination_id: The ID of the event destination.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1199,7 +1254,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventDestination],
+            decoder=async_json_decoder[EventDestination],
             error_mapper=get_live_event_destination_error_mapper,
             request_options=request_options,
         )
@@ -1212,7 +1267,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1223,7 +1279,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventDestinationConnection],
+            decoder=async_json_decoder[EventDestinationConnection],
             error_mapper=get_live_event_destinations_error_mapper,
             request_options=request_options,
         )
@@ -1237,7 +1293,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1248,7 +1305,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventDestinationConnection],
+            decoder=async_json_decoder[EventDestinationConnection],
             error_mapper=get_live_event_destinations_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1262,7 +1319,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1273,7 +1331,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OttDestinationConnection],
+            decoder=async_json_decoder[OttDestinationConnection],
             error_mapper=get_ott_destinations_error_mapper,
             request_options=request_options,
         )
@@ -1290,7 +1348,8 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
         Args:
             destination_id: The ID of the event destination.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1303,7 +1362,7 @@ class AsyncLiveEventDestinationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventDestination],
+            decoder=async_json_decoder[EventDestination],
             error_mapper=update_live_event_destination_error_mapper,
             request_options=request_options,
         )

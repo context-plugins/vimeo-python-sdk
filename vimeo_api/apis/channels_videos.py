@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_video_to_channel_error import AddVideoToChannelErrorBody, add_video_to_channel_error_mapper
 from ..errors.add_videos_to_channel_error import AddVideosToChannelErrorBody, add_videos_to_channel_error_mapper
@@ -56,7 +59,8 @@ class ChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -64,9 +68,9 @@ class ChannelsVideos:
         Raises:
             ApiError: The video can't be added to a channel, or the authenticated user can't add videos to this channel.
                 No such channel or video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_to_channel(
-            channel_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_to_channel(channel_id, video_id, request_options=request_options)
+        )
 
     def add_videos_to_channel(
         self,
@@ -81,7 +85,8 @@ class ChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -89,7 +94,7 @@ class ChannelsVideos:
         Raises:
             ApiError: The authenticated user can't add videos to the channel, or a video can't be added to the channel.
                 No such channel or user exist. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_videos_to_channel(channel_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_videos_to_channel(channel_id, body, request_options=request_options))
 
     def delete_video_from_channel(
         self, channel_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -100,7 +105,8 @@ class ChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -108,9 +114,9 @@ class ChannelsVideos:
         Raises:
             ApiError: The authenticated user can't remove videos from this channel, or the video can't be removed from
                 the channel. No such channel or video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_video_from_channel(
-            channel_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_from_channel(channel_id, video_id, request_options=request_options)
+        )
 
     def get_available_video_channels(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -120,7 +126,8 @@ class ChannelsVideos:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channels were returned.
@@ -129,7 +136,7 @@ class ChannelsVideos:
             ApiError: The authenticated user can't add or remove this video from a channel. * The authenticated user
                 isn't a moderator of the channel. * Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_available_video_channels(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_available_video_channels(video_id, request_options=request_options))
 
     def get_channel_video(
         self, channel_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -140,14 +147,15 @@ class ChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_channel_video(channel_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_channel_video(channel_id, video_id, request_options=request_options))
 
     def get_channel_videos(
         self,
@@ -155,7 +163,7 @@ class ChannelsVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -171,7 +179,7 @@ class ChannelsVideos:
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -187,7 +195,8 @@ class ChannelsVideos:
                 method. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``manual`` - Sort the results as the user has arranged them. * ``modified_time`` - Sort the
                 results by last modification. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -196,19 +205,21 @@ class ChannelsVideos:
             ApiError: The **sort** field is ``default``, but the **direction** field has a value. * No such channel
                 exists. * Error code 5451: This resource is restricted in your region. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_channel_videos(
-            channel_id,
-            containing_uri=containing_uri,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sizes=sizes,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_channel_videos(
+                channel_id,
+                containing_uri=containing_uri,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sizes=sizes,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def remove_videos_from_channel(
         self,
@@ -226,7 +237,8 @@ class ChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -234,9 +246,9 @@ class ChannelsVideos:
         Raises:
             ApiError: The authenticated user can't remove videos from this channel, or a video can't be removed from the
                 channel. No such channel or user exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.remove_videos_from_channel(
-            channel_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_videos_from_channel(channel_id, body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> ChannelsVideosWithRawResponse:
@@ -256,7 +268,8 @@ class AsyncChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -264,9 +277,9 @@ class AsyncChannelsVideos:
         Raises:
             ApiError: The video can't be added to a channel, or the authenticated user can't add videos to this channel.
                 No such channel or video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_channel(channel_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def add_videos_to_channel(
         self,
@@ -281,7 +294,8 @@ class AsyncChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -289,9 +303,9 @@ class AsyncChannelsVideos:
         Raises:
             ApiError: The authenticated user can't add videos to the channel, or a video can't be added to the channel.
                 No such channel or user exist. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_videos_to_channel(channel_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_video_from_channel(
         self, channel_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -302,7 +316,8 @@ class AsyncChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -310,11 +325,11 @@ class AsyncChannelsVideos:
         Raises:
             ApiError: The authenticated user can't remove videos from this channel, or the video can't be removed from
                 the channel. No such channel or video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_from_channel(
                 channel_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_available_video_channels(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -324,7 +339,8 @@ class AsyncChannelsVideos:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The channels were returned.
@@ -333,9 +349,9 @@ class AsyncChannelsVideos:
             ApiError: The authenticated user can't add or remove this video from a channel. * The authenticated user
                 isn't a moderator of the channel. * Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_available_video_channels(video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_channel_video(
         self, channel_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -346,16 +362,17 @@ class AsyncChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: No such channel exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channel_video(channel_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_channel_videos(
         self,
@@ -363,7 +380,7 @@ class AsyncChannelsVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -379,7 +396,7 @@ class AsyncChannelsVideos:
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -395,7 +412,8 @@ class AsyncChannelsVideos:
                 method. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``manual`` - Sort the results as the user has arranged them. * ``modified_time`` - Sort the
                 results by last modification. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -404,12 +422,12 @@ class AsyncChannelsVideos:
             ApiError: The **sort** field is ``default``, but the **direction** field has a value. * No such channel
                 exists. * Error code 5451: This resource is restricted in your region. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channel_videos(
                 channel_id,
                 containing_uri=containing_uri,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
@@ -417,8 +435,8 @@ class AsyncChannelsVideos:
                 sizes=sizes,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_videos_from_channel(
         self,
@@ -436,7 +454,8 @@ class AsyncChannelsVideos:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -444,9 +463,9 @@ class AsyncChannelsVideos:
         Raises:
             ApiError: The authenticated user can't remove videos from this channel, or a video can't be removed from the
                 channel. No such channel or user exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_videos_from_channel(channel_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncChannelsVideosWithRawResponse:
@@ -463,7 +482,8 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -493,7 +513,8 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -520,7 +541,8 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -545,7 +567,8 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -570,7 +593,8 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -592,7 +616,7 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -608,7 +632,7 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -624,7 +648,8 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
                 method. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``manual`` - Sort the results as the user has arranged them. * ``modified_time`` - Sort the
                 results by last modification. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -635,7 +660,7 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -667,7 +692,8 @@ class ChannelsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -696,7 +722,8 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -708,7 +735,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_video_to_channel_error_mapper,
             request_options=request_options,
         )
@@ -726,7 +753,8 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -739,7 +767,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_videos_to_channel_error_mapper,
             request_options=request_options,
         )
@@ -753,7 +781,8 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -765,7 +794,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_from_channel_error_mapper,
             request_options=request_options,
         )
@@ -778,7 +807,8 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -789,7 +819,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ChannelConnection],
+            decoder=async_json_decoder[ChannelConnection],
             error_mapper=get_available_video_channels_error_mapper,
             request_options=request_options,
         )
@@ -803,7 +833,8 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -814,7 +845,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=get_channel_video_error_mapper,
             request_options=request_options,
         )
@@ -825,7 +856,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -841,7 +872,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -857,7 +888,8 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
                 method. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number of
                 likes. * ``manual`` - Sort the results as the user has arranged them. * ``modified_time`` - Sort the
                 results by last modification. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -868,7 +900,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -879,7 +911,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_channel_videos_error_mapper,
             request_options=request_options,
         )
@@ -900,7 +932,8 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -913,7 +946,7 @@ class AsyncChannelsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_videos_from_channel_error_mapper,
             request_options=request_options,
         )

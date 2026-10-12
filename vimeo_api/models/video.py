@@ -15,7 +15,7 @@ from .enums.content_rating4 import ContentRating4OrStr
 from .enums.content_rating_class import ContentRatingClassOrStr
 from .enums.license1 import License1OrStr
 from .enums.review_status import ReviewStatusOrStr
-from .enums.status4 import Status4OrStr
+from .enums.status5 import Status5OrStr
 from .enums.type7 import Type7OrStr
 from .explicit_access_summary import ExplicitAccessSummary, ExplicitAccessSummaryDict
 from .metadata4 import Metadata4, Metadata4Dict
@@ -26,7 +26,7 @@ from .project import Project, ProjectDict
 from .review_link import ReviewLink, ReviewLinkDict
 from .spatial import Spatial, SpatialDict
 from .stats import Stats, StatsDict
-from .tag import Tag, TagDict
+from .tag_model import TagModel, TagModelDict
 from .transcode import Transcode, TranscodeDict
 from .transcript import Transcript, TranscriptDict
 from .upload import Upload, UploadDict
@@ -265,7 +265,7 @@ class Video(SdkBaseModel):
     stats: Stats
     """A collection of analytics associated with the video."""
 
-    status: Status4OrStr
+    status: Status5OrStr
     """The status code for the availability of the video.
 
     Option descriptions:
@@ -281,7 +281,7 @@ class Video(SdkBaseModel):
      * ``uploading`` - The video is being uploaded.
      * ``uploading_error`` - There was an error in uploading the video."""
 
-    tags: list[Tag]
+    tags: list[TagModel]
     """An array of all tags assigned to the video."""
 
     transcode: Transcode | None
@@ -326,27 +326,27 @@ class Video(SdkBaseModel):
 class VideoDict(TypedDict):
     allow_multiple_review_links: NotRequired[bool]
     allowed_privacies: NotRequired[list[str]]
-    app: ApiApp | ApiAppDict
+    app: ApiAppDict
     can_move_to_project: bool
-    categories: list[Category | CategoryDict]
+    categories: list[CategoryDict]
     content_rating: ContentRating4OrStr
     content_rating_class: ContentRatingClassOrStr
-    context: Context | ContextDict
+    context: ContextDict
     counts_toward_managed_storage: bool
     created_time: str
-    custom_metadata: NotRequired[list[CustomMetadatum | CustomMetadatumDict]]
+    custom_metadata: NotRequired[list[CustomMetadatumDict]]
     custom_url: str | None
-    deleted_by: DeletedBy | DeletedByDict | None
+    deleted_by: DeletedByDict | None
     description: str | None
     description_html: str
     description_rich: NotRequired[str]
-    download: NotRequired[list[VideoFile | VideoFileDict]]
+    download: NotRequired[list[VideoFileDict]]
     duration: float
-    edit_session: NotRequired[EditingSession | EditingSessionDict]
-    embed: EmbedSettings | EmbedSettingsDict
-    explicit_access_summary: NotRequired[ExplicitAccessSummary | ExplicitAccessSummaryDict]
-    files: NotRequired[list[VideoFile | VideoFileDict]]
-    files_size: VideoVersionsSize | VideoVersionsSizeDict
+    edit_session: NotRequired[EditingSessionDict]
+    embed: EmbedSettingsDict
+    explicit_access_summary: NotRequired[ExplicitAccessSummaryDict]
+    files: NotRequired[list[VideoFileDict]]
+    files_size: VideoVersionsSizeDict
     has_audio: bool
     has_audio_tracks: bool
     has_chapters: bool
@@ -364,37 +364,37 @@ class VideoDict(TypedDict):
     license: License1OrStr
     link: str
     manage_link: NotRequired[str]
-    metadata: Metadata4 | Metadata4Dict
+    metadata: Metadata4Dict
     modified_time: str
     name: str
     origin_variable_frame_resolution: NotRequired[bool]
-    page: NotRequired[VideoPageSettings | VideoPageSettingsDict]
-    parent_project: NotRequired[Project | ProjectDict | None]
+    page: NotRequired[VideoPageSettingsDict]
+    parent_project: NotRequired[ProjectDict | None]
     password: NotRequired[str]
-    pictures: Picture | PictureDict
-    play: NotRequired[Play | PlayDict]
+    pictures: PictureDict
+    play: NotRequired[PlayDict]
     player_embed_url: str
-    privacy: Privacy3 | Privacy3Dict
+    privacy: Privacy3Dict
     rating_mod_locked: bool
     release_time: str
     resource_key: str
-    review_links: NotRequired[list[ReviewLink | ReviewLinkDict]]
+    review_links: NotRequired[list[ReviewLinkDict]]
     review_status: NotRequired[ReviewStatusOrStr]
     show_review_page: bool
     show_svv_footer_banner: bool
     show_svv_timecoded_comments: bool
-    spatial: NotRequired[Spatial | SpatialDict]
-    stats: Stats | StatsDict
-    status: Status4OrStr
-    tags: list[Tag | TagDict]
-    transcode: Transcode | TranscodeDict | None
-    transcript: Transcript | TranscriptDict
+    spatial: NotRequired[SpatialDict]
+    stats: StatsDict
+    status: Status5OrStr
+    tags: list[TagModelDict]
+    transcode: TranscodeDict | None
+    transcript: TranscriptDict
     type_: Type7OrStr
-    upload: Upload | UploadDict | None
-    uploader: Uploader | UploaderDict
+    upload: UploadDict | None
+    uploader: UploaderDict
     uri: str
-    user: User | UserDict
+    user: UserDict
     uses_drm: bool
-    version_transcode_status: VersionTranscodeStatus | VersionTranscodeStatusDict
-    vod: Vod | VodDict
+    version_transcode_status: VersionTranscodeStatusDict
+    vod: VodDict
     width: float

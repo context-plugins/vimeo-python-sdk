@@ -7,7 +7,7 @@ from ..core import UNSET, Optional, SdkBaseModel
 from .buy3 import Buy3, Buy3Dict
 from .enums.accepted_currencies import AcceptedCurrenciesOrStr
 from .enums.content_rating1 import ContentRating1OrStr
-from .enums.type33 import Type33OrStr
+from .enums.type37 import Type37OrStr
 from .episodes1 import Episodes1, Episodes1Dict
 from .rent4 import Rent4, Rent4Dict
 from .subscription2 import Subscription2, Subscription2Dict
@@ -59,7 +59,7 @@ class UsersOndemandPagesRequest(SdkBaseModel):
 
     rent: Optional[Rent4] = UNSET
     subscription: Optional[Subscription2] = UNSET
-    type_: Type33OrStr = Field(alias="type")
+    type_: Type37OrStr = Field(alias="type")
     """The type of the On Demand page.
 
     Option descriptions:
@@ -69,13 +69,13 @@ class UsersOndemandPagesRequest(SdkBaseModel):
 
 class UsersOndemandPagesRequestDict(TypedDict):
     accepted_currencies: NotRequired[AcceptedCurrenciesOrStr]
-    buy: NotRequired[Buy3 | Buy3Dict]
+    buy: NotRequired[Buy3Dict]
     content_rating: ContentRating1OrStr
     description: str
     domain_link: NotRequired[str]
-    episodes: NotRequired[Episodes1 | Episodes1Dict]
+    episodes: NotRequired[Episodes1Dict]
     link: NotRequired[str]
     name: str
-    rent: NotRequired[Rent4 | Rent4Dict]
-    subscription: NotRequired[Subscription2 | Subscription2Dict]
-    type_: Type33OrStr
+    rent: NotRequired[Rent4Dict]
+    subscription: NotRequired[Subscription2Dict]
+    type_: Type37OrStr

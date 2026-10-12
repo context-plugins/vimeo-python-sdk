@@ -18,5 +18,5 @@ class Connections23(SdkBaseModel):
 
 
 class Connections23Dict(TypedDict):
-    shared_team: NotRequired[SharedTeam | SharedTeamDict | None]
-    shared_user: NotRequired[SharedUser | SharedUserDict | None]
+    shared_team: NotRequired[SharedTeamDict | None]
+    shared_user: NotRequired[SharedUserDict | None]

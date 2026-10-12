@@ -16,5 +16,5 @@ class Connections14(SdkBaseModel):
 
 
 class Connections14Dict(TypedDict):
-    guest_user: GuestUser | GuestUserDict
-    user: User2 | User2Dict
+    guest_user: GuestUserDict
+    user: User2Dict

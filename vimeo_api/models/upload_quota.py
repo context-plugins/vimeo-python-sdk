@@ -30,8 +30,8 @@ class UploadQuota(SdkBaseModel):
 
 
 class UploadQuotaDict(TypedDict):
-    lifetime: Lifetime | LifetimeDict
-    periodic: Periodic | PeriodicDict
+    lifetime: LifetimeDict
+    periodic: PeriodicDict
     recently_deleted_disk_space: float
-    restricted: Restricted | RestrictedDict
-    space: Space | SpaceDict
+    restricted: RestrictedDict
+    space: SpaceDict

@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_project_alt1_error import CreateProjectAlt1ErrorBody, create_project_alt1_error_mapper
 from ..errors.create_project_error import CreateProjectErrorBody, create_project_error_mapper
@@ -58,7 +61,8 @@ class FoldersEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was created.
@@ -67,7 +71,7 @@ class FoldersEssentials:
             ApiError: * Error code 2204: The input is invalid. * Error code 2205: The input is empty. Error code 8000:
                 The user credentials are invalid. * Error code 3200: The authenticated user can't create folders. *
                 Error code 3701: The maximum folder depth has been exceeded. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_project(user_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_project(user_id, body, request_options=request_options))
 
     def create_project_alt1(
         self, body: MeProjectsRequest | MeProjectsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -78,7 +82,8 @@ class FoldersEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was created.
@@ -87,7 +92,7 @@ class FoldersEssentials:
             ApiError: * Error code 2204: The input is invalid. * Error code 2205: The input is empty. Error code 8000:
                 The user credentials are invalid. * Error code 3200: The authenticated user can't create folders. *
                 Error code 3701: The maximum folder depth has been exceeded. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_project_alt1(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_project_alt1(body, request_options=request_options))
 
     def delete_project(
         self,
@@ -104,7 +109,8 @@ class FoldersEssentials:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was deleted.
@@ -112,9 +118,9 @@ class FoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 delete the folder. Error code 5000: No such folder exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_project(
-            project_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_project(project_id, user_id, body=body, request_options=request_options)
+        )
 
     def delete_project_alt1(
         self,
@@ -129,7 +135,8 @@ class FoldersEssentials:
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was deleted.
@@ -137,9 +144,9 @@ class FoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 delete the folder. Error code 5000: No such folder exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_project_alt1(
-            project_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_project_alt1(project_id, body=body, request_options=request_options)
+        )
 
     def edit_project(
         self,
@@ -155,7 +162,8 @@ class FoldersEssentials:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was edited.
@@ -166,7 +174,7 @@ class FoldersEssentials:
                 Error code 3449: The authenticated user can't edit folder settings. * Error code 3702: Folder settings
                 aren't enabled for this team. Error code 5000: No such folder exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.edit_project(project_id, user_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.edit_project(project_id, user_id, body, request_options=request_options))
 
     def edit_project_alt1(
         self,
@@ -180,7 +188,8 @@ class FoldersEssentials:
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was edited.
@@ -191,7 +200,7 @@ class FoldersEssentials:
                 Error code 3449: The authenticated user can't edit folder settings. * Error code 3702: Folder settings
                 aren't enabled for this team. Error code 5000: No such folder exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.edit_project_alt1(project_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.edit_project_alt1(project_id, body, request_options=request_options))
 
     def get_private_to_me_folder(
         self, owner_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -200,7 +209,8 @@ class FoldersEssentials:
 
         Args:
             owner_id: The ID of the owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was returned.
@@ -208,7 +218,7 @@ class FoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_private_to_me_folder(owner_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_private_to_me_folder(owner_id, request_options=request_options))
 
     def get_project(
         self, project_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -218,7 +228,8 @@ class FoldersEssentials:
         Args:
             project_id: The ID of the folder.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was returned.
@@ -226,14 +237,15 @@ class FoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_project(project_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_project(project_id, user_id, request_options=request_options))
 
     def get_project_alt1(self, project_id: float, *, request_options: RequestOptionsOrDict | None = None) -> Project:
         """This method returns a single folder belonging to the authenticated user.
 
         Args:
             project_id: The ID of the folder.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was returned.
@@ -241,7 +253,7 @@ class FoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_project_alt1(project_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_project_alt1(project_id, request_options=request_options))
 
     def get_projects(
         self,
@@ -266,22 +278,25 @@ class FoldersEssentials:
             sort: The way to sort the results. Option descriptions: * ``date`` - Sort the results by date. * ``default``
                 - Use the default sort order. * ``modified_time`` - Sort the results by last modification. * ``name`` -
                 Sort the results by name. * ``pinned_on`` - Sort the results by pinned timestamp.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folders were returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_projects(
-            user_id,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_projects(
+                user_id,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_projects_alt1(
         self,
@@ -304,16 +319,24 @@ class FoldersEssentials:
             sort: The way to sort the results. Option descriptions: * ``date`` - Sort the results by date. * ``default``
                 - Use the default sort order. * ``modified_time`` - Sort the results by last modification. * ``name`` -
                 Sort the results by name. * ``pinned_on`` - Sort the results by pinned timestamp.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folders were returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_projects_alt1(
-            direction=direction, page=page, per_page=per_page, query=query, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_projects_alt1(
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> FoldersEssentialsWithRawResponse:
@@ -338,7 +361,8 @@ class AsyncFoldersEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was created.
@@ -347,7 +371,7 @@ class AsyncFoldersEssentials:
             ApiError: * Error code 2204: The input is invalid. * Error code 2205: The input is empty. Error code 8000:
                 The user credentials are invalid. * Error code 3200: The authenticated user can't create folders. *
                 Error code 3701: The maximum folder depth has been exceeded. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.create_project(user_id, body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_project(user_id, body, request_options=request_options))
 
     async def create_project_alt1(
         self, body: MeProjectsRequest | MeProjectsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -358,7 +382,8 @@ class AsyncFoldersEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was created.
@@ -367,7 +392,7 @@ class AsyncFoldersEssentials:
             ApiError: * Error code 2204: The input is invalid. * Error code 2205: The input is empty. Error code 8000:
                 The user credentials are invalid. * Error code 3200: The authenticated user can't create folders. *
                 Error code 3701: The maximum folder depth has been exceeded. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.create_project_alt1(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_project_alt1(body, request_options=request_options))
 
     async def delete_project(
         self,
@@ -384,7 +409,8 @@ class AsyncFoldersEssentials:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was deleted.
@@ -392,11 +418,11 @@ class AsyncFoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 delete the folder. Error code 5000: No such folder exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_project(
                 project_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_project_alt1(
         self,
@@ -411,7 +437,8 @@ class AsyncFoldersEssentials:
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was deleted.
@@ -419,9 +446,9 @@ class AsyncFoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 delete the folder. Error code 5000: No such folder exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_project_alt1(project_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_project(
         self,
@@ -437,7 +464,8 @@ class AsyncFoldersEssentials:
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was edited.
@@ -448,9 +476,9 @@ class AsyncFoldersEssentials:
                 Error code 3449: The authenticated user can't edit folder settings. * Error code 3702: Folder settings
                 aren't enabled for this team. Error code 5000: No such folder exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_project(project_id, user_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_project_alt1(
         self,
@@ -464,7 +492,8 @@ class AsyncFoldersEssentials:
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was edited.
@@ -475,9 +504,9 @@ class AsyncFoldersEssentials:
                 Error code 3449: The authenticated user can't edit folder settings. * Error code 3702: Folder settings
                 aren't enabled for this team. Error code 5000: No such folder exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_project_alt1(project_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_private_to_me_folder(
         self, owner_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -486,7 +515,8 @@ class AsyncFoldersEssentials:
 
         Args:
             owner_id: The ID of the owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was returned.
@@ -494,9 +524,7 @@ class AsyncFoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return (
-            await self._with_raw_response.get_private_to_me_folder(owner_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_private_to_me_folder(owner_id, request_options=request_options))
 
     async def get_project(
         self, project_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -506,7 +534,8 @@ class AsyncFoldersEssentials:
         Args:
             project_id: The ID of the folder.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was returned.
@@ -514,9 +543,7 @@ class AsyncFoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return (
-            await self._with_raw_response.get_project(project_id, user_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_project(project_id, user_id, request_options=request_options))
 
     async def get_project_alt1(
         self, project_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -525,7 +552,8 @@ class AsyncFoldersEssentials:
 
         Args:
             project_id: The ID of the folder.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folder was returned.
@@ -533,7 +561,7 @@ class AsyncFoldersEssentials:
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. Error code 5000: No such folder exists.
                 ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.get_project_alt1(project_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_project_alt1(project_id, request_options=request_options))
 
     async def get_projects(
         self,
@@ -558,14 +586,15 @@ class AsyncFoldersEssentials:
             sort: The way to sort the results. Option descriptions: * ``date`` - Sort the results by date. * ``default``
                 - Use the default sort order. * ``modified_time`` - Sort the results by last modification. * ``name`` -
                 Sort the results by name. * ``pinned_on`` - Sort the results by pinned timestamp.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folders were returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_projects(
                 user_id,
                 direction=direction,
@@ -574,8 +603,8 @@ class AsyncFoldersEssentials:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_projects_alt1(
         self,
@@ -598,14 +627,15 @@ class AsyncFoldersEssentials:
             sort: The way to sort the results. Option descriptions: * ``date`` - Sort the results by date. * ``default``
                 - Use the default sort order. * ``modified_time`` - Sort the results by last modification. * ``name`` -
                 Sort the results by name. * ``pinned_on`` - Sort the results by pinned timestamp.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The folders were returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_projects_alt1(
                 direction=direction,
                 page=page,
@@ -613,8 +643,8 @@ class AsyncFoldersEssentials:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncFoldersEssentialsWithRawResponse:
@@ -636,7 +666,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -663,7 +694,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -695,7 +727,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -726,7 +759,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -758,7 +792,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -788,7 +823,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -813,7 +849,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             owner_id: The ID of the owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -837,7 +874,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         Args:
             project_id: The ID of the folder.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -860,7 +898,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             project_id: The ID of the folder.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -899,7 +938,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
             sort: The way to sort the results. Option descriptions: * ``date`` - Sort the results by date. * ``default``
                 - Use the default sort order. * ``modified_time`` - Sort the results by last modification. * ``name`` -
                 Sort the results by name. * ``pinned_on`` - Sort the results by pinned timestamp.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -943,7 +983,8 @@ class FoldersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
             sort: The way to sort the results. Option descriptions: * ``date`` - Sort the results by date. * ``default``
                 - Use the default sort order. * ``modified_time`` - Sort the results by last modification. * ``name`` -
                 Sort the results by name. * ``pinned_on`` - Sort the results by pinned timestamp.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -981,7 +1022,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -994,7 +1036,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Project],
+            decoder=async_json_decoder[Project],
             error_mapper=create_project_error_mapper,
             request_options=request_options,
         )
@@ -1008,7 +1050,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1020,7 +1063,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Project],
+            decoder=async_json_decoder[Project],
             error_mapper=create_project_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1040,7 +1083,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1053,7 +1097,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_project_error_mapper,
             request_options=request_options,
         )
@@ -1071,7 +1115,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1084,7 +1129,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_project_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1103,7 +1148,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             project_id: The ID of the folder.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1116,7 +1162,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Project],
+            decoder=async_json_decoder[Project],
             error_mapper=edit_project_error_mapper,
             request_options=request_options,
         )
@@ -1133,7 +1179,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         Args:
             project_id: The ID of the folder.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1146,7 +1193,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Project],
+            decoder=async_json_decoder[Project],
             error_mapper=edit_project_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1158,7 +1205,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             owner_id: The ID of the owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1169,7 +1217,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Project],
+            decoder=async_json_decoder[Project],
             error_mapper=get_private_to_me_folder_error_mapper,
             request_options=request_options,
         )
@@ -1182,7 +1230,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         Args:
             project_id: The ID of the folder.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1193,7 +1242,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Project],
+            decoder=async_json_decoder[Project],
             error_mapper=get_project_error_mapper,
             request_options=request_options,
         )
@@ -1205,7 +1254,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             project_id: The ID of the folder.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1216,7 +1266,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Project],
+            decoder=async_json_decoder[Project],
             error_mapper=get_project_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1244,7 +1294,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             sort: The way to sort the results. Option descriptions: * ``date`` - Sort the results by date. * ``default``
                 - Use the default sort order. * ``modified_time`` - Sort the results by last modification. * ``name`` -
                 Sort the results by name. * ``pinned_on`` - Sort the results by pinned timestamp.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1262,7 +1313,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ProjectConnection],
+            decoder=async_json_decoder[ProjectConnection],
             error_mapper=get_projects_error_mapper,
             request_options=request_options,
         )
@@ -1288,7 +1339,8 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             sort: The way to sort the results. Option descriptions: * ``date`` - Sort the results by date. * ``default``
                 - Use the default sort order. * ``modified_time`` - Sort the results by last modification. * ``name`` -
                 Sort the results by name. * ``pinned_on`` - Sort the results by pinned timestamp.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1305,7 +1357,7 @@ class AsyncFoldersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ProjectConnection],
+            decoder=async_json_decoder[ProjectConnection],
             error_mapper=get_projects_alt1_error_mapper,
             request_options=request_options,
         )

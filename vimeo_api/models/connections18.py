@@ -14,4 +14,4 @@ class Connections18(SdkBaseModel):
 
 
 class Connections18Dict(TypedDict):
-    codes: Codes | CodesDict
+    codes: CodesDict

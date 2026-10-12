@@ -5,20 +5,12 @@ from ...core import open_enum_validator
 
 
 class Type15(str, Enum):
-    """The type of the simulcast destination.
+    """The Vimeo content to which the comment relates.
 
     Option descriptions:
-     * ``channel`` - The destination is a YouTube channel.
-     * ``custom`` - The destination is custom.
-     * ``organization`` - The destination is a LinkedIn organization.
-     * ``page`` - The destination is a Facebook page.
-     * ``profile`` - The destination is a Facebook or LinkedIn profile."""
+     * ``video`` - The comment is about a video."""
 
-    CHANNEL = "channel"
-    CUSTOM = "custom"
-    ORGANIZATION = "organization"
-    PAGE = "page"
-    PROFILE = "profile"
+    VIDEO = "video"
 
     __str__ = str.__str__
 

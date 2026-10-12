@@ -9,8 +9,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.federated_search_user_items_alt1_error import (
     FederatedSearchUserItemsAlt1ErrorBody,
@@ -36,7 +38,7 @@ class SearchFederated:
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter30OrStr | None = None,
+        filter_: Filter30OrStr | None = None,
         filter_privacy: str | None = None,
         modified_end_date: str | None = None,
         modified_start_date: str | None = None,
@@ -56,7 +58,7 @@ class SearchFederated:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
             filter_privacy: A comma-separated list of privacy settings to filter the results by. Possible values include
                 ``unlisted`` for videos that are accessible but not searchable from Vimeo, ``password`` for videos on
                 Vimeo that anyone can access with the correct password, ``hide-from-vimeo`` for videos that don't appear
@@ -75,34 +77,37 @@ class SearchFederated:
                 order. * ``duration`` - Sort the results by duration, where available. * ``folder_path`` - Sort the
                 results by the hierarchy of folders. * ``last_user_action_event_date`` - Sort the results by most recent
                 user interaction.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The federated search results were returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.federated_search_user_items(
-            user_id,
-            direction=direction,
-            filter=filter,
-            filter_privacy=filter_privacy,
-            modified_end_date=modified_end_date,
-            modified_start_date=modified_start_date,
-            page=page,
-            per_page=per_page,
-            query=query,
-            query_fields=query_fields,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.federated_search_user_items(
+                user_id,
+                direction=direction,
+                filter_=filter_,
+                filter_privacy=filter_privacy,
+                modified_end_date=modified_end_date,
+                modified_start_date=modified_start_date,
+                page=page,
+                per_page=per_page,
+                query=query,
+                query_fields=query_fields,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def federated_search_user_items_alt1(
         self,
         workspace_uuid: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter30OrStr | None = None,
+        filter_: Filter30OrStr | None = None,
         filter_privacy: str | None = None,
         modified_end_date: str | None = None,
         modified_start_date: str | None = None,
@@ -122,7 +127,7 @@ class SearchFederated:
             workspace_uuid: The UUID of the workspace.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
             filter_privacy: A comma-separated list of privacy settings to filter the results by. Possible values include
                 ``unlisted`` for videos that are accessible but not searchable from Vimeo, ``password`` for videos on
                 Vimeo that anyone can access with the correct password, ``hide-from-vimeo`` for videos that don't appear
@@ -141,27 +146,30 @@ class SearchFederated:
                 order. * ``duration`` - Sort the results by duration, where available. * ``folder_path`` - Sort the
                 results by the hierarchy of folders. * ``last_user_action_event_date`` - Sort the results by most recent
                 user interaction.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The federated search results were returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.federated_search_user_items_alt1(
-            workspace_uuid,
-            direction=direction,
-            filter=filter,
-            filter_privacy=filter_privacy,
-            modified_end_date=modified_end_date,
-            modified_start_date=modified_start_date,
-            page=page,
-            per_page=per_page,
-            query=query,
-            query_fields=query_fields,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.federated_search_user_items_alt1(
+                workspace_uuid,
+                direction=direction,
+                filter_=filter_,
+                filter_privacy=filter_privacy,
+                modified_end_date=modified_end_date,
+                modified_start_date=modified_start_date,
+                page=page,
+                per_page=per_page,
+                query=query,
+                query_fields=query_fields,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> SearchFederatedWithRawResponse:
@@ -177,7 +185,7 @@ class AsyncSearchFederated:
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter30OrStr | None = None,
+        filter_: Filter30OrStr | None = None,
         filter_privacy: str | None = None,
         modified_end_date: str | None = None,
         modified_start_date: str | None = None,
@@ -197,7 +205,7 @@ class AsyncSearchFederated:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
             filter_privacy: A comma-separated list of privacy settings to filter the results by. Possible values include
                 ``unlisted`` for videos that are accessible but not searchable from Vimeo, ``password`` for videos on
                 Vimeo that anyone can access with the correct password, ``hide-from-vimeo`` for videos that don't appear
@@ -216,18 +224,19 @@ class AsyncSearchFederated:
                 order. * ``duration`` - Sort the results by duration, where available. * ``folder_path`` - Sort the
                 results by the hierarchy of folders. * ``last_user_action_event_date`` - Sort the results by most recent
                 user interaction.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The federated search results were returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.federated_search_user_items(
                 user_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_privacy=filter_privacy,
                 modified_end_date=modified_end_date,
                 modified_start_date=modified_start_date,
@@ -237,15 +246,15 @@ class AsyncSearchFederated:
                 query_fields=query_fields,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def federated_search_user_items_alt1(
         self,
         workspace_uuid: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter30OrStr | None = None,
+        filter_: Filter30OrStr | None = None,
         filter_privacy: str | None = None,
         modified_end_date: str | None = None,
         modified_start_date: str | None = None,
@@ -265,7 +274,7 @@ class AsyncSearchFederated:
             workspace_uuid: The UUID of the workspace.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
             filter_privacy: A comma-separated list of privacy settings to filter the results by. Possible values include
                 ``unlisted`` for videos that are accessible but not searchable from Vimeo, ``password`` for videos on
                 Vimeo that anyone can access with the correct password, ``hide-from-vimeo`` for videos that don't appear
@@ -284,18 +293,19 @@ class AsyncSearchFederated:
                 order. * ``duration`` - Sort the results by duration, where available. * ``folder_path`` - Sort the
                 results by the hierarchy of folders. * ``last_user_action_event_date`` - Sort the results by most recent
                 user interaction.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The federated search results were returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.federated_search_user_items_alt1(
                 workspace_uuid,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_privacy=filter_privacy,
                 modified_end_date=modified_end_date,
                 modified_start_date=modified_start_date,
@@ -305,8 +315,8 @@ class AsyncSearchFederated:
                 query_fields=query_fields,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncSearchFederatedWithRawResponse:
@@ -319,7 +329,7 @@ class SearchFederatedWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter30OrStr | None = None,
+        filter_: Filter30OrStr | None = None,
         filter_privacy: str | None = None,
         modified_end_date: str | None = None,
         modified_start_date: str | None = None,
@@ -339,7 +349,7 @@ class SearchFederatedWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
             filter_privacy: A comma-separated list of privacy settings to filter the results by. Possible values include
                 ``unlisted`` for videos that are accessible but not searchable from Vimeo, ``password`` for videos on
                 Vimeo that anyone can access with the correct password, ``hide-from-vimeo`` for videos that don't appear
@@ -358,7 +368,8 @@ class SearchFederatedWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
                 order. * ``duration`` - Sort the results by duration, where available. * ``folder_path`` - Sort the
                 results by the hierarchy of folders. * ``last_user_action_event_date`` - Sort the results by most recent
                 user interaction.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -368,7 +379,7 @@ class SearchFederatedWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter30OrStr | None]("filter", filter),
+                param[Filter30OrStr | None]("filter", filter_),
                 param[str | None]("filter_privacy", filter_privacy),
                 param[str | None]("modified_end_date", modified_end_date),
                 param[str | None]("modified_start_date", modified_start_date),
@@ -391,7 +402,7 @@ class SearchFederatedWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         workspace_uuid: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter30OrStr | None = None,
+        filter_: Filter30OrStr | None = None,
         filter_privacy: str | None = None,
         modified_end_date: str | None = None,
         modified_start_date: str | None = None,
@@ -411,7 +422,7 @@ class SearchFederatedWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             workspace_uuid: The UUID of the workspace.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
             filter_privacy: A comma-separated list of privacy settings to filter the results by. Possible values include
                 ``unlisted`` for videos that are accessible but not searchable from Vimeo, ``password`` for videos on
                 Vimeo that anyone can access with the correct password, ``hide-from-vimeo`` for videos that don't appear
@@ -430,7 +441,8 @@ class SearchFederatedWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
                 order. * ``duration`` - Sort the results by duration, where available. * ``folder_path`` - Sort the
                 results by the hierarchy of folders. * ``last_user_action_event_date`` - Sort the results by most recent
                 user interaction.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -440,7 +452,7 @@ class SearchFederatedWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             path_params=[param[str]("workspace_uuid", workspace_uuid)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter30OrStr | None]("filter", filter),
+                param[Filter30OrStr | None]("filter", filter_),
                 param[str | None]("filter_privacy", filter_privacy),
                 param[str | None]("modified_end_date", modified_end_date),
                 param[str | None]("modified_start_date", modified_start_date),
@@ -465,7 +477,7 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter30OrStr | None = None,
+        filter_: Filter30OrStr | None = None,
         filter_privacy: str | None = None,
         modified_end_date: str | None = None,
         modified_start_date: str | None = None,
@@ -485,7 +497,7 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
             filter_privacy: A comma-separated list of privacy settings to filter the results by. Possible values include
                 ``unlisted`` for videos that are accessible but not searchable from Vimeo, ``password`` for videos on
                 Vimeo that anyone can access with the correct password, ``hide-from-vimeo`` for videos that don't appear
@@ -504,7 +516,8 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
                 order. * ``duration`` - Sort the results by duration, where available. * ``folder_path`` - Sort the
                 results by the hierarchy of folders. * ``last_user_action_event_date`` - Sort the results by most recent
                 user interaction.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -514,7 +527,7 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter30OrStr | None]("filter", filter),
+                param[Filter30OrStr | None]("filter", filter_),
                 param[str | None]("filter_privacy", filter_privacy),
                 param[str | None]("modified_end_date", modified_end_date),
                 param[str | None]("modified_start_date", modified_start_date),
@@ -527,7 +540,7 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[FederatedSearchItemsConnection],
+            decoder=async_json_decoder[FederatedSearchItemsConnection],
             error_mapper=federated_search_user_items_error_mapper,
             request_options=request_options,
         )
@@ -537,7 +550,7 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         workspace_uuid: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter30OrStr | None = None,
+        filter_: Filter30OrStr | None = None,
         filter_privacy: str | None = None,
         modified_end_date: str | None = None,
         modified_start_date: str | None = None,
@@ -557,7 +570,7 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             workspace_uuid: The UUID of the workspace.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
+            filter_: The attribute by which to filter the results. Option descriptions: * ``video`` - Return videos.
             filter_privacy: A comma-separated list of privacy settings to filter the results by. Possible values include
                 ``unlisted`` for videos that are accessible but not searchable from Vimeo, ``password`` for videos on
                 Vimeo that anyone can access with the correct password, ``hide-from-vimeo`` for videos that don't appear
@@ -576,7 +589,8 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
                 order. * ``duration`` - Sort the results by duration, where available. * ``folder_path`` - Sort the
                 results by the hierarchy of folders. * ``last_user_action_event_date`` - Sort the results by most recent
                 user interaction.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -586,7 +600,7 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             path_params=[param[str]("workspace_uuid", workspace_uuid)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter30OrStr | None]("filter", filter),
+                param[Filter30OrStr | None]("filter", filter_),
                 param[str | None]("filter_privacy", filter_privacy),
                 param[str | None]("modified_end_date", modified_end_date),
                 param[str | None]("modified_start_date", modified_start_date),
@@ -599,7 +613,7 @@ class AsyncSearchFederatedWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[FederatedSearchItemsConnection],
+            decoder=async_json_decoder[FederatedSearchItemsConnection],
             error_mapper=federated_search_user_items_alt1_error_mapper,
             request_options=request_options,
         )

@@ -12,10 +12,13 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.add_video_privacy_user_error import AddVideoPrivacyUserErrorBody, add_video_privacy_user_error_mapper
 from ..errors.delete_video_privacy_user_error import (
@@ -45,16 +48,17 @@ class VideosUnlistedVideos:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was granted access to the unlisted video.
 
         Raises:
             ApiError: The video doesn't have a user-defined access list. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_privacy_user(
-            user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_privacy_user(user_id, video_id, request_options=request_options)
+        )
 
     def add_video_privacy_users(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -66,14 +70,15 @@ class VideosUnlistedVideos:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were granted access to the unlisted video.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.add_video_privacy_users(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_video_privacy_users(video_id, request_options=request_options))
 
     def add_video_privacy_users_alt1(
         self, channel_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -86,16 +91,17 @@ class VideosUnlistedVideos:
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were granted access to the unlisted video.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.add_video_privacy_users_alt1(
-            channel_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_privacy_users_alt1(channel_id, video_id, request_options=request_options)
+        )
 
     def delete_video_privacy_user(
         self, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -106,7 +112,8 @@ class VideosUnlistedVideos:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was restricted from accessing the unlisted video.
@@ -114,9 +121,9 @@ class VideosUnlistedVideos:
         Raises:
             ApiError: The video isn't set to a user-defined access list. No such user exists. ``error`` is ``LegacyError
                 | RawError``."""
-        return self._with_raw_response.delete_video_privacy_user(
-            user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_privacy_user(user_id, video_id, request_options=request_options)
+        )
 
     def get_video_privacy_users(
         self,
@@ -132,16 +139,19 @@ class VideosUnlistedVideos:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were returned.
 
         Raises:
             ApiError: No users can access this unlisted video. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_video_privacy_users(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_privacy_users(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_video_privacy_users_alt1(
         self,
@@ -159,16 +169,19 @@ class VideosUnlistedVideos:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were returned.
 
         Raises:
             ApiError: No users can access this unlisted video. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_video_privacy_users_alt1(
-            channel_id, video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_privacy_users_alt1(
+                channel_id, video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosUnlistedVideosWithRawResponse:
@@ -188,16 +201,17 @@ class AsyncVideosUnlistedVideos:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was granted access to the unlisted video.
 
         Raises:
             ApiError: The video doesn't have a user-defined access list. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_privacy_user(user_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def add_video_privacy_users(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -209,16 +223,15 @@ class AsyncVideosUnlistedVideos:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were granted access to the unlisted video.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.add_video_privacy_users(video_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.add_video_privacy_users(video_id, request_options=request_options))
 
     async def add_video_privacy_users_alt1(
         self, channel_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -231,18 +244,19 @@ class AsyncVideosUnlistedVideos:
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were granted access to the unlisted video.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_privacy_users_alt1(
                 channel_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_video_privacy_user(
         self, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -253,7 +267,8 @@ class AsyncVideosUnlistedVideos:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was restricted from accessing the unlisted video.
@@ -261,9 +276,9 @@ class AsyncVideosUnlistedVideos:
         Raises:
             ApiError: The video isn't set to a user-defined access list. No such user exists. ``error`` is ``LegacyError
                 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_privacy_user(user_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_video_privacy_users(
         self,
@@ -279,18 +294,19 @@ class AsyncVideosUnlistedVideos:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were returned.
 
         Raises:
             ApiError: No users can access this unlisted video. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_privacy_users(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_video_privacy_users_alt1(
         self,
@@ -308,18 +324,19 @@ class AsyncVideosUnlistedVideos:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were returned.
 
         Raises:
             ApiError: No users can access this unlisted video. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_privacy_users_alt1(
                 channel_id, video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosUnlistedVideosWithRawResponse:
@@ -336,7 +353,8 @@ class VideosUnlistedVideosWithRawResponse(SecuredRawResponse[RawClient, Server, 
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -363,7 +381,8 @@ class VideosUnlistedVideosWithRawResponse(SecuredRawResponse[RawClient, Server, 
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -391,7 +410,8 @@ class VideosUnlistedVideosWithRawResponse(SecuredRawResponse[RawClient, Server, 
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -417,7 +437,8 @@ class VideosUnlistedVideosWithRawResponse(SecuredRawResponse[RawClient, Server, 
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -448,7 +469,8 @@ class VideosUnlistedVideosWithRawResponse(SecuredRawResponse[RawClient, Server, 
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -481,7 +503,8 @@ class VideosUnlistedVideosWithRawResponse(SecuredRawResponse[RawClient, Server, 
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -509,7 +532,8 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -521,7 +545,7 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[User],
+            decoder=async_json_decoder[User],
             error_mapper=add_video_privacy_user_error_mapper,
             request_options=request_options,
         )
@@ -536,7 +560,8 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -548,7 +573,7 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[User]],
+            decoder=async_json_decoder[list[User]],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -564,7 +589,8 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
         Args:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -576,7 +602,7 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[User]],
+            decoder=async_json_decoder[list[User]],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -590,7 +616,8 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -602,7 +629,7 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_privacy_user_error_mapper,
             request_options=request_options,
         )
@@ -621,7 +648,8 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -633,7 +661,7 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=get_video_privacy_users_error_mapper,
             request_options=request_options,
         )
@@ -654,7 +682,8 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -666,7 +695,7 @@ class AsyncVideosUnlistedVideosWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=get_video_privacy_users_alt1_error_mapper,
             request_options=request_options,
         )

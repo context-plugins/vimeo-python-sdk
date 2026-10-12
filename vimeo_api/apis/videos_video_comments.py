@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.create_comment_alt1_error import CreateCommentAlt1ErrorBody, create_comment_alt1_error_mapper
 from ..errors.create_comment_error import CreateCommentErrorBody, create_comment_error_mapper
@@ -50,7 +53,8 @@ class VideosVideoComments:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was added.
@@ -61,7 +65,7 @@ class VideosVideoComments:
                 as spam. * Error code 3411: The authenticated user is unverified. * Error code 3412: The authenticated
                 user can't comment. * Error code 3413: Comments are disabled for this video. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.create_comment(video_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_comment(video_id, body=body, request_options=request_options))
 
     def create_comment_alt1(
         self,
@@ -77,7 +81,8 @@ class VideosVideoComments:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was added.
@@ -88,9 +93,11 @@ class VideosVideoComments:
                 as spam. * Error code 3411: The authenticated user is unverified. * Error code 3412: The authenticated
                 user can't comment. * Error code 3413: Comments are disabled for this video. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.create_comment_alt1(
-            channel_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_comment_alt1(
+                channel_id, video_id, body=body, request_options=request_options
+            ),
+        )
 
     def create_comment_reply(
         self,
@@ -106,7 +113,8 @@ class VideosVideoComments:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The reply was added.
@@ -116,9 +124,9 @@ class VideosVideoComments:
                 invalid. * Error code 3301: The comment was flagged as spam. * Error code 3411: The authenticated user
                 is unverified. * Error code 3412: The authenticated user can't comment. * Error code 3413: Comments are
                 disabled on this video. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_comment_reply(
-            comment_id, video_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_comment_reply(comment_id, video_id, body, request_options=request_options)
+        )
 
     def delete_comment(
         self, comment_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -128,7 +136,8 @@ class VideosVideoComments:
         Args:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was deleted.
@@ -137,7 +146,7 @@ class VideosVideoComments:
             ApiError: Error code 3415: The authenticated user can't delete this comment. * No such video or comment
                 exists. * Error code 5000: The comment wasn't deleted and still exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return self._with_raw_response.delete_comment(comment_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_comment(comment_id, video_id, request_options=request_options))
 
     def edit_comment(
         self,
@@ -153,7 +162,8 @@ class VideosVideoComments:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was edited.
@@ -163,9 +173,9 @@ class VideosVideoComments:
                 invalid. * Error code 3301: The comment was flagged as spam. * Error code 3411: The authenticated user
                 is unverified. * Error code 3412: The authenticated user can't post comments. * Error code 3414: The
                 authenticated user can't edit this comment. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.edit_comment(
-            comment_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_comment(comment_id, video_id, body=body, request_options=request_options)
+        )
 
     def get_comment(
         self, comment_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -175,14 +185,15 @@ class VideosVideoComments:
         Args:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was returned.
 
         Raises:
             ApiError: No such video or comment exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_comment(comment_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_comment(comment_id, video_id, request_options=request_options))
 
     def get_comment_replies(
         self,
@@ -200,16 +211,19 @@ class VideosVideoComments:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The replies were returned.
 
         Raises:
             ApiError: No such video or comment exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_comment_replies(
-            comment_id, video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_comment_replies(
+                comment_id, video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_comments(
         self,
@@ -228,16 +242,19 @@ class VideosVideoComments:
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comments were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_comments(
-            video_id, direction=direction, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_comments(
+                video_id, direction=direction, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_comments_alt1(
         self,
@@ -258,16 +275,19 @@ class VideosVideoComments:
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comments were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_comments_alt1(
-            channel_id, video_id, direction=direction, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_comments_alt1(
+                channel_id, video_id, direction=direction, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosVideoCommentsWithRawResponse:
@@ -290,7 +310,8 @@ class AsyncVideosVideoComments:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was added.
@@ -301,9 +322,9 @@ class AsyncVideosVideoComments:
                 as spam. * Error code 3411: The authenticated user is unverified. * Error code 3412: The authenticated
                 user can't comment. * Error code 3413: Comments are disabled for this video. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_comment(video_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def create_comment_alt1(
         self,
@@ -319,7 +340,8 @@ class AsyncVideosVideoComments:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was added.
@@ -330,11 +352,11 @@ class AsyncVideosVideoComments:
                 as spam. * Error code 3411: The authenticated user is unverified. * Error code 3412: The authenticated
                 user can't comment. * Error code 3413: Comments are disabled for this video. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_comment_alt1(
                 channel_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_comment_reply(
         self,
@@ -350,7 +372,8 @@ class AsyncVideosVideoComments:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The reply was added.
@@ -360,11 +383,11 @@ class AsyncVideosVideoComments:
                 invalid. * Error code 3301: The comment was flagged as spam. * Error code 3411: The authenticated user
                 is unverified. * Error code 3412: The authenticated user can't comment. * Error code 3413: Comments are
                 disabled on this video. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_comment_reply(
                 comment_id, video_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_comment(
         self, comment_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -374,7 +397,8 @@ class AsyncVideosVideoComments:
         Args:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was deleted.
@@ -383,9 +407,9 @@ class AsyncVideosVideoComments:
             ApiError: Error code 3415: The authenticated user can't delete this comment. * No such video or comment
                 exists. * Error code 5000: The comment wasn't deleted and still exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_comment(comment_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_comment(
         self,
@@ -401,7 +425,8 @@ class AsyncVideosVideoComments:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was edited.
@@ -411,9 +436,9 @@ class AsyncVideosVideoComments:
                 invalid. * Error code 3301: The comment was flagged as spam. * Error code 3411: The authenticated user
                 is unverified. * Error code 3412: The authenticated user can't post comments. * Error code 3414: The
                 authenticated user can't edit this comment. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_comment(comment_id, video_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_comment(
         self, comment_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -423,16 +448,15 @@ class AsyncVideosVideoComments:
         Args:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comment was returned.
 
         Raises:
             ApiError: No such video or comment exists. ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.get_comment(comment_id, video_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_comment(comment_id, video_id, request_options=request_options))
 
     async def get_comment_replies(
         self,
@@ -450,18 +474,19 @@ class AsyncVideosVideoComments:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The replies were returned.
 
         Raises:
             ApiError: No such video or comment exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_comment_replies(
                 comment_id, video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_comments(
         self,
@@ -480,18 +505,19 @@ class AsyncVideosVideoComments:
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comments were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_comments(
                 video_id, direction=direction, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_comments_alt1(
         self,
@@ -512,18 +538,19 @@ class AsyncVideosVideoComments:
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The comments were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_comments_alt1(
                 channel_id, video_id, direction=direction, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosVideoCommentsWithRawResponse:
@@ -543,7 +570,8 @@ class VideosVideoCommentsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -575,7 +603,8 @@ class VideosVideoCommentsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -607,7 +636,8 @@ class VideosVideoCommentsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             comment_id: The ID of the comment.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -633,7 +663,8 @@ class VideosVideoCommentsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -664,7 +695,8 @@ class VideosVideoCommentsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             comment_id: The ID of the comment.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -690,7 +722,8 @@ class VideosVideoCommentsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -722,7 +755,8 @@ class VideosVideoCommentsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -756,7 +790,8 @@ class VideosVideoCommentsWithRawResponse(SecuredRawResponse[RawClient, Server, A
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -796,7 +831,8 @@ class VideosVideoCommentsWithRawResponse(SecuredRawResponse[RawClient, Server, A
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -831,7 +867,8 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -844,7 +881,7 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Comment],
+            decoder=async_json_decoder[Comment],
             error_mapper=create_comment_error_mapper,
             request_options=request_options,
         )
@@ -863,7 +900,8 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -876,7 +914,7 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Comment],
+            decoder=async_json_decoder[Comment],
             error_mapper=create_comment_alt1_error_mapper,
             request_options=request_options,
         )
@@ -895,7 +933,8 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             comment_id: The ID of the comment.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -908,7 +947,7 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Comment],
+            decoder=async_json_decoder[Comment],
             error_mapper=create_comment_reply_error_mapper,
             request_options=request_options,
         )
@@ -921,7 +960,8 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -933,7 +973,7 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_comment_error_mapper,
             request_options=request_options,
         )
@@ -952,7 +992,8 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             comment_id: The ID of the comment.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -965,7 +1006,7 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Comment],
+            decoder=async_json_decoder[Comment],
             error_mapper=edit_comment_error_mapper,
             request_options=request_options,
         )
@@ -978,7 +1019,8 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             comment_id: The ID of the comment.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -989,7 +1031,7 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Comment],
+            decoder=async_json_decoder[Comment],
             error_mapper=get_comment_error_mapper,
             request_options=request_options,
         )
@@ -1010,7 +1052,8 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1022,7 +1065,7 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CommentConnection],
+            decoder=async_json_decoder[CommentConnection],
             error_mapper=get_comment_replies_error_mapper,
             request_options=request_options,
         )
@@ -1044,7 +1087,8 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1060,7 +1104,7 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CommentConnection],
+            decoder=async_json_decoder[CommentConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1084,7 +1128,8 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1100,7 +1145,7 @@ class AsyncVideosVideoCommentsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CommentConnection],
+            decoder=async_json_decoder[CommentConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

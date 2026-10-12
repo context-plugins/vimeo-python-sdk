@@ -5,17 +5,16 @@ from ...core import open_enum_validator
 
 
 class Type18(str, Enum):
-    """The way in which the promotion generates promo codes.
+    """Which logo to show in the landing page navbar.
 
     Option descriptions:
-     * ``batch`` - The promotion provides a unique promotional code for each user.
-     * ``batch_prefix`` - Like ``batch``, except that all codes have a similar prefix string. _This option is
-            deprecated, yet it may still appear for some users._
-     * ``single`` - The promotion provides a single promotional code for all users."""
+     * ``custom`` - A custom brand-kit logo (see ``uri``/``url``).
+     * ``none`` - No logo is shown.
+     * ``vimeo`` - The Vimeo logo."""
 
-    BATCH = "batch"
-    BATCH_PREFIX = "batch_prefix"
-    SINGLE = "single"
+    CUSTOM = "custom"
+    NONE = "none"
+    VIMEO = "vimeo"
 
     __str__ = str.__str__
 

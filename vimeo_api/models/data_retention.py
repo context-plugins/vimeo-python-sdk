@@ -13,4 +13,4 @@ class DataRetention(SdkBaseModel):
 
 
 class DataRetentionDict(TypedDict):
-    policy: Policy | PolicyDict
+    policy: PolicyDict

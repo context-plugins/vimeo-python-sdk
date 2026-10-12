@@ -12,4 +12,4 @@ class VideosAiTexttracksRequest(SdkBaseModel):
 
 
 class VideosAiTexttracksRequestDict(TypedDict):
-    segments: NotRequired[list[Segment1 | Segment1Dict]]
+    segments: NotRequired[list[Segment1Dict]]

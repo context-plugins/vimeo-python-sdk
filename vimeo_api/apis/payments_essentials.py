@@ -12,10 +12,13 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.delete_payment_method_error import DeletePaymentMethodErrorBody, delete_payment_method_error_mapper
 from ..errors.get_payment_method_info_error import GetPaymentMethodInfoErrorBody, get_payment_method_info_error_mapper
@@ -36,16 +39,15 @@ class PaymentsEssentials:
 
         Args:
             payment_method_id: The ID of the payment method.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The payments service payment method was deleted.
 
         Raises:
             ApiError: Error code 2204: No such payment method exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_payment_method(
-            payment_method_id, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.delete_payment_method(payment_method_id, request_options=request_options))
 
     def get_payment_method_info(
         self, payment_method_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -54,16 +56,17 @@ class PaymentsEssentials:
 
         Args:
             payment_method_id: The ID of the payment method.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The payments service payment method information was returned.
 
         Raises:
             ApiError: Error code 5000: No such payment method exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_payment_method_info(
-            payment_method_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_payment_method_info(payment_method_id, request_options=request_options)
+        )
 
     def get_subscription_info(
         self, subscription_id: str, user_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -73,13 +76,14 @@ class PaymentsEssentials:
         Args:
             subscription_id: The ID of the subscription.
             user_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_subscription_info(
-            subscription_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_subscription_info(subscription_id, user_id, request_options=request_options)
+        )
 
     def list_payment_methods(
         self,
@@ -98,7 +102,8 @@ class PaymentsEssentials:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             show_disabled: Whether to return disabled payment methods.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of payments service payment methods was returned.
@@ -106,13 +111,15 @@ class PaymentsEssentials:
         Raises:
             ApiError: Error code 5000: A parameter is invalid. Error code 8000: The authenticated user can't make this
                 request. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.list_payment_methods(
-            cardmember_name=cardmember_name,
-            page=page,
-            per_page=per_page,
-            show_disabled=show_disabled,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_payment_methods(
+                cardmember_name=cardmember_name,
+                page=page,
+                per_page=per_page,
+                show_disabled=show_disabled,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> PaymentsEssentialsWithRawResponse:
@@ -130,16 +137,17 @@ class AsyncPaymentsEssentials:
 
         Args:
             payment_method_id: The ID of the payment method.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The payments service payment method was deleted.
 
         Raises:
             ApiError: Error code 2204: No such payment method exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_payment_method(payment_method_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_payment_method_info(
         self, payment_method_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -148,16 +156,17 @@ class AsyncPaymentsEssentials:
 
         Args:
             payment_method_id: The ID of the payment method.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The payments service payment method information was returned.
 
         Raises:
             ApiError: Error code 5000: No such payment method exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_payment_method_info(payment_method_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_subscription_info(
         self, subscription_id: str, user_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -167,15 +176,16 @@ class AsyncPaymentsEssentials:
         Args:
             subscription_id: The ID of the subscription.
             user_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_subscription_info(
                 subscription_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_payment_methods(
         self,
@@ -194,7 +204,8 @@ class AsyncPaymentsEssentials:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             show_disabled: Whether to return disabled payment methods.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of payments service payment methods was returned.
@@ -202,15 +213,15 @@ class AsyncPaymentsEssentials:
         Raises:
             ApiError: Error code 5000: A parameter is invalid. Error code 8000: The authenticated user can't make this
                 request. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_payment_methods(
                 cardmember_name=cardmember_name,
                 page=page,
                 per_page=per_page,
                 show_disabled=show_disabled,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncPaymentsEssentialsWithRawResponse:
@@ -225,7 +236,8 @@ class PaymentsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             payment_method_id: The ID of the payment method.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -249,7 +261,8 @@ class PaymentsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             payment_method_id: The ID of the payment method.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -273,7 +286,8 @@ class PaymentsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             subscription_id: The ID of the subscription.
             user_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -306,7 +320,8 @@ class PaymentsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             show_disabled: Whether to return disabled payment methods.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -336,7 +351,8 @@ class AsyncPaymentsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             payment_method_id: The ID of the payment method.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -348,7 +364,7 @@ class AsyncPaymentsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_payment_method_error_mapper,
             request_options=request_options,
         )
@@ -360,7 +376,8 @@ class AsyncPaymentsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             payment_method_id: The ID of the payment method.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -371,7 +388,7 @@ class AsyncPaymentsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PaymentMethod],
+            decoder=async_json_decoder[PaymentMethod],
             error_mapper=get_payment_method_info_error_mapper,
             request_options=request_options,
         )
@@ -384,7 +401,8 @@ class AsyncPaymentsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             subscription_id: The ID of the subscription.
             user_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -395,7 +413,7 @@ class AsyncPaymentsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -417,7 +435,8 @@ class AsyncPaymentsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             show_disabled: Whether to return disabled payment methods.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -433,7 +452,7 @@ class AsyncPaymentsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PaymentMethodConnection],
+            decoder=async_json_decoder[PaymentMethodConnection],
             error_mapper=list_payment_methods_error_mapper,
             request_options=request_options,
         )

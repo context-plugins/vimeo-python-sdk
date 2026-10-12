@@ -247,9 +247,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/live_events`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_live_events(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type27OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_live_events(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type31OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `user_id`
-- **Params**: `user_id` — path · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query · `type_` — query `type`
+- **Params**: `user_id` — path · `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `query` — query · `sort` — query · `type_` — query `type`
 - **Returns (parsed)**: `EventConnection`
 - **Returns (raw)**: `ApiResult[EventConnection, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -259,15 +259,15 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 | `DirectionOrStr` | `vimeo_api/models/enums/direction.py` |
 | `Filter8OrStr` | `vimeo_api/models/enums/filter8.py` |
 | `Sort8OrStr` | `vimeo_api/models/enums/sort8.py` |
-| `Type27OrStr` | `vimeo_api/models/enums/type27.py` |
+| `Type31OrStr` | `vimeo_api/models/enums/type31.py` |
 | `EventConnection` | `vimeo_api/models/event_connection.py` |
 
 ### client.live_essentials.get_live_events_alt1
 
 - **Route**: `GET /live_events`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_live_events_alt1(*, direction: DirectionOrStr | None = None, filter: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type27OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query · `type_` — query `type`
+- **Signature**: `def get_live_events_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type31OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `query` — query · `sort` — query · `type_` — query `type`
 - **Returns (parsed)**: `EventConnection`
 - **Returns (raw)**: `ApiResult[EventConnection, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -277,15 +277,15 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 | `DirectionOrStr` | `vimeo_api/models/enums/direction.py` |
 | `Filter8OrStr` | `vimeo_api/models/enums/filter8.py` |
 | `Sort8OrStr` | `vimeo_api/models/enums/sort8.py` |
-| `Type27OrStr` | `vimeo_api/models/enums/type27.py` |
+| `Type31OrStr` | `vimeo_api/models/enums/type31.py` |
 | `EventConnection` | `vimeo_api/models/event_connection.py` |
 
 ### client.live_essentials.get_live_events_alt2
 
 - **Route**: `GET /me/live_events`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_live_events_alt2(*, direction: DirectionOrStr | None = None, filter: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type27OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query · `type_` — query `type`
+- **Signature**: `def get_live_events_alt2(*, direction: DirectionOrStr | None = None, filter_: Filter8OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort8OrStr | None = None, type_: Type31OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `query` — query · `sort` — query · `type_` — query `type`
 - **Returns (parsed)**: `EventConnection`
 - **Returns (raw)**: `ApiResult[EventConnection, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -295,7 +295,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 | `DirectionOrStr` | `vimeo_api/models/enums/direction.py` |
 | `Filter8OrStr` | `vimeo_api/models/enums/filter8.py` |
 | `Sort8OrStr` | `vimeo_api/models/enums/sort8.py` |
-| `Type27OrStr` | `vimeo_api/models/enums/type27.py` |
+| `Type31OrStr` | `vimeo_api/models/enums/type31.py` |
 | `EventConnection` | `vimeo_api/models/event_connection.py` |
 
 ### client.live_essentials.update_live_event

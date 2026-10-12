@@ -80,21 +80,21 @@ class PlaybackConfig(SdkBaseModel):
 
 
 class PlaybackConfigDict(TypedDict):
-    enable_ask_ai: EnableAskAi | EnableAskAiDict
-    enable_comments: EnableComments | EnableCommentsDict
-    enable_download: EnableDownload | EnableDownloadDict
-    enable_like: EnableLike | EnableLikeDict
-    enable_share: EnableShare | EnableShareDict
-    playback_grid_size: PlaybackGridSize | PlaybackGridSizeDict
-    show_playback_added_date: ShowPlaybackAddedDate | ShowPlaybackAddedDateDict
-    show_playback_grid_profile_image: ShowPlaybackGridProfileImage | ShowPlaybackGridProfileImageDict
-    show_playback_grid_profile_name: ShowPlaybackGridProfileName | ShowPlaybackGridProfileNameDict
-    show_playback_grid_video_card: ShowPlaybackGridVideoCard | ShowPlaybackGridVideoCardDict
-    show_playback_grid_video_title: ShowPlaybackGridVideoTitle | ShowPlaybackGridVideoTitleDict
-    show_playback_profile_image: ShowPlaybackProfileImage | ShowPlaybackProfileImageDict
-    show_playback_profile_name: ShowPlaybackProfileName | ShowPlaybackProfileNameDict
-    show_playback_uploaded_date: ShowPlaybackUploadedDate | ShowPlaybackUploadedDateDict
-    show_playback_video_count: ShowPlaybackVideoCount | ShowPlaybackVideoCountDict
-    show_playback_video_description: ShowPlaybackVideoDescription | ShowPlaybackVideoDescriptionDict
-    show_playback_video_title: ShowPlaybackVideoTitle | ShowPlaybackVideoTitleDict
-    show_playback_views: ShowPlaybackViews | ShowPlaybackViewsDict
+    enable_ask_ai: EnableAskAiDict
+    enable_comments: EnableCommentsDict
+    enable_download: EnableDownloadDict
+    enable_like: EnableLikeDict
+    enable_share: EnableShareDict
+    playback_grid_size: PlaybackGridSizeDict
+    show_playback_added_date: ShowPlaybackAddedDateDict
+    show_playback_grid_profile_image: ShowPlaybackGridProfileImageDict
+    show_playback_grid_profile_name: ShowPlaybackGridProfileNameDict
+    show_playback_grid_video_card: ShowPlaybackGridVideoCardDict
+    show_playback_grid_video_title: ShowPlaybackGridVideoTitleDict
+    show_playback_profile_image: ShowPlaybackProfileImageDict
+    show_playback_profile_name: ShowPlaybackProfileNameDict
+    show_playback_uploaded_date: ShowPlaybackUploadedDateDict
+    show_playback_video_count: ShowPlaybackVideoCountDict
+    show_playback_video_description: ShowPlaybackVideoDescriptionDict
+    show_playback_video_title: ShowPlaybackVideoTitleDict
+    show_playback_views: ShowPlaybackViewsDict

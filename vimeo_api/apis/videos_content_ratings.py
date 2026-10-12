@@ -10,8 +10,10 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     raw_error_response,
+    unwrap,
 )
 from ..models.content_rating_connection import ContentRatingConnection
 from ..server.server import Server
@@ -25,14 +27,15 @@ class VideosContentRatings:
         """This method returns all available content ratings.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The content ratings were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_content_ratings(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_content_ratings(request_options=request_options))
 
     @property
     def with_raw_response(self) -> VideosContentRatingsWithRawResponse:
@@ -49,14 +52,15 @@ class AsyncVideosContentRatings:
         """This method returns all available content ratings.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The content ratings were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_content_ratings(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_content_ratings(request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncVideosContentRatingsWithRawResponse:
@@ -70,7 +74,8 @@ class VideosContentRatingsWithRawResponse(SecuredRawResponse[RawClient, Server, 
         """This method returns all available content ratings.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -93,7 +98,8 @@ class AsyncVideosContentRatingsWithRawResponse(SecuredRawResponse[AsyncRawClient
         """This method returns all available content ratings.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -103,7 +109,7 @@ class AsyncVideosContentRatingsWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ContentRatingConnection],
+            decoder=async_json_decoder[ContentRatingConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

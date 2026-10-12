@@ -19,5 +19,5 @@ class OnDemandVideoConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[OnDemandVideo | OnDemandVideoDict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[OnDemandVideoDict]]

@@ -124,16 +124,16 @@ class Embed3Dict(TypedDict):
     chromecast: bool
     closed_captions: bool
     color: str
-    colors: Colors | ColorsDict
+    colors: ColorsDict
     embed_chat: str | None
-    embed_properties: EmbedProperties | EmbedPropertiesDict | None
+    embed_properties: EmbedPropertiesDict | None
     event_schedule: bool
     fullscreen_button: bool
     hide_live_label: bool
     hide_viewer_count: bool
     html: str | None
     like_button: bool
-    logos: Logos2 | Logos2Dict
+    logos: Logos2Dict
     loop: bool
     pip: bool
     play_button_position: PlayButtonPositionOrStr

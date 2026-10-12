@@ -11,9 +11,12 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_video_privacy_domain_error import (
     AddVideoPrivacyDomainErrorBody,
@@ -45,16 +48,17 @@ class VideosEmbedPrivacy:
         Args:
             domain: The domain name.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The domain was added to the video's allowlist.
 
         Raises:
             ApiError: The video doesn't have a user-defined access list. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_privacy_domain(
-            domain, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_privacy_domain(domain, video_id, request_options=request_options)
+        )
 
     def delete_video_privacy_domain(
         self, domain: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -64,7 +68,8 @@ class VideosEmbedPrivacy:
         Args:
             domain: The domain name.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The domain was removed.
@@ -72,9 +77,9 @@ class VideosEmbedPrivacy:
         Raises:
             ApiError: The video's embed privacy setting isn't ``whitelist``. No such domain exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_video_privacy_domain(
-            domain, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_privacy_domain(domain, video_id, request_options=request_options)
+        )
 
     def get_video_privacy_domains(
         self,
@@ -96,7 +101,8 @@ class VideosEmbedPrivacy:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``default`` - Sort the results by the video's
                 allowlist ID.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The domains were returned.
@@ -104,9 +110,11 @@ class VideosEmbedPrivacy:
         Raises:
             ApiError: There are no domains on which the video can be embedded. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_video_privacy_domains(
-            video_id, direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_privacy_domains(
+                video_id, direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosEmbedPrivacyWithRawResponse:
@@ -125,16 +133,17 @@ class AsyncVideosEmbedPrivacy:
         Args:
             domain: The domain name.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The domain was added to the video's allowlist.
 
         Raises:
             ApiError: The video doesn't have a user-defined access list. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_privacy_domain(domain, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_video_privacy_domain(
         self, domain: str, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -144,7 +153,8 @@ class AsyncVideosEmbedPrivacy:
         Args:
             domain: The domain name.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The domain was removed.
@@ -152,9 +162,9 @@ class AsyncVideosEmbedPrivacy:
         Raises:
             ApiError: The video's embed privacy setting isn't ``whitelist``. No such domain exists. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_privacy_domain(domain, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_video_privacy_domains(
         self,
@@ -176,7 +186,8 @@ class AsyncVideosEmbedPrivacy:
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``default`` - Sort the results by the video's
                 allowlist ID.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The domains were returned.
@@ -184,11 +195,11 @@ class AsyncVideosEmbedPrivacy:
         Raises:
             ApiError: There are no domains on which the video can be embedded. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_privacy_domains(
                 video_id, direction=direction, page=page, per_page=per_page, sort=sort, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosEmbedPrivacyWithRawResponse:
@@ -204,7 +215,8 @@ class VideosEmbedPrivacyWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             domain: The domain name.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -229,7 +241,8 @@ class VideosEmbedPrivacyWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             domain: The domain name.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -266,7 +279,8 @@ class VideosEmbedPrivacyWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``default`` - Sort the results by the video's
                 allowlist ID.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -298,7 +312,8 @@ class AsyncVideosEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             domain: The domain name.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -310,7 +325,7 @@ class AsyncVideosEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_video_privacy_domain_error_mapper,
             request_options=request_options,
         )
@@ -323,7 +338,8 @@ class AsyncVideosEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             domain: The domain name.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -335,7 +351,7 @@ class AsyncVideosEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_privacy_domain_error_mapper,
             request_options=request_options,
         )
@@ -360,7 +376,8 @@ class AsyncVideosEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             sort: The way to sort the results. Option descriptions: * ``default`` - Sort the results by the video's
                 allowlist ID.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -377,7 +394,7 @@ class AsyncVideosEmbedPrivacyWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[DomainConnection],
+            decoder=async_json_decoder[DomainConnection],
             error_mapper=get_video_privacy_domains_error_mapper,
             request_options=request_options,
         )

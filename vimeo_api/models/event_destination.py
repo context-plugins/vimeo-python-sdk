@@ -7,7 +7,7 @@ from ..core import SdkBaseModel
 from .enums.privacy6 import Privacy6OrStr
 from .enums.service_name import ServiceNameOrStr
 from .enums.state import StateOrStr
-from .enums.type15 import Type15OrStr
+from .enums.type19 import Type19OrStr
 from .metadata16 import Metadata16, Metadata16Dict
 
 
@@ -80,7 +80,7 @@ class EventDestination(SdkBaseModel):
     stream_url: str | None
     """The RTMP URL to stream to."""
 
-    type_: Type15OrStr = Field(alias="type")
+    type_: Type19OrStr = Field(alias="type")
     """The type of the simulcast destination.
 
     Option descriptions:
@@ -102,7 +102,7 @@ class EventDestinationDict(TypedDict):
     id: float
     is_enabled: bool
     live_clip_id: float
-    metadata: Metadata16 | Metadata16Dict
+    metadata: Metadata16Dict
     privacy: Privacy6OrStr | None
     provider_broadcast_id: str | None
     provider_destination_id: str | None
@@ -114,6 +114,6 @@ class EventDestinationDict(TypedDict):
     state_message: str | None
     stream_key: str | None
     stream_url: str | None
-    type_: Type15OrStr
+    type_: Type19OrStr
     user_display_name: str
     user_id: float

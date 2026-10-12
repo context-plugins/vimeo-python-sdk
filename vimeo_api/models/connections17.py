@@ -14,4 +14,4 @@ class Connections17(SdkBaseModel):
 
 
 class Connections17Dict(TypedDict):
-    clip: Clip | ClipDict
+    clip: ClipDict

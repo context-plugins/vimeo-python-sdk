@@ -5,18 +5,20 @@ from ...core import open_enum_validator
 
 
 class Type29(str, Enum):
-    APPEARS = "appears"
-    CATEGORY_FEATURED = "category_featured"
-    CHANNEL = "channel"
-    FACEBOOK_FEED = "facebook_feed"
-    FOLLOWING = "following"
-    GROUP = "group"
-    LIKES = "likes"
-    ONDEMAND_PUBLISH = "ondemand_publish"
-    SHARE = "share"
-    TAGGED_WITH = "tagged_with"
-    TWITTER_TIMELINE = "twitter_timeline"
-    UPLOADS = "uploads"
+    """The type of text track.
+
+    Option descriptions:
+     * ``captions`` - The text track is the captions type.
+     * ``chapters`` - The text track is the chapters type.
+     * ``descriptions`` - The text track is the descriptions type.
+     * ``metadata`` - The text track is the metadata type.
+     * ``subtitles`` - The text track is the subtitles type."""
+
+    CAPTIONS = "captions"
+    CHAPTERS = "chapters"
+    DESCRIPTIONS = "descriptions"
+    METADATA = "metadata"
+    SUBTITLES = "subtitles"
 
     __str__ = str.__str__
 

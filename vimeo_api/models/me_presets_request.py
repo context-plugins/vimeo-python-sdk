@@ -17,5 +17,5 @@ class MePresetsRequest(SdkBaseModel):
 
 class MePresetsRequestDict(TypedDict):
     apply_to_all: NotRequired[bool]
-    embed: NotRequired[Embed16 | Embed16Dict]
+    embed: NotRequired[Embed16Dict]
     name: NotRequired[str]

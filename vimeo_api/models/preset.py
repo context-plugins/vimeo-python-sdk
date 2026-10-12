@@ -33,9 +33,9 @@ class Preset(SdkBaseModel):
 
 class PresetDict(TypedDict):
     created_on: str
-    metadata: Metadata23 | Metadata23Dict
+    metadata: Metadata23Dict
     modified_on: str
     name: str
-    settings: Settings1 | Settings1Dict
+    settings: Settings1Dict
     uri: str
-    user: User | UserDict | None
+    user: UserDict | None

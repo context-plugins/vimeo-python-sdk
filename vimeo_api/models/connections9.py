@@ -14,4 +14,4 @@ class Connections9(SdkBaseModel):
 
 
 class Connections9Dict(TypedDict):
-    metadata: Metadata10 | Metadata10Dict
+    metadata: Metadata10Dict

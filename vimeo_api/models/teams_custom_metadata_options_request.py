@@ -16,4 +16,4 @@ class TeamsCustomMetadataOptionsRequest(SdkBaseModel):
 
 class TeamsCustomMetadataOptionsRequestDict(TypedDict):
     field_id: float
-    options: list[Option | OptionDict]
+    options: list[OptionDict]

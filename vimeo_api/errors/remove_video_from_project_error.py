@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final, TypeAlias
 
-from ..core import ErrorMapper, HttpResponse, RawError, decode_json
+from ..core import ErrorMapper, RawError, decode_json
 from ..models.error import Error
 
 RemoveVideoFromProjectErrorBody: TypeAlias = Error | RawError
@@ -11,12 +11,12 @@ RemoveVideoFromProjectErrorBody: TypeAlias = Error | RawError
 
 @dataclass(frozen=True, slots=True)
 class _RemoveVideoFromProjectError:
-    def map(self, response: HttpResponse) -> RemoveVideoFromProjectErrorBody:
-        match response.status_code:
+    def map(self, status_code: int, content: bytes) -> RemoveVideoFromProjectErrorBody:
+        match status_code:
             case 400 | 401 | 404:
-                return decode_json[Error](response)
+                return decode_json[Error](content)
             case _:
-                return RawError(response)
+                return RawError(status_code, content)
 
 
 remove_video_from_project_error_mapper: Final[

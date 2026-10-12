@@ -4,7 +4,7 @@ from typing import Annotated, TypeAlias
 from ...core import open_enum_validator
 
 
-class Type53(str, Enum):
+class Type57(str, Enum):
     """The type of audio track.
 
     Option descriptions:
@@ -19,4 +19,4 @@ class Type53(str, Enum):
     __str__ = str.__str__
 
 
-Type53OrStr: TypeAlias = Annotated[Type53 | str, open_enum_validator(Type53)]
+Type57OrStr: TypeAlias = Annotated[Type57 | str, open_enum_validator(Type57)]

@@ -28,9 +28,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /ondemand/pages/{ondemand_id}/seasons/{season_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_vod_season_videos(ondemand_id: float, season_id: float, *, filter: Filter27OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort44OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_vod_season_videos(ondemand_id: float, season_id: float, *, filter_: Filter27OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort44OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `ondemand_id`, `season_id`
-- **Params**: `ondemand_id` — path · `season_id` — path · `filter` — query · `page` — query · `per_page` — query · `sort` — query
+- **Params**: `ondemand_id` — path · `season_id` — path · `filter_` — query `filter` · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -45,9 +45,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /ondemand/pages/{ondemand_id}/seasons`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_vod_seasons(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter: Filter27OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort43OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_vod_seasons(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter27OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort43OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `ondemand_id`
-- **Params**: `ondemand_id` — path · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `sort` — query
+- **Params**: `ondemand_id` — path · `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `OnDemandSeasonConnection`
 - **Returns (raw)**: `ApiResult[OnDemandSeasonConnection, GetVodSeasonsErrorBody]`
 - **Error**: `GetVodSeasonsErrorBody` — **Case A (typed)**

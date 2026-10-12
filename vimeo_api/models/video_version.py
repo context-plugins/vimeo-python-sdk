@@ -132,34 +132,34 @@ class VideoVersion(SdkBaseModel):
 
 class VideoVersionDict(TypedDict):
     active: bool
-    app: ApiApp | ApiAppDict
-    audio_track_quota: AudioTrackQuota | AudioTrackQuotaDict
+    app: ApiAppDict
+    audio_track_quota: AudioTrackQuotaDict
     can_restore_create: bool
     create_storyboard_id: NotRequired[str]
     created_time: str
     description: NotRequired[str]
     download_config: Any
     duration: float | None
-    edit_session: EditSession | EditSessionDict
+    edit_session: EditSessionDict
     filename: str
     filesize: float | None
     has_interactive: bool
     height: float | None
     is_deleted: bool
     is_playable: NotRequired[bool]
-    metadata: Metadata29 | Metadata29Dict
+    metadata: Metadata29Dict
     modified_time: str
     origin_variable_frame_resolution: NotRequired[bool]
-    pictures: Picture | PictureDict | None
-    play: NotRequired[Play | PlayDict]
+    pictures: PictureDict | None
+    play: NotRequired[PlayDict]
     player_embed_url: str
     sequence_number: float | None
-    source_metadata: SourceMetadata | SourceMetadataDict | None
-    transcode: Transcode2 | Transcode2Dict | None
-    upload: Upload1 | Upload1Dict | None
+    source_metadata: SourceMetadataDict | None
+    transcode: Transcode2Dict | None
+    upload: Upload1Dict | None
     upload_date: str | None
     uri: str
-    user: User | UserDict | None
+    user: UserDict | None
     version_transcode_status: NotRequired[VersionTranscodeStatus1OrStr]
     version_type: VersionTypeOrStr
     width: float | None

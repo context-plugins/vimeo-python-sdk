@@ -14,4 +14,4 @@ class Connections2(SdkBaseModel):
 
 
 class Connections2Dict(TypedDict):
-    videos: Videos2 | Videos2Dict
+    videos: Videos2Dict

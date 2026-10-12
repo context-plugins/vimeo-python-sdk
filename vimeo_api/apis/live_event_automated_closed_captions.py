@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.edit_live_event_auto_cc_alt1_error import (
     EditLiveEventAutoCcAlt1ErrorBody,
@@ -49,7 +51,8 @@ class LiveEventAutomatedClosedCaptions:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The automated closed captions preference was edited.
@@ -62,9 +65,11 @@ class LiveEventAutomatedClosedCaptions:
                 captions feature at all. * Error code 3459: The authenticated user can't use the automated closed
                 captions translation feature. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.edit_live_event_auto_cc(
-            live_event_id, user_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_live_event_auto_cc(
+                live_event_id, user_id, body, request_options=request_options
+            ),
+        )
 
     def edit_live_event_auto_cc_alt1(
         self,
@@ -78,7 +83,8 @@ class LiveEventAutomatedClosedCaptions:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The automated closed captions preference was edited.
@@ -91,9 +97,9 @@ class LiveEventAutomatedClosedCaptions:
                 captions feature at all. * Error code 3459: The authenticated user can't use the automated closed
                 captions translation feature. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.edit_live_event_auto_cc_alt1(
-            live_event_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_live_event_auto_cc_alt1(live_event_id, body, request_options=request_options)
+        )
 
     def edit_live_event_auto_cc_alt2(
         self,
@@ -107,7 +113,8 @@ class LiveEventAutomatedClosedCaptions:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The automated closed captions preference was edited.
@@ -120,9 +127,9 @@ class LiveEventAutomatedClosedCaptions:
                 captions feature at all. * Error code 3459: The authenticated user can't use the automated closed
                 captions translation feature. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.edit_live_event_auto_cc_alt2(
-            live_event_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_live_event_auto_cc_alt2(live_event_id, body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> LiveEventAutomatedClosedCaptionsWithRawResponse:
@@ -147,7 +154,8 @@ class AsyncLiveEventAutomatedClosedCaptions:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The automated closed captions preference was edited.
@@ -160,11 +168,11 @@ class AsyncLiveEventAutomatedClosedCaptions:
                 captions feature at all. * Error code 3459: The authenticated user can't use the automated closed
                 captions translation feature. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_live_event_auto_cc(
                 live_event_id, user_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_live_event_auto_cc_alt1(
         self,
@@ -178,7 +186,8 @@ class AsyncLiveEventAutomatedClosedCaptions:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The automated closed captions preference was edited.
@@ -191,11 +200,11 @@ class AsyncLiveEventAutomatedClosedCaptions:
                 captions feature at all. * Error code 3459: The authenticated user can't use the automated closed
                 captions translation feature. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_live_event_auto_cc_alt1(
                 live_event_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_live_event_auto_cc_alt2(
         self,
@@ -209,7 +218,8 @@ class AsyncLiveEventAutomatedClosedCaptions:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The automated closed captions preference was edited.
@@ -222,11 +232,11 @@ class AsyncLiveEventAutomatedClosedCaptions:
                 captions feature at all. * Error code 3459: The authenticated user can't use the automated closed
                 captions translation feature. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_live_event_auto_cc_alt2(
                 live_event_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveEventAutomatedClosedCaptionsWithRawResponse:
@@ -248,7 +258,8 @@ class LiveEventAutomatedClosedCaptionsWithRawResponse(SecuredRawResponse[RawClie
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -278,7 +289,8 @@ class LiveEventAutomatedClosedCaptionsWithRawResponse(SecuredRawResponse[RawClie
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -308,7 +320,8 @@ class LiveEventAutomatedClosedCaptionsWithRawResponse(SecuredRawResponse[RawClie
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -344,7 +357,8 @@ class AsyncLiveEventAutomatedClosedCaptionsWithRawResponse(
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -357,7 +371,7 @@ class AsyncLiveEventAutomatedClosedCaptionsWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventAutomatedClosedCaptions],
+            decoder=async_json_decoder[EventAutomatedClosedCaptions],
             error_mapper=edit_live_event_auto_cc_error_mapper,
             request_options=request_options,
         )
@@ -374,7 +388,8 @@ class AsyncLiveEventAutomatedClosedCaptionsWithRawResponse(
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -387,7 +402,7 @@ class AsyncLiveEventAutomatedClosedCaptionsWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventAutomatedClosedCaptions],
+            decoder=async_json_decoder[EventAutomatedClosedCaptions],
             error_mapper=edit_live_event_auto_cc_alt1_error_mapper,
             request_options=request_options,
         )
@@ -404,7 +419,8 @@ class AsyncLiveEventAutomatedClosedCaptionsWithRawResponse(
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -417,7 +433,7 @@ class AsyncLiveEventAutomatedClosedCaptionsWithRawResponse(
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventAutomatedClosedCaptions],
+            decoder=async_json_decoder[EventAutomatedClosedCaptions],
             error_mapper=edit_live_event_auto_cc_alt2_error_mapper,
             request_options=request_options,
         )

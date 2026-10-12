@@ -10,9 +10,11 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..server.server import Server
 
@@ -27,11 +29,12 @@ class TeamsMembers:
 
         Args:
             code: The code corresponding to the desired team. This value appears under ``TeamUser`` > ``code``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_team_information(code, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_team_information(code, request_options=request_options))
 
     def get_team_information2(
         self, team_user_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -42,24 +45,26 @@ class TeamsMembers:
         Args:
             team_user_id: The ID of the team user.
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_team_information2(
-            team_user_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_team_information2(team_user_id, user_id, request_options=request_options)
+        )
 
     def get_team_role_information(self, user_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method returns information about the authenticated user's role on the specified team owner's team.
 
         Args:
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_team_role_information(user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_team_role_information(user_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> TeamsMembersWithRawResponse:
@@ -76,11 +81,12 @@ class AsyncTeamsMembers:
 
         Args:
             code: The code corresponding to the desired team. This value appears under ``TeamUser`` > ``code``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_team_information(code, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_team_information(code, request_options=request_options))
 
     async def get_team_information2(
         self, team_user_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -91,13 +97,14 @@ class AsyncTeamsMembers:
         Args:
             team_user_id: The ID of the team user.
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_team_information2(team_user_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_team_role_information(
         self, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -106,13 +113,12 @@ class AsyncTeamsMembers:
 
         Args:
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.get_team_role_information(user_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_team_role_information(user_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncTeamsMembersWithRawResponse:
@@ -128,7 +134,8 @@ class TeamsMembersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
 
         Args:
             code: The code corresponding to the desired team. This value appears under ``TeamUser`` > ``code``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -153,7 +160,8 @@ class TeamsMembersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             team_user_id: The ID of the team user.
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -176,7 +184,8 @@ class TeamsMembersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
 
         Args:
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -202,7 +211,8 @@ class AsyncTeamsMembersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
 
         Args:
             code: The code corresponding to the desired team. This value appears under ``TeamUser`` > ``code``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -213,7 +223,7 @@ class AsyncTeamsMembersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -227,7 +237,8 @@ class AsyncTeamsMembersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             team_user_id: The ID of the team user.
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -238,7 +249,7 @@ class AsyncTeamsMembersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -250,7 +261,8 @@ class AsyncTeamsMembersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
 
         Args:
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -261,7 +273,7 @@ class AsyncTeamsMembersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )

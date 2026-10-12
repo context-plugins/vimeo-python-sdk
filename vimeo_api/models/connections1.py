@@ -27,7 +27,7 @@ class Connections1(SdkBaseModel):
 
 
 class Connections1Dict(TypedDict):
-    privacy_users: PrivacyUsers | PrivacyUsersDict
-    requested_clip: RequestedClip | RequestedClipDict
-    users: Users1 | Users1Dict
-    videos: Videos1 | Videos1Dict
+    privacy_users: PrivacyUsersDict
+    requested_clip: RequestedClipDict
+    users: Users1Dict
+    videos: Videos1Dict

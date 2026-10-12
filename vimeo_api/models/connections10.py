@@ -32,9 +32,9 @@ class Connections10(SdkBaseModel):
 
 
 class Connections10Dict(TypedDict):
-    comments: Comments3 | Comments3Dict
-    genres: Genres | GenresDict
-    likes: Likes2 | Likes2Dict
-    pictures: Pictures2 | Pictures2Dict
-    seasons: Seasons | SeasonsDict
-    videos: Videos8 | Videos8Dict
+    comments: Comments3Dict
+    genres: GenresDict
+    likes: Likes2Dict
+    pictures: Pictures2Dict
+    seasons: SeasonsDict
+    videos: Videos8Dict

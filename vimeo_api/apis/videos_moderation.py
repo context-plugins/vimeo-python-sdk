@@ -9,7 +9,9 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
+    unwrap,
 )
 from ..errors.get_video_reporting_reasons_error import (
     GetVideoReportingReasonsErrorBody,
@@ -27,14 +29,15 @@ class VideosModeration:
         """This method returns a list of valid reasons for reporting inappropriate videos on Vimeo.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of reasons was returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_video_reporting_reasons(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_video_reporting_reasons(request_options=request_options))
 
     @property
     def with_raw_response(self) -> VideosModerationWithRawResponse:
@@ -51,14 +54,15 @@ class AsyncVideosModeration:
         """This method returns a list of valid reasons for reporting inappropriate videos on Vimeo.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of reasons was returned.
 
         Raises:
             ApiError: Error code 8000: The user credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.get_video_reporting_reasons(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_video_reporting_reasons(request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncVideosModerationWithRawResponse:
@@ -72,7 +76,8 @@ class VideosModerationWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         """This method returns a list of valid reasons for reporting inappropriate videos on Vimeo.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -95,7 +100,8 @@ class AsyncVideosModerationWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         """This method returns a list of valid reasons for reporting inappropriate videos on Vimeo.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -105,7 +111,7 @@ class AsyncVideosModerationWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoReportReason],
+            decoder=async_json_decoder[VideoReportReason],
             error_mapper=get_video_reporting_reasons_error_mapper,
             request_options=request_options,
         )

@@ -32,9 +32,9 @@ class LayoutConfig(SdkBaseModel):
 
 
 class LayoutConfigDict(TypedDict):
-    grid_size: GridSize | GridSizeDict
-    show_grid_profile_image: ShowGridProfileImage | ShowGridProfileImageDict
-    show_grid_profile_name: ShowGridProfileName | ShowGridProfileNameDict
-    show_grid_section_name: ShowGridSectionName | ShowGridSectionNameDict
-    show_grid_video_count: ShowGridVideoCount | ShowGridVideoCountDict
-    show_grid_video_titles: ShowGridVideoTitles | ShowGridVideoTitlesDict
+    grid_size: GridSizeDict
+    show_grid_profile_image: ShowGridProfileImageDict
+    show_grid_profile_name: ShowGridProfileNameDict
+    show_grid_section_name: ShowGridSectionNameDict
+    show_grid_video_count: ShowGridVideoCountDict
+    show_grid_video_titles: ShowGridVideoTitlesDict

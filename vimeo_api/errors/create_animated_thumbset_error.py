@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final, TypeAlias
 
-from ..core import ErrorMapper, HttpResponse, RawError, decode_json
+from ..core import ErrorMapper, RawError, decode_json
 from ..models.error import Error
 from ..models.legacy_error import LegacyError
 
@@ -12,14 +12,14 @@ CreateAnimatedThumbsetErrorBody: TypeAlias = Error | LegacyError | RawError
 
 @dataclass(frozen=True, slots=True)
 class _CreateAnimatedThumbsetError:
-    def map(self, response: HttpResponse) -> CreateAnimatedThumbsetErrorBody:
-        match response.status_code:
+    def map(self, status_code: int, content: bytes) -> CreateAnimatedThumbsetErrorBody:
+        match status_code:
             case 400:
-                return decode_json[Error](response)
+                return decode_json[Error](content)
             case 403 | 429:
-                return decode_json[LegacyError](response)
+                return decode_json[LegacyError](content)
             case _:
-                return RawError(response)
+                return RawError(status_code, content)
 
 
 create_animated_thumbset_error_mapper: Final[

@@ -4,11 +4,11 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.type36 import Type36OrStr
+from .enums.type40 import Type40OrStr
 
 
 class EndScreen4(SdkBaseModel):
-    type_: Optional[Type36OrStr] = Field(default=UNSET, alias="type")
+    type_: Optional[Type40OrStr] = Field(default=UNSET, alias="type")
     """The end screen type.
 
     Option descriptions:
@@ -19,4 +19,4 @@ class EndScreen4(SdkBaseModel):
 
 
 class EndScreen4Dict(TypedDict):
-    type_: NotRequired[Type36OrStr]
+    type_: NotRequired[Type40OrStr]

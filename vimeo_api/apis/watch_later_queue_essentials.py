@@ -12,10 +12,13 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.check_watch_later_queue_alt1_error import (
     CheckWatchLaterQueueAlt1ErrorBody,
@@ -42,16 +45,17 @@ class WatchLaterQueueEssentials:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.add_video_to_watch_later(
-            user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_to_watch_later(user_id, video_id, request_options=request_options)
+        )
 
     def add_video_to_watch_later_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -60,14 +64,15 @@ class WatchLaterQueueEssentials:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.add_video_to_watch_later_alt1(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_video_to_watch_later_alt1(video_id, request_options=request_options))
 
     def check_watch_later_queue(
         self, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -77,16 +82,17 @@ class WatchLaterQueueEssentials:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video is in the user's Watch Later queue.
 
         Raises:
             ApiError: The video isn't in the user's Watch Later queue. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_watch_later_queue(
-            user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_watch_later_queue(user_id, video_id, request_options=request_options)
+        )
 
     def check_watch_later_queue_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -95,14 +101,15 @@ class WatchLaterQueueEssentials:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video is in the user's Watch Later queue.
 
         Raises:
             ApiError: The video isn't in the user's Watch Later queue. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_watch_later_queue_alt1(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.check_watch_later_queue_alt1(video_id, request_options=request_options))
 
     def delete_video_from_watch_later(
         self, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -112,16 +119,17 @@ class WatchLaterQueueEssentials:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_video_from_watch_later(
-            user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_from_watch_later(user_id, video_id, request_options=request_options)
+        )
 
     def delete_video_from_watch_later_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -130,23 +138,24 @@ class WatchLaterQueueEssentials:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_video_from_watch_later_alt1(
-            video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_from_watch_later_alt1(video_id, request_options=request_options)
+        )
 
     def get_watch_later_queue(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -160,7 +169,7 @@ class WatchLaterQueueEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -171,30 +180,33 @@ class WatchLaterQueueEssentials:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date added. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number
                 of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_watch_later_queue(
-            user_id,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_watch_later_queue(
+                user_id,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_watch_later_queue_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -207,7 +219,7 @@ class WatchLaterQueueEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -218,23 +230,26 @@ class WatchLaterQueueEssentials:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date added. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number
                 of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_watch_later_queue_alt1(
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_watch_later_queue_alt1(
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> WatchLaterQueueEssentialsWithRawResponse:
@@ -253,16 +268,17 @@ class AsyncWatchLaterQueueEssentials:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_watch_later(user_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def add_video_to_watch_later_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -271,16 +287,17 @@ class AsyncWatchLaterQueueEssentials:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_watch_later_alt1(video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def check_watch_later_queue(
         self, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -290,16 +307,17 @@ class AsyncWatchLaterQueueEssentials:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video is in the user's Watch Later queue.
 
         Raises:
             ApiError: The video isn't in the user's Watch Later queue. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_watch_later_queue(user_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def check_watch_later_queue_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -308,16 +326,17 @@ class AsyncWatchLaterQueueEssentials:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video is in the user's Watch Later queue.
 
         Raises:
             ApiError: The video isn't in the user's Watch Later queue. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_watch_later_queue_alt1(video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_video_from_watch_later(
         self, user_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -327,18 +346,19 @@ class AsyncWatchLaterQueueEssentials:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_from_watch_later(
                 user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_video_from_watch_later_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -347,23 +367,24 @@ class AsyncWatchLaterQueueEssentials:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_from_watch_later_alt1(video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_watch_later_queue(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -377,7 +398,7 @@ class AsyncWatchLaterQueueEssentials:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -388,32 +409,33 @@ class AsyncWatchLaterQueueEssentials:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date added. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number
                 of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_watch_later_queue(
                 user_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_watch_later_queue_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -426,7 +448,7 @@ class AsyncWatchLaterQueueEssentials:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -437,25 +459,26 @@ class AsyncWatchLaterQueueEssentials:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date added. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number
                 of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_watch_later_queue_alt1(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncWatchLaterQueueEssentialsWithRawResponse:
@@ -471,7 +494,8 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -495,7 +519,8 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -520,7 +545,8 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -543,7 +569,8 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -567,7 +594,8 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -591,7 +619,8 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -613,7 +642,7 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -627,7 +656,7 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -638,7 +667,8 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date added. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number
                 of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -648,7 +678,7 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -667,7 +697,7 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -680,7 +710,7 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -691,7 +721,8 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date added. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number
                 of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -700,7 +731,7 @@ class WatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[RawClient, Ser
             url_template=self._server.default("/me/watchlater"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -725,7 +756,8 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -737,7 +769,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -749,7 +781,8 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -761,7 +794,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -774,7 +807,8 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -785,7 +819,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=check_watch_later_queue_error_mapper,
             request_options=request_options,
         )
@@ -797,7 +831,8 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -808,7 +843,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=check_watch_later_queue_alt1_error_mapper,
             request_options=request_options,
         )
@@ -821,7 +856,8 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -833,7 +869,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -845,7 +881,8 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -857,7 +894,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -867,7 +904,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -881,7 +918,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -892,7 +929,8 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date added. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number
                 of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -902,7 +940,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -912,7 +950,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -921,7 +959,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -934,7 +972,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -945,7 +983,8 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by date added. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by number
                 of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -954,7 +993,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             url_template=self._server.default("/me/watchlater"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -964,7 +1003,7 @@ class AsyncWatchLaterQueueEssentialsWithRawResponse(SecuredRawResponse[AsyncRawC
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

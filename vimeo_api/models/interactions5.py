@@ -15,4 +15,4 @@ class Interactions5(SdkBaseModel):
 
 
 class Interactions5Dict(TypedDict):
-    join: Join | JoinDict
+    join: JoinDict

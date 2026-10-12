@@ -8,7 +8,7 @@ from .enums.access_type import AccessTypeOrStr
 from .enums.discount_type import DiscountTypeOrStr
 from .enums.product_type import ProductTypeOrStr
 from .enums.stream_period import StreamPeriodOrStr
-from .enums.type18 import Type18OrStr
+from .enums.type22 import Type22OrStr
 from .metadata19 import Metadata19, Metadata19Dict
 
 
@@ -71,7 +71,7 @@ class OnDemandPromotion(SdkBaseModel):
     """When **type** is ``single``, the total number of times that the promotion can be used. When **type** is ``batch``
     or ``batch_prefix``, the total number of promo codes that have been generated."""
 
-    type_: Type18OrStr = Field(alias="type")
+    type_: Type22OrStr = Field(alias="type")
     """The way in which the promotion generates promo codes.
 
     Option descriptions:
@@ -89,10 +89,10 @@ class OnDemandPromotionDict(TypedDict):
     discount_type: DiscountTypeOrStr
     download: bool
     label: str | None
-    metadata: Metadata19 | Metadata19Dict
+    metadata: Metadata19Dict
     percent_off: float
     product_type: ProductTypeOrStr
     stream_period: StreamPeriodOrStr | None
     total: float
-    type_: Type18OrStr
+    type_: Type22OrStr
     uri: str

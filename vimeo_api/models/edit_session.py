@@ -3,14 +3,14 @@ from __future__ import annotations
 from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
-from .enums.status19 import Status19OrStr
+from .enums.status22 import Status22OrStr
 
 
 class EditSession(SdkBaseModel):
     """Information about the video's Vimeo Create editing session. This data requires a bearer token with the
     ``private`` scope."""
 
-    status: Status19OrStr
+    status: Status22OrStr
     """The status of the video's edit session. This data requires a bearer token with the ``private`` scope.
 
     Option descriptions:
@@ -20,4 +20,4 @@ class EditSession(SdkBaseModel):
 
 
 class EditSessionDict(TypedDict):
-    status: Status19OrStr
+    status: Status22OrStr

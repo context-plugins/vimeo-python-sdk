@@ -12,4 +12,4 @@ class Connections19(SdkBaseModel):
 
 
 class Connections19Dict(TypedDict):
-    videos: Videos12 | Videos12Dict
+    videos: Videos12Dict

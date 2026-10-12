@@ -13,5 +13,5 @@ class Episodes1(SdkBaseModel):
 
 
 class Episodes1Dict(TypedDict):
-    buy: NotRequired[Buy4 | Buy4Dict]
-    rent: NotRequired[Rent3 | Rent3Dict]
+    buy: NotRequired[Buy4Dict]
+    rent: NotRequired[Rent3Dict]

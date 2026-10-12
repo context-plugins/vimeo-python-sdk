@@ -11,9 +11,12 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_vod_genre_error import AddVodGenreErrorBody, add_vod_genre_error_mapper
 from ..errors.delete_vod_genre_error import DeleteVodGenreErrorBody, delete_vod_genre_error_mapper
@@ -52,7 +55,8 @@ class OnDemandGenres:
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genre was added.
@@ -60,7 +64,7 @@ class OnDemandGenres:
         Raises:
             ApiError: The On Demand page already has two genres. The authenticated user can't add a genre to this On
                 Demand page. No such On Demand page or genre exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_vod_genre(genre_id, ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_vod_genre(genre_id, ondemand_id, request_options=request_options))
 
     def delete_vod_genre(
         self, genre_id: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -71,7 +75,8 @@ class OnDemandGenres:
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genre was removed.
@@ -80,7 +85,7 @@ class OnDemandGenres:
             ApiError: The On Demand page must belong to at least one genre. The authenticated user can't remove a genre
                 from this On Demand page. No such On Demand page or genre exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.delete_vod_genre(genre_id, ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_vod_genre(genre_id, ondemand_id, request_options=request_options))
 
     def get_genre_vod(
         self, genre_id: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -90,21 +95,22 @@ class OnDemandGenres:
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page in the genre was returned.
 
         Raises:
             ApiError: No such On Demand page or genre exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_genre_vod(genre_id, ondemand_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_genre_vod(genre_id, ondemand_id, request_options=request_options))
 
     def get_genre_vods(
         self,
         genre_id: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter24OrStr | None = None,
+        filter_: Filter24OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -117,7 +123,7 @@ class OnDemandGenres:
             genre_id: The ID of the genre.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``country`` - Sort the results
+            filter_: The attribute by which to filter the results. Option descriptions: * ``country`` - Sort the results
                 by country. * ``my_region`` - Sort the results by user's region.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -125,37 +131,41 @@ class OnDemandGenres:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name. *
                 ``publish.time`` - Sort the results by time of publishing. * ``videos`` - Sort the results by video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand pages in the genre were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_genre_vods(
-            genre_id,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_genre_vods(
+                genre_id,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_vod_genre(self, genre_id: str, *, request_options: RequestOptionsOrDict | None = None) -> OnDemandGenre:
         """This method returns a single On Demand genre.
 
         Args:
             genre_id: The ID of the genre.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genre was returned.
 
         Raises:
             ApiError: No such genre exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_genre(genre_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_vod_genre(genre_id, request_options=request_options))
 
     def get_vod_genre_by_ondemand_id(
         self, genre_id: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -165,29 +175,31 @@ class OnDemandGenres:
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page is in this genre.
 
         Raises:
             ApiError: No such On Demand page or genre exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_genre_by_ondemand_id(
-            genre_id, ondemand_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_genre_by_ondemand_id(genre_id, ondemand_id, request_options=request_options)
+        )
 
     def get_vod_genres(self, *, request_options: RequestOptionsOrDict | None = None) -> OnDemandGenreConnection:
         """This method returns every existing On Demand genre.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genres were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_vod_genres(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_vod_genres(request_options=request_options))
 
     def get_vod_genres_by_ondemand_id(
         self, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -196,7 +208,8 @@ class OnDemandGenres:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genres were returned.
@@ -204,9 +217,9 @@ class OnDemandGenres:
         Raises:
             ApiError: * No such On Demand page exists. * Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_genres_by_ondemand_id(
-            ondemand_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_genres_by_ondemand_id(ondemand_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> OnDemandGenresWithRawResponse:
@@ -226,7 +239,8 @@ class AsyncOnDemandGenres:
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genre was added.
@@ -234,9 +248,9 @@ class AsyncOnDemandGenres:
         Raises:
             ApiError: The On Demand page already has two genres. The authenticated user can't add a genre to this On
                 Demand page. No such On Demand page or genre exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_vod_genre(genre_id, ondemand_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_vod_genre(
         self, genre_id: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -247,7 +261,8 @@ class AsyncOnDemandGenres:
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genre was removed.
@@ -256,9 +271,9 @@ class AsyncOnDemandGenres:
             ApiError: The On Demand page must belong to at least one genre. The authenticated user can't remove a genre
                 from this On Demand page. No such On Demand page or genre exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_vod_genre(genre_id, ondemand_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_genre_vod(
         self, genre_id: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -268,23 +283,24 @@ class AsyncOnDemandGenres:
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page in the genre was returned.
 
         Raises:
             ApiError: No such On Demand page or genre exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_genre_vod(genre_id, ondemand_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_genre_vods(
         self,
         genre_id: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter24OrStr | None = None,
+        filter_: Filter24OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -297,7 +313,7 @@ class AsyncOnDemandGenres:
             genre_id: The ID of the genre.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``country`` - Sort the results
+            filter_: The attribute by which to filter the results. Option descriptions: * ``country`` - Sort the results
                 by country. * ``my_region`` - Sort the results by user's region.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -305,25 +321,26 @@ class AsyncOnDemandGenres:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name. *
                 ``publish.time`` - Sort the results by time of publishing. * ``videos`` - Sort the results by video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand pages in the genre were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_genre_vods(
                 genre_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_vod_genre(
         self, genre_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -332,14 +349,15 @@ class AsyncOnDemandGenres:
 
         Args:
             genre_id: The ID of the genre.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genre was returned.
 
         Raises:
             ApiError: No such genre exists. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.get_vod_genre(genre_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_vod_genre(genre_id, request_options=request_options))
 
     async def get_vod_genre_by_ondemand_id(
         self, genre_id: str, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -349,31 +367,33 @@ class AsyncOnDemandGenres:
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The On Demand page is in this genre.
 
         Raises:
             ApiError: No such On Demand page or genre exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_genre_by_ondemand_id(
                 genre_id, ondemand_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_vod_genres(self, *, request_options: RequestOptionsOrDict | None = None) -> OnDemandGenreConnection:
         """This method returns every existing On Demand genre.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genres were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.get_vod_genres(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_vod_genres(request_options=request_options))
 
     async def get_vod_genres_by_ondemand_id(
         self, ondemand_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -382,7 +402,8 @@ class AsyncOnDemandGenres:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The genres were returned.
@@ -390,9 +411,9 @@ class AsyncOnDemandGenres:
         Raises:
             ApiError: * No such On Demand page exists. * Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_genres_by_ondemand_id(ondemand_id, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncOnDemandGenresWithRawResponse:
@@ -409,7 +430,8 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -435,7 +457,8 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -460,7 +483,8 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -481,7 +505,7 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         genre_id: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter24OrStr | None = None,
+        filter_: Filter24OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -494,7 +518,7 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             genre_id: The ID of the genre.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``country`` - Sort the results
+            filter_: The attribute by which to filter the results. Option descriptions: * ``country`` - Sort the results
                 by country. * ``my_region`` - Sort the results by user's region.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -502,7 +526,8 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name. *
                 ``publish.time`` - Sort the results by time of publishing. * ``videos`` - Sort the results by video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -512,7 +537,7 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             path_params=[param[str]("genre_id", genre_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter24OrStr | None]("filter", filter),
+                param[Filter24OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -533,7 +558,8 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             genre_id: The ID of the genre.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -557,7 +583,8 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -579,7 +606,8 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         """This method returns every existing On Demand genre.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -601,7 +629,8 @@ class OnDemandGenresWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -628,7 +657,8 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -640,7 +670,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandGenre],
+            decoder=async_json_decoder[OnDemandGenre],
             error_mapper=add_vod_genre_error_mapper,
             request_options=request_options,
         )
@@ -654,7 +684,8 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -666,7 +697,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_vod_genre_error_mapper,
             request_options=request_options,
         )
@@ -679,7 +710,8 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -690,7 +722,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPage],
+            decoder=async_json_decoder[OnDemandPage],
             error_mapper=get_genre_vod_error_mapper,
             request_options=request_options,
         )
@@ -700,7 +732,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         genre_id: str,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter24OrStr | None = None,
+        filter_: Filter24OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -713,7 +745,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             genre_id: The ID of the genre.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``country`` - Sort the results
+            filter_: The attribute by which to filter the results. Option descriptions: * ``country`` - Sort the results
                 by country. * ``my_region`` - Sort the results by user's region.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -721,7 +753,8 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``name`` - Sort the results by name. *
                 ``publish.time`` - Sort the results by time of publishing. * ``videos`` - Sort the results by video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -731,7 +764,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             path_params=[param[str]("genre_id", genre_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter24OrStr | None]("filter", filter),
+                param[Filter24OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -740,7 +773,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPageConnection],
+            decoder=async_json_decoder[OnDemandPageConnection],
             error_mapper=get_genre_vods_error_mapper,
             request_options=request_options,
         )
@@ -752,7 +785,8 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             genre_id: The ID of the genre.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -763,7 +797,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandGenre],
+            decoder=async_json_decoder[OnDemandGenre],
             error_mapper=get_vod_genre_error_mapper,
             request_options=request_options,
         )
@@ -776,7 +810,8 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             genre_id: The ID of the genre.
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -787,7 +822,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandGenre],
+            decoder=async_json_decoder[OnDemandGenre],
             error_mapper=get_vod_genre_by_ondemand_id_error_mapper,
             request_options=request_options,
         )
@@ -798,7 +833,8 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         """This method returns every existing On Demand genre.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -808,7 +844,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandGenreConnection],
+            decoder=async_json_decoder[OnDemandGenreConnection],
             error_mapper=get_vod_genres_error_mapper,
             request_options=request_options,
         )
@@ -820,7 +856,8 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -831,7 +868,7 @@ class AsyncOnDemandGenresWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandGenreConnection],
+            decoder=async_json_decoder[OnDemandGenreConnection],
             error_mapper=get_vod_genres_by_ondemand_id_error_mapper,
             request_options=request_options,
         )

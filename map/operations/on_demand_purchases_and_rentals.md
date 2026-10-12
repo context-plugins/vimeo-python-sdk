@@ -28,9 +28,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/ondemand/purchases`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_vod_purchases(user_id: float, *, direction: DirectionOrStr | None = None, filter: Filter19OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort33OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_vod_purchases(user_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter19OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort33OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `user_id`
-- **Params**: `user_id` — path · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `sort` — query
+- **Params**: `user_id` — path · `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `OnDemandPageConnection`
 - **Returns (raw)**: `ApiResult[OnDemandPageConnection, GetVodPurchasesErrorBody]`
 - **Error**: `GetVodPurchasesErrorBody` — **Case A (typed)**
@@ -49,8 +49,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/ondemand/purchases`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_vod_purchases_alt1(*, direction: DirectionOrStr | None = None, filter: Filter19OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort33OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `direction` — query · `filter` — query · `page` — query · `per_page` — query · `sort` — query
+- **Signature**: `def get_vod_purchases_alt1(*, direction: DirectionOrStr | None = None, filter_: Filter19OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort33OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `OnDemandPageConnection`
 - **Returns (raw)**: `ApiResult[OnDemandPageConnection, GetVodPurchasesAlt1ErrorBody]`
 - **Error**: `GetVodPurchasesAlt1ErrorBody` — **Case A (typed)**

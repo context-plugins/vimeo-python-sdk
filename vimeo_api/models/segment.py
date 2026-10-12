@@ -62,9 +62,9 @@ class SegmentDict(TypedDict):
     id: str
     kind: Kind1OrStr
     language: str
-    lines: list[SegmentLine | SegmentLineDict]
+    lines: list[SegmentLineDict]
     speaker: str | None
     text_track_uri: str
-    translation_metadata: NotRequired[SegmentTranslationMetadata | SegmentTranslationMetadataDict]
+    translation_metadata: NotRequired[SegmentTranslationMetadataDict]
     video_uri: NotRequired[str]
-    words: list[SegmentWords | SegmentWordsDict]
+    words: list[SegmentWordsDict]

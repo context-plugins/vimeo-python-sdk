@@ -26,8 +26,8 @@ class Metadata25(SdkBaseModel):
 
 
 class Metadata25Dict(TypedDict):
-    entitlements: Entitlements | EntitlementsDict
-    interactions: Interactions15 | Interactions15Dict
+    entitlements: EntitlementsDict
+    interactions: Interactions15Dict
     is_bandwidth_product: bool
     is_ps_plan: bool
-    purchased_product: PurchasedProduct | PurchasedProductDict
+    purchased_product: PurchasedProductDict

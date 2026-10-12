@@ -3,13 +3,13 @@ from __future__ import annotations
 from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
-from .enums.status8 import Status8OrStr
+from .enums.status9 import Status9OrStr
 
 
 class Transcode1(SdkBaseModel):
     """The transcode information for the audio track."""
 
-    status: Status8OrStr
+    status: Status9OrStr
     """The transcode status of the audio track.
 
     Option descriptions:
@@ -19,4 +19,4 @@ class Transcode1(SdkBaseModel):
 
 
 class Transcode1Dict(TypedDict):
-    status: Status8OrStr
+    status: Status9OrStr

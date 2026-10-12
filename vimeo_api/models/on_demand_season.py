@@ -34,10 +34,10 @@ class OnDemandSeason(SdkBaseModel):
 
 class OnDemandSeasonDict(TypedDict):
     description: str
-    metadata: Metadata20 | Metadata20Dict
+    metadata: Metadata20Dict
     name: str
     position: float
     resource_key: str
     type_: str
     uri: str
-    user: User | UserDict | None
+    user: UserDict | None

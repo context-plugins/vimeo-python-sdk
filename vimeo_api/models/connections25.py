@@ -16,5 +16,5 @@ class Connections25(SdkBaseModel):
 
 
 class Connections25Dict(TypedDict):
-    child_text_tracks: NotRequired[ChildTextTracks | ChildTextTracksDict]
-    parent_text_track: NotRequired[ParentTextTrack | ParentTextTrackDict]
+    child_text_tracks: NotRequired[ChildTextTracksDict]
+    parent_text_track: NotRequired[ParentTextTrackDict]

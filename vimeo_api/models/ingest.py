@@ -4,7 +4,7 @@ from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
 from .enums.encoder_type import EncoderTypeOrStr
-from .enums.status12 import Status12OrInt
+from .enums.status14 import Status14OrInt
 
 
 class Ingest(SdkBaseModel):
@@ -52,7 +52,7 @@ class Ingest(SdkBaseModel):
     start_time: float | None
     """The timestamp in UTC format when the live video started."""
 
-    status: Status12OrInt | None
+    status: Status14OrInt | None
     """The ingest status of the live video.
 
     Option descriptions:
@@ -86,7 +86,7 @@ class IngestDict(TypedDict):
     scheduled_start_time: str | None
     session_id: str | None
     start_time: float | None
-    status: Status12OrInt | None
+    status: Status14OrInt | None
     stream_ended_reason: float | None
     stream_key: str | None
     width: float | None

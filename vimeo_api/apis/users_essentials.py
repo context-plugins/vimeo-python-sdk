@@ -12,10 +12,12 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.edit_user_alt1_error import EditUserAlt1ErrorBody, edit_user_alt1_error_mapper
 from ..errors.edit_user_error import EditUserErrorBody, edit_user_error_mapper
@@ -41,14 +43,15 @@ class UsersEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user's Vimeo account was edited.
 
         Raises:
             ApiError: Error code 2204: A parameter is invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.edit_user(user_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.edit_user(user_id, body=body, request_options=request_options))
 
     def edit_user_alt1(
         self, *, body: MeRequest | MeRequestDict | None = None, request_options: RequestOptionsOrDict | None = None
@@ -57,41 +60,44 @@ class UsersEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user's Vimeo account was edited.
 
         Raises:
             ApiError: Error code 2204: A parameter is invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.edit_user_alt1(body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.edit_user_alt1(body=body, request_options=request_options))
 
     def get_user(self, user_id: float, *, request_options: RequestOptionsOrDict | None = None) -> User:
         """This method returns the authenticated user.
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_user(user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_user(user_id, request_options=request_options))
 
     def get_user_alt1(self, *, request_options: RequestOptionsOrDict | None = None) -> User:
         """This method returns the authenticated user.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_user_alt1(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_user_alt1(request_options=request_options))
 
     @property
     def with_raw_response(self) -> UsersEssentialsWithRawResponse:
@@ -114,14 +120,15 @@ class AsyncUsersEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user's Vimeo account was edited.
 
         Raises:
             ApiError: Error code 2204: A parameter is invalid. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.edit_user(user_id, body=body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.edit_user(user_id, body=body, request_options=request_options))
 
     async def edit_user_alt1(
         self, *, body: MeRequest | MeRequestDict | None = None, request_options: RequestOptionsOrDict | None = None
@@ -130,41 +137,44 @@ class AsyncUsersEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user's Vimeo account was edited.
 
         Raises:
             ApiError: Error code 2204: A parameter is invalid. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.edit_user_alt1(body=body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.edit_user_alt1(body=body, request_options=request_options))
 
     async def get_user(self, user_id: float, *, request_options: RequestOptionsOrDict | None = None) -> User:
         """This method returns the authenticated user.
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_user(user_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_user(user_id, request_options=request_options))
 
     async def get_user_alt1(self, *, request_options: RequestOptionsOrDict | None = None) -> User:
         """This method returns the authenticated user.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_user_alt1(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_user_alt1(request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncUsersEssentialsWithRawResponse:
@@ -184,7 +194,8 @@ class UsersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -209,7 +220,8 @@ class UsersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -233,7 +245,8 @@ class UsersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -253,7 +266,8 @@ class UsersEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         """This method returns the authenticated user.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -282,7 +296,8 @@ class AsyncUsersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -295,7 +310,7 @@ class AsyncUsersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[User],
+            decoder=async_json_decoder[User],
             error_mapper=edit_user_error_mapper,
             request_options=request_options,
         )
@@ -307,7 +322,8 @@ class AsyncUsersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -319,7 +335,7 @@ class AsyncUsersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[User],
+            decoder=async_json_decoder[User],
             error_mapper=edit_user_alt1_error_mapper,
             request_options=request_options,
         )
@@ -331,7 +347,8 @@ class AsyncUsersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -342,7 +359,7 @@ class AsyncUsersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[User],
+            decoder=async_json_decoder[User],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -351,7 +368,8 @@ class AsyncUsersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         """This method returns the authenticated user.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -361,7 +379,7 @@ class AsyncUsersEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[User],
+            decoder=async_json_decoder[User],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

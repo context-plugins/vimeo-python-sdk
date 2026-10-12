@@ -7,7 +7,7 @@ from typing_extensions import NotRequired, TypedDict
 from ..core import UNSET, Optional, SdkBaseModel
 from .applicable_permission_policies import ApplicablePermissionPolicies, ApplicablePermissionPoliciesDict
 from .enums.permission_level1 import PermissionLevel1OrStr
-from .enums.status18 import Status18OrStr
+from .enums.status21 import Status21OrStr
 from .metadata26 import Metadata26, Metadata26Dict
 from .team_role import TeamRole, TeamRoleDict
 from .user import User, UserDict
@@ -83,7 +83,7 @@ class TeamMembership(SdkBaseModel):
     role: str
     """The team member's role, translated."""
 
-    status: Status18OrStr
+    status: Status21OrStr
     """The status of the team membership invite.
 
     Option descriptions:
@@ -100,8 +100,8 @@ class TeamMembership(SdkBaseModel):
 class TeamMembershipDict(TypedDict):
     access_grant: Any | None
     active: bool
-    applicable_permission_policies: ApplicablePermissionPolicies | ApplicablePermissionPoliciesDict
-    applicable_roles: list[TeamRole | TeamRoleDict]
+    applicable_permission_policies: ApplicablePermissionPoliciesDict
+    applicable_roles: list[TeamRoleDict]
     created_time: str
     email: str
     exclude_sso: bool | None
@@ -109,13 +109,13 @@ class TeamMembershipDict(TypedDict):
     has_lms_user: NotRequired[bool]
     invite_url: str | None
     joined_time: str
-    metadata: Metadata26 | Metadata26Dict
+    metadata: Metadata26Dict
     modified_time: str
     permission_actions: list[str]
     permission_level: PermissionLevel1OrStr
     recently_reminded: NotRequired[bool]
     resource_key: str
     role: str
-    status: Status18OrStr
+    status: Status21OrStr
     uri: str
-    user: User | UserDict | None
+    user: UserDict | None

@@ -19,4 +19,4 @@ class Buy4(SdkBaseModel):
 class Buy4Dict(TypedDict):
     active: NotRequired[bool]
     download: NotRequired[bool]
-    price: NotRequired[Price3 | Price3Dict]
+    price: NotRequired[Price3Dict]

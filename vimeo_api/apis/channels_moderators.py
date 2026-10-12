@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.add_channel_moderator_error import AddChannelModeratorErrorBody, add_channel_moderator_error_mapper
 from ..errors.add_channel_moderators_error import AddChannelModeratorsErrorBody, add_channel_moderators_error_mapper
@@ -54,15 +57,16 @@ class ChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: The authenticated user doesn't own the channel, the requested user is already a moderator of the
                 channel, or the authenticated user doesn't follow the requested user. No such channel exists, or no such
                 user exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_channel_moderator(
-            channel_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_channel_moderator(channel_id, user_id, request_options=request_options)
+        )
 
     def add_channel_moderators(self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method adds multiple users as moderators to the specified channel. Include the users by their URI as a
@@ -73,7 +77,8 @@ class ChannelsModerators:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderators were added.
@@ -83,7 +88,7 @@ class ChannelsModerators:
                 channel, a requested user is already a moderator of the channel, or the authenticated user doesn't
                 follow a requested user. No such channel exists, or no such user exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return self._with_raw_response.add_channel_moderators(channel_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_channel_moderators(channel_id, request_options=request_options))
 
     def get_channel_moderator(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -93,16 +98,17 @@ class ChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderator was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_channel_moderator(
-            channel_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_channel_moderator(channel_id, user_id, request_options=request_options)
+        )
 
     def get_channel_moderators(
         self,
@@ -126,22 +132,25 @@ class ChannelsModerators:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date added.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderators were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_channel_moderators(
-            channel_id,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_channel_moderators(
+                channel_id,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def remove_channel_moderator(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -152,7 +161,8 @@ class ChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderator was removed.
@@ -161,9 +171,9 @@ class ChannelsModerators:
             ApiError: The authenticated user doesn't own the channel, the requested user isn't a moderator of the
                 channel, or the requested user is the owner of the channel. No such channel exists, or no such user
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.remove_channel_moderator(
-            channel_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_channel_moderator(channel_id, user_id, request_options=request_options)
+        )
 
     def remove_channel_moderators(
         self,
@@ -178,7 +188,8 @@ class ChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderators were removed.
@@ -187,9 +198,9 @@ class ChannelsModerators:
             ApiError: The authenticated user doesn't own the channel, a requested user isn't a moderator of the channel,
                 or a requested user is the owner of the channel. No such channel exists, or no such user exists.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.remove_channel_moderators(
-            channel_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_channel_moderators(channel_id, body, request_options=request_options)
+        )
 
     def replace_channel_moderators(
         self,
@@ -204,7 +215,8 @@ class ChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderators were replaced.
@@ -212,9 +224,9 @@ class ChannelsModerators:
         Raises:
             ApiError: Error code 2908: The list contains more than 100 users. The authenticated user doesn't own the
                 channel. No such channel exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.replace_channel_moderators(
-            channel_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.replace_channel_moderators(channel_id, body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> ChannelsModeratorsWithRawResponse:
@@ -234,15 +246,16 @@ class AsyncChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: The authenticated user doesn't own the channel, the requested user is already a moderator of the
                 channel, or the authenticated user doesn't follow the requested user. No such channel exists, or no such
                 user exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_channel_moderator(channel_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def add_channel_moderators(
         self, channel_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -255,7 +268,8 @@ class AsyncChannelsModerators:
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderators were added.
@@ -265,9 +279,7 @@ class AsyncChannelsModerators:
                 channel, a requested user is already a moderator of the channel, or the authenticated user doesn't
                 follow a requested user. No such channel exists, or no such user exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.add_channel_moderators(channel_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.add_channel_moderators(channel_id, request_options=request_options))
 
     async def get_channel_moderator(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -277,16 +289,17 @@ class AsyncChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderator was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channel_moderator(channel_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_channel_moderators(
         self,
@@ -310,14 +323,15 @@ class AsyncChannelsModerators:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date added.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderators were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channel_moderators(
                 channel_id,
                 direction=direction,
@@ -326,8 +340,8 @@ class AsyncChannelsModerators:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_channel_moderator(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -338,7 +352,8 @@ class AsyncChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderator was removed.
@@ -347,9 +362,9 @@ class AsyncChannelsModerators:
             ApiError: The authenticated user doesn't own the channel, the requested user isn't a moderator of the
                 channel, or the requested user is the owner of the channel. No such channel exists, or no such user
                 exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_channel_moderator(channel_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def remove_channel_moderators(
         self,
@@ -364,7 +379,8 @@ class AsyncChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderators were removed.
@@ -373,9 +389,9 @@ class AsyncChannelsModerators:
             ApiError: The authenticated user doesn't own the channel, a requested user isn't a moderator of the channel,
                 or a requested user is the owner of the channel. No such channel exists, or no such user exists.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_channel_moderators(channel_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def replace_channel_moderators(
         self,
@@ -390,7 +406,8 @@ class AsyncChannelsModerators:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The moderators were replaced.
@@ -398,9 +415,9 @@ class AsyncChannelsModerators:
         Raises:
             ApiError: Error code 2908: The list contains more than 100 users. The authenticated user doesn't own the
                 channel. No such channel exists. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.replace_channel_moderators(channel_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncChannelsModeratorsWithRawResponse:
@@ -417,7 +434,8 @@ class ChannelsModeratorsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -445,7 +463,8 @@ class ChannelsModeratorsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -470,7 +489,8 @@ class ChannelsModeratorsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -508,7 +528,8 @@ class ChannelsModeratorsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date added.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -540,7 +561,8 @@ class ChannelsModeratorsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -570,7 +592,8 @@ class ChannelsModeratorsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -601,7 +624,8 @@ class ChannelsModeratorsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -630,7 +654,8 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -642,7 +667,7 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_channel_moderator_error_mapper,
             request_options=request_options,
         )
@@ -658,7 +683,8 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             channel_id: The ID of the channel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -670,7 +696,7 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_channel_moderators_error_mapper,
             request_options=request_options,
         )
@@ -683,7 +709,8 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -694,7 +721,7 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[User],
+            decoder=async_json_decoder[User],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -721,7 +748,8 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date added.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -739,7 +767,7 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -753,7 +781,8 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -765,7 +794,7 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_channel_moderator_error_mapper,
             request_options=request_options,
         )
@@ -783,7 +812,8 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -796,7 +826,7 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_channel_moderators_error_mapper,
             request_options=request_options,
         )
@@ -814,7 +844,8 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -827,7 +858,7 @@ class AsyncChannelsModeratorsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[User]],
+            decoder=async_json_decoder[list[User]],
             error_mapper=replace_channel_moderators_error_mapper,
             request_options=request_options,
         )

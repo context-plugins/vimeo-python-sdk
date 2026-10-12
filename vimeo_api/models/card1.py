@@ -42,7 +42,7 @@ class Card1(SdkBaseModel):
 
 
 class Card1Dict(TypedDict):
-    billing_address: NotRequired[BillingAddress | BillingAddressDict]
+    billing_address: NotRequired[BillingAddressDict]
     bin: NotRequired[str]
     brand: NotRequired[BrandOrStr]
     cardholder_name: NotRequired[str]

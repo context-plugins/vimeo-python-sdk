@@ -11,4 +11,4 @@ class Subscription2(SdkBaseModel):
 
 
 class Subscription2Dict(TypedDict):
-    monthly: NotRequired[Monthly | MonthlyDict]
+    monthly: NotRequired[MonthlyDict]

@@ -11,8 +11,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     param,
+    unwrap,
 )
 from ..errors.join_group_alt1_error import JoinGroupAlt1ErrorBody, join_group_alt1_error_mapper
 from ..errors.join_group_error import JoinGroupErrorBody, join_group_error_mapper
@@ -33,7 +35,8 @@ class GroupsSubscriptions:
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user joined the group.
@@ -42,14 +45,15 @@ class GroupsSubscriptions:
             ApiError: The authenticated user can't join the group. Possible reasons are that the group isn't public or
                 that its privacy setting is ``members``. Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.join_group(group_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.join_group(group_id, user_id, request_options=request_options))
 
     def join_group_alt1(self, group_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method adds the authenticated user to the specified group.
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user joined the group.
@@ -58,7 +62,7 @@ class GroupsSubscriptions:
             ApiError: The authenticated user can't join the group. Possible reasons are that the group isn't public or
                 that its privacy setting is ``members``. Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.join_group_alt1(group_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.join_group_alt1(group_id, request_options=request_options))
 
     def leave_group(
         self, group_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -69,7 +73,8 @@ class GroupsSubscriptions:
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was removed from the group.
@@ -77,7 +82,7 @@ class GroupsSubscriptions:
         Raises:
             ApiError: The authenticated user can't leave the group. Error code 5451: This resource is restricted in your
                 region. ``error`` is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.leave_group(group_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.leave_group(group_id, user_id, request_options=request_options))
 
     def leave_group_alt1(self, group_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method removes the authenticated user from the specified group. The authenticated user can't be the
@@ -85,7 +90,8 @@ class GroupsSubscriptions:
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was removed from the group.
@@ -93,7 +99,7 @@ class GroupsSubscriptions:
         Raises:
             ApiError: The authenticated user can't leave the group. Error code 5451: This resource is restricted in your
                 region. ``error`` is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.leave_group_alt1(group_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.leave_group_alt1(group_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> GroupsSubscriptionsWithRawResponse:
@@ -112,7 +118,8 @@ class AsyncGroupsSubscriptions:
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user joined the group.
@@ -121,14 +128,15 @@ class AsyncGroupsSubscriptions:
             ApiError: The authenticated user can't join the group. Possible reasons are that the group isn't public or
                 that its privacy setting is ``members``. Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | Error | RawError``."""
-        return (await self._with_raw_response.join_group(group_id, user_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.join_group(group_id, user_id, request_options=request_options))
 
     async def join_group_alt1(self, group_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method adds the authenticated user to the specified group.
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user joined the group.
@@ -137,7 +145,7 @@ class AsyncGroupsSubscriptions:
             ApiError: The authenticated user can't join the group. Possible reasons are that the group isn't public or
                 that its privacy setting is ``members``. Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | Error | RawError``."""
-        return (await self._with_raw_response.join_group_alt1(group_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.join_group_alt1(group_id, request_options=request_options))
 
     async def leave_group(
         self, group_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -148,7 +156,8 @@ class AsyncGroupsSubscriptions:
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was removed from the group.
@@ -156,7 +165,7 @@ class AsyncGroupsSubscriptions:
         Raises:
             ApiError: The authenticated user can't leave the group. Error code 5451: This resource is restricted in your
                 region. ``error`` is ``LegacyError | Error | RawError``."""
-        return (await self._with_raw_response.leave_group(group_id, user_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.leave_group(group_id, user_id, request_options=request_options))
 
     async def leave_group_alt1(self, group_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method removes the authenticated user from the specified group. The authenticated user can't be the
@@ -164,7 +173,8 @@ class AsyncGroupsSubscriptions:
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was removed from the group.
@@ -172,7 +182,7 @@ class AsyncGroupsSubscriptions:
         Raises:
             ApiError: The authenticated user can't leave the group. Error code 5451: This resource is restricted in your
                 region. ``error`` is ``LegacyError | Error | RawError``."""
-        return (await self._with_raw_response.leave_group_alt1(group_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.leave_group_alt1(group_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncGroupsSubscriptionsWithRawResponse:
@@ -188,7 +198,8 @@ class GroupsSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -212,7 +223,8 @@ class GroupsSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -238,7 +250,8 @@ class GroupsSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -263,7 +276,8 @@ class GroupsSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -290,7 +304,8 @@ class AsyncGroupsSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -302,7 +317,7 @@ class AsyncGroupsSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=join_group_error_mapper,
             request_options=request_options,
         )
@@ -314,7 +329,8 @@ class AsyncGroupsSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -326,7 +342,7 @@ class AsyncGroupsSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=join_group_alt1_error_mapper,
             request_options=request_options,
         )
@@ -340,7 +356,8 @@ class AsyncGroupsSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -352,7 +369,7 @@ class AsyncGroupsSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=leave_group_error_mapper,
             request_options=request_options,
         )
@@ -365,7 +382,8 @@ class AsyncGroupsSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -377,7 +395,7 @@ class AsyncGroupsSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=leave_group_alt1_error_mapper,
             request_options=request_options,
         )

@@ -11,4 +11,4 @@ class Metadata20(SdkBaseModel):
 
 
 class Metadata20Dict(TypedDict):
-    connections: Connections19 | Connections19Dict
+    connections: Connections19Dict

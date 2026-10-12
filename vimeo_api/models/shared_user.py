@@ -25,5 +25,5 @@ class SharedUser(SdkBaseModel):
 class SharedUserDict(TypedDict):
     link: NotRequired[str]
     name: NotRequired[str]
-    pictures: NotRequired[Picture | PictureDict]
+    pictures: NotRequired[PictureDict]
     uri: NotRequired[str]

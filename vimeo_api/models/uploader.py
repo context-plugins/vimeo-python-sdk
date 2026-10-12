@@ -22,4 +22,4 @@ class Uploader(SdkBaseModel):
 class UploaderDict(TypedDict):
     link: str
     name: str
-    pictures: Picture | PictureDict
+    pictures: PictureDict

@@ -9,8 +9,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     param,
+    unwrap,
 )
 from ..errors.download_lms_package_error import DownloadLmsPackageErrorBody, download_lms_package_error_mapper
 from ..models.enums.scoring_algorithm import ScoringAlgorithmOrStr
@@ -50,7 +52,8 @@ class UsersLms:
                 ``aicc`` - The standard is AICC. * ``cmi5`` - The standard is cmi5. * ``scorm12`` - The standard is
                 SCORM 1.2. * ``scorm2004_3rd`` - The standard is SCORM 2004 3rd Edition. * ``tincan`` - The standard is
                 Tin Can or xAPI.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The zipped proxy package was created and returned.
@@ -58,16 +61,18 @@ class UsersLms:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 5000: No such resource exists. Error code 1004:
                 An error occurred creating the proxy package. ``error`` is ``RawError``."""
-        return self._with_raw_response.download_lms_package(
-            user_id,
-            video_id,
-            completion_threshold=completion_threshold,
-            course_title=course_title,
-            passing_score=passing_score,
-            scoring_algorithm=scoring_algorithm,
-            standard=standard,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.download_lms_package(
+                user_id,
+                video_id,
+                completion_threshold=completion_threshold,
+                course_title=course_title,
+                passing_score=passing_score,
+                scoring_algorithm=scoring_algorithm,
+                standard=standard,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> UsersLmsWithRawResponse:
@@ -106,7 +111,8 @@ class AsyncUsersLms:
                 ``aicc`` - The standard is AICC. * ``cmi5`` - The standard is cmi5. * ``scorm12`` - The standard is
                 SCORM 1.2. * ``scorm2004_3rd`` - The standard is SCORM 2004 3rd Edition. * ``tincan`` - The standard is
                 Tin Can or xAPI.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The zipped proxy package was created and returned.
@@ -114,7 +120,7 @@ class AsyncUsersLms:
         Raises:
             ApiError: Error code 2204: The input is invalid. Error code 5000: No such resource exists. Error code 1004:
                 An error occurred creating the proxy package. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.download_lms_package(
                 user_id,
                 video_id,
@@ -124,8 +130,8 @@ class AsyncUsersLms:
                 scoring_algorithm=scoring_algorithm,
                 standard=standard,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncUsersLmsWithRawResponse:
@@ -161,7 +167,8 @@ class UsersLmsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
                 ``aicc`` - The standard is AICC. * ``cmi5`` - The standard is cmi5. * ``scorm12`` - The standard is
                 SCORM 1.2. * ``scorm2004_3rd`` - The standard is SCORM 2004 3rd Edition. * ``tincan`` - The standard is
                 Tin Can or xAPI.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -214,7 +221,8 @@ class AsyncUsersLmsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
                 ``aicc`` - The standard is AICC. * ``cmi5`` - The standard is cmi5. * ``scorm12`` - The standard is
                 SCORM 1.2. * ``scorm2004_3rd`` - The standard is SCORM 2004 3rd Edition. * ``tincan`` - The standard is
                 Tin Can or xAPI.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -232,7 +240,7 @@ class AsyncUsersLmsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=download_lms_package_error_mapper,
             request_options=request_options,
         )

@@ -13,4 +13,4 @@ class Metadata29(SdkBaseModel):
 
 
 class Metadata29Dict(TypedDict):
-    connections: Connections27 | Connections27Dict
+    connections: Connections27Dict

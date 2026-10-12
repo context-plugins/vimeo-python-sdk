@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final, TypeAlias
 
-from ..core import ErrorMapper, HttpResponse, RawError, decode_json
+from ..core import ErrorMapper, RawError, decode_json
 from ..models.legacy_error import LegacyError
 
 EditVideoErrorBody: TypeAlias = LegacyError | RawError
@@ -11,12 +11,12 @@ EditVideoErrorBody: TypeAlias = LegacyError | RawError
 
 @dataclass(frozen=True, slots=True)
 class _EditVideoError:
-    def map(self, response: HttpResponse) -> EditVideoErrorBody:
-        match response.status_code:
+    def map(self, status_code: int, content: bytes) -> EditVideoErrorBody:
+        match status_code:
             case 400 | 403:
-                return decode_json[LegacyError](response)
+                return decode_json[LegacyError](content)
             case _:
-                return RawError(response)
+                return RawError(status_code, content)
 
 
 edit_video_error_mapper: Final[ErrorMapper[EditVideoErrorBody]] = _EditVideoError()

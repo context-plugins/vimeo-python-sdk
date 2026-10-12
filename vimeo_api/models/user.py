@@ -149,18 +149,18 @@ class User(SdkBaseModel):
 
 
 class UserDict(TypedDict):
-    account_dictionary_quota: NotRequired[AccountDictionaryQuota | AccountDictionaryQuotaDict]
+    account_dictionary_quota: NotRequired[AccountDictionaryQuotaDict]
     age_verification_status: AgeVerificationStatusOrStr
-    ai_credits_quota: NotRequired[AiCreditsQuota | AiCreditsQuotaDict]
+    ai_credits_quota: NotRequired[AiCreditsQuotaDict]
     available_for_hire: bool
-    bandwidth: NotRequired[Bandwidth | BandwidthDict]
+    bandwidth: NotRequired[BandwidthDict]
     bio: NotRequired[str]
     can_work_remotely: bool
     capabilities: NotRequired[Any]
     clients: str
     content_filter: NotRequired[ContentFilterOrStr]
     created_time: str
-    drm_licenses_quota: NotRequired[DrmLicensesQuota | DrmLicensesQuotaDict]
+    drm_licenses_quota: NotRequired[DrmLicensesQuotaDict]
     gender: NotRequired[str]
     has_invalid_email: NotRequired[bool]
     is_expert: bool
@@ -168,21 +168,21 @@ class UserDict(TypedDict):
     last_video_upload_date: NotRequired[str]
     link: str
     live_localization_trial_expires_on: NotRequired[str]
-    lms_learner_seats_quota: NotRequired[LmsLearnerSeatsQuota | LmsLearnerSeatsQuotaDict]
+    lms_learner_seats_quota: NotRequired[LmsLearnerSeatsQuotaDict]
     location: NotRequired[str]
-    location_details: NotRequired[Location | LocationDict]
+    location_details: NotRequired[LocationDict]
     max_team_members: float
-    membership: Membership | MembershipDict
-    metadata: Metadata3 | Metadata3Dict
+    membership: MembershipDict
+    metadata: Metadata3Dict
     name: str
-    pictures: Picture | PictureDict
-    preferences: Preferences | PreferencesDict
+    pictures: PictureDict
+    preferences: PreferencesDict
     profile_discovery: bool
     requires_age_verification: bool
     resource_key: str
     short_bio: NotRequired[str]
-    skills: NotRequired[list[Skill | SkillDict]]
+    skills: NotRequired[list[SkillDict]]
     transcript_phrases_limit: NotRequired[float]
-    upload_quota: UploadQuota | UploadQuotaDict
+    upload_quota: UploadQuotaDict
     uri: str
-    websites: list[Website | WebsiteDict]
+    websites: list[WebsiteDict]

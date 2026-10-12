@@ -19,5 +19,5 @@ class ComposerScenesConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[ComposerScenes | ComposerScenesDict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[ComposerScenesDict]]

@@ -121,9 +121,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/albums/{album_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_showcase_videos(album_id: float, user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter10OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, password: str | None = None, per_page: float | None = None, query: str | None = None, sort: Sort21OrStr | None = None, weak_search: bool | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_showcase_videos(album_id: float, user_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter10OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, password: str | None = None, per_page: float | None = None, query: str | None = None, sort: Sort21OrStr | None = None, weak_search: bool | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `album_id`, `user_id`
-- **Params**: `album_id` — path · `user_id` — path · `containing_uri` — query · `direction` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `password` — query · `per_page` — query · `query` — query · `sort` — query · `weak_search` — query
+- **Params**: `album_id` — path · `user_id` — path · `containing_uri` — query · `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `password` — query · `per_page` — query · `query` — query · `sort` — query · `weak_search` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetShowcaseVideosErrorBody]`
 - **Error**: `GetShowcaseVideosErrorBody` — **Case A (typed)**
@@ -142,9 +142,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/albums/{album_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_showcase_videos_alt2(album_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter: Filter10OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, password: str | None = None, per_page: float | None = None, query: str | None = None, sort: Sort21OrStr | None = None, weak_search: bool | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_showcase_videos_alt2(album_id: float, *, containing_uri: str | None = None, direction: DirectionOrStr | None = None, filter_: Filter10OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, password: str | None = None, per_page: float | None = None, query: str | None = None, sort: Sort21OrStr | None = None, weak_search: bool | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `album_id`
-- **Params**: `album_id` — path · `containing_uri` — query · `direction` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `password` — query · `per_page` — query · `query` — query · `sort` — query · `weak_search` — query
+- **Params**: `album_id` — path · `containing_uri` — query · `direction` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `password` — query · `per_page` — query · `query` — query · `sort` — query · `weak_search` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, GetShowcaseVideosAlt2ErrorBody]`
 - **Error**: `GetShowcaseVideosAlt2ErrorBody` — **Case A (typed)**

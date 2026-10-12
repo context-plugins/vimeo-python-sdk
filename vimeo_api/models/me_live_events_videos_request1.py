@@ -12,4 +12,4 @@ class MeLiveEventsVideosRequest1(SdkBaseModel):
 
 
 class MeLiveEventsVideosRequest1Dict(TypedDict):
-    videos: NotRequired[list[Videos17 | Videos17Dict]]
+    videos: NotRequired[list[Videos17Dict]]

@@ -45,7 +45,7 @@ class LiveEventOccurrence(SdkBaseModel):
 
 class LiveEventOccurrenceDict(TypedDict):
     end_time: str | None
-    event: RecurringEvent | RecurringEventDict | None
+    event: RecurringEventDict | None
     event_title: str
     event_type: str
     event_uri: str

@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.clip_trim_error import ClipTrimErrorBody, clip_trim_error_mapper
 from ..models.trimmed_video import TrimmedVideo
@@ -37,7 +39,8 @@ class VideosNondestructiveTrimming:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The trim operation was started.
@@ -45,7 +48,7 @@ class VideosNondestructiveTrimming:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3411: The authenticated user is
                 unverified. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.clip_trim(video_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.clip_trim(video_id, body=body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> VideosNondestructiveTrimmingWithRawResponse:
@@ -68,7 +71,8 @@ class AsyncVideosNondestructiveTrimming:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The trim operation was started.
@@ -76,7 +80,7 @@ class AsyncVideosNondestructiveTrimming:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3411: The authenticated user is
                 unverified. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.clip_trim(video_id, body=body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.clip_trim(video_id, body=body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncVideosNondestructiveTrimmingWithRawResponse:
@@ -96,7 +100,8 @@ class VideosNondestructiveTrimmingWithRawResponse(SecuredRawResponse[RawClient, 
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -128,7 +133,8 @@ class AsyncVideosNondestructiveTrimmingWithRawResponse(SecuredRawResponse[AsyncR
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -141,7 +147,7 @@ class AsyncVideosNondestructiveTrimmingWithRawResponse(SecuredRawResponse[AsyncR
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TrimmedVideo],
+            decoder=async_json_decoder[TrimmedVideo],
             error_mapper=clip_trim_error_mapper,
             request_options=request_options,
         )

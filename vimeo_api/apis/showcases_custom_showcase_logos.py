@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_showcase_logo_error import CreateShowcaseLogoErrorBody, create_showcase_logo_error_mapper
 from ..errors.delete_showcase_logo_error import DeleteShowcaseLogoErrorBody, delete_showcase_logo_error_mapper
@@ -43,7 +46,8 @@ class ShowcasesCustomShowcaseLogos:
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The logo was added to the showcase.
@@ -51,7 +55,7 @@ class ShowcasesCustomShowcaseLogos:
         Raises:
             ApiError: The authenticated user can't add custom logos to this showcase. No such showcase exists. ``error``
                 is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_showcase_logo(album_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_showcase_logo(album_id, user_id, request_options=request_options))
 
     def delete_showcase_logo(
         self, album_id: float, logo_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -63,7 +67,8 @@ class ShowcasesCustomShowcaseLogos:
             album_id: The ID of the showcase.
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was deleted.
@@ -71,9 +76,9 @@ class ShowcasesCustomShowcaseLogos:
         Raises:
             ApiError: The authenticated user can't delete this custom logo. No such showcase exists, or it doesn't
                 contain the specified custom logo. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_showcase_logo(
-            album_id, logo_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_showcase_logo(album_id, logo_id, user_id, request_options=request_options)
+        )
 
     def get_showcase_logo(
         self, album_id: float, logo_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -85,7 +90,8 @@ class ShowcasesCustomShowcaseLogos:
             album_id: The ID of the showcase.
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was returned.
@@ -93,9 +99,9 @@ class ShowcasesCustomShowcaseLogos:
         Raises:
             ApiError: The authenticated user can't access this custom logo. No such showcase exists, or it doesn't
                 contain the specified custom logo. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_showcase_logo(
-            album_id, logo_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcase_logo(album_id, logo_id, user_id, request_options=request_options)
+        )
 
     def get_showcase_logos(
         self,
@@ -114,16 +120,19 @@ class ShowcasesCustomShowcaseLogos:
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logos were returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_showcase_logos(
-            album_id, user_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_showcase_logos(
+                album_id, user_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def replace_showcase_logo(
         self,
@@ -145,7 +154,8 @@ class ShowcasesCustomShowcaseLogos:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was replaced.
@@ -153,9 +163,11 @@ class ShowcasesCustomShowcaseLogos:
         Raises:
             ApiError: The authenticated user can't replace this custom logo. No such showcase exists, or it doesn't
                 contain the specified custom logo. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.replace_showcase_logo(
-            album_id, logo_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.replace_showcase_logo(
+                album_id, logo_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> ShowcasesCustomShowcaseLogosWithRawResponse:
@@ -178,7 +190,8 @@ class AsyncShowcasesCustomShowcaseLogos:
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The logo was added to the showcase.
@@ -186,9 +199,9 @@ class AsyncShowcasesCustomShowcaseLogos:
         Raises:
             ApiError: The authenticated user can't add custom logos to this showcase. No such showcase exists. ``error``
                 is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_showcase_logo(album_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_showcase_logo(
         self, album_id: float, logo_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -200,7 +213,8 @@ class AsyncShowcasesCustomShowcaseLogos:
             album_id: The ID of the showcase.
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was deleted.
@@ -208,11 +222,11 @@ class AsyncShowcasesCustomShowcaseLogos:
         Raises:
             ApiError: The authenticated user can't delete this custom logo. No such showcase exists, or it doesn't
                 contain the specified custom logo. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_showcase_logo(
                 album_id, logo_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_showcase_logo(
         self, album_id: float, logo_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -224,7 +238,8 @@ class AsyncShowcasesCustomShowcaseLogos:
             album_id: The ID of the showcase.
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was returned.
@@ -232,9 +247,9 @@ class AsyncShowcasesCustomShowcaseLogos:
         Raises:
             ApiError: The authenticated user can't access this custom logo. No such showcase exists, or it doesn't
                 contain the specified custom logo. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcase_logo(album_id, logo_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_showcase_logos(
         self,
@@ -253,18 +268,19 @@ class AsyncShowcasesCustomShowcaseLogos:
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logos were returned.
 
         Raises:
             ApiError: No such showcase exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_showcase_logos(
                 album_id, user_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def replace_showcase_logo(
         self,
@@ -286,7 +302,8 @@ class AsyncShowcasesCustomShowcaseLogos:
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom logo was replaced.
@@ -294,11 +311,11 @@ class AsyncShowcasesCustomShowcaseLogos:
         Raises:
             ApiError: The authenticated user can't replace this custom logo. No such showcase exists, or it doesn't
                 contain the specified custom logo. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.replace_showcase_logo(
                 album_id, logo_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncShowcasesCustomShowcaseLogosWithRawResponse:
@@ -318,7 +335,8 @@ class ShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[RawClient, 
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -345,7 +363,8 @@ class ShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[RawClient, 
             album_id: The ID of the showcase.
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -374,7 +393,8 @@ class ShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[RawClient, 
             album_id: The ID of the showcase.
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -409,7 +429,8 @@ class ShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[RawClient, 
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -446,7 +467,8 @@ class ShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[RawClient, 
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -480,7 +502,8 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
         Args:
             album_id: The ID of the showcase.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -492,7 +515,7 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_showcase_logo_error_mapper,
             request_options=request_options,
         )
@@ -507,7 +530,8 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
             album_id: The ID of the showcase.
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -521,7 +545,7 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_showcase_logo_error_mapper,
             request_options=request_options,
         )
@@ -536,7 +560,8 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
             album_id: The ID of the showcase.
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -549,7 +574,7 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_showcase_logo_error_mapper,
             request_options=request_options,
         )
@@ -571,7 +596,8 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -583,7 +609,7 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=get_showcase_logos_error_mapper,
             request_options=request_options,
         )
@@ -608,7 +634,8 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
             logo_id: The ID of the custom logo.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -623,7 +650,7 @@ class AsyncShowcasesCustomShowcaseLogosWithRawResponse(SecuredRawResponse[AsyncR
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=replace_showcase_logo_error_mapper,
             request_options=request_options,
         )

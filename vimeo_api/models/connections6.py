@@ -22,6 +22,6 @@ class Connections6(SdkBaseModel):
 
 
 class Connections6Dict(TypedDict):
-    requested_clip: RequestedClip | RequestedClipDict
-    users: Users2 | Users2Dict
-    videos: Videos6 | Videos6Dict
+    requested_clip: RequestedClipDict
+    users: Users2Dict
+    videos: Videos6Dict

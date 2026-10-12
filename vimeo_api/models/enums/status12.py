@@ -4,26 +4,21 @@ from typing import Annotated, TypeAlias
 from ...core import open_enum_validator
 
 
-class Status12(int, Enum):
-    """The ingest status of the live video.
+class Status12(str, Enum):
+    """The status of the pre-live video's RTMP link.
 
     Option descriptions:
-     * ``0`` - There’s a live video, but no RMTP URL or key.
-     * ``1`` - There’s an RMTP URL and key, but the machine is provisioning.
-     * ``2`` - There’s an RMTP URL and key, and the machine is provisioned, but the stream hasn’t started yet.
-     * ``3`` - There’s an RMTP URL and key, and the machine is provisioned, but the stream didn’t start before the
-            machine timed out.
-     * ``4`` - The stream has started and is currently underway.
-     * ``5`` - The stream has ended."""
+     * ``pending`` - Vimeo is working on setting up the connection.
+     * ``ready`` - Resources have been provisioned for the event.
+     * ``streaming`` - Live video is currently streaming to the RTMP link.
+     * ``unavailable`` - The connection is ready, but streaming to the RTMP link has not yet begun."""
 
-    VALUE_0 = 0
-    VALUE_1 = 1
-    VALUE_2 = 2
-    VALUE_3 = 3
-    VALUE_4 = 4
-    VALUE_5 = 5
+    PENDING = "pending"
+    READY = "ready"
+    STREAMING = "streaming"
+    UNAVAILABLE = "unavailable"
 
     __str__ = str.__str__
 
 
-Status12OrInt: TypeAlias = Annotated[Status12 | int, open_enum_validator(Status12)]
+Status12OrStr: TypeAlias = Annotated[Status12 | str, open_enum_validator(Status12)]

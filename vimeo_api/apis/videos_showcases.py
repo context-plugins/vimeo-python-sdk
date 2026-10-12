@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_or_remove_multiple_albums_error import (
     AddOrRemoveMultipleAlbumsErrorBody,
@@ -42,16 +44,17 @@ class VideosShowcases:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added or removed.
 
         Raises:
             ApiError: Error code 3433: No such video exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_or_remove_multiple_albums(
-            video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_or_remove_multiple_albums(video_id, body=body, request_options=request_options)
+        )
 
     def get_video_albums(
         self,
@@ -67,7 +70,8 @@ class VideosShowcases:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcases were returned.
@@ -75,9 +79,11 @@ class VideosShowcases:
         Raises:
             ApiError: * Error code 3433: No such video exists. * Error code 5451: This resource is restricted in your
                 region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_video_albums(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_albums(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosShowcasesWithRawResponse:
@@ -100,18 +106,19 @@ class AsyncVideosShowcases:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added or removed.
 
         Raises:
             ApiError: Error code 3433: No such video exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_or_remove_multiple_albums(
                 video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_video_albums(
         self,
@@ -127,7 +134,8 @@ class AsyncVideosShowcases:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The showcases were returned.
@@ -135,11 +143,11 @@ class AsyncVideosShowcases:
         Raises:
             ApiError: * Error code 3433: No such video exists. * Error code 5451: This resource is restricted in your
                 region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_albums(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosShowcasesWithRawResponse:
@@ -159,7 +167,8 @@ class VideosShowcasesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -191,7 +200,8 @@ class VideosShowcasesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -222,7 +232,8 @@ class AsyncVideosShowcasesWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -235,7 +246,7 @@ class AsyncVideosShowcasesWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[Album]],
+            decoder=async_json_decoder[list[Album]],
             error_mapper=add_or_remove_multiple_albums_error_mapper,
             request_options=request_options,
         )
@@ -254,7 +265,8 @@ class AsyncVideosShowcasesWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -266,7 +278,7 @@ class AsyncVideosShowcasesWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AlbumConnection],
+            decoder=async_json_decoder[AlbumConnection],
             error_mapper=get_video_albums_error_mapper,
             request_options=request_options,
         )

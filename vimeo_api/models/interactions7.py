@@ -60,14 +60,14 @@ class Interactions7(SdkBaseModel):
 
 
 class Interactions7Dict(TypedDict):
-    add_custom_thumbnails: AddCustomThumbnails | AddCustomThumbnailsDict
-    add_live_events: AddLiveEvents | AddLiveEventsDict
-    add_logos: AddLogos | AddLogosDict
-    add_to: AddTo1 | AddTo1Dict | None
-    add_videos: AddVideos | AddVideosDict
-    can_update_privacy_to_public: CanUpdatePrivacyToPublic1 | CanUpdatePrivacyToPublic1Dict
-    delete: Delete2 | Delete2Dict | None
-    edit: Edit2 | Edit2Dict | None
-    edit_live_events: EditLiveEvents | EditLiveEventsDict
-    invite: Invite3 | Invite3Dict | None
-    view_privacy: ViewPrivacy1 | ViewPrivacy1Dict | None
+    add_custom_thumbnails: AddCustomThumbnailsDict
+    add_live_events: AddLiveEventsDict
+    add_logos: AddLogosDict
+    add_to: AddTo1Dict | None
+    add_videos: AddVideosDict
+    can_update_privacy_to_public: CanUpdatePrivacyToPublic1Dict
+    delete: Delete2Dict | None
+    edit: Edit2Dict | None
+    edit_live_events: EditLiveEventsDict
+    invite: Invite3Dict | None
+    view_privacy: ViewPrivacy1Dict | None

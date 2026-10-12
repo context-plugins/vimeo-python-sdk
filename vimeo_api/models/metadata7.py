@@ -14,4 +14,4 @@ class Metadata7(SdkBaseModel):
 
 
 class Metadata7Dict(TypedDict):
-    connections: Connections7 | Connections7Dict
+    connections: Connections7Dict

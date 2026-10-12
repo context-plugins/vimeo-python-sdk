@@ -4,7 +4,7 @@ from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
 from .animated_thumbnail import AnimatedThumbnail, AnimatedThumbnailDict
-from .enums.status9 import Status9OrStr
+from .enums.status10 import Status10OrStr
 
 
 class AnimatedThumbset(SdkBaseModel):
@@ -17,7 +17,7 @@ class AnimatedThumbset(SdkBaseModel):
     sizes: list[AnimatedThumbnail]
     """An array of all the animated thumbnails in the set."""
 
-    status: Status9OrStr
+    status: Status10OrStr
     """The availability of the animated thumbnail.
 
     Option descriptions:
@@ -33,6 +33,6 @@ class AnimatedThumbset(SdkBaseModel):
 class AnimatedThumbsetDict(TypedDict):
     clip_uri: str
     created_on: str
-    sizes: list[AnimatedThumbnail | AnimatedThumbnailDict]
-    status: Status9OrStr
+    sizes: list[AnimatedThumbnailDict]
+    status: Status10OrStr
     uri: str

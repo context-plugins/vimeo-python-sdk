@@ -15,4 +15,4 @@ class VideosVersionsRequest(SdkBaseModel):
 
 class VideosVersionsRequestDict(TypedDict):
     file_name: str
-    upload: Upload4 | Upload4Dict
+    upload: Upload4Dict

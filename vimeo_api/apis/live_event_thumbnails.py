@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_live_event_thumbnail_alt1_error import (
     CreateLiveEventThumbnailAlt1ErrorBody,
@@ -109,7 +112,8 @@ class LiveEventThumbnails:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was created.
@@ -118,9 +122,11 @@ class LiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnails for the event. * Error code
                 3422: The authenticated user can't create a thumbnail for the event. Error code 5000: No such event or
                 user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_live_event_thumbnail(
-            live_event_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_live_event_thumbnail(
+                live_event_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     def create_live_event_thumbnail_alt1(
         self,
@@ -134,7 +140,8 @@ class LiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was created.
@@ -143,9 +150,11 @@ class LiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnails for the event. * Error code
                 3422: The authenticated user can't create a thumbnail for the event. Error code 5000: No such event or
                 user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_live_event_thumbnail_alt1(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_live_event_thumbnail_alt1(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     def create_live_event_thumbnail_alt2(
         self,
@@ -159,7 +168,8 @@ class LiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was created.
@@ -168,9 +178,11 @@ class LiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnails for the event. * Error code
                 3422: The authenticated user can't create a thumbnail for the event. Error code 5000: No such event or
                 user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_live_event_thumbnail_alt2(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_live_event_thumbnail_alt2(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     def delete_live_event_thumbnail(
         self,
@@ -186,7 +198,8 @@ class LiveEventThumbnails:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was deleted.
@@ -195,9 +208,11 @@ class LiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnail for the event. * Error code
                 3422: The authenticated user can't delete the thumbnail. Error code 5000: No such event, thumbnail, or
                 user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_live_event_thumbnail(
-            live_event_id, thumbnail_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_live_event_thumbnail(
+                live_event_id, thumbnail_id, user_id, request_options=request_options
+            ),
+        )
 
     def delete_live_event_thumbnail_alt1(
         self, live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -207,7 +222,8 @@ class LiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was deleted.
@@ -216,9 +232,11 @@ class LiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnail for the event. * Error code
                 3422: The authenticated user can't delete the thumbnail. Error code 5000: No such event, thumbnail, or
                 user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_live_event_thumbnail_alt1(
-            live_event_id, thumbnail_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_live_event_thumbnail_alt1(
+                live_event_id, thumbnail_id, request_options=request_options
+            ),
+        )
 
     def delete_live_event_thumbnail_alt2(
         self, live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -228,7 +246,8 @@ class LiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was deleted.
@@ -237,9 +256,11 @@ class LiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnail for the event. * Error code
                 3422: The authenticated user can't delete the thumbnail. Error code 5000: No such event, thumbnail, or
                 user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_live_event_thumbnail_alt2(
-            live_event_id, thumbnail_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_live_event_thumbnail_alt2(
+                live_event_id, thumbnail_id, request_options=request_options
+            ),
+        )
 
     def edit_live_event_thumbnail(
         self,
@@ -257,7 +278,8 @@ class LiveEventThumbnails:
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was edited.
@@ -266,9 +288,11 @@ class LiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't update the thumbnail for the event. * Error code
                 3422: The authenticated user can't edit the thumbnail of the event. Error code 5000: No such event,
                 thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.edit_live_event_thumbnail(
-            live_event_id, thumbnail_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_live_event_thumbnail(
+                live_event_id, thumbnail_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     def edit_live_event_thumbnail_alt1(
         self,
@@ -284,7 +308,8 @@ class LiveEventThumbnails:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was edited.
@@ -293,9 +318,11 @@ class LiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't update the thumbnail for the event. * Error code
                 3422: The authenticated user can't edit the thumbnail of the event. Error code 5000: No such event,
                 thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.edit_live_event_thumbnail_alt1(
-            live_event_id, thumbnail_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_live_event_thumbnail_alt1(
+                live_event_id, thumbnail_id, body=body, request_options=request_options
+            ),
+        )
 
     def edit_live_event_thumbnail_alt2(
         self,
@@ -311,7 +338,8 @@ class LiveEventThumbnails:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was edited.
@@ -320,9 +348,11 @@ class LiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't update the thumbnail for the event. * Error code
                 3422: The authenticated user can't edit the thumbnail of the event. Error code 5000: No such event,
                 thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.edit_live_event_thumbnail_alt2(
-            live_event_id, thumbnail_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_live_event_thumbnail_alt2(
+                live_event_id, thumbnail_id, body=body, request_options=request_options
+            ),
+        )
 
     def get_live_event_thumbnail(
         self,
@@ -338,7 +368,8 @@ class LiveEventThumbnails:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was returned.
@@ -346,9 +377,11 @@ class LiveEventThumbnails:
         Raises:
             ApiError: Error code 3200: The authenticated user can't access the thumbnail. Error code 5000: No such
                 event, thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_thumbnail(
-            live_event_id, thumbnail_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_thumbnail(
+                live_event_id, thumbnail_id, user_id, request_options=request_options
+            ),
+        )
 
     def get_live_event_thumbnail_alt1(
         self, live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -358,7 +391,8 @@ class LiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was returned.
@@ -366,9 +400,11 @@ class LiveEventThumbnails:
         Raises:
             ApiError: Error code 3200: The authenticated user can't access the thumbnail. Error code 5000: No such
                 event, thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_thumbnail_alt1(
-            live_event_id, thumbnail_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_thumbnail_alt1(
+                live_event_id, thumbnail_id, request_options=request_options
+            ),
+        )
 
     def get_live_event_thumbnail_alt2(
         self, live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -378,7 +414,8 @@ class LiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was returned.
@@ -386,9 +423,11 @@ class LiveEventThumbnails:
         Raises:
             ApiError: Error code 3200: The authenticated user can't access the thumbnail. Error code 5000: No such
                 event, thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_thumbnail_alt2(
-            live_event_id, thumbnail_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_thumbnail_alt2(
+                live_event_id, thumbnail_id, request_options=request_options
+            ),
+        )
 
     def get_live_event_thumbnails(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -398,16 +437,17 @@ class LiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_thumbnails(
-            live_event_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_thumbnails(live_event_id, user_id, request_options=request_options)
+        )
 
     def get_live_event_thumbnails_alt1(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -416,16 +456,17 @@ class LiveEventThumbnails:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_thumbnails_alt1(
-            live_event_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_thumbnails_alt1(live_event_id, request_options=request_options)
+        )
 
     def get_live_event_thumbnails_alt2(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -434,16 +475,17 @@ class LiveEventThumbnails:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_thumbnails_alt2(
-            live_event_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_thumbnails_alt2(live_event_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> LiveEventThumbnailsWithRawResponse:
@@ -468,7 +510,8 @@ class AsyncLiveEventThumbnails:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was created.
@@ -477,11 +520,11 @@ class AsyncLiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnails for the event. * Error code
                 3422: The authenticated user can't create a thumbnail for the event. Error code 5000: No such event or
                 user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_live_event_thumbnail(
                 live_event_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_live_event_thumbnail_alt1(
         self,
@@ -495,7 +538,8 @@ class AsyncLiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was created.
@@ -504,11 +548,11 @@ class AsyncLiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnails for the event. * Error code
                 3422: The authenticated user can't create a thumbnail for the event. Error code 5000: No such event or
                 user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_live_event_thumbnail_alt1(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_live_event_thumbnail_alt2(
         self,
@@ -522,7 +566,8 @@ class AsyncLiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was created.
@@ -531,11 +576,11 @@ class AsyncLiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnails for the event. * Error code
                 3422: The authenticated user can't create a thumbnail for the event. Error code 5000: No such event or
                 user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_live_event_thumbnail_alt2(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_live_event_thumbnail(
         self,
@@ -551,7 +596,8 @@ class AsyncLiveEventThumbnails:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was deleted.
@@ -560,11 +606,11 @@ class AsyncLiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnail for the event. * Error code
                 3422: The authenticated user can't delete the thumbnail. Error code 5000: No such event, thumbnail, or
                 user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_live_event_thumbnail(
                 live_event_id, thumbnail_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_live_event_thumbnail_alt1(
         self, live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -574,7 +620,8 @@ class AsyncLiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was deleted.
@@ -583,11 +630,11 @@ class AsyncLiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnail for the event. * Error code
                 3422: The authenticated user can't delete the thumbnail. Error code 5000: No such event, thumbnail, or
                 user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_live_event_thumbnail_alt1(
                 live_event_id, thumbnail_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_live_event_thumbnail_alt2(
         self, live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -597,7 +644,8 @@ class AsyncLiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was deleted.
@@ -606,11 +654,11 @@ class AsyncLiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't delete the thumbnail for the event. * Error code
                 3422: The authenticated user can't delete the thumbnail. Error code 5000: No such event, thumbnail, or
                 user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_live_event_thumbnail_alt2(
                 live_event_id, thumbnail_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_live_event_thumbnail(
         self,
@@ -628,7 +676,8 @@ class AsyncLiveEventThumbnails:
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was edited.
@@ -637,11 +686,11 @@ class AsyncLiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't update the thumbnail for the event. * Error code
                 3422: The authenticated user can't edit the thumbnail of the event. Error code 5000: No such event,
                 thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_live_event_thumbnail(
                 live_event_id, thumbnail_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_live_event_thumbnail_alt1(
         self,
@@ -657,7 +706,8 @@ class AsyncLiveEventThumbnails:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was edited.
@@ -666,11 +716,11 @@ class AsyncLiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't update the thumbnail for the event. * Error code
                 3422: The authenticated user can't edit the thumbnail of the event. Error code 5000: No such event,
                 thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_live_event_thumbnail_alt1(
                 live_event_id, thumbnail_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_live_event_thumbnail_alt2(
         self,
@@ -686,7 +736,8 @@ class AsyncLiveEventThumbnails:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was edited.
@@ -695,11 +746,11 @@ class AsyncLiveEventThumbnails:
             ApiError: * Error code 3200: The authenticated user can't update the thumbnail for the event. * Error code
                 3422: The authenticated user can't edit the thumbnail of the event. Error code 5000: No such event,
                 thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_live_event_thumbnail_alt2(
                 live_event_id, thumbnail_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_thumbnail(
         self,
@@ -715,7 +766,8 @@ class AsyncLiveEventThumbnails:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was returned.
@@ -723,11 +775,11 @@ class AsyncLiveEventThumbnails:
         Raises:
             ApiError: Error code 3200: The authenticated user can't access the thumbnail. Error code 5000: No such
                 event, thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_thumbnail(
                 live_event_id, thumbnail_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_thumbnail_alt1(
         self, live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -737,7 +789,8 @@ class AsyncLiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was returned.
@@ -745,11 +798,11 @@ class AsyncLiveEventThumbnails:
         Raises:
             ApiError: Error code 3200: The authenticated user can't access the thumbnail. Error code 5000: No such
                 event, thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_thumbnail_alt1(
                 live_event_id, thumbnail_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_thumbnail_alt2(
         self, live_event_id: float, thumbnail_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -759,7 +812,8 @@ class AsyncLiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was returned.
@@ -767,11 +821,11 @@ class AsyncLiveEventThumbnails:
         Raises:
             ApiError: Error code 3200: The authenticated user can't access the thumbnail. Error code 5000: No such
                 event, thumbnail, or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_thumbnail_alt2(
                 live_event_id, thumbnail_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_thumbnails(
         self, live_event_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -781,18 +835,19 @@ class AsyncLiveEventThumbnails:
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_thumbnails(
                 live_event_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_thumbnails_alt1(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -801,16 +856,17 @@ class AsyncLiveEventThumbnails:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_thumbnails_alt1(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_live_event_thumbnails_alt2(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -819,16 +875,17 @@ class AsyncLiveEventThumbnails:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_thumbnails_alt2(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveEventThumbnailsWithRawResponse:
@@ -850,7 +907,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -880,7 +938,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -910,7 +969,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -942,7 +1002,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -971,7 +1032,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -996,7 +1058,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1029,7 +1092,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1067,7 +1131,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1099,7 +1164,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1131,7 +1197,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1159,7 +1226,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1183,7 +1251,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1207,7 +1276,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1230,7 +1300,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1253,7 +1324,8 @@ class LiveEventThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1285,7 +1357,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1298,7 +1371,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_live_event_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -1315,7 +1388,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1328,7 +1402,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_live_event_thumbnail_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1345,7 +1419,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1358,7 +1433,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=create_live_event_thumbnail_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1377,7 +1452,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1393,7 +1469,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_event_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -1406,7 +1482,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1418,7 +1495,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_event_thumbnail_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1431,7 +1508,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1443,7 +1521,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_live_event_thumbnail_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1464,7 +1542,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1483,7 +1562,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=edit_live_event_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -1502,7 +1581,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1515,7 +1595,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=edit_live_event_thumbnail_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1534,7 +1614,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1547,7 +1628,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=edit_live_event_thumbnail_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1566,7 +1647,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1581,7 +1663,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_live_event_thumbnail_error_mapper,
             request_options=request_options,
         )
@@ -1594,7 +1676,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1605,7 +1688,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_live_event_thumbnail_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1618,7 +1701,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             thumbnail_id: The ID of the thumbnail.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1629,7 +1713,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=get_live_event_thumbnail_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1642,7 +1726,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1653,7 +1738,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=get_live_event_thumbnails_error_mapper,
             request_options=request_options,
         )
@@ -1665,7 +1750,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1676,7 +1762,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=get_live_event_thumbnails_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1688,7 +1774,8 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1699,7 +1786,7 @@ class AsyncLiveEventThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=get_live_event_thumbnails_alt2_error_mapper,
             request_options=request_options,
         )

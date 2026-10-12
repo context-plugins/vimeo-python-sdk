@@ -12,4 +12,4 @@ class Connections27(SdkBaseModel):
 
 
 class Connections27Dict(TypedDict):
-    video: Video3 | Video3Dict
+    video: Video3Dict

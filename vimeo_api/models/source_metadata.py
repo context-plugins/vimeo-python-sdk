@@ -25,7 +25,7 @@ class SourceMetadata(SdkBaseModel):
 
 
 class SourceMetadataDict(TypedDict):
-    audio: Audio | AudioDict | None
+    audio: AudioDict | None
     display_filetype: str | None
     filetype: str | None
-    video: Video4 | Video4Dict | None
+    video: Video4Dict | None

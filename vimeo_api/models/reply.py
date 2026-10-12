@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from typing import Literal
-
 from pydantic import Field
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
+from .enums.type13 import Type13OrStr
 from .metadata14 import Metadata14, Metadata14Dict
 from .text_decoration import TextDecoration, TextDecorationDict
 
@@ -36,7 +35,7 @@ class Reply(SdkBaseModel):
     text_decorations: list[TextDecoration]
     """An array of text decorations for the note."""
 
-    type_: Literal["video"] = Field(default="video", alias="type")
+    type_: Type13OrStr = Field(alias="type")
     """The Vimeo content to which the reply relates.
 
     Option descriptions:
@@ -51,10 +50,10 @@ class ReplyDict(TypedDict):
     deleted_on: str | None
     last_edited_on: str | None
     link: str
-    metadata: Metadata14 | Metadata14Dict
+    metadata: Metadata14Dict
     resource_key: str
     richtext: str | None
     text: str
-    text_decorations: list[TextDecoration | TextDecorationDict]
-    type_: NotRequired[Literal["video"]]
+    text_decorations: list[TextDecorationDict]
+    type_: Type13OrStr
     uri: str

@@ -9,8 +9,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_category_groups_error import GetCategoryGroupsErrorBody, get_category_groups_error_mapper
 from ..models.enums.direction import DirectionOrStr
@@ -46,22 +48,25 @@ class CategoriesGroups:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``members`` - Sort the results by number of
                 members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The groups were returned.
 
         Raises:
             ApiError: No such category exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_category_groups(
-            category,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_category_groups(
+                category,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> CategoriesGroupsWithRawResponse:
@@ -95,14 +100,15 @@ class AsyncCategoriesGroups:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``members`` - Sort the results by number of
                 members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The groups were returned.
 
         Raises:
             ApiError: No such category exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_category_groups(
                 category,
                 direction=direction,
@@ -111,8 +117,8 @@ class AsyncCategoriesGroups:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncCategoriesGroupsWithRawResponse:
@@ -143,7 +149,8 @@ class CategoriesGroupsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``members`` - Sort the results by number of
                 members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -191,7 +198,8 @@ class AsyncCategoriesGroupsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date. * ``members`` - Sort the results by number of
                 members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -209,7 +217,7 @@ class AsyncCategoriesGroupsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[GroupConnection],
+            decoder=async_json_decoder[GroupConnection],
             error_mapper=get_category_groups_error_mapper,
             request_options=request_options,
         )

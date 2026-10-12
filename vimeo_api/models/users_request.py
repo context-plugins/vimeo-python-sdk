@@ -49,4 +49,4 @@ class UsersRequestDict(TypedDict):
     location: NotRequired[str]
     name: NotRequired[str]
     password: NotRequired[str]
-    videos: NotRequired[Videos18 | Videos18Dict]
+    videos: NotRequired[Videos18Dict]

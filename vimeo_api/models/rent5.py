@@ -11,4 +11,4 @@ class Rent5(SdkBaseModel):
 
 
 class Rent5Dict(TypedDict):
-    price: NotRequired[Price8 | Price8Dict]
+    price: NotRequired[Price8Dict]

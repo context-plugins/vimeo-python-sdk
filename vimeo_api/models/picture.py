@@ -45,6 +45,6 @@ class PictureDict(TypedDict):
     default_picture: bool
     link: NotRequired[str]
     resource_key: str
-    sizes: list[Size | SizeDict]
+    sizes: list[SizeDict]
     type_: TypeOrStr
     uri: str

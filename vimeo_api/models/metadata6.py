@@ -18,5 +18,5 @@ class Metadata6(SdkBaseModel):
 
 
 class Metadata6Dict(TypedDict):
-    connections: Connections6 | Connections6Dict
-    interactions: Interactions5 | Interactions5Dict
+    connections: Connections6Dict
+    interactions: Interactions5Dict

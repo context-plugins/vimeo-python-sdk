@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.backfill_team_custom_metadata_error import (
     BackfillTeamCustomMetadataErrorBody,
@@ -80,7 +83,8 @@ class TeamsEssentials:
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The backfill request was accepted. The response includes the ``field_id`` and the ``total_videos`` snapshot
@@ -91,9 +95,9 @@ class TeamsEssentials:
                 doesn't match the field's data type. The authentication credentials are missing or invalid. The
                 authenticated user doesn't have permission to manage this team's metadata. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return self._with_raw_response.backfill_team_custom_metadata(
-            user_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.backfill_team_custom_metadata(user_id, body, request_options=request_options)
+        )
 
     def get_team_custom_metadata_incomplete_videos(
         self,
@@ -123,7 +127,8 @@ class TeamsEssentials:
                 ``modified_asc`` - Sort by last modified time, oldest first. * ``modified_desc`` - Sort by last modified
                 time, newest first. * ``title_asc`` - Sort by video title, ascending. * ``title_desc`` - Sort by video
                 title, descending.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of incomplete videos was returned. Each entry includes the video's ID, name, link, thumbnail URL,
@@ -134,9 +139,11 @@ class TeamsEssentials:
                 or ``sort`` isn't an allowed value). The authentication credentials are missing or invalid. The
                 authenticated user doesn't have permission to view this team's videos. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return self._with_raw_response.get_team_custom_metadata_incomplete_videos(
-            user_id, page=page, per_page=per_page, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_team_custom_metadata_incomplete_videos(
+                user_id, page=page, per_page=per_page, sort=sort, request_options=request_options
+            ),
+        )
 
     def get_team_custom_metadata_settings(
         self, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -153,7 +160,8 @@ class TeamsEssentials:
 
         Args:
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom metadata fields were returned.
@@ -162,9 +170,9 @@ class TeamsEssentials:
             ApiError: The authentication credentials are missing or invalid. The authenticated user doesn't have
                 permission to view this team's settings. Error code 5000: No such team exists. ``error`` is
                 ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.get_team_custom_metadata_settings(
-            user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_team_custom_metadata_settings(user_id, request_options=request_options)
+        )
 
     def update_custom_metadata_field_options(
         self,
@@ -199,7 +207,8 @@ class TeamsEssentials:
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The updated field definition was returned, including its new list of allowed values.
@@ -209,9 +218,9 @@ class TeamsEssentials:
                 operations contain a cascading rename, or the resulting option list would contain duplicates. The
                 authentication credentials are missing or invalid. The authenticated user doesn't have permission to
                 manage this team's metadata. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.update_custom_metadata_field_options(
-            user_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_custom_metadata_field_options(user_id, body, request_options=request_options)
+        )
 
     def upsert_custom_metadata_settings(
         self,
@@ -241,7 +250,8 @@ class TeamsEssentials:
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The updated set of custom metadata fields was returned.
@@ -251,9 +261,9 @@ class TeamsEssentials:
                 field, or attempts an operation that isn't allowed (such as changing a field's ``type``). The
                 authentication credentials are missing or invalid. The authenticated user doesn't have permission to
                 manage this team's settings. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.upsert_custom_metadata_settings(
-            user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.upsert_custom_metadata_settings(user_id, body=body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> TeamsEssentialsWithRawResponse:
@@ -289,7 +299,8 @@ class AsyncTeamsEssentials:
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The backfill request was accepted. The response includes the ``field_id`` and the ``total_videos`` snapshot
@@ -300,9 +311,9 @@ class AsyncTeamsEssentials:
                 doesn't match the field's data type. The authentication credentials are missing or invalid. The
                 authenticated user doesn't have permission to manage this team's metadata. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.backfill_team_custom_metadata(user_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_team_custom_metadata_incomplete_videos(
         self,
@@ -332,7 +343,8 @@ class AsyncTeamsEssentials:
                 ``modified_asc`` - Sort by last modified time, oldest first. * ``modified_desc`` - Sort by last modified
                 time, newest first. * ``title_asc`` - Sort by video title, ascending. * ``title_desc`` - Sort by video
                 title, descending.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of incomplete videos was returned. Each entry includes the video's ID, name, link, thumbnail URL,
@@ -343,11 +355,11 @@ class AsyncTeamsEssentials:
                 or ``sort`` isn't an allowed value). The authentication credentials are missing or invalid. The
                 authenticated user doesn't have permission to view this team's videos. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_team_custom_metadata_incomplete_videos(
                 user_id, page=page, per_page=per_page, sort=sort, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_team_custom_metadata_settings(
         self, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -364,7 +376,8 @@ class AsyncTeamsEssentials:
 
         Args:
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The custom metadata fields were returned.
@@ -373,9 +386,9 @@ class AsyncTeamsEssentials:
             ApiError: The authentication credentials are missing or invalid. The authenticated user doesn't have
                 permission to view this team's settings. Error code 5000: No such team exists. ``error`` is
                 ``LegacyError | Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_team_custom_metadata_settings(user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_custom_metadata_field_options(
         self,
@@ -410,7 +423,8 @@ class AsyncTeamsEssentials:
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The updated field definition was returned, including its new list of allowed values.
@@ -420,11 +434,11 @@ class AsyncTeamsEssentials:
                 operations contain a cascading rename, or the resulting option list would contain duplicates. The
                 authentication credentials are missing or invalid. The authenticated user doesn't have permission to
                 manage this team's metadata. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_custom_metadata_field_options(
                 user_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def upsert_custom_metadata_settings(
         self,
@@ -454,7 +468,8 @@ class AsyncTeamsEssentials:
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The updated set of custom metadata fields was returned.
@@ -464,11 +479,11 @@ class AsyncTeamsEssentials:
                 field, or attempts an operation that isn't allowed (such as changing a field's ``type``). The
                 authentication credentials are missing or invalid. The authenticated user doesn't have permission to
                 manage this team's settings. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.upsert_custom_metadata_settings(
                 user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncTeamsEssentialsWithRawResponse:
@@ -501,7 +516,8 @@ class TeamsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -547,7 +563,8 @@ class TeamsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
                 ``modified_asc`` - Sort by last modified time, oldest first. * ``modified_desc`` - Sort by last modified
                 time, newest first. * ``title_asc`` - Sort by video title, ascending. * ``title_desc`` - Sort by video
                 title, descending.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -583,7 +600,8 @@ class TeamsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -632,7 +650,8 @@ class TeamsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -678,7 +697,8 @@ class TeamsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -723,7 +743,8 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -736,7 +757,7 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=backfill_team_custom_metadata_error_mapper,
             request_options=request_options,
         )
@@ -769,7 +790,8 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
                 ``modified_asc`` - Sort by last modified time, oldest first. * ``modified_desc`` - Sort by last modified
                 time, newest first. * ``title_asc`` - Sort by video title, ascending. * ``title_desc`` - Sort by video
                 title, descending.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -785,7 +807,7 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_team_custom_metadata_incomplete_videos_error_mapper,
             request_options=request_options,
         )
@@ -805,7 +827,8 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             user_id: The ID of the team owner.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -816,7 +839,7 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CustomMetadataSettingsConnection],
+            decoder=async_json_decoder[CustomMetadataSettingsConnection],
             error_mapper=get_team_custom_metadata_settings_error_mapper,
             request_options=request_options,
         )
@@ -854,7 +877,8 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -867,7 +891,7 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[CustomMetadataSettings],
+            decoder=async_json_decoder[CustomMetadataSettings],
             error_mapper=update_custom_metadata_field_options_error_mapper,
             request_options=request_options,
         )
@@ -900,7 +924,8 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             user_id: The ID of the team owner.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -913,7 +938,7 @@ class AsyncTeamsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[CustomMetadataSettings]],
+            decoder=async_json_decoder[list[CustomMetadataSettings]],
             error_mapper=upsert_custom_metadata_settings_error_mapper,
             request_options=request_options,
         )

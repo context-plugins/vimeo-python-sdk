@@ -115,7 +115,7 @@ from .core import (
     AsyncAuthorizationCodeTokenSource,
     AsyncClientCredentialsTokenSource,
     AsyncHttpClient,
-    AsyncHttpxClient,
+    AsyncHttpx2Client,
     AsyncOAuth2RefreshableScheme,
     AsyncOAuth2Scheme,
     AsyncRawClient,
@@ -124,6 +124,7 @@ from .core import (
     BearerAuthScheme,
     ClientCredentials,
     ClientCredentialsOrDict,
+    RetryOptionsOrDict,
     client_secret_basic,
     no_auth,
     param,
@@ -136,6 +137,7 @@ class AsyncVimeoApiClient(BaseVimeoApiClient[AsyncRawClient]):
         *,
         base_url: str | None = None,
         timeout: float = DEFAULT_TIMEOUT,
+        retry_options: int | RetryOptionsOrDict | None = None,
         custom_async_http_client: AsyncHttpClient | None = None,
         bearer: str | None = None,
         oauth2_authorization_code: AsyncAuthorizationCodeCredentialsOrDict[Oauth2AuthorizationCodeScope] | None = None,
@@ -147,11 +149,12 @@ class AsyncVimeoApiClient(BaseVimeoApiClient[AsyncRawClient]):
             AsyncTokenSource[ClientCredentials[Oauth2ClientCredentialsScope]] | None
         ) = None,
     ) -> None:
-        super().__init__(base_url=base_url, timeout=timeout)
+        super().__init__(base_url=base_url, timeout=timeout, retry_options=retry_options)
         self._raw_client = AsyncRawClient(
             http_client=(
-                custom_async_http_client if custom_async_http_client is not None else AsyncHttpxClient(timeout=timeout)
+                custom_async_http_client if custom_async_http_client is not None else AsyncHttpx2Client(timeout=timeout)
             ),
+            retry_options=self._retry_options,
             global_headers=[
                 param[str]("User-Agent", "VimeoApiClient/3.4.9 Python"),
                 param[str]("X-APIMatic-Lang", "Python"),

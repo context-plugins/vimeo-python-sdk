@@ -8,8 +8,8 @@ class Status13(str, Enum):
     """The status of the event.
 
     Option descriptions:
-     * ``ended`` - The event has ended.
-     * ``started`` - The event has started."""
+     * ``ended`` - The user ended the event.
+     * ``started`` - The user started the event."""
 
     ENDED = "ended"
     STARTED = "started"

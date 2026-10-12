@@ -67,8 +67,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /groups`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_groups(*, direction: DirectionOrStr | None = None, filter: Filter1OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort13OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Signature**: `def get_groups(*, direction: DirectionOrStr | None = None, filter_: Filter1OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort13OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `GroupConnection`
 - **Returns (raw)**: `ApiResult[GroupConnection, GetGroupsErrorBody]`
 - **Error**: `GetGroupsErrorBody` — **Case A (typed)**

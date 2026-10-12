@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_vod_promotion_error import CreateVodPromotionErrorBody, create_vod_promotion_error_mapper
 from ..errors.delete_vod_promotion_error import DeleteVodPromotionErrorBody, delete_vod_promotion_error_mapper
@@ -48,7 +51,8 @@ class OnDemandPromotions:
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The promotion was added.
@@ -57,7 +61,7 @@ class OnDemandPromotions:
             ApiError: There are errors in the request, or the promotion code already exists. The authenticated user
                 can't add promotions to this On Demand page. No such On Demand page exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.create_vod_promotion(ondemand_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_vod_promotion(ondemand_id, body, request_options=request_options))
 
     def delete_vod_promotion(
         self, ondemand_id: float, promotion_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -68,7 +72,8 @@ class OnDemandPromotions:
         Args:
             ondemand_id: The ID of the On Demand page.
             promotion_id: The ID of the promotion.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The promotion was deleted.
@@ -76,9 +81,9 @@ class OnDemandPromotions:
         Raises:
             ApiError: The authenticated user can't delete promotions on this On Demand page. No such On Demand page or
                 promotion exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_vod_promotion(
-            ondemand_id, promotion_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_vod_promotion(ondemand_id, promotion_id, request_options=request_options)
+        )
 
     def get_vod_promotion(
         self, ondemand_id: float, promotion_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -89,7 +94,8 @@ class OnDemandPromotions:
         Args:
             ondemand_id: The ID of the On Demand page.
             promotion_id: The ID of the promotion.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The promotion was returned.
@@ -97,9 +103,9 @@ class OnDemandPromotions:
         Raises:
             ApiError: The authenticated user can't get promotions on this On Demand page. No such On Demand page or
                 promotion exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_promotion(
-            ondemand_id, promotion_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_promotion(ondemand_id, promotion_id, request_options=request_options)
+        )
 
     def get_vod_promotion_codes(
         self,
@@ -118,7 +124,8 @@ class OnDemandPromotions:
             promotion_id: The ID of the promotion.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The codes were returned.
@@ -126,14 +133,16 @@ class OnDemandPromotions:
         Raises:
             ApiError: The authenticated user can't get promotions on this On Demand page. No such On Demand page or
                 promotion exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_promotion_codes(
-            ondemand_id, promotion_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_promotion_codes(
+                ondemand_id, promotion_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_vod_promotions(
         self,
         ondemand_id: float,
-        filter: Filter26OrStr,
+        filter_: Filter26OrStr,
         *,
         page: float | None = None,
         per_page: float | None = None,
@@ -144,12 +153,13 @@ class OnDemandPromotions:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            filter: The type of filter to apply to the results. Option descriptions: * ``batch`` - Filter the results by
-                the ``batch`` promotion. * ``default`` - Filter the results by the default promotion. * ``single`` -
+            filter_: The type of filter to apply to the results. Option descriptions: * ``batch`` - Filter the results
+                by the ``batch`` promotion. * ``default`` - Filter the results by the default promotion. * ``single`` -
                 Filter the results by the ``single`` promotion. * ``vip`` - Filter the results by the ``vip`` promotion.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The promotions were returned.
@@ -157,9 +167,11 @@ class OnDemandPromotions:
         Raises:
             ApiError: The filter is invalid. The authenticated user can't get promotions on this On Demand page. No such
                 On Demand page exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_promotions(
-            ondemand_id, filter, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_promotions(
+                ondemand_id, filter_, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> OnDemandPromotionsWithRawResponse:
@@ -183,7 +195,8 @@ class AsyncOnDemandPromotions:
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The promotion was added.
@@ -192,9 +205,9 @@ class AsyncOnDemandPromotions:
             ApiError: There are errors in the request, or the promotion code already exists. The authenticated user
                 can't add promotions to this On Demand page. No such On Demand page exists. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_vod_promotion(ondemand_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_vod_promotion(
         self, ondemand_id: float, promotion_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -205,7 +218,8 @@ class AsyncOnDemandPromotions:
         Args:
             ondemand_id: The ID of the On Demand page.
             promotion_id: The ID of the promotion.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The promotion was deleted.
@@ -213,11 +227,11 @@ class AsyncOnDemandPromotions:
         Raises:
             ApiError: The authenticated user can't delete promotions on this On Demand page. No such On Demand page or
                 promotion exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_vod_promotion(
                 ondemand_id, promotion_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_vod_promotion(
         self, ondemand_id: float, promotion_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -228,7 +242,8 @@ class AsyncOnDemandPromotions:
         Args:
             ondemand_id: The ID of the On Demand page.
             promotion_id: The ID of the promotion.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The promotion was returned.
@@ -236,9 +251,9 @@ class AsyncOnDemandPromotions:
         Raises:
             ApiError: The authenticated user can't get promotions on this On Demand page. No such On Demand page or
                 promotion exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_promotion(ondemand_id, promotion_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_vod_promotion_codes(
         self,
@@ -257,7 +272,8 @@ class AsyncOnDemandPromotions:
             promotion_id: The ID of the promotion.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The codes were returned.
@@ -265,16 +281,16 @@ class AsyncOnDemandPromotions:
         Raises:
             ApiError: The authenticated user can't get promotions on this On Demand page. No such On Demand page or
                 promotion exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_promotion_codes(
                 ondemand_id, promotion_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_vod_promotions(
         self,
         ondemand_id: float,
-        filter: Filter26OrStr,
+        filter_: Filter26OrStr,
         *,
         page: float | None = None,
         per_page: float | None = None,
@@ -285,12 +301,13 @@ class AsyncOnDemandPromotions:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            filter: The type of filter to apply to the results. Option descriptions: * ``batch`` - Filter the results by
-                the ``batch`` promotion. * ``default`` - Filter the results by the default promotion. * ``single`` -
+            filter_: The type of filter to apply to the results. Option descriptions: * ``batch`` - Filter the results
+                by the ``batch`` promotion. * ``default`` - Filter the results by the default promotion. * ``single`` -
                 Filter the results by the ``single`` promotion. * ``vip`` - Filter the results by the ``vip`` promotion.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The promotions were returned.
@@ -298,11 +315,11 @@ class AsyncOnDemandPromotions:
         Raises:
             ApiError: The filter is invalid. The authenticated user can't get promotions on this On Demand page. No such
                 On Demand page exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_promotions(
-                ondemand_id, filter, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+                ondemand_id, filter_, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncOnDemandPromotionsWithRawResponse:
@@ -323,7 +340,8 @@ class OnDemandPromotionsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -350,7 +368,8 @@ class OnDemandPromotionsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             ondemand_id: The ID of the On Demand page.
             promotion_id: The ID of the promotion.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -376,7 +395,8 @@ class OnDemandPromotionsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             ondemand_id: The ID of the On Demand page.
             promotion_id: The ID of the promotion.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -409,7 +429,8 @@ class OnDemandPromotionsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             promotion_id: The ID of the promotion.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -429,7 +450,7 @@ class OnDemandPromotionsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
     def get_vod_promotions(
         self,
         ondemand_id: float,
-        filter: Filter26OrStr,
+        filter_: Filter26OrStr,
         *,
         page: float | None = None,
         per_page: float | None = None,
@@ -440,12 +461,13 @@ class OnDemandPromotionsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            filter: The type of filter to apply to the results. Option descriptions: * ``batch`` - Filter the results by
-                the ``batch`` promotion. * ``default`` - Filter the results by the default promotion. * ``single`` -
+            filter_: The type of filter to apply to the results. Option descriptions: * ``batch`` - Filter the results
+                by the ``batch`` promotion. * ``default`` - Filter the results by the default promotion. * ``single`` -
                 Filter the results by the ``single`` promotion. * ``vip`` - Filter the results by the ``vip`` promotion.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -454,7 +476,7 @@ class OnDemandPromotionsWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             url_template=self._server.default("/ondemand/pages/{ondemand_id}/promotions"),
             path_params=[param[float]("ondemand_id", ondemand_id)],
             query_params=[
-                param[Filter26OrStr]("filter", filter),
+                param[Filter26OrStr]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
             ],
@@ -481,7 +503,8 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             ondemand_id: The ID of the On Demand page.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -494,7 +517,7 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPromotion],
+            decoder=async_json_decoder[OnDemandPromotion],
             error_mapper=create_vod_promotion_error_mapper,
             request_options=request_options,
         )
@@ -508,7 +531,8 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             ondemand_id: The ID of the On Demand page.
             promotion_id: The ID of the promotion.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -520,7 +544,7 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_vod_promotion_error_mapper,
             request_options=request_options,
         )
@@ -534,7 +558,8 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             ondemand_id: The ID of the On Demand page.
             promotion_id: The ID of the promotion.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -545,7 +570,7 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPromotion],
+            decoder=async_json_decoder[OnDemandPromotion],
             error_mapper=get_vod_promotion_error_mapper,
             request_options=request_options,
         )
@@ -567,7 +592,8 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             promotion_id: The ID of the promotion.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -579,7 +605,7 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPromotionCode],
+            decoder=async_json_decoder[OnDemandPromotionCode],
             error_mapper=get_vod_promotion_codes_error_mapper,
             request_options=request_options,
         )
@@ -587,7 +613,7 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
     async def get_vod_promotions(
         self,
         ondemand_id: float,
-        filter: Filter26OrStr,
+        filter_: Filter26OrStr,
         *,
         page: float | None = None,
         per_page: float | None = None,
@@ -598,12 +624,13 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            filter: The type of filter to apply to the results. Option descriptions: * ``batch`` - Filter the results by
-                the ``batch`` promotion. * ``default`` - Filter the results by the default promotion. * ``single`` -
+            filter_: The type of filter to apply to the results. Option descriptions: * ``batch`` - Filter the results
+                by the ``batch`` promotion. * ``default`` - Filter the results by the default promotion. * ``single`` -
                 Filter the results by the ``single`` promotion. * ``vip`` - Filter the results by the ``vip`` promotion.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -612,14 +639,14 @@ class AsyncOnDemandPromotionsWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             url_template=self._server.default("/ondemand/pages/{ondemand_id}/promotions"),
             path_params=[param[float]("ondemand_id", ondemand_id)],
             query_params=[
-                param[Filter26OrStr]("filter", filter),
+                param[Filter26OrStr]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
             ],
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPromotion],
+            decoder=async_json_decoder[OnDemandPromotion],
             error_mapper=get_vod_promotions_error_mapper,
             request_options=request_options,
         )

@@ -5,7 +5,7 @@ from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
 from .card1 import Card1, Card1Dict
-from .enums.type20 import Type20OrStr
+from .enums.type24 import Type24OrStr
 
 
 class PaymentMethod(SdkBaseModel):
@@ -27,7 +27,7 @@ class PaymentMethod(SdkBaseModel):
     is_default: bool
     """Whether the payment method is the default payment method for the account."""
 
-    type_: Type20OrStr = Field(alias="type")
+    type_: Type24OrStr = Field(alias="type")
     """The type of payment method.
 
     Option descriptions:
@@ -45,10 +45,10 @@ class PaymentMethod(SdkBaseModel):
 
 class PaymentMethodDict(TypedDict):
     account_id: str
-    card: NotRequired[Card1 | Card1Dict]
+    card: NotRequired[Card1Dict]
     created_at: str
     disabled_at: str
     id: str
     is_default: bool
-    type_: Type20OrStr
+    type_: Type24OrStr
     updated_at: str

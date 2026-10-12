@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.create_audio_track_error import CreateAudioTrackErrorBody, create_audio_track_error_mapper
 from ..errors.create_video_version_error import CreateVideoVersionErrorBody, create_video_version_error_mapper
@@ -65,16 +68,17 @@ class VideosVersions:
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio track was created.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_audio_track(
-            version_id, video_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_audio_track(version_id, video_id, body, request_options=request_options)
+        )
 
     def create_video_version(
         self,
@@ -88,7 +92,8 @@ class VideosVersions:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The version was added.
@@ -100,7 +105,7 @@ class VideosVersions:
                 5012: A video isn't associated with this upload. * Error code 5013: The endpoint isn't available,
                 because the specified version of the API is less than 3.4 and **upload.approach** isn't ``tus``.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.create_video_version(video_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_video_version(video_id, body, request_options=request_options))
 
     def delete_audio_track(
         self,
@@ -116,16 +121,19 @@ class VideosVersions:
             audiotrack_id: The ID of the audio track.
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio track was deleted.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_audio_track(
-            audiotrack_id, version_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_audio_track(
+                audiotrack_id, version_id, video_id, request_options=request_options
+            ),
+        )
 
     def delete_video_version(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -136,7 +144,8 @@ class VideosVersions:
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video version was deleted.
@@ -146,9 +155,9 @@ class VideosVersions:
                 code 2538: The specified version is the video's current version and can't be deleted. * Error code 3200:
                 The authenticated user can't access the versions of this video. * Error code 8003: The user credentials
                 are invalid. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_video_version(
-            version_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_version(version_id, video_id, request_options=request_options)
+        )
 
     def edit_audio_track(
         self,
@@ -168,16 +177,19 @@ class VideosVersions:
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio track was edited.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_audio_track(
-            audiotrack_id, version_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_audio_track(
+                audiotrack_id, version_id, video_id, body=body, request_options=request_options
+            ),
+        )
 
     def edit_video_version(
         self,
@@ -193,7 +205,8 @@ class VideosVersions:
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The version was edited.
@@ -202,9 +215,9 @@ class VideosVersions:
             ApiError: Error code 8003: The user credentials are invalid. * No such video exists. * Error code 2205: A
                 parameter is invalid. * Error code 3200: The authenticated user can't access the versions of this video.
                 ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.edit_video_version(
-            version_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_video_version(version_id, video_id, body=body, request_options=request_options)
+        )
 
     def get_audio_track(
         self,
@@ -220,16 +233,19 @@ class VideosVersions:
             audiotrack_id: The ID of the audio track.
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio track was returned.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_audio_track(
-            audiotrack_id, version_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_audio_track(
+                audiotrack_id, version_id, video_id, request_options=request_options
+            ),
+        )
 
     def get_audio_tracks(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -239,14 +255,15 @@ class VideosVersions:
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio tracks were returned.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_audio_tracks(version_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_audio_tracks(version_id, video_id, request_options=request_options))
 
     def get_audiotrack_downloads(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -257,16 +274,17 @@ class VideosVersions:
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of downloadable file links was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_audiotrack_downloads(
-            version_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_audiotrack_downloads(version_id, video_id, request_options=request_options)
+        )
 
     def get_version_thumbnail(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -276,16 +294,17 @@ class VideosVersions:
         Args:
             version_id: The ID of the version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The version thumbnail was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_version_thumbnail(
-            version_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_version_thumbnail(version_id, video_id, request_options=request_options)
+        )
 
     def get_video_version(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -296,7 +315,8 @@ class VideosVersions:
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video version was returned.
@@ -305,7 +325,7 @@ class VideosVersions:
             ApiError: * No such video exists. * Error code 3200: The authenticated user can't access the versions of
                 this video. * Error code 8003: The user credentials are invalid. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.get_video_version(version_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_video_version(version_id, video_id, request_options=request_options))
 
     def get_video_versions(
         self,
@@ -322,7 +342,8 @@ class VideosVersions:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The versions were returned.
@@ -330,9 +351,11 @@ class VideosVersions:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. No such video exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return self._with_raw_response.get_video_versions(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_versions(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_video_versions_alt1(
         self,
@@ -351,7 +374,8 @@ class VideosVersions:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The versions were returned.
@@ -359,9 +383,11 @@ class VideosVersions:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. No such video exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return self._with_raw_response.get_video_versions_alt1(
-            channel_id, video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_versions_alt1(
+                channel_id, video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosVersionsWithRawResponse:
@@ -386,18 +412,19 @@ class AsyncVideosVersions:
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio track was created.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_audio_track(
                 version_id, video_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_video_version(
         self,
@@ -411,7 +438,8 @@ class AsyncVideosVersions:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The version was added.
@@ -423,9 +451,9 @@ class AsyncVideosVersions:
                 5012: A video isn't associated with this upload. * Error code 5013: The endpoint isn't available,
                 because the specified version of the API is less than 3.4 and **upload.approach** isn't ``tus``.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_video_version(video_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_audio_track(
         self,
@@ -441,18 +469,19 @@ class AsyncVideosVersions:
             audiotrack_id: The ID of the audio track.
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio track was deleted.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_audio_track(
                 audiotrack_id, version_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_video_version(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -463,7 +492,8 @@ class AsyncVideosVersions:
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video version was deleted.
@@ -473,9 +503,9 @@ class AsyncVideosVersions:
                 code 2538: The specified version is the video's current version and can't be deleted. * Error code 3200:
                 The authenticated user can't access the versions of this video. * Error code 8003: The user credentials
                 are invalid. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_version(version_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_audio_track(
         self,
@@ -495,18 +525,19 @@ class AsyncVideosVersions:
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio track was edited.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_audio_track(
                 audiotrack_id, version_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_video_version(
         self,
@@ -522,7 +553,8 @@ class AsyncVideosVersions:
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The version was edited.
@@ -531,11 +563,11 @@ class AsyncVideosVersions:
             ApiError: Error code 8003: The user credentials are invalid. * No such video exists. * Error code 2205: A
                 parameter is invalid. * Error code 3200: The authenticated user can't access the versions of this video.
                 ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_video_version(
                 version_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_audio_track(
         self,
@@ -551,18 +583,19 @@ class AsyncVideosVersions:
             audiotrack_id: The ID of the audio track.
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio track was returned.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_audio_track(
                 audiotrack_id, version_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_audio_tracks(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -572,16 +605,17 @@ class AsyncVideosVersions:
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The audio tracks were returned.
 
         Raises:
             ApiError: No such audio track exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_audio_tracks(version_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_audiotrack_downloads(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -592,18 +626,19 @@ class AsyncVideosVersions:
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of downloadable file links was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_audiotrack_downloads(
                 version_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_version_thumbnail(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -613,16 +648,17 @@ class AsyncVideosVersions:
         Args:
             version_id: The ID of the version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The version thumbnail was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_version_thumbnail(version_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_video_version(
         self, version_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -633,7 +669,8 @@ class AsyncVideosVersions:
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video version was returned.
@@ -642,9 +679,9 @@ class AsyncVideosVersions:
             ApiError: * No such video exists. * Error code 3200: The authenticated user can't access the versions of
                 this video. * Error code 8003: The user credentials are invalid. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_version(version_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_video_versions(
         self,
@@ -661,7 +698,8 @@ class AsyncVideosVersions:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The versions were returned.
@@ -669,11 +707,11 @@ class AsyncVideosVersions:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. No such video exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_versions(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_video_versions_alt1(
         self,
@@ -692,7 +730,8 @@ class AsyncVideosVersions:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The versions were returned.
@@ -700,11 +739,11 @@ class AsyncVideosVersions:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. No such video exists. ``error`` is ``Error |
                 LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_versions_alt1(
                 channel_id, video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosVersionsWithRawResponse:
@@ -726,7 +765,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -756,7 +796,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -788,7 +829,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             audiotrack_id: The ID of the audio track.
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -818,7 +860,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -853,7 +896,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -891,7 +935,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -923,7 +968,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             audiotrack_id: The ID of the audio track.
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -951,7 +997,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -976,7 +1023,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1000,7 +1048,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             version_id: The ID of the version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1025,7 +1074,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1056,7 +1106,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1090,7 +1141,8 @@ class VideosVersionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1123,7 +1175,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1136,7 +1189,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AlternateAudioTrack],
+            decoder=async_json_decoder[AlternateAudioTrack],
             error_mapper=create_audio_track_error_mapper,
             request_options=request_options,
         )
@@ -1153,7 +1206,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1166,7 +1220,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoVersion],
+            decoder=async_json_decoder[VideoVersion],
             error_mapper=create_video_version_error_mapper,
             request_options=request_options,
         )
@@ -1185,7 +1239,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             audiotrack_id: The ID of the audio track.
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1201,7 +1256,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_audio_track_error_mapper,
             request_options=request_options,
         )
@@ -1215,7 +1270,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1227,7 +1283,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_version_error_mapper,
             request_options=request_options,
         )
@@ -1250,7 +1306,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1269,7 +1326,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AlternateAudioTrack],
+            decoder=async_json_decoder[AlternateAudioTrack],
             error_mapper=edit_audio_track_error_mapper,
             request_options=request_options,
         )
@@ -1288,7 +1345,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             version_id: The ID of the video version.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1301,7 +1359,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoVersion],
+            decoder=async_json_decoder[VideoVersion],
             error_mapper=edit_video_version_error_mapper,
             request_options=request_options,
         )
@@ -1320,7 +1378,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             audiotrack_id: The ID of the audio track.
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1335,7 +1394,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AlternateAudioTrack],
+            decoder=async_json_decoder[AlternateAudioTrack],
             error_mapper=get_audio_track_error_mapper,
             request_options=request_options,
         )
@@ -1348,7 +1407,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1359,7 +1419,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AlternateAudioTrackConnection],
+            decoder=async_json_decoder[AlternateAudioTrackConnection],
             error_mapper=get_audio_tracks_error_mapper,
             request_options=request_options,
         )
@@ -1373,7 +1433,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1384,7 +1445,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1397,7 +1458,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             version_id: The ID of the version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1408,7 +1470,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1422,7 +1484,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             version_id: The ID of the video version.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1433,7 +1496,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoVersion],
+            decoder=async_json_decoder[VideoVersion],
             error_mapper=get_video_version_error_mapper,
             request_options=request_options,
         )
@@ -1453,7 +1516,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1465,7 +1529,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoVersionConnection],
+            decoder=async_json_decoder[VideoVersionConnection],
             error_mapper=get_video_versions_error_mapper,
             request_options=request_options,
         )
@@ -1487,7 +1551,8 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1499,7 +1564,7 @@ class AsyncVideosVersionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoVersionConnection],
+            decoder=async_json_decoder[VideoVersionConnection],
             error_mapper=get_video_versions_alt1_error_mapper,
             request_options=request_options,
         )

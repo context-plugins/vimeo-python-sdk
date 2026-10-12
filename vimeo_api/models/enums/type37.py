@@ -5,14 +5,14 @@ from ...core import open_enum_validator
 
 
 class Type37(str, Enum):
-    """The type of the promotion. When **access_type** is ``vip``, the value for this parameter must be ``batch``.
+    """The type of the On Demand page.
 
     Option descriptions:
-     * ``batch`` - The promotion type that generates many random codes to use one time each.
-     * ``single`` - The promotion type that generates one code to use many times."""
+     * ``film`` - The On Demand page is a film.
+     * ``series`` - The On Demand page is a series."""
 
-    BATCH = "batch"
-    SINGLE = "single"
+    FILM = "film"
+    SERIES = "series"
 
     __str__ = str.__str__
 

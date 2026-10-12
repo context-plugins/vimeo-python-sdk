@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import Literal
-
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
+from .enums.rendition2 import Rendition2OrStr
 
 
 class Download1(SdkBaseModel):
@@ -17,7 +16,7 @@ class Download1(SdkBaseModel):
     link: str
     """The URL of the audio track download."""
 
-    rendition: Literal["source"] = "source"
+    rendition: Rendition2OrStr
     """The rendition of the audio track.
 
     Option descriptions:
@@ -28,4 +27,4 @@ class Download1Dict(TypedDict):
     expires: str
     extension: str
     link: str
-    rendition: NotRequired[Literal["source"]]
+    rendition: Rendition2OrStr

@@ -45,7 +45,7 @@ class TrimmedVideoDict(TypedDict):
     created_version_id: str
     end: str
     is_clip_finished_transcoding: bool
-    metadata: Metadata28 | Metadata28Dict
+    metadata: Metadata28Dict
     modified_on: str | None
     root_version_id: str
     start: str

@@ -24,8 +24,8 @@ class Interactions2(SdkBaseModel):
 
 
 class Interactions2Dict(TypedDict):
-    add_privacy_user: NotRequired[AddPrivacyUser | AddPrivacyUserDict]
-    block: Block1 | Block1Dict
-    connected_apps: NotRequired[ConnectedApps1 | ConnectedApps1Dict]
-    follow: NotRequired[Follow2 | Follow2Dict]
-    report: Report | ReportDict
+    add_privacy_user: NotRequired[AddPrivacyUserDict]
+    block: Block1Dict
+    connected_apps: NotRequired[ConnectedApps1Dict]
+    follow: NotRequired[Follow2Dict]
+    report: ReportDict

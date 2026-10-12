@@ -9,9 +9,12 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.check_if_user_joined_group_alt1_error import (
     CheckIfUserJoinedGroupAlt1ErrorBody,
@@ -46,7 +49,8 @@ class GroupsUsers:
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user belongs to the group.
@@ -54,9 +58,9 @@ class GroupsUsers:
         Raises:
             ApiError: * No such group exists. * The authenticated user isn't a member of the group. * Error code 5451:
                 This resource is restricted in your region. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_if_user_joined_group(
-            group_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_user_joined_group(group_id, user_id, request_options=request_options)
+        )
 
     def check_if_user_joined_group_alt1(
         self, group_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -65,7 +69,8 @@ class GroupsUsers:
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user belongs to the group.
@@ -73,16 +78,16 @@ class GroupsUsers:
         Raises:
             ApiError: * No such group exists. * The authenticated user isn't a member of the group. * Error code 5451:
                 This resource is restricted in your region. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_if_user_joined_group_alt1(
-            group_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_user_joined_group_alt1(group_id, request_options=request_options)
+        )
 
     def get_group_members(
         self,
         group_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter2OrStr | None = None,
+        filter_: Filter2OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -95,14 +100,15 @@ class GroupsUsers:
             group_id: The ID of the group.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return group
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return group
                 moderators.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The members were returned.
@@ -110,23 +116,25 @@ class GroupsUsers:
         Raises:
             ApiError: * No such group exists. * Error code 5451: This resource is restricted in your region. ``error``
                 is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_group_members(
-            group_id,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_group_members(
+                group_id,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_user_groups(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -139,7 +147,7 @@ class GroupsUsers:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated groups.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -147,29 +155,32 @@ class GroupsUsers:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``members`` - Sort the results by
                 number of members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The groups were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_user_groups(
-            user_id,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_user_groups(
+                user_id,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_user_groups_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -181,7 +192,7 @@ class GroupsUsers:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated groups.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -189,22 +200,25 @@ class GroupsUsers:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``members`` - Sort the results by
                 number of members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The groups were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_user_groups_alt1(
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_user_groups_alt1(
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> GroupsUsersWithRawResponse:
@@ -223,7 +237,8 @@ class AsyncGroupsUsers:
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user belongs to the group.
@@ -231,9 +246,9 @@ class AsyncGroupsUsers:
         Raises:
             ApiError: * No such group exists. * The authenticated user isn't a member of the group. * Error code 5451:
                 This resource is restricted in your region. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_joined_group(group_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def check_if_user_joined_group_alt1(
         self, group_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -242,7 +257,8 @@ class AsyncGroupsUsers:
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user belongs to the group.
@@ -250,16 +266,16 @@ class AsyncGroupsUsers:
         Raises:
             ApiError: * No such group exists. * The authenticated user isn't a member of the group. * Error code 5451:
                 This resource is restricted in your region. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_joined_group_alt1(group_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_group_members(
         self,
         group_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter2OrStr | None = None,
+        filter_: Filter2OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -272,14 +288,15 @@ class AsyncGroupsUsers:
             group_id: The ID of the group.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return group
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return group
                 moderators.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The members were returned.
@@ -287,25 +304,25 @@ class AsyncGroupsUsers:
         Raises:
             ApiError: * No such group exists. * Error code 5451: This resource is restricted in your region. ``error``
                 is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_group_members(
                 group_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_user_groups(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -318,7 +335,7 @@ class AsyncGroupsUsers:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated groups.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -326,31 +343,32 @@ class AsyncGroupsUsers:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``members`` - Sort the results by
                 number of members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The groups were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_user_groups(
                 user_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_user_groups_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -362,7 +380,7 @@ class AsyncGroupsUsers:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated groups.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -370,24 +388,25 @@ class AsyncGroupsUsers:
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``members`` - Sort the results by
                 number of members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The groups were returned.
 
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_user_groups_alt1(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncGroupsUsersWithRawResponse:
@@ -403,7 +422,8 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -426,7 +446,8 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -447,7 +468,7 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         group_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter2OrStr | None = None,
+        filter_: Filter2OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -460,14 +481,15 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
             group_id: The ID of the group.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return group
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return group
                 moderators.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -477,7 +499,7 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
             path_params=[param[float]("group_id", group_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter2OrStr | None]("filter", filter),
+                param[Filter2OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -496,7 +518,7 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -509,7 +531,7 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated groups.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -517,7 +539,8 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``members`` - Sort the results by
                 number of members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -527,7 +550,7 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter12OrStr | None]("filter", filter),
+                param[Filter12OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -545,7 +568,7 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -557,7 +580,7 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated groups.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -565,7 +588,8 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``members`` - Sort the results by
                 number of members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -574,7 +598,7 @@ class GroupsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
             url_template=self._server.default("/me/groups"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter12OrStr | None]("filter", filter),
+                param[Filter12OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -598,7 +622,8 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             group_id: The ID of the group.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -609,7 +634,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=check_if_user_joined_group_error_mapper,
             request_options=request_options,
         )
@@ -621,7 +646,8 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
 
         Args:
             group_id: The ID of the group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -632,7 +658,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=check_if_user_joined_group_alt1_error_mapper,
             request_options=request_options,
         )
@@ -642,7 +668,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         group_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter2OrStr | None = None,
+        filter_: Filter2OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -655,14 +681,15 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             group_id: The ID of the group.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return group
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderators`` - Return group
                 moderators.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -672,7 +699,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             path_params=[param[float]("group_id", group_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter2OrStr | None]("filter", filter),
+                param[Filter2OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -681,7 +708,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=get_group_members_error_mapper,
             request_options=request_options,
         )
@@ -691,7 +718,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -704,7 +731,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated groups.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -712,7 +739,8 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``members`` - Sort the results by
                 number of members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -722,7 +750,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter12OrStr | None]("filter", filter),
+                param[Filter12OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -731,7 +759,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[GroupConnection],
+            decoder=async_json_decoder[GroupConnection],
             error_mapper=get_user_groups_error_mapper,
             request_options=request_options,
         )
@@ -740,7 +768,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter12OrStr | None = None,
+        filter_: Filter12OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -752,7 +780,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``moderated`` - Return
                 moderated groups.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
@@ -760,7 +788,8 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date. * ``members`` - Sort the results by
                 number of members. * ``videos`` - Sort the results by number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -769,7 +798,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             url_template=self._server.default("/me/groups"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter12OrStr | None]("filter", filter),
+                param[Filter12OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -778,7 +807,7 @@ class AsyncGroupsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[GroupConnection],
+            decoder=async_json_decoder[GroupConnection],
             error_mapper=get_user_groups_alt1_error_mapper,
             request_options=request_options,
         )

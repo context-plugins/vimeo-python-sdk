@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.delete_embed_preset_alt1_error import (
     DeleteEmbedPresetAlt1ErrorBody,
@@ -50,16 +53,15 @@ class EmbedPresetsEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was created.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_embed_presets(
-            user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.create_embed_presets(user_id, body=body, request_options=request_options))
 
     def create_embed_presets_alt1(
         self,
@@ -71,14 +73,15 @@ class EmbedPresetsEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was created.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_embed_presets_alt1(body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_embed_presets_alt1(body=body, request_options=request_options))
 
     def delete_embed_preset(
         self, preset_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -88,14 +91,15 @@ class EmbedPresetsEssentials:
         Args:
             preset_id: The ID of the embed preset.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was deleted.
 
         Raises:
             ApiError: The authenticated user can't delete the embed preset. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_embed_preset(preset_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_embed_preset(preset_id, user_id, request_options=request_options))
 
     def delete_embed_preset_alt1(
         self, preset_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -104,14 +108,15 @@ class EmbedPresetsEssentials:
 
         Args:
             preset_id: The ID of the embed preset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was deleted.
 
         Raises:
             ApiError: The authenticated user can't delete the embed preset. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_embed_preset_alt1(preset_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_embed_preset_alt1(preset_id, request_options=request_options))
 
     def edit_embed_preset(
         self,
@@ -127,7 +132,8 @@ class EmbedPresetsEssentials:
             preset_id: The ID of the preset.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was edited.
@@ -135,9 +141,9 @@ class EmbedPresetsEssentials:
         Raises:
             ApiError: The outro type is invalid. * No such embed preset exists. * The authenticated user can't edit the
                 embed preset. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_embed_preset(
-            preset_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_embed_preset(preset_id, user_id, body=body, request_options=request_options)
+        )
 
     def edit_embed_preset_alt1(
         self,
@@ -151,7 +157,8 @@ class EmbedPresetsEssentials:
         Args:
             preset_id: The ID of the preset.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was edited.
@@ -159,9 +166,9 @@ class EmbedPresetsEssentials:
         Raises:
             ApiError: The outro type is invalid. * No such embed preset exists. * The authenticated user can't edit the
                 embed preset. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_embed_preset_alt1(
-            preset_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_embed_preset_alt1(preset_id, body=body, request_options=request_options)
+        )
 
     def get_embed_preset(
         self, preset_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -171,28 +178,30 @@ class EmbedPresetsEssentials:
         Args:
             preset_id: The ID of the preset.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_embed_preset(preset_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_embed_preset(preset_id, user_id, request_options=request_options))
 
     def get_embed_preset_alt1(self, preset_id: float, *, request_options: RequestOptionsOrDict | None = None) -> Preset:
         """This method returns a single embed preset. The authenticated user must be the owner of the preset.
 
         Args:
             preset_id: The ID of the preset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_embed_preset_alt1(preset_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_embed_preset_alt1(preset_id, request_options=request_options))
 
     def get_embed_presets(
         self,
@@ -208,16 +217,19 @@ class EmbedPresetsEssentials:
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed presets were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_embed_presets(
-            user_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_embed_presets(
+                user_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_embed_presets_alt1(
         self,
@@ -231,16 +243,19 @@ class EmbedPresetsEssentials:
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed presets were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_embed_presets_alt1(
-            page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_embed_presets_alt1(
+                page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> EmbedPresetsEssentialsWithRawResponse:
@@ -263,16 +278,17 @@ class AsyncEmbedPresetsEssentials:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was created.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_embed_presets(user_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def create_embed_presets_alt1(
         self,
@@ -284,16 +300,17 @@ class AsyncEmbedPresetsEssentials:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was created.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_embed_presets_alt1(body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_embed_preset(
         self, preset_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -303,16 +320,17 @@ class AsyncEmbedPresetsEssentials:
         Args:
             preset_id: The ID of the embed preset.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was deleted.
 
         Raises:
             ApiError: The authenticated user can't delete the embed preset. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_embed_preset(preset_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_embed_preset_alt1(
         self, preset_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -321,16 +339,17 @@ class AsyncEmbedPresetsEssentials:
 
         Args:
             preset_id: The ID of the embed preset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was deleted.
 
         Raises:
             ApiError: The authenticated user can't delete the embed preset. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_embed_preset_alt1(preset_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_embed_preset(
         self,
@@ -346,7 +365,8 @@ class AsyncEmbedPresetsEssentials:
             preset_id: The ID of the preset.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was edited.
@@ -354,11 +374,11 @@ class AsyncEmbedPresetsEssentials:
         Raises:
             ApiError: The outro type is invalid. * No such embed preset exists. * The authenticated user can't edit the
                 embed preset. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_embed_preset(
                 preset_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_embed_preset_alt1(
         self,
@@ -372,7 +392,8 @@ class AsyncEmbedPresetsEssentials:
         Args:
             preset_id: The ID of the preset.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was edited.
@@ -380,9 +401,9 @@ class AsyncEmbedPresetsEssentials:
         Raises:
             ApiError: The outro type is invalid. * No such embed preset exists. * The authenticated user can't edit the
                 embed preset. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_embed_preset_alt1(preset_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_embed_preset(
         self, preset_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -392,16 +413,17 @@ class AsyncEmbedPresetsEssentials:
         Args:
             preset_id: The ID of the preset.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_embed_preset(preset_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_embed_preset_alt1(
         self, preset_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -410,16 +432,15 @@ class AsyncEmbedPresetsEssentials:
 
         Args:
             preset_id: The ID of the preset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.get_embed_preset_alt1(preset_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_embed_preset_alt1(preset_id, request_options=request_options))
 
     async def get_embed_presets(
         self,
@@ -435,18 +456,19 @@ class AsyncEmbedPresetsEssentials:
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed presets were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_embed_presets(
                 user_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_embed_presets_alt1(
         self,
@@ -460,18 +482,19 @@ class AsyncEmbedPresetsEssentials:
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed presets were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_embed_presets_alt1(
                 page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncEmbedPresetsEssentialsWithRawResponse:
@@ -491,7 +514,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -519,7 +543,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -544,7 +569,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
         Args:
             preset_id: The ID of the embed preset.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -568,7 +594,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
 
         Args:
             preset_id: The ID of the embed preset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -599,7 +626,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
             preset_id: The ID of the preset.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -629,7 +657,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
         Args:
             preset_id: The ID of the preset.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -655,7 +684,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
         Args:
             preset_id: The ID of the preset.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -678,7 +708,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
 
         Args:
             preset_id: The ID of the preset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -708,7 +739,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -737,7 +769,8 @@ class EmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -767,7 +800,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -780,7 +814,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Preset],
+            decoder=async_json_decoder[Preset],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -795,7 +829,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -807,7 +842,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Preset],
+            decoder=async_json_decoder[Preset],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -820,7 +855,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
         Args:
             preset_id: The ID of the embed preset.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -832,7 +868,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_embed_preset_error_mapper,
             request_options=request_options,
         )
@@ -844,7 +880,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
 
         Args:
             preset_id: The ID of the embed preset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -856,7 +893,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_embed_preset_alt1_error_mapper,
             request_options=request_options,
         )
@@ -875,7 +912,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             preset_id: The ID of the preset.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -888,7 +926,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Preset],
+            decoder=async_json_decoder[Preset],
             error_mapper=edit_embed_preset_error_mapper,
             request_options=request_options,
         )
@@ -905,7 +943,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
         Args:
             preset_id: The ID of the preset.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -918,7 +957,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Preset],
+            decoder=async_json_decoder[Preset],
             error_mapper=edit_embed_preset_alt1_error_mapper,
             request_options=request_options,
         )
@@ -931,7 +970,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
         Args:
             preset_id: The ID of the preset.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -942,7 +982,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Preset],
+            decoder=async_json_decoder[Preset],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -954,7 +994,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
 
         Args:
             preset_id: The ID of the preset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -965,7 +1006,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Preset],
+            decoder=async_json_decoder[Preset],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -984,7 +1025,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -996,7 +1038,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PresetConnection],
+            decoder=async_json_decoder[PresetConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1013,7 +1055,8 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1024,7 +1067,7 @@ class AsyncEmbedPresetsEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PresetConnection],
+            decoder=async_json_decoder[PresetConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

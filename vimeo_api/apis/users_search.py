@@ -9,8 +9,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.search_users_error import SearchUsersErrorBody, search_users_error_mapper
 from ..models.enums.direction import DirectionOrStr
@@ -45,7 +47,8 @@ class UsersSearch:
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``relevant`` - Sort the results by relevance. * ``videos`` - Sort the results by
                 number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The search results were returned.
@@ -53,9 +56,16 @@ class UsersSearch:
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. There was an internal search error.
                 Search is disabled. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.search_users(
-            direction=direction, page=page, per_page=per_page, query=query, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.search_users(
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> UsersSearchWithRawResponse:
@@ -88,7 +98,8 @@ class AsyncUsersSearch:
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``relevant`` - Sort the results by relevance. * ``videos`` - Sort the results by
                 number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The search results were returned.
@@ -96,7 +107,7 @@ class AsyncUsersSearch:
         Raises:
             ApiError: Error code 5451: This resource is restricted in your region. There was an internal search error.
                 Search is disabled. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.search_users(
                 direction=direction,
                 page=page,
@@ -104,8 +115,8 @@ class AsyncUsersSearch:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncUsersSearchWithRawResponse:
@@ -135,7 +146,8 @@ class UsersSearchWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``relevant`` - Sort the results by relevance. * ``videos`` - Sort the results by
                 number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -181,7 +193,8 @@ class AsyncUsersSearchWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
                 alphabetically. * ``date`` - Sort the results by creation date. * ``followers`` - Sort the results by
                 number of followers. * ``relevant`` - Sort the results by relevance. * ``videos`` - Sort the results by
                 number of videos.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -198,7 +211,7 @@ class AsyncUsersSearchWithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=search_users_error_mapper,
             request_options=request_options,
         )

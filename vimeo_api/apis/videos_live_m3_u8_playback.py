@@ -9,8 +9,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     param,
+    unwrap,
 )
 from ..errors.get_one_time_event_m3_u8_playback_alt1_error import (
     GetOneTimeEventM3U8PlaybackAlt1ErrorBody,
@@ -37,7 +39,8 @@ class VideosLiveM3U8Playback:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The M3U8 playback URL was returned.
@@ -46,9 +49,9 @@ class VideosLiveM3U8Playback:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the M3U8 playback URL. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_one_time_event_m3u8_playback(
-            user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_one_time_event_m3u8_playback(user_id, video_id, request_options=request_options)
+        )
 
     def get_one_time_event_m3u8_playback_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -59,7 +62,8 @@ class VideosLiveM3U8Playback:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The M3U8 playback URL was returned.
@@ -68,9 +72,9 @@ class VideosLiveM3U8Playback:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the M3U8 playback URL. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_one_time_event_m3u8_playback_alt1(
-            video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_one_time_event_m3u8_playback_alt1(video_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> VideosLiveM3U8PlaybackWithRawResponse:
@@ -91,7 +95,8 @@ class AsyncVideosLiveM3U8Playback:
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The M3U8 playback URL was returned.
@@ -100,11 +105,11 @@ class AsyncVideosLiveM3U8Playback:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the M3U8 playback URL. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_one_time_event_m3u8_playback(
                 user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_one_time_event_m3u8_playback_alt1(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -115,7 +120,8 @@ class AsyncVideosLiveM3U8Playback:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The M3U8 playback URL was returned.
@@ -124,11 +130,11 @@ class AsyncVideosLiveM3U8Playback:
             ApiError: Error code 8000: The user credentials are invalid. Error code 3200: The authenticated user can't
                 access the M3U8 playback URL. Error code 5000: No such event or user exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_one_time_event_m3u8_playback_alt1(
                 video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosLiveM3U8PlaybackWithRawResponse:
@@ -146,7 +152,8 @@ class VideosLiveM3U8PlaybackWithRawResponse(SecuredRawResponse[RawClient, Server
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -171,7 +178,8 @@ class VideosLiveM3U8PlaybackWithRawResponse(SecuredRawResponse[RawClient, Server
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -199,7 +207,8 @@ class AsyncVideosLiveM3U8PlaybackWithRawResponse(SecuredRawResponse[AsyncRawClie
         Args:
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -210,7 +219,7 @@ class AsyncVideosLiveM3U8PlaybackWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_one_time_event_m3_u8_playback_error_mapper,
             request_options=request_options,
         )
@@ -224,7 +233,8 @@ class AsyncVideosLiveM3U8PlaybackWithRawResponse(SecuredRawResponse[AsyncRawClie
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -235,7 +245,7 @@ class AsyncVideosLiveM3U8PlaybackWithRawResponse(SecuredRawResponse[AsyncRawClie
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_one_time_event_m3_u8_playback_alt1_error_mapper,
             request_options=request_options,
         )

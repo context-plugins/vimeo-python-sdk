@@ -11,8 +11,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     param,
+    unwrap,
 )
 from ..errors.export_vpaas_viewer_analytics_error import (
     ExportVpaasViewerAnalyticsErrorBody,
@@ -35,7 +37,8 @@ class LiveAnalytics:
 
         Args:
             live_event_id: The ID of the live event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The analytics export has been queued for processing.
@@ -44,9 +47,9 @@ class LiveAnalytics:
             ApiError: Error code 9101: The user isn't authorized. Error code 3422: The authenticated user can't export
                 analytics for this event, or the event is not owned by a VPaaS managed user. Error code 5000: No such
                 event exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.export_vpaas_viewer_analytics(
-            live_event_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.export_vpaas_viewer_analytics(live_event_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> LiveAnalyticsWithRawResponse:
@@ -67,7 +70,8 @@ class AsyncLiveAnalytics:
 
         Args:
             live_event_id: The ID of the live event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The analytics export has been queued for processing.
@@ -76,9 +80,9 @@ class AsyncLiveAnalytics:
             ApiError: Error code 9101: The user isn't authorized. Error code 3422: The authenticated user can't export
                 analytics for this event, or the event is not owned by a VPaaS managed user. Error code 5000: No such
                 event exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.export_vpaas_viewer_analytics(live_event_id, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveAnalyticsWithRawResponse:
@@ -96,7 +100,8 @@ class LiveAnalyticsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             live_event_id: The ID of the live event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -125,7 +130,8 @@ class AsyncLiveAnalyticsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             live_event_id: The ID of the live event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -137,7 +143,7 @@ class AsyncLiveAnalyticsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=export_vpaas_viewer_analytics_error_mapper,
             request_options=request_options,
         )

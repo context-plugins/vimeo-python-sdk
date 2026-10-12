@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_text_track_alt1_error import CreateTextTrackAlt1ErrorBody, create_text_track_alt1_error_mapper
 from ..errors.create_text_track_error import CreateTextTrackErrorBody, create_text_track_error_mapper
@@ -53,7 +56,8 @@ class VideosTextTracks:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was added.
@@ -61,7 +65,7 @@ class VideosTextTracks:
         Raises:
             ApiError: * The authenticated user can't add the text track. * Error code 2204: The request contains errors.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_text_track(video_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_text_track(video_id, body, request_options=request_options))
 
     def create_text_track_alt1(
         self,
@@ -78,7 +82,8 @@ class VideosTextTracks:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was added.
@@ -86,9 +91,9 @@ class VideosTextTracks:
         Raises:
             ApiError: * The authenticated user can't add the text track. * Error code 2204: The request contains errors.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.create_text_track_alt1(
-            channel_id, video_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_text_track_alt1(channel_id, video_id, body, request_options=request_options)
+        )
 
     def delete_text_track(
         self, texttrack_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -99,7 +104,8 @@ class VideosTextTracks:
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was deleted.
@@ -110,9 +116,9 @@ class VideosTextTracks:
                 user can't delete the text track. * Error code 5014: The specified text track doesn't exist. * Error
                 code 5015: The specified text track belongs to a different video. ``error`` is ``Error | LegacyError |
                 RawError``."""
-        return self._with_raw_response.delete_text_track(
-            texttrack_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_text_track(texttrack_id, video_id, request_options=request_options)
+        )
 
     def edit_text_track(
         self,
@@ -128,7 +134,8 @@ class VideosTextTracks:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was edited.
@@ -139,9 +146,9 @@ class VideosTextTracks:
                 Error code 3431: This text track is disabled. * No such video or text track exists. * Error code 5014:
                 The specified text track doesn't exist. * Error code 5015: The specified text track belongs to a
                 different video. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.edit_text_track(
-            texttrack_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_text_track(texttrack_id, video_id, body=body, request_options=request_options)
+        )
 
     def get_text_track(
         self, texttrack_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -152,7 +159,8 @@ class VideosTextTracks:
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was returned.
@@ -162,7 +170,7 @@ class VideosTextTracks:
                 Error code 3431: This text track is disabled. * No such video or text track exists. * Error code 5014:
                 The specified text track doesn't exist. * Error code 5015: The specified text track belongs to a
                 different video. ``error`` is ``Error | LegacyError | RawError``."""
-        return self._with_raw_response.get_text_track(texttrack_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_text_track(texttrack_id, video_id, request_options=request_options))
 
     def get_text_tracks(
         self,
@@ -179,16 +187,19 @@ class VideosTextTracks:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text tracks were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_text_tracks(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_text_tracks(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_text_tracks_alt1(
         self,
@@ -207,16 +218,19 @@ class VideosTextTracks:
             version_id: Value sent with the request.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text tracks were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_text_tracks_alt1(
-            video_id, version_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_text_tracks_alt1(
+                video_id, version_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_text_tracks_alt2(
         self,
@@ -235,16 +249,19 @@ class VideosTextTracks:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text tracks were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_text_tracks_alt2(
-            channel_id, video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_text_tracks_alt2(
+                channel_id, video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_text_tracks_alt3(
         self,
@@ -263,16 +280,19 @@ class VideosTextTracks:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text tracks were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_text_tracks_alt3(
-            album_id, video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_text_tracks_alt3(
+                album_id, video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosTextTracksWithRawResponse:
@@ -296,7 +316,8 @@ class AsyncVideosTextTracks:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was added.
@@ -304,9 +325,7 @@ class AsyncVideosTextTracks:
         Raises:
             ApiError: * The authenticated user can't add the text track. * Error code 2204: The request contains errors.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
-            await self._with_raw_response.create_text_track(video_id, body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.create_text_track(video_id, body, request_options=request_options))
 
     async def create_text_track_alt1(
         self,
@@ -323,7 +342,8 @@ class AsyncVideosTextTracks:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was added.
@@ -331,11 +351,11 @@ class AsyncVideosTextTracks:
         Raises:
             ApiError: * The authenticated user can't add the text track. * Error code 2204: The request contains errors.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_text_track_alt1(
                 channel_id, video_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_text_track(
         self, texttrack_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -346,7 +366,8 @@ class AsyncVideosTextTracks:
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was deleted.
@@ -357,9 +378,9 @@ class AsyncVideosTextTracks:
                 user can't delete the text track. * Error code 5014: The specified text track doesn't exist. * Error
                 code 5015: The specified text track belongs to a different video. ``error`` is ``Error | LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_text_track(texttrack_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_text_track(
         self,
@@ -375,7 +396,8 @@ class AsyncVideosTextTracks:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was edited.
@@ -386,11 +408,11 @@ class AsyncVideosTextTracks:
                 Error code 3431: This text track is disabled. * No such video or text track exists. * Error code 5014:
                 The specified text track doesn't exist. * Error code 5015: The specified text track belongs to a
                 different video. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_text_track(
                 texttrack_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_text_track(
         self, texttrack_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -401,7 +423,8 @@ class AsyncVideosTextTracks:
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text track was returned.
@@ -411,9 +434,9 @@ class AsyncVideosTextTracks:
                 Error code 3431: This text track is disabled. * No such video or text track exists. * Error code 5014:
                 The specified text track doesn't exist. * Error code 5015: The specified text track belongs to a
                 different video. ``error`` is ``Error | LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_text_track(texttrack_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_text_tracks(
         self,
@@ -430,18 +453,19 @@ class AsyncVideosTextTracks:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text tracks were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_text_tracks(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_text_tracks_alt1(
         self,
@@ -460,18 +484,19 @@ class AsyncVideosTextTracks:
             version_id: Value sent with the request.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text tracks were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_text_tracks_alt1(
                 video_id, version_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_text_tracks_alt2(
         self,
@@ -490,18 +515,19 @@ class AsyncVideosTextTracks:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text tracks were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_text_tracks_alt2(
                 channel_id, video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_text_tracks_alt3(
         self,
@@ -520,18 +546,19 @@ class AsyncVideosTextTracks:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The text tracks were returned.
 
         Raises:
             ApiError: No such video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_text_tracks_alt3(
                 album_id, video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosTextTracksWithRawResponse:
@@ -552,7 +579,8 @@ class VideosTextTracksWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -585,7 +613,8 @@ class VideosTextTracksWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -612,7 +641,8 @@ class VideosTextTracksWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -643,7 +673,8 @@ class VideosTextTracksWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -670,7 +701,8 @@ class VideosTextTracksWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -701,7 +733,8 @@ class VideosTextTracksWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -735,7 +768,8 @@ class VideosTextTracksWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             version_id: Value sent with the request.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -769,7 +803,8 @@ class VideosTextTracksWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -803,7 +838,8 @@ class VideosTextTracksWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -835,7 +871,8 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -848,7 +885,7 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TextTrack],
+            decoder=async_json_decoder[TextTrack],
             error_mapper=create_text_track_error_mapper,
             request_options=request_options,
         )
@@ -868,7 +905,8 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -881,7 +919,7 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TextTrack],
+            decoder=async_json_decoder[TextTrack],
             error_mapper=create_text_track_alt1_error_mapper,
             request_options=request_options,
         )
@@ -895,7 +933,8 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -907,7 +946,7 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_text_track_error_mapper,
             request_options=request_options,
         )
@@ -926,7 +965,8 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -939,7 +979,7 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TextTrack],
+            decoder=async_json_decoder[TextTrack],
             error_mapper=edit_text_track_error_mapper,
             request_options=request_options,
         )
@@ -953,7 +993,8 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             texttrack_id: The ID of the text track.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -964,7 +1005,7 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TextTrack],
+            decoder=async_json_decoder[TextTrack],
             error_mapper=get_text_track_error_mapper,
             request_options=request_options,
         )
@@ -984,7 +1025,8 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -996,7 +1038,7 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TextTrackConnection],
+            decoder=async_json_decoder[TextTrackConnection],
             error_mapper=get_text_tracks_error_mapper,
             request_options=request_options,
         )
@@ -1018,7 +1060,8 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             version_id: Value sent with the request.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1030,7 +1073,7 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TextTrackConnection],
+            decoder=async_json_decoder[TextTrackConnection],
             error_mapper=get_text_tracks_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1052,7 +1095,8 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1064,7 +1108,7 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TextTrackConnection],
+            decoder=async_json_decoder[TextTrackConnection],
             error_mapper=get_text_tracks_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1086,7 +1130,8 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1098,7 +1143,7 @@ class AsyncVideosTextTracksWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[TextTrackConnection],
+            decoder=async_json_decoder[TextTrackConnection],
             error_mapper=get_text_tracks_alt3_error_mapper,
             request_options=request_options,
         )

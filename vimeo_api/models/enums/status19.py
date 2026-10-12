@@ -5,16 +5,26 @@ from ...core import open_enum_validator
 
 
 class Status19(str, Enum):
-    """The status of the video's edit session. This data requires a bearer token with the ``private`` scope.
+    """The status of the subscription.
 
     Option descriptions:
-     * ``done`` - The video is finished processing.
-     * ``failed`` - Video processing has failed.
-     * ``processing`` - The video is still being processed."""
+     * ``SUBSCRIPTION_STATUS_ACTIVE`` - The subscription is active.
+     * ``SUBSCRIPTION_STATUS_CANCELLED`` - The subscription is canceled.
+     * ``SUBSCRIPTION_STATUS_DRAFT`` - The subscription is a draft.
+     * ``SUBSCRIPTION_STATUS_EXPIRED`` - The subscription is expired.
+     * ``SUBSCRIPTION_STATUS_PAUSED`` - The subscription is paused.
+     * ``SUBSCRIPTION_STATUS_PENDING_ACCEPTANCE`` - The subscription is pending acceptance.
+     * ``SUBSCRIPTION_STATUS_PENDING_ACTIVATION`` - The subscription is pending activation.
+     * ``SUBSCRIPTION_STATUS_UNSPECIFIED`` - The subscription status is unspecified."""
 
-    DONE = "done"
-    FAILED = "failed"
-    PROCESSING = "processing"
+    SUBSCRIPTION_STATUS_ACTIVE = "SUBSCRIPTION_STATUS_ACTIVE"
+    SUBSCRIPTION_STATUS_CANCELLED = "SUBSCRIPTION_STATUS_CANCELLED"
+    SUBSCRIPTION_STATUS_DRAFT = "SUBSCRIPTION_STATUS_DRAFT"
+    SUBSCRIPTION_STATUS_EXPIRED = "SUBSCRIPTION_STATUS_EXPIRED"
+    SUBSCRIPTION_STATUS_PAUSED = "SUBSCRIPTION_STATUS_PAUSED"
+    SUBSCRIPTION_STATUS_PENDING_ACCEPTANCE = "SUBSCRIPTION_STATUS_PENDING_ACCEPTANCE"
+    SUBSCRIPTION_STATUS_PENDING_ACTIVATION = "SUBSCRIPTION_STATUS_PENDING_ACTIVATION"
+    SUBSCRIPTION_STATUS_UNSPECIFIED = "SUBSCRIPTION_STATUS_UNSPECIFIED"
 
     __str__ = str.__str__
 

@@ -18,5 +18,5 @@ class Metadata(SdkBaseModel):
 
 
 class MetadataDict(TypedDict):
-    connections: Connections | ConnectionsDict
-    interactions: Interactions | InteractionsDict
+    connections: ConnectionsDict
+    interactions: InteractionsDict

@@ -19,5 +19,5 @@ class LiveEventOccurrenceConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[LiveEventOccurrence | LiveEventOccurrenceDict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[LiveEventOccurrenceDict]]

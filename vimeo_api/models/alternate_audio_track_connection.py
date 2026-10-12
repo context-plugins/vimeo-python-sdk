@@ -19,5 +19,5 @@ class AlternateAudioTrackConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[AlternateAudioTrack | AlternateAudioTrackDict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[AlternateAudioTrackDict]]

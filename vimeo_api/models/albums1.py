@@ -24,7 +24,7 @@ class Albums1(SdkBaseModel):
 
 
 class Albums1Dict(TypedDict):
-    disabled: NotRequired[Disabled1 | Disabled1Dict]
+    disabled: NotRequired[Disabled1Dict]
     options: NotRequired[list[str]]
     total: NotRequired[float]
     uri: NotRequired[str]

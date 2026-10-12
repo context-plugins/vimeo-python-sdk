@@ -13,5 +13,5 @@ class Logos16(SdkBaseModel):
 
 
 class Logos16Dict(TypedDict):
-    custom: NotRequired[Custom16 | Custom16Dict]
+    custom: NotRequired[Custom16Dict]
     vimeo: NotRequired[bool]

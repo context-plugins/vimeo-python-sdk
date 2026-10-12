@@ -5,7 +5,7 @@ from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
 from .album import Album, AlbumDict
-from .enums.type17 import Type17OrStr
+from .enums.type21 import Type21OrStr
 from .project import Project, ProjectDict
 from .recurring_event import RecurringEvent, RecurringEventDict
 from .video import Video, VideoDict
@@ -21,7 +21,7 @@ class FederatedSearchItems(SdkBaseModel):
     showcase: Optional[Album] = UNSET
     """The project item showcase."""
 
-    type_: Type17OrStr = Field(alias="type")
+    type_: Type21OrStr = Field(alias="type")
     """The project item type.
 
     Option descriptions:
@@ -35,8 +35,8 @@ class FederatedSearchItems(SdkBaseModel):
 
 
 class FederatedSearchItemsDict(TypedDict):
-    folder: NotRequired[Project | ProjectDict]
-    live_event: NotRequired[RecurringEvent | RecurringEventDict]
-    showcase: NotRequired[Album | AlbumDict]
-    type_: Type17OrStr
-    video: NotRequired[Video | VideoDict]
+    folder: NotRequired[ProjectDict]
+    live_event: NotRequired[RecurringEventDict]
+    showcase: NotRequired[AlbumDict]
+    type_: Type21OrStr
+    video: NotRequired[VideoDict]

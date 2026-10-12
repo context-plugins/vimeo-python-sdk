@@ -11,4 +11,4 @@ class Metdata(SdkBaseModel):
 
 
 class MetdataDict(TypedDict):
-    interactions: Interactions9 | Interactions9Dict
+    interactions: Interactions9Dict

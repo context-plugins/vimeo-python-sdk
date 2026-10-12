@@ -12,4 +12,4 @@ class Metadata8(SdkBaseModel):
 
 
 class Metadata8Dict(TypedDict):
-    connections: Connections8 | Connections8Dict
+    connections: Connections8Dict

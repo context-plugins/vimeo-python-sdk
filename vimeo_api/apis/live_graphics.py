@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_composer_video_graphic_item_error import (
     AddComposerVideoGraphicItemErrorBody,
@@ -53,7 +56,8 @@ class LiveGraphics:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video graphic item was added.
@@ -62,9 +66,11 @@ class LiveGraphics:
             ApiError: Error code 3978: The Composer graphics API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_composer_video_graphic_item(
-            live_event_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_composer_video_graphic_item(
+                live_event_id, body, request_options=request_options
+            ),
+        )
 
     def delete_composer_video_graphic_item(
         self, live_event_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -74,7 +80,8 @@ class LiveGraphics:
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the associated video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video graphic item was deleted.
@@ -83,9 +90,11 @@ class LiveGraphics:
             ApiError: Error code 3978: The Composer graphics API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't delete the specified video graphic item. * Error code 8000: The user
                 credentials are invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_composer_video_graphic_item(
-            live_event_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_composer_video_graphic_item(
+                live_event_id, video_id, request_options=request_options
+            ),
+        )
 
     def get_composer_video_graphic_items(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -94,7 +103,8 @@ class LiveGraphics:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video graphic items were returned.
@@ -103,9 +113,9 @@ class LiveGraphics:
             ApiError: Error code 3978: The Composer graphics API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_composer_video_graphic_items(
-            live_event_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_composer_video_graphic_items(live_event_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> LiveGraphicsWithRawResponse:
@@ -128,7 +138,8 @@ class AsyncLiveGraphics:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video graphic item was added.
@@ -137,11 +148,11 @@ class AsyncLiveGraphics:
             ApiError: Error code 3978: The Composer graphics API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_composer_video_graphic_item(
                 live_event_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_composer_video_graphic_item(
         self, live_event_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -151,7 +162,8 @@ class AsyncLiveGraphics:
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the associated video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video graphic item was deleted.
@@ -160,11 +172,11 @@ class AsyncLiveGraphics:
             ApiError: Error code 3978: The Composer graphics API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't delete the specified video graphic item. * Error code 8000: The user
                 credentials are invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_composer_video_graphic_item(
                 live_event_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_composer_video_graphic_items(
         self, live_event_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -173,7 +185,8 @@ class AsyncLiveGraphics:
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video graphic items were returned.
@@ -182,11 +195,11 @@ class AsyncLiveGraphics:
             ApiError: Error code 3978: The Composer graphics API isn't supported in the context of venues. * Error code
                 3200: The authenticated user can't access the event. * Error code 8000: The user credentials are
                 invalid. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_composer_video_graphic_items(
                 live_event_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveGraphicsWithRawResponse:
@@ -206,7 +219,8 @@ class LiveGraphicsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -232,7 +246,8 @@ class LiveGraphicsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the associated video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -256,7 +271,8 @@ class LiveGraphicsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -286,7 +302,8 @@ class AsyncLiveGraphicsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -299,7 +316,7 @@ class AsyncLiveGraphicsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ComposerGraphics],
+            decoder=async_json_decoder[ComposerGraphics],
             error_mapper=add_composer_video_graphic_item_error_mapper,
             request_options=request_options,
         )
@@ -312,7 +329,8 @@ class AsyncLiveGraphicsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the associated video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -324,7 +342,7 @@ class AsyncLiveGraphicsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_composer_video_graphic_item_error_mapper,
             request_options=request_options,
         )
@@ -336,7 +354,8 @@ class AsyncLiveGraphicsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
 
         Args:
             live_event_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -347,7 +366,7 @@ class AsyncLiveGraphicsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[ComposerGraphicsConnection],
+            decoder=async_json_decoder[ComposerGraphicsConnection],
             error_mapper=get_composer_video_graphic_items_error_mapper,
             request_options=request_options,
         )

@@ -52,14 +52,14 @@ class ShowcaseConfig(SdkBaseModel):
 
 
 class ShowcaseConfigDict(TypedDict):
-    banner: BannerConfig | BannerConfigDict
-    layout: LayoutConfig | LayoutConfigDict
-    navigation: NavigationConfig | NavigationConfigDict
-    playback: PlaybackConfig | PlaybackConfigDict
-    show_account_name: ShowAccountName | ShowAccountNameDict
-    show_avatar: ShowAvatar | ShowAvatarDict
-    show_video_description: ShowVideoDescription | ShowVideoDescriptionDict
-    show_video_details: ShowVideoDetails | ShowVideoDetailsDict
-    show_video_player_cards: ShowVideoPlayerCards | ShowVideoPlayerCardsDict
-    show_video_title: ShowVideoTitle | ShowVideoTitleDict
-    text_cta_alignment: TextCtaAlignment | TextCtaAlignmentDict
+    banner: BannerConfigDict
+    layout: LayoutConfigDict
+    navigation: NavigationConfigDict
+    playback: PlaybackConfigDict
+    show_account_name: ShowAccountNameDict
+    show_avatar: ShowAvatarDict
+    show_video_description: ShowVideoDescriptionDict
+    show_video_details: ShowVideoDetailsDict
+    show_video_player_cards: ShowVideoPlayerCardsDict
+    show_video_title: ShowVideoTitleDict
+    text_cta_alignment: TextCtaAlignmentDict

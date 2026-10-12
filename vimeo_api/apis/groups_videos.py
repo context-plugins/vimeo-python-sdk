@@ -11,9 +11,12 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_video_to_group_error import AddVideoToGroupErrorBody, add_video_to_group_error_mapper
 from ..errors.delete_video_from_group_error import DeleteVideoFromGroupErrorBody, delete_video_from_group_error_mapper
@@ -44,7 +47,8 @@ class GroupsVideos:
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -53,7 +57,7 @@ class GroupsVideos:
             ApiError: * The video is already in the group. * The authenticated user can't add videos to the group. Error
                 code 5451: This resource is restricted in your region. ``error`` is ``LegacyError | Error |
                 RawError``."""
-        return self._with_raw_response.add_video_to_group(group_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_video_to_group(group_id, video_id, request_options=request_options))
 
     def delete_video_from_group(
         self, group_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -63,7 +67,8 @@ class GroupsVideos:
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -71,9 +76,9 @@ class GroupsVideos:
         Raises:
             ApiError: The authenticated user can't remove the video from the group. Error code 5451: This resource is
                 restricted in your region. ``error`` is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.delete_video_from_group(
-            group_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_from_group(group_id, video_id, request_options=request_options)
+        )
 
     def get_available_video_groups(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -82,7 +87,8 @@ class GroupsVideos:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The groups were returned.
@@ -91,7 +97,7 @@ class GroupsVideos:
             ApiError: Error code 3433: The authenticated user can't add the video to or remove the video from any
                 groups. Error code 5451: This resource is restricted in your region. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_available_video_groups(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_available_video_groups(video_id, request_options=request_options))
 
     def get_group_video(
         self, group_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -102,7 +108,8 @@ class GroupsVideos:
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -110,14 +117,14 @@ class GroupsVideos:
         Raises:
             ApiError: * No such video or group exists. * Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_group_video(group_id, video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_group_video(group_id, video_id, request_options=request_options))
 
     def get_group_videos(
         self,
         group_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -131,7 +138,7 @@ class GroupsVideos:
             group_id: The ID of the group.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -142,7 +149,8 @@ class GroupsVideos:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by creation date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by
                 number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -150,17 +158,19 @@ class GroupsVideos:
         Raises:
             ApiError: * No such group exists. * Error code 5451: This resource is restricted in your region. ``error``
                 is ``LegacyError | RawError``."""
-        return self._with_raw_response.get_group_videos(
-            group_id,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_group_videos(
+                group_id,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> GroupsVideosWithRawResponse:
@@ -179,7 +189,8 @@ class AsyncGroupsVideos:
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
@@ -188,9 +199,9 @@ class AsyncGroupsVideos:
             ApiError: * The video is already in the group. * The authenticated user can't add videos to the group. Error
                 code 5451: This resource is restricted in your region. ``error`` is ``LegacyError | Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_group(group_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_video_from_group(
         self, group_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -200,7 +211,8 @@ class AsyncGroupsVideos:
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
@@ -208,9 +220,9 @@ class AsyncGroupsVideos:
         Raises:
             ApiError: The authenticated user can't remove the video from the group. Error code 5451: This resource is
                 restricted in your region. ``error`` is ``LegacyError | Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_from_group(group_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_available_video_groups(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -219,7 +231,8 @@ class AsyncGroupsVideos:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The groups were returned.
@@ -228,9 +241,9 @@ class AsyncGroupsVideos:
             ApiError: Error code 3433: The authenticated user can't add the video to or remove the video from any
                 groups. Error code 5451: This resource is restricted in your region. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_available_video_groups(video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_group_video(
         self, group_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -241,7 +254,8 @@ class AsyncGroupsVideos:
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -249,16 +263,16 @@ class AsyncGroupsVideos:
         Raises:
             ApiError: * No such video or group exists. * Error code 5451: This resource is restricted in your region.
                 ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_group_video(group_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_group_videos(
         self,
         group_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -272,7 +286,7 @@ class AsyncGroupsVideos:
             group_id: The ID of the group.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -283,7 +297,8 @@ class AsyncGroupsVideos:
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by creation date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by
                 number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -291,19 +306,19 @@ class AsyncGroupsVideos:
         Raises:
             ApiError: * No such group exists. * Error code 5451: This resource is restricted in your region. ``error``
                 is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_group_videos(
                 group_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncGroupsVideosWithRawResponse:
@@ -319,7 +334,8 @@ class GroupsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -344,7 +360,8 @@ class GroupsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -368,7 +385,8 @@ class GroupsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -393,7 +411,8 @@ class GroupsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -414,7 +433,7 @@ class GroupsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         group_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -428,7 +447,7 @@ class GroupsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
             group_id: The ID of the group.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -439,7 +458,8 @@ class GroupsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by creation date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by
                 number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -449,7 +469,7 @@ class GroupsVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
             path_params=[param[float]("group_id", group_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -474,7 +494,8 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -486,7 +507,7 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=add_video_to_group_error_mapper,
             request_options=request_options,
         )
@@ -499,7 +520,8 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -511,7 +533,7 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_from_group_error_mapper,
             request_options=request_options,
         )
@@ -523,7 +545,8 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -534,7 +557,7 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[GroupConnection],
+            decoder=async_json_decoder[GroupConnection],
             error_mapper=get_available_video_groups_error_mapper,
             request_options=request_options,
         )
@@ -548,7 +571,8 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             group_id: The ID of the group.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -559,7 +583,7 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=get_group_video_error_mapper,
             request_options=request_options,
         )
@@ -569,7 +593,7 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         group_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -583,7 +607,7 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             group_id: The ID of the group.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -594,7 +618,8 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
                 alphabetically. * ``comments`` - Sort the results by number of comments. * ``date`` - Sort the results
                 by creation date. * ``duration`` - Sort the results by duration. * ``likes`` - Sort the results by
                 number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -604,7 +629,7 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             path_params=[param[float]("group_id", group_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -614,7 +639,7 @@ class AsyncGroupsVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_group_videos_error_mapper,
             request_options=request_options,
         )

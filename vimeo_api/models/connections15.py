@@ -31,8 +31,8 @@ class Connections15(SdkBaseModel):
 
 
 class Connections15Dict(TypedDict):
-    live_video: LiveVideo | LiveVideoDict | None
-    pictures: Pictures3 | Pictures3Dict
-    pre_live_video: PreLiveVideo | PreLiveVideoDict | None
-    team_member: TeamMember | TeamMemberDict | None
-    videos: Videos10 | Videos10Dict
+    live_video: LiveVideoDict | None
+    pictures: Pictures3Dict
+    pre_live_video: PreLiveVideoDict | None
+    team_member: TeamMemberDict | None
+    videos: Videos10Dict

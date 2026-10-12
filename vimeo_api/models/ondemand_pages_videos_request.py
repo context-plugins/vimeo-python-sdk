@@ -5,7 +5,7 @@ from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
 from .buy5 import Buy5, Buy5Dict
-from .enums.type38 import Type38OrStr
+from .enums.type42 import Type42OrStr
 from .rent5 import Rent5, Rent5Dict
 
 
@@ -18,7 +18,7 @@ class OndemandPagesVideosRequest(SdkBaseModel):
     """The release year of the video."""
 
     rent: Optional[Rent5] = UNSET
-    type_: Type38OrStr = Field(alias="type")
+    type_: Type42OrStr = Field(alias="type")
     """The type of the video.
 
     Option descriptions:
@@ -28,8 +28,8 @@ class OndemandPagesVideosRequest(SdkBaseModel):
 
 
 class OndemandPagesVideosRequestDict(TypedDict):
-    buy: NotRequired[Buy5 | Buy5Dict]
+    buy: NotRequired[Buy5Dict]
     position: NotRequired[float]
     release_year: NotRequired[float]
-    rent: NotRequired[Rent5 | Rent5Dict]
-    type_: Type38OrStr
+    rent: NotRequired[Rent5Dict]
+    type_: Type42OrStr

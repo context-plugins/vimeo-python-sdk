@@ -12,10 +12,13 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.fragments import Fragments
 from ..server.server import Server
@@ -30,42 +33,45 @@ class VideosFragments:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The fragments were deleted.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_fragments(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_fragments(video_id, request_options=request_options))
 
     def get_fragments(self, video_id: float, *, request_options: RequestOptionsOrDict | None = None) -> Fragments:
         """This method returns all of the fragments associated with the specified video.
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The fragments were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_fragments(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_fragments(video_id, request_options=request_options))
 
     def put_fragments(self, video_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method updates the specified video with new fragments.
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The fragments were updated.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.put_fragments(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.put_fragments(video_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> VideosFragmentsWithRawResponse:
@@ -81,42 +87,45 @@ class AsyncVideosFragments:
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The fragments were deleted.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.delete_fragments(video_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_fragments(video_id, request_options=request_options))
 
     async def get_fragments(self, video_id: float, *, request_options: RequestOptionsOrDict | None = None) -> Fragments:
         """This method returns all of the fragments associated with the specified video.
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The fragments were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_fragments(video_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_fragments(video_id, request_options=request_options))
 
     async def put_fragments(self, video_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method updates the specified video with new fragments.
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The fragments were updated.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.put_fragments(video_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.put_fragments(video_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncVideosFragmentsWithRawResponse:
@@ -131,7 +140,8 @@ class VideosFragmentsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -155,7 +165,8 @@ class VideosFragmentsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -178,7 +189,8 @@ class VideosFragmentsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -204,7 +216,8 @@ class AsyncVideosFragmentsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -216,7 +229,7 @@ class AsyncVideosFragmentsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -228,7 +241,8 @@ class AsyncVideosFragmentsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -239,7 +253,7 @@ class AsyncVideosFragmentsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Fragments],
+            decoder=async_json_decoder[Fragments],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -251,7 +265,8 @@ class AsyncVideosFragmentsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -263,7 +278,7 @@ class AsyncVideosFragmentsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )

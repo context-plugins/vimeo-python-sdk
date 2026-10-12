@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import Literal
-
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
+from .enums.status11 import Status11OrStr
 
 
 class LiveVideo(SdkBaseModel):
@@ -13,7 +12,7 @@ class LiveVideo(SdkBaseModel):
     options: list[str]
     """An array of HTTP methods permitted on this URI."""
 
-    status: Literal["streaming"] = "streaming"
+    status: Status11OrStr
     """The status of the live video's RTMP link.
 
     Option descriptions:
@@ -25,5 +24,5 @@ class LiveVideo(SdkBaseModel):
 
 class LiveVideoDict(TypedDict):
     options: list[str]
-    status: NotRequired[Literal["streaming"]]
+    status: Status11OrStr
     uri: str

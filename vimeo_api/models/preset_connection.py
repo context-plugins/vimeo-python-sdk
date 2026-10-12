@@ -19,5 +19,5 @@ class PresetConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[Preset | PresetDict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[PresetDict]]

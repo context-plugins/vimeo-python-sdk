@@ -6,7 +6,7 @@ from typing_extensions import NotRequired, TypedDict
 from ..core import UNSET, Optional, OptionalNullable, SdkBaseModel
 from .enums.privacy9 import Privacy9OrStr
 from .enums.service_name1 import ServiceName1OrStr
-from .enums.type15 import Type15OrStr
+from .enums.type19 import Type19OrStr
 
 
 class UsersLiveEventsDestinationsRequest(SdkBaseModel):
@@ -53,7 +53,7 @@ class UsersLiveEventsDestinationsRequest(SdkBaseModel):
     stream_url: Optional[str] = UNSET
     """The RTMP URL for receiving the video stream."""
 
-    type_: Type15OrStr = Field(alias="type")
+    type_: Type19OrStr = Field(alias="type")
     """The type of the simulcast destination.
 
     Option descriptions:
@@ -74,4 +74,4 @@ class UsersLiveEventsDestinationsRequestDict(TypedDict):
     service_name: ServiceName1OrStr
     stream_key: NotRequired[str]
     stream_url: NotRequired[str]
-    type_: Type15OrStr
+    type_: Type19OrStr

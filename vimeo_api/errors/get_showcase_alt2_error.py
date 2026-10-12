@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final, TypeAlias
 
-from ..core import ErrorMapper, HttpResponse, RawError, decode_json
+from ..core import ErrorMapper, RawError, decode_json
 from ..models.legacy_error import LegacyError
 
 GetShowcaseAlt2ErrorBody: TypeAlias = LegacyError | RawError
@@ -11,12 +11,12 @@ GetShowcaseAlt2ErrorBody: TypeAlias = LegacyError | RawError
 
 @dataclass(frozen=True, slots=True)
 class _GetShowcaseAlt2Error:
-    def map(self, response: HttpResponse) -> GetShowcaseAlt2ErrorBody:
-        match response.status_code:
+    def map(self, status_code: int, content: bytes) -> GetShowcaseAlt2ErrorBody:
+        match status_code:
             case 404:
-                return decode_json[LegacyError](response)
+                return decode_json[LegacyError](content)
             case _:
-                return RawError(response)
+                return RawError(status_code, content)
 
 
 get_showcase_alt2_error_mapper: Final[ErrorMapper[GetShowcaseAlt2ErrorBody]] = _GetShowcaseAlt2Error()

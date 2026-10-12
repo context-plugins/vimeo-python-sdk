@@ -21,5 +21,5 @@ class DeletedBy(SdkBaseModel):
 
 class DeletedByDict(TypedDict):
     name: str
-    pictures: Picture | PictureDict
+    pictures: PictureDict
     uri: str

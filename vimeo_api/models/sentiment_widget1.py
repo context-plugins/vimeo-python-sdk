@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.type50 import Type50OrStr
+from .enums.type54 import Type54OrStr
 
 
 class SentimentWidget1(SdkBaseModel):
@@ -20,7 +20,7 @@ class SentimentWidget1(SdkBaseModel):
     start_time: Optional[float] = UNSET
     """The playback position in seconds when the widget appears."""
 
-    type_: Optional[Type50OrStr] = Field(default=UNSET, alias="type")
+    type_: Optional[Type54OrStr] = Field(default=UNSET, alias="type")
     """The widget variant.
 
     Option descriptions:
@@ -33,4 +33,4 @@ class SentimentWidget1Dict(TypedDict):
     headline: NotRequired[str]
     id: NotRequired[str]
     start_time: NotRequired[float]
-    type_: NotRequired[Type50OrStr]
+    type_: NotRequired[Type54OrStr]

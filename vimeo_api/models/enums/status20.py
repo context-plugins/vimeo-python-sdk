@@ -5,16 +5,16 @@ from ...core import open_enum_validator
 
 
 class Status20(str, Enum):
-    """The status code for the availability of the video version.
+    """The purchase status of the product.
 
     Option descriptions:
-     * ``complete`` - Transcoding is complete. The video version is available.
-     * ``error`` - There was a transcoding error. The video version isn't available.
-     * ``in_progress`` - Transcoding is in progress. The video version isn't available yet."""
+     * ``available`` - The product is available for purchase.
+     * ``purchased`` - The product is already purchased.
+     * ``unavailable`` - The product isn't available for purchase."""
 
-    COMPLETE = "complete"
-    ERROR = "error"
-    IN_PROGRESS = "in_progress"
+    AVAILABLE = "available"
+    PURCHASED = "purchased"
+    UNAVAILABLE = "unavailable"
 
     __str__ = str.__str__
 

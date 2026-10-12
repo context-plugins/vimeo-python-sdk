@@ -11,8 +11,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     param,
+    unwrap,
 )
 from ..errors.delete_folder_embed_preset_error import (
     DeleteFolderEmbedPresetErrorBody,
@@ -40,16 +42,19 @@ class EmbedPresetsFolders:
             preset_id: The ID of the embed preset.
             project_id: The ID of the folder.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was removed.
 
         Raises:
             ApiError: No such folder or embed preset exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_folder_embed_preset(
-            preset_id, project_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_folder_embed_preset(
+                preset_id, project_id, user_id, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> EmbedPresetsFoldersWithRawResponse:
@@ -75,18 +80,19 @@ class AsyncEmbedPresetsFolders:
             preset_id: The ID of the embed preset.
             project_id: The ID of the folder.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The embed preset was removed.
 
         Raises:
             ApiError: No such folder or embed preset exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_folder_embed_preset(
                 preset_id, project_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncEmbedPresetsFoldersWithRawResponse:
@@ -109,7 +115,8 @@ class EmbedPresetsFoldersWithRawResponse(SecuredRawResponse[RawClient, Server, A
             preset_id: The ID of the embed preset.
             project_id: The ID of the folder.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -147,7 +154,8 @@ class AsyncEmbedPresetsFoldersWithRawResponse(SecuredRawResponse[AsyncRawClient,
             preset_id: The ID of the embed preset.
             project_id: The ID of the folder.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -163,7 +171,7 @@ class AsyncEmbedPresetsFoldersWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_folder_embed_preset_error_mapper,
             request_options=request_options,
         )

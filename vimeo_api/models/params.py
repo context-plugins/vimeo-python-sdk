@@ -57,11 +57,11 @@ class Params(SdkBaseModel):
 
 
 class ParamsDict(TypedDict):
-    ai: Ai | AiDict
-    bandwidth: Bandwidth1 | Bandwidth1Dict
+    ai: AiDict
+    bandwidth: Bandwidth1Dict
     restricted_video_storage_limit: str | None
-    seats: Seats | SeatsDict
-    storage: Storage | StorageDict
+    seats: SeatsDict
+    storage: StorageDict
     team_seats: float | None
     video_storage_periodic_quota: str | None
     video_storage_quota_cap: str | None

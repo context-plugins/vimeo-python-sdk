@@ -22,6 +22,6 @@ class Interactions10(SdkBaseModel):
 
 
 class Interactions10Dict(TypedDict):
-    activate: Activate | ActivateDict | None
-    delete: Delete3 | Delete3Dict | None
-    edit: Edit3 | Edit3Dict | None
+    activate: ActivateDict | None
+    delete: Delete3Dict | None
+    edit: Edit3Dict | None

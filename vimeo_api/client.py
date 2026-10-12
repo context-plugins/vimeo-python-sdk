@@ -118,11 +118,12 @@ from .core import (
     ClientCredentialsOrDict,
     ClientCredentialsTokenSource,
     HttpClient,
-    HttpxClient,
+    Httpx2Client,
     OAuth2RefreshableScheme,
     OAuth2Scheme,
     RawClient,
     RefreshableTokenSource,
+    RetryOptionsOrDict,
     TokenSource,
     client_secret_basic,
     no_auth,
@@ -136,6 +137,7 @@ class VimeoApiClient(BaseVimeoApiClient[RawClient]):
         *,
         base_url: str | None = None,
         timeout: float = DEFAULT_TIMEOUT,
+        retry_options: int | RetryOptionsOrDict | None = None,
         custom_http_client: HttpClient | None = None,
         bearer: str | None = None,
         oauth2_authorization_code: AuthorizationCodeCredentialsOrDict[Oauth2AuthorizationCodeScope] | None = None,
@@ -147,9 +149,10 @@ class VimeoApiClient(BaseVimeoApiClient[RawClient]):
             TokenSource[ClientCredentials[Oauth2ClientCredentialsScope]] | None
         ) = None,
     ) -> None:
-        super().__init__(base_url=base_url, timeout=timeout)
+        super().__init__(base_url=base_url, timeout=timeout, retry_options=retry_options)
         self._raw_client = RawClient(
-            http_client=custom_http_client if custom_http_client is not None else HttpxClient(timeout=timeout),
+            http_client=custom_http_client if custom_http_client is not None else Httpx2Client(timeout=timeout),
+            retry_options=self._retry_options,
             global_headers=[
                 param[str]("User-Agent", "VimeoApiClient/3.4.9 Python"),
                 param[str]("X-APIMatic-Lang", "Python"),

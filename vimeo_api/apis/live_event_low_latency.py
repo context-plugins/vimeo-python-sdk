@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.toggle_rle_low_latency_alt1_error import (
     ToggleRleLowLatencyAlt1ErrorBody,
@@ -52,7 +54,8 @@ class LiveEventLowLatency:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The low-latency status of the event was returned.
@@ -60,9 +63,11 @@ class LiveEventLowLatency:
         Raises:
             ApiError: Error code 3200: The authenticated user can't toggle the low-latency option of the event. Error
                 code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.toggle_rle_low_latency(
-            live_event_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.toggle_rle_low_latency(
+                live_event_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     def toggle_rle_low_latency_alt1(
         self,
@@ -76,7 +81,8 @@ class LiveEventLowLatency:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The low-latency status of the event was returned.
@@ -84,9 +90,11 @@ class LiveEventLowLatency:
         Raises:
             ApiError: Error code 3200: The authenticated user can't toggle the low-latency option of the event. Error
                 code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.toggle_rle_low_latency_alt1(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.toggle_rle_low_latency_alt1(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     def toggle_rle_low_latency_alt2(
         self,
@@ -100,7 +108,8 @@ class LiveEventLowLatency:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The low-latency status of the event was returned.
@@ -108,9 +117,11 @@ class LiveEventLowLatency:
         Raises:
             ApiError: Error code 3200: The authenticated user can't toggle the low-latency option of the event. Error
                 code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.toggle_rle_low_latency_alt2(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.toggle_rle_low_latency_alt2(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> LiveEventLowLatencyWithRawResponse:
@@ -135,7 +146,8 @@ class AsyncLiveEventLowLatency:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The low-latency status of the event was returned.
@@ -143,11 +155,11 @@ class AsyncLiveEventLowLatency:
         Raises:
             ApiError: Error code 3200: The authenticated user can't toggle the low-latency option of the event. Error
                 code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.toggle_rle_low_latency(
                 live_event_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def toggle_rle_low_latency_alt1(
         self,
@@ -161,7 +173,8 @@ class AsyncLiveEventLowLatency:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The low-latency status of the event was returned.
@@ -169,11 +182,11 @@ class AsyncLiveEventLowLatency:
         Raises:
             ApiError: Error code 3200: The authenticated user can't toggle the low-latency option of the event. Error
                 code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.toggle_rle_low_latency_alt1(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def toggle_rle_low_latency_alt2(
         self,
@@ -187,7 +200,8 @@ class AsyncLiveEventLowLatency:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The low-latency status of the event was returned.
@@ -195,11 +209,11 @@ class AsyncLiveEventLowLatency:
         Raises:
             ApiError: Error code 3200: The authenticated user can't toggle the low-latency option of the event. Error
                 code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.toggle_rle_low_latency_alt2(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveEventLowLatencyWithRawResponse:
@@ -221,7 +235,8 @@ class LiveEventLowLatencyWithRawResponse(SecuredRawResponse[RawClient, Server, A
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -251,7 +266,8 @@ class LiveEventLowLatencyWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -281,7 +297,8 @@ class LiveEventLowLatencyWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -315,7 +332,8 @@ class AsyncLiveEventLowLatencyWithRawResponse(SecuredRawResponse[AsyncRawClient,
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -328,7 +346,7 @@ class AsyncLiveEventLowLatencyWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEventLowLatency],
+            decoder=async_json_decoder[RecurringEventLowLatency],
             error_mapper=toggle_rle_low_latency_error_mapper,
             request_options=request_options,
         )
@@ -345,7 +363,8 @@ class AsyncLiveEventLowLatencyWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -358,7 +377,7 @@ class AsyncLiveEventLowLatencyWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEventLowLatency],
+            decoder=async_json_decoder[RecurringEventLowLatency],
             error_mapper=toggle_rle_low_latency_alt1_error_mapper,
             request_options=request_options,
         )
@@ -375,7 +394,8 @@ class AsyncLiveEventLowLatencyWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -388,7 +408,7 @@ class AsyncLiveEventLowLatencyWithRawResponse(SecuredRawResponse[AsyncRawClient,
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[RecurringEventLowLatency],
+            decoder=async_json_decoder[RecurringEventLowLatency],
             error_mapper=toggle_rle_low_latency_alt2_error_mapper,
             request_options=request_options,
         )

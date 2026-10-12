@@ -14,4 +14,4 @@ class Metadata18(SdkBaseModel):
 
 
 class Metadata18Dict(TypedDict):
-    connections: Connections17 | Connections17Dict
+    connections: Connections17Dict

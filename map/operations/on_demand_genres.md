@@ -63,9 +63,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /ondemand/genres/{genre_id}/pages`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_genre_vods(genre_id: str, *, direction: DirectionOrStr | None = None, filter: Filter24OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort41OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_genre_vods(genre_id: str, *, direction: DirectionOrStr | None = None, filter_: Filter24OrStr | None = None, page: float | None = None, per_page: float | None = None, query: str | None = None, sort: Sort41OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `genre_id`
-- **Params**: `genre_id` — path · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `query` — query · `sort` — query
+- **Params**: `genre_id` — path · `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `query` — query · `sort` — query
 - **Returns (parsed)**: `OnDemandPageConnection`
 - **Returns (raw)**: `ApiResult[OnDemandPageConnection, GetGenreVodsErrorBody]`
 - **Error**: `GetGenreVodsErrorBody` — **Case A (typed)**

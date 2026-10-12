@@ -17,5 +17,5 @@ class Logos1(SdkBaseModel):
 
 
 class Logos1Dict(TypedDict):
-    custom: NotRequired[Custom1 | Custom1Dict]
+    custom: NotRequired[Custom1Dict]
     vimeo: NotRequired[bool]

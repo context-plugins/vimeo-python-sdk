@@ -9,8 +9,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     param,
+    unwrap,
 )
 from ..errors.get_live_event_m3_u8_playback_alt1_error import (
     GetLiveEventM3U8PlaybackAlt1ErrorBody,
@@ -48,7 +50,8 @@ class LiveEventM3U8Playback:
                 the standard stream URL is returned.
             max_fps_fhd: The requested maximum frames per second.
             ttl: The time to live of the playlist link in seconds. This value must be between ``10`` and ``60``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The M3U8 playback URL was returned.
@@ -59,9 +62,11 @@ class LiveEventM3U8Playback:
                 event or user exists. * Error code 4020: No streamable video was found. * Error code 4021: No video was
                 found. Error code 7900: The streamable video in progress will be available soon. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_live_event_m3u8_playback(
-            live_event_id, user_id, dvr=dvr, max_fps_fhd=max_fps_fhd, ttl=ttl, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_m3u8_playback(
+                live_event_id, user_id, dvr=dvr, max_fps_fhd=max_fps_fhd, ttl=ttl, request_options=request_options
+            ),
+        )
 
     def get_live_event_m3u8_playback_alt1(
         self,
@@ -82,7 +87,8 @@ class LiveEventM3U8Playback:
                 the standard stream URL is returned.
             max_fps_fhd: The requested maximum frames per second.
             ttl: The time to live of the playlist link in seconds. This value must be between ``10`` and ``60``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The M3U8 playback URL was returned.
@@ -93,9 +99,11 @@ class LiveEventM3U8Playback:
                 event or user exists. * Error code 4020: No streamable video was found. * Error code 4021: No video was
                 found. Error code 7900: The streamable video in progress will be available soon. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_live_event_m3u8_playback_alt1(
-            live_event_id, dvr=dvr, max_fps_fhd=max_fps_fhd, ttl=ttl, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_m3u8_playback_alt1(
+                live_event_id, dvr=dvr, max_fps_fhd=max_fps_fhd, ttl=ttl, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> LiveEventM3U8PlaybackWithRawResponse:
@@ -127,7 +135,8 @@ class AsyncLiveEventM3U8Playback:
                 the standard stream URL is returned.
             max_fps_fhd: The requested maximum frames per second.
             ttl: The time to live of the playlist link in seconds. This value must be between ``10`` and ``60``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The M3U8 playback URL was returned.
@@ -138,11 +147,11 @@ class AsyncLiveEventM3U8Playback:
                 event or user exists. * Error code 4020: No streamable video was found. * Error code 4021: No video was
                 found. Error code 7900: The streamable video in progress will be available soon. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_m3u8_playback(
                 live_event_id, user_id, dvr=dvr, max_fps_fhd=max_fps_fhd, ttl=ttl, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_m3u8_playback_alt1(
         self,
@@ -163,7 +172,8 @@ class AsyncLiveEventM3U8Playback:
                 the standard stream URL is returned.
             max_fps_fhd: The requested maximum frames per second.
             ttl: The time to live of the playlist link in seconds. This value must be between ``10`` and ``60``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The M3U8 playback URL was returned.
@@ -174,11 +184,11 @@ class AsyncLiveEventM3U8Playback:
                 event or user exists. * Error code 4020: No streamable video was found. * Error code 4021: No video was
                 found. Error code 7900: The streamable video in progress will be available soon. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_m3u8_playback_alt1(
                 live_event_id, dvr=dvr, max_fps_fhd=max_fps_fhd, ttl=ttl, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveEventM3U8PlaybackWithRawResponse:
@@ -207,7 +217,8 @@ class LiveEventM3U8PlaybackWithRawResponse(SecuredRawResponse[RawClient, Server,
                 the standard stream URL is returned.
             max_fps_fhd: The requested maximum frames per second.
             ttl: The time to live of the playlist link in seconds. This value must be between ``10`` and ``60``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -247,7 +258,8 @@ class LiveEventM3U8PlaybackWithRawResponse(SecuredRawResponse[RawClient, Server,
                 the standard stream URL is returned.
             max_fps_fhd: The requested maximum frames per second.
             ttl: The time to live of the playlist link in seconds. This value must be between ``10`` and ``60``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -291,7 +303,8 @@ class AsyncLiveEventM3U8PlaybackWithRawResponse(SecuredRawResponse[AsyncRawClien
                 the standard stream URL is returned.
             max_fps_fhd: The requested maximum frames per second.
             ttl: The time to live of the playlist link in seconds. This value must be between ``10`` and ``60``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -307,7 +320,7 @@ class AsyncLiveEventM3U8PlaybackWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_live_event_m3_u8_playback_error_mapper,
             request_options=request_options,
         )
@@ -331,7 +344,8 @@ class AsyncLiveEventM3U8PlaybackWithRawResponse(SecuredRawResponse[AsyncRawClien
                 the standard stream URL is returned.
             max_fps_fhd: The requested maximum frames per second.
             ttl: The time to live of the playlist link in seconds. This value must be between ``10`` and ``60``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -347,7 +361,7 @@ class AsyncLiveEventM3U8PlaybackWithRawResponse(SecuredRawResponse[AsyncRawClien
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=get_live_event_m3_u8_playback_alt1_error_mapper,
             request_options=request_options,
         )

@@ -18,4 +18,4 @@ class Entitlements(SdkBaseModel):
 
 class EntitlementsDict(TypedDict):
     id: float | None
-    params: Params | ParamsDict
+    params: ParamsDict

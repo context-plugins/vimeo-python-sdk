@@ -17,5 +17,5 @@ class Logos2(SdkBaseModel):
 
 
 class Logos2Dict(TypedDict):
-    custom: Custom2 | Custom2Dict
+    custom: Custom2Dict
     vimeo: bool

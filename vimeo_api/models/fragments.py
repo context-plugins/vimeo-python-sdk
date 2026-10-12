@@ -26,7 +26,7 @@ class Fragments(SdkBaseModel):
 
 class FragmentsDict(TypedDict):
     created_on: str
-    metadata: Metadata18 | Metadata18Dict
+    metadata: Metadata18Dict
     modified_on: str
     timecode: float
     uri: str

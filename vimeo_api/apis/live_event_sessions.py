@@ -10,9 +10,11 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.event_session_status import EventSessionStatus
 from ..server.server import Server
@@ -30,16 +32,19 @@ class LiveEventSessions:
         Args:
             live_event_id: Value sent with the request.
             clip_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The ingest status was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_live_clip_ingest_status(
-            live_event_id, clip_id=clip_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_clip_ingest_status(
+                live_event_id, clip_id=clip_id, request_options=request_options
+            ),
+        )
 
     def get_live_ingest_status(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -48,14 +53,15 @@ class LiveEventSessions:
 
         Args:
             video_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The ingest status was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_live_ingest_status(video_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_live_ingest_status(video_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> LiveEventSessionsWithRawResponse:
@@ -74,18 +80,19 @@ class AsyncLiveEventSessions:
         Args:
             live_event_id: Value sent with the request.
             clip_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The ingest status was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_clip_ingest_status(
                 live_event_id, clip_id=clip_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_ingest_status(
         self, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -94,16 +101,15 @@ class AsyncLiveEventSessions:
 
         Args:
             video_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The ingest status was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.get_live_ingest_status(video_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_live_ingest_status(video_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncLiveEventSessionsWithRawResponse:
@@ -119,7 +125,8 @@ class LiveEventSessionsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         Args:
             live_event_id: Value sent with the request.
             clip_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -143,7 +150,8 @@ class LiveEventSessionsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             video_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -169,7 +177,8 @@ class AsyncLiveEventSessionsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         Args:
             live_event_id: Value sent with the request.
             clip_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -181,7 +190,7 @@ class AsyncLiveEventSessionsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventSessionStatus],
+            decoder=async_json_decoder[EventSessionStatus],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -193,7 +202,8 @@ class AsyncLiveEventSessionsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             video_id: The ID of the event.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -204,7 +214,7 @@ class AsyncLiveEventSessionsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[EventSessionStatus],
+            decoder=async_json_decoder[EventSessionStatus],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

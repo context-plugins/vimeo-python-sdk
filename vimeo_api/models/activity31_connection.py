@@ -19,5 +19,5 @@ class Activity31ConnectionDict(TypedDict):
     total: NotRequired[int]
     page: NotRequired[int]
     per_page: NotRequired[int]
-    paging: NotRequired[Paging | PagingDict]
-    data: NotRequired[list[Activity31 | Activity31Dict]]
+    paging: NotRequired[PagingDict]
+    data: NotRequired[list[Activity31Dict]]

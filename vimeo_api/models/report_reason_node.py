@@ -39,7 +39,7 @@ class ReportReasonNode(SdkBaseModel):
 class ReportReasonNodeDict(TypedDict):
     description: str
     external_url: NotRequired[str]
-    gendered: NotRequired[ReportReasonGenderedVariant | ReportReasonGenderedVariantDict]
+    gendered: NotRequired[ReportReasonGenderedVariantDict]
     id: str
     kind: KindOrStr
     name: str

@@ -17,5 +17,5 @@ class Share(SdkBaseModel):
 
 
 class ShareDict(TypedDict):
-    picture: NotRequired[Picture | PictureDict | None]
+    picture: NotRequired[PictureDict | None]
     picture_uri: NotRequired[str | None]

@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.delete_channel_privacy_user_error import (
     DeleteChannelPrivacyUserErrorBody,
@@ -52,7 +55,8 @@ class ChannelsPrivateChannelMembers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user can't acceess the private channel.
@@ -60,9 +64,9 @@ class ChannelsPrivateChannelMembers:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user doesn't
                 own the channel. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.delete_channel_privacy_user(
-            channel_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_channel_privacy_user(channel_id, user_id, request_options=request_options)
+        )
 
     def get_channel_privacy_users(
         self,
@@ -82,7 +86,8 @@ class ChannelsPrivateChannelMembers:
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were returned.
@@ -90,9 +95,11 @@ class ChannelsPrivateChannelMembers:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user doesn't
                 own this channel. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_channel_privacy_users(
-            channel_id, direction=direction, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_channel_privacy_users(
+                channel_id, direction=direction, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def set_channel_privacy_user(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -103,7 +110,8 @@ class ChannelsPrivateChannelMembers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user can now view the private channel.
@@ -111,9 +119,9 @@ class ChannelsPrivateChannelMembers:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user doesn't
                 own the channel. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.set_channel_privacy_user(
-            channel_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_channel_privacy_user(channel_id, user_id, request_options=request_options)
+        )
 
     def set_channel_privacy_users(
         self,
@@ -128,7 +136,8 @@ class ChannelsPrivateChannelMembers:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users can access the private channel.
@@ -138,9 +147,9 @@ class ChannelsPrivateChannelMembers:
                 No such user exists. Error code 8003: The user credentials are invalid. Error code 3200: The
                 authenticated user doesn't own this channel. Error code 2204: A requested user can't have access to the
                 channel. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.set_channel_privacy_users(
-            channel_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.set_channel_privacy_users(channel_id, body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> ChannelsPrivateChannelMembersWithRawResponse:
@@ -160,7 +169,8 @@ class AsyncChannelsPrivateChannelMembers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user can't acceess the private channel.
@@ -168,11 +178,11 @@ class AsyncChannelsPrivateChannelMembers:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user doesn't
                 own the channel. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_channel_privacy_user(
                 channel_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_channel_privacy_users(
         self,
@@ -192,7 +202,8 @@ class AsyncChannelsPrivateChannelMembers:
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were returned.
@@ -200,11 +211,11 @@ class AsyncChannelsPrivateChannelMembers:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user doesn't
                 own this channel. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_channel_privacy_users(
                 channel_id, direction=direction, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def set_channel_privacy_user(
         self, channel_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -215,7 +226,8 @@ class AsyncChannelsPrivateChannelMembers:
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user can now view the private channel.
@@ -223,9 +235,9 @@ class AsyncChannelsPrivateChannelMembers:
         Raises:
             ApiError: Error code 8003: The user credentials are invalid. Error code 3200: The authenticated user doesn't
                 own the channel. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_channel_privacy_user(channel_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def set_channel_privacy_users(
         self,
@@ -240,7 +252,8 @@ class AsyncChannelsPrivateChannelMembers:
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users can access the private channel.
@@ -250,9 +263,9 @@ class AsyncChannelsPrivateChannelMembers:
                 No such user exists. Error code 8003: The user credentials are invalid. Error code 3200: The
                 authenticated user doesn't own this channel. Error code 2204: A requested user can't have access to the
                 channel. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.set_channel_privacy_users(channel_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncChannelsPrivateChannelMembersWithRawResponse:
@@ -269,7 +282,8 @@ class ChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[RawClient,
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -304,7 +318,8 @@ class ChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[RawClient,
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -334,7 +349,8 @@ class ChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[RawClient,
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -364,7 +380,8 @@ class ChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[RawClient,
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -393,7 +410,8 @@ class AsyncChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[Async
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -405,7 +423,7 @@ class AsyncChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[Async
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_channel_privacy_user_error_mapper,
             request_options=request_options,
         )
@@ -428,7 +446,8 @@ class AsyncChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[Async
                 order. * ``desc`` - Sort the results in descending order.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -444,7 +463,7 @@ class AsyncChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[Async
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=get_channel_privacy_users_error_mapper,
             request_options=request_options,
         )
@@ -458,7 +477,8 @@ class AsyncChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[Async
         Args:
             channel_id: The ID of the channel.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -470,7 +490,7 @@ class AsyncChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[Async
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=set_channel_privacy_user_error_mapper,
             request_options=request_options,
         )
@@ -488,7 +508,8 @@ class AsyncChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[Async
         Args:
             channel_id: The ID of the channel.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -501,7 +522,7 @@ class AsyncChannelsPrivateChannelMembersWithRawResponse(SecuredRawResponse[Async
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[list[User]],
+            decoder=async_json_decoder[list[User]],
             error_mapper=set_channel_privacy_users_error_mapper,
             request_options=request_options,
         )

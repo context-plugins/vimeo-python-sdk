@@ -35,7 +35,7 @@ class Embed7(SdkBaseModel):
 class Embed7Dict(TypedDict):
     autoplay: NotRequired[bool]
     color: NotRequired[str]
-    logos: NotRequired[Logos4 | Logos4Dict]
+    logos: NotRequired[Logos4Dict]
     loop: NotRequired[bool]
     playlist: NotRequired[bool]
     schedule: NotRequired[bool]

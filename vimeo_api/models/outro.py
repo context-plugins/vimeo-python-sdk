@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, OptionalNullable, SdkBaseModel
-from .enums.type22 import Type22OrStr
+from .enums.type26 import Type26OrStr
 from .link1 import Link1, Link1Dict
 
 
@@ -18,7 +18,7 @@ class Outro(SdkBaseModel):
     text: OptionalNullable[str] = UNSET
     """The outro text. This appears only when **type** is ``text``."""
 
-    type_: Type22OrStr = Field(alias="type")
+    type_: Type26OrStr = Field(alias="type")
     """The preset outro type.
 
     Option descriptions:
@@ -34,7 +34,7 @@ class Outro(SdkBaseModel):
 
 class OutroDict(TypedDict):
     clips: NotRequired[str | None]
-    link: NotRequired[Link1 | Link1Dict | None]
+    link: NotRequired[Link1Dict | None]
     text: NotRequired[str | None]
-    type_: Type22OrStr
+    type_: Type26OrStr
     videos: NotRequired[str | None]

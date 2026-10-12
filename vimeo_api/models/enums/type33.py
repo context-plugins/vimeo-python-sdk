@@ -5,14 +5,18 @@ from ...core import open_enum_validator
 
 
 class Type33(str, Enum):
-    """The type of the On Demand page.
-
-    Option descriptions:
-     * ``film`` - The On Demand page is a film.
-     * ``series`` - The On Demand page is a series."""
-
-    FILM = "film"
-    SERIES = "series"
+    APPEARS = "appears"
+    CATEGORY_FEATURED = "category_featured"
+    CHANNEL = "channel"
+    FACEBOOK_FEED = "facebook_feed"
+    FOLLOWING = "following"
+    GROUP = "group"
+    LIKES = "likes"
+    ONDEMAND_PUBLISH = "ondemand_publish"
+    SHARE = "share"
+    TAGGED_WITH = "tagged_with"
+    TWITTER_TIMELINE = "twitter_timeline"
+    UPLOADS = "uploads"
 
     __str__ = str.__str__
 

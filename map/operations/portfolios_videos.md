@@ -108,9 +108,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /users/{user_id}/portfolios/{portfolio_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_portfolio_videos(portfolio_id: float, user_id: float, *, containing_uri: str | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_portfolio_videos(portfolio_id: float, user_id: float, *, containing_uri: str | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`, `user_id`
-- **Params**: `portfolio_id` — path · `user_id` — path · `containing_uri` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `sort` — query
+- **Params**: `portfolio_id` — path · `user_id` — path · `containing_uri` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -125,9 +125,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /me/portfolios/{portfolio_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_portfolio_videos_alt1(portfolio_id: float, *, containing_uri: str | None = None, filter: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_portfolio_videos_alt1(portfolio_id: float, *, containing_uri: str | None = None, filter_: Filter3OrStr | None = None, filter_embeddable: bool | None = None, page: float | None = None, per_page: float | None = None, sort: Sort35OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `portfolio_id`
-- **Params**: `portfolio_id` — path · `containing_uri` — query · `filter` — query · `filter_embeddable` — query · `page` — query · `per_page` — query · `sort` — query
+- **Params**: `portfolio_id` — path · `containing_uri` — query · `filter_` — query `filter` · `filter_embeddable` — query · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `VideoConnection`
 - **Returns (raw)**: `ApiResult[VideoConnection, RawError]`
 - **Error**: `RawError` — **Case B**

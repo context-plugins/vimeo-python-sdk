@@ -20,4 +20,4 @@ class Metadata16(SdkBaseModel):
 
 class Metadata16Dict(TypedDict):
     connection_status: Any
-    interactions: Interactions11 | Interactions11Dict
+    interactions: Interactions11Dict

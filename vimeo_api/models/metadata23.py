@@ -14,4 +14,4 @@ class Metadata23(SdkBaseModel):
 
 
 class Metadata23Dict(TypedDict):
-    connections: Connections22 | Connections22Dict
+    connections: Connections22Dict

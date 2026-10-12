@@ -105,7 +105,7 @@ class VideoFileDict(TypedDict):
     fps: float
     height: float
     link: str
-    log: NotRequired[Log | LogDict]
+    log: NotRequired[LogDict]
     md5: str
     public_name: str
     quality: QualityOrStr

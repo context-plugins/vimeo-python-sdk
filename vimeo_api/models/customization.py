@@ -40,6 +40,6 @@ class CustomizationDict(TypedDict):
     ambient_backlight: NotRequired[bool]
     background_color: NotRequired[str | None]
     hide_vimeo_header: NotRequired[bool]
-    logo: NotRequired[Logo | LogoDict]
+    logo: NotRequired[LogoDict]
     title_font_family: NotRequired[TitleFontFamilyOrStr | None]
     title_font_weight: NotRequired[TitleFontWeightOrInt | None]

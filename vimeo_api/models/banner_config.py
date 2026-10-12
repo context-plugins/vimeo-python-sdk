@@ -32,9 +32,9 @@ class BannerConfig(SdkBaseModel):
 
 
 class BannerConfigDict(TypedDict):
-    show_banner: ShowBanner | ShowBannerDict
-    show_banner_description: ShowBannerDescription | ShowBannerDescriptionDict
-    show_banner_header: ShowBannerHeader | ShowBannerHeaderDict
-    show_banner_title: ShowBannerTitle | ShowBannerTitleDict
-    show_showcase_owner_avatar: ShowShowcaseOwnerAvatar | ShowShowcaseOwnerAvatarDict
-    show_start_watching_button: ShowStartWatchingButton | ShowStartWatchingButtonDict
+    show_banner: ShowBannerDict
+    show_banner_description: ShowBannerDescriptionDict
+    show_banner_header: ShowBannerHeaderDict
+    show_banner_title: ShowBannerTitleDict
+    show_showcase_owner_avatar: ShowShowcaseOwnerAvatarDict
+    show_start_watching_button: ShowStartWatchingButtonDict

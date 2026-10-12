@@ -96,6 +96,7 @@ Every API group is a property on the client (e.g. `client.api_apps_webhooks`). E
 | --- | --- | --- | --- |
 | `base_url` | `str \| None` | `str \| None` | `None` |
 | `timeout` | `float` | `float` | `30.0` seconds |
+| `retry_options` | `int \| RetryOptionsOrDict \| None` | `int \| RetryOptionsOrDict \| None` | `None` |
 | `custom_http_client` | `HttpClient \| None` | — | `None` |
 | `custom_async_http_client` | — | `AsyncHttpClient \| None` | `None` |
 | `bearer` | `str \| None` | `str \| None` | `None` |
@@ -108,7 +109,8 @@ The types those columns name — where each imports from and, for a credentials 
 
 | Type | Import from | Shape |
 | --- | --- | --- |
-| `HttpClient` | `vimeo_api.core` | protocol — `send(request: HttpRequest) -> HttpResponse` · `close()` |
+| `RetryOptionsOrDict` | `vimeo_api.core` | a retry count, `RetryOptions`, or a dict: `max_retries: int` · `initial_delay: float` · `backoff_factor: float` · `max_delay: float` · `max_jitter: float` · `status_codes_to_retry: frozenset[int]` · `http_methods_to_retry: frozenset[HttpMethod]` |
+| `HttpClient` | `vimeo_api.core` | protocol — `send(request: HttpRequest) -> HttpResponse` · `close()`; `send` returns once the head has arrived and never reads the body, and raises `TransportError` (from `core`) when no response arrives — anything else it raises is never retried |
 | `AuthorizationCodeCredentialsOrDict` | `vimeo_api.core` | `AuthorizationCodeCredentials` or a dict: `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AuthorizationCodePrompt` |
 | `Oauth2AuthorizationCodeScope` | `vimeo_api.auth` | `Enum` of the declared scopes |
 | `RefreshableTokenSource` | `vimeo_api.core` | protocol — `fetch(credentials) -> OAuthTokenRefreshable` · `refresh(credentials, refresh_token) -> OAuthTokenRefreshable \| None` |
@@ -117,11 +119,31 @@ The types those columns name — where each imports from and, for a credentials 
 | `Oauth2ClientCredentialsScope` | `vimeo_api.auth` | `Enum` of the declared scopes |
 | `TokenSource` | `vimeo_api.core` | protocol — `fetch(credentials) -> OAuthToken` |
 | `ClientCredentials` | `vimeo_api.core` | `client_id: str` · `client_secret: str` · `scopes: list[Scope] \| None` |
-| `AsyncHttpClient` | `vimeo_api.core` | protocol — `async send(request: HttpRequest) -> HttpResponse` · `async aclose()` |
+| `AsyncHttpClient` | `vimeo_api.core` | protocol — `async send(request: HttpRequest) -> AsyncHttpResponse` · `async aclose()`; the same obligation, awaited |
 | `AsyncAuthorizationCodeCredentialsOrDict` | `vimeo_api.core` | `AsyncAuthorizationCodeCredentials` or a dict: `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AsyncAuthorizationCodePrompt` |
 | `AsyncRefreshableTokenSource` | `vimeo_api.core` | protocol — `async fetch(credentials) -> OAuthTokenRefreshable` · `async refresh(credentials, refresh_token) -> OAuthTokenRefreshable \| None` |
 | `AsyncAuthorizationCodeCredentials` | `vimeo_api.core` | `client_id: str` · `client_secret: str \| None` · `redirect_uri: str` · `scopes: list[Scope] \| None` · `state: str \| None` · `pkce: PkceMethod \| None = "S256"` · `prompt_for_authorization_code: AsyncAuthorizationCodePrompt` |
 | `AsyncTokenSource` | `vimeo_api.core` | protocol — `async fetch(credentials) -> OAuthToken` |
+
+### Retries — on by default
+
+`retry_options` left at `None` applies the default `RetryOptions` policy below, so an unconfigured client **retries**: a request whose method is in `http_methods_to_retry` is sent again when it gets a status in `status_codes_to_retry`, or no response at all, and the last outcome reaches you only once its retries are spent. A body that cannot be re-sent byte for byte — a streamed file upload — is never retried. `retry_options=0` (or `{"max_retries": 0}`) turns retrying off; a bare count sets `max_retries` and leaves every other field at its default.
+
+`RetryOptions` fields (source: `vimeo_api/core/retries.py`). Pass only the fields you change; each one left out takes its default:
+
+| Field | Type | Default |
+| --- | --- | --- |
+| `max_retries` | `int` | `3` |
+| `initial_delay` | `float` (seconds) | `1.0` |
+| `backoff_factor` | `float` | `2.0` |
+| `max_delay` | `float` (seconds) | `60.0` |
+| `max_jitter` | `float` (seconds) | `0.5` |
+| `status_codes_to_retry` | `frozenset[int]` | `frozenset({408, 429, 500, 502, 503, 504})` |
+| `http_methods_to_retry` | `frozenset[HttpMethod]` | `frozenset({"GET", "HEAD", "PUT", "OPTIONS"})` |
+
+The wait before retry *n* is `initial_delay × backoff_factor^(n−1)` plus up to `max_jitter` of random delay, the sum capped at `max_delay`; a `Retry-After` header replaces it, trimmed to `max_delay`.
+
+A single call overrides two of these through `request_options` (`vimeo_api/core/request_options.py`): `max_retries` and `status_codes_to_retry`, each merged over the client's policy field by field — `request_options={"max_retries": 0}` turns retrying off for that one call and leaves every other call alone.
 
 ---
 
@@ -130,29 +152,26 @@ The types those columns name — where each imports from and, for a credentials 
 Every operation is reached in two response modes:
 
 - **Parsed call.** Returns the decoded payload and raises `ApiError` on an error status, with the decoded body on `.error` and the status on `.status_code`.
-- **Raw call.** Reached through `.with_raw_response`; returns `ApiResult` — `Success` or `Failure` — and never raises for an API error. Read `.payload` on a `Success` or `.error` on a `Failure`; both carry `.response`.
+- **Raw call.** Reached through `.with_raw_response`; returns `ApiResult` — `Success` or `Failure` — and never raises for an API error. Read `.payload` on a `Success` or `.error` on a `Failure`; both carry `.status_code` and `.headers`.
 
 What `.error` holds is fixed per operation. There are two cases:
 
 - **Case A — typed error.** The operation documents at least one error status, so `vimeo_api/errors/` declares a union alias over the bodies those statuses map to — `RawError` is always its last arm, for any undocumented status — and `.error` is annotated with that alias. Narrow it with `isinstance`. The operation blocks name the alias and the status each arm maps from.
-- **Case B — raw error.** The operation documents no error status; `.error` is `RawError` (`vimeo_api/core/results.py`): `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` · `response: HttpResponse`.
+- **Case B — raw error.** The operation documents no error status; `.error` is `RawError` (`vimeo_api/core/results.py`): `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any`.
 
 Core runtime types (`vimeo_api/core/`) — public members with their **declared types**, verbatim from source:
 
 | Type | Public members | Source |
 | --- | --- | --- |
-| `ApiError` — raised by every parsed call; `.error` is a Case A alias from `vimeo_api/errors/` or `RawError` | `error: E` · `status_code: int` · `response: HttpResponse` | `vimeo_api/core/exceptions.py` |
-| `ApiResult[T, E]` — returned by every raw call; the `Success[T] \| Failure[E]` union | `payload: T` (on `Success`) · `error: E` (on `Failure`) · `response: HttpResponse` (on both) | `vimeo_api/core/results.py` |
-| `RawError` | `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` · `response: HttpResponse` | `vimeo_api/core/results.py` |
+| `ApiError` — raised by every parsed call; `.error` is a Case A alias from `vimeo_api/errors/` or `RawError` | `error: E` · `status_code: int` · `headers: Mapping[str, str]` | `vimeo_api/core/exceptions.py` |
+| `ApiResult[T, E]` — returned by every raw call; the `Success[T] \| Failure[E]` union | `payload: T` (on `Success`) · `error: E` (on `Failure`) · `status_code: int` · `headers: Mapping[str, str]` (both on either) | `vimeo_api/core/results.py` |
+| `RawError` | `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` | `vimeo_api/core/results.py` |
 
 Typed error bodies (the arms of a Case A alias) are ordinary models — no special handling. The operation's **Type sources** table gives the module that declares each one; read field names, declared types and JSON aliases there, as for any other model.
 
 ```python
-from vimeo_api.core import ApiError, RawError
-from vimeo_api.models import Error
-
 try:
-    response = client.api_apps_webhooks.add_webhook(app_id)
+    response = client.api_apps_webhooks.add_webhook(128301)
 except ApiError as e:
     # Case A — typed error: e.error is AddWebhookErrorBody
     if isinstance(e.error, Error):
@@ -169,7 +188,7 @@ except ApiError as e:
 
 ## Operations — by controller (100 pages, 520 operations)
 
-Each links to a sub-page with one block per operation, headed by its full accessor path: the HTTP verb and route (for a mock, a raw request or a provider-side log — never reconstruct it from the method name), the sync parsed signature with its required positional parameters, each parameter's role and — where it differs — wire name, both return types, and its error case — **Case A** names the alias and the status each arm maps from, **Case B** names `RawError`. Every block also carries a **Type sources** table — every type it names, with the module that declares it.
+Each links to a sub-page with one block per operation, headed by its full accessor path: the HTTP verb and route (for a mock, a raw request or a provider-side log — never reconstruct it from the method name), the sync parsed signature with its required positional parameters, each parameter's role and — where it differs — wire name, both return types, and its error case — **Case A** names the alias and the status each arm maps from, **Case B** names `RawError`. Every block also carries a **Type sources** table — every *generated* type it names, with the module that declares it. A runtime type — a file alias, a date/time or byte converter — is not listed there.
 
 **Each block states what is specific to its operation. Everything below holds for every operation, and blocks never restate it — silence means the default applies.**
 
@@ -178,7 +197,7 @@ Each links to a sub-page with one block per operation, headed by its full access
 | **Four spellings, one signature** — the same method name and parameters on `Client` and `AsyncClient`, each also reachable through `.with_raw_response`; the async twin is a coroutine to `await`, with the same return types and error case, and where the **Async Type** column differs, pass the type it names | Getting a client |
 | **Parsed raises, raw returns** — `ApiError` versus `ApiResult` | Error-handling model |
 | **Case B error is always `RawError`** — also the last arm of every Case A alias, where a block's **Error arms** bullet ends in it | Error-handling model |
-| **A trailing `request_options`** — keyword-only and optional, for per-call overrides such as a timeout or extra headers; every signature ends with it | here (`vimeo_api/core/request_options.py`) |
+| **A trailing `request_options`** — keyword-only and optional, for per-call overrides such as a timeout, extra headers, `max_retries` or `status_codes_to_retry`; every signature ends with it | here (`vimeo_api/core/request_options.py`), Retries |
 | **Base URL `https://api.vimeo.com`** — this SDK's only server; override it with `base_url="https://…"` | Servers & auth |
 | **Parameter names are literal** — signatures are generated code verbatim, and everything behind the bare `*` must be passed by name | here |
 | **A parameter's wire name is its Python name** — sent as-is on the path, query string, header or body, unless the block's **Params** bullet carries a wire name beside the role | here |
@@ -299,7 +318,7 @@ Sub-pages chunk per `###` block: each block is self-contained given the table ab
 | Group | Count | Directory (module = `<type_name>.py`) |
 | --- | --- | --- |
 | Models (`SdkBaseModel` pydantic classes) | 784 | `vimeo_api/models/` |
-| Enums (`Enum` over `str` / `int`) — Python member names + wire values | 270 | `vimeo_api/models/enums/` |
+| Enums (`Enum` over `str` / `int`) — Python member names + wire values | 281 | `vimeo_api/models/enums/` |
 | Unions (plain) — `TypeAlias` over the arms | 1 | `vimeo_api/models/unions/` |
 | Error aliases (one per Case A operation) | 411 | `vimeo_api/errors/` |
 

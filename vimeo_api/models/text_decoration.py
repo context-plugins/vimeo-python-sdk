@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-from typing import Literal
-
 from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
 from .assets import Assets, AssetsDict
+from .enums.type12 import Type12OrStr
 
 
 class TextDecoration(SdkBaseModel):
@@ -16,7 +15,7 @@ class TextDecoration(SdkBaseModel):
     text: str
     """The note text to decorate."""
 
-    type_: Literal["url"] = Field(default="url", alias="type")
+    type_: Type12OrStr = Field(alias="type")
     """The type of text decoration.
 
     Option descriptions:
@@ -24,6 +23,6 @@ class TextDecoration(SdkBaseModel):
 
 
 class TextDecorationDict(TypedDict):
-    assets: NotRequired[Assets | AssetsDict]
+    assets: NotRequired[AssetsDict]
     text: str
-    type_: NotRequired[Literal["url"]]
+    type_: Type12OrStr

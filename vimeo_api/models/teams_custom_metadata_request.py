@@ -12,4 +12,4 @@ class TeamsCustomMetadataRequest(SdkBaseModel):
 
 
 class TeamsCustomMetadataRequestDict(TypedDict):
-    fields: NotRequired[list[FieldModel | FieldModelDict]]
+    fields: NotRequired[list[FieldModelDict]]

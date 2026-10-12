@@ -14,4 +14,4 @@ class Connections8(SdkBaseModel):
 
 
 class Connections8Dict(TypedDict):
-    pages: Pages | PagesDict
+    pages: PagesDict

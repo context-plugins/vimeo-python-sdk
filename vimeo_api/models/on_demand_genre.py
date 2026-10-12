@@ -25,8 +25,8 @@ class OnDemandGenre(SdkBaseModel):
 
 class OnDemandGenreDict(TypedDict):
     canonical: str
-    interactions: Interactions6 | Interactions6Dict
+    interactions: Interactions6Dict
     link: str
-    metadata: Metadata8 | Metadata8Dict
+    metadata: Metadata8Dict
     name: str
     uri: str

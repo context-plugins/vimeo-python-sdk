@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.me_pictures_request import MePicturesRequest, MePicturesRequestDict
 from ..models.picture import Picture
@@ -37,14 +40,15 @@ class UsersPictures:
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was added.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_picture(user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_picture(user_id, request_options=request_options))
 
     def create_picture_alt1(self, *, request_options: RequestOptionsOrDict | None = None) -> Picture:
         """This method adds a portrait image to the authenticated user's Vimeo account. Send the binary data of the
@@ -53,14 +57,15 @@ class UsersPictures:
         <https://developer.vimeo.com/api/upload/thumbnails#uploading-a-thumbnail-step-3>`__.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was added.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_picture_alt1(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_picture_alt1(request_options=request_options))
 
     def delete_picture(
         self, portraitset_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -70,14 +75,15 @@ class UsersPictures:
         Args:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was removed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_picture(portraitset_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_picture(portraitset_id, user_id, request_options=request_options))
 
     def delete_picture_alt1(
         self, portraitset_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -86,14 +92,15 @@ class UsersPictures:
 
         Args:
             portraitset_id: The ID of the picture.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was removed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_picture_alt1(portraitset_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_picture_alt1(portraitset_id, request_options=request_options))
 
     def edit_picture(
         self,
@@ -109,16 +116,17 @@ class UsersPictures:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was edited.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.edit_picture(
-            portraitset_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_picture(portraitset_id, user_id, body=body, request_options=request_options)
+        )
 
     def edit_picture_alt1(
         self,
@@ -132,16 +140,17 @@ class UsersPictures:
         Args:
             portraitset_id: The ID of the picture.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was edited.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.edit_picture_alt1(
-            portraitset_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_picture_alt1(portraitset_id, body=body, request_options=request_options)
+        )
 
     def get_picture(
         self, portraitset_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -151,14 +160,15 @@ class UsersPictures:
         Args:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_picture(portraitset_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_picture(portraitset_id, user_id, request_options=request_options))
 
     def get_picture_alt1(
         self, portraitset_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -167,14 +177,15 @@ class UsersPictures:
 
         Args:
             portraitset_id: The ID of the picture.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_picture_alt1(portraitset_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_picture_alt1(portraitset_id, request_options=request_options))
 
     def get_pictures(
         self,
@@ -190,16 +201,17 @@ class UsersPictures:
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait images were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_pictures(
-            user_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_pictures(user_id, page=page, per_page=per_page, request_options=request_options)
+        )
 
     def get_pictures_alt1(
         self,
@@ -213,16 +225,17 @@ class UsersPictures:
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait images were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_pictures_alt1(
-            page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_pictures_alt1(page=page, per_page=per_page, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> UsersPicturesWithRawResponse:
@@ -241,14 +254,15 @@ class AsyncUsersPictures:
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was added.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.create_picture(user_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_picture(user_id, request_options=request_options))
 
     async def create_picture_alt1(self, *, request_options: RequestOptionsOrDict | None = None) -> Picture:
         """This method adds a portrait image to the authenticated user's Vimeo account. Send the binary data of the
@@ -257,14 +271,15 @@ class AsyncUsersPictures:
         <https://developer.vimeo.com/api/upload/thumbnails#uploading-a-thumbnail-step-3>`__.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was added.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.create_picture_alt1(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_picture_alt1(request_options=request_options))
 
     async def delete_picture(
         self, portraitset_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -274,16 +289,17 @@ class AsyncUsersPictures:
         Args:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was removed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_picture(portraitset_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_picture_alt1(
         self, portraitset_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -292,16 +308,17 @@ class AsyncUsersPictures:
 
         Args:
             portraitset_id: The ID of the picture.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was removed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_picture_alt1(portraitset_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_picture(
         self,
@@ -317,18 +334,19 @@ class AsyncUsersPictures:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was edited.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_picture(
                 portraitset_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def edit_picture_alt1(
         self,
@@ -342,16 +360,17 @@ class AsyncUsersPictures:
         Args:
             portraitset_id: The ID of the picture.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was edited.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_picture_alt1(portraitset_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_picture(
         self, portraitset_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -361,16 +380,17 @@ class AsyncUsersPictures:
         Args:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_picture(portraitset_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_picture_alt1(
         self, portraitset_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -379,16 +399,15 @@ class AsyncUsersPictures:
 
         Args:
             portraitset_id: The ID of the picture.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait image was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.get_picture_alt1(portraitset_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_picture_alt1(portraitset_id, request_options=request_options))
 
     async def get_pictures(
         self,
@@ -404,18 +423,19 @@ class AsyncUsersPictures:
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait images were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_pictures(
                 user_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_pictures_alt1(
         self,
@@ -429,18 +449,19 @@ class AsyncUsersPictures:
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portrait images were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_pictures_alt1(
                 page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncUsersPicturesWithRawResponse:
@@ -458,7 +479,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -484,7 +506,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         <https://developer.vimeo.com/api/upload/thumbnails#uploading-a-thumbnail-step-3>`__.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -508,7 +531,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -532,7 +556,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             portraitset_id: The ID of the picture.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -563,7 +588,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -593,7 +619,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             portraitset_id: The ID of the picture.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -619,7 +646,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -642,7 +670,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             portraitset_id: The ID of the picture.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -672,7 +701,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -701,7 +731,8 @@ class UsersPicturesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -729,7 +760,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -741,7 +773,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -755,7 +787,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         <https://developer.vimeo.com/api/upload/thumbnails#uploading-a-thumbnail-step-3>`__.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -766,7 +799,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -779,7 +812,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -791,7 +825,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -803,7 +837,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             portraitset_id: The ID of the picture.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -815,7 +850,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -834,7 +869,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -847,7 +883,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -864,7 +900,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             portraitset_id: The ID of the picture.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -877,7 +914,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -890,7 +927,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             portraitset_id: The ID of the picture.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -901,7 +939,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -913,7 +951,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             portraitset_id: The ID of the picture.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -924,7 +963,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -943,7 +982,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             user_id: The ID of the user.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -955,7 +995,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -972,7 +1012,8 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -983,7 +1024,7 @@ class AsyncUsersPicturesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

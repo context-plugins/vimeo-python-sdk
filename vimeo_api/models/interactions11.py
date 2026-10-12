@@ -14,4 +14,4 @@ class Interactions11(SdkBaseModel):
 
 
 class Interactions11Dict(TypedDict):
-    edit: Edit3 | Edit3Dict | None
+    edit: Edit3Dict | None

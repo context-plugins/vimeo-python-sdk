@@ -5,22 +5,12 @@ from ...core import open_enum_validator
 
 
 class Type13(str, Enum):
-    """The data type of the metadata field.
+    """The Vimeo content to which the reply relates.
 
     Option descriptions:
-     * ``bool`` - Boolean value.
-     * ``date`` - Date value.
-     * ``int`` - Integer value.
-     * ``multi-select`` - Multi-select from allowed values.
-     * ``select`` - Single-select from allowed values.
-     * ``str`` - String value."""
+     * ``video`` - The comment is about a video."""
 
-    BOOL = "bool"
-    DATE = "date"
-    INT = "int"
-    MULTI_SELECT = "multi-select"
-    SELECT = "select"
-    STR = "str"
+    VIDEO = "video"
 
     __str__ = str.__str__
 

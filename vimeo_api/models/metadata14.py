@@ -11,4 +11,4 @@ class Metadata14(SdkBaseModel):
 
 
 class Metadata14Dict(TypedDict):
-    connections: Connections14 | Connections14Dict
+    connections: Connections14Dict

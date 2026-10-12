@@ -25,10 +25,10 @@ class Embed18(SdkBaseModel):
 
 
 class Embed18Dict(TypedDict):
-    buttons: NotRequired[Buttons2 | Buttons2Dict]
+    buttons: NotRequired[Buttons2Dict]
     color: NotRequired[str]
-    end_screen: NotRequired[EndScreen4 | EndScreen4Dict]
-    logos: NotRequired[Logos10 | Logos10Dict]
+    end_screen: NotRequired[EndScreen4Dict]
+    logos: NotRequired[Logos10Dict]
     playbar: NotRequired[bool]
-    title: NotRequired[Title2 | Title2Dict]
+    title: NotRequired[Title2Dict]
     volume: NotRequired[bool]

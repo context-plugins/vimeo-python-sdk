@@ -10,9 +10,11 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.enums.direction import DirectionOrStr
 from ..models.enums.sort8 import Sort8OrStr
@@ -33,14 +35,15 @@ class PortfoliosEssentials:
         Args:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portfolio was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_portfolio(portfolio_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_portfolio(portfolio_id, user_id, request_options=request_options))
 
     def get_portfolio_alt1(
         self, portfolio_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -49,14 +52,15 @@ class PortfoliosEssentials:
 
         Args:
             portfolio_id: The ID of the portfolio.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portfolio was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_portfolio_alt1(portfolio_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_portfolio_alt1(portfolio_id, request_options=request_options))
 
     def get_portfolios(
         self,
@@ -80,22 +84,25 @@ class PortfoliosEssentials:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portfolios were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_portfolios(
-            user_id,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_portfolios(
+                user_id,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_portfolios_alt1(
         self,
@@ -117,16 +124,24 @@ class PortfoliosEssentials:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portfolios were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_portfolios_alt1(
-            direction=direction, page=page, per_page=per_page, query=query, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_portfolios_alt1(
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> PortfoliosEssentialsWithRawResponse:
@@ -145,16 +160,17 @@ class AsyncPortfoliosEssentials:
         Args:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portfolio was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_portfolio(portfolio_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_portfolio_alt1(
         self, portfolio_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -163,16 +179,15 @@ class AsyncPortfoliosEssentials:
 
         Args:
             portfolio_id: The ID of the portfolio.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portfolio was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.get_portfolio_alt1(portfolio_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_portfolio_alt1(portfolio_id, request_options=request_options))
 
     async def get_portfolios(
         self,
@@ -196,14 +211,15 @@ class AsyncPortfoliosEssentials:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portfolios were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_portfolios(
                 user_id,
                 direction=direction,
@@ -212,8 +228,8 @@ class AsyncPortfoliosEssentials:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_portfolios_alt1(
         self,
@@ -235,14 +251,15 @@ class AsyncPortfoliosEssentials:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The portfolios were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_portfolios_alt1(
                 direction=direction,
                 page=page,
@@ -250,8 +267,8 @@ class AsyncPortfoliosEssentials:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncPortfoliosEssentialsWithRawResponse:
@@ -267,7 +284,8 @@ class PortfoliosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, 
         Args:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -290,7 +308,8 @@ class PortfoliosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, 
 
         Args:
             portfolio_id: The ID of the portfolio.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -328,7 +347,8 @@ class PortfoliosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, 
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -371,7 +391,8 @@ class PortfoliosEssentialsWithRawResponse(SecuredRawResponse[RawClient, Server, 
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -403,7 +424,8 @@ class AsyncPortfoliosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
         Args:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -414,7 +436,7 @@ class AsyncPortfoliosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Portfolio],
+            decoder=async_json_decoder[Portfolio],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -426,7 +448,8 @@ class AsyncPortfoliosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
 
         Args:
             portfolio_id: The ID of the portfolio.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -437,7 +460,7 @@ class AsyncPortfoliosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Portfolio],
+            decoder=async_json_decoder[Portfolio],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -464,7 +487,8 @@ class AsyncPortfoliosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -482,7 +506,7 @@ class AsyncPortfoliosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PortfolioConnection],
+            decoder=async_json_decoder[PortfolioConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -507,7 +531,8 @@ class AsyncPortfoliosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by creation date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -524,7 +549,7 @@ class AsyncPortfoliosEssentialsWithRawResponse(SecuredRawResponse[AsyncRawClient
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PortfolioConnection],
+            decoder=async_json_decoder[PortfolioConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

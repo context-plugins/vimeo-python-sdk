@@ -11,4 +11,4 @@ class Metadata27(SdkBaseModel):
 
 
 class Metadata27Dict(TypedDict):
-    connections: NotRequired[Connections25 | Connections25Dict]
+    connections: NotRequired[Connections25Dict]

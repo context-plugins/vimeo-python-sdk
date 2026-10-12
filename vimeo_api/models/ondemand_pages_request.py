@@ -19,6 +19,6 @@ class OndemandPagesRequest(SdkBaseModel):
 
 class OndemandPagesRequestDict(TypedDict):
     link: NotRequired[str]
-    preorder: NotRequired[Preorder1 | Preorder1Dict]
-    publish: NotRequired[Publish | PublishDict]
+    preorder: NotRequired[Preorder1Dict]
+    publish: NotRequired[PublishDict]
     publish_when_ready: NotRequired[bool]

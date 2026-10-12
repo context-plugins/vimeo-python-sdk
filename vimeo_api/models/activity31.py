@@ -10,7 +10,7 @@ from .enums.type10 import Type10OrStr
 from .group import Group, GroupDict
 from .metadata7 import Metadata7, Metadata7Dict
 from .on_demand_page import OnDemandPage, OnDemandPageDict
-from .tag import Tag, TagDict
+from .tag_model import TagModel, TagModelDict
 from .user import User, UserDict
 from .video import Video, VideoDict
 
@@ -35,7 +35,7 @@ class Activity31(SdkBaseModel):
     """The Vimeo On Demand page associated with the event. This field is present only when the activity type is
     ``ondemand``."""
 
-    tag: Optional[Tag] = UNSET
+    tag: Optional[TagModel] = UNSET
     """The tag associated with the event. This field is present only when the activity type is ``tag``."""
 
     time: str
@@ -63,13 +63,13 @@ class Activity31(SdkBaseModel):
 
 
 class Activity31Dict(TypedDict):
-    category: NotRequired[Category | CategoryDict]
-    channel: NotRequired[Channel | ChannelDict]
-    clip: Video | VideoDict
-    group: NotRequired[Group | GroupDict]
-    metadata: Metadata7 | Metadata7Dict
-    ondemand_page: NotRequired[OnDemandPage | OnDemandPageDict]
-    tag: NotRequired[Tag | TagDict]
+    category: NotRequired[CategoryDict]
+    channel: NotRequired[ChannelDict]
+    clip: VideoDict
+    group: NotRequired[GroupDict]
+    metadata: Metadata7Dict
+    ondemand_page: NotRequired[OnDemandPageDict]
+    tag: NotRequired[TagModelDict]
     time: str
     type_: Type10OrStr
-    user: NotRequired[User | UserDict]
+    user: NotRequired[UserDict]

@@ -5,18 +5,28 @@ from ...core import open_enum_validator
 
 
 class Status7(str, Enum):
-    """The status code for the availability of the uploaded video.
+    """The video transcript's availability status. This data requires a bearer token with the ``private`` scope.
 
     Option descriptions:
-     * ``canceled`` - The upload was canceled.
-     * ``complete`` - The upload is complete.
-     * ``error`` - The upload ended with an error.
-     * ``in_progress`` - The upload is underway."""
+     * ``blocked`` - The transcription is blocked.
+     * ``completed`` - Transcription is completed. The transcript is available.
+     * ``exceeds_maximum_duration`` - The audio track is too long to be transcribed.
+     * ``failed`` - There was a transcription error. The transcript isn't available.
+     * ``in_progress`` - Transcription is currently underway. The transcript isn't available yet.
+     * ``language_not_supported`` - We currently don't support transcribing audio for this video's language.
+     * ``no_speech`` - Transcription was completed, but there were no words in the audio to transcribe.
+     * ``not_started`` - The transcript job hasn't started.
+     * ``unknown`` - There isn't a record of this video's transcription job."""
 
-    CANCELED = "canceled"
-    COMPLETE = "complete"
-    ERROR = "error"
+    BLOCKED = "blocked"
+    COMPLETED = "completed"
+    EXCEEDS_MAXIMUM_DURATION = "exceeds_maximum_duration"
+    FAILED = "failed"
     IN_PROGRESS = "in_progress"
+    LANGUAGE_NOT_SUPPORTED = "language_not_supported"
+    NO_SPEECH = "no_speech"
+    NOT_STARTED = "not_started"
+    UNKNOWN = "unknown"
 
     __str__ = str.__str__
 

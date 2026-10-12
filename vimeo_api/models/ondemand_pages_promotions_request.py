@@ -8,7 +8,7 @@ from .enums.access_type1 import AccessType1OrStr
 from .enums.discount_type1 import DiscountType1OrStr
 from .enums.product_type1 import ProductType1OrStr
 from .enums.stream_period1 import StreamPeriod1OrStr
-from .enums.type37 import Type37OrStr
+from .enums.type41 import Type41OrStr
 
 
 class OndemandPagesPromotionsRequest(SdkBaseModel):
@@ -83,7 +83,7 @@ class OndemandPagesPromotionsRequest(SdkBaseModel):
     """When **type** is ``batch``, the total number of promotions to generate. When **type** is ``single``, the total
     number of uses of the promotion."""
 
-    type_: Type37OrStr = Field(alias="type")
+    type_: Type41OrStr = Field(alias="type")
     """The type of the promotion. When **access_type** is ``vip``, the value for this parameter must be ``batch``.
 
     Option descriptions:
@@ -103,4 +103,4 @@ class OndemandPagesPromotionsRequestDict(TypedDict):
     start_time: NotRequired[str]
     stream_period: StreamPeriod1OrStr
     total: float
-    type_: Type37OrStr
+    type_: Type41OrStr

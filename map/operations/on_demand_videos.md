@@ -62,9 +62,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /ondemand/pages/{ondemand_id}/videos`
 - **Auth**: `oauth2_authorization_code` OR `oauth2_client_credentials` OR `bearer`
-- **Signature**: `def get_vod_videos(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter: Filter29OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort45OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_vod_videos(ondemand_id: float, *, direction: DirectionOrStr | None = None, filter_: Filter29OrStr | None = None, page: float | None = None, per_page: float | None = None, sort: Sort45OrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `ondemand_id`
-- **Params**: `ondemand_id` — path · `direction` — query · `filter` — query · `page` — query · `per_page` — query · `sort` — query
+- **Params**: `ondemand_id` — path · `direction` — query · `filter_` — query `filter` · `page` — query · `per_page` — query · `sort` — query
 - **Returns (parsed)**: `OnDemandVideoConnection`
 - **Returns (raw)**: `ApiResult[OnDemandVideoConnection, RawError]`
 - **Error**: `RawError` — **Case B**

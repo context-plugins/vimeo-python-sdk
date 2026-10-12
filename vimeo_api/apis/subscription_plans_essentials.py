@@ -10,9 +10,11 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
     empty_response,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.enums.tier1 import Tier1OrStr
 from ..server.server import Server
@@ -31,11 +33,12 @@ class SubscriptionPlansEssentials:
                 ``live_premium`` - The plan type is Vimeo Premium. * ``plus`` - The plan type is Vimeo Plus. * ``pro`` -
                 The plan type is Vimeo Pro. * ``pro_unlimited`` - The plan type is Vimeo Pro Unlimited. * ``standard`` -
                 The plan type is Vimeo Standard. * ``starter`` - The plan type is Vimeo Starter.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_plan(tier, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_plan(tier, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SubscriptionPlansEssentialsWithRawResponse:
@@ -55,11 +58,12 @@ class AsyncSubscriptionPlansEssentials:
                 ``live_premium`` - The plan type is Vimeo Premium. * ``plus`` - The plan type is Vimeo Plus. * ``pro`` -
                 The plan type is Vimeo Pro. * ``pro_unlimited`` - The plan type is Vimeo Pro Unlimited. * ``standard`` -
                 The plan type is Vimeo Standard. * ``starter`` - The plan type is Vimeo Starter.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_plan(tier, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_plan(tier, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncSubscriptionPlansEssentialsWithRawResponse:
@@ -78,7 +82,8 @@ class SubscriptionPlansEssentialsWithRawResponse(SecuredRawResponse[RawClient, S
                 ``live_premium`` - The plan type is Vimeo Premium. * ``plus`` - The plan type is Vimeo Plus. * ``pro`` -
                 The plan type is Vimeo Pro. * ``pro_unlimited`` - The plan type is Vimeo Pro Unlimited. * ``standard`` -
                 The plan type is Vimeo Standard. * ``starter`` - The plan type is Vimeo Starter.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -107,7 +112,8 @@ class AsyncSubscriptionPlansEssentialsWithRawResponse(SecuredRawResponse[AsyncRa
                 ``live_premium`` - The plan type is Vimeo Premium. * ``plus`` - The plan type is Vimeo Plus. * ``pro`` -
                 The plan type is Vimeo Pro. * ``pro_unlimited`` - The plan type is Vimeo Pro Unlimited. * ``standard`` -
                 The plan type is Vimeo Standard. * ``starter`` - The plan type is Vimeo Starter.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -118,7 +124,7 @@ class AsyncSubscriptionPlansEssentialsWithRawResponse(SecuredRawResponse[AsyncRa
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )

@@ -9,8 +9,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.check_if_vod_was_purchased_alt1_error import (
     CheckIfVodWasPurchasedAlt1ErrorBody,
@@ -38,7 +40,8 @@ class OnDemandPurchasesAndRentals:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user has made this purchase.
@@ -46,16 +49,16 @@ class OnDemandPurchasesAndRentals:
         Raises:
             ApiError: The authenticated user can't make purchases for another user's account. No such user or On Demand
                 page exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.check_if_vod_was_purchased_alt1(
-            ondemand_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_vod_was_purchased_alt1(ondemand_id, request_options=request_options)
+        )
 
     def get_vod_purchases(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter19OrStr | None = None,
+        filter_: Filter19OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort33OrStr | None = None,
@@ -68,7 +71,7 @@ class OnDemandPurchasesAndRentals:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
+            filter_: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
                 types. * ``expiring_soon`` - Filter by videos that expire soon. * ``film`` - Filter by film. *
                 ``important`` - Filter by pages that are about to expire. * ``purchased`` - Filter by purchased videos.
                 * ``rented`` - Filter by rented videos. * ``series`` - Filter by series. * ``subscription`` - Filter by
@@ -81,7 +84,8 @@ class OnDemandPurchasesAndRentals:
                 date. * ``name`` - Sort the results by video name. * ``purchase_time`` - Sort the results by time of
                 video purchase. * ``rating`` - Sort the results by content rating. * ``release_date`` - Sort the results
                 by video release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The purchases and rentals were returned.
@@ -89,21 +93,23 @@ class OnDemandPurchasesAndRentals:
         Raises:
             ApiError: The authenticated user can't get purchases and rentals for another user's account. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_purchases(
-            user_id,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_purchases(
+                user_id,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_vod_purchases_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter19OrStr | None = None,
+        filter_: Filter19OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort33OrStr | None = None,
@@ -115,7 +121,7 @@ class OnDemandPurchasesAndRentals:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
+            filter_: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
                 types. * ``expiring_soon`` - Filter by videos that expire soon. * ``film`` - Filter by film. *
                 ``important`` - Filter by pages that are about to expire. * ``purchased`` - Filter by purchased videos.
                 * ``rented`` - Filter by rented videos. * ``series`` - Filter by series. * ``subscription`` - Filter by
@@ -128,7 +134,8 @@ class OnDemandPurchasesAndRentals:
                 date. * ``name`` - Sort the results by video name. * ``purchase_time`` - Sort the results by time of
                 video purchase. * ``rating`` - Sort the results by content rating. * ``release_date`` - Sort the results
                 by video release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The purchases and rentals were returned.
@@ -136,9 +143,16 @@ class OnDemandPurchasesAndRentals:
         Raises:
             ApiError: The authenticated user can't get purchases and rentals for another user's account. ``error`` is
                 ``LegacyError | RawError``."""
-        return self._with_raw_response.get_vod_purchases_alt1(
-            direction=direction, filter=filter, page=page, per_page=per_page, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_vod_purchases_alt1(
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> OnDemandPurchasesAndRentalsWithRawResponse:
@@ -157,7 +171,8 @@ class AsyncOnDemandPurchasesAndRentals:
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user has made this purchase.
@@ -165,16 +180,16 @@ class AsyncOnDemandPurchasesAndRentals:
         Raises:
             ApiError: The authenticated user can't make purchases for another user's account. No such user or On Demand
                 page exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_vod_was_purchased_alt1(ondemand_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_vod_purchases(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter19OrStr | None = None,
+        filter_: Filter19OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort33OrStr | None = None,
@@ -187,7 +202,7 @@ class AsyncOnDemandPurchasesAndRentals:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
+            filter_: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
                 types. * ``expiring_soon`` - Filter by videos that expire soon. * ``film`` - Filter by film. *
                 ``important`` - Filter by pages that are about to expire. * ``purchased`` - Filter by purchased videos.
                 * ``rented`` - Filter by rented videos. * ``series`` - Filter by series. * ``subscription`` - Filter by
@@ -200,7 +215,8 @@ class AsyncOnDemandPurchasesAndRentals:
                 date. * ``name`` - Sort the results by video name. * ``purchase_time`` - Sort the results by time of
                 video purchase. * ``rating`` - Sort the results by content rating. * ``release_date`` - Sort the results
                 by video release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The purchases and rentals were returned.
@@ -208,23 +224,23 @@ class AsyncOnDemandPurchasesAndRentals:
         Raises:
             ApiError: The authenticated user can't get purchases and rentals for another user's account. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_purchases(
                 user_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_vod_purchases_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter19OrStr | None = None,
+        filter_: Filter19OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort33OrStr | None = None,
@@ -236,7 +252,7 @@ class AsyncOnDemandPurchasesAndRentals:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
+            filter_: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
                 types. * ``expiring_soon`` - Filter by videos that expire soon. * ``film`` - Filter by film. *
                 ``important`` - Filter by pages that are about to expire. * ``purchased`` - Filter by purchased videos.
                 * ``rented`` - Filter by rented videos. * ``series`` - Filter by series. * ``subscription`` - Filter by
@@ -249,7 +265,8 @@ class AsyncOnDemandPurchasesAndRentals:
                 date. * ``name`` - Sort the results by video name. * ``purchase_time`` - Sort the results by time of
                 video purchase. * ``rating`` - Sort the results by content rating. * ``release_date`` - Sort the results
                 by video release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The purchases and rentals were returned.
@@ -257,16 +274,16 @@ class AsyncOnDemandPurchasesAndRentals:
         Raises:
             ApiError: The authenticated user can't get purchases and rentals for another user's account. ``error`` is
                 ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_vod_purchases_alt1(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncOnDemandPurchasesAndRentalsWithRawResponse:
@@ -282,7 +299,8 @@ class OnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[RawClient, S
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -303,7 +321,7 @@ class OnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[RawClient, S
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter19OrStr | None = None,
+        filter_: Filter19OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort33OrStr | None = None,
@@ -316,7 +334,7 @@ class OnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[RawClient, S
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
+            filter_: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
                 types. * ``expiring_soon`` - Filter by videos that expire soon. * ``film`` - Filter by film. *
                 ``important`` - Filter by pages that are about to expire. * ``purchased`` - Filter by purchased videos.
                 * ``rented`` - Filter by rented videos. * ``series`` - Filter by series. * ``subscription`` - Filter by
@@ -329,7 +347,8 @@ class OnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[RawClient, S
                 date. * ``name`` - Sort the results by video name. * ``purchase_time`` - Sort the results by time of
                 video purchase. * ``rating`` - Sort the results by content rating. * ``release_date`` - Sort the results
                 by video release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -339,7 +358,7 @@ class OnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[RawClient, S
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter19OrStr | None]("filter", filter),
+                param[Filter19OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort33OrStr | None]("sort", sort),
@@ -356,7 +375,7 @@ class OnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[RawClient, S
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter19OrStr | None = None,
+        filter_: Filter19OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort33OrStr | None = None,
@@ -368,7 +387,7 @@ class OnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[RawClient, S
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
+            filter_: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
                 types. * ``expiring_soon`` - Filter by videos that expire soon. * ``film`` - Filter by film. *
                 ``important`` - Filter by pages that are about to expire. * ``purchased`` - Filter by purchased videos.
                 * ``rented`` - Filter by rented videos. * ``series`` - Filter by series. * ``subscription`` - Filter by
@@ -381,7 +400,8 @@ class OnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[RawClient, S
                 date. * ``name`` - Sort the results by video name. * ``purchase_time`` - Sort the results by time of
                 video purchase. * ``rating`` - Sort the results by content rating. * ``release_date`` - Sort the results
                 by video release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -390,7 +410,7 @@ class OnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[RawClient, S
             url_template=self._server.default("/me/ondemand/purchases"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter19OrStr | None]("filter", filter),
+                param[Filter19OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort33OrStr | None]("sort", sort),
@@ -413,7 +433,8 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
 
         Args:
             ondemand_id: The ID of the On Demand page.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -424,7 +445,7 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPage],
+            decoder=async_json_decoder[OnDemandPage],
             error_mapper=check_if_vod_was_purchased_alt1_error_mapper,
             request_options=request_options,
         )
@@ -434,7 +455,7 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter19OrStr | None = None,
+        filter_: Filter19OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort33OrStr | None = None,
@@ -447,7 +468,7 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
+            filter_: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
                 types. * ``expiring_soon`` - Filter by videos that expire soon. * ``film`` - Filter by film. *
                 ``important`` - Filter by pages that are about to expire. * ``purchased`` - Filter by purchased videos.
                 * ``rented`` - Filter by rented videos. * ``series`` - Filter by series. * ``subscription`` - Filter by
@@ -460,7 +481,8 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
                 date. * ``name`` - Sort the results by video name. * ``purchase_time`` - Sort the results by time of
                 video purchase. * ``rating`` - Sort the results by content rating. * ``release_date`` - Sort the results
                 by video release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -470,7 +492,7 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter19OrStr | None]("filter", filter),
+                param[Filter19OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort33OrStr | None]("sort", sort),
@@ -478,7 +500,7 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPageConnection],
+            decoder=async_json_decoder[OnDemandPageConnection],
             error_mapper=get_vod_purchases_error_mapper,
             request_options=request_options,
         )
@@ -487,7 +509,7 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter19OrStr | None = None,
+        filter_: Filter19OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         sort: Sort33OrStr | None = None,
@@ -499,7 +521,7 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
+            filter_: The type of the On Demand video to filter on. Option descriptions: * ``all`` - Filter by all video
                 types. * ``expiring_soon`` - Filter by videos that expire soon. * ``film`` - Filter by film. *
                 ``important`` - Filter by pages that are about to expire. * ``purchased`` - Filter by purchased videos.
                 * ``rented`` - Filter by rented videos. * ``series`` - Filter by series. * ``subscription`` - Filter by
@@ -512,7 +534,8 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
                 date. * ``name`` - Sort the results by video name. * ``purchase_time`` - Sort the results by time of
                 video purchase. * ``rating`` - Sort the results by content rating. * ``release_date`` - Sort the results
                 by video release date.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -521,7 +544,7 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
             url_template=self._server.default("/me/ondemand/purchases"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter19OrStr | None]("filter", filter),
+                param[Filter19OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[Sort33OrStr | None]("sort", sort),
@@ -529,7 +552,7 @@ class AsyncOnDemandPurchasesAndRentalsWithRawResponse(SecuredRawResponse[AsyncRa
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[OnDemandPageConnection],
+            decoder=async_json_decoder[OnDemandPageConnection],
             error_mapper=get_vod_purchases_alt1_error_mapper,
             request_options=request_options,
         )

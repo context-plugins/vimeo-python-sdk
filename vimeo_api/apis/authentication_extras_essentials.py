@@ -11,9 +11,12 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.delete_token_error import DeleteTokenErrorBody, delete_token_error_mapper
 from ..errors.verify_token_error import VerifyTokenErrorBody, verify_token_error_mapper
@@ -30,27 +33,29 @@ class AuthenticationExtrasEssentials:
         OAuth 2 type.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The token was revoked.
 
         Raises:
             ApiError: Access can't be revoked for an OAuth 1 token. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_token(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_token(request_options=request_options))
 
     def verify_token(self, *, request_options: RequestOptionsOrDict | None = None) -> AuthModel:
         """This method verifies that an OAuth 2 access token exists.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The token was verified.
 
         Raises:
             ApiError: The token isn't a valid OAuth 2 token. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.verify_token(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.verify_token(request_options=request_options))
 
     @property
     def with_raw_response(self) -> AuthenticationExtrasEssentialsWithRawResponse:
@@ -66,27 +71,29 @@ class AsyncAuthenticationExtrasEssentials:
         OAuth 2 type.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The token was revoked.
 
         Raises:
             ApiError: Access can't be revoked for an OAuth 1 token. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.delete_token(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_token(request_options=request_options))
 
     async def verify_token(self, *, request_options: RequestOptionsOrDict | None = None) -> AuthModel:
         """This method verifies that an OAuth 2 access token exists.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The token was verified.
 
         Raises:
             ApiError: The token isn't a valid OAuth 2 token. ``error`` is ``LegacyError | RawError``."""
-        return (await self._with_raw_response.verify_token(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.verify_token(request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncAuthenticationExtrasEssentialsWithRawResponse:
@@ -101,7 +108,8 @@ class AuthenticationExtrasEssentialsWithRawResponse(SecuredRawResponse[RawClient
         OAuth 2 type.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -123,7 +131,8 @@ class AuthenticationExtrasEssentialsWithRawResponse(SecuredRawResponse[RawClient
         """This method verifies that an OAuth 2 access token exists.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -147,7 +156,8 @@ class AsyncAuthenticationExtrasEssentialsWithRawResponse(SecuredRawResponse[Asyn
         OAuth 2 type.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -158,7 +168,7 @@ class AsyncAuthenticationExtrasEssentialsWithRawResponse(SecuredRawResponse[Asyn
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_token_error_mapper,
             request_options=request_options,
         )
@@ -169,7 +179,8 @@ class AsyncAuthenticationExtrasEssentialsWithRawResponse(SecuredRawResponse[Asyn
         """This method verifies that an OAuth 2 access token exists.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -179,7 +190,7 @@ class AsyncAuthenticationExtrasEssentialsWithRawResponse(SecuredRawResponse[Asyn
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AuthModel],
+            decoder=async_json_decoder[AuthModel],
             error_mapper=verify_token_error_mapper,
             request_options=request_options,
         )

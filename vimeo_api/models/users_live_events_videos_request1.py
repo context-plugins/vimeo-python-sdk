@@ -12,4 +12,4 @@ class UsersLiveEventsVideosRequest1(SdkBaseModel):
 
 
 class UsersLiveEventsVideosRequest1Dict(TypedDict):
-    videos: NotRequired[list[Videos17 | Videos17Dict]]
+    videos: NotRequired[list[Videos17Dict]]

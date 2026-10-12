@@ -13,11 +13,11 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Signature**: `def get_tag(word: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `word`
 - **Params**: `word` — path
-- **Returns (parsed)**: `Tag`
-- **Returns (raw)**: `ApiResult[Tag, RawError]`
+- **Returns (parsed)**: `TagModel`
+- **Returns (raw)**: `ApiResult[TagModel, RawError]`
 - **Error**: `RawError` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `Tag` | `vimeo_api/models/tag.py` |
+| `TagModel` | `vimeo_api/models/tag_model.py` |
 

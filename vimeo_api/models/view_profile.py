@@ -23,7 +23,7 @@ class ViewProfile(SdkBaseModel):
 
 
 class ViewProfileDict(TypedDict):
-    disabled: NotRequired[Disabled | DisabledDict]
+    disabled: NotRequired[DisabledDict]
     mod_override: NotRequired[bool]
     options: NotRequired[list[str]]
     uri: NotRequired[str]

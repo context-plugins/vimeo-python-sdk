@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.channels_videos_pictures_request import ChannelsVideosPicturesRequest, ChannelsVideosPicturesRequestDict
 from ..models.picture import Picture
@@ -43,16 +46,17 @@ class VideosThumbnails:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail image was added to the video.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_video_thumbnail(
-            video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_video_thumbnail(video_id, body=body, request_options=request_options)
+        )
 
     def create_video_thumbnail_alt1(
         self,
@@ -69,16 +73,19 @@ class VideosThumbnails:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail image was added to the video.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_video_thumbnail_alt1(
-            channel_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_video_thumbnail_alt1(
+                channel_id, video_id, body=body, request_options=request_options
+            ),
+        )
 
     def delete_video_thumbnail(
         self, picture_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -89,16 +96,17 @@ class VideosThumbnails:
         Args:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was deleted.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_video_thumbnail(
-            picture_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_thumbnail(picture_id, video_id, request_options=request_options)
+        )
 
     def edit_video_thumbnail(
         self,
@@ -115,16 +123,19 @@ class VideosThumbnails:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was edited.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.edit_video_thumbnail(
-            picture_id, video_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.edit_video_thumbnail(
+                picture_id, video_id, body=body, request_options=request_options
+            ),
+        )
 
     def get_video_thumbnail(
         self, picture_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -135,16 +146,17 @@ class VideosThumbnails:
         Args:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_video_thumbnail(
-            picture_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_thumbnail(picture_id, video_id, request_options=request_options)
+        )
 
     def get_video_thumbnails(
         self,
@@ -161,16 +173,19 @@ class VideosThumbnails:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_video_thumbnails(
-            video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_thumbnails(
+                video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     def get_video_thumbnails_alt1(
         self,
@@ -189,16 +204,19 @@ class VideosThumbnails:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_video_thumbnails_alt1(
-            channel_id, video_id, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_video_thumbnails_alt1(
+                channel_id, video_id, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosThumbnailsWithRawResponse:
@@ -222,16 +240,17 @@ class AsyncVideosThumbnails:
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail image was added to the video.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_video_thumbnail(video_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def create_video_thumbnail_alt1(
         self,
@@ -248,18 +267,19 @@ class AsyncVideosThumbnails:
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail image was added to the video.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_video_thumbnail_alt1(
                 channel_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_video_thumbnail(
         self, picture_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -270,16 +290,17 @@ class AsyncVideosThumbnails:
         Args:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was deleted.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_thumbnail(picture_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def edit_video_thumbnail(
         self,
@@ -296,18 +317,19 @@ class AsyncVideosThumbnails:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was edited.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.edit_video_thumbnail(
                 picture_id, video_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_video_thumbnail(
         self, picture_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -318,16 +340,17 @@ class AsyncVideosThumbnails:
         Args:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnail was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_thumbnail(picture_id, video_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_video_thumbnails(
         self,
@@ -344,18 +367,19 @@ class AsyncVideosThumbnails:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_thumbnails(
                 video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_video_thumbnails_alt1(
         self,
@@ -374,18 +398,19 @@ class AsyncVideosThumbnails:
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The thumbnails were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_video_thumbnails_alt1(
                 channel_id, video_id, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosThumbnailsWithRawResponse:
@@ -406,7 +431,8 @@ class VideosThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -439,7 +465,8 @@ class VideosThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -466,7 +493,8 @@ class VideosThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -498,7 +526,8 @@ class VideosThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -525,7 +554,8 @@ class VideosThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -556,7 +586,8 @@ class VideosThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -590,7 +621,8 @@ class VideosThumbnailsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -622,7 +654,8 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -635,7 +668,7 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -655,7 +688,8 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             channel_id: The ID of the channel.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -668,7 +702,7 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -682,7 +716,8 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -694,7 +729,7 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -714,7 +749,8 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -727,7 +763,7 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -741,7 +777,8 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             picture_id: The ID of the thumbnail.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -752,7 +789,7 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Picture],
+            decoder=async_json_decoder[Picture],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -772,7 +809,8 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -784,7 +822,7 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -806,7 +844,8 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             video_id: The ID of the video.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -818,7 +857,7 @@ class AsyncVideosThumbnailsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[PictureConnection],
+            decoder=async_json_decoder[PictureConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

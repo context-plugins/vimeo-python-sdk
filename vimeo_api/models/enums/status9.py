@@ -5,18 +5,16 @@ from ...core import open_enum_validator
 
 
 class Status9(str, Enum):
-    """The availability of the animated thumbnail.
+    """The transcode status of the audio track.
 
     Option descriptions:
-     * ``cancelled`` - The animated thumbnail's creation has been cancelled.
-     * ``completed`` - The animated thumbnail has been created.
-     * ``failed`` - The animated thumbnail's creation has failed.
-     * ``started`` - The animated thumbnail's creation has started."""
+     * ``complete`` - Transcoding is complete. The audio track is available.
+     * ``error`` - There was a transcoding error. The audio track isn't available.
+     * ``in_progress`` - Transcoding is in progress. The audio track isn't available yet."""
 
-    CANCELLED = "cancelled"
-    COMPLETED = "completed"
-    FAILED = "failed"
-    STARTED = "started"
+    COMPLETE = "complete"
+    ERROR = "error"
+    IN_PROGRESS = "in_progress"
 
     __str__ = str.__str__
 

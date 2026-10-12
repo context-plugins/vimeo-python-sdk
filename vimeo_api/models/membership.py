@@ -65,5 +65,5 @@ class Membership(SdkBaseModel):
 
 class MembershipDict(TypedDict):
     display: DisplayOrStr
-    subscription: Subscription3 | Subscription3Dict
+    subscription: Subscription3Dict
     type_: Type2OrStr

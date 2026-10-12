@@ -12,11 +12,14 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.check_if_user_is_following_alt1_error import (
     CheckIfUserIsFollowingAlt1ErrorBody,
@@ -51,7 +54,8 @@ class UsersFollowers:
         Args:
             follow_user_id: The ID of the user to follow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user follows the specified user.
@@ -59,9 +63,9 @@ class UsersFollowers:
         Raises:
             ApiError: The authenticated user doesn't follow the specified user. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.check_if_user_is_following(
-            follow_user_id, user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_user_is_following(follow_user_id, user_id, request_options=request_options)
+        )
 
     def check_if_user_is_following_alt1(
         self, follow_user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -70,7 +74,8 @@ class UsersFollowers:
 
         Args:
             follow_user_id: The ID of the user to follow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user follows the specified user.
@@ -78,9 +83,9 @@ class UsersFollowers:
         Raises:
             ApiError: The authenticated user doesn't follow the specified user. ``error`` is ``LegacyError |
                 RawError``."""
-        return self._with_raw_response.check_if_user_is_following_alt1(
-            follow_user_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_if_user_is_following_alt1(follow_user_id, request_options=request_options)
+        )
 
     def follow_user(
         self, follow_user_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -90,7 +95,8 @@ class UsersFollowers:
         Args:
             follow_user_id: The ID of the user to follow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was followed.
@@ -99,14 +105,15 @@ class UsersFollowers:
             ApiError: * The authenticated user can't follow other users. * Error code 3438: The authenticated user can't
                 follow other users because an email verification check hasn't been completed. ``error`` is ``LegacyError
                 | RawError``."""
-        return self._with_raw_response.follow_user(follow_user_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.follow_user(follow_user_id, user_id, request_options=request_options))
 
     def follow_user_alt1(self, follow_user_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method causes the authenticated user to become the follower of the specified user.
 
         Args:
             follow_user_id: The ID of the user to follow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was followed.
@@ -115,7 +122,7 @@ class UsersFollowers:
             ApiError: * The authenticated user can't follow other users. * Error code 3438: The authenticated user can't
                 follow other users because an email verification check hasn't been completed. ``error`` is ``LegacyError
                 | RawError``."""
-        return self._with_raw_response.follow_user_alt1(follow_user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.follow_user_alt1(follow_user_id, request_options=request_options))
 
     def follow_users(
         self,
@@ -141,7 +148,8 @@ class UsersFollowers:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were followed.
@@ -154,7 +162,7 @@ class UsersFollowers:
                 other users because an email verification check hasn't been completed. Error code 9006: The
                 authenticated user is rate-limited from following other users. Error code 4005: An unexpected error
                 occurred. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.follow_users(user_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.follow_users(user_id, body, request_options=request_options))
 
     def follow_users_alt1(
         self, body: MeFollowingRequest | MeFollowingRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -175,7 +183,8 @@ class UsersFollowers:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were followed.
@@ -188,7 +197,7 @@ class UsersFollowers:
                 other users because an email verification check hasn't been completed. Error code 9006: The
                 authenticated user is rate-limited from following other users. Error code 4005: An unexpected error
                 occurred. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.follow_users_alt1(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.follow_users_alt1(body, request_options=request_options))
 
     def get_followers(
         self,
@@ -212,22 +221,25 @@ class UsersFollowers:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user's followers were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_followers(
-            user_id,
-            direction=direction,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_followers(
+                user_id,
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_followers_alt1(
         self,
@@ -249,23 +261,31 @@ class UsersFollowers:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user's followers were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_followers_alt1(
-            direction=direction, page=page, per_page=per_page, query=query, sort=sort, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_followers_alt1(
+                direction=direction,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_user_following(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter13OrStr | None = None,
+        filter_: Filter13OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -278,36 +298,39 @@ class UsersFollowers:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
+            filter_: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
                 are currently online.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The followed users were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_user_following(
-            user_id,
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_user_following(
+                user_id,
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_user_following_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter13OrStr | None = None,
+        filter_: Filter13OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -319,29 +342,32 @@ class UsersFollowers:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
+            filter_: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
                 are currently online.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The followed users were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_user_following_alt1(
-            direction=direction,
-            filter=filter,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_user_following_alt1(
+                direction=direction,
+                filter_=filter_,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def unfollow_user(
         self, follow_user_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -351,28 +377,30 @@ class UsersFollowers:
         Args:
             follow_user_id: The ID of the user to unfollow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was unfollowed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.unfollow_user(follow_user_id, user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.unfollow_user(follow_user_id, user_id, request_options=request_options))
 
     def unfollow_user_alt1(self, follow_user_id: float, *, request_options: RequestOptionsOrDict | None = None) -> None:
         """This method causes the authenticated user to stop following another user.
 
         Args:
             follow_user_id: The ID of the user to unfollow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was unfollowed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.unfollow_user_alt1(follow_user_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.unfollow_user_alt1(follow_user_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> UsersFollowersWithRawResponse:
@@ -391,7 +419,8 @@ class AsyncUsersFollowers:
         Args:
             follow_user_id: The ID of the user to follow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user follows the specified user.
@@ -399,11 +428,11 @@ class AsyncUsersFollowers:
         Raises:
             ApiError: The authenticated user doesn't follow the specified user. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_is_following(
                 follow_user_id, user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def check_if_user_is_following_alt1(
         self, follow_user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -412,7 +441,8 @@ class AsyncUsersFollowers:
 
         Args:
             follow_user_id: The ID of the user to follow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authenticated user follows the specified user.
@@ -420,11 +450,11 @@ class AsyncUsersFollowers:
         Raises:
             ApiError: The authenticated user doesn't follow the specified user. ``error`` is ``LegacyError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_if_user_is_following_alt1(
                 follow_user_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def follow_user(
         self, follow_user_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -434,7 +464,8 @@ class AsyncUsersFollowers:
         Args:
             follow_user_id: The ID of the user to follow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was followed.
@@ -443,9 +474,9 @@ class AsyncUsersFollowers:
             ApiError: * The authenticated user can't follow other users. * Error code 3438: The authenticated user can't
                 follow other users because an email verification check hasn't been completed. ``error`` is ``LegacyError
                 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.follow_user(follow_user_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def follow_user_alt1(
         self, follow_user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -454,7 +485,8 @@ class AsyncUsersFollowers:
 
         Args:
             follow_user_id: The ID of the user to follow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was followed.
@@ -463,9 +495,7 @@ class AsyncUsersFollowers:
             ApiError: * The authenticated user can't follow other users. * Error code 3438: The authenticated user can't
                 follow other users because an email verification check hasn't been completed. ``error`` is ``LegacyError
                 | RawError``."""
-        return (
-            await self._with_raw_response.follow_user_alt1(follow_user_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.follow_user_alt1(follow_user_id, request_options=request_options))
 
     async def follow_users(
         self,
@@ -491,7 +521,8 @@ class AsyncUsersFollowers:
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were followed.
@@ -504,7 +535,7 @@ class AsyncUsersFollowers:
                 other users because an email verification check hasn't been completed. Error code 9006: The
                 authenticated user is rate-limited from following other users. Error code 4005: An unexpected error
                 occurred. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.follow_users(user_id, body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.follow_users(user_id, body, request_options=request_options))
 
     async def follow_users_alt1(
         self, body: MeFollowingRequest | MeFollowingRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -525,7 +556,8 @@ class AsyncUsersFollowers:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The users were followed.
@@ -538,7 +570,7 @@ class AsyncUsersFollowers:
                 other users because an email verification check hasn't been completed. Error code 9006: The
                 authenticated user is rate-limited from following other users. Error code 4005: An unexpected error
                 occurred. ``error`` is ``Error | RawError``."""
-        return (await self._with_raw_response.follow_users_alt1(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.follow_users_alt1(body, request_options=request_options))
 
     async def get_followers(
         self,
@@ -562,14 +594,15 @@ class AsyncUsersFollowers:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user's followers were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_followers(
                 user_id,
                 direction=direction,
@@ -578,8 +611,8 @@ class AsyncUsersFollowers:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_followers_alt1(
         self,
@@ -601,14 +634,15 @@ class AsyncUsersFollowers:
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user's followers were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_followers_alt1(
                 direction=direction,
                 page=page,
@@ -616,15 +650,15 @@ class AsyncUsersFollowers:
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_user_following(
         self,
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter13OrStr | None = None,
+        filter_: Filter13OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -637,38 +671,39 @@ class AsyncUsersFollowers:
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
+            filter_: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
                 are currently online.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The followed users were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_user_following(
                 user_id,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_user_following_alt1(
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter13OrStr | None = None,
+        filter_: Filter13OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -680,31 +715,32 @@ class AsyncUsersFollowers:
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
+            filter_: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
                 are currently online.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The followed users were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_user_following_alt1(
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def unfollow_user(
         self, follow_user_id: float, user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -714,16 +750,17 @@ class AsyncUsersFollowers:
         Args:
             follow_user_id: The ID of the user to unfollow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was unfollowed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.unfollow_user(follow_user_id, user_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def unfollow_user_alt1(
         self, follow_user_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -732,16 +769,15 @@ class AsyncUsersFollowers:
 
         Args:
             follow_user_id: The ID of the user to unfollow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The user was unfollowed.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.unfollow_user_alt1(follow_user_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.unfollow_user_alt1(follow_user_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncUsersFollowersWithRawResponse:
@@ -757,7 +793,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             follow_user_id: The ID of the user to follow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -780,7 +817,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             follow_user_id: The ID of the user to follow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -804,7 +842,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             follow_user_id: The ID of the user to follow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -828,7 +867,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             follow_user_id: The ID of the user to follow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -869,7 +909,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -906,7 +947,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -945,7 +987,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -988,7 +1031,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1015,7 +1059,7 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter13OrStr | None = None,
+        filter_: Filter13OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -1028,14 +1072,15 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
+            filter_: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
                 are currently online.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1045,7 +1090,7 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter13OrStr | None]("filter", filter),
+                param[Filter13OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -1063,7 +1108,7 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter13OrStr | None = None,
+        filter_: Filter13OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -1075,14 +1120,15 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
+            filter_: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
                 are currently online.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1091,7 +1137,7 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             url_template=self._server.default("/me/following"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter13OrStr | None]("filter", filter),
+                param[Filter13OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -1113,7 +1159,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             follow_user_id: The ID of the user to unfollow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1137,7 +1184,8 @@ class UsersFollowersWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
 
         Args:
             follow_user_id: The ID of the user to unfollow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1164,7 +1212,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             follow_user_id: The ID of the user to follow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1175,7 +1224,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=check_if_user_is_following_error_mapper,
             request_options=request_options,
         )
@@ -1187,7 +1236,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             follow_user_id: The ID of the user to follow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1198,7 +1248,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=check_if_user_is_following_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1211,7 +1261,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             follow_user_id: The ID of the user to follow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1223,7 +1274,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=follow_user_error_mapper,
             request_options=request_options,
         )
@@ -1235,7 +1286,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             follow_user_id: The ID of the user to follow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1247,7 +1299,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=follow_user_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1276,7 +1328,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1289,7 +1342,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=follow_users_error_mapper,
             request_options=request_options,
         )
@@ -1313,7 +1366,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1325,7 +1379,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=follow_users_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1352,7 +1406,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1370,7 +1425,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1395,7 +1450,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1412,7 +1468,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1422,7 +1478,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         user_id: float,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter13OrStr | None = None,
+        filter_: Filter13OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -1435,14 +1491,15 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             user_id: The ID of the user.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
+            filter_: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
                 are currently online.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1452,7 +1509,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             path_params=[param[float]("user_id", user_id)],
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter13OrStr | None]("filter", filter),
+                param[Filter13OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -1461,7 +1518,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1470,7 +1527,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         self,
         *,
         direction: DirectionOrStr | None = None,
-        filter: Filter13OrStr | None = None,
+        filter_: Filter13OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         query: str | None = None,
@@ -1482,14 +1539,15 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
+            filter_: The attribute by which to filter the results. Option descriptions: * ``online`` - Return users who
                 are currently online.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
             query: The search query to use to filter the results.
             sort: The way to sort the results. Option descriptions: * ``alphabetical`` - Sort the results
                 alphabetically. * ``date`` - Sort the results by date followed.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1498,7 +1556,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             url_template=self._server.default("/me/following"),
             query_params=[
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter13OrStr | None]("filter", filter),
+                param[Filter13OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
                 param[str | None]("query", query),
@@ -1507,7 +1565,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[UserConnection],
+            decoder=async_json_decoder[UserConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1520,7 +1578,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             follow_user_id: The ID of the user to unfollow.
             user_id: The ID of the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1532,7 +1591,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1544,7 +1603,8 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
 
         Args:
             follow_user_id: The ID of the user to unfollow.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1556,7 +1616,7 @@ class AsyncUsersFollowersWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )

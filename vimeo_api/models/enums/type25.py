@@ -5,20 +5,32 @@ from ...core import open_enum_validator
 
 
 class Type25(str, Enum):
-    """The type of text track.
+    """The elements that appear after the video ends.
 
     Option descriptions:
-     * ``captions`` - The text track is the captions type.
-     * ``chapters`` - The text track is the chapters type.
-     * ``descriptions`` - The text track is the descriptions type.
-     * ``metadata`` - The text track is the metadata type.
-     * ``subtitles`` - The text track is the subtitles type."""
+     * ``beginning`` - The end screen is a thumbnail.
+     * ``custom`` - The end screen is custom.
+     * ``email`` - The end screen is an email form.
+     * ``image`` - The end screen is an image.
+     * ``link`` - The end screen is a link.
+     * ``loop`` - The end screen is a loop.
+     * ``nothing`` - There is no end screen.
+     * ``share`` - The end screen is a share button.
+     * ``text`` - The end screen is text.
+     * ``threevideos`` - The end screen is three video suggestions.
+     * ``videos`` - The end screen is video suggestions."""
 
-    CAPTIONS = "captions"
-    CHAPTERS = "chapters"
-    DESCRIPTIONS = "descriptions"
-    METADATA = "metadata"
-    SUBTITLES = "subtitles"
+    BEGINNING = "beginning"
+    CUSTOM = "custom"
+    EMAIL = "email"
+    IMAGE = "image"
+    LINK = "link"
+    LOOP = "loop"
+    NOTHING = "nothing"
+    SHARE = "share"
+    TEXT = "text"
+    THREEVIDEOS = "threevideos"
+    VIDEOS = "videos"
 
     __str__ = str.__str__
 

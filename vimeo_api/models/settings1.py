@@ -100,18 +100,18 @@ class Settings1Dict(TypedDict):
     airplay: bool
     ask_ai: bool
     audio_tracks: bool
-    buttons: Buttons1 | Buttons1Dict
+    buttons: Buttons1Dict
     byline: BylineOrStr
     cc_track_menu: bool
     chapters: bool
     chromecast: bool
     closed_captions: bool
     color: str
-    colors: Colors5 | Colors5Dict
-    end_screen: EndScreen1 | EndScreen1Dict
-    outro: Outro | OutroDict
+    colors: Colors5Dict
+    end_screen: EndScreen1Dict
+    outro: OutroDict
     pip: bool
-    play_button: PlayButton | PlayButtonDict
+    play_button: PlayButtonDict
     playbar: bool
     portrait: Portrait1OrStr
     quality_selector: bool

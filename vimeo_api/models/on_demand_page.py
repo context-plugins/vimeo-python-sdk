@@ -98,29 +98,29 @@ class OnDemandPage(SdkBaseModel):
 
 
 class OnDemandPageDict(TypedDict):
-    background: Picture | PictureDict | None
-    colors: Colors2 | Colors2Dict
+    background: PictureDict | None
+    colors: Colors2Dict
     content_rating: list[str]
     created_time: NotRequired[str]
     description: str | None
     domain_link: str | None
-    episodes: Episodes | EpisodesDict
-    film: NotRequired[Video | VideoDict]
-    genres: list[OnDemandGenre | OnDemandGenreDict]
+    episodes: EpisodesDict
+    film: NotRequired[VideoDict]
+    genres: list[OnDemandGenreDict]
     link: str
-    metadata: Metadata9 | Metadata9Dict
+    metadata: Metadata9Dict
     modified_time: NotRequired[str]
     name: str
-    pictures: Picture | PictureDict | None
-    preorder: Preorder | PreorderDict
-    published: Published | PublishedDict
+    pictures: PictureDict | None
+    preorder: PreorderDict
+    published: PublishedDict
     rating: float | None
     resource_key: str
     sku: NotRequired[str | None]
-    subscription: Subscription1 | Subscription1Dict | None
+    subscription: Subscription1Dict | None
     theme: str
-    thumbnail: Picture | PictureDict | None
-    trailer: Video | VideoDict | None
+    thumbnail: PictureDict | None
+    trailer: VideoDict | None
     type_: Type9OrStr
     uri: str
-    user: User | UserDict | None
+    user: UserDict | None

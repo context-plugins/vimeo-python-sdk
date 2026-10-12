@@ -28,9 +28,9 @@ class UploadAttempt(SdkBaseModel):
 
 
 class UploadAttemptDict(TypedDict):
-    clip: NotRequired[Video | VideoDict]
+    clip: NotRequired[VideoDict]
     form: NotRequired[str]
     ticket_id: str
     upload_link: str
     uri: str
-    user: User | UserDict
+    user: UserDict

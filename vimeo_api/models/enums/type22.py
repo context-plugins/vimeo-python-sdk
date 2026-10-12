@@ -5,20 +5,17 @@ from ...core import open_enum_validator
 
 
 class Type22(str, Enum):
-    """The preset outro type.
+    """The way in which the promotion generates promo codes.
 
     Option descriptions:
-     * ``link`` - The outro includes a link.
-     * ``no idea`` - The outro type is ``no idea``. The outro includes uploaded videos.
-     * ``text`` - The outro includes text.
-     * ``uploaded_clips`` - The outro includes uploaded videos.
-     * ``uploaded_videos`` - The outro includes uploaded videos."""
+     * ``batch`` - The promotion provides a unique promotional code for each user.
+     * ``batch_prefix`` - Like ``batch``, except that all codes have a similar prefix string. _This option is
+            deprecated, yet it may still appear for some users._
+     * ``single`` - The promotion provides a single promotional code for all users."""
 
-    LINK = "link"
-    NO_IDEA = "no idea"
-    TEXT = "text"
-    UPLOADED_CLIPS = "uploaded_clips"
-    UPLOADED_VIDEOS = "uploaded_videos"
+    BATCH = "batch"
+    BATCH_PREFIX = "batch_prefix"
+    SINGLE = "single"
 
     __str__ = str.__str__
 

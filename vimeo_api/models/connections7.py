@@ -14,4 +14,4 @@ class Connections7(SdkBaseModel):
 
 
 class Connections7Dict(TypedDict):
-    related: Related1 | Related1Dict | None
+    related: Related1Dict | None

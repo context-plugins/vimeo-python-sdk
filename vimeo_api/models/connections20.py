@@ -12,4 +12,4 @@ class Connections20(SdkBaseModel):
 
 
 class Connections20Dict(TypedDict):
-    season: Season1 | Season1Dict
+    season: Season1Dict

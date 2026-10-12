@@ -11,9 +11,11 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.exchange_auth_code_error import ExchangeAuthCodeErrorBody, exchange_auth_code_error_mapper
 from ..models.auth_model import AuthModel
@@ -35,7 +37,8 @@ class AuthenticationExtrasExchange:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authorization code was exchanged.
@@ -43,7 +46,7 @@ class AuthenticationExtrasExchange:
         Raises:
             ApiError: * The grant type is invalid. * The authorization code is invalid. * The redirect URI doesn't match
                 the URI to create the authorization code. ``error`` is ``AuthError | RawError``."""
-        return self._with_raw_response.exchange_auth_code(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.exchange_auth_code(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AuthenticationExtrasExchangeWithRawResponse:
@@ -64,7 +67,8 @@ class AsyncAuthenticationExtrasExchange:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The authorization code was exchanged.
@@ -72,7 +76,7 @@ class AsyncAuthenticationExtrasExchange:
         Raises:
             ApiError: * The grant type is invalid. * The authorization code is invalid. * The redirect URI doesn't match
                 the URI to create the authorization code. ``error`` is ``AuthError | RawError``."""
-        return (await self._with_raw_response.exchange_auth_code(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.exchange_auth_code(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncAuthenticationExtrasExchangeWithRawResponse:
@@ -90,7 +94,8 @@ class AuthenticationExtrasExchangeWithRawResponse(SecuredRawResponse[RawClient, 
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -119,7 +124,8 @@ class AsyncAuthenticationExtrasExchangeWithRawResponse(SecuredRawResponse[AsyncR
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -131,7 +137,7 @@ class AsyncAuthenticationExtrasExchangeWithRawResponse(SecuredRawResponse[AsyncR
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[AuthModel],
+            decoder=async_json_decoder[AuthModel],
             error_mapper=exchange_auth_code_error_mapper,
             request_options=request_options,
         )

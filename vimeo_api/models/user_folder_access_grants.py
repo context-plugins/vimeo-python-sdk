@@ -23,7 +23,7 @@ class UserFolderAccessGrants(SdkBaseModel):
 
 
 class UserFolderAccessGrantsDict(TypedDict):
-    folder_permission_policies: list[FolderPermissionPolicy | FolderPermissionPolicyDict]
+    folder_permission_policies: list[FolderPermissionPolicyDict]
     options: list[str]
     total: float
     uri: str

@@ -22,5 +22,5 @@ class Videos18(SdkBaseModel):
 
 
 class Videos18Dict(TypedDict):
-    privacy: NotRequired[Privacy10 | Privacy10Dict]
+    privacy: NotRequired[Privacy10Dict]
     rating: NotRequired[Rating1OrStr]

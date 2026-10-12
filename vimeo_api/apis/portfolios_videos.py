@@ -12,10 +12,13 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.add_video_to_portfolio_alt1_error import (
     AddVideoToPortfolioAlt1ErrorBody,
@@ -55,16 +58,19 @@ class PortfoliosVideos:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: No such portfolio or video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_to_portfolio(
-            portfolio_id, user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_to_portfolio(
+                portfolio_id, user_id, video_id, request_options=request_options
+            ),
+        )
 
     def add_video_to_portfolio_alt1(
         self, portfolio_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -74,16 +80,17 @@ class PortfoliosVideos:
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: No such portfolio or video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.add_video_to_portfolio_alt1(
-            portfolio_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_video_to_portfolio_alt1(portfolio_id, video_id, request_options=request_options)
+        )
 
     def delete_video_from_portfolio(
         self,
@@ -99,16 +106,19 @@ class PortfoliosVideos:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
 
         Raises:
             ApiError: No such portfolio or video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_video_from_portfolio(
-            portfolio_id, user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_from_portfolio(
+                portfolio_id, user_id, video_id, request_options=request_options
+            ),
+        )
 
     def delete_video_from_portfolio_alt1(
         self, portfolio_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -118,16 +128,19 @@ class PortfoliosVideos:
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
 
         Raises:
             ApiError: No such portfolio or video exists. ``error`` is ``LegacyError | RawError``."""
-        return self._with_raw_response.delete_video_from_portfolio_alt1(
-            portfolio_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_video_from_portfolio_alt1(
+                portfolio_id, video_id, request_options=request_options
+            ),
+        )
 
     def get_portfolio_video(
         self,
@@ -143,16 +156,19 @@ class PortfoliosVideos:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_portfolio_video(
-            portfolio_id, user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_portfolio_video(
+                portfolio_id, user_id, video_id, request_options=request_options
+            ),
+        )
 
     def get_portfolio_video_alt1(
         self, portfolio_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -162,16 +178,17 @@ class PortfoliosVideos:
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_portfolio_video_alt1(
-            portfolio_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_portfolio_video_alt1(portfolio_id, video_id, request_options=request_options)
+        )
 
     def get_portfolio_videos(
         self,
@@ -179,7 +196,7 @@ class PortfoliosVideos:
         user_id: float,
         *,
         containing_uri: str | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -192,7 +209,7 @@ class PortfoliosVideos:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             containing_uri: The page that contains the video URI.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -203,31 +220,34 @@ class PortfoliosVideos:
                 by creation date. * ``default`` - Use the default sorting method. * ``likes`` - Sort the results by
                 number of likes. * ``manual`` - Sort the results by their user-specified order. * ``plays`` - Sort the
                 results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_portfolio_videos(
-            portfolio_id,
-            user_id,
-            containing_uri=containing_uri,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_portfolio_videos(
+                portfolio_id,
+                user_id,
+                containing_uri=containing_uri,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_portfolio_videos_alt1(
         self,
         portfolio_id: float,
         *,
         containing_uri: str | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -239,7 +259,7 @@ class PortfoliosVideos:
         Args:
             portfolio_id: The ID of the portfolio.
             containing_uri: The page that contains the video URI.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -250,23 +270,26 @@ class PortfoliosVideos:
                 by creation date. * ``default`` - Use the default sorting method. * ``likes`` - Sort the results by
                 number of likes. * ``manual`` - Sort the results by their user-specified order. * ``plays`` - Sort the
                 results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_portfolio_videos_alt1(
-            portfolio_id,
-            containing_uri=containing_uri,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_portfolio_videos_alt1(
+                portfolio_id,
+                containing_uri=containing_uri,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> PortfoliosVideosWithRawResponse:
@@ -291,18 +314,19 @@ class AsyncPortfoliosVideos:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: No such portfolio or video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_portfolio(
                 portfolio_id, user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def add_video_to_portfolio_alt1(
         self, portfolio_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -312,18 +336,19 @@ class AsyncPortfoliosVideos:
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was added.
 
         Raises:
             ApiError: No such portfolio or video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_video_to_portfolio_alt1(
                 portfolio_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_video_from_portfolio(
         self,
@@ -339,18 +364,19 @@ class AsyncPortfoliosVideos:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
 
         Raises:
             ApiError: No such portfolio or video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_from_portfolio(
                 portfolio_id, user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def delete_video_from_portfolio_alt1(
         self, portfolio_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -360,18 +386,19 @@ class AsyncPortfoliosVideos:
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was removed.
 
         Raises:
             ApiError: No such portfolio or video exists. ``error`` is ``LegacyError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_video_from_portfolio_alt1(
                 portfolio_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_portfolio_video(
         self,
@@ -387,18 +414,19 @@ class AsyncPortfoliosVideos:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_portfolio_video(
                 portfolio_id, user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_portfolio_video_alt1(
         self, portfolio_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -408,18 +436,19 @@ class AsyncPortfoliosVideos:
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_portfolio_video_alt1(
                 portfolio_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_portfolio_videos(
         self,
@@ -427,7 +456,7 @@ class AsyncPortfoliosVideos:
         user_id: float,
         *,
         containing_uri: str | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -440,7 +469,7 @@ class AsyncPortfoliosVideos:
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             containing_uri: The page that contains the video URI.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -451,33 +480,34 @@ class AsyncPortfoliosVideos:
                 by creation date. * ``default`` - Use the default sorting method. * ``likes`` - Sort the results by
                 number of likes. * ``manual`` - Sort the results by their user-specified order. * ``plays`` - Sort the
                 results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_portfolio_videos(
                 portfolio_id,
                 user_id,
                 containing_uri=containing_uri,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_portfolio_videos_alt1(
         self,
         portfolio_id: float,
         *,
         containing_uri: str | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -489,7 +519,7 @@ class AsyncPortfoliosVideos:
         Args:
             portfolio_id: The ID of the portfolio.
             containing_uri: The page that contains the video URI.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -500,25 +530,26 @@ class AsyncPortfoliosVideos:
                 by creation date. * ``default`` - Use the default sorting method. * ``likes`` - Sort the results by
                 number of likes. * ``manual`` - Sort the results by their user-specified order. * ``plays`` - Sort the
                 results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_portfolio_videos_alt1(
                 portfolio_id,
                 containing_uri=containing_uri,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncPortfoliosVideosWithRawResponse:
@@ -540,7 +571,8 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -569,7 +601,8 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -600,7 +633,8 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -629,7 +663,8 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -660,7 +695,8 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -688,7 +724,8 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -710,7 +747,7 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         user_id: float,
         *,
         containing_uri: str | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -723,7 +760,7 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             containing_uri: The page that contains the video URI.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -734,7 +771,8 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 by creation date. * ``default`` - Use the default sorting method. * ``likes`` - Sort the results by
                 number of likes. * ``manual`` - Sort the results by their user-specified order. * ``plays`` - Sort the
                 results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -744,7 +782,7 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             path_params=[param[float]("portfolio_id", portfolio_id), param[float]("user_id", user_id)],
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -763,7 +801,7 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         portfolio_id: float,
         *,
         containing_uri: str | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -775,7 +813,7 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             portfolio_id: The ID of the portfolio.
             containing_uri: The page that contains the video URI.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -786,7 +824,8 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
                 by creation date. * ``default`` - Use the default sorting method. * ``likes`` - Sort the results by
                 number of likes. * ``manual`` - Sort the results by their user-specified order. * ``plays`` - Sort the
                 results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -796,7 +835,7 @@ class PortfoliosVideosWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             path_params=[param[float]("portfolio_id", portfolio_id)],
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -826,7 +865,8 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -842,7 +882,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_video_to_portfolio_error_mapper,
             request_options=request_options,
         )
@@ -855,7 +895,8 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -867,7 +908,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_video_to_portfolio_alt1_error_mapper,
             request_options=request_options,
         )
@@ -886,7 +927,8 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -902,7 +944,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_from_portfolio_error_mapper,
             request_options=request_options,
         )
@@ -915,7 +957,8 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -927,7 +970,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_video_from_portfolio_alt1_error_mapper,
             request_options=request_options,
         )
@@ -946,7 +989,8 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -961,7 +1005,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -974,7 +1018,8 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             portfolio_id: The ID of the portfolio.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -985,7 +1030,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -996,7 +1041,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         user_id: float,
         *,
         containing_uri: str | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1009,7 +1054,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             portfolio_id: The ID of the portfolio.
             user_id: The ID of the user.
             containing_uri: The page that contains the video URI.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1020,7 +1065,8 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 by creation date. * ``default`` - Use the default sorting method. * ``likes`` - Sort the results by
                 number of likes. * ``manual`` - Sort the results by their user-specified order. * ``plays`` - Sort the
                 results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1030,7 +1076,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             path_params=[param[float]("portfolio_id", portfolio_id), param[float]("user_id", user_id)],
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1039,7 +1085,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -1049,7 +1095,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         portfolio_id: float,
         *,
         containing_uri: str | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1061,7 +1107,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             portfolio_id: The ID of the portfolio.
             containing_uri: The page that contains the video URI.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable videos.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1072,7 +1118,8 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 by creation date. * ``default`` - Use the default sorting method. * ``likes`` - Sort the results by
                 number of likes. * ``manual`` - Sort the results by their user-specified order. * ``plays`` - Sort the
                 results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1082,7 +1129,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             path_params=[param[float]("portfolio_id", portfolio_id)],
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1091,7 +1138,7 @@ class AsyncPortfoliosVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

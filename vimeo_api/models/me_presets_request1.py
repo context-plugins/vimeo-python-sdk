@@ -20,6 +20,6 @@ class MePresetsRequest1(SdkBaseModel):
 
 
 class MePresetsRequest1Dict(TypedDict):
-    embed: NotRequired[Embed17 | Embed17Dict]
+    embed: NotRequired[Embed17Dict]
     name: NotRequired[str]
     outro: NotRequired[Outro1OrStr]

@@ -20,6 +20,6 @@ class Connections13(SdkBaseModel):
 
 
 class Connections13Dict(TypedDict):
-    guest_user: GuestUser | GuestUserDict
-    replies: Replies | RepliesDict
-    user: User1 | User1Dict
+    guest_user: GuestUserDict
+    replies: RepliesDict
+    user: User1Dict

@@ -11,10 +11,13 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_videos_to_live_event_alt1_error import (
     AddVideosToLiveEventAlt1ErrorBody,
@@ -87,7 +90,8 @@ class LiveEventVideos:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -96,9 +100,11 @@ class LiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't add
                 videos to the event. * Error code 3422: The authenticated user can't add one or more of the listed
                 videos. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_videos_to_live_event(
-            live_event_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_videos_to_live_event(
+                live_event_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     def add_videos_to_live_event_alt1(
         self,
@@ -112,7 +118,8 @@ class LiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -121,9 +128,11 @@ class LiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't add
                 videos to the event. * Error code 3422: The authenticated user can't add one or more of the listed
                 videos. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_videos_to_live_event_alt1(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_videos_to_live_event_alt1(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     def add_videos_to_live_event_alt2(
         self,
@@ -137,7 +146,8 @@ class LiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -146,9 +156,11 @@ class LiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't add
                 videos to the event. * Error code 3422: The authenticated user can't add one or more of the listed
                 videos. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.add_videos_to_live_event_alt2(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.add_videos_to_live_event_alt2(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     def get_live_event_video(
         self,
@@ -164,7 +176,8 @@ class LiveEventVideos:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -173,9 +186,11 @@ class LiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event, video, or user exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_video(
-            live_event_id, user_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_video(
+                live_event_id, user_id, video_id, request_options=request_options
+            ),
+        )
 
     def get_live_event_video_alt1(
         self, live_event_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -185,7 +200,8 @@ class LiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -194,9 +210,9 @@ class LiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event, video, or user exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_video_alt1(
-            live_event_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_video_alt1(live_event_id, video_id, request_options=request_options)
+        )
 
     def get_live_event_video_alt2(
         self, live_event_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -206,7 +222,8 @@ class LiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -215,9 +232,9 @@ class LiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event, video, or user exists.
                 ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.get_live_event_video_alt2(
-            live_event_id, video_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_video_alt2(live_event_id, video_id, request_options=request_options)
+        )
 
     def get_live_event_videos(
         self,
@@ -226,7 +243,7 @@ class LiveEventVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -242,7 +259,7 @@ class LiveEventVideos:
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -254,7 +271,8 @@ class LiveEventVideos:
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -263,19 +281,21 @@ class LiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_live_event_videos(
-            live_event_id,
-            user_id,
-            containing_uri=containing_uri,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_videos(
+                live_event_id,
+                user_id,
+                containing_uri=containing_uri,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_live_event_videos_alt1(
         self,
@@ -283,7 +303,7 @@ class LiveEventVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -298,7 +318,7 @@ class LiveEventVideos:
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -310,7 +330,8 @@ class LiveEventVideos:
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -319,18 +340,20 @@ class LiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_live_event_videos_alt1(
-            live_event_id,
-            containing_uri=containing_uri,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_videos_alt1(
+                live_event_id,
+                containing_uri=containing_uri,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def get_live_event_videos_alt2(
         self,
@@ -338,7 +361,7 @@ class LiveEventVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -353,7 +376,7 @@ class LiveEventVideos:
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -365,7 +388,8 @@ class LiveEventVideos:
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -374,18 +398,20 @@ class LiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return self._with_raw_response.get_live_event_videos_alt2(
-            live_event_id,
-            containing_uri=containing_uri,
-            direction=direction,
-            filter=filter,
-            filter_embeddable=filter_embeddable,
-            page=page,
-            per_page=per_page,
-            query=query,
-            sort=sort,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_live_event_videos_alt2(
+                live_event_id,
+                containing_uri=containing_uri,
+                direction=direction,
+                filter_=filter_,
+                filter_embeddable=filter_embeddable,
+                page=page,
+                per_page=per_page,
+                query=query,
+                sort=sort,
+                request_options=request_options,
+            ),
+        )
 
     def remove_videos_from_live_event(
         self,
@@ -401,7 +427,8 @@ class LiveEventVideos:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -410,9 +437,11 @@ class LiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't remove
                 one or more of the listed videos. * Error code 3422: The authenticated user can't remove videos from the
                 event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.remove_videos_from_live_event(
-            live_event_id, user_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_videos_from_live_event(
+                live_event_id, user_id, body=body, request_options=request_options
+            ),
+        )
 
     def remove_videos_from_live_event_alt1(
         self,
@@ -426,7 +455,8 @@ class LiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -435,9 +465,11 @@ class LiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't remove
                 one or more of the listed videos. * Error code 3422: The authenticated user can't remove videos from the
                 event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.remove_videos_from_live_event_alt1(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_videos_from_live_event_alt1(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     def remove_videos_from_live_event_alt2(
         self,
@@ -451,7 +483,8 @@ class LiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -460,9 +493,11 @@ class LiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't remove
                 one or more of the listed videos. * Error code 3422: The authenticated user can't remove videos from the
                 event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return self._with_raw_response.remove_videos_from_live_event_alt2(
-            live_event_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.remove_videos_from_live_event_alt2(
+                live_event_id, body=body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> LiveEventVideosWithRawResponse:
@@ -487,7 +522,8 @@ class AsyncLiveEventVideos:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -496,11 +532,11 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't add
                 videos to the event. * Error code 3422: The authenticated user can't add one or more of the listed
                 videos. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_videos_to_live_event(
                 live_event_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def add_videos_to_live_event_alt1(
         self,
@@ -514,7 +550,8 @@ class AsyncLiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -523,11 +560,11 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't add
                 videos to the event. * Error code 3422: The authenticated user can't add one or more of the listed
                 videos. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_videos_to_live_event_alt1(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def add_videos_to_live_event_alt2(
         self,
@@ -541,7 +578,8 @@ class AsyncLiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were added.
@@ -550,11 +588,11 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't add
                 videos to the event. * Error code 3422: The authenticated user can't add one or more of the listed
                 videos. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.add_videos_to_live_event_alt2(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_video(
         self,
@@ -570,7 +608,8 @@ class AsyncLiveEventVideos:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -579,11 +618,11 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event, video, or user exists.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_video(
                 live_event_id, user_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_video_alt1(
         self, live_event_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -593,7 +632,8 @@ class AsyncLiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -602,11 +642,11 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event, video, or user exists.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_video_alt1(
                 live_event_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_video_alt2(
         self, live_event_id: float, video_id: float, *, request_options: RequestOptionsOrDict | None = None
@@ -616,7 +656,8 @@ class AsyncLiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The video was returned.
@@ -625,11 +666,11 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event, video, or user exists.
                 ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_video_alt2(
                 live_event_id, video_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_videos(
         self,
@@ -638,7 +679,7 @@ class AsyncLiveEventVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -654,7 +695,7 @@ class AsyncLiveEventVideos:
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -666,7 +707,8 @@ class AsyncLiveEventVideos:
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -675,21 +717,21 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_videos(
                 live_event_id,
                 user_id,
                 containing_uri=containing_uri,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_videos_alt1(
         self,
@@ -697,7 +739,7 @@ class AsyncLiveEventVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -712,7 +754,7 @@ class AsyncLiveEventVideos:
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -724,7 +766,8 @@ class AsyncLiveEventVideos:
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -733,20 +776,20 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_videos_alt1(
                 live_event_id,
                 containing_uri=containing_uri,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_live_event_videos_alt2(
         self,
@@ -754,7 +797,7 @@ class AsyncLiveEventVideos:
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -769,7 +812,7 @@ class AsyncLiveEventVideos:
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -781,7 +824,8 @@ class AsyncLiveEventVideos:
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were returned.
@@ -790,20 +834,20 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A password is required for password-protected events. Error code 3200: The
                 authenticated user can't access the event. Error code 5000: No such event exists. ``error`` is ``Error |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_live_event_videos_alt2(
                 live_event_id,
                 containing_uri=containing_uri,
                 direction=direction,
-                filter=filter,
+                filter_=filter_,
                 filter_embeddable=filter_embeddable,
                 page=page,
                 per_page=per_page,
                 query=query,
                 sort=sort,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_videos_from_live_event(
         self,
@@ -819,7 +863,8 @@ class AsyncLiveEventVideos:
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -828,11 +873,11 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't remove
                 one or more of the listed videos. * Error code 3422: The authenticated user can't remove videos from the
                 event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_videos_from_live_event(
                 live_event_id, user_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_videos_from_live_event_alt1(
         self,
@@ -846,7 +891,8 @@ class AsyncLiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -855,11 +901,11 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't remove
                 one or more of the listed videos. * Error code 3422: The authenticated user can't remove videos from the
                 event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_videos_from_live_event_alt1(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_videos_from_live_event_alt2(
         self,
@@ -873,7 +919,8 @@ class AsyncLiveEventVideos:
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The videos were removed.
@@ -882,11 +929,11 @@ class AsyncLiveEventVideos:
             ApiError: Error code 2204: A parameter is invalid. * Error code 3200: The authenticated user can't remove
                 one or more of the listed videos. * Error code 3422: The authenticated user can't remove videos from the
                 event. Error code 5000: No such event or user exists. ``error`` is ``Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_videos_from_live_event_alt2(
                 live_event_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncLiveEventVideosWithRawResponse:
@@ -908,7 +955,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -938,7 +986,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -968,7 +1017,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1000,7 +1050,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1028,7 +1079,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1052,7 +1104,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1075,7 +1128,7 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1091,7 +1144,7 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1103,7 +1156,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1114,7 +1168,7 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1135,7 +1189,7 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1150,7 +1204,7 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1162,7 +1216,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1173,7 +1228,7 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1194,7 +1249,7 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1209,7 +1264,7 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1221,7 +1276,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1232,7 +1288,7 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1261,7 +1317,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1291,7 +1348,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1321,7 +1379,8 @@ class LiveEventVideosWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1355,7 +1414,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1368,7 +1428,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_videos_to_live_event_error_mapper,
             request_options=request_options,
         )
@@ -1385,7 +1445,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1398,7 +1459,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_videos_to_live_event_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1415,7 +1476,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1428,7 +1490,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=add_videos_to_live_event_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1447,7 +1509,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1462,7 +1525,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=get_live_event_video_error_mapper,
             request_options=request_options,
         )
@@ -1475,7 +1538,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1486,7 +1550,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=get_live_event_video_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1499,7 +1563,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             live_event_id: The ID of the event.
             video_id: The ID of the video.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1510,7 +1575,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[Video],
+            decoder=async_json_decoder[Video],
             error_mapper=get_live_event_video_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1522,7 +1587,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1538,7 +1603,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1550,7 +1615,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1561,7 +1627,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1571,7 +1637,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_live_event_videos_error_mapper,
             request_options=request_options,
         )
@@ -1582,7 +1648,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1597,7 +1663,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1609,7 +1675,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1620,7 +1687,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1630,7 +1697,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_live_event_videos_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1641,7 +1708,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         *,
         containing_uri: str | None = None,
         direction: DirectionOrStr | None = None,
-        filter: Filter3OrStr | None = None,
+        filter_: Filter3OrStr | None = None,
         filter_embeddable: bool | None = None,
         page: float | None = None,
         per_page: float | None = None,
@@ -1656,7 +1723,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             containing_uri: The page that contains the video URI.
             direction: The sort direction of the results. Option descriptions: * ``asc`` - Sort the results in ascending
                 order. * ``desc`` - Sort the results in descending order.
-            filter: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
+            filter_: The attribute by which to filter the results. Option descriptions: * ``embeddable`` - Return
                 embeddable events.
             filter_embeddable: Whether to filter the results by embeddable videos (``true``) or non-embeddable videos
                 (``false``). This parameter is required only when **filter** is ``embeddable``.
@@ -1668,7 +1735,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
                 the order that the user has arranged the videos. * ``comments`` - Sort the results by number of
                 comments. * ``date`` - Sort the results by creation date. * ``duration`` - Sort the results by duration.
                 * ``likes`` - Sort the results by number of likes. * ``plays`` - Sort the results by number of plays.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1679,7 +1747,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             query_params=[
                 param[str | None]("containing_uri", containing_uri),
                 param[DirectionOrStr | None]("direction", direction),
-                param[Filter3OrStr | None]("filter", filter),
+                param[Filter3OrStr | None]("filter", filter_),
                 param[bool | None]("filter_embeddable", filter_embeddable),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
@@ -1689,7 +1757,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_live_event_videos_alt2_error_mapper,
             request_options=request_options,
         )
@@ -1708,7 +1776,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             live_event_id: The ID of the event.
             user_id: The ID of the user.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1721,7 +1790,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_videos_from_live_event_error_mapper,
             request_options=request_options,
         )
@@ -1738,7 +1807,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1751,7 +1821,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_videos_from_live_event_alt1_error_mapper,
             request_options=request_options,
         )
@@ -1768,7 +1838,8 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             live_event_id: The ID of the event.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1781,7 +1852,7 @@ class AsyncLiveEventVideosWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=remove_videos_from_live_event_alt2_error_mapper,
             request_options=request_options,
         )

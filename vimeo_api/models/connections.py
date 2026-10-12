@@ -26,7 +26,7 @@ class Connections(SdkBaseModel):
 
 
 class ConnectionsDict(TypedDict):
-    channels: Channels | ChannelsDict
-    groups: Groups | GroupsDict
-    users: Users | UsersDict
-    videos: Videos | VideosDict
+    channels: ChannelsDict
+    groups: GroupsDict
+    users: UsersDict
+    videos: VideosDict

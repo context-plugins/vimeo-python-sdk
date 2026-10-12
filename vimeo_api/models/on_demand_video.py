@@ -5,7 +5,7 @@ from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
 from .buy2 import Buy2, Buy2Dict
-from .enums.type19 import Type19OrStr
+from .enums.type23 import Type23OrStr
 from .interactions13 import Interactions13, Interactions13Dict
 from .metadata21 import Metadata21, Metadata21Dict
 from .picture import Picture, PictureDict
@@ -60,7 +60,7 @@ class OnDemandVideo(SdkBaseModel):
     rent: Rent2 | None
     """Information about renting the video."""
 
-    type_: Type19OrStr = Field(alias="type")
+    type_: Type23OrStr = Field(alias="type")
     """The type of video.
 
     Option descriptions:
@@ -76,21 +76,21 @@ class OnDemandVideo(SdkBaseModel):
 
 
 class OnDemandVideoDict(TypedDict):
-    buy: Buy2 | Buy2Dict | None
+    buy: Buy2Dict | None
     description: NotRequired[str]
     duration: NotRequired[str]
     episode: NotRequired[float]
-    interactions: Interactions13 | Interactions13Dict
+    interactions: Interactions13Dict
     link: str
-    metadata: Metadata21 | Metadata21Dict
+    metadata: Metadata21Dict
     name: NotRequired[str]
     options: NotRequired[list[str]]
-    pictures: NotRequired[Picture | PictureDict]
+    pictures: NotRequired[PictureDict]
     play_progress: float
     position: NotRequired[float]
     release_date: NotRequired[str]
     release_year: float | None
-    rent: Rent2 | Rent2Dict | None
-    type_: Type19OrStr
+    rent: Rent2Dict | None
+    type_: Type23OrStr
     uri: str
-    user: NotRequired[User | UserDict]
+    user: NotRequired[UserDict]

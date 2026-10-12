@@ -22,6 +22,6 @@ class ChildTextTracks(SdkBaseModel):
 
 
 class ChildTextTracksDict(TypedDict):
-    filters: NotRequired[Filters | FiltersDict]
+    filters: NotRequired[FiltersDict]
     options: NotRequired[list[str]]
     uri: NotRequired[str]

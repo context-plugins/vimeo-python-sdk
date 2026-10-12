@@ -16,4 +16,4 @@ class Monthly(SdkBaseModel):
 
 class MonthlyDict(TypedDict):
     active: NotRequired[bool]
-    price: NotRequired[Price6 | Price6Dict]
+    price: NotRequired[Price6Dict]

@@ -9,8 +9,10 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_related_videos_error import GetRelatedVideosErrorBody, get_related_videos_error_mapper
 from ..models.enums.filter46 import Filter46OrStr
@@ -26,7 +28,7 @@ class VideosRecommendations:
         self,
         video_id: float,
         *,
-        filter: Filter46OrStr | None = None,
+        filter_: Filter46OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         request_options: RequestOptionsOrDict | None = None,
@@ -35,11 +37,12 @@ class VideosRecommendations:
 
         Args:
             video_id: The ID of the video.
-            filter: The attribute by which to filter the results. Option descriptions: * ``related`` - Return related
+            filter_: The attribute by which to filter the results. Option descriptions: * ``related`` - Return related
                 videos.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The related videos were returned.
@@ -47,9 +50,11 @@ class VideosRecommendations:
         Raises:
             ApiError: The value of **filter** isn't ``related``. Error code 5451: This resource is restricted in your
                 region. ``error`` is ``LegacyError | Error | RawError``."""
-        return self._with_raw_response.get_related_videos(
-            video_id, filter=filter, page=page, per_page=per_page, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_related_videos(
+                video_id, filter_=filter_, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> VideosRecommendationsWithRawResponse:
@@ -64,7 +69,7 @@ class AsyncVideosRecommendations:
         self,
         video_id: float,
         *,
-        filter: Filter46OrStr | None = None,
+        filter_: Filter46OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         request_options: RequestOptionsOrDict | None = None,
@@ -73,11 +78,12 @@ class AsyncVideosRecommendations:
 
         Args:
             video_id: The ID of the video.
-            filter: The attribute by which to filter the results. Option descriptions: * ``related`` - Return related
+            filter_: The attribute by which to filter the results. Option descriptions: * ``related`` - Return related
                 videos.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The related videos were returned.
@@ -85,11 +91,11 @@ class AsyncVideosRecommendations:
         Raises:
             ApiError: The value of **filter** isn't ``related``. Error code 5451: This resource is restricted in your
                 region. ``error`` is ``LegacyError | Error | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_related_videos(
-                video_id, filter=filter, page=page, per_page=per_page, request_options=request_options
-            )
-        ).unwrap()
+                video_id, filter_=filter_, page=page, per_page=per_page, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncVideosRecommendationsWithRawResponse:
@@ -101,7 +107,7 @@ class VideosRecommendationsWithRawResponse(SecuredRawResponse[RawClient, Server,
         self,
         video_id: float,
         *,
-        filter: Filter46OrStr | None = None,
+        filter_: Filter46OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         request_options: RequestOptionsOrDict | None = None,
@@ -110,11 +116,12 @@ class VideosRecommendationsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             video_id: The ID of the video.
-            filter: The attribute by which to filter the results. Option descriptions: * ``related`` - Return related
+            filter_: The attribute by which to filter the results. Option descriptions: * ``related`` - Return related
                 videos.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -123,7 +130,7 @@ class VideosRecommendationsWithRawResponse(SecuredRawResponse[RawClient, Server,
             url_template=self._server.default("/videos/{video_id}/videos"),
             path_params=[param[float]("video_id", video_id)],
             query_params=[
-                param[Filter46OrStr | None]("filter", filter),
+                param[Filter46OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
             ],
@@ -141,7 +148,7 @@ class AsyncVideosRecommendationsWithRawResponse(SecuredRawResponse[AsyncRawClien
         self,
         video_id: float,
         *,
-        filter: Filter46OrStr | None = None,
+        filter_: Filter46OrStr | None = None,
         page: float | None = None,
         per_page: float | None = None,
         request_options: RequestOptionsOrDict | None = None,
@@ -150,11 +157,12 @@ class AsyncVideosRecommendationsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             video_id: The ID of the video.
-            filter: The attribute by which to filter the results. Option descriptions: * ``related`` - Return related
+            filter_: The attribute by which to filter the results. Option descriptions: * ``related`` - Return related
                 videos.
             page: The page number of the results to show.
             per_page: The number of items to show on each page of results, up to a maximum of 100.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -163,14 +171,14 @@ class AsyncVideosRecommendationsWithRawResponse(SecuredRawResponse[AsyncRawClien
             url_template=self._server.default("/videos/{video_id}/videos"),
             path_params=[param[float]("video_id", video_id)],
             query_params=[
-                param[Filter46OrStr | None]("filter", filter),
+                param[Filter46OrStr | None]("filter", filter_),
                 param[float | None]("page", page),
                 param[float | None]("per_page", per_page),
             ],
             auth_scheme=AsyncAnySchemes(
                 self._auth.oauth2_authorization_code, self._auth.oauth2_client_credentials, self._auth.bearer
             ),
-            decoder=json_decoder[VideoConnection],
+            decoder=async_json_decoder[VideoConnection],
             error_mapper=get_related_videos_error_mapper,
             request_options=request_options,
         )
